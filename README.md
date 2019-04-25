@@ -9,9 +9,9 @@ Pages have not all functionalities.
 
 
 ToDo:
-=> Use routes
+=> Routes
 
-=> To Render
+=> Render
 
 => Make subpages reachable
 
