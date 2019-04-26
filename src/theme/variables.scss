@@ -116,6 +116,16 @@
   --ion-color-tint: var(--ion-color-home-tint) !important;
 }
 
+
+.ion-color-uclouvain {
+  --ion-color-base: var(--ion-color-ucouvain) !important;
+  --ion-color-base-rgb: var(--ion-color-uclouvain-rgb) !important;
+  --ion-color-contrast: var(--ion-color-uclouvain-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-uclouvain-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-uclouvain-shade) !important;
+  --ion-color-tint: var(--ion-color-uclouvain-tint) !important;
+}
+
 ion-segment-button ion-label {
   color: white;
 }
@@ -156,4 +166,11 @@ ion-segment {
 }
 .segment-button {
   color: white !important;
+}
+.menu-title{
+  display: inline-block;
+}
+.menu-title.ios.title-ios{
+  padding: 0 !important;
+  line-height: 3.5;
 }
