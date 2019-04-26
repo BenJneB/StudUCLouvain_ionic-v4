@@ -26,7 +26,7 @@
     <ion-buttons slot="start">
         <ion-menu-toggle>
           <ion-button>
-            <ion-icon slot="icon-only" name="menu"></ion-icon>
+            <ion-icon color="light" slot="icon-only" name="menu"></ion-icon>
           </ion-button>
         </ion-menu-toggle>
         <img src="./assets/img/s.png" height="28"/>
@@ -41,25 +41,25 @@
         <ion-label>{{'NEWS.FAC' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
-  <ion-segment [(ngModel)]="subsegment" (ionChange)="cachedOrNot()" *ngIf="segment==='univ'">
-    <ion-segment-button value="P1">
-        <ion-label>{{'NEWS.STUDY' | translate}}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="P2">
-        <ion-label>{{'NEWS.SEARCH' | translate}}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="P3">
-        <ion-label>{{'NEWS.SERVICE' | translate}}</ion-label>
-    </ion-segment-button>
-  </ion-segment>
-  <ion-segment [(ngModel)]="facsegment" (ionChange)="facTabChange()" *ngIf="segment==='fac'">
-    <ion-segment-button value="news">
+  <ion-tab-bar [(ngModel)]="facsegment" (ionChange)="facTabChange()" *ngIf="segment==='fac'">
+    <ion-tab-button value="news">
         <ion-label>{{'HOME.NEWS' |translate}} <strong *ngIf="userS.hasFac()">({{userS.fac}})</strong></ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="valve">
+    </ion-tab-button>
+    <ion-tab-button value="valve">
         <ion-label>{{'NEWS.VALVE' | translate}}</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+    </ion-tab-button>
+  </ion-tab-bar>
+  <ion-tab-bar [(ngModel)]="subsegment" (ionChange)="cachedOrNot()" *ngIf="segment==='univ'">
+    <ion-tab-button tab="P1">
+        <ion-label>{{'NEWS.STUDY' | translate}}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="P2">
+        <ion-label>{{'NEWS.SEARCH' | translate}}</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="P3">
+        <ion-label>{{'NEWS.SERVICE' | translate}}</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
 </ion-header>
 
 <!--BODY-->

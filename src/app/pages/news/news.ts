@@ -163,8 +163,12 @@ export class NewsPage {
     }
   }
 
-  facTabChange(){
+  ionTabsDidChange(e){
+    console.log(e);
+  }
 
+  facTabChange(e){
+    console.log(e);
   }
 
   /*Tab change*/
