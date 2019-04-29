@@ -20,7 +20,8 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
 
 import { NewsItem } from '../../../entity/newsItem';
 
@@ -32,8 +33,14 @@ import { NewsItem } from '../../../entity/newsItem';
 export class NewsDetailsPage {
   news: NewsItem;
 
-  constructor(public navCtrl: NavController, navParams: NavParams) {
-    this.news = navParams.get('news');
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, private router: Router) {
+    this.route.queryParams.subscribe(params => {
+
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.news = this.router.getCurrentNavigation().extras.state.news;
+      }
+    });
+
   }
   
   /*Open the url for a news to see more details*/

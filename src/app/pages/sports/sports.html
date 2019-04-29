@@ -21,15 +21,15 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="sport">
-    <button ion-button menuToggle>
+    <ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </ion-button>
     <img src="./assets/img/s.png" height="28"/>
     <ion-title align="center"><img alt="logo"   height="40" src="./assets/img/logoSport.png" ></ion-title>
     <ion-buttons end>
-      <button ion-button (tap)="presentFilter()">
+      <ion-button (tap)="presentFilter()">
         <ion-icon name="options"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayedSports()" >
@@ -75,15 +75,15 @@
             </ion-item>
 
             <ion-item-options side="right">
-              <button ion-button (tap)="addToCalendar(slidingItem, sport)" class="large-icon">
+              <ion-button (tap)="addToCalendar(slidingItem, sport)" class="large-icon">
                 <ion-icon name='calendar'></ion-icon>
-              </button>
-              <button ion-button (tap)="addFavorite(slidingItem, sport)" *ngIf="segment === 'all' || segment === 'team'" class="large-icon">
+              </ion-button>
+              <ion-button (tap)="addFavorite(slidingItem, sport)" *ngIf="segment === 'all' || segment === 'team'" class="large-icon">
                 <ion-icon name="star-outline"></ion-icon>
-              </button>
-              <button ion-button (tap)="removeFavorite(slidingItem, sport, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+              </ion-button>
+              <ion-button (tap)="removeFavorite(slidingItem, sport, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
                 <ion-icon name='close'></ion-icon>
-              </button>
+              </ion-button>
             </ion-item-options>
 
           </ion-item-sliding>

@@ -21,6 +21,9 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="news" secondary>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
     <ion-row>
       <ion-col>
         <ion-title>{{news.title}}</ion-title>
@@ -32,21 +35,23 @@
 <!--BODY-->
 <ion-content>
   <ion-card>
-    <img src="{{news.image}}"/>
+    
+    <img style="width:75%; margin:auto;"  src="{{news.image}}"/>
 
     <ion-card-content>
       <ion-card-title>
         {{news.title}}
       </ion-card-title>
+    <br>
       <p [innerHTML]="news.description"></p>
     </ion-card-content>
 
     <ion-row no-padding>
       <ion-col text-right>
-        <button ion-button clear small icon-left (click)="openPage(news.link)">
+        <ion-button clear small icon-left (click)="openPage(news.link)">
           <ion-icon name='share-alt'></ion-icon>
           {{'NEWS.SITE' | translate}}
-        </button>
+        </ion-button>
       </ion-col>
     </ion-row>
 

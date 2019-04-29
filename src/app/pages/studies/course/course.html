@@ -30,9 +30,9 @@
       </ion-col>
     </ion-row>
     <ion-buttons end (tap)="openModalInfo()">
-      <button ion-button icon-only end >
+      <ion-button icon-only end >
       <ion-icon name="information-circle"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayed()">
@@ -58,17 +58,17 @@
           &mdash; {{activity.end | date: 'H:mm' }} </p>
         <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
         <p>{{'COURSE.STUDENT' | translate}} : 
-        <button (click)="toggleGroup(activity.start)"> {{'COURSE.SHOW' | translate }} </button> </p>
+        <button (click)="toggleGroup(activity.start)"> {{'COURSE.SHOW' | translate }} </ion-button> </p>
         <p [hidden]="!isGroupShown(activity.start)" style="display:inline" [innerHTML]="activity.students"></p>
         <p *ngIf="activity.teachers.length>0"> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
         <p> {{activity.name}} </p>
       </ion-item>
 
       <ion-item-options side="right">
-        <button ion-button (click)="addToCalendar(slidingItem, activity)" >
+        <ion-button (click)="addToCalendar(slidingItem, activity)" >
           <ion-icon name="calendar"></ion-icon>
           {{'COURSE.CALENDAR' | translate}}
-        </button>
+        </ion-button>
       </ion-item-options>
     </ion-item-sliding>
 
@@ -81,12 +81,12 @@
   <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
     <button ion-fab (tap)="showPrompt(segment)">
       <ion-icon name="cut"> </ion-icon>
-    </button>
+    </ion-button>
   </ion-fab>
     <ion-fab left bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
   <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
     <button ion-fab (tap)="addCourseToCalendar()">
       <ion-icon name="calendar"> </ion-icon>
-    </button>
+    </ion-button>
   </ion-fab>
 </ion-content>

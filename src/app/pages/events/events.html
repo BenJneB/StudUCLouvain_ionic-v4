@@ -22,15 +22,15 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="event">
-    <button ion-button menuToggle>
+    <ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </ion-button>
     <img src="./assets/img/s.png" height="28"/>
     <ion-title>{{title | translate}}</ion-title>
     <ion-buttons end>
-      <button ion-button (tap)="presentFilter()">
+      <ion-button (tap)="presentFilter()">
         <ion-icon name="options"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="cachedOrNot()">
@@ -73,21 +73,21 @@
             <p [innerHtml]="event.trimmedDescription"></p>
             <p [innerHtml]="event.location"></p>
             <p>{{event.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{event.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
-          </button>
+          </ion-button>
         </ion-item>
 
         <ion-item-options>
-          <button ion-button outline (tap)="createEvent(slidingItem, event)" class="large-icon">
+          <ion-button outline (tap)="createEvent(slidingItem, event)" class="large-icon">
             <ion-icon name='calendar'></ion-icon>
-          </button>
+          </ion-button>
 
-          <button ion-button outline (tap)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'" class="large-icon">
+          <ion-button outline (tap)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'" class="large-icon">
             <ion-icon name="star-outline"></ion-icon>
-          </button>
+          </ion-button>
 
-          <button ion-button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+          <ion-button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
             <ion-icon name='close'></ion-icon>
-          </button>
+          </ion-button>
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
