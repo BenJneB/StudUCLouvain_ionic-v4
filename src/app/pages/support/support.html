@@ -147,7 +147,7 @@
 
           <ion-list *ngIf="searching">
             <ion-item *ngFor="let emp of employees">
-            <button ion-item no-lines (click)="goToEmpDetails(emp)">
+            <ion-item button no-lines (click)="goToEmpDetails(emp)">
               {{emp.lastname}} {{emp.firstname}}
             </ion-button>
             </ion-item>

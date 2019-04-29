@@ -68,12 +68,12 @@
           <ion-thumbnail item-left>
             <img [src]="event.iconCategory">
           </ion-thumbnail>
-          <button ion-item (click)="goToEventDetail(event)" no-lines>
+          <ion-item button (click)="goToEventDetail(event)" no-lines>
             <h3>{{event.title}}</h3>
             <p [innerHtml]="event.trimmedDescription"></p>
             <p [innerHtml]="event.location"></p>
             <p>{{event.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{event.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
-          </ion-button>
+          </ion-item>
         </ion-item>
 
         <ion-item-options>

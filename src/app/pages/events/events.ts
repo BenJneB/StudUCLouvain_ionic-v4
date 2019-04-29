@@ -35,6 +35,7 @@ import { EventsFilterPage } from '../../pages/events/events-filter/events-filter
 import { EventItem } from '../../entity/eventItem';
 import { debounceTime } from 'rxjs/operators';
 import { OverlayEventDetail } from '@ionic/core';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'page-events',
@@ -77,7 +78,8 @@ export class EventsPage {
     public connService : ConnectivityService,
     private translateService: TranslateService,
     private loadingCtrl: LoadingController,
-    private cache: CacheService
+    private cache: CacheService,
+    private router: Router,
   ) {
     this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
@@ -130,7 +132,12 @@ export class EventsPage {
 
   /*Open the details page for an event*/
   public goToEventDetail(event: EventItem) {
-    this.navCtrl.navigateForward(['EventsDetailsPage', { 'event': event }]);
+    let navigationExtras: NavigationExtras = {
+      state: {
+        event: event
+      }
+    };
+    this.router.navigate( ['events/details'], navigationExtras);
   }
 
   /*To display or close a group of events (1 group = events for one week)*/
