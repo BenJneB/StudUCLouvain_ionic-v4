@@ -29,7 +29,7 @@
         <ion-title align="center">{{course.name}}-{{course.acronym}}</ion-title>
       </ion-col>
     </ion-row>
-    <ion-buttons end (tap)="openModalInfo()">
+    <ion-buttons end (click)="openModalInfo()">
       <ion-button icon-only end >
       <ion-icon name="information-circle"></ion-icon>
       </ion-button>
@@ -79,13 +79,13 @@
 
   <ion-fab right bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
   <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
-    <button ion-fab (tap)="showPrompt(segment)">
+    <button ion-fab (click)="showPrompt(segment)">
       <ion-icon name="cut"> </ion-icon>
     </ion-button>
   </ion-fab>
     <ion-fab left bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
   <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
-    <button ion-fab (tap)="addCourseToCalendar()">
+    <button ion-fab (click)="addCourseToCalendar()">
       <ion-icon name="calendar"> </ion-icon>
     </ion-button>
   </ion-fab>

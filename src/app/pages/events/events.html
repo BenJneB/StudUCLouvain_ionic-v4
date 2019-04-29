@@ -28,7 +28,7 @@
     <img src="./assets/img/s.png" height="28"/>
     <ion-title>{{title | translate}}</ion-title>
     <ion-buttons end>
-      <ion-button (tap)="presentFilter()">
+      <ion-button (click)="presentFilter()">
         <ion-icon name="options"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -56,7 +56,7 @@
 
   <ion-list #eventsList *ngFor="let item of displayedEventsD"  [hidden]="shownEvents === 0">
 
-    <ion-item-divider *ngIf="item.event.length > 0" (tap)="toggleGroup(item.weeks)" text-center>
+    <ion-item-divider *ngIf="item.event.length > 0" (click)="toggleGroup(item.weeks)" text-center>
         <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks,year).from | date: 'dd/MM'}} &mdash; {{getRangeWeek(item.weeks,year).to | date: 'dd/MM'}}] ({{item.event.length}})
     </ion-item-divider>
 
@@ -68,7 +68,7 @@
           <ion-thumbnail item-left>
             <img [src]="event.iconCategory">
           </ion-thumbnail>
-          <button ion-item (tap)="goToEventDetail(event)" no-lines>
+          <button ion-item (click)="goToEventDetail(event)" no-lines>
             <h3>{{event.title}}</h3>
             <p [innerHtml]="event.trimmedDescription"></p>
             <p [innerHtml]="event.location"></p>
@@ -77,15 +77,15 @@
         </ion-item>
 
         <ion-item-options>
-          <ion-button outline (tap)="createEvent(slidingItem, event)" class="large-icon">
+          <ion-button outline (click)="createEvent(slidingItem, event)" class="large-icon">
             <ion-icon name='calendar'></ion-icon>
           </ion-button>
 
-          <ion-button outline (tap)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'" class="large-icon">
+          <ion-button outline (click)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'" class="large-icon">
             <ion-icon name="star-outline"></ion-icon>
           </ion-button>
 
-          <ion-button (tap)="removeFavorite(slidingItem, event, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+          <ion-button (click)="removeFavorite(slidingItem, event, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
             <ion-icon name='close'></ion-icon>
           </ion-button>
         </ion-item-options>

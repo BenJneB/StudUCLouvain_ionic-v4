@@ -35,7 +35,7 @@
 <!--BODY-->
 <ion-content padding #weekContent>
 <ion-list *ngFor="let day of schedule"  >
-  <ion-item-divider text-center [hidden]="day.schedule.length == 0" (tap)="toggleGroup(day.date)">
+  <ion-item-divider text-center [hidden]="day.schedule.length == 0" (click)="toggleGroup(day.date)">
     {{day.day}} {{day.date}} ({{day.schedule.length}} séances)
   </ion-item-divider>
   <ion-list *ngFor="let course of day.schedule" [hidden]="!isGroupShown(day.date)">

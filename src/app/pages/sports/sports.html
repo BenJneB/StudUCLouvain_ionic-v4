@@ -27,7 +27,7 @@
     <img src="./assets/img/s.png" height="28"/>
     <ion-title align="center"><img alt="logo"   height="40" src="./assets/img/logoSport.png" ></ion-title>
     <ion-buttons end>
-      <ion-button (tap)="presentFilter()">
+      <ion-button (click)="presentFilter()">
         <ion-icon name="options"></ion-icon>
       </ion-button>
     </ion-buttons>
@@ -58,7 +58,7 @@
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" ></ion-searchbar>
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD"  [hidden]="shownSports === 0" >
-        <ion-item-divider *ngIf="item.name.length > 0" (tap)="toggleGroup(item.jour)" text-center class="all" [ngClass]="{'team' : segment == 'team'}">
+        <ion-item-divider *ngIf="item.name.length > 0" (click)="toggleGroup(item.jour)" text-center class="all" [ngClass]="{'team' : segment == 'team'}">
           {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
         </ion-item-divider>
 
@@ -75,13 +75,13 @@
             </ion-item>
 
             <ion-item-options side="right">
-              <ion-button (tap)="addToCalendar(slidingItem, sport)" class="large-icon">
+              <ion-button (click)="addToCalendar(slidingItem, sport)" class="large-icon">
                 <ion-icon name='calendar'></ion-icon>
               </ion-button>
-              <ion-button (tap)="addFavorite(slidingItem, sport)" *ngIf="segment === 'all' || segment === 'team'" class="large-icon">
+              <ion-button (click)="addFavorite(slidingItem, sport)" *ngIf="segment === 'all' || segment === 'team'" class="large-icon">
                 <ion-icon name="star-outline"></ion-icon>
               </ion-button>
-              <ion-button (tap)="removeFavorite(slidingItem, sport, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
+              <ion-button (click)="removeFavorite(slidingItem, sport, 'Remove Favorite')" *ngIf="segment === 'favorites'" class="large-icon">
                 <ion-icon name='close'></ion-icon>
               </ion-button>
             </ion-item-options>

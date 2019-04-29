@@ -47,9 +47,9 @@
 <!------------------------------- RIGHT MENU TO GO MOODLE, UCL PORTAL ... ------------------------------------------>
 <ion-menu persistent=true id="studiesMenu" [content]="studiesContent" side="right" type="overlay">
   <button> </ion-button>
-  <button ion-item (tap)="launch('http://www.uclouvain.be/')"> uclouvain.be </ion-button>
-  <button ion-item (tap)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </ion-button>
-  <button ion-item (tap)="openModalProject()"> {{'STUDY.CHANGEADE' | translate}} </ion-button>
+  <button ion-item (click)="launch('http://www.uclouvain.be/')"> uclouvain.be </ion-button>
+  <button ion-item (click)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </ion-button>
+  <button ion-item (click)="openModalProject()"> {{'STUDY.CHANGEADE' | translate}} </ion-button>
 </ion-menu>
 
 <ion-content padding #studiesContent [ngClass]="{'cours' : segment === 'cours'}">
@@ -60,15 +60,15 @@
   
   <ion-list class="cours">
     <ion-item-sliding *ngFor="let course of listCourses" #slidingItem>
-      <ion-item (tap)="openCoursePage(course)" >
+      <ion-item (click)="openCoursePage(course)" >
         <h2>{{course.acronym}} - {{course.name}}</h2>
       </ion-item>
       <ion-item-options side="right">
-        <!--<ion-button (tap)="addCourseToCalendar(slidingItem, course)" >
+        <!--<ion-button (click)="addCourseToCalendar(slidingItem, course)" >
           <ion-icon name="calendar"></ion-icon>
             {{'STUDY.CALENDAR' | translate}}
         </ion-button>-->
-        <ion-button (tap)="removeCourse(course)" >
+        <ion-button (click)="removeCourse(course)" >
           <ion-icon name="trash"></ion-icon>
             {{'STUDY.DEL' | translate}}
         </ion-button>
@@ -105,17 +105,17 @@
 
   <!------------------------------------------------- LISTE DU PROGRAMME DE COURS ------------------------------------------->
   <ion-list *ngIf="status">
-    <!--<ion-button full (tap)="openWeekPage()">{{'STUDY.WEEK' | translate}}</ion-button>-->
+    <!--<ion-button full (click)="openWeekPage()">{{'STUDY.WEEK' | translate}}</ion-button>-->
     <h4 text-center *ngIf="prog">{{prog}}</h4>
     <p text-center> {{'STUDY.STATUS' | translate}} : {{statusInsc}}</p>
-    <ion-button full (tap)="openExamPage()" color="uclouvain">{{'STUDY.EXAM' | translate}}</ion-button>
+    <ion-button full (click)="openExamPage()" color="uclouvain">{{'STUDY.EXAM' | translate}}</ion-button>
     <ion-list *ngFor="let activity of activities">
     <ion-item-sliding #slidingItem>
       <ion-item>
         {{activity.sigle}}<!-- - {{activity.name}}-->
       </ion-item>
       <ion-item-options>
-        <ion-button outline (tap)="addCourseFromProgram(activity.sigle)" class="large-icon">
+        <ion-button outline (click)="addCourseFromProgram(activity.sigle)" class="large-icon">
           <ion-icon name='add-circle'></ion-icon>
         </ion-button>
       </ion-item-options>
@@ -135,7 +135,7 @@
 </ion-footer>
 <ion-footer text-center *ngIf="segment=='cours'">
     <ion-fab fab fab-bottom right style="margin-bottom:65px;">
-    <button id="prompt" ion-fab fab-fixed (tap)="showPrompt()">
+    <button id="prompt" ion-fab fab-fixed (click)="showPrompt()">
       <ion-icon name="add"> </ion-icon>
     </ion-button>
   </ion-fab>
