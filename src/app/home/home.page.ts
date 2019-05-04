@@ -91,7 +91,7 @@ export class HomePage {
     appUrl: 'apptreeresto4u://',
     httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' };
 
-  mobilityPage = { title: 'MENU.MOBILITY', component: 'MobilityPage',
+  mobilityPage = { title: 'MENU.MOBILITY', component: '/mobility',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
