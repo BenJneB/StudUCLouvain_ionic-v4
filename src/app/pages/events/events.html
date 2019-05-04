@@ -73,7 +73,9 @@
             <h3>{{event.title}}</h3>
             <p [innerHtml]="event.trimmedDescription"></p>
             <p [innerHtml]="event.location"></p>
-            <p>{{event.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{event.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
+            <p>
+                <ion-icon slot="start" name="calendar"></ion-icon>
+              {{event.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{event.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
           </ion-label>
           
         </ion-item>
