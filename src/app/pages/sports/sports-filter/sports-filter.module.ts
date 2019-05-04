@@ -3,12 +3,23 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { SportsFilterPage } from './sports-filter';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [SportsFilterPage],
   imports: [
-  	IonicModule,
-  	TranslateModule.forChild()
-  ]
+    IonicModule,
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    TranslateModule.forChild(),
+
+    
+  ],
+  entryComponents: [
+    SportsFilterPage
+   ]
 })
 export class SportsFilterPageModule { }

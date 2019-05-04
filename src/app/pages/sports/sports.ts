@@ -234,7 +234,7 @@ export class SportsPage {
       })
       await modal.present();
     //Applied changing of date range when dismiss the modal
-    await modal.onWillDismiss().then((data) => {
+    await modal.onDidDismiss().then((data) => {
       if (data) {
         data = data.data;
         let tmpRange = data[1];

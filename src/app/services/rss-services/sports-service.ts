@@ -88,7 +88,8 @@ export class SportsService {
       this.extractSports(result);
       return {
         sports: this.sports,
-        showSports: this.shownSports
+        showSports: this.shownSports,
+        categories: this.allCategories
       }
     }) .catch(error => {
       if(error == 1) {
@@ -101,7 +102,8 @@ export class SportsService {
         }
         return {
           sports: [],
-          shownSports: 0
+          shownSports: 0,
+          categories: []
         }
       }
     });
@@ -114,7 +116,8 @@ export class SportsService {
       this.extractSports(result, false);
       return {
         teams: this.teams,
-        shownTeams: this.shownTeams
+        shownTeams: this.shownTeams,
+        categoriesT: this.allCategoriesT
       }
     }) 
     .catch(error => {
@@ -128,7 +131,8 @@ export class SportsService {
         }
         return {
           teams: [],
-          shownTeams: 0
+          shownTeams: 0,
+          categoriesT: []
         }
       }
     });
