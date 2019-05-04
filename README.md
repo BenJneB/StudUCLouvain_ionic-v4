@@ -5,10 +5,11 @@
 ## WIP - Work In Progress
 
 
-Pages have not all functionalities.
+### Pages have not all functionalities.
 
 
-ToDo:
+#### ToDo:
+
 => Routes
 
 => Render
