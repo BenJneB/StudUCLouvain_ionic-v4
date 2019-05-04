@@ -81,7 +81,7 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  paramPage = { title: 'MENU.PARAM', component: 'ParamPage',
+  paramPage = { title: 'MENU.PARAM', component: '/settings',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
