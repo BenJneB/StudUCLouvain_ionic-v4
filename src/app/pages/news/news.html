@@ -22,12 +22,12 @@
 -->
 <!--EN-TETE-->
 <ion-header >
-  <ion-toolbar color="news" mode='ios'>
-    <ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </ion-button>
-    <img src="./assets/img/s.png" height="28"/>
-    <ion-title align="center">{{title | translate}}</ion-title>
+  <ion-toolbar color="news">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+          <img src="./assets/img/s.png" height="28"/>
+        </ion-buttons>
+    <ion-title horizontal="center">{{title | translate}}</ion-title>
   </ion-toolbar>
   <ion-segment [(ngModel)]="segment" name="segment" (ionChange)="tabChanged()" >
     <ion-segment-button value="univ">

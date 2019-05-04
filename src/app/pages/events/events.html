@@ -22,23 +22,24 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="event">
-    <ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </ion-button>
-    <img src="./assets/img/s.png" height="28"/>
-    <ion-title>{{title | translate}}</ion-title>
-    <ion-buttons end>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+          <img src="./assets/img/s.png" height="28"/>
+        </ion-buttons>
+    
+    <ion-title horizontal="center">{{title | translate}}</ion-title>
+    <ion-buttons slot="end">
       <ion-button (click)="presentFilter()">
-        <ion-icon name="options"></ion-icon>
+        <ion-icon  name="options"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="cachedOrNot()">
     <ion-segment-button value="all">
-      {{'EVENTS.ALL' | translate}}
+      <ion-label>{{'EVENTS.ALL' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="favorites">
-      {{'EVENTS.FAV' | translate}}
+      <ion-label>{{'EVENTS.FAV' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -56,24 +57,25 @@
 
   <ion-list #eventsList *ngFor="let item of displayedEventsD"  [hidden]="shownEvents === 0">
 
-    <ion-item-divider *ngIf="item.event.length > 0" (click)="toggleGroup(item.weeks)" text-center>
-        <!--{{'EVENTS.WEEK' | translate}} {{item.weeks}}--> [{{getRangeWeek(item.weeks,year).from | date: 'dd/MM'}} &mdash; {{getRangeWeek(item.weeks,year).to | date: 'dd/MM'}}] ({{item.event.length}})
+    <ion-item-divider *ngIf="item.event.length > 0" (click)="toggleGroup(item.weeks)">
+        <ion-label style="width: 100%;" text-center> [{{getRangeWeek(item.weeks,year).from | date: 'dd/MM'}} &mdash; {{getRangeWeek(item.weeks,year).to | date: 'dd/MM'}}] ({{item.event.length}}) </ion-label>
     </ion-item-divider>
 
-    <ion-list *ngFor="let event of item.event" [hidden]="!isGroupShown(item.weeks)">
+    <ion-item-sliding #slidingItem *ngFor="let event of item.event" [hidden]="!isGroupShown(item.weeks) || event.hidden">
 
-      <ion-item-sliding #slidingItem [hidden]="event.hidden">
 
-        <ion-item>
+        <ion-item button (click)="goToEventDetail(event)" >
           <ion-thumbnail item-left>
             <img [src]="event.iconCategory">
           </ion-thumbnail>
-          <ion-item button (click)="goToEventDetail(event)" no-lines>
+          &nbsp;
+            <ion-label>
             <h3>{{event.title}}</h3>
             <p [innerHtml]="event.trimmedDescription"></p>
             <p [innerHtml]="event.location"></p>
             <p>{{event.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{event.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
-          </ion-item>
+          </ion-label>
+          
         </ion-item>
 
         <ion-item-options>
@@ -90,7 +92,6 @@
           </ion-button>
         </ion-item-options>
       </ion-item-sliding>
-    </ion-list>
   </ion-list>
 
   <ion-list-header *ngIf="(noevents && !searching)">

@@ -80,7 +80,6 @@ export class NewsPage {
     public connService : ConnectivityService,
     private iab: InAppBrowser,
     public alertCtrl : AlertController,
-    public loadingCtrl: LoadingController,
     public facService: FacService,
     private cache: CacheService,
     private loader: LoaderService,
@@ -158,10 +157,10 @@ export class NewsPage {
         }
         else this.loadNews();
       }
-      refresher.complete();
+      refresher.target.complete();
     } else {
       this.connService.presentConnectionAlert();
-      refresher.complete();
+      refresher.target.complete();
     }
   }
 

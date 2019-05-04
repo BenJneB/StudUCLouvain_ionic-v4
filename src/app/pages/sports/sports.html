@@ -21,26 +21,26 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="sport">
-    <ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </ion-button>
-    <img src="./assets/img/s.png" height="28"/>
-    <ion-title align="center"><img alt="logo"   height="40" src="./assets/img/logoSport.png" ></ion-title>
-    <ion-buttons end>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+          <img src="./assets/img/s.png" height="28"/>
+        </ion-buttons>
+    <ion-title horizontal="center"><img alt="logo"   height="40" src="./assets/img/logoSport.png" ></ion-title>
+    <ion-buttons slot="end">
       <ion-button (click)="presentFilter()">
         <ion-icon name="options"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayedSports()" >
+  <ion-segment [(ngModel)]="segment" name="segment" (ionChange)="updateDisplayedSports()" >
     <ion-segment-button value="all" style="color: white;">
-      {{'SPORTS.ALL' | translate}}
+      <ion-label>{{'SPORTS.ALL' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="team" style="color: white;">
-      {{'SPORTS.TEAM' | translate}}
+        <ion-label>{{'SPORTS.TEAM' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="favorites" style="color: white;">
-      {{'SPORTS.FAV' | translate}}
+        <ion-label>{{'SPORTS.FAV' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -59,22 +59,24 @@
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD"  [hidden]="shownSports === 0" >
         <ion-item-divider *ngIf="item.name.length > 0" (click)="toggleGroup(item.jour)" text-center class="all" [ngClass]="{'team' : segment == 'team'}">
-          {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}})
+            <ion-label style="width: 100%;" text-center> {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}}) </ion-label>
         </ion-item-divider>
 
-        <ion-list *ngFor="let sport of item.name" [hidden]="!isGroupShown(item.jour)">
-
-          <ion-item-sliding #slidingItem [hidden]="sport.hidden">
+        <ion-item-sliding #slidingItem *ngFor="let sport of item.name" [hidden]="!isGroupShown(item.jour) || sport.hidden">
             <ion-item text-center class="all" [ngClass]="{'team' : segment == 'team'}">
+              <ion-label>
               <h3>{{sport.sport}} {{sport.sexe}}  {{sport.type}}</h3>
               <p class="text">{{sport.lieu}} - Salle : {{sport.salle}}</p>
-              <p class="text">{{sport.jour}} {{sport.date | date: 'dd/MM/yyyy' }} {{sport.date | date : 'H:mm' }} &mdash; {{sport.hfin | date : 'H:mm'}}</p>
+              <p class="text">
+                  <ion-icon slot="start" name="calendar"></ion-icon>
+                  {{sport.jour}} {{sport.date | date: 'dd/MM/yyyy' }} {{sport.date | date : 'H:mm' }} &mdash; {{sport.hfin | date : 'H:mm'}}</p>
               <p style="color:red;" *ngIf="sport.online==1">{{'SPORTS.ONLINE' | translate}}</p>
               <p style="color:red;" *ngIf="sport.remarque.length > 2">{{'SPORTS.NOTE' | translate}} : {{sport.remarque}}</p>
               <p style="color:red;" *ngIf="sport.active==0">{{'SPORTS.ANNULE' | translate}}</p>
+            </ion-label>
             </ion-item>
 
-            <ion-item-options side="right">
+            <ion-item-options side="end">
               <ion-button (click)="addToCalendar(slidingItem, sport)" class="large-icon">
                 <ion-icon name='calendar'></ion-icon>
               </ion-button>
@@ -87,8 +89,6 @@
             </ion-item-options>
 
           </ion-item-sliding>
-
-        </ion-list>
 
     </ion-list>
 

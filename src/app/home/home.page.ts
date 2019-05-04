@@ -57,11 +57,11 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
-  eventPage = { title: 'MENU.EVENTS', component: 'EventsPage',
+  eventPage = { title: 'MENU.EVENTS', component: '/events',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  sportPage = { title: 'MENU.SPORTS', component: 'SportsPage',
+  sportPage = { title: 'MENU.SPORTS', component: '/sports',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 

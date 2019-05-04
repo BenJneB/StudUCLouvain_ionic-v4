@@ -46,10 +46,10 @@
       <p [innerHTML]="news.description"></p>
     </ion-card-content>
 
-    <ion-row no-padding>
+    <ion-row>
       <ion-col text-right>
-        <ion-button clear small icon-left (click)="openPage(news.link)">
-          <ion-icon name='share-alt'></ion-icon>
+        <ion-button fill="clear" size="small" (click)="openPage(news.link)">
+          <ion-icon slot="start" name='share-alt'></ion-icon>
           {{'NEWS.SITE' | translate}}
         </ion-button>
       </ion-col>

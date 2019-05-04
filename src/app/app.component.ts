@@ -96,13 +96,13 @@ console.log("Startin App");
       appUrl: null, httpUrl: null}
     ;
     this.campusPages =[
-      { title: 'MENU.NEWS', component: 'NewsPage', icon: "./assets/img/news.png",
+      { title: 'MENU.NEWS', component: '/news', icon: "./assets/img/news.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.EVENTS', component: 'EventsPage', icon: "./assets/img/event.png",
+      { title: 'MENU.EVENTS', component: '/events', icon: "./assets/img/event.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.SPORTS', component: 'SportsPage', icon: "./assets/img/sport.png",
+      { title: 'MENU.SPORTS', component: '/sports', icon: "./assets/img/sport.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
 
