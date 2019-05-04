@@ -65,6 +65,7 @@ export class NewsService {
        }
     }
     return this.rssService.load(baseURL).then(result => {
+      console.log(result);
         this.extractNews(result);
         return {
           news: this.news,
@@ -99,6 +100,7 @@ export class NewsService {
     let maxDescLength = 20;
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
+
       let trimmedDescription = "...";
       if(item.description !== undefined) {
         trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + "..." : item.description;
@@ -108,7 +110,7 @@ export class NewsService {
       this.shownNews++;
       let pubDate = this.createDateForNews(item.pubDate);
       let img = "";
-      if(item.enclosure != null) img = item.enclosure.url;
+      if(item.enclosure != null) img = item.enclosure.$.url;
       let newNewsItem = new NewsItem(item.description || "No description...", item.link || "No link", item.title || "No title", img, trimmedDescription, hidden, item.guid, pubDate);
       this.news.push(newNewsItem);
     }

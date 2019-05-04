@@ -22,7 +22,7 @@
 <ion-header>
   <ion-toolbar id="header" class="header">
     <ion-buttons start>
-      <button ion-button (click)="dismiss()">{{'EVENTS.CANCEL' | translate}}</button>
+      <ion-button (click)="dismiss()">{{'EVENTS.CANCEL' | translate}}</ion-button>
     </ion-buttons>
     <ion-row><ion-col>
     <ion-title>
@@ -30,7 +30,7 @@
     </ion-title>
   </ion-col></ion-row>
     <ion-buttons end>
-      <button ion-button (click)="applyFilters()" strong>{{'EVENTS.APPLY' | translate}}</button>
+      <ion-button (click)="applyFilters()" strong>{{'EVENTS.APPLY' | translate}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -49,16 +49,16 @@
   </ion-item>
   <ion-toolbar color="uclouvain">
     <ion-buttons left>
-      <button ion-button icon-right end (click)="uncheckAll()">
+      <ion-button icon-right end (click)="uncheckAll()">
         {{'EVENTS.UNTOGGLE' | translate}}
         <ion-icon name="done-all"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
     <ion-buttons end>
-      <button ion-button icon-right (click)="resetFilters()">
+      <ion-button icon-right (click)="resetFilters()">
         {{'EVENTS.RESTORE' | translate}}
         <ion-icon name="refresh-circle"></ion-icon>
-      </button>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-list>

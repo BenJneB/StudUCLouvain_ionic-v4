@@ -21,9 +21,9 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="map">
-    <button ion-button menuToggle>
+    <ion-button menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </ion-button>
     <img src="./assets/img/s.png" height="28"/>
     <ion-title align="center">{{title | translate}}</ion-title>
   </ion-toolbar>
@@ -43,7 +43,7 @@
 
   <ion-card *ngFor="let zone of zones" overflow-scroll=false>
 
-    <ion-item-divider (tap)="toggleDetails(zone.auditoires)">
+    <ion-item-divider (click)="toggleDetails(zone.auditoires)">
       {{'MAP.AUDIT' | translate}}
     </ion-item-divider>
 
@@ -55,7 +55,7 @@
       <ion-toggle [(ngModel)]="zone.auditoires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(auditoire, zone.auditoires.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider (tap)="toggleDetails(zone.bibliotheques)" >
+    <ion-item-divider (click)="toggleDetails(zone.bibliotheques)" >
       {{'MAP.LIBRARY' | translate}}
     </ion-item-divider>
 
@@ -67,7 +67,7 @@
       <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary" (ionChange)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider (tap)="toggleDetails(zone.locaux)" >
+    <ion-item-divider (click)="toggleDetails(zone.locaux)" >
       {{'MAP.LOC' | translate}}
     </ion-item-divider>
 
@@ -78,7 +78,7 @@
       <ion-toggle [(ngModel)]="zone.locaux.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(loc, zone.locaux.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider (tap)="toggleDetails(zone.sports)">
+    <ion-item-divider (click)="toggleDetails(zone.sports)">
       {{'MAP.SPORT' | translate}}
     </ion-item-divider>
 
@@ -90,7 +90,7 @@
       <ion-toggle [(ngModel)]="zone.sports.listChecked[i]" color="secondary" (ionChange)="toggleLocation(sport, zone.sports.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider (tap)="toggleDetails(zone.restaurants_universitaires)">
+    <ion-item-divider (click)="toggleDetails(zone.restaurants_universitaires)">
       {{'MAP.REST' | translate}}
     </ion-item-divider>
 
@@ -102,7 +102,7 @@
       <ion-toggle [(ngModel)]="zone.restaurants_universitaires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(restau, zone.restaurants_universitaires.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider (tap)="toggleDetails(zone.services)" >
+    <ion-item-divider (click)="toggleDetails(zone.services)" >
       {{'MAP.SERV' | translate}}
     </ion-item-divider>
 
@@ -114,7 +114,7 @@
       <ion-toggle [(ngModel)]="zone.services.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(service, zone.services.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider (tap)="toggleDetails(zone.parkings)" >
+    <ion-item-divider (click)="toggleDetails(zone.parkings)" >
       {{'MAP.PARK' | translate}}
     </ion-item-divider>
 

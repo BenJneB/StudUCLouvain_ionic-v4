@@ -33,6 +33,7 @@ import { FacService } from '../../services/utils-services/fac-service';
 
 import { NewsItem } from '../../entity/newsItem';
 import { debounceTime } from 'rxjs/operators';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'page-news',
@@ -79,10 +80,10 @@ export class NewsPage {
     public connService : ConnectivityService,
     private iab: InAppBrowser,
     public alertCtrl : AlertController,
-    public loadingCtrl: LoadingController,
     public facService: FacService,
     private cache: CacheService,
-    private loader: LoaderService)
+    private loader: LoaderService,
+    private router: Router)
   {
       this.searchControl = new FormControl();
       this.facService.loadResources().then((data) => {
@@ -156,10 +157,10 @@ export class NewsPage {
         }
         else this.loadNews();
       }
-      refresher.complete();
+      refresher.target.complete();
     } else {
       this.connService.presentConnectionAlert();
-      refresher.complete();
+      refresher.target.complete();
     }
   }
 
@@ -252,11 +253,16 @@ export class NewsPage {
     this.nonews = this.shownNews ==0;
     this.searching = false;
     this.loader.dismiss();
-    console.log(this.displayedNews);
+    console.log(this.displayedNews)
   }
 
   /*When click on a news, go to the page with more details*/
   public goToNewsDetail(news: NewsItem) {
-    this.navCtrl.navigateForward( ['NewsDetailsPage', { 'news': news }]);
+    let navigationExtras: NavigationExtras = {
+      state: {
+        news: news
+      }
+    };
+    this.router.navigate( ['news/details'], navigationExtras);
   }
 }
