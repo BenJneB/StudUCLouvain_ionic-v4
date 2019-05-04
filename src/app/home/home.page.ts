@@ -85,7 +85,7 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  restoPage = { title: 'MENU.RESTAURANT', component: 'RestaurantPage',
+  restoPage = { title: 'MENU.RESTAURANT', component: '/rest',
     iosSchemaName: 'id1156050719',
     androidPackageName: 'com.apptree.resto4u',
     appUrl: 'apptreeresto4u://',
