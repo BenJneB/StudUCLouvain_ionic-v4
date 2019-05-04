@@ -9,7 +9,7 @@ before_script:
 script:
       - ionic build browser --prod
 deploy:
-      provider: pages
+      provider: app
       skip-cleanup: true
       github-token: $GITHUB_TOKEN 
       keep-history: true
