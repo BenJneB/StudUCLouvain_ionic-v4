@@ -134,7 +134,7 @@ console.log("Startin App");
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.PARAM', component: 'ParamPage', icon : "./assets/img/setting.png",
+      { title: 'MENU.PARAM', component: '/settings', icon : "./assets/img/setting.png",
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },

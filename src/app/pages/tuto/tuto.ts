@@ -20,7 +20,7 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 
@@ -30,7 +30,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 })
 export class TutoPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public splashscreen: SplashScreen) {
+  constructor(public navCtrl: NavController, public splashscreen: SplashScreen) {
   }
 
   ionViewDidEnter() {

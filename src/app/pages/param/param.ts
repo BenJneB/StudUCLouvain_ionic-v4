@@ -21,7 +21,7 @@
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, AlertController } from '@ionic/angular';
+import { NavController, ModalController, AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../services/utils-services/user-service';
@@ -45,22 +45,21 @@ export class ParamPage {
 
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
               public modalCtrl: ModalController,
               public userS:UserService,
               private alertCtrl : AlertController,
               private translateService: TranslateService) {
-    this.title = this.navParams.get('title');
+              this.translateService.get('MENU.PARAM').subscribe((res:string) => {this.title=res;});
   }
 
   /*Create and display an alert for the choice of campus and save the choice of the user in the public variable*/
-  campus_choice(){
+  async campus_choice(){
     let check = this.userS.campus;
     let setting, message, save;
     this.translateService.get('HOME.SETTING1').subscribe((res:string) => {setting=res;});
     this.translateService.get('HOME.MESSAGE').subscribe((res:string) => {message=res;});
     this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
-    let settingsAlert = this.alertCtrl.create({
+    let settingsAlert = await this.alertCtrl.create({
       header: setting,
       message: message,
       inputs : [
@@ -86,7 +85,7 @@ export class ParamPage {
           type:'radio',
           label:'Tournai',
           value:'Tournai',
-          disabled:true
+          disabled:true,
         },
         {
           type:'radio',
@@ -101,11 +100,12 @@ export class ParamPage {
           this.userS.addCampus(data);
         }
       }]
-    }).then(alert => alert.present());
+    });
+    await settingsAlert.present();
   }
 
   /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
-  language_choice(){
+  async language_choice(){
     let check2 = this.translateService.currentLang;
     let message2, en, fr, setting2, save:string;
     this.translateService.get('HOME.SETTING2').subscribe((res:string) => {setting2=res;});
@@ -113,7 +113,7 @@ export class ParamPage {
     this.translateService.get('HOME.FR').subscribe((res:string) => {fr=res;});
     this.translateService.get('HOME.EN').subscribe((res:string) => {en=res;});
     this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
-    let languageAlert = this.alertCtrl.create({
+    let languageAlert = await this.alertCtrl.create({
       header: setting2,
       message : message2,
       inputs : [
@@ -138,7 +138,7 @@ export class ParamPage {
         }
       }]
     });
-    languageAlert.then(alert => alert.present());
+    await languageAlert.present();
   }
 
   /*When the language change, translate the page with the applied language*/
@@ -148,6 +148,6 @@ export class ParamPage {
   }
 
   openTuto(){
-    this.navCtrl.navigateForward('TutoPage');
+    this.navCtrl.navigateForward('/tutos');
   }
 }

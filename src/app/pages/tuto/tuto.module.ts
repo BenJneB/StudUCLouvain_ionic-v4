@@ -23,6 +23,9 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TutoPage } from './tuto';
 import { TranslateModule } from '@ngx-translate/core';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [
@@ -30,7 +33,16 @@ import { TranslateModule } from '@ngx-translate/core';
   ],
   imports: [
     IonicModule,
-    TranslateModule.forChild()
+    TranslateModule.forChild(),
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: TutoPage
+      }
+    ])
   ],
 })
 export class TutoPageModule {}
