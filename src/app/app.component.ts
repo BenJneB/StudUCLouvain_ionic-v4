@@ -119,7 +119,7 @@ console.log("Startin App");
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];
     this.toolPages =[
-      { title: 'MENU.PARTY', component: 'GuindaillePage', icon: "./assets/img/g2.png",
+      { title: 'MENU.PARTY', component: '/guindaille', icon: "./assets/img/g2.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
       { title: 'MENU.MAP', component: 'MapPage', icon: "./assets/img/cartes.png",

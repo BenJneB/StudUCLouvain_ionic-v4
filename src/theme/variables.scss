@@ -98,7 +98,7 @@
   --ion-color-home: #002A6A;
 }
 
-$customColors: ('news', 'event', 'sport', 'g2', 'cred', 'bibli', 'etudes', 'support', 'ucl', 'setting', 'map', 'resto', 'mobilite', 'urg', 'fun', 'uclouvain', 'home');
+$customColors: ('guindaille', 'navbarColor', 'news', 'event', 'sport', 'g2', 'cred', 'bibli', 'etudes', 'support', 'ucl', 'setting', 'map', 'resto', 'mobilite', 'urg', 'fun', 'uclouvain', 'home');
 @each $color in $customColors {
   .ion-color-#{$color} {
     --ion-color-base: var(--ion-color-#{$color}) !important;

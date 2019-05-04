@@ -9,6 +9,7 @@ const routes: Routes = [
   { path: 'events', loadChildren: './pages/events/events.module#EventsPageModule' },
   { path: 'events/details', loadChildren: './pages/events/events-details/events-details.module#EventsDetailsPageModule' },
   { path: 'sports', loadChildren: './pages/sports/sports.module#SportsPageModule' },
+  { path: 'guindaille', loadChildren: './pages/guindaille2-0/guindaille2-0.module#GuindaillePageModule' },
 ];
 
 @NgModule({
