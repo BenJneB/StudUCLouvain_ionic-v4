@@ -37,7 +37,7 @@ page-guindaille2-0 {
     .guindaille {
         font-family: 'Museo' !important;
 
-        background-color: map-get($colors, guindaille);
+        background-color: map-get($colors, guindaille) !important;
     }
 
 
@@ -49,18 +49,18 @@ page-guindaille2-0 {
     }
 
     .gbutton {
-        background-color: map-get($colors, guindaille);
+        background-color: map-get($colors, guindaille) !important;
         border: 1px solid white;
         text-transform: none;
     }
 
     .gelem {
-        background-color: map-get($colors, guindaille);
+        background-color: map-get($colors, guindaille) !important;
         text-align: center;
     }
 
     .gfoot {
-        background-color: map-get($colors, guindaille);
+        background-color: map-get($colors, guindaille) !important;
     }
 
     .gtextf{

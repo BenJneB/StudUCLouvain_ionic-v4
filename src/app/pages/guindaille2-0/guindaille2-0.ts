@@ -21,7 +21,7 @@
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -39,7 +39,7 @@ import { TranslateService } from '@ngx-translate/core';
 })
 
 export class GuindaillePage {
-  title: any;
+  header: any;
   shownGroup = null;
   segment:string = 'pict';
 
@@ -48,66 +48,66 @@ export class GuindaillePage {
 
   alt:string;
   altsub:string;
-  alterner = { title: '',
-          subTitle: '',
+  alterner = { header: '',
+          subHeader: '',
           buttons: ['OK'] };
 
   brt:string;
   brtsub:string;
-  bruit = { title: '',
-      subTitle: '',
+  bruit = { header: '',
+      subHeader: '',
       buttons: ['OK'] };
 
   wat:string;
   watsub:string;
-  eau = { title: '',
-      subTitle: '',
+  eau = { header: '',
+      subHeader: '',
       buttons: ['OK'] };
 
   where:string;
   wheresub:string;
-  ou = { title: '',
-      subTitle: '',
+  ou = { header: '',
+      subHeader: '',
       buttons: ['OK'] };
 
   can:string;
   cansub:string;
-  cans = { title: '',
-      subTitle: '',
+  cans = { header: '',
+      subHeader: '',
       buttons: ['OK'] };
 
   pres:string;
   pressub:string;
-  preservatif = { title: '',
-      subTitle: '',
+  preservatif = { header: '',
+      subHeader: '',
       buttons: ['OK'] };
 
   rac:string;
   racsub:string;
-  racompagner = { title: '',
-      subTitle: '',
+  racompagner = { header: '',
+      subHeader: '',
       buttons: ['OK'] };
 
   ur:string;
   ursub:string;
-  uriner = { title: '',
-      subTitle: '',
+  uriner = { header: '',
+      subHeader: '',
       buttons: ['OK'] };
 
   de:string;
   desub:string;
-  dehors = { title: '',
-      subTitle: '',
+  dehors = { header: '',
+      subHeader: '',
       buttons: ['OK'] };
 
   vio:string;
   viosub:string;
-  violence = { title: '',
-      subTitle: '',
+  violence = { header: '',
+      subHeader: '',
       buttons: ['OK'] };
 
   /*Create that to use the system of bilingual application, the objects are instantiate here
-  title and efct for each part of the effectometre*/
+  header and efct for each part of the effectometre*/
   ttl1:string;
   efct1:string;
   ttl2:string;
@@ -126,165 +126,164 @@ export class GuindaillePage {
 
   slides = [
       {
-        title: '',
-        subTitle: '',
+        header: '',
+        subHeader: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/1.png",
       },
       {
-        title: '',
-        subTitle: '',
+        header: '',
+        subHeader: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/2.png",
       },
       {
-        title: '',
-        subTitle: '',
+        header: '',
+        subHeader: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/3.png",
       },
       {
-        title: '',
-        subTitle: '',
+        header: '',
+        subHeader: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/4.png",
       },
       {
-        title: '',
-        subTitle: '',
+        header: '',
+        subHeader: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/5.png",
       },
       {
-        title: '',
-        subTitle: '',
+        header: '',
+        subHeader: '',
         buttons: ['OK'],
         image: "assets/img/guindaille/6.png",
       }];
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
               public modalCtrl: ModalController,
               public alertCtrl: AlertController,
               public translateService: TranslateService)
   {
-      this.title = this.navParams.get('title');
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLE1').subscribe((res:string) => {this.alt=res;});
       this.translateService.get('GUINDAILLE.PIC1').subscribe((res:string) => {this.altsub=res;});
       //put real value for each attributes
-      this.alterner.title = this.alt;
-      this.alterner.subTitle = this.altsub;
+      this.alterner.header = this.alt;
+      this.alterner.subHeader = this.altsub;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLE2').subscribe((res:string) => {this.brt=res;});
       this.translateService.get('GUINDAILLE.PIC2').subscribe((res:string) => {this.brtsub=res;});
       //put real value for each attributes
-      this.bruit.title = this.brt;
-      this.bruit.subTitle = this.brtsub;
+      this.bruit.header = this.brt;
+      this.bruit.subHeader = this.brtsub;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLE3').subscribe((res:string) => {this.wat=res;});
       this.translateService.get('GUINDAILLE.PIC3').subscribe((res:string) => {this.watsub=res;});
       //put real value for each attributes
-      this.eau.title = this.wat;
-      this.eau.subTitle = this.watsub;
+      this.eau.header = this.wat;
+      this.eau.subHeader = this.watsub;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLE4').subscribe((res:string) => {this.where=res;});
       this.translateService.get('GUINDAILLE.PIC4').subscribe((res:string) => {this.wheresub=res;});
       //put real value for each attributes
-      this.ou.title = this.where;
-      this.ou.subTitle = this.wheresub;
+      this.ou.header = this.where;
+      this.ou.subHeader = this.wheresub;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLE5').subscribe((res:string) => {this.can=res;});
       this.translateService.get('GUINDAILLE.PIC5').subscribe((res:string) => {this.cansub=res;});
       //put real value for each attributes
-      this.cans.title = this.can;
-      this.cans.subTitle = this.cansub;
+      this.cans.header = this.can;
+      this.cans.subHeader = this.cansub;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLE6').subscribe((res:string) => {this.pres=res;});
       this.translateService.get('GUINDAILLE.PIC6').subscribe((res:string) => {this.pressub=res;});
       //put real value for each attributes
-      this.preservatif.title = this.pres;
-      this.preservatif.subTitle = this.pressub;
+      this.preservatif.header = this.pres;
+      this.preservatif.subHeader = this.pressub;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLE7').subscribe((res:string) => {this.rac=res;});
       this.translateService.get('GUINDAILLE.PIC7').subscribe((res:string) => {this.racsub=res;});
       //put real value for each attributes
-      this.racompagner.title = this.rac;
-      this.racompagner.subTitle = this.racsub;
+      this.racompagner.header = this.rac;
+      this.racompagner.subHeader = this.racsub;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLE8').subscribe((res:string) => {this.ur=res;});
       this.translateService.get('GUINDAILLE.PIC8').subscribe((res:string) => {this.ursub=res;});
       //put real value for each attributes
-      this.uriner.title = this.ur;
-      this.uriner.subTitle = this.ursub;
+      this.uriner.header = this.ur;
+      this.uriner.subHeader = this.ursub;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLE9').subscribe((res:string) => {this.de=res;});
       this.translateService.get('GUINDAILLE.PIC9').subscribe((res:string) => {this.desub=res;});
       //put real value for each attributes
-      this.dehors.title = this.de;
-      this.dehors.subTitle = this.desub;
+      this.dehors.header = this.de;
+      this.dehors.subHeader = this.desub;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLE10').subscribe((res:string) => {this.vio=res;});
       this.translateService.get('GUINDAILLE.PIC10').subscribe((res:string) => {this.viosub=res;});
       //put real value for each attributes
-      this.violence.title = this.vio;
-      this.violence.subTitle = this.viosub;
+      this.violence.header = this.vio;
+      this.violence.subHeader = this.viosub;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLEF1').subscribe((res:string) => {this.ttl1=res;});
       this.translateService.get('GUINDAILLE.EFFECT1').subscribe((res:string) => {this.efct1=res;});
       //put real value for each attributes
-      this.slides[0].title = this.ttl1;
-      this.slides[0].subTitle = this.efct1;
+      this.slides[0].header = this.ttl1;
+      this.slides[0].subHeader = this.efct1;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLEF2').subscribe((res:string) => {this.ttl2=res;});
       this.translateService.get('GUINDAILLE.EFFECT2').subscribe((res:string) => {this.efct2=res;});
       //put real value for each attributes
-      this.slides[1].title = this.ttl2;
-      this.slides[1].subTitle = this.efct2;
+      this.slides[1].header = this.ttl2;
+      this.slides[1].subHeader = this.efct2;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLEF3').subscribe((res:string) => {this.ttl3=res;});
       this.translateService.get('GUINDAILLE.EFFECT3').subscribe((res:string) => {this.efct3=res;});
       //put real value for each attributes
-      this.slides[2].title = this.ttl3;
-      this.slides[2].subTitle = this.efct3;
+      this.slides[2].header = this.ttl3;
+      this.slides[2].subHeader = this.efct3;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLEF4').subscribe((res:string) => {this.ttl4=res;});
       this.translateService.get('GUINDAILLE.EFFECT4').subscribe((res:string) => {this.efct4=res;});
       //put real value for each attributes
-      this.slides[3].title = this.ttl4;
-      this.slides[3].subTitle = this.efct4;
+      this.slides[3].header = this.ttl4;
+      this.slides[3].subHeader = this.efct4;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLEF5').subscribe((res:string) => {this.ttl5=res;});
       this.translateService.get('GUINDAILLE.EFFECT5').subscribe((res:string) => {this.efct5=res;});
       //put real value for each attributes
-      this.slides[4].title = this.ttl5;
-      this.slides[4].subTitle = this.efct5;
+      this.slides[4].header = this.ttl5;
+      this.slides[4].subHeader = this.efct5;
 
       //get the good value
       this.translateService.get('GUINDAILLE.TITLEF6').subscribe((res:string) => {this.ttl6=res;});
       this.translateService.get('GUINDAILLE.EFFECT6').subscribe((res:string) => {this.efct6=res;});
       //put real value for each attributes
-      this.slides[5].title = this.ttl6;
-      this.slides[5].subTitle = this.efct6;
+      this.slides[5].header = this.ttl6;
+      this.slides[5].subHeader = this.efct6;
   }
 
   /*Display alert*/
   showAlert(page) {
+    console.log(page);
       let alert = this.alertCtrl.create(page).then(alert => alert.present());
   }
 }

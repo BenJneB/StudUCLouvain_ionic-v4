@@ -77,7 +77,7 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  guindaillePage = { title: 'MENU.PARTY', component: 'GuindaillePage',
+  guindaillePage = { title: 'MENU.PARTY', component: '/guindaille',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
