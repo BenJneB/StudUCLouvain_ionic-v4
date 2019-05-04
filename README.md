@@ -12,7 +12,7 @@
 
 => Routes
 
-=> Render
+=> Render (In progress -- Guindaille to fix)
 
 => Make subpages reachable
 
