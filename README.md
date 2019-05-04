@@ -1,8 +1,8 @@
 # StudUCLouvain_ionic-v4
-Migration to ionic-v4
+### Migration to ionic-v4
 
 
-WIP - Work In Progress
+## WIP - Work In Progress
 
 
 Pages have not all functionalities.
