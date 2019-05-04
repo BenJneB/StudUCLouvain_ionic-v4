@@ -130,7 +130,7 @@ console.log("Startin App");
         androidPackageName: 'com.apptree.resto4u',
         appUrl: 'apptreeresto4u://',
         httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
-      { title: 'MENU.MOBILITY', component: 'MobilityPage', icon : "./assets/img/mobilité.png",
+      { title: 'MENU.MOBILITY', component: '/mobility', icon : "./assets/img/mobilité.png",
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },

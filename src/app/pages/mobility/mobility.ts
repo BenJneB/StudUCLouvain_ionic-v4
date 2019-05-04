@@ -20,7 +20,7 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
@@ -39,13 +39,12 @@ export class MobilityPage {
   trainPage;
   constructor(public nav: NavController,
               public market: Market,
-              public navParams: NavParams,
               private iab: InAppBrowser,
               private appAvailability: AppAvailability,
               private device: Device,
               private translateService: TranslateService)
   {
-    this.title = this.navParams.get('title');
+    this.title = "Mobilité";
     let titlecar:string;
     this.translateService.get('MOBI.COVOIT').subscribe((res:string) => {titlecar=res;});
 
