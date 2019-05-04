@@ -89,7 +89,6 @@ export class EventsPage {
   /*Like the constructor, ngOnInit fires all his body*/
   ngOnInit() {
     this.updateDateLimit();
-    console.log(this.dateLimit);
       this.cachedOrNot();
       this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
         this.searching = false;
@@ -107,23 +106,6 @@ export class EventsPage {
     } else {
       this.connService.presentConnectionAlert();
       refresher.tagert.complete();
-    }
-  }
-
-  /*Display an loading window*/
-  presentLoading() {
-    if(!this.loading){
-      this.loading = this.loadingCtrl.create({
-        message: 'Please wait...'
-      }).then(loading => loading.present());
-    }
-  }
-
-  /*Close the loading window*/
-  dismissLoading(){
-    if(this.loading){
-        this.loading.dismiss();
-        this.loading = null;
     }
   }
 
@@ -162,7 +144,6 @@ export class EventsPage {
         await this.cache.getItem(key)
         .then((data) => {
           this.loader.present('Please wait...');
-          console.log("cached events");
           this.events=data.events;
           this.events.forEach(function(element) {
             element.startDate = new Date(element.startDate);
@@ -186,16 +167,12 @@ export class EventsPage {
     this.eventsList && this.eventsList.closeSlidingItems();
 
     //Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
-          console.log("conn?")
 
     if(this.connService.isOnline()) {
-            console.log("before")
 
       this.loader.present('Please wait...');
-      console.log("before")
       this.eventsService.getEvents(this.segment).then(
         res => {
-          console.log("in")
           let result:any = res;
           this.events = result.events;
           if(key) this.cache.saveItem(key, result);
@@ -206,7 +183,6 @@ export class EventsPage {
           this.updateDisplayedEvents();
       })
     } else {
-      console.log("else")
       this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -228,7 +204,6 @@ export class EventsPage {
     var eventsD = Object.keys(groups).map(function(key){
       return {weeks: key, event: groups[key]};
     });
-    console.log(eventsD);
     return eventsD;
   }
 
@@ -265,12 +240,10 @@ export class EventsPage {
     this.eventsList && this.eventsList.closeSlidingItems();
 
     if (this.segment === 'all') {
-     // try{
       this.displayedEvents = this.events.filter((item) => {
-        //console.log(item);
         return ( this.excludedFilters.indexOf(item.category) < 0 ) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.startDate.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
-      })//}catch(error) {console.log(error)}
+      })
     } else if (this.segment === 'favorites') {
       let favEvents = [];
       this.events.filter((item) => {
@@ -294,7 +267,6 @@ export class EventsPage {
     if(this.filters === undefined){
       this.filters = [];
     }
-
     let modal = await this.modalCtrl.create(
       {
         component: EventsFilterPage, 
@@ -302,7 +274,7 @@ export class EventsPage {
       }
       );
       await modal.present();
-     await modal.onWillDismiss().then((data: OverlayEventDetail) => {
+     await modal.onDidDismiss().then((data: OverlayEventDetail) => {
       if (data) {
         data=data.data;
         let tmpRange = data[1];

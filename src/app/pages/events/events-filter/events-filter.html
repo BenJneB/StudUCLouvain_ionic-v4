@@ -21,7 +21,7 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar id="header" class="header">
-    <ion-buttons start>
+    <ion-buttons slot="start">
       <ion-button (click)="dismiss()">{{'EVENTS.CANCEL' | translate}}</ion-button>
     </ion-buttons>
     <ion-row><ion-col>
@@ -29,7 +29,7 @@
       {{'EVENTS.FILTER' | translate}}
     </ion-title>
   </ion-col></ion-row>
-    <ion-buttons end>
+    <ion-buttons slot="end">
       <ion-button (click)="applyFilters()" strong>{{'EVENTS.APPLY' | translate}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
@@ -48,16 +48,16 @@
     </ion-range>
   </ion-item>
   <ion-toolbar color="uclouvain">
-    <ion-buttons left>
-      <ion-button icon-right end (click)="uncheckAll()">
-        {{'EVENTS.UNTOGGLE' | translate}}
-        <ion-icon name="done-all"></ion-icon>
+    <ion-buttons slot="start">
+      <ion-button color="light" (click)="uncheckAll()">
+          <ion-label >{{'EVENTS.UNTOGGLE' | translate}}</ion-label>
+        <ion-icon  slot="end" name="done-all"></ion-icon>
       </ion-button>
     </ion-buttons>
-    <ion-buttons end>
-      <ion-button icon-right (click)="resetFilters()">
-        {{'EVENTS.RESTORE' | translate}}
-        <ion-icon name="refresh-circle"></ion-icon>
+    <ion-buttons slot="end">
+      <ion-button color="light" (click)="resetFilters()">
+        <ion-label>{{'EVENTS.RESTORE' | translate}}</ion-label>
+        <ion-icon slot="end" name="refresh-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>

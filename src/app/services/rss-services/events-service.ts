@@ -45,7 +45,8 @@ export class EventsService {
       this.extractEvents(result);
       return {
         events: this.events,
-        shownEvents: this.shownEvents
+        shownEvents: this.shownEvents,
+        categories: this.allCategories
       }
     })
     .catch(error => {
