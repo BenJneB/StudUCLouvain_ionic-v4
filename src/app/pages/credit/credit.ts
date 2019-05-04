@@ -20,7 +20,7 @@
 */
 
 import { Component} from '@angular/core';
-import { NavController, NavParams, ModalController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 
@@ -36,12 +36,11 @@ export class CreditPage {
   version;
 
   constructor(public navCtrl: NavController, 
-              public navParams: NavParams, 
               public modalCtrl: ModalController, 
               private iab: InAppBrowser,
               private appVersion: AppVersion) 
   {
-    this.title = this.navParams.get('title');
+    this.title = "Crédits";
     this.appVersion.getVersionNumber().then(version => {
       this.version = version;
       console.log(this.version);

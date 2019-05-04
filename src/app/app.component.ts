@@ -138,7 +138,7 @@ console.log("Startin App");
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null },
-      { title: 'MENU.CREDITS', component: 'CreditPage', icon : "./assets/img/signature.png",
+      { title: 'MENU.CREDITS', component: '/credit', icon : "./assets/img/signature.png",
         iosSchemaName: null,
         androidPackageName: null,
         appUrl: null, httpUrl: null }
