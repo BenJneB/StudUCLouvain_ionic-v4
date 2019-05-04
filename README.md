@@ -10,11 +10,11 @@
 
 #### ToDo:
 
-=> Routes
+=> Routes (Main : Studies, Libraries, Map, Support, Mobility, Credit)
 
-=> Render (In progress -- Guindaille&Tuto to fix)
+=> Render (Same + Guindaille&Tuto to fix)
 
-=> Refactor ?
+=> Refactor ? (Rss +- done)
 
 => Satisfy codeclimate. Maybe after fix all pages ?
 
