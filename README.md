@@ -2,10 +2,11 @@
 ### Migration to ionic-v4
 
 
-## WIP - Work In Progress
-
-
 ### Pages have not all functionalities.
+
+
+
+## WIP - Work In Progress
 
 
 #### ToDo:
