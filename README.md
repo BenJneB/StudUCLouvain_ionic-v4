@@ -1,12 +1,10 @@
 # StudUCLouvain_ionic-v4
+## WIP - Work In Progress
 ### Migration to ionic-v4
 
 
 ### Pages have not all functionalities.
 
-
-
-## WIP - Work In Progress
 
 
 #### ToDo:
