@@ -12,7 +12,7 @@
 
 => Routes
 
-=> Render (In progress -- Guindaille to fix)
+=> Render (In progress -- Guindaille&Tuto to fix)
 
 => Refactor ?
 
