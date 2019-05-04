@@ -14,8 +14,6 @@
 
 => Render (In progress -- Guindaille to fix)
 
-=> Make subpages reachable
-
 => Refactor ?
 
 => Satisfy codeclimate. Maybe after fix all pages ?
