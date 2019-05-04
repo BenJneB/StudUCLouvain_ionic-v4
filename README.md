@@ -1,21 +1,19 @@
 # StudUCLouvain_ionic-v4
-Migration to ionic-v4
+## WIP - Work In Progress
+### Migration to ionic-v4
 
 
-WIP - Work In Progress
+### Pages have not all functionalities.
 
 
-Pages have not all functionalities.
 
+#### ToDo:
 
-ToDo:
-=> Routes
+=> Routes (Main : Studies, Libraries, Map, Support, Mobility, Credit)
 
-=> Render
+=> Render (Same + Guindaille&Tuto to fix)
 
-=> Make subpages reachable
-
-=> Refactor ?
+=> Refactor ? (Rss +- done)
 
 => Satisfy codeclimate. Maybe after fix all pages ?
 

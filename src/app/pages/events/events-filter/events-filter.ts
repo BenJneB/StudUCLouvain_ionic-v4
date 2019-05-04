@@ -20,7 +20,7 @@
 */
 
 import { Component } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 
 import { EventsService } from '../../../services/rss-services/events-service';
 
@@ -34,21 +34,25 @@ export class EventsFilterPage {
   results: any = [];
 
   constructor(
-    public navParams: NavParams,
     public viewCtrl: ModalController,
-    private eventService: EventsService
+    private eventService: EventsService,
+    private navParams: NavParams
   ) {
     //passed in array of categories names that should be excluded (unchecked)
-    let excludedFilters = this.navParams.get("excludedFilters");
-    let filters = this.navParams.get("filters");
-    this.dateRange = this.navParams.get("dateRange");
-    for (let filterName of filters) {
-      this.categories.push({
-        name: filterName,
-        iconCategory: this.eventService.getIconCategory(filterName),
-        isChecked: (excludedFilters.indexOf(filterName) === -1)
-      });
-    }
+        let excludedFilters = this.navParams.get('excludedFilters');
+        let filters = this.navParams.get('filters');
+        this.dateRange = this.navParams.get('dateRange');
+        console.log(filters);
+        for (let filterName of filters) {
+          this.categories.push({
+            name: filterName,
+            iconCategory: this.eventService.getIconCategory(filterName),
+            isChecked: (excludedFilters.indexOf(filterName) === -1)
+          });
+        }
+      
+  
+
   }
 
   /*Reset All of the Toggles to be checked*/

@@ -20,12 +20,13 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController } from '@ionic/angular';
+import { NavController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../../services/utils-services/user-service';
 
 import { EventItem } from '../../../entity/eventItem';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'page-events-details',
@@ -38,8 +39,15 @@ export class EventsDetailsPage {
     public user: UserService,
     private translateService: TranslateService,
     public toastCtrl: ToastController,
-    navParams: NavParams) {
-    this.event = navParams.get('event');
+    private router: Router,
+    private route: ActivatedRoute
+    ) {
+      this.route.queryParams.subscribe(params => {
+
+        if (this.router.getCurrentNavigation().extras.state) {
+          this.event = this.router.getCurrentNavigation().extras.state.event;
+        }
+      });
   }
 
   /*OPEN THE EXTERNAL PAGE OF THE EVENT*/

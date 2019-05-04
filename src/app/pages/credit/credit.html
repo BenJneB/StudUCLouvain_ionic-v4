@@ -22,9 +22,9 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="cred">
-    <button ion-button icon-only menuToggle>
+    <ion-button icon-only menuToggle>
       <ion-icon name="menu"></ion-icon>
-    </button>
+    </ion-button>
     <img src="./assets/img/s.png" height="28"/>
     <ion-title>{{title | translate}}</ion-title>
   </ion-toolbar>
@@ -38,7 +38,7 @@
       <p>{{'CREDIT.PROJET' | translate}}</p>
       <p [innerHTML]="'CREDIT.DEV' | translate"></p>
       <p>{{'CREDIT.DESIGN' | translate}}
-      <p>{{'CREDIT.LICENCE' | translate}} <a (tap)="openURL('https://github.com/UCL-INGI/StudUCLouvain')">https://github.com/UCL-INGI/StudUCLouvain</a></p>
+      <p>{{'CREDIT.LICENCE' | translate}} <a (click)="openURL('https://github.com/UCL-INGI/StudUCLouvain')">https://github.com/UCL-INGI/StudUCLouvain</a></p>
       <p>{{'CREDIT.CONTRIB' | translate}} <a href="mailto:StudUCLouvain@UCLouvain.be" target="_top">StudUCLouvain@UCLouvain.be</a></p>
     </div>
 </ion-content>

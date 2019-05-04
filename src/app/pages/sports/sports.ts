@@ -21,7 +21,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { AlertController, IonItemSliding, IonList,
-  ModalController, NavParams, ToastController, LoadingController, NavController} from '@ionic/angular';
+  ModalController, ToastController, NavController} from '@ionic/angular';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
@@ -30,6 +30,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../../services/utils-services/user-service';
 import { SportsService } from '../../services/rss-services/sports-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { LoaderService } from '../../services/utils-services/loader-service';
 
 import { SportItem } from '../../entity/sportItem';
 import { debounceTime } from 'rxjs/operators';
@@ -68,7 +69,6 @@ export class SportsPage {
 
   constructor(
     public alertCtrl: AlertController,
-    public navParams: NavParams,
     public modalCtrl: ModalController,
     private sportsService: SportsService,
     public user: UserService,
@@ -76,10 +76,9 @@ export class SportsPage {
     private calendar: Calendar,
     public connService : ConnectivityService,
     private translateService: TranslateService,
-    public loadingCtrl: LoadingController,
+    private loader: LoaderService,
     public navCtrl: NavController)
   {
-    this.title = this.navParams.get('title');
     this.searchControl = new FormControl();
   }
 
@@ -93,7 +92,7 @@ export class SportsPage {
         this.searching = false;
         this.updateDisplayedSports();
       });
-      this.presentLoading();
+      this.loader.present("Please wait..");
       //this.nosport=true;
     }
     //If not go back to previous page and pop an alert
@@ -106,24 +105,7 @@ export class SportsPage {
   /*Reload sport after refreshing the page*/
   public doRefresh(refresher) {
     this.loadSports();
-    refresher.complete();
-  }
-
-  /*display an loading pop up*/
-  presentLoading() {
-    if(!this.loading){
-      this.loading = this.loadingCtrl.create({
-        message: 'Please wait...'
-      }).then(loading => loading.present());
-    }
-  }
-
-  /*Cancel loading pop up*/
-  dismissLoading(){
-    if(this.loading){
-        this.loading.dismiss();
-        this.loading = null;
-    }
+    refresher.target.complete();
   }
 
   public onSearchInput(){
@@ -216,7 +198,7 @@ export class SportsPage {
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
-    this.dismissLoading();
+    this.loader.dismiss();
   }
 
   private filterDisplayedSports(items: Array<SportItem>) {
@@ -252,7 +234,7 @@ export class SportsPage {
       })
       await modal.present();
     //Applied changing of date range when dismiss the modal
-    await modal.onWillDismiss().then((data) => {
+    await modal.onDidDismiss().then((data) => {
       if (data) {
         data = data.data;
         let tmpRange = data[1];

@@ -21,9 +21,9 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="event" secondary>
-    <button ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </button>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+        </ion-buttons>
     <ion-title>{{event.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -38,18 +38,18 @@
       </ion-card-title>
       <p [innerHTML]="event.description"></p>
     </ion-card-content>
-    <ion-row no-padding>
+    <ion-row>
       <ion-col text-right>
-        <button ion-button clear small icon-left (click)="addFavorite(event)">
-          <ion-icon name='star'></ion-icon>
+        <ion-button fill="clear" size="small" (click)="addFavorite(event)">
+          <ion-icon slot="start" name='star'></ion-icon>
           {{'EVENTS.FAV' | translate}}
-        </button>
+        </ion-button>
       </ion-col>
       <ion-col text-right>
-        <button ion-button clear small icon-left (click)="openPage(event.link)">
-          <ion-icon name='share-alt'></ion-icon>
+        <ion-button fill="clear" size="small"  (click)="openPage(event.link)">
+          <ion-icon slot="start" name='share-alt'></ion-icon>
           {{'EVENTS.SITE' | translate}}
-        </button>
+        </ion-button>
       </ion-col>
     </ion-row>
 

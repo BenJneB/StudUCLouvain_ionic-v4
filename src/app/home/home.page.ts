@@ -57,11 +57,11 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
-  eventPage = { title: 'MENU.EVENTS', component: 'EventsPage',
+  eventPage = { title: 'MENU.EVENTS', component: '/events',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  sportPage = { title: 'MENU.SPORTS', component: 'SportsPage',
+  sportPage = { title: 'MENU.SPORTS', component: '/sports',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
@@ -77,11 +77,11 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  guindaillePage = { title: 'MENU.PARTY', component: 'GuindaillePage',
+  guindaillePage = { title: 'MENU.PARTY', component: '/guindaille',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  paramPage = { title: 'MENU.PARAM', component: 'ParamPage',
+  paramPage = { title: 'MENU.PARAM', component: '/settings',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 

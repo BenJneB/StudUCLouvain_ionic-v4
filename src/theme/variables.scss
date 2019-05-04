@@ -98,23 +98,18 @@
   --ion-color-home: #002A6A;
 }
 
-.ion-color-news {
-  --ion-color-base: var(--ion-color-news) !important;
-  --ion-color-base-rgb: var(--ion-color-news-rgb) !important;
-  --ion-color-contrast: var(--ion-color-news-contrast) !important;
-  --ion-color-contrast-rgb: var(--ion-color-news-contrast-rgb) !important;
-  --ion-color-shade: var(--ion-color-news-shade) !important;
-  --ion-color-tint: var(--ion-color-news-tint) !important;
+$customColors: ('guindaille', 'navbarColor', 'news', 'event', 'sport', 'g2', 'cred', 'bibli', 'etudes', 'support', 'ucl', 'setting', 'map', 'resto', 'mobilite', 'urg', 'fun', 'uclouvain', 'home');
+@each $color in $customColors {
+  .ion-color-#{$color} {
+    --ion-color-base: var(--ion-color-#{$color}) !important;
+    --ion-color-base-rgb: var(--ion-color-#{$color}-rgb) !important;
+    --ion-color-contrast: var(--ion-color-#{$color}-contrast) !important;
+    --ion-color-contrast-rgb: var(--ion-color-#{$color}-contrast-rgb) !important;
+    --ion-color-shade: var(--ion-color-#{$color}-shade) !important;
+    --ion-color-tint: var(--ion-color-#{$color}-tint) !important;
+  }
 }
 
-.ion-color-home {
-  --ion-color-base: var(--ion-color-home) !important;
-  --ion-color-base-rgb: var(--ion-color-home-rgb) !important;
-  --ion-color-contrast: var(--ion-color-home-contrast) !important;
-  --ion-color-contrast-rgb: var(--ion-color-home-contrast-rgb) !important;
-  --ion-color-shade: var(--ion-color-home-shade) !important;
-  --ion-color-tint: var(--ion-color-home-tint) !important;
-}
 
 
 .ion-color-uclouvain {
@@ -156,7 +151,13 @@ ion-title {
   width: 100%;
   text-align: center;
 }
-
+.menu-title{
+  display: inline-block;
+}
+.menu-title.ios.title-ios{
+  padding: 0 !important;
+  line-height: 3.5;
+}
 .back-button {
 z-index: 1;
 }

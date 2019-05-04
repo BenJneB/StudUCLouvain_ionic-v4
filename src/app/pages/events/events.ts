@@ -21,12 +21,13 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { AlertController, IonItemSliding, IonList, NavController,
-  ModalController, NavParams, ToastController, LoadingController } from '@ionic/angular';
+  ModalController, ToastController, LoadingController } from '@ionic/angular';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 
 import { CacheService } from 'ionic-cache';
+import { LoaderService } from '../../services/utils-services/loader-service';
 
 import { UserService } from '../../services/utils-services/user-service';
 import { EventsService } from '../../services/rss-services/events-service';
@@ -35,6 +36,7 @@ import { EventsFilterPage } from '../../pages/events/events-filter/events-filter
 import { EventItem } from '../../entity/eventItem';
 import { debounceTime } from 'rxjs/operators';
 import { OverlayEventDetail } from '@ionic/core';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'page-events',
@@ -68,7 +70,6 @@ export class EventsPage {
   constructor(
     public alertCtrl: AlertController,
     private navCtrl: NavController,
-    public navParams: NavParams,
     public modalCtrl: ModalController,
     private eventsService: EventsService,
     public user: UserService,
@@ -77,16 +78,17 @@ export class EventsPage {
     public connService : ConnectivityService,
     private translateService: TranslateService,
     private loadingCtrl: LoadingController,
-    private cache: CacheService
+    private cache: CacheService,
+    private loader: LoaderService,
+    private router: Router,
   ) {
-    this.title = this.navParams.get('title');
+    this.title = 'Evénements';
     this.searchControl = new FormControl();
   }
 
   /*Like the constructor, ngOnInit fires all his body*/
   ngOnInit() {
     this.updateDateLimit();
-    console.log(this.dateLimit);
       this.cachedOrNot();
       this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
         this.searching = false;
@@ -100,27 +102,10 @@ export class EventsPage {
     if(this.connService.isOnline()) {
       this.cache.removeItem('cache-event');
       this.loadEvents('cache-event');
-      refresher.complete();
+      refresher.target.complete();
     } else {
       this.connService.presentConnectionAlert();
-      refresher.complete();
-    }
-  }
-
-  /*Display an loading window*/
-  presentLoading() {
-    if(!this.loading){
-      this.loading = this.loadingCtrl.create({
-        message: 'Please wait...'
-      }).then(loading => loading.present());
-    }
-  }
-
-  /*Close the loading window*/
-  dismissLoading(){
-    if(this.loading){
-        this.loading.dismiss();
-        this.loading = null;
+      refresher.tagert.complete();
     }
   }
 
@@ -130,7 +115,12 @@ export class EventsPage {
 
   /*Open the details page for an event*/
   public goToEventDetail(event: EventItem) {
-    this.navCtrl.navigateForward(['EventsDetailsPage', { 'event': event }]);
+    let navigationExtras: NavigationExtras = {
+      state: {
+        event: event
+      }
+    };
+    this.router.navigate( ['events/details'], navigationExtras);
   }
 
   /*To display or close a group of events (1 group = events for one week)*/
@@ -153,8 +143,7 @@ export class EventsPage {
         let key = 'cache-event';
         await this.cache.getItem(key)
         .then((data) => {
-          this.presentLoading();
-          console.log("cached events");
+          this.loader.present('Please wait...');
           this.events=data.events;
           this.events.forEach(function(element) {
             element.startDate = new Date(element.startDate);
@@ -178,16 +167,12 @@ export class EventsPage {
     this.eventsList && this.eventsList.closeSlidingItems();
 
     //Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
-          console.log("conn?")
 
     if(this.connService.isOnline()) {
-            console.log("before")
 
-      this.presentLoading();
-      console.log("before")
+      this.loader.present('Please wait...');
       this.eventsService.getEvents(this.segment).then(
         res => {
-          console.log("in")
           let result:any = res;
           this.events = result.events;
           if(key) this.cache.saveItem(key, result);
@@ -198,7 +183,6 @@ export class EventsPage {
           this.updateDisplayedEvents();
       })
     } else {
-      console.log("else")
       this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -220,7 +204,6 @@ export class EventsPage {
     var eventsD = Object.keys(groups).map(function(key){
       return {weeks: key, event: groups[key]};
     });
-    console.log(eventsD);
     return eventsD;
   }
 
@@ -257,12 +240,10 @@ export class EventsPage {
     this.eventsList && this.eventsList.closeSlidingItems();
 
     if (this.segment === 'all') {
-     // try{
       this.displayedEvents = this.events.filter((item) => {
-        //console.log(item);
         return ( this.excludedFilters.indexOf(item.category) < 0 ) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
             && (Math.floor(item.startDate.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
-      })//}catch(error) {console.log(error)}
+      })
     } else if (this.segment === 'favorites') {
       let favEvents = [];
       this.events.filter((item) => {
@@ -278,7 +259,7 @@ export class EventsPage {
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
     this.displayedEventsD = this.changeArray(this.displayedEvents,this.weekUCL);
-    this.dismissLoading();
+    this.loader.dismiss();
   }
 
   /*Display the modal with the filters and update data with them*/
@@ -286,7 +267,6 @@ export class EventsPage {
     if(this.filters === undefined){
       this.filters = [];
     }
-
     let modal = await this.modalCtrl.create(
       {
         component: EventsFilterPage, 
@@ -294,7 +274,7 @@ export class EventsPage {
       }
       );
       await modal.present();
-     await modal.onWillDismiss().then((data: OverlayEventDetail) => {
+     await modal.onDidDismiss().then((data: OverlayEventDetail) => {
       if (data) {
         data=data.data;
         let tmpRange = data[1];
