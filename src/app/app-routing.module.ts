@@ -9,6 +9,8 @@ const routes: Routes = [
   { path: 'guindaille', loadChildren: './pages/guindaille2-0/guindaille2-0.module#GuindaillePageModule' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'libraries', loadChildren: './library/library.module#LibrariesPageModule' },
+  { path: 'libraries/details', loadChildren: './library/library-details/library-details.module#LibrariesDetailsPageModule' },
+  { path: 'map', loadChildren: './map/map.module#MapPageModule' },
   { path: 'mobility', loadChildren: './pages/mobility/mobility.module#MobilityPageModule' },
   { path: 'news', loadChildren: './pages/news/news.module#NewsPageModule' },
   { path: 'news/details', loadChildren: './pages/news/news-details/news-details.module#NewsDetailsPageModule' },
