@@ -8,7 +8,7 @@ const routes: Routes = [
   { path: 'events/details', loadChildren: './pages/events/events-details/events-details.module#EventsDetailsPageModule' },
   { path: 'guindaille', loadChildren: './pages/guindaille2-0/guindaille2-0.module#GuindaillePageModule' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
-  { path: 'libraries', loadChildren: './library/library.module#LibrariesPageModule' },
+  { path: 'libraries', loadChildren: './library/libraries.module#LibrariesPageModule' },
   { path: 'libraries/details', loadChildren: './library/library-details/library-details.module#LibrariesDetailsPageModule' },
   { path: 'map', loadChildren: './map/map.module#MapPageModule' },
   { path: 'mobility', loadChildren: './pages/mobility/mobility.module#MobilityPageModule' },
