@@ -13,7 +13,7 @@ before_script:
       - chmod +x ./cc-test-reporter
       - ./cc-test-reporter before-build
 script:
-      - ng build browser --prod
+      - ng build --prod
 deploy:
       provider: app
       skip-cleanup: true
