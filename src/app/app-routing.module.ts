@@ -10,7 +10,7 @@ const routes: Routes = [
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'libraries', loadChildren: './pages/library/libraries.module#LibrariesPageModule' },
   { path: 'libraries/details', loadChildren: './pages/library/library-details/library-details.module#LibrariesDetailsPageModule' },
-  { path: 'map', loadChildren: './map/map.module#MapPageModule' },
+  { path: 'map', loadChildren: './pages/map/map.module#MapPageModule' },
   { path: 'mobility', loadChildren: './pages/mobility/mobility.module#MobilityPageModule' },
   { path: 'news', loadChildren: './pages/news/news.module#NewsPageModule' },
   { path: 'news/details', loadChildren: './pages/news/news-details/news-details.module#NewsDetailsPageModule' },
