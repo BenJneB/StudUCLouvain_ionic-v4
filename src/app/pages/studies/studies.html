@@ -46,7 +46,7 @@
 <!--BODY-->
 <!------------------------------- RIGHT MENU TO GO MOODLE, UCL PORTAL ... ------------------------------------------>
 <ion-menu persistent=true id="studiesMenu" [content]="studiesContent" side="right" type="overlay">
-  <button> </ion-button>
+  <ion-button> </ion-button>
   <ion-item button (click)="launch('http://www.uclouvain.be/')"> uclouvain.be </ion-item>
   <ion-item button (click)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </ion-item>
   <ion-item button (click)="openModalProject()"> {{'STUDY.CHANGEADE' | translate}} </ion-item>
@@ -98,7 +98,7 @@
     <ion-row>
       <ion-col>
         <div id="error" text-center *ngIf="error" class="alert alert-danger" style="color: red"><b  >{{error}}</b></div>
-        <button id="login" ion-button class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</ion-button>
+        <ion-button id="login" class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</ion-button>
       </ion-col>
     </ion-row>
   </form>
@@ -135,7 +135,7 @@
 </ion-footer>
 <ion-footer text-center *ngIf="segment=='cours'">
     <ion-fab fab fab-bottom right style="margin-bottom:65px;">
-    <button id="prompt" ion-fab fab-fixed (click)="showPrompt()">
+    <ion-button id="prompt" ion-fab fab-fixed (click)="showPrompt()">
       <ion-icon name="add"> </ion-icon>
     </ion-button>
   </ion-fab>
