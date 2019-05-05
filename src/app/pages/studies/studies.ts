@@ -54,7 +54,7 @@ export class StudiesPage {
   private username:string = "";
   private password: string = "";
   public error:string = "";
-  private status: string = "";
+  status: string = "";
   sigles: any;
   activities:any = [];
   response:any;
