@@ -45,14 +45,14 @@
 
 <!--BODY-->
 <!------------------------------- RIGHT MENU TO GO MOODLE, UCL PORTAL ... ------------------------------------------>
-<ion-menu persistent=true id="studiesMenu" [content]="studiesContent" side="right" type="overlay">
+<ion-menu persistent=true id="studiesMenu" contentId="studiesContent" side="right" type="overlay">
   <ion-button> </ion-button>
   <ion-item button (click)="launch('http://www.uclouvain.be/')"> uclouvain.be </ion-item>
   <ion-item button (click)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </ion-item>
   <ion-item button (click)="openModalProject()"> {{'STUDY.CHANGEADE' | translate}} </ion-item>
 </ion-menu>
 
-<ion-content padding #studiesContent [ngClass]="{'cours' : segment === 'cours'}">
+<ion-content padding id="studiesContent" [ngClass]="{'cours' : segment === 'cours'}">
 
   <!------------------------------------------ LISTE DES COURS ------------------------------------------------>
 
