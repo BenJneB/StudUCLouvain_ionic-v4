@@ -58,7 +58,7 @@
           &mdash; {{activity.end | date: 'H:mm' }} </p>
         <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
         <p>{{'COURSE.STUDENT' | translate}} : 
-        <button (click)="toggleGroup(activity.start)"> {{'COURSE.SHOW' | translate }} </ion-button> </p>
+        <ion-button (click)="toggleGroup(activity.start)"> {{'COURSE.SHOW' | translate }} </ion-button> </p>
         <p [hidden]="!isGroupShown(activity.start)" style="display:inline" [innerHTML]="activity.students"></p>
         <p *ngIf="activity.teachers.length>0"> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
         <p> {{activity.name}} </p>
@@ -79,13 +79,13 @@
 
   <ion-fab right bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
   <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
-    <button ion-fab (click)="showPrompt(segment)">
+    <ion-button ion-fab (click)="showPrompt(segment)">
       <ion-icon name="cut"> </ion-icon>
     </ion-button>
   </ion-fab>
     <ion-fab left bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
   <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
-    <button ion-fab (click)="addCourseToCalendar()">
+    <ion-button ion-fab (click)="addCourseToCalendar()">
       <ion-icon name="calendar"> </ion-icon>
     </ion-button>
   </ion-fab>

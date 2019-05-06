@@ -111,10 +111,10 @@ console.log("Startin App");
       { title: 'MENU.STUDIES', component: 'StudiesPage', icon: "./assets/img/études.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.LIBRARY', component: 'LibrariesPage', icon: "./assets/img/biblio.png",
+      { title: 'MENU.LIBRARY', component: '/libraries', icon: "./assets/img/biblio.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.HELP', component: 'SupportPage',
+      { title: 'MENU.HELP', component: '/support',
         icon: "./assets/img/support.png", iosSchemaName: null,
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];
@@ -122,7 +122,7 @@ console.log("Startin App");
       { title: 'MENU.PARTY', component: '/guindaille', icon: "./assets/img/g2.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.MAP', component: 'MapPage', icon: "./assets/img/cartes.png",
+      { title: 'MENU.MAP', component: '/map', icon: "./assets/img/cartes.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
       { title: 'MENU.RESTAURANT', component: 'RestaurantPage', icon : "./assets/img/resto.png",
@@ -234,7 +234,7 @@ console.log("Startin App");
               if (outlet && outlet.canGoBack()) {
                   outlet.pop();
 
-              } else if (this.router.url === '/home') {
+              } else if (this.router.url === 'home') {
                   if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
                       // this.platform.exitApp(); // Exit from app
                       navigator['app'].exitApp(); // work in ionic 4

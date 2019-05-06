@@ -20,7 +20,7 @@
 */
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, Platform, ActionSheetController, ModalController, NavParams } from '@ionic/angular';
+import { NavController, Platform, ActionSheetController, ModalController } from '@ionic/angular';
 
 import { POIService } from '../../services/map-services/poi-service';
 import { MapService } from '../../services/map-services/map-service';
@@ -52,15 +52,16 @@ export class MapPage {
               public actionSheetCtrl: ActionSheetController,
               public mapService: MapService,
               public platform: Platform,
-              public navParams: NavParams,
               public poilocations: POIService)
   {
-      this.title = this.navParams.get('title');
+    console.log("map constr")
+      this.title = "Carte";
   }
 
   /*ngAfterViewInit() is called after the view is initially rendered, load map and list of positions*/
-  ngAfterViewInit(){
+ /*  ngAfterViewInit(){
     let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
+    console.log(mapLoaded);
     let zones = this.poilocations.loadResources();
     this.searching = true;
 
@@ -72,6 +73,7 @@ export class MapPage {
       this.zones = result[1];
       this.filters = this.zones;
       this.userLocation = this.mapService.getUserLocation();
+      console.log(this.userLocation);
       this.selectedLocation = this.userLocation;
       this.showedLocations.push(this.selectedLocation);
       if(result[0]) {
@@ -79,8 +81,17 @@ export class MapPage {
       }
     }, (error) => {
     });
-  }
+  } */
 
+  ngAfterViewInit() {
+    console.log("aft vie in")
+		this.platform.ready().then( () => {
+
+      this.mapService.loadMap();
+      console.log("after load");
+    });
+    console.log("end")
+	}
   /*Use to display or close the list of a type of positions (auditoires, parkings, bibliotheques, ...)*/
   toggleDetails(data) {
     if (data.showDetails) {

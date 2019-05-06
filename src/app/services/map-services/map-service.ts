@@ -26,7 +26,7 @@
 import { Injectable } from '@angular/core';
 import { ConnectivityService } from '../utils-services/connectivity-service';
 import { UserService } from '../utils-services/user-service';
-import { Geolocation } from '@ionic-native/geolocation';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { Platform, MenuController } from '@ionic/angular';
 import { GoogleMaps,
    GoogleMapsEvent,
@@ -59,36 +59,54 @@ export class MapService {
   constructor(public connectivityService: ConnectivityService,
               private geolocation : Geolocation,
               private platform: Platform,
-              menuCtrl: MenuController,
+              public menuCtrl: MenuController,
               public userS: UserService) {
+                console.log("test yolo");
+                console.log("yolo");
     //Check the platform used
-    this.onDevice = this.platform.is('cordova');
+    //this.onDevice = this.platform.is('cordova');
+    console.log("yolo2");
 
     this.apiKey = jsApiKey;
-
-    // let leftMenu = menuCtrl.get('left');
-    // if(leftMenu) {
-    //   leftMenu.ionOpen.subscribe(() => {
-    //     if(this.map && this.onDevice) {
-    //       this.map.setClickable(false);
-    //     }
-    //   });
-    //   leftMenu.ionClose.subscribe(() => {
-    //     if(this.map && this.onDevice) {
-    //       this.map.setClickable(true);
-    //     }
-    //   });
-    // }
   }
-
+  loadMap() {
+    console.log("before create");
+    this.map = GoogleMaps.create("map");
+    console.log(this.map);
+    this.map.one( GoogleMapsEvent.MAP_READY ).then( ( data: any ) => {
+  
+      let coordinates: LatLng = new LatLng( 36.7783, 119.4179 );
+  
+      let position = {
+        target: coordinates,
+        zoom: 14
+      };
+  
+      this.map.animateCamera( position );
+  
+      let markerOptions: MarkerOptions = {
+        position: coordinates,
+        icon: "assets/images/marker.png",
+        title: 'Hello California'
+      };
+  
+      const marker = this.map.addMarker( markerOptions )
+      .then( ( marker: Marker ) => {
+        marker.showInfoWindow();
+      });
+    })
+    console.log("loaded map oooo!")
+  }
   /*Initializes the map for the device or the browser*/
   init(mapElement: any, pleaseConnect: any): Promise<any> {
     this.mapElement = mapElement;
     this.pleaseConnect = pleaseConnect;
 
     if(this.onDevice) {
+      console.log("Device wtf?");
       return this.loadDeviceGoogleMaps();
     } else {
+      console.log("Browser as expected !");
       return this.loadBrowserGoogleMaps();
     }
   }
@@ -140,8 +158,7 @@ export class MapService {
   private initBrowserMap(): Promise<any> {
     this.mapInitialised = true;
     return new Promise((resolve, reject) => {
-      this.geolocation.getCurrentPosition(
-        (position) => {
+      this.geolocation.getCurrentPosition().then((position) => {
           this.userLocation =new MapLocation( "Ma Position",
                                       "Mon adresse",
                                       String(position.coords.latitude),
@@ -155,7 +172,7 @@ export class MapService {
           }
           this.map = new google.maps.Map(this.mapElement, mapOptions);
           resolve(true);
-        }, (error) => {
+        }).catch((error) => {
           console.log("Map error loadDeviceGoogleMaps : " + error);
           reject(false);
         });

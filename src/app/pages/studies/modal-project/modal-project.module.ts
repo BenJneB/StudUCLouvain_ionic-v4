@@ -3,12 +3,17 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ModalProjectPage } from './modal-project';
+import { CommonModule } from '@angular/common';
+import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [ModalProjectPage],
   imports: [
-  	IonicModule,
-  	TranslateModule.forChild()
+    IonicModule,
+    FormsModule,
+    ReactiveFormsModule,
+  	CommonModule,
+    TranslateModule.forChild(),
   ]
 })
 export class ModalProjectPageModule { }

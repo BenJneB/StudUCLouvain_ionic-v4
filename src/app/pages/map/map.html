@@ -21,11 +21,11 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="map">
-    <ion-button menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </ion-button>
-    <img src="./assets/img/s.png" height="28"/>
-    <ion-title align="center">{{title | translate}}</ion-title>
+    <ion-buttons slot="start">
+        <ion-back-button></ion-back-button>
+        <img src="./assets/img/s.png" height="28"/>
+      </ion-buttons>
+    <ion-title horizontal="center">{{title | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
@@ -38,7 +38,7 @@
     <p> {{'MAP.NET' | translate}}</p>
   </div>
   <div id="container" style="background-color: rgba(0, 0, 0, 0);">
-    <div #map id="map"></div>
+    <div id="map" style="height:100%; width: 100%"></div>
   </div>
 
   <ion-card *ngFor="let zone of zones" overflow-scroll=false>
