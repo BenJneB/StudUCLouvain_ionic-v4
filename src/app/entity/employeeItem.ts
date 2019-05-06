@@ -26,8 +26,8 @@ export class EmployeeItem {
   email: string;
   departments: any;
   address: any;
-  businessContacts:Array<any>;
-  contracts:Array<any>;
+  businessContacts:any;
+  contracts:any;
   gender:string;
   photo_url:string;
 

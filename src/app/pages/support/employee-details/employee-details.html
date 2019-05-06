@@ -23,6 +23,10 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="support">
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+          <img src="./assets/img/s.png" height="28"/>
+        </ion-buttons>
     <ion-title>{{'EMPLOYEE.INFO' | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -30,30 +34,27 @@
 <!--BODY-->
 <ion-content padding>
   <ion-card>
-    <ion-row text-wrap>
-      <ion-col text-right>
-      </ion-col>
-      <ion-col text-right>
-      </ion-col>
-    </ion-row>
-
-    <ion-row text-wrap padding>
+    <ion-card-header text-wrap>
         <h1><b>{{empDetails.firstname}} {{empDetails.lastname}}</b></h1>
+    </ion-card-header>
 
-
-    </ion-row>
-
-    <ion-row padding text-wrap>
+    <ion-row text-wrap>
       <ion-list>
-        <ion-item style="text-transform:uppercase" *ngFor="let c of empDetails.contracts?.contract"> <p *ngIf="c.grade!=null">({{c.grade}})</p></ion-item>
+        <ion-item style="text-transform:uppercase" *ngIf="empDetails.contracts" > 
+          <ion-label>
+            <p *ngIf="empDetails.contracts.contract.grade!=null">({{c.grade}})</p>
+          </ion-label>
+        </ion-item>
         <ion-item *ngFor="let emp of empDetails.departments.department">
-          <p *ngIf="emp.linkType == 'Affectation'">{{emp.entity.acronyms}} -- {{emp.entity.name_fr}} ({{emp.entity.acronym}})</p>
-          <p *ngIf="emp.linkType == 'Appartenance'"><ion-icon name="return-right"></ion-icon>{{emp.entity.acronyms}} -- {{emp.entity.name_fr}} ({{emp.entity.acronym}})</p>
+          <ion-label>
+            <p *ngIf="emp.linkType == 'Affectation'">{{emp.entity.acronyms}} -- {{emp.entity.name_fr}} ({{emp.entity.acronym}})</p>
+            <p *ngIf="emp.linkType == 'Appartenance'"><ion-icon name="return-right"></ion-icon>{{emp.entity.acronyms}} -- {{emp.entity.name_fr}} ({{emp.entity.acronym}})</p>
+          </ion-label>
         </ion-item>
       </ion-list>
     </ion-row>
 
-    <ion-row padding>
+   
 
       <ion-card>
         <ion-card-content>
@@ -93,9 +94,6 @@
             <ion-col> <a href="tel:{{contact.secretary}}">{{contact.secretary}}</a> </ion-col>
           </ion-row>
         </ion-card>
-
-
       </ion-card>
-    </ion-row>
   </ion-card>
 </ion-content>

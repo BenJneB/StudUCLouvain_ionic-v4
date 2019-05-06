@@ -21,12 +21,13 @@
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 import { LibrariesService } from '../../../services/wso2-services/libraries-service';
 import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
 
 import { LibraryItem } from '../../../entity/libraryItem';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'page-library-details',
@@ -46,21 +47,29 @@ export class LibraryDetailsPage {
   shownGroup = null;
   searching: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public libService: LibrariesService, public connService: ConnectivityService) {
-    this.libDetails = navParams.get('lib');
-    this.searching = true;
-    if(this.connService.isOnline()) {
-      this.libService.loadLibDetails(this.libDetails).then(
-        res => {
-          let result:any = res;
-          this.libDetails = result.libDetails;
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, private router: Router, public libService: LibrariesService, public connService: ConnectivityService) {
+    this.route.queryParams.subscribe(params => {
+
+      if (this.router.getCurrentNavigation().extras.state) {
+        console.log(this.router.getCurrentNavigation().extras.state);
+        this.libDetails = this.router.getCurrentNavigation().extras.state.lib;
+        console.log(this.libDetails);
+        this.searching = true;
+        if(this.connService.isOnline()) {
+          this.libService.loadLibDetails(this.libDetails).then(
+            res => {
+              let result:any = res;
+              this.libDetails = result.libDetails;
+              this.searching = false;
+            }
+          );
+        } else {
           this.searching = false;
+          this.connService.presentConnectionAlert();
         }
-      );
-    } else {
-      this.searching = false;
-      this.connService.presentConnectionAlert();
-    }
+      }
+    });
+
   }
 
   /*Open or close the schedule*/

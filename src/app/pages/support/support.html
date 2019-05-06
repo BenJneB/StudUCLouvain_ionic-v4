@@ -22,22 +22,22 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="support">
-    <ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </ion-button>
-    <img src="./assets/img/s.png" height="28"/>
-    <ion-title align="center">{{title | translate}}</ion-title>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+          <img src="./assets/img/s.png" height="28"/>
+        </ion-buttons>
+    <ion-title horizontal="center">{{title | translate}}</ion-title>
   </ion-toolbar>
-  <ion-segment [(ngModel)]="segment">
+  <ion-segment [(ngModel)]="segment" name="segment">
     <ion-segment-button value="aide">
-      {{'HELP.SEGMENT2' | translate}}
+      <ion-label>{{'HELP.SEGMENT2' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="info">
-      {{'HELP.SEGMENT1' | translate}}
+        <ion-label>{{'HELP.SEGMENT1' | translate}}</ion-label>
     </ion-segment-button>
 
     <ion-segment-button value="tuto">
-      {{'HELP.SEGMENT3' | translate}}
+        <ion-label> {{'HELP.SEGMENT3' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
@@ -130,11 +130,11 @@
       <ion-card [hidden]="!isGroupShown('rep')">
         <ion-card-content>
           <ion-list no-lines class="ilist">
-            <ion-item no-lines [(ngModel)]="lastname">
+            <ion-item no-lines [(ngModel)]="lastname" ngDefaultControl>
               <ion-label color="primary">{{'HELP.NAME' | translate}}</ion-label>
               <ion-input type="text" placeholder="nom"></ion-input>
             </ion-item>
-            <ion-item no-lines [(ngModel)]="firstname">
+            <ion-item no-lines [(ngModel)]="firstname" ngDefaultControl>
               <ion-label color="primary">{{'HELP.FIRSTNAME' | translate}}</ion-label>
               <ion-input type="text" placeholder="prénom"></ion-input>
             </ion-item>
@@ -159,8 +159,8 @@
 <!----------------SERVICES D AIDES ---------------------->
 <ng-container *ngIf="segment==='aide'">
   <h1><strong> {{'HELP.AIDE1' | translate}} </strong></h1>
-  <ion-button clear small icon-left (click)="openURL('https://uclouvain.be/fr/etudier/aide')">
-    <ion-icon name='share-alt'></ion-icon>
+  <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide')">
+    <ion-icon slot="start" name='share-alt'></ion-icon>
     {{'HELP.WEB' | translate}}
   </ion-button>
   <p>{{'HELP.AIDE2' | translate}}</p>
@@ -205,8 +205,9 @@
   </ion-item-divider>
 
   <ion-item [hidden]="!isGroupShown('socfi')" text-wrap>
-    <ion-button clear small icon-left (click)="openURL('https://uclouvain.be/fr/etudier/aide/aidesociale.html')">
-      <ion-icon name='share-alt'></ion-icon>
+    <ion-label>
+    <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide/aidesociale.html')">
+      <ion-icon slot="start" name='share-alt'></ion-icon>
       {{'HELP.WEB' | translate}}
     </ion-button>
     <p>{{'HELP.AIDE12' | translate}}</p><br>
@@ -225,6 +226,7 @@
     </p><br>
 
     <p><strong>{{'HELP.AIDE20' | translate}}</strong></p>
+    </ion-label>
   </ion-item>
 
   <ion-item-divider  (click)="toggleGroup('sante')">
@@ -232,8 +234,9 @@
   </ion-item-divider>
 
   <ion-item [hidden]="!isGroupShown('sante')" text-wrap>
-    <ion-button clear small icon-left (click)="openURL('https://uclouvain.be/fr/etudier/aide/aide-sante.html')">
-      <ion-icon name='share-alt'></ion-icon>
+    <ion-label>
+    <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide/aide-sante.html')">
+      <ion-icon slot="start" name='share-alt'></ion-icon>
       {{'HELP.WEB' | translate}}
     </ion-button>
     <p>{{'HELP.AIDE21' | translate}}</p><br>
@@ -251,6 +254,7 @@
     <p><strong>{{'HELP.AIDE24' | translate}}</strong></p>
     <p>{{'HELP.SANTE8' | translate}}</p><br>
     <p>{{'HELP.SANTE9' | translate}}</p>
+    </ion-label>
   </ion-item>
 
   <ion-item-divider  (click)="toggleGroup('psyped')">
@@ -258,14 +262,16 @@
   </ion-item-divider>
 
   <ion-item [hidden]="!isGroupShown('psyped')" text-wrap>
-    <ion-button clear small icon-left (click)="openURL('https://uclouvain.be/fr/etudier/aide/planning.html')">
-      <ion-icon name='share-alt'></ion-icon>
+    <ion-label>
+    <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide/planning.html')">
+      <ion-icon slot="start" name='share-alt'></ion-icon>
       {{'HELP.WEB' | translate}}
     </ion-button>
     <p>{{'HELP.AIDE25' | translate}}</p><br>
     <p>{{'HELP.AIDE26' | translate}}</p><br>
     <p>{{'HELP.AIDE27' | translate}}</p><br>
     <p>{{'HELP.AIDE28' | translate}}</p>
+    </ion-label>
   </ion-item>
 </ng-container>
 
