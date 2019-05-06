@@ -234,7 +234,7 @@ console.log("Startin App");
               if (outlet && outlet.canGoBack()) {
                   outlet.pop();
 
-              } else if (this.router.url === '/home') {
+              } else if (this.router.url === 'home') {
                   if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
                       // this.platform.exitApp(); // Exit from app
                       navigator['app'].exitApp(); // work in ionic 4
