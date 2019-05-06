@@ -9,7 +9,7 @@
 
 #### ToDo:
 
-=> Routes (Main : Studies, Libraries, Map, Support, Mobility, Credit)
+=> Routes (Main : Studies, Libraries, Map, Support)
 
 => Render (Same + Guindaille&Tuto to fix)
 
