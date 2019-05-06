@@ -111,7 +111,7 @@ console.log("Startin App");
       { title: 'MENU.STUDIES', component: 'StudiesPage', icon: "./assets/img/études.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.LIBRARY', component: 'LibrariesPage', icon: "./assets/img/biblio.png",
+      { title: 'MENU.LIBRARY', component: '/libraries', icon: "./assets/img/biblio.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
       { title: 'MENU.HELP', component: 'SupportPage',

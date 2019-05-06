@@ -49,7 +49,7 @@ export class HomePage {
 
   /*Create an object Page for each feature of our application display in the home page*/
 
-  libraryPage = { title: 'MENU.LIBRARY', component: 'LibrariesPage',
+  libraryPage = { title: 'MENU.LIBRARY', component: '/libraries',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
