@@ -114,7 +114,7 @@ console.log("Startin App");
       { title: 'MENU.LIBRARY', component: '/libraries', icon: "./assets/img/biblio.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.HELP', component: 'SupportPage',
+      { title: 'MENU.HELP', component: '/support',
         icon: "./assets/img/support.png", iosSchemaName: null,
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];

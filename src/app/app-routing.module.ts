@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'news/details', loadChildren: './pages/news/news-details/news-details.module#NewsDetailsPageModule' },
   { path: 'settings', loadChildren: './pages/param/param.module#ParamPageModule' },
   { path: 'sports', loadChildren: './pages/sports/sports.module#SportsPageModule' },
+  { path: 'support', loadChildren: './pages/support/support.module#SupportPageModule' },
   { path: 'tutos', loadChildren: './pages/tuto/tuto.module#TutoPageModule' },
 ];
 

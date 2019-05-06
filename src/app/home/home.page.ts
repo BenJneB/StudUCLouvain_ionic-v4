@@ -69,7 +69,7 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  helpDeskPage = { title: 'MENU.HELP', component: 'SupportPage',
+  helpDeskPage = { title: 'MENU.HELP', component: '/support',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 

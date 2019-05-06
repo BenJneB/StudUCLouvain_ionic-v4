@@ -21,7 +21,7 @@
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController, Platform,LoadingController} from '@ionic/angular';
+import { NavController, ModalController, Platform,LoadingController} from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { RepertoireService } from '../../services/wso2-services/repertoire-service';
@@ -53,7 +53,6 @@ export class SupportPage {
   shownHelp = null;
 
   constructor(public navCtrl: NavController,
-              public navParams: NavParams,
               public modalCtrl: ModalController,
               private iab: InAppBrowser,
               public platform: Platform,
@@ -61,7 +60,7 @@ export class SupportPage {
               public connService : ConnectivityService,
               public loadingCtrl: LoadingController)
   {
-    this.title = this.navParams.get('title');
+    this.title = "Support";
   }
 
   /*Display loading pop up*/
