@@ -28,6 +28,8 @@ import { RepertoireService } from '../../services/wso2-services/repertoire-servi
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 
 import { EmployeeItem } from '../../entity/employeeItem';
+import { LoaderService } from 'src/app/services/utils-services/loader-service';
+import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'page-support',
@@ -58,32 +60,15 @@ export class SupportPage {
               public platform: Platform,
               public repService : RepertoireService,
               public connService : ConnectivityService,
-              public loadingCtrl: LoadingController)
+              public loader: LoaderService,
+              private router: Router)
   {
     this.title = "Support";
   }
 
-  /*Display loading pop up*/
-  presentLoading() {
-    if(!this.loading){
-        this.loading = this.loadingCtrl.create({
-          message: 'Please wait...'
-        }).then(loading => loading.present());
-    }
-
-  }
-
-  /*Dismiss loading pop up*/
-  dismissLoading(){
-    if(this.loading){
-        this.loading.dismiss();
-        this.loading = null;
-    }
-  }
-
   /*Take the name and lastname in the good field to do the search and display the result*/
   update(){
-    this.presentLoading();
+    this.loader.present("Please wait..");
     let options: Array<string>= [];
     let values: Array<string> = [];
     if(this.lastname.length>0){
@@ -111,12 +96,17 @@ export class SupportPage {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
-    this.dismissLoading();
+    this.loader.dismiss();
   }
 
   /*Open the page with the details for the employee selectionned*/
   goToEmpDetails(emp: EmployeeItem) {
-    this.navCtrl.navigateForward(['EmployeeDetailsPage', { 'emp': emp}]);
+    let navigationExtras: NavigationExtras = {
+      state: {
+        emp: emp
+      }
+    };
+    this.router.navigate(['employee'], navigationExtras);
   }
 
   /*Show or close the informations for the section selectionned*/

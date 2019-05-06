@@ -21,12 +21,13 @@
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Component } from '@angular/core';
-import { NavController, NavParams } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 import { RepertoireService } from '../../../services/wso2-services/repertoire-service';
 import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
 
 import { EmployeeItem } from '../../../entity/employeeItem';
+import { Router, ActivatedRoute } from '@angular/router';
 
 
 @Component({
@@ -47,9 +48,13 @@ export class EmployeeDetailsPage {
   address:any;
   searching: boolean = false;
 
-  constructor(public navCtrl: NavController, public navParams: NavParams, public repService: RepertoireService, public connService: ConnectivityService) {
-    this.empDetails = navParams.get('emp')
-    this.searching = true;
+  constructor(public navCtrl: NavController, private route: ActivatedRoute, private router: Router, public repService: RepertoireService, public connService: ConnectivityService) {
+        this.route.queryParams.subscribe(params => {
+
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.empDetails = this.router.getCurrentNavigation().extras.state.emp;
+      }
+      this.searching = true;
     //Check if the connexion is Ok before search details pour an employee
     if(this.connService.isOnline()) {
       this.repService.loadEmpDetails(this.empDetails).then(
@@ -66,6 +71,8 @@ export class EmployeeDetailsPage {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
+    });
+    
   }
 
   ngOnInit() {
