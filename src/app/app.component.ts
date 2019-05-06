@@ -122,7 +122,7 @@ console.log("Startin App");
       { title: 'MENU.PARTY', component: '/guindaille', icon: "./assets/img/g2.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.MAP', component: 'MapPage', icon: "./assets/img/cartes.png",
+      { title: 'MENU.MAP', component: '/map', icon: "./assets/img/cartes.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
       { title: 'MENU.RESTAURANT', component: 'RestaurantPage', icon : "./assets/img/resto.png",

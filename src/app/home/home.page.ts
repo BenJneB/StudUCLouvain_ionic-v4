@@ -73,7 +73,7 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
-  mapPage = { title: 'MENU.MAP', component: 'MapPage',
+  mapPage = { title: 'MENU.MAP', component: '/map',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
