@@ -111,10 +111,10 @@ console.log("Startin App");
       { title: 'MENU.STUDIES', component: 'StudiesPage', icon: "./assets/img/études.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.LIBRARY', component: '/libraries', icon: "./assets/img/biblio.png",
+      { title: 'MENU.LIBRARY', component: 'LibrariesPage', icon: "./assets/img/biblio.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.HELP', component: '/support',
+      { title: 'MENU.HELP', component: 'SupportPage',
         icon: "./assets/img/support.png", iosSchemaName: null,
         androidPackageName: null, appUrl: null, httpUrl: null }
     ];
@@ -122,7 +122,7 @@ console.log("Startin App");
       { title: 'MENU.PARTY', component: '/guindaille', icon: "./assets/img/g2.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
-      { title: 'MENU.MAP', component: '/map', icon: "./assets/img/cartes.png",
+      { title: 'MENU.MAP', component: 'MapPage', icon: "./assets/img/cartes.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
       { title: 'MENU.RESTAURANT', component: 'RestaurantPage', icon : "./assets/img/resto.png",

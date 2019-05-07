@@ -49,7 +49,7 @@ export class HomePage {
 
   /*Create an object Page for each feature of our application display in the home page*/
 
-  libraryPage = { title: 'MENU.LIBRARY', component: '/libraries',
+  libraryPage = { title: 'MENU.LIBRARY', component: 'LibrariesPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
@@ -69,11 +69,11 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  helpDeskPage = { title: 'MENU.HELP', component: '/support',
+  helpDeskPage = { title: 'MENU.HELP', component: 'SupportPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null };
 
-  mapPage = { title: 'MENU.MAP', component: '/map',
+  mapPage = { title: 'MENU.MAP', component: 'MapPage',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
@@ -85,7 +85,7 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  restoPage = { title: 'MENU.RESTAURANT', component: '/rest',
+  restoPage = { title: 'MENU.RESTAURANT', component: 'RestaurantPage',
     iosSchemaName: 'id1156050719',
     androidPackageName: 'com.apptree.resto4u',
     appUrl: 'apptreeresto4u://',

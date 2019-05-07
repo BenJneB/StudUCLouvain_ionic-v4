@@ -21,15 +21,13 @@
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Component } from '@angular/core';
-import { NavController, ModalController, Platform,LoadingController} from '@ionic/angular';
+import { NavController, NavParams, ModalController, Platform,LoadingController} from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 import { RepertoireService } from '../../services/wso2-services/repertoire-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 
 import { EmployeeItem } from '../../entity/employeeItem';
-import { LoaderService } from 'src/app/services/utils-services/loader-service';
-import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'page-support',
@@ -55,20 +53,38 @@ export class SupportPage {
   shownHelp = null;
 
   constructor(public navCtrl: NavController,
+              public navParams: NavParams,
               public modalCtrl: ModalController,
               private iab: InAppBrowser,
               public platform: Platform,
               public repService : RepertoireService,
               public connService : ConnectivityService,
-              public loader: LoaderService,
-              private router: Router)
+              public loadingCtrl: LoadingController)
   {
-    this.title = "Support";
+    this.title = this.navParams.get('title');
+  }
+
+  /*Display loading pop up*/
+  presentLoading() {
+    if(!this.loading){
+        this.loading = this.loadingCtrl.create({
+          message: 'Please wait...'
+        }).then(loading => loading.present());
+    }
+
+  }
+
+  /*Dismiss loading pop up*/
+  dismissLoading(){
+    if(this.loading){
+        this.loading.dismiss();
+        this.loading = null;
+    }
   }
 
   /*Take the name and lastname in the good field to do the search and display the result*/
   update(){
-    this.loader.present("Please wait..");
+    this.presentLoading();
     let options: Array<string>= [];
     let values: Array<string> = [];
     if(this.lastname.length>0){
@@ -96,17 +112,12 @@ export class SupportPage {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }
-    this.loader.dismiss();
+    this.dismissLoading();
   }
 
   /*Open the page with the details for the employee selectionned*/
   goToEmpDetails(emp: EmployeeItem) {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        emp: emp
-      }
-    };
-    this.router.navigate(['employee'], navigationExtras);
+    this.navCtrl.navigateForward(['EmployeeDetailsPage', { 'emp': emp}]);
   }
 
   /*Show or close the informations for the section selectionned*/

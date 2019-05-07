@@ -20,14 +20,13 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, Platform } from '@ionic/angular';
+import { NavController, NavParams, Platform } from '@ionic/angular';
 import { CacheService } from 'ionic-cache';
 
 import { LibrariesService } from '../../services/wso2-services/libraries-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 
 import { LibraryItem } from '../../entity/libraryItem';
-import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'page-libraries',
@@ -40,15 +39,15 @@ export class LibrariesPage {
 
   constructor(
     public navCtrl: NavController,
+    public navParams: NavParams,
     public platform: Platform,
     public libService : LibrariesService,
     public connService : ConnectivityService,
-    private cache:CacheService,
-    private router: Router
-    )
+    private cache:CacheService)
   {
+    this.title = this.navParams.get('title');
     this.cachedOrNot();
-    this.title = "Bibliothèques";
+
   }
 
   ngOnInit() {
@@ -60,11 +59,11 @@ export class LibrariesPage {
     if(this.connService.isOnline()) {
       this.cache.removeItem('cache-libraries');
       this.loadLibraries('cache-libraries');
-      refresher.target.complete();
+      refresher.complete();
     }
     else{
       this.connService.presentConnectionAlert();
-      refresher.target.complete();
+      refresher.complete();
     }
   }
 
@@ -90,12 +89,7 @@ export class LibrariesPage {
 
   /*Open the page with the details for the selectionned library*/
   goToLibDetails(lib: LibraryItem) {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        lib: lib
-      }
-    };
-    this.router.navigate(['/libraries/details'], navigationExtras);
+    this.navCtrl.navigateForward(['LibraryDetailsPage', { 'lib': lib}]);
   }
 
   async cachedOrNot(){

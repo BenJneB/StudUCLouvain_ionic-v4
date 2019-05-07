@@ -20,7 +20,7 @@
 */
 
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, Platform, ActionSheetController, ModalController } from '@ionic/angular';
+import { NavController, Platform, ActionSheetController, ModalController, NavParams } from '@ionic/angular';
 
 import { POIService } from '../../services/map-services/poi-service';
 import { MapService } from '../../services/map-services/map-service';
@@ -52,9 +52,10 @@ export class MapPage {
               public actionSheetCtrl: ActionSheetController,
               public mapService: MapService,
               public platform: Platform,
+              public navParams: NavParams,
               public poilocations: POIService)
   {
-      this.title = "Carte";
+      this.title = this.navParams.get('title');
   }
 
   /*ngAfterViewInit() is called after the view is initially rendered, load map and list of positions*/
