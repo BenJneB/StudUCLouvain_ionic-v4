@@ -48,9 +48,9 @@ export class LibraryDetailsPage {
   searching = false;
 
   constructor(
-    public navCtrl: NavController, 
-    private route: ActivatedRoute, 
-    private router: Router, 
+    public navCtrl: NavController,
+    private route: ActivatedRoute,
+    private router: Router,
     public libService: LibrariesService,
     public connService: ConnectivityService
     ) {

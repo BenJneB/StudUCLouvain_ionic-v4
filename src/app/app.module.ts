@@ -65,6 +65,7 @@ import { RouteReuseStrategy } from '@angular/router';
 import { Toast } from '@ionic-native/toast/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { UtilsService } from './services/utils-services/utils-services';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -127,6 +128,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     SportsService,
     RepertoireService,
     StudentService,
+    UtilsService,
     FacService,
     SQLite,
     SecureStorage,

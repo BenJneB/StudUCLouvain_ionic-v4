@@ -22,9 +22,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { timeout, map } from 'rxjs/operators';
-import * as xml2js from 'xml2js';
-
-//import  X2JS  from 'x2js';
+import { UtilsService } from '../utils-services/utils-services';
 
 @Injectable({ 
   providedIn: 'root' 
@@ -33,28 +31,14 @@ export class RssService {
   nbCalls = 0;
   callLimit = 30;
 
-  constructor(public http: HttpClient) {
-
+  constructor(public http: HttpClient, private utilsServices: UtilsService) {
   }
-
-public convertToJson(data: string): Object {
-        let res;
-
-        xml2js.parseString(data, { explicitArray: false }, (error, result) => {
-            if (error) {
-                throw new Error(error);
-            } else {
-                res = result;
-            }
-        });
-        return res;
-    }
 
   /*Load data from the RSS flux*/
   load(url: string, isSport:boolean = false){
     return new Promise( (resolve, reject) => {
       this.http.get(url, {responseType: 'text'}).pipe(timeout(5000),
-      map(data => { return this.convertToJson(data);})).subscribe( result => {
+      map(data => { return this.utilsServices.convertToJson(data);})).subscribe( result => {
           this.nbCalls++;
           console.log(result);
           if (isSport) result = result['xml'];

@@ -242,11 +242,11 @@ export class UserService {
     this.storage.set('fac',this.fac);
   };
   removeSlotTP(acronym:string){
-    this.removeSlot(acronym, "TP");
+    this.removeSlot(acronym, 'TP');
   }
 
   removeSlotCM(acronym:string){
-    this.removeSlot(acronym, "CM");
+    this.removeSlot(acronym, 'CM');
 }
 
 removeSlot(acronym:string, type:string){

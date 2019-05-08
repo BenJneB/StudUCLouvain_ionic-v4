@@ -49,7 +49,7 @@ export class StudiesPage {
   segment = 'prog';
   public listCourses: Course[];
   public course : Course;
-  public title = "Etudes";
+  public title = 'Etudes';
   public sessionId: string;
   public project : AdeProject = null;
   private username:string = "";
@@ -404,7 +404,7 @@ export class StudiesPage {
   /*Open CoursePage of a course to have the schedule*/
   openCoursePage(course: Course){
     let year = parseInt(this.project.name.split("-")[0]);
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       state: {
         course: course,
         sessionId: this.sessionId,

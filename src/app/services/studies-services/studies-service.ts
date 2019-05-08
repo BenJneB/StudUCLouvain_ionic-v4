@@ -43,7 +43,7 @@ export class StudiesService {
       console.log("StudiesService openSession")
       this.ade.httpOpenSession().subscribe(
         data => {
-          resolve( data.session.$.id);
+          resolve( data['session'].$.id);
         }
       );
     });
@@ -55,8 +55,6 @@ export class StudiesService {
       console.log("Studiesservice getProjects")
       this.ade.httpGetProjects(sessionId).subscribe(
         data => {
-          console.log("project");
-          console.log(data.projects);
           resolve(this.extractAdeProjects(data));
           }
         );
