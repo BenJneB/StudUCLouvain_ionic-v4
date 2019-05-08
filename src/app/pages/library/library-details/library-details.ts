@@ -45,31 +45,35 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LibraryDetailsPage {
   libDetails: LibraryItem;
   shownGroup = null;
-  searching: boolean = false;
+  searching = false;
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute, private router: Router, public libService: LibrariesService, public connService: ConnectivityService) {
-    this.route.queryParams.subscribe(params => {
-
-      if (this.router.getCurrentNavigation().extras.state) {
-        console.log(this.router.getCurrentNavigation().extras.state);
-        this.libDetails = this.router.getCurrentNavigation().extras.state.lib;
-        console.log(this.libDetails);
-        this.searching = true;
-        if(this.connService.isOnline()) {
-          this.libService.loadLibDetails(this.libDetails).then(
-            res => {
-              let result:any = res;
-              this.libDetails = result.libDetails;
-              this.searching = false;
-            }
-          );
-        } else {
-          this.searching = false;
-          this.connService.presentConnectionAlert();
+  constructor(
+    public navCtrl: NavController, 
+    private route: ActivatedRoute, 
+    private router: Router, 
+    public libService: LibrariesService,
+    public connService: ConnectivityService
+    ) {
+      this.route.queryParams.subscribe(params => {
+        if (this.router.getCurrentNavigation().extras.state) {
+          console.log(this.router.getCurrentNavigation().extras.state);
+          this.libDetails = this.router.getCurrentNavigation().extras.state.lib;
+          console.log(this.libDetails);
+          this.searching = true;
+          if (this.connService.isOnline()) {
+            this.libService.loadLibDetails(this.libDetails).then(
+              res => {
+                const result: any = res;
+                this.libDetails = result.libDetails;
+                this.searching = false;
+              }
+            );
+          } else {
+            this.searching = false;
+            this.connService.presentConnectionAlert();
+          }
         }
-      }
-    });
-
+      });
   }
 
   /*Open or close the schedule*/
