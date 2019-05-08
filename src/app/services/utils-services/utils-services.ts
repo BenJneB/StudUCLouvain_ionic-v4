@@ -1,8 +1,8 @@
 import { Injectable } from '@angular/core';
 import * as xml2js from 'xml2js';
 
-@Injectable({ 
-    providedIn: 'root' 
+@Injectable({
+    providedIn: 'root'
   })
   export class UtilsService {
 
@@ -16,7 +16,6 @@ import * as xml2js from 'xml2js';
                 res = result;
             }
         });
-        console.log(res);
         return res;
     }
   }
