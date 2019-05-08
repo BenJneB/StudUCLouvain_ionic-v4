@@ -22,7 +22,7 @@
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertController, MenuController, ModalController, ToastController } from '@ionic/angular';
-import { NavController, NavParams, Platform } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -35,6 +35,7 @@ import { map, catchError } from 'rxjs/operators';
 import { Course } from '../../entity/course';
 import { AdeProject } from '../../entity/adeProject';
 import { ModalProjectPage } from './modal-project/modal-project';
+import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'page-studies',
@@ -48,7 +49,7 @@ export class StudiesPage {
   segment = 'prog';
   public listCourses: Course[];
   public course : Course;
-  public title: any;
+  public title = "Etudes";
   public sessionId: string;
   public project : AdeProject = null;
   private username:string = "";
@@ -65,7 +66,6 @@ export class StudiesPage {
   constructor(
     public studiesService: StudiesService,
     public navCtrl: NavController,
-    public navParams: NavParams,
     private alertCtrl: AlertController,
     public storage:Storage,
     public menu: MenuController,
@@ -78,8 +78,6 @@ export class StudiesPage {
     private wso2Service: Wso2Service,
     private studentService: StudentService)
   {
-    this.title = this.navParams.get('title');
-
     this.initializeSession();
     this.menu.enable(true, "studiesMenu");
     this.getCourses();
@@ -99,7 +97,6 @@ export class StudiesPage {
         let nameEN:string ='';
         if(data === 400) exist=false;
         else{
-          console.log(res);
           let names = res.intituleCompletMap.entry;
           nameFR = names[1].value;
           nameEN = names[0].value;
@@ -127,7 +124,6 @@ export class StudiesPage {
   	return new Promise(resolve => {
       this.wso2Service.login(this.username,this.password).pipe(
       catchError(error => {
-      	console.log(error);
       	if(error.status == 400) this.translateService.get('STUDY.BADLOG').subscribe((res:string) => {this.error=res;});
       	else this.translateService.get('STUDY.ERROR').subscribe((res:string) => {this.error=res;});
       	return error;
@@ -199,16 +195,16 @@ export class StudiesPage {
     if(this.connService.isOnline()) {
       this.studiesService.openSession().then(
         data => {
+          console.log(data);
           this.sessionId = data;
           this.storage.get('adeProject').then(
             (data) => {
               this.project=data;
-              if (this.project === null) {
+              if (this.project === null || this.project === undefined) {
                 this.openModalProject();
               } else {
                 this.studiesService.setProject(this.sessionId,this.project.id).then(
                   data => {
-                    console.log("setProject");
                   }
                 );
               }
@@ -258,9 +254,7 @@ export class StudiesPage {
           cssClass: 'save',
           handler: data => {
             let check; 
-            //console.log(data);
             let acro = data.acronym.toUpperCase();
-            //console.log(acro);
             let already = false;
             for(let item of this.listCourses){
               if(item.acronym === acro) already = true;
@@ -344,8 +338,6 @@ export class StudiesPage {
 
   addCourseFromProgram(acro:string){
                 let check; 
-            //console.log(data);
-            //console.log(acro);
             let already = false;
             for(let item of this.listCourses){
               if(item.acronym === acro) already = true;
@@ -369,11 +361,10 @@ export class StudiesPage {
   }
 
   addCourse(sigle:string, name:string){
-    //console.log(sigle);
    // let check; 
     //this.checkExist(sigle).then(data => {
       //check = data;
-      console.log(this.listCourses);
+
       this.saveCourse(name, sigle);
       let toast = this.toastCtrl.create({
         message: 'Cours ajouté',
@@ -413,17 +404,19 @@ export class StudiesPage {
   /*Open CoursePage of a course to have the schedule*/
   openCoursePage(course: Course){
     let year = parseInt(this.project.name.split("-")[0]);
-    this.navCtrl.navigateForward([
-      'CoursePage',
-      {course : course, sessionId : this.sessionId, year: year}
-    ]);
+    let navigationExtras: NavigationExtras = {
+      state: {
+        course: course,
+        sessionId: this.sessionId,
+        year: year
+      }
+    };
+    this.navCtrl.navigateForward(['/course'], navigationExtras);
   }
 
   openWeekPage(){
     this.studentService.weekSchedule().then((res) => {
       let result:any = res;
-      console.log(result);
-      
       //result.sort((a, b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
       this.navCtrl.navigateForward(['HebdoPage', {schedule:result}]);
     });

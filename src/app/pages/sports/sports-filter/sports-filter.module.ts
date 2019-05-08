@@ -5,7 +5,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SportsFilterPage } from './sports-filter';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { RouterModule } from '@angular/router';
 
 @NgModule({
   declarations: [SportsFilterPage],
@@ -15,8 +14,6 @@ import { RouterModule } from '@angular/router';
     CommonModule,
     FormsModule,
     TranslateModule.forChild(),
-
-    
   ],
   entryComponents: [
     SportsFilterPage

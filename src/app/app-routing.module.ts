@@ -3,6 +3,7 @@ import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
+  { path: 'course', loadChildren: './pages/studies/course/course.module#CoursePageModule' },
   { path: 'credit', loadChildren: './pages/credit/credit.module#CreditPageModule' },
   { path: 'employee', loadChildren: './pages/support/employee-details/employee-details.module#EmployeeDetailsPageModule' },
   { path: 'events', loadChildren: './pages/events/events.module#EventsPageModule' },
@@ -17,6 +18,7 @@ const routes: Routes = [
   { path: 'news/details', loadChildren: './pages/news/news-details/news-details.module#NewsDetailsPageModule' },
   { path: 'settings', loadChildren: './pages/param/param.module#ParamPageModule' },
   { path: 'sports', loadChildren: './pages/sports/sports.module#SportsPageModule' },
+  { path: 'studies', loadChildren: './pages/studies/studies.module#StudiesPageModule' },
   { path: 'support', loadChildren: './pages/support/support.module#SupportPageModule' },
   { path: 'tutos', loadChildren: './pages/tuto/tuto.module#TutoPageModule' },
 ];

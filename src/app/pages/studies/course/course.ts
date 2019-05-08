@@ -20,7 +20,7 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonItemSliding, ToastController, AlertController, ModalController  } from '@ionic/angular';
+import { NavController, IonItemSliding, ToastController, AlertController, ModalController  } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { CourseService } from '../../../services/studies-services/course-service';
@@ -30,6 +30,7 @@ import { Course } from '../../../entity/course';
 import { Activity } from '../../../entity/activity'
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { ModalInfoPage } from './modal-info/modal-info';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'page-course',
@@ -37,9 +38,9 @@ import { ModalInfoPage } from './modal-info/modal-info';
 })
 
 export class CoursePage {
-  sessionId : string = this.navParams.get('sessionId');
-  course : Course = this.navParams.get("course");
-  year = this.navParams.get("year");
+  sessionId : string;
+  course : Course;
+  year;
   segment = 'Cours magistral';
   slotTP:string = "no";
   shownGroup = null;
@@ -59,16 +60,26 @@ export class CoursePage {
               public modalCtrl: ModalController,
               private alertCtrl : AlertController,
               private translateService: TranslateService,
-              public navParams:NavParams)
+              private route: ActivatedRoute, 
+              private router: Router)
   {
-      this.courseSorted = {cm : [], tp : [], ex :[]};
-      let acro = this.course.acronym;
-      if(this.userS.hasSlotCM(acro)){
-        this.slotCM = this.userS.getSlotCM(acro);
+    this.route.queryParams.subscribe(params => {
+
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.sessionId = this.router.getCurrentNavigation().extras.state.sessionId;
+        this.course = this.router.getCurrentNavigation().extras.state.course;
+        this.year = this.router.getCurrentNavigation().extras.state.year;
+        this.courseSorted = {cm : [], tp : [], ex :[]};
+        let acro = this.course.acronym;
+        if(this.userS.hasSlotCM(acro)){
+          this.slotCM = this.userS.getSlotCM(acro);
+        }
+        if(this.userS.hasSlotTP(acro)){
+          this.slotTP = this.userS.getSlotTP(acro);
+        }
       }
-      if(this.userS.hasSlotTP(acro)){
-        this.slotTP = this.userS.getSlotTP(acro);
-      }
+    });
+
   }
 
   /*Display the available sessions for a course*/

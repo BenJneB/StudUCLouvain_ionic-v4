@@ -48,7 +48,7 @@ export class CourseService {
 
     /*Extract the course ID*/
     extractCourseId(data){
-
+      console.log(data);
       if(data.resources.resource !== undefined) return data.resources.resource._id;
     }
 
@@ -101,7 +101,7 @@ export class CourseService {
           let auditorium = this.getAuditorium(participants)
           let start = this.createDate(date, startHour);
           let end = this.createDate(date, endHour);
-          let name = event._name;
+          let name = event.$.name;
           let activity = new Activity(type, teachers, students, start, end, auditorium,isExam,name);
           activities.push(activity);
         }

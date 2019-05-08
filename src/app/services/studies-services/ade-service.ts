@@ -22,7 +22,8 @@ import {map} from 'rxjs/operators';
 */
 
 import { Injectable } from '@angular/core';
-import { Http} from '@angular/http';
+import { HttpClient } from '@angular/common/http';
+import * as xml2js from 'xml2js';
 
 
 
@@ -40,20 +41,27 @@ export class AdeService {
   AdeserviceBaseUrl : string = "http://horaire.uclouvain.be/jsp/webapi?";
   AdeserviceConnection : string = "function=connect&login=etudiant&password=student";
   AdeServiceGetProjects : string = "&function=getProjects&detail=2";
-  constructor(public http: Http) {
+  constructor(public http: HttpClient) {
   }
    /*Convert Xml to JSON*/
   convertXmlToJson(xml) : any{
-    //let parser : any = new X2JS();
-    //let json = parser.xml2js(xml);
-    //return json;
+    let res;
+
+    xml2js.parseString(xml, { explicitArray: false }, (error, result) => {
+        if (error) {
+            throw new Error(error);
+        } else {
+            res = result;
+        }
+    });
+    return res;
   }
 
   /*Open a session*/
   httpOpenSession() {
     let encodedURL : string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
-    return this.http.get(encodedURL).pipe(map(res => {
-      return this.convertXmlToJson(res.text());
+    return this.http.get(encodedURL, {responseType: 'text'}).pipe(map(res => {
+      return this.convertXmlToJson(res);
     },
     err => {
 
@@ -65,9 +73,9 @@ export class AdeService {
     let encodedURL : string = this.AdeserviceBaseUrl
                               +"sessionId="+sessionId
                               +this.AdeServiceGetProjects;
-    return this.http.get(encodedURL).pipe(
+    return this.http.get(encodedURL, {responseType: 'text'}).pipe(
       map( res => {
-        return this.convertXmlToJson(res.text());
+        return this.convertXmlToJson(res);
      }))
   }
 
@@ -76,8 +84,8 @@ export class AdeService {
     let encodedURL : string = this.AdeserviceBaseUrl
                               +"sessionId="+sessionId
                               +"&function=setProject&projectId="+ projectId;
-    return this.http.get(encodedURL).pipe(map( res => {
-      return this.convertXmlToJson(res.text());
+    return this.http.get(encodedURL, {responseType: 'text'}).pipe(map( res => {
+      return this.convertXmlToJson(res);
      }))
   }
 
@@ -86,8 +94,9 @@ export class AdeService {
     let encodedURL : string = this.AdeserviceBaseUrl
                               +"sessionId="+sessionId
                               +"&function=getResources&code="+ acronym;
-    return this.http.get(encodedURL).pipe(map( res => {
-      return this.convertXmlToJson(res.text());
+                              console.log(encodedURL);
+    return this.http.get(encodedURL, {responseType: 'text'}).pipe(map( res => {
+      return this.convertXmlToJson(res);
      }))
   }
 
@@ -97,8 +106,8 @@ export class AdeService {
                               +"sessionId="+sessionId
                               +"&function=getActivities&resources="+ courseId
                               +"&detail=17";
-    return this.http.get(encodedURL).pipe(map( res => {
-      return this.convertXmlToJson(res.text());
+    return this.http.get(encodedURL, {responseType: 'text'}).pipe(map( res => {
+      return this.convertXmlToJson(res);
     }))
   }
 
