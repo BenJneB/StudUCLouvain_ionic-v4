@@ -23,21 +23,25 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="uclouvain">
-    <ion-button icon-only menuToggle>
-      <ion-icon name="menu"></ion-icon>
-    </ion-button>
-    <img src="./assets/img/s.png" height="28"/>
-    <ion-title align="center">{{title | translate}}</ion-title>
-    <ion-button icon-only end  menuToggle="studiesMenu">
-      <ion-icon name="menu"></ion-icon>
-    </ion-button>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <img src="./assets/img/s.png" height="28"/>
+    </ion-buttons>
+    <ion-title horizontal="center">{{title | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-menu-toggle >
+        <ion-button color="light">
+          <ion-icon slot="icon-only" name="menu"></ion-icon>
+        </ion-button>
+      </ion-menu-toggle>
+    </ion-buttons>
   </ion-toolbar>
     <ion-segment [(ngModel)]="segment">
-    <ion-segment-button value="prog">
-      {{'STUDY.PROGRAM' | translate}}
+    <ion-segment-button value="prog" name="prog">
+     <ion-label> {{'STUDY.PROGRAM' | translate}} </ion-label>
     </ion-segment-button>
     <ion-segment-button value="cours" name="cours">
-      {{'STUDY.HORAIRE' | translate}}
+        <ion-label> {{'STUDY.HORAIRE' | translate}} </ion-label>
     </ion-segment-button>
   </ion-segment>
   <h4  text-center padding *ngIf="project!==null && segment === 'cours'"> {{'STUDY.ADE' | translate}} {{project.name}}  </h4>
@@ -45,13 +49,15 @@
 
 <!--BODY-->
 <!------------------------------- RIGHT MENU TO GO MOODLE, UCL PORTAL ... ------------------------------------------>
-<ion-menu persistent=true id="studiesMenu" contentId="studiesContent" side="right" type="overlay">
-  <ion-button> </ion-button>
-  <ion-item button (click)="launch('http://www.uclouvain.be/')"> uclouvain.be </ion-item>
-  <ion-item button (click)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </ion-item>
-  <ion-item button (click)="openModalProject()"> {{'STUDY.CHANGEADE' | translate}} </ion-item>
+<ion-menu persistent=true menuId="studiesMenu" contentId="studiesContent" side="end" type="overlay">
+  <ion-content>
+    <ion-buttons> </ion-buttons>
+    <ion-item button (click)="launch('http://www.uclouvain.be/')"> uclouvain.be </ion-item>
+    <ion-item button (click)="launch('https://moodleucl.uclouvain.be')"> Moodle ucl </ion-item>
+    <ion-item button (click)="openModalProject()"> {{'STUDY.CHANGEADE' | translate}} </ion-item>
+  </ion-content>
 </ion-menu>
-
+<ion-router-outlet id="studiesContent" main></ion-router-outlet>
 <ion-content padding id="studiesContent" [ngClass]="{'cours' : segment === 'cours'}">
 
   <!------------------------------------------ LISTE DES COURS ------------------------------------------------>
@@ -63,15 +69,15 @@
       <ion-item (click)="openCoursePage(course)" >
         <h2>{{course.acronym}} - {{course.name}}</h2>
       </ion-item>
-      <ion-item-options side="right">
+      <ion-item-options side="end">
         <!--<ion-button (click)="addCourseToCalendar(slidingItem, course)" >
           <ion-icon name="calendar"></ion-icon>
             {{'STUDY.CALENDAR' | translate}}
         </ion-button>-->
-        <ion-button (click)="removeCourse(course)" >
+        <ion-item-option (click)="removeCourse(course)" >
           <ion-icon name="trash"></ion-icon>
             {{'STUDY.DEL' | translate}}
-        </ion-button>
+        </ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
   </ion-list>
@@ -98,7 +104,7 @@
     <ion-row>
       <ion-col>
         <div id="error" text-center *ngIf="error" class="alert alert-danger" style="color: red"><b  >{{error}}</b></div>
-        <ion-button id="login" class="submit-btn" full type="submit" [disabled]="!loginForm.form.valid">Login</ion-button>
+        <ion-button id="login" class="submit-btn" expand="full" type="submit" [disabled]="!loginForm.form.valid">Login</ion-button>
       </ion-col>
     </ion-row>
   </form>
@@ -115,7 +121,7 @@
         {{activity.sigle}}<!-- - {{activity.name}}-->
       </ion-item>
       <ion-item-options>
-        <ion-button outline (click)="addCourseFromProgram(activity.sigle)" class="large-icon">
+        <ion-button fill="outline" (click)="addCourseFromProgram(activity.sigle)" class="large-icon">
           <ion-icon name='add-circle'></ion-icon>
         </ion-button>
       </ion-item-options>
@@ -134,10 +140,10 @@
   <ion-icon name='help-circle'></ion-icon><p>{{'STUDY.SWIPE2' | translate}}</p>
 </ion-footer>
 <ion-footer text-center *ngIf="segment=='cours'">
-    <ion-fab fab fab-bottom right style="margin-bottom:65px;">
-    <ion-button id="prompt" ion-fab fab-fixed (click)="showPrompt()">
-      <ion-icon name="add"> </ion-icon>
-    </ion-button>
+    <ion-fab fab fab-bottom horizontal="end" style="margin-bottom:65px;">
+      <ion-fab-button id="prompt" fab-fixed (click)="showPrompt()">
+        <ion-icon name="add"> </ion-icon>
+      </ion-fab-button>
   </ion-fab>
   <ion-icon name='help-circle'></ion-icon><p>{{'STUDY.SWIPE' | translate}}</p>
 </ion-footer>

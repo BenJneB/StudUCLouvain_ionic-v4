@@ -1,3 +1,4 @@
+import { ModalProjectPageModule } from './modal-project/modal-project.module';
 import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
@@ -13,7 +14,8 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-  	CommonModule,
+    CommonModule,
+    ModalProjectPageModule,
     TranslateModule.forChild(),
     RouterModule.forChild([
       {

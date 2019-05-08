@@ -108,7 +108,7 @@ console.log("Startin App");
 
     ];
     this.studiePages =[
-      { title: 'MENU.STUDIES', component: 'StudiesPage', icon: "./assets/img/études.png",
+      { title: 'MENU.STUDIES', component: '/studies', icon: "./assets/img/études.png",
         iosSchemaName: null, androidPackageName: null,
         appUrl: null, httpUrl: null  },
       { title: 'MENU.LIBRARY', component: '/libraries', icon: "./assets/img/biblio.png",

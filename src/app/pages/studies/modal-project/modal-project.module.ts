@@ -14,6 +14,9 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
     ReactiveFormsModule,
   	CommonModule,
     TranslateModule.forChild(),
-  ]
+  ],
+  entryComponents: [
+    ModalProjectPage
+   ]
 })
 export class ModalProjectPageModule { }

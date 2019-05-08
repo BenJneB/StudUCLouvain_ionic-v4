@@ -23,27 +23,26 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="uclouvain">
-    
-    <ion-row>
-      <ion-col>
-        <ion-title align="center">{{course.name}}-{{course.acronym}}</ion-title>
-      </ion-col>
-    </ion-row>
-    <ion-buttons end (click)="openModalInfo()">
-      <ion-button icon-only end >
-      <ion-icon name="information-circle"></ion-icon>
+      <ion-buttons slot="start">
+          <ion-back-button></ion-back-button>
+          <img src="./assets/img/s.png" height="28"/>
+      </ion-buttons>
+      <ion-title horizontal="center">{{course.name}}-{{course.acronym}}</ion-title>
+    <ion-buttons slot="end" (click)="openModalInfo()">
+      <ion-button color="light">
+        <ion-icon slot="icon-only" name="information-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
   <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayed()">
     <ion-segment-button value="Cours magistral">
-      {{'COURSE.CM' | translate}}
+      <ion-label>{{'COURSE.CM' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="TD">
-      {{'COURSE.TP' | translate}}
+        <ion-label>{{'COURSE.TP' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="Examen">
-      {{'COURSE.EXAMEN' | translate}}
+        <ion-label>{{'COURSE.EXAMEN' | translate}}</ion-label>
       </ion-segment-button>
   </ion-segment>
 </ion-header>

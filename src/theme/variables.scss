@@ -110,7 +110,9 @@ $customColors: ('guindaille', 'navbarColor', 'news', 'event', 'sport', 'g2', 'cr
   }
 }
 
-
+ion-toolbar ion-buttons ion-back-button {
+  color: light !important;
+}
 ion-segment-button ion-label {
   color: white;
 }

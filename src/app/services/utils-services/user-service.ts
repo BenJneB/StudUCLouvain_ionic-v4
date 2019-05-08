@@ -175,10 +175,6 @@ export class UserService {
     this.storage.set('disclaimer',this.disclaimer);
   }
 
-  removeDisclaimer(discl:boolean){
-    this.disclaimer = false;
-    this.storage.set('disclaimer', this.disclaimer);
-  }
 
   addFavorite(itemGuid: string) {
     this.favorites.push(itemGuid);
@@ -186,26 +182,12 @@ export class UserService {
 
   };
 
-  removeFavorite(itemGuid: string) {
-    let index = this.favorites.indexOf(itemGuid);
-    if (index > -1) {
-      this.favorites.splice(index, 1);
-    }
-    this.storage.set('listEvents',this.favorites);
-  };
 
   addFavoriteS(itemGuid : string) {
     this.sports.push(itemGuid);
     this.storage.set('listSports',this.sports);
   };
 
-  removeFavoriteS(itemGuid: string) {
-    let index = this.sports.indexOf(itemGuid);
-    if (index > -1) {
-      this.sports.splice(index, 1);
-    }
-    this.storage.set('listSports',this.sports);
-  };
 
 
   addCampus(campus: string) {
@@ -214,20 +196,12 @@ export class UserService {
     this.storage.set('campus',this.campus);
   };
 
-  removeCampus(campus: string) {
-    this.campus="";
-    this.storage.set('campus',this.campus);
-  };
 
   addFac(fac: string) {
     this.fac = fac;
     this.storage.set('fac',this.fac);
   };
 
-  removeFac(fac: string) {
-    this.fac="";
-    this.storage.set('fac',this.fac);
-  };
 
   addSlotTP(acronym:string, slot:string){
     var index = this.slots.findIndex(item => item.course === acronym);
@@ -240,14 +214,48 @@ export class UserService {
     }
     this.storage.set('slots',this.slots);
   }
-
-  removeSlotTP(acronym:string){
-      var index = this.slots.findIndex(item => item.course === acronym);
-      if(index > -1){
-        this.slots[index].TP = "";
-      }
-      this.storage.set('slots',this.slots);
+  removeDisclaimer(discl:boolean){
+    this.disclaimer = false;
+    this.storage.set('disclaimer', this.disclaimer);
   }
+
+  removeFavorite(itemGuid: string) {
+    let index = this.favorites.indexOf(itemGuid);
+    if (index > -1) {
+      this.favorites.splice(index, 1);
+    }
+    this.storage.set('listEvents',this.favorites);
+  };
+  removeFavoriteS(itemGuid: string) {
+    let index = this.sports.indexOf(itemGuid);
+    if (index > -1) {
+      this.sports.splice(index, 1);
+    }
+    this.storage.set('listSports',this.sports);
+  };
+  removeCampus(campus: string) {
+    this.campus="";
+    this.storage.set('campus',this.campus);
+  };
+  removeFac(fac: string) {
+    this.fac="";
+    this.storage.set('fac',this.fac);
+  };
+  removeSlotTP(acronym:string){
+    this.removeSlot(acronym, 'TP');
+  }
+
+  removeSlotCM(acronym:string){
+    this.removeSlot(acronym, 'CM');
+}
+
+removeSlot(acronym:string, type:string){
+  var index = this.slots.findIndex(item => item.course === acronym);
+  if(index > -1){
+    this.slots[index][type] = "";
+  }
+  this.storage.set('slots',this.slots);
+}
 
   addSlotCM(acronym:string, slot:string){
     var index = this.slots.findIndex(item => item.course === acronym);
@@ -261,12 +269,6 @@ export class UserService {
     this.storage.set('slots',this.slots);
   }
 
-  removeSlotCM(acronym:string){
-      var index = this.slots.findIndex(item => item.course === acronym);
-      if(index > -1){
-        this.slots[index].CM = "";
-      }
-      this.storage.set('slots',this.slots);
-  }
+
 
 }

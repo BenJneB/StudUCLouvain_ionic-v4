@@ -43,9 +43,7 @@ export class StudiesService {
       console.log("StudiesService openSession")
       this.ade.httpOpenSession().subscribe(
         data => {
-          console.log("data");
-          console.log(data);
-          resolve( data.session._id);
+          resolve( data['session'].$.id);
         }
       );
     });
@@ -57,8 +55,6 @@ export class StudiesService {
       console.log("Studiesservice getProjects")
       this.ade.httpGetProjects(sessionId).subscribe(
         data => {
-          console.log("project");
-          console.log(data.projects);
           resolve(this.extractAdeProjects(data));
           }
         );
@@ -71,9 +67,9 @@ export class StudiesService {
     console.log(data.projects)
     console.log(data.projects.project.length)
     if (data.projects.project.length === undefined){
-      let name = data.projects.project._name.toString();
+      let name = data.projects.project.$.name.toString();
       console.log("name : " + name);
-      let id = data.projects.project._id.toString();
+      let id = data.projects.project.$.id.toString();
       console.log("id : "+ id);
       let project = new AdeProject(id, name);
       console.log("project" + project)
@@ -82,9 +78,9 @@ export class StudiesService {
     }
     else{
       for(let i=0 ; i<data.projects.project.length ; i++){
-        let name = data.projects.project[i]._name.toString();
+        let name = data.projects.project[i].$.name.toString();
         console.log("name : " + name);
-        let id = data.projects.project[i]._id.toString();
+        let id = data.projects.project[i].$.id.toString();
         console.log("id : "+ id);
         let project = new AdeProject(id, name);
         console.log("project" + project)

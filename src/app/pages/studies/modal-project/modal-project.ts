@@ -33,7 +33,7 @@ import { AdeProject } from '../../../entity/adeProject';
   templateUrl: 'modal-project.html',
 })
 export class ModalProjectPage {
-  sessionId : string = this.navParams.get('sessionId');
+  sessionId : string;
   public projects;
 
   constructor(public navCtrl: NavController,
@@ -42,6 +42,7 @@ export class ModalProjectPage {
     public viewCtrl: ModalController,
     public studiesService : StudiesService)
   {
+    this.sessionId = this.navParams.get('sessionId');
   }
 
   /*Set the project and close de view of the modal*/
