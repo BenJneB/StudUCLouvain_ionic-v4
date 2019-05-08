@@ -65,7 +65,7 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  studiesPage = { title: 'MENU.STUDIES', component: 'StudiesPage',
+  studiesPage = { title: 'MENU.STUDIES', component: '/studies',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
