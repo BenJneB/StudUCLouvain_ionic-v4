@@ -60,57 +60,41 @@ export class AdeService {
   /*Open a session*/
   httpOpenSession() {
     let encodedURL : string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
-    return this.http.get(encodedURL, {responseType: 'text'}).pipe(map(res => {
-      return this.convertXmlToJson(res);
-    },
-    err => {
-
-    }))
+    return this.getDataFromADE(encodedURL);
   }
 
+  private getDataFromADE(encodedURL: string) {
+    return this.http.get(encodedURL, { responseType: 'text' }).pipe(map(res => {
+      return this.convertXmlToJson(res);
+    }, err => {
+    }));
+  }
+
+  getBasicSessionUrl(sessionId : string){
+    return this.AdeserviceBaseUrl + "sessionId=" + sessionId
+  }
   /*Get the projects from ADE*/
   httpGetProjects(sessionId : string){
-    let encodedURL : string = this.AdeserviceBaseUrl
-                              +"sessionId="+sessionId
-                              +this.AdeServiceGetProjects;
-    return this.http.get(encodedURL, {responseType: 'text'}).pipe(
-      map( res => {
-        return this.convertXmlToJson(res);
-     }))
+    let encodedURL : string = this.getBasicSessionUrl(sessionId) + this.AdeServiceGetProjects; 
+    return this.getDataFromADE(encodedURL);
   }
 
   /*Set the project selected by the user*/
   httpSetProject(sessionId : string, projectId : string){
-    let encodedURL : string = this.AdeserviceBaseUrl
-                              +"sessionId="+sessionId
-                              +"&function=setProject&projectId="+ projectId;
-    return this.http.get(encodedURL, {responseType: 'text'}).pipe(map( res => {
-      return this.convertXmlToJson(res);
-     }))
+    let encodedURL : string = this.getBasicSessionUrl(sessionId) + "&function=setProject&projectId=" + projectId;
+    return this.getDataFromADE(encodedURL);
   }
 
   /*For a course selected and its acronym get the course id*/
   httpGetCourseId(sessionId : string, acronym : string){
-    let encodedURL : string = this.AdeserviceBaseUrl
-                              +"sessionId="+sessionId
-                              +"&function=getResources&code="+ acronym;
-                              console.log(encodedURL);
-    return this.http.get(encodedURL, {responseType: 'text'}).pipe(map( res => {
-      return this.convertXmlToJson(res);
-     }))
+    let encodedURL : string = this.getBasicSessionUrl(sessionId) + "&function=getResources&code=" + acronym;
+    return this.getDataFromADE(encodedURL);
   }
 
   /*For a course selected get the activities*/
   httpGetActivity(sessionId : string , courseId : string){
-    let encodedURL : string = this.AdeserviceBaseUrl
-                              +"sessionId="+sessionId
-                              +"&function=getActivities&resources="+ courseId
-                              +"&detail=17";
-    return this.http.get(encodedURL, {responseType: 'text'}).pipe(map( res => {
-      return this.convertXmlToJson(res);
-    }))
+    let encodedURL : string = this.getBasicSessionUrl(sessionId) + "&function=getActivities&resources=" + courseId + "&detail=17";
+    return this.getDataFromADE(encodedURL);
   }
-
-
 
 }
