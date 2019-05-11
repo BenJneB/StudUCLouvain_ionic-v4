@@ -131,7 +131,7 @@ export class CoursePage {
         }).then(toast => toast.present());
         slidingItem.close();
     });
-      this.utilsServices.alertCourse();
+      this.utilsServices.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 
   /*Filter TP if a slot is selectionned*/
@@ -250,28 +250,8 @@ export class CoursePage {
       message: message,
       duration: 3000
     }).then(toast => toast.present());
-    this.alertAll();
+    this.utilsServices.alertCourse({'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4'});
   }
-
-  /*Alert to warning that changes are possible*/
-  async alertAll(){
-    let title:string;
-    let message:string;
-    this.translateService.get('STUDY.WARNING').subscribe((res:string) => {title=res;});
-    this.translateService.get('STUDY.MESSAGE4').subscribe((res:string) => {message=res;});
-    const disclaimerAlert = await this.alertCtrl.create({
-      header: title,
-      message: message,
-      buttons: [
-          {
-              text: "OK",
-              handler: data => {
-              }
-          }
-      ]
-    });
-    return await disclaimerAlert.present();
-   }
 
    openModalInfo(){
 

@@ -141,13 +141,13 @@ import { Device } from '@ionic-native/device/ngx';
 
   /*Create and display the alert that say that if a course is add to the calendar if this course is changed,
    the calendar doesn't take that in account*/
-  async alertCourse() {
+  async alertCourse(texts) {
     let title: string;
     let message: string;
-    this.translateService.get('COURSE.WARNING').subscribe((res: string) => {
+    this.translateService.get(texts['warning']).subscribe((res: string) => {
         title = res;
     });
-    this.translateService.get('COURSE.MESSAGE3').subscribe((res: string) => {
+    this.translateService.get(texts['message']).subscribe((res: string) => {
         message = res;
     });
     const disclaimerAlert = await this.alertCtrl.create({

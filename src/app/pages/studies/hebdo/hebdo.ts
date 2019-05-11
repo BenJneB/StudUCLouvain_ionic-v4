@@ -76,6 +76,6 @@ export class HebdoPage {
         }).then(toast => toast.present());
         slidingItem.close();
     });
-      this.utilsServices.alertCourse();
+      this.utilsServices.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 }
