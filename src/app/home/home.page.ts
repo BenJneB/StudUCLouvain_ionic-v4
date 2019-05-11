@@ -110,28 +110,21 @@ export class HomePage {
               public splashscreen: SplashScreen
             )
   {
-      console.log("OH YEAR");
       this.where = "";
-      console.log(this.title);
       document.title = this.title;
-      //this.resize();
       //this.userS.removeCampus('');
   }
 
   /*Set the title*/
   ionViewDidEnter() {
-    console.log("OH YEARDDDD");
     setTimeout(()=>{
       this.splashscreen.hide();
     },1000);
-    //this.resize();
   }
 
   /*Update the public variable campus for the user*/
   updateCampus(){
-    console.log(this.where)
     this.userS.addCampus(this.where);
-   // this.resize();
   }
 
   /*Change page when click on a page of the home of launchExternalApp if it's the resto U*/
@@ -147,15 +140,12 @@ export class HomePage {
   /*launch external application*/
   launchExternalApp(page) {
     let app: string;
-    //let storeUrl:string;
     let check:string;
     if (this.device.platform === 'iOS') {
       app = page.iosSchemaName;
-      //storeUrl=page.httpUrl;
       check=page.appUrl;
     } else if (this.device.platform === 'Android') {
       app = page.androidPackageName;
-      //storeUrl= 'market://details?id='+ app;
       check=app;
     } else {
       const browser = this.iab.create(page.httpUrl, '_system');
@@ -163,12 +153,10 @@ export class HomePage {
     }
     this.appAvailability.check(check).then(
       () => { // success callback
-      console.log("have APP");
         const browser = this.iab.create(page.appUrl, '_system');
         browser.close();
       },
       () => { // error callback
-      console.log("not have APP");
         this.market.open(app);
       }
     );
@@ -201,7 +189,7 @@ export class HomePage {
     this.translateService.get('HOME.FR').subscribe((res:string) => {fr=res;});
     this.translateService.get('HOME.EN').subscribe((res:string) => {en=res;});
 
-    let settingsAlert = this.alertCtrl.create({
+    this.alertCtrl.create({
             header: settings,
             message: message,
             inputs : [

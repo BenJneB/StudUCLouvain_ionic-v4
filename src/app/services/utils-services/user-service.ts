@@ -161,7 +161,6 @@ export class UserService {
   };
 
   addCampus(campus: string) {
-    console.log(campus)
     this.campus = campus;
     this.storage.set('campus',this.campus);
   };

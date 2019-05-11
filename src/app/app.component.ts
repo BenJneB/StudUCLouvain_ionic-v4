@@ -84,9 +84,7 @@ export class AppComponent {
     private toast: Toast,
     private nav: NavController
   ) {
-console.log("Startin App");
     this.user.getCampus();
-    //this.user.getDisclaimer();
     this.alertPresented = false;
     this.initializeApp();
 
@@ -185,7 +183,6 @@ console.log("Startin App");
 
     backButtonEvent() {
       this.platform.backButton.subscribe(async () => {
-          // close action sheet
           try {
               const element = await this.actionSheetCtrl.getTop();
               if (element) {
@@ -194,8 +191,6 @@ console.log("Startin App");
               }
           } catch (error) {
           }
-
-          // close popover
           try {
               const element = await this.popoverCtrl.getTop();
               if (element) {
@@ -204,8 +199,6 @@ console.log("Startin App");
               }
           } catch (error) {
           }
-
-          // close modal
           try {
               const element = await this.modalCtrl.getTop();
               if (element) {
@@ -214,29 +207,22 @@ console.log("Startin App");
               }
           } catch (error) {
               console.log(error);
-
           }
-
-          // close side menua
           try {
               const element = await this.menu.getOpen();
               if (element) {
                   this.menu.close();
                   return;
-
               }
-
           } catch (error) {
-
+            console.log(error);
           }
 
           this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
               if (outlet && outlet.canGoBack()) {
                   outlet.pop();
-
               } else if (this.router.url === 'home') {
                   if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
-                      // this.platform.exitApp(); // Exit from app
                       navigator['app'].exitApp(); // work in ionic 4
 
                   } else {
@@ -245,7 +231,7 @@ console.log("Startin App");
                           '2000',
                           'center')
                           .subscribe(toast => {
-                              // console.log(JSON.stringify(toast));
+
                           });
                       this.lastTimeBackPress = new Date().getTime();
                   }
@@ -308,26 +294,6 @@ console.log("Startin App");
   else this.openRootPage(this.homePage);
 } */
 
-  disclaimer(){
-        //let title:string;
-    //let message:string;
-    //this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
-    //this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
-     let disclaimerAlert = this.alertCtrl.create({
-            header: "Avertissement",
-            message: "<p>Version beta de l'application Stud@UCLouvain.</p> <p>Cette version n'est pas publique et est uniquement destinée à une phase de test.</p>",
-
-            buttons: [
-                {
-                    text: "OK",
-                    handler: data => {
-
-                    }
-                }
-            ]
-        }).then(alert => alert.present());
-  }
-
   openRootPage(page) {
     let activeUrl = this.router.url;
 
@@ -374,5 +340,4 @@ console.log("Startin App");
   		}
   	);
   }
-
 }
