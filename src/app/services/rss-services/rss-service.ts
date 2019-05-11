@@ -40,7 +40,6 @@ export class RssService {
       this.http.get(url, {responseType: 'text'}).pipe(timeout(5000),
       map(data =>  this.utilsServices.convertToJson(data))).subscribe( result => {
           this.nbCalls++;
-          console.log(result);
           if (isSport) result = result['xml'];
           else result = result['rss']['channel'];
           if (result == null) {

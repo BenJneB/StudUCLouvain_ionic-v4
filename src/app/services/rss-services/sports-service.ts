@@ -79,17 +79,27 @@ export class SportsService {
     }
   }
 
+  private getSportsDatas(segment: string) {
+    this.update();
+    const isSport = segment === 'all';
+    isSport ? this.sports = [] : this.teams = [];
+    return {
+      sports: isSport ? this.sports : this.teams,
+      shownSports: isSport ? this.shownSports : this.shownTeams,
+      url: isSport ? this.url : this.urlT,
+      categories: isSport ? this.allCategories : this.allCategoriesT
+    }
+  }
 
   /*Get sports for the URL specific to the campus of the user*/
   public getSports(segment:string) {
-    this.update();
-    this.sports = [];
-    return this.rssService.load(this.url, true).then(result => {
-      this.extractSports(result);
+    const datas = this.getSportsDatas(segment);
+    return this.rssService.load(datas['url'], true).then(result => {
+      this.extractSports(result, segment == 'team' ? false : true);
       return {
-        sports: this.sports,
-        showSports: this.shownSports,
-        categories: this.allCategories
+        sports: datas['sports'],
+        shownSports: datas['shownSports'],
+        categories: datas['categories']
       }
     }) .catch(error => {
       if(error == 1) {
@@ -104,35 +114,6 @@ export class SportsService {
           sports: [],
           shownSports: 0,
           categories: []
-        }
-      }
-    });
-  }
-
-  /*Get sports for the university teams*/
-  public getTeams(segment:string) {
-    this.teams = [];
-    return this.rssService.load(this.urlT, true).then(result => {
-      this.extractSports(result, false);
-      return {
-        sports: this.teams,
-        shownSports: this.shownTeams,
-        categories: this.allCategoriesT
-      }
-    }) 
-    .catch(error => {
-      if(error == 1) {
-        return this.getTeams(segment);
-      } else {
-        if(error == 2) {
-          console.log("Loading teams : GET req timed out > limit, suppose no teams to be displayed");
-        } else {
-          console.log("Error loading teams : " + error);
-        }
-        return {
-          teams: [],
-          shownTeams: 0,
-          categoriesT: []
         }
       }
     });

@@ -91,7 +91,8 @@ export class SportsPage {
     this.updateDateLimit();
     //Check connxion, if it's ok, load and display sports
     if(this.connService.isOnline()) {
-      this.loadSports();
+      this.loadSports(this.segment);
+      this.loadSports('team');
       this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
         this.searching = false;
         this.updateDisplayedSports();
@@ -107,7 +108,7 @@ export class SportsPage {
 
   /*Reload sport after refreshing the page*/
   public doRefresh(refresher) {
-    this.loadSports();
+    this.loadSports(this.segment);
     refresher.target.complete();
   }
 
@@ -116,18 +117,17 @@ export class SportsPage {
   }
 
   /*Load sports to display*/
-  public loadSports() {
+  public loadSports(segment: string) {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
     if(this.connService.isOnline()) {
-      this.sportsService.getSports(this.segment).then(
+      this.sportsService.getSports(segment).then(
         result => {
-          this.assignDatas(false, result);
-      })
-      this.sportsService.getTeams(this.segment).then(
-        result => {
-          this.assignDatas(true, result);
+          this.assignDatas(
+            segment == 'team' ? true : false, 
+            result
+          );
       })
     } else {
       this.searching = false;
@@ -185,7 +185,7 @@ export class SportsPage {
     this.sportsList && this.sportsList.closeSlidingItems();
 
     if (this.segment === 'all') { //List of sports for all students
-      this.filterDisplayedSports(this.sports);
+      this.displayedSports = this.filterDisplayedSports(this.sports, this.excludedFilters);
     }
     else if (this.segment === 'favorites') { //list of sports put in favorite
       let favSports = [];
@@ -199,7 +199,7 @@ export class SportsPage {
       this.displayedSports = favSports;
     }
     else if (this.segment === 'team') { //List of sports for university teams
-      this.filterDisplayedSports(this.teams);
+      this.displayedSports = this.filterDisplayedSports(this.teams, this.excludedFiltersT);
     }
 
     this.shownSports = this.displayedSports.length;
@@ -208,8 +208,8 @@ export class SportsPage {
     this.loader.dismiss();
   }
 
-  private filterDisplayedSports(items: Array<SportItem>) {
-    this.displayedSports = this.utilsServices.filterItems('sport', items, this.excludedFilters, this.dateLimit, this.searchTerm);
+  private filterDisplayedSports(items: Array<SportItem>, excluded: any) {
+    return this.utilsServices.filterItems('sport', items, excluded, this.dateLimit, this.searchTerm);
   }
 
   private getFiltersData(isTeam: boolean){
