@@ -139,28 +139,50 @@ import { Device } from '@ionic-native/device/ngx';
         this.checkAvailability(check, page, app);
     }
 
-  /*Create and display the alert that say that if a course is add to the calendar if this course is changed,
-   the calendar doesn't take that in account*/
-  async alertCourse(texts) {
-    let title: string;
-    let message: string;
-    this.translateService.get(texts['warning']).subscribe((res: string) => {
-        title = res;
-    });
-    this.translateService.get(texts['message']).subscribe((res: string) => {
-        message = res;
-    });
-    const disclaimerAlert = await this.alertCtrl.create({
-      header: title,
-      message: message,
-      buttons: [
-          {
-              text: 'OK',
-              handler: data => {
-              }
-          }
-      ]
-    });
-    return await disclaimerAlert.present();
-  }
+    /*Create and display the alert that say that if a course is add to the calendar if this course is changed,
+    the calendar doesn't take that in account*/
+    async alertCourse(texts) {
+        let title: string;
+        let message: string;
+        this.translateService.get(texts['warning']).subscribe((res: string) => {
+            title = res;
+        });
+        this.translateService.get(texts['message']).subscribe((res: string) => {
+            message = res;
+        });
+        const disclaimerAlert = await this.alertCtrl.create({
+            header: title,
+            message: message,
+            buttons: [
+                {
+                    text: 'OK',
+                    handler: data => {
+                    }
+                }
+            ]
+        });
+        return await disclaimerAlert.present();
+    }
+
+    filterItems(type: string, items: Array<any>, excluded: Array<any>, dateLimit: Date, search: string) {
+        let index: string, title: string, date: Date;
+        return items.filter((item) => {
+            ({ index, title, date } = this.getFilterFields(type, index, item, title, date));
+            return (excluded.indexOf(index) < 0) && (title.toLowerCase().indexOf(search.toLowerCase()) > -1)
+            && (Math.floor(date.getTime() / 86400000) <= Math.floor(dateLimit.getTime() / 86400000));
+        });
+    }
+
+    private getFilterFields(type: string, index: string, item: any, title: string, date: Date) {
+        if (type === 'events') {
+            index = item.category;
+            title = item.title;
+            date = item.startDate;
+        } else {
+            index = item.sport;
+            title = item.sport;
+            date = item.date;
+        }
+        return { index, title, date };
+    }
 }
