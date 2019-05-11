@@ -195,29 +195,27 @@ import { Device } from '@ionic-native/device/ngx';
               type: 'radio',
               label: fr,
               value: 'fr',
-              checked: (check2 == 'fr')
+              checked: (check2 === 'fr')
             },
             {
               type: 'radio',
               label: en,
               value: 'en',
-              checked: (check2 == 'en')
+              checked: (check2 === 'en')
             }
           ],
           buttons: [
             {
               text: save,
-              handler: data => {
-                this.languageChanged(data);
-              }
+              handler: data => { this.languageChanged(data); }
             }
           ]
         });
       }
 
     /*When the language change, translate the page with the applied language*/
-    private languageChanged(event:string) {
-        this.user.storage.set('lan',event);
+    private languageChanged(event: string) {
+        this.user.storage.set('lan', event);
         this.translateService.use(event);
     }
 }
