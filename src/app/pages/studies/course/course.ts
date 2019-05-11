@@ -254,22 +254,23 @@ export class CoursePage {
   }
 
   /*Alert to warning that changes are possible*/
-  alertAll(){
+  async alertAll(){
     let title:string;
     let message:string;
     this.translateService.get('STUDY.WARNING').subscribe((res:string) => {title=res;});
     this.translateService.get('STUDY.MESSAGE4').subscribe((res:string) => {message=res;});
-       let disclaimerAlert = this.alertCtrl.create({
-          header: title,
-          message: message,
-          buttons: [
-              {
-                  text: "OK",
-                  handler: data => {
-                  }
+    const disclaimerAlert = await this.alertCtrl.create({
+      header: title,
+      message: message,
+      buttons: [
+          {
+              text: "OK",
+              handler: data => {
               }
-          ]
-      }).then(alert => alert.present());
+          }
+      ]
+    });
+    return await disclaimerAlert.present();
    }
 
    openModalInfo(){
