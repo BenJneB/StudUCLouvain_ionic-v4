@@ -9,11 +9,13 @@ import { UserService } from './user-service';
   })
   export class UtilsService {
     constructor(
-        public toastCtrl: ToastController, 
-        public user: UserService, 
+        public toastCtrl: ToastController,
+        public user: UserService,
         private translateService: TranslateService,
-        public alertCtrl: AlertController,) 
-        {}
+        public alertCtrl: AlertController
+    ){
+
+    }
 
     public convertToJson(data: string): Object {
         let res;
@@ -29,12 +31,12 @@ import { UserService } from './user-service';
     }
 
       /*Add an event to the favorites*/
-  addFavorite(slidingItem: IonItemSliding, itemData: any, texts: any, update: () => void) {
+  async addFavorite(slidingItem: IonItemSliding, itemData: any, texts: any, update: () => void) {
          if (this.user.hasFavorite(itemData.guid)) {
             let message:string;
             this.translateService.get(texts['FAV']).subscribe((res:string) => {message=res;});
             this.removeFavorite(
-                slidingItem, 
+                slidingItem,
                 itemData,
                 message, 
                 {
@@ -42,48 +44,48 @@ import { UserService } from './user-service';
                     'CANCEL': texts['CANCEL'], 
                     'DEL': texts['DEL']
                 },
-                update);
-            } else {
-            // remember this session as a user favorite
+                update
+            );
+        } else {
             this.user.addFavorite(itemData.guid);
             let message:string;
             this.translateService.get(texts['FAV2']).subscribe((res:string) => {message=res;});
-            let toast = this.toastCtrl.create({
+            const toast = await this.toastCtrl.create({
                 message: message,
                 duration: 3000
-            }).then(toast => toast.present());
-            slidingItem.close();
-            }
+            })
+            await toast.present();
+            await slidingItem.close();
+        }
     }
 
 
   /*Remove an event from the favorites*/
-    removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any, update: () => void) {
-            let message:string;
-            let cancel:string;
-            let del:string;
+    async  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any, update: () => void) {
+            let message, cancel, del:string;
             this.translateService.get(texts['FAV3']).subscribe((res:string) => {message=res;});
             this.translateService.get(texts['CANCEL']).subscribe((res:string) => {cancel=res;});
             this.translateService.get(texts['DEL']).subscribe((res:string) => {del=res;});
-            let alert = this.alertCtrl.create({
+            const alert = await this.alertCtrl.create({
             header: title,
             message: message,
             buttons: [
                 {
-                text: cancel,
-                handler: () => {
-                    slidingItem.close();
-                }
+                    text: cancel,
+                    handler: () => {
+                        slidingItem.close();
+                    }
                 },
                 {
-                text: del,
-                handler: () => {
-                    this.user.removeFavorite(itemData.guid);
-                    slidingItem.close();
-                    update();
-                }
+                    text: del,
+                    handler: () => {
+                        this.user.removeFavorite(itemData.guid);
+                        slidingItem.close();
+                        update();
+                    }
                 }
             ]
-            }).then(alert => alert.present());
+        });
+        return await alert.present();
     }
 }
