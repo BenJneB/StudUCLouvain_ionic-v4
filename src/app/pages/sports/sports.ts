@@ -97,7 +97,6 @@ export class SportsPage {
         this.updateDisplayedSports();
       });
       this.loader.present("Please wait..");
-      //this.nosport=true;
     }
     //If not go back to previous page and pop an alert
     else{
@@ -146,14 +145,14 @@ export class SportsPage {
       this.teams = result.sports;
       this.shownTeams = result.shownSports;
       this.filtersT = result.categories;
+      this.noteams = this.sports.length == 0;
     } else {
       this.sports = result.sports;
       this.shownSports = result.shownSports;
       this.filters = result.categories;
+      this.nosport = this.sports.length == 0;
     }
     this.searching = false;
-    if (isTeam == true) this.noteams = this.sports.length == 0;
-    else this.nosport = this.sports.length == 0;
   }
 
   /*Sort sports BY DAY*/
@@ -216,32 +215,31 @@ export class SportsPage {
     this.displayedSports = this.utilsServices.filterItems('sport', items, this.excludedFilters, this.dateLimit, this.searchTerm);
   }
 
+  private getFiltersData(isTeam: boolean){
+    if (isTeam == true) {
+      return {
+        filters: this.filtersT,
+        exclude: this.excludedFiltersT
+      }
+    } else {
+      return {
+        filters: this.filters,
+        exclude: this.excludedFilters
+      }
+    }
+  }
   /*Display a modal to select as filter only the sports that the user want to see*/
   async presentFilter() {
-    if(this.filters === undefined){
-      this.filters = [];
+    const datas = this.getFiltersData(this.segment === 'team')
+    let filters = datas['filters'],  excluded = datas['exclude'];
+    if(filters === undefined){
+      filters = [];
     }
-    if(this.filtersT === undefined){
-      this.filtersT = [];
-    }
-    let cat;
-    let exclude;
-    if(this.segment === 'all'){
-      cat = this.filters;
-      exclude = this.excludedFilters;
-    }
-    if(this.segment === 'team'){ 
-      cat = this.filtersT;
-      exclude = this.excludedFiltersT;
-    }
-    //Create a modal in which the filter will be by the SportsFilterPage
-    let modal = await this.modalCtrl.create(
-      {
+    let modal = await this.modalCtrl.create({
         component: SportsFilterPage,
-        componentProps: { excludedFilters : exclude, filters : cat, dateRange : this.dateRange}
-      })
-      await modal.present();
-    //Applied changing of date range when dismiss the modal
+        componentProps: { excludedFilters : excluded, filters : filters, dateRange : this.dateRange}
+    })
+    await modal.present();
     await modal.onDidDismiss().then((data) => {
       if (data) {
         data = data.data;
