@@ -19,15 +19,14 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { Component, ViewChild, ViewChildren, QueryList } from '@angular/core';
-import { MenuController, NavController, Platform, AlertController,LoadingController, ActionSheetController, PopoverController, ModalController, IonRouterOutlet } from '@ionic/angular';
+import { Component, ViewChildren, QueryList } from '@angular/core';
+import { MenuController, NavController, Platform,LoadingController, ActionSheetController, PopoverController, ModalController, IonRouterOutlet } from '@ionic/angular';
 import { Device } from '@ionic-native/device/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { TranslateService } from '@ngx-translate/core';
-import { HomePage } from './home/home.page';
 
 import { UserService } from './services/utils-services/user-service';
 import { Wso2Service } from './services/wso2-services/wso2-service';
@@ -95,32 +94,60 @@ export class AppComponent {
     this.user.getCampus();
     this.alertPresented = false;
     this.initializeApp();
+    const nullSchemas = { ios: null, android: null };
+    const nullUrls = { app: null, http: null };
+    this.homePage = this.getPageData({
+      title: 'HOME', 
+      route: 'home', 
+      icon: 'home', 
+      schemas: nullSchemas, 
+      urls: nullUrls
+    });
+    const campusDatas = [
+      { title: 'NEWS', route: 'news', icon: 'news', schemas: nullSchemas, urls: nullUrls },
+      { title: 'EVENTS', route: 'events', icon: 'event', schemas: nullSchemas, urls: nullUrls },
+      { title: 'SPORTS', route: 'sports', icon: 'sport', schemas: nullSchemas, urls: nullUrls },
+    ]
+    this.campusPages = [];
+    for (let page of campusDatas){
+      this.campusPages.push(
+        this.getPageData(page)
+      )
+    }
 
-    this.homePage = this.getPageData('MENU.HOME', '/home', './assets/img/home.png', { ios: null, android: null }, { app: null, http: null });
-    this.campusPages = [
-      this.getPageData('MENU.NEWS', '/news', './assets/img/news.png', { ios: null, android: null }, { app: null, http: null }),
-      this.getPageData('MENU.EVENTS', '/events', './assets/img/event.png', { ios: null, android: null }, { app: null, http: null }),
-      this.getPageData('MENU.SPORTS', '/sports', './assets/img/sport.png', { ios: null, android: null }, { app: null, http: null }),
-    ];
-    this.studiePages = [
-      this.getPageData('MENU.STUDIES', '/studies', './assets/img/études.png', { ios: null, android: null }, { app: null, http: null }),
-      this.getPageData('MENU.LIBRARIES', '/libraries', './assets/img/biblio.png', { ios: null, android: null }, { app: null, http: null }),
-      this.getPageData('MENU.HELP', '/support', './assets/img/support.png', { ios: null, android: null }, { app: null, http: null }),
-    ];
-    this.toolPages = [
-      this.getPageData('MENU.PARTY', '/guindaille', './assets/img/g2.png', { ios: null, android: null }, { app: null, http: null }),
-      this.getPageData('MENU.MAP', '/map', './assets/img/cartes.png', { ios: null, android: null }, { app: null, http: null }),
-      this.getPageData(
-        'MENU.RESTAURANT',
-        'R', 
-        './assets/img/resto.png', 
-        { ios: 'id1156050719', android: 'com.apptree.resto4u' }, 
-        { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }
-      ),
-      this.getPageData('MENU.MOBILITY', '/mobility', './assets/img/mobilité.png', { ios: null, android: null }, { app: null, http: null }),
-      this.getPageData('MENU.PARAM', '/settings', './assets/img/setting.png', { ios: null, android: null }, { app: null, http: null }),
-      this.getPageData('MENU.CREDITS', '/credit', './assets/img/signature.png', { ios: null, android: null }, { app: null, http: null }),
-    ];
+    const studiesData = [
+      { title: 'STUDIES', route: 'studies', icon: 'études', schemas: nullSchemas, urls: nullUrls },
+      { title: 'LIBRARIES', route: 'libraries', icon: 'biblio', schemas: nullSchemas, urls: nullUrls },
+      { title: 'HELP', route: 'support', icon: 'support', schemas: nullSchemas, urls: nullUrls },
+    ]
+    this.studiePages = [];
+    for (let page of studiesData){
+      this.studiePages.push(
+        this.getPageData(page)
+      )
+    }
+
+    const toolData = [
+      { title: 'PARTY', route: 'guindaille', icon: 'g2', schemas: nullSchemas, urls: nullUrls },
+      { title: 'MAP', route: 'map', icon: 'cartes', schemas: nullSchemas, urls: nullUrls },
+      { 
+        title: 'RESTAURANT', 
+        route: 'R', 
+        icon: 'resto', 
+        schemas: { ios: 'id1156050719', android: 'com.apptree.resto4u' }, 
+        urls: { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' } 
+      },
+      { title: 'MOBILITY', route: 'mobility', icon: 'mobilité', schemas: nullSchemas, urls: nullUrls },
+      { title: 'PARAM', route: 'settings', icon: 'setting', schemas: nullSchemas, urls: nullUrls },
+      { title: 'CREDITS', route: 'credit', icon: 'signature', schemas: nullSchemas, urls: nullUrls },
+    ]
+    this.toolPages = [];
+    for (let page of toolData){
+      this.toolPages.push(
+        this.getPageData(page)
+      )
+    }
+
     platform.ready().then(() => {
     	 this.wso2Service.getToken();
       translateService.setDefaultLang('fr');
@@ -144,13 +171,13 @@ export class AppComponent {
     })
   }
 
-  private getPageData(title: string, route: string, icon: string, schemas: any, urls: any) {
+  private getPageData(page: any) {
     return {
-      title: title,
-      component: route, 
-      icon: icon,
-      iosSchemaName: schemas['ios'], androidPackageName: schemas['android'],
-      appUrl: urls['app'], httpUrl: urls['http']
+      title: 'MENU.' + page['title'],
+      component: '/' + page['route'], 
+      icon: './assets/img/' + page['icon'] + '.png',
+      iosSchemaName: page['schemas']['ios'], androidPackageName: page['schemas']['android'],
+      appUrl: page['urls']['app'], httpUrl: page['urls']['http']
     };
   }
 
