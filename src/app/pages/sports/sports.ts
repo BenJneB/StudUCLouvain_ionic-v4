@@ -21,8 +21,14 @@ import { UtilsService } from './../../services/utils-services/utils-services';
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, IonItemSliding, IonList,
-  ModalController, ToastController, NavController} from '@ionic/angular';
+import { 
+  AlertController, 
+  IonItemSliding, 
+  IonList,
+  ModalController, 
+  ToastController, 
+  NavController
+} from '@ionic/angular';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { FormControl } from '@angular/forms';
 import { UserService } from '../../services/utils-services/user-service';
@@ -89,7 +95,6 @@ export class SportsPage {
   /*update the date with in real time value, load sport and display them*/
   ngOnInit() {
     this.updateDateLimit();
-    //Check connxion, if it's ok, load and display sports
     if(this.connService.isOnline()) {
       this.loadSports(this.segment);
       this.loadSports('team');
@@ -98,15 +103,12 @@ export class SportsPage {
         this.updateDisplayedSports();
       });
       this.loader.present("Please wait..");
-    }
-    //If not go back to previous page and pop an alert
-    else{
+    } else{
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }
 
-  /*Reload sport after refreshing the page*/
   public doRefresh(refresher) {
     this.loadSports(this.segment);
     refresher.target.complete();
@@ -116,7 +118,6 @@ export class SportsPage {
     this.searching = true;
   }
 
-  /*Load sports to display*/
   public loadSports(segment: string) {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
