@@ -195,7 +195,6 @@ export class StudiesPage {
     if(this.connService.isOnline()) {
       this.studiesService.openSession().then(
         data => {
-          console.log(data);
           this.sessionId = data;
           this.storage.get('adeProject').then(
             (data) => {
@@ -292,86 +291,43 @@ export class StudiesPage {
 
   }
 
-
-  /*Add a course from course program, a prompt is shown for this and the user can add a name*/
-  /*showPromptAddCourse(sigle : string) {
-    let addcourse:string;
-    let message:string;
-    let name:string;
-    let cancel:string;
-    let save:string;
-    this.translateService.get('STUDY.ADDCOURSE2').subscribe((res:string) => {addcourse=res;});
-    this.translateService.get('STUDY.MESSAGE2').subscribe((res:string) => {message=res;});
-    this.translateService.get('STUDY.NAME').subscribe((res:string) => {name=res;});
-    this.translateService.get('STUDY.CANCEL').subscribe((res:string) => {cancel=res;});
-    this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
-    let prompt = this.alertCtrl.create({
-      title: addcourse,
-      cssClass: "alert",
-      message: message,
-      inputs: [
-        {
-          name: 'name',
-          placeholder: name
-        }
-      ],
-      buttons: [
-        {
-          text: cancel,
-          handler: data => {
-          }
-        },
-        {
-          text: save,
-          handler: data => {
-            console.log(data);
-            //this.getNameToAddCourse(data)
-            //let check;
-
-            this.addCourse(sigle, data.name);
-          }
-        }
-      ]
-    });
-    prompt.present();
-  }*/
-
   addCourseFromProgram(acro:string){
-                let check; 
-            let already = false;
-            for(let item of this.listCourses){
-              if(item.acronym === acro) already = true;
-            }
-            if(!already){
-              this.checkExist(acro).then(data2 => {
-                check = data2;
-                if(check.exist){
-                  this.addCourse(acro, check.nameFR);
-                  //this.addCourse(acro,data.name);
-                }
-                else{
-                  this.toastBadCourse();
-                  this.showPrompt();
-                }
-              })
-            }
-            else{
-              this.toastAlreadyCourse();
-            }
+    let already = false;
+    for(let item of this.listCourses){
+      if(item.acronym === acro) already = true;
+    }
+    this.checkCourseExisting(already, acro);
   }
 
-  addCourse(sigle:string, name:string){
-   // let check; 
-    //this.checkExist(sigle).then(data => {
-      //check = data;
+  private checkCourseExisting(already: boolean, acro: string) {
+    let check;
+    if (!already) {
+      this.checkExist(acro).then(data2 => {
+        check = data2;
+        if (check.exist) {
+          this.addCourse(acro, check.nameFR);
+          //this.addCourse(acro,data.name);
+        }
+        else {
+          this.toastBadCourse();
+          this.showPrompt();
+        }
+      });
+    }
+    else {
+      this.toastAlreadyCourse();
+    }
+    return check;
+  }
 
+  async addCourse(sigle:string, name:string){
       this.saveCourse(name, sigle);
-      let toast = this.toastCtrl.create({
+      const toast = await this.toastCtrl.create({
         message: 'Cours ajouté',
         duration: 1000,
         position: 'bottom'
-      }).then(toast => toast.present());
-   // })
+      });
+      return await toast.present();
   }
 
   /*Retrieve list of course added previously in the storage*/
