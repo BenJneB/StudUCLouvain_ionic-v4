@@ -259,11 +259,7 @@ export class EventsPage {
     } else if (this.segment === 'favorites') {
       let favEvents = [];
       this.events.filter((item) => {
-        if(item.favorite || this.user.hasFavorite(item.guid)) {
-          if(item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1) {
-            favEvents.push(item);
-          }
-        }
+        favEvents = this.utilsServices.filterFavoriteItems(item, favEvents, this.searchTerm);
       });
 
       this.displayedEvents = favEvents;
@@ -273,6 +269,7 @@ export class EventsPage {
     this.displayedEventsD = this.changeArray(this.displayedEvents,this.weekUCL);
     this.loader.dismiss();
   }
+
 
   /*Display the modal with the filters and update data with them*/
   async presentFilter() {

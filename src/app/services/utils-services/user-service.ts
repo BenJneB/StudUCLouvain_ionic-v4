@@ -33,7 +33,6 @@ export class UserService {
   campus: string = "";
   slots: Array<{course:string, TP:string, CM:string}> = [];
   fac: string = "";
-  disclaimer:boolean = false;
 
   constructor(
     public eventss: Events,
@@ -45,7 +44,6 @@ export class UserService {
     this.getCampus();
     this.getSlots();
     this.getFac();
-    this.getDisclaimer();
   }
 
   getFavorites(){
@@ -66,17 +64,6 @@ export class UserService {
         this.campus = "";
       } else {
         this.campus=data;
-        }
-    });
-  }
-
-  getDisclaimer(){
-    this.storage.get('disclaimer').then((data) =>
-    {
-      if(data==null){
-        this.disclaimer=false;
-      } else {
-        this.disclaimer=data;
         }
     });
   }
@@ -128,10 +115,6 @@ export class UserService {
     return(this.fac.length > 0);
   }
 
-  hasDisclaimer(){
-    return(this.disclaimer == true);
-  }
-
   hasSlotTP(acronym:string){
     var index = this.slots.findIndex(item => item.course === acronym);
     if(index > -1){
@@ -148,12 +131,6 @@ export class UserService {
     }
     else return index > -1;
   }
-
-  addDisclaimer(discl:boolean){
-    this.disclaimer = discl;
-    this.storage.set('disclaimer',this.disclaimer);
-  }
-
 
   addFavorite(itemGuid: string) {
     this.favorites.push(itemGuid);
@@ -183,10 +160,6 @@ export class UserService {
     }
     this.storage.set('slots',this.slots);
   }
-  removeDisclaimer(discl:boolean){
-    this.disclaimer = false;
-    this.storage.set('disclaimer', this.disclaimer);
-  }
 
   removeFavorite(itemGuid: string) {
     let index = this.favorites.indexOf(itemGuid);
@@ -196,11 +169,11 @@ export class UserService {
     this.storage.set('listFavorites',this.favorites);
   };
 
-  removeCampus(campus: string) {
+  removeCampus() {
     this.campus="";
     this.storage.set('campus',this.campus);
   };
-  removeFac(fac: string) {
+  removeFac() {
     this.fac="";
     this.storage.set('fac',this.fac);
   };
@@ -231,7 +204,4 @@ removeSlot(acronym:string, type:string){
     }
     this.storage.set('slots',this.slots);
   }
-
-
-
 }
