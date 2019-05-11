@@ -34,7 +34,9 @@ import { UserService } from './user-service';
   async addFavorite(slidingItem: IonItemSliding, itemData: any, texts: any, update: () => void) {
          if (this.user.hasFavorite(itemData.guid)) {
             let message: string;
-            this.translateService.get(texts['FAV']).subscribe((res: string) => {message = res;});
+            this.translateService.get(texts['FAV']).subscribe((res: string) => {
+                message = res;
+            });
             this.removeFavorite(
                 slidingItem,
                 itemData,
@@ -49,7 +51,9 @@ import { UserService } from './user-service';
         } else {
             this.user.addFavorite(itemData.guid);
             let message: string;
-            this.translateService.get(texts['FAV2']).subscribe((res: string) => {message = res;});
+            this.translateService.get(texts['FAV2']).subscribe((res: string) => {
+                message = res;
+            });
             const toast = await this.toastCtrl.create({
                 message: message,
                 duration: 3000
@@ -63,9 +67,15 @@ import { UserService } from './user-service';
   /*Remove an event from the favorites*/
     async  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any, update: () => void) {
             let message: string, cancel: string, del: string;
-            this.translateService.get(texts['FAV3']).subscribe((res: string) => {message = res;});
-            this.translateService.get(texts['CANCEL']).subscribe((res: string) => {cancel = res;});
-            this.translateService.get(texts['DEL']).subscribe((res: string) => {del = res;});
+            this.translateService.get(texts['FAV3']).subscribe((res: string) => {
+                message = res;
+            });
+            this.translateService.get(texts['CANCEL']).subscribe((res: string) => {
+                cancel = res;
+            });
+            this.translateService.get(texts['DEL']).subscribe((res: string) => {
+                del = res;
+            });
             const alert = await this.alertCtrl.create({
             header: title,
             message: message,
