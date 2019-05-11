@@ -16,6 +16,7 @@ const routes: Routes = [
   { path: 'mobility', loadChildren: './pages/mobility/mobility.module#MobilityPageModule' },
   { path: 'news', loadChildren: './pages/news/news.module#NewsPageModule' },
   { path: 'news/details', loadChildren: './pages/news/news-details/news-details.module#NewsDetailsPageModule' },
+  { path: 'resto', loadChildren: './pages/restaurant/restaurant.module#RestaurantPageModule' },
   { path: 'settings', loadChildren: './pages/param/param.module#ParamPageModule' },
   { path: 'sports', loadChildren: './pages/sports/sports.module#SportsPageModule' },
   { path: 'studies', loadChildren: './pages/studies/studies.module#StudiesPageModule' },
