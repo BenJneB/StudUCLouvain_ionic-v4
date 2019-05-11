@@ -21,7 +21,7 @@
 
 export class Page {
   title: string;
-  compoenent: string;
+  component: string;
   icon: string;
   iosSchemaName: string;
   androidPackageName: string;
@@ -29,5 +29,6 @@ export class Page {
   httpUrl: string;
 
   constructor(){
+      
   }
 }

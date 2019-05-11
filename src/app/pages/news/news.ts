@@ -138,7 +138,7 @@ export class NewsPage {
 
   /*Remove a fac for a user*/
   removeFac(fac:string){
-    this.userS.removeFac(fac);
+    this.userS.removeFac();
         //this.resize();
   }
 
