@@ -124,12 +124,10 @@ export class SportsPage {
       this.sportsService.getSports(this.segment).then(
         result => {
           this.assignDatas(false, result);
-          this.updateDisplayedSports();
       })
       this.sportsService.getTeams(this.segment).then(
         result => {
           this.assignDatas(true, result);
-          this.updateDisplayedSports();
       })
     } else {
       this.searching = false;
@@ -151,6 +149,7 @@ export class SportsPage {
       this.nosport = this.sports.length == 0;
     }
     this.searching = false;
+    this.updateDisplayedSports();
   }
 
   /*Sort sports BY DAY*/
@@ -231,7 +230,7 @@ export class SportsPage {
     const datas = this.getFiltersData(this.segment === 'team')
     let filters = datas['filters'];
     const excluded = datas['exclude'];
-    if(filters === undefined) {
+    if (filters === undefined) {
       filters = [];
     }
     let modal = await this.modalCtrl.create({
