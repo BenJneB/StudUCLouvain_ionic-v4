@@ -20,7 +20,7 @@
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { IonList, IonContent, NavController, Platform, AlertController,LoadingController } from '@ionic/angular';
+import { IonList, IonContent, NavController, Platform, AlertController } from '@ionic/angular';
 import { FormControl } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { CacheService } from 'ionic-cache';
@@ -98,7 +98,7 @@ export class NewsPage {
       this.cachedOrNot();
       this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
         this.searching = false;
-        this.updateDisplayedNews();
+        this.updateDisplayed();
       });
       //this.presentLoading();
     //}
@@ -164,10 +164,6 @@ export class NewsPage {
     }
   }
 
-  facTabChange(){
-
-  }
-
   /*Tab change*/
   tabChanged(){
     //this.resize();
@@ -201,7 +197,7 @@ export class NewsPage {
         this.news=data.news;
         this.shownNews = data.shownNews;
         this.searching=false;
-        this.updateDisplayedNews();
+        this.updateDisplayed();
       })
       .catch(() => {
         console.log("Oh no! My data is expired or doesn't exist!");
@@ -230,7 +226,7 @@ export class NewsPage {
           this.shownNews = result.shownNews;
           this.searching = false;
           this.nonews = this.news.length == 0;
-          this.updateDisplayedNews();
+          this.updateDisplayed();
       })
     //If no connexion pop an alert and go back to previous page
     } else {
@@ -243,7 +239,7 @@ export class NewsPage {
   }
 
   /*Update display news*/
-  public updateDisplayedNews() {
+  public updateDisplayed() {
     this.searching = true;
     this.displayedNews = this.news;
     this.displayedNews = this.news.filter((item) => {
@@ -253,7 +249,6 @@ export class NewsPage {
     this.nonews = this.shownNews ==0;
     this.searching = false;
     this.loader.dismiss();
-    console.log(this.displayedNews)
   }
 
   /*When click on a news, go to the page with more details*/

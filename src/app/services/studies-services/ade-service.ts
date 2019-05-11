@@ -48,7 +48,7 @@ export class AdeService {
 
   /*Open a session*/
   httpOpenSession() {
-    let encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
+    const encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
     return this.getDataFromADE(encodedURL);
   }
 

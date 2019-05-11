@@ -1,3 +1,4 @@
+import { UtilsService } from './../../services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Daubry Benjamin & Marchesini Bruno
@@ -66,6 +67,13 @@ export class SportsPage {
   loading;
   nosport:any = false;
   noteams:any = false;
+  texts = {
+    'FAV': 'SPORTS.MESSAGEFAV',
+    'FAV2': 'SPORTS.FAVADD',
+    'FAV3': 'SPORTS.MESSAGEFAV2',
+    'CANCEL': 'SPORTS.CANCEL',
+    'DEL': 'SPORTS.DEL',
+  }
 
   constructor(
     public alertCtrl: AlertController,
@@ -77,7 +85,8 @@ export class SportsPage {
     public connService : ConnectivityService,
     private translateService: TranslateService,
     private loader: LoaderService,
-    public navCtrl: NavController)
+    public navCtrl: NavController,
+    private utilsServices: UtilsService)
   {
     this.searchControl = new FormControl();
   }
@@ -183,7 +192,7 @@ export class SportsPage {
     else if (this.segment === 'favorites') { //list of sports put in favorite
       let favSports = [];
       this.sports.filter((item) => {
-        if(item.favorite || this.user.hasFavoriteS(item.guid)) {
+        if(item.favorite || this.user.hasFavorite(item.guid)) {
           if(item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1) {
             favSports.push(item);
           }
@@ -274,58 +283,13 @@ export class SportsPage {
 
   /*Add a sport to favorite, each slot for the day selected*/
   addFavorite(slidingItem: IonItemSliding, itemData: SportItem) {
-    if (this.user.hasFavoriteS(itemData.guid)) {
-      // woops, they already favorited it! What shall we do!?
-      // prompt them to remove it
-      let message:string;
-      this.translateService.get('SPORTS.MESSAGEFAV').subscribe((res:string) => {message=res;});
-      this.removeFavorite(slidingItem, itemData, message);
-    } else {
-      // remember this session as a user favorite
-      this.user.addFavoriteS(itemData.guid);
-      let message:string;
-      this.translateService.get('SPORTS.FAVADD').subscribe((res:string) => {message=res;});
-
-      let toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000
-      }).then(toast => toast.present());
-      slidingItem.close();
-    }
+    console.log(itemData.guid);
+    this.utilsServices.addFavorite(slidingItem, itemData, this.texts, this.updateDisplayedSports.bind(this));
   }
 
   /*Remove a sport of the favorites*/
   removeFavorite(slidingItem: IonItemSliding, itemData: SportItem, title: string) {
-    let message:string;
-    let delet:string;
-    let cancel:string;
-    this.translateService.get('SPORTS.MESSAGEFAV2').subscribe((res:string) => {message=res;});
-    this.translateService.get('SPORTS.CANCEL').subscribe((res:string) => {cancel=res;});
-    this.translateService.get('SPORTS.DEL').subscribe((res:string) => {delet=res;});
-    let alert = this.alertCtrl.create({
-      header: title,
-      message: message,
-      buttons: [
-        {
-          text: cancel,
-          handler: () => {
-            // they clicked the cancel button, do not remove the session
-            // close the sliding item and hide the option buttons
-            slidingItem.close();
-          }
-        },
-        {
-          text: delet,
-          handler: () => {
-            // they want to remove this session from their favorites
-            this.user.removeFavoriteS(itemData.guid);
-            this.updateDisplayedSports();
 
-            // close the sliding item and hide the option buttons
-            slidingItem.close();
-          }
-        }
-      ]
-    }).then(alert => alert.present());
+    this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts, this.updateDisplayedSports.bind(this));
   }
 }

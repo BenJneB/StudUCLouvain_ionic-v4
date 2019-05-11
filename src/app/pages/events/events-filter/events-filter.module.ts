@@ -15,7 +15,7 @@ import { CommonModule } from '@angular/common';
     FormsModule,
   	TranslateModule.forChild(),
   ],
-    entryComponents: [
+  entryComponents: [
       EventsFilterPage
      ]
 })
