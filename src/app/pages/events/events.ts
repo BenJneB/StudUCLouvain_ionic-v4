@@ -259,10 +259,9 @@ export class EventsPage {
     } else if (this.segment === 'favorites') {
       let favEvents = [];
       this.events.filter((item) => {
-        if(item.favorite || this.user.hasFavorite(item.guid)) {
-          if(item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1) {
-            favEvents.push(item);
-          }
+        const fav = this.utilsServices.filterFavoriteItems(item, this.searchTerm);
+        if (fav !== undefined) {
+          favEvents.push(this.utilsServices.filterFavoriteItems(item, this.searchTerm));
         }
       });
 
@@ -273,6 +272,7 @@ export class EventsPage {
     this.displayedEventsD = this.changeArray(this.displayedEvents,this.weekUCL);
     this.loader.dismiss();
   }
+
 
   /*Display the modal with the filters and update data with them*/
   async presentFilter() {

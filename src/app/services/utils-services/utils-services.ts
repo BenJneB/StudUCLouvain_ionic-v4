@@ -173,6 +173,14 @@ import { Device } from '@ionic-native/device/ngx';
         });
     }
 
+    filterFavoriteItems(item: any, searchTerm: string) {
+        if (item.favorite || this.user.hasFavorite(item.guid)) {
+          if (item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+            return item;
+          }
+        }
+      }
+
     private getFilterFields(type: string, index: string, item: any, title: string, date: Date) {
         if (type === 'events') {
             index = item.category;
