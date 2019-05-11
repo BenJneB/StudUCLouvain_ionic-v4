@@ -91,15 +91,27 @@ export class AppComponent {
     const nullSchemas = { ios: null, android: null };
     const nullUrls = { app: null, http: null };
     this.homePage = this.getPageStruct(this.getPageData('HOME', 'home', 'home', nullSchemas, nullUrls));
-    const campusDatas = [
-      this.getPageData('NEWS', 'news', 'news', nullSchemas, nullUrls),
-      this.getPageData('EVENTS', 'events', 'event', nullSchemas, nullUrls),
-      this.getPageData('SPORTS', 'sports', 'sport', nullSchemas, nullUrls),
+    this.getCampusPages(nullSchemas, nullUrls);
+    this.getStudiesPages(nullSchemas, nullUrls);
+    this.getToolsPages(nullSchemas, nullUrls);
+  }
+
+  private getToolsPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
+    const toolData = [
+      this.getPageData('PARTY', 'guindaille', 'g2', nullSchemas, nullUrls),
+      this.getPageData('MAP', 'map', 'cartes', nullSchemas, nullUrls),
+      this.getPageData('RESTAURANT', 'R', 'resto', { ios: 'id1156050719', android: 'com.apptree.resto4u' }, { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }),
+      this.getPageData('MOBILITY', 'mobility', 'mobilité', nullSchemas, nullUrls),
+      this.getPageData('PARAM', 'settings', 'setting', nullSchemas, nullUrls),
+      this.getPageData('CREDITS', 'credit', 'signature', nullSchemas, nullUrls),
     ];
-    this.campusPages = [];
-    for (const page of campusDatas) {
-      this.campusPages.push(this.getPageStruct(page));
+    this.toolPages = [];
+    for (const page of toolData) {
+      this.toolPages.push(this.getPageStruct(page));
     }
+  }
+
+  private getStudiesPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
     const studiesData = [
       this.getPageData('STUDIES', 'studies', 'études', nullSchemas, nullUrls),
       this.getPageData('LIBRARY', 'libraries', 'biblio', nullSchemas, nullUrls),
@@ -109,22 +121,17 @@ export class AppComponent {
     for (const page of studiesData) {
       this.studiePages.push(this.getPageStruct(page));
     }
-    const toolData = [
-      this.getPageData('PARTY', 'guindaille', 'g2', nullSchemas, nullUrls),
-      this.getPageData('MAP', 'map', 'cartes', nullSchemas, nullUrls),
-      this.getPageData(
-        'RESTAURANT',
-        'R', 'resto',
-        { ios: 'id1156050719', android: 'com.apptree.resto4u' },
-        { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }
-      ),
-      this.getPageData('MOBILITY', 'mobility', 'mobilité', nullSchemas, nullUrls),
-      this.getPageData('PARAM', 'settings', 'setting', nullSchemas, nullUrls),
-      this.getPageData('CREDITS', 'credit', 'signature', nullSchemas, nullUrls),
+  }
+
+  private getCampusPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
+    const campusDatas = [
+      this.getPageData('NEWS', 'news', 'news', nullSchemas, nullUrls),
+      this.getPageData('EVENTS', 'events', 'event', nullSchemas, nullUrls),
+      this.getPageData('SPORTS', 'sports', 'sport', nullSchemas, nullUrls),
     ];
-    this.toolPages = [];
-    for (const page of toolData) {
-      this.toolPages.push(this.getPageStruct(page));
+    this.campusPages = [];
+    for (const page of campusDatas) {
+      this.campusPages.push(this.getPageStruct(page));
     }
   }
 
@@ -154,8 +161,11 @@ export class AppComponent {
       this.translateService.setDefaultLang('fr');
      this.user.storage.get('lan').then((data) =>
      {
-       if(data!=null) this.translateService.use(data);
-       else this.translateService.use('fr');
+       if(data!=null) {
+         this.translateService.use(data);
+       } else {
+         this.translateService.use('fr');
+       }
       });
       this.cache.setDefaultTTL(60 * 60 * 2);
       this.cache.setOfflineInvalidate(false);
