@@ -20,11 +20,10 @@
 */
 
 import { Component } from '@angular/core';
-import { NavController, NavParams, IonItemSliding, ToastController, AlertController, ModalController  } from '@ionic/angular';
+import { NavController, NavParams, IonItemSliding, ToastController, ModalController  } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-
+import { UtilsService } from './../../../services/utils-services/utils-services';
 import { UserService } from '../../../services/utils-services/user-service';
-
 import { Calendar } from '@ionic-native/calendar/ngx';
 
 @Component({
@@ -36,25 +35,18 @@ export class HebdoPage {
   schedule : Array<any> = this.navParams.get('schedule');
   shownGroup = null;
 
-  constructor(public navCtrl: NavController,
-              private calendar: Calendar,
-              public toastCtrl: ToastController,
-              public userS:UserService,
-              public modalCtrl: ModalController,
-              private alertCtrl : AlertController,
-              private translateService: TranslateService,
-              public navParams:NavParams)
-  {
-
-    console.log(this.schedule);
-    console.log(new Date("2017-10-17"));
-  }
-
-
-  ngOnInit() {
+  constructor(
+    public navCtrl: NavController,
+    private calendar: Calendar,
+    public toastCtrl: ToastController,
+    public userS:UserService,
+    public modalCtrl: ModalController,
+    private translateService: TranslateService,
+    public navParams:NavParams,
+    private utilsServices: UtilsService
+  ) {
 
   }
-
 
   toggleGroup(group) {
       if (this.isGroupShown(group)) {
@@ -63,7 +55,6 @@ export class HebdoPage {
           this.shownGroup = group;
       }
   }
-
 
   isGroupShown(group) {
       return this.shownGroup === group;
@@ -85,27 +76,6 @@ export class HebdoPage {
         }).then(toast => toast.present());
         slidingItem.close();
     });
-      this.alert();
+      this.utilsServices.alertCourse();
   }
-
-    /*Create and display the alert that say that if a course is add to the calendar if this course is changed, the calendar doesn't take that in account*/
-  alert(){
-    let title:string;
-    let message:string;
-    this.translateService.get('COURSE.WARNING').subscribe((res:string) => {title=res;});
-    this.translateService.get('COURSE.MESSAGE3').subscribe((res:string) => {message=res;});
-         let disclaimerAlert = this.alertCtrl.create({
-            header: title,
-            message: message,
-            buttons: [
-                {
-                    text: "OK",
-                    handler: data => {
-                    }
-                }
-            ]
-        }).then(alert => alert.present());
-  }
-
-
 }
