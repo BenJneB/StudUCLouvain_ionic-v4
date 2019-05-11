@@ -97,31 +97,33 @@ export class AppComponent {
   }
 
   private getToolsPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
-    const toolData = [
-      this.getPageData('PARTY', 'guindaille', 'g2', nullSchemas, nullUrls),
-      this.getPageData('MAP', 'map', 'cartes', nullSchemas, nullUrls),
-      this.getPageData(
-        'RESTAURANT',
-        'R', 'resto',
-        { ios: 'id1156050719', android: 'com.apptree.resto4u' },
-        { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }
-      ),
-      this.getPageData('MOBILITY', 'mobility', 'mobilité', nullSchemas, nullUrls),
-      this.getPageData('PARAM', 'settings', 'setting', nullSchemas, nullUrls),
-      this.getPageData('CREDITS', 'credit', 'signature', nullSchemas, nullUrls),
-    ];
+    const pages = ['guindaille', 'map', 'resto', 'mobility', 'settings', 'credits'];
+    const toolData = [];
+    for (let page of pages) {
+      if (page === 'resto') {
+        toolData.push(this.getPageData(
+          page.toUpperCase(), 
+          page, page, 
+          { ios: 'id1156050719', android: 'com.apptree.resto4u' },
+          { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }
+        ));
+      } else {
+        toolData.push(this.getPageData(page.toUpperCase(), page, page, nullSchemas, nullUrls));
+      }
+    }
     this.toolPages = [];
     for (const page of toolData) {
       this.toolPages.push(this.getPageStruct(page));
     }
   }
+  
 
   private getStudiesPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
-    const studiesData = [
-      this.getPageData('STUDIES', 'studies', 'études', nullSchemas, nullUrls),
-      this.getPageData('LIBRARY', 'libraries', 'biblio', nullSchemas, nullUrls),
-      this.getPageData('HELP', 'support', 'support', nullSchemas, nullUrls),
-    ];
+    const pages = ['studies', 'libraries', 'support'];
+    const studiesData = [];
+    for (let page of pages) {
+      studiesData.push( this.getPageData(page.toUpperCase(), page, page, nullSchemas, nullUrls),)
+    }
     this.studiePages = [];
     for (const page of studiesData) {
       this.studiePages.push(this.getPageStruct(page));
@@ -129,11 +131,11 @@ export class AppComponent {
   }
 
   private getCampusPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
-    const campusDatas = [
-      this.getPageData('NEWS', 'news', 'news', nullSchemas, nullUrls),
-      this.getPageData('EVENTS', 'events', 'event', nullSchemas, nullUrls),
-      this.getPageData('SPORTS', 'sports', 'sport', nullSchemas, nullUrls),
-    ];
+    const pages = ['news', 'events', 'sports'];
+    const campusDatas = [];
+    for (let page of pages) {
+      campusDatas.push( this.getPageData(page.toUpperCase(), page, page, nullSchemas, nullUrls),)
+    }
     this.campusPages = [];
     for (const page of campusDatas) {
       this.campusPages.push(this.getPageStruct(page));
