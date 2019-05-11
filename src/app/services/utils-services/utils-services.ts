@@ -54,29 +54,37 @@ import { UserService } from './user-service';
             this.translateService.get(texts['FAV2']).subscribe((res: string) => {
                 message = res;
             });
-            const toast = await this.toastCtrl.create({
-                message: message,
-                duration: 3000
-            });
-            await toast.present();
-            await slidingItem.close();
+            await this.presentToast(message, slidingItem);
         }
     }
 
 
+    private async presentToast(message: string, slidingItem: IonItemSliding) {
+        const toast = await this.toastCtrl.create({
+            message: message,
+            duration: 3000
+        });
+        await toast.present();
+        await slidingItem.close();
+    }
+
   /*Remove an event from the favorites*/
     async  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any, update: () => void) {
-            let message: string, cancel: string, del: string;
-            this.translateService.get(texts['FAV3']).subscribe((res: string) => {
-                message = res;
-            });
-            this.translateService.get(texts['CANCEL']).subscribe((res: string) => {
-                cancel = res;
-            });
-            this.translateService.get(texts['DEL']).subscribe((res: string) => {
-                del = res;
-            });
-            const alert = await this.alertCtrl.create({
+        let message: string, cancel: string, del: string;
+        this.translateService.get(texts['FAV3']).subscribe((res: string) => {
+            message = res;
+        });
+        this.translateService.get(texts['CANCEL']).subscribe((res: string) => {
+            cancel = res;
+        });
+        this.translateService.get(texts['DEL']).subscribe((res: string) => {
+            del = res;
+        });
+        return await this.presentAlert(title, message, cancel, slidingItem, del, itemData, update);
+    }
+
+    private async presentAlert(title: string, message: string, cancel: string, slidingItem: IonItemSliding, del: string, itemData: any, update: () => void) {
+        const alert = await this.alertCtrl.create({
             header: title,
             message: message,
             buttons: [
