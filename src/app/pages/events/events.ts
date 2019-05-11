@@ -255,10 +255,7 @@ export class EventsPage {
     this.eventsList && this.eventsList.closeSlidingItems();
 
     if (this.segment === 'all') {
-      this.displayedEvents = this.events.filter((item) => {
-        return ( this.excludedFilters.indexOf(item.category) < 0 ) && (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-            && (Math.floor(item.startDate.getTime()/86400000) <= Math.floor(this.dateLimit.getTime()/86400000));
-      })
+      this.displayedEvents = this.utilsServices.filterItems('events', this.events, this.excludedFilters, this.dateLimit, this.searchTerm);
     } else if (this.segment === 'favorites') {
       let favEvents = [];
       this.events.filter((item) => {

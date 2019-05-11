@@ -211,10 +211,7 @@ export class SportsPage {
   }
 
   private filterDisplayedSports(items: Array<SportItem>) {
-    this.displayedSports = items.filter((item) => {
-      return (this.excludedFilters.indexOf(item.sport) < 0) && (item.sport.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1)
-        && (Math.floor(item.date.getTime() / 86400000) <= Math.floor(this.dateLimit.getTime() / 86400000));
-    });
+    this.displayedSports = this.utilsServices.filterItems('sport', items, this.excludedFilters, this.dateLimit, this.searchTerm);
   }
 
   /*Display a modal to select as filter only the sports that the user want to see*/
@@ -270,7 +267,6 @@ export class SportsPage {
     let options:any = {
       firstReminderMinutes:30
     };
-
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
       itemData.salle, itemData.date, itemData.hfin, options).then(() => {
         let toast = this.toastCtrl.create({
@@ -288,7 +284,6 @@ export class SportsPage {
 
   /*Remove a sport of the favorites*/
   removeFavorite(slidingItem: IonItemSliding, itemData: SportItem, title: string) {
-
     this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts, this.updateDisplayedSports.bind(this));
   }
 }
