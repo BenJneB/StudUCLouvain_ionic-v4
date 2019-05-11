@@ -85,27 +85,6 @@ export class AppComponent {
     private nav: NavController
   ) {
     this.initializeApp();
-    platform.ready().then(() => {
-    	 this.wso2Service.getToken();
-      translateService.setDefaultLang('fr');
-      this.user.storage.get('lan').then((data) =>
-      {
-        if(data!=null) translateService.use(data);
-        else translateService.use('fr');
-       });
-      cache.setDefaultTTL(60 * 60 * 2);
-      cache.setOfflineInvalidate(false);
-      //this.user.storage.set('first',null);
-      this.user.storage.get('first').then((data) =>
-      {
-      	if(data==null) {
-      		this.rootPage = 'TutoPage';
-      		this.user.storage.set('first',false);
-      	}
-      	else this.rootPage = 'HomePage';
-      })
-
-    })
   }
 
   private getAllPages() {
@@ -133,7 +112,12 @@ export class AppComponent {
     const toolData = [
       this.getPageData('PARTY', 'guindaille', 'g2', nullSchemas, nullUrls),
       this.getPageData('MAP', 'map', 'cartes', nullSchemas, nullUrls),
-      this.getPageData('RESTAURANT', 'R', 'resto', { ios: 'id1156050719', android: 'com.apptree.resto4u' }, { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }),
+      this.getPageData(
+        'RESTAURANT',
+        'R', 'resto',
+        { ios: 'id1156050719', android: 'com.apptree.resto4u' },
+        { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }
+      ),
       this.getPageData('MOBILITY', 'mobility', 'mobilité', nullSchemas, nullUrls),
       this.getPageData('PARAM', 'settings', 'setting', nullSchemas, nullUrls),
       this.getPageData('CREDITS', 'credit', 'signature', nullSchemas, nullUrls),
@@ -165,6 +149,26 @@ export class AppComponent {
       this.statusBar.styleDefault();
     });
     this.getAllPages();
+    this.platform.ready().then(() => {
+      this.wso2Service.getToken();
+      this.translateService.setDefaultLang('fr');
+     this.user.storage.get('lan').then((data) =>
+     {
+       if(data!=null) this.translateService.use(data);
+       else this.translateService.use('fr');
+      });
+      this.cache.setDefaultTTL(60 * 60 * 2);
+      this.cache.setOfflineInvalidate(false);
+     //this.user.storage.set('first',null);
+     this.user.storage.get('first').then((data) =>
+     {
+       if(data==null) {
+         this.rootPage = 'TutoPage';
+         this.user.storage.set('first',false);
+       }
+       else this.rootPage = 'HomePage';
+     })
+   })
   }
 
   async getElementToClose(element: any){

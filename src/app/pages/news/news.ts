@@ -144,12 +144,11 @@ export class NewsPage {
 
   /*Reload news if pull bellow the view*/
   public doRefresh(refresher) {
-    const doRefresh = this.segment ==='univ' 
-    || (
+    const doRefresh = this.segment ==='univ' || (
       this.segment === 'fac' && this.facsegment ==='news' && this.userS.hasFac()
     );
     if(this.connService.isOnline()) {
-      if(doRefresh) {
+      if (doRefresh) {
         if(this.segment==='univ'){
           let part = this.subsegment;
           let key;

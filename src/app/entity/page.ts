@@ -28,7 +28,7 @@ export class Page {
   appUrl: string;
   httpUrl: string;
 
-  constructor(){
+  constructor() {
 
   }
 }
