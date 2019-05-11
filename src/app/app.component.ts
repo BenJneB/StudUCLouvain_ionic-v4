@@ -96,55 +96,50 @@ export class AppComponent {
     this.initializeApp();
     const nullSchemas = { ios: null, android: null };
     const nullUrls = { app: null, http: null };
-    this.homePage = this.getPageData({
-      title: 'HOME', 
-      route: 'home', 
-      icon: 'home', 
-      schemas: nullSchemas, 
-      urls: nullUrls
-    });
+    this.homePage = this.getPageStruct(this.getPageData('HOME', 'home', 'home', nullSchemas, nullUrls))
+
     const campusDatas = [
-      { title: 'NEWS', route: 'news', icon: 'news', schemas: nullSchemas, urls: nullUrls },
-      { title: 'EVENTS', route: 'events', icon: 'event', schemas: nullSchemas, urls: nullUrls },
-      { title: 'SPORTS', route: 'sports', icon: 'sport', schemas: nullSchemas, urls: nullUrls },
+      this.getPageData('NEWS', 'news', 'news', nullSchemas, nullUrls),
+      this.getPageData('EVENTS', 'events', 'event', nullSchemas, nullUrls),
+      this.getPageData('SPORTS', 'sports', 'sport', nullSchemas, nullUrls),
     ]
     this.campusPages = [];
     for (let page of campusDatas){
       this.campusPages.push(
-        this.getPageData(page)
+        this.getPageStruct(page)
       )
     }
 
     const studiesData = [
-      { title: 'STUDIES', route: 'studies', icon: 'études', schemas: nullSchemas, urls: nullUrls },
-      { title: 'LIBRARIES', route: 'libraries', icon: 'biblio', schemas: nullSchemas, urls: nullUrls },
-      { title: 'HELP', route: 'support', icon: 'support', schemas: nullSchemas, urls: nullUrls },
+      this.getPageData('STUDIES', 'studies', 'études', nullSchemas, nullUrls),
+      this.getPageData('LIBRARY', 'libraries', 'biblio', nullSchemas, nullUrls),
+      this.getPageData('HELP', 'support', 'support', nullSchemas, nullUrls),
     ]
     this.studiePages = [];
     for (let page of studiesData){
       this.studiePages.push(
-        this.getPageData(page)
+        this.getPageStruct(page)
       )
     }
 
     const toolData = [
-      { title: 'PARTY', route: 'guindaille', icon: 'g2', schemas: nullSchemas, urls: nullUrls },
-      { title: 'MAP', route: 'map', icon: 'cartes', schemas: nullSchemas, urls: nullUrls },
-      { 
-        title: 'RESTAURANT', 
-        route: 'R', 
-        icon: 'resto', 
-        schemas: { ios: 'id1156050719', android: 'com.apptree.resto4u' }, 
-        urls: { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' } 
-      },
-      { title: 'MOBILITY', route: 'mobility', icon: 'mobilité', schemas: nullSchemas, urls: nullUrls },
-      { title: 'PARAM', route: 'settings', icon: 'setting', schemas: nullSchemas, urls: nullUrls },
-      { title: 'CREDITS', route: 'credit', icon: 'signature', schemas: nullSchemas, urls: nullUrls },
+      this.getPageData('PARTY', 'guindaille', 'g2', nullSchemas, nullUrls),
+      this.getPageData('MAP', 'map', 'cartes', nullSchemas, nullUrls),
+      this.getPageData(
+        'RESTAURANT', 
+        'R', 
+        'resto', 
+        { ios: 'id1156050719', android: 'com.apptree.resto4u' }, 
+        { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }
+      ),
+      this.getPageData('MOBILITY', 'mobility', 'mobilité', nullSchemas, nullUrls),
+      this.getPageData('PARAM', 'settings', 'setting', nullSchemas, nullUrls),
+      this.getPageData('CREDITS', 'credit', 'signature', nullSchemas, nullUrls),
     ]
     this.toolPages = [];
     for (let page of toolData){
       this.toolPages.push(
-        this.getPageData(page)
+        this.getPageStruct(page)
       )
     }
 
@@ -171,7 +166,11 @@ export class AppComponent {
     })
   }
 
-  private getPageData(page: any) {
+  private getPageData(title: string, route: string, icon: string, nullSchemas: any, nullUrls: any) {
+    return { title: title, route: route, icon: icon, schemas: nullSchemas, urls: nullUrls };
+  }
+
+  private getPageStruct(page: any) {
     return {
       title: 'MENU.' + page['title'],
       component: '/' + page['route'], 
