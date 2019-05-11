@@ -123,15 +123,15 @@ import { Device } from '@ionic-native/device/ngx';
         });
     }
 
-    launchExternalApp(page:any) {
+    launchExternalApp(page: any) {
         let app: string;
-        let check:string;
+        let check: string;
         if (this.device.platform === 'iOS') {
           app = page.iosSchemaName;
-          check=page.appUrl;
+          check = page.appUrl;
         } else if (this.device.platform === 'Android') {
           app = page.androidPackageName;
-          check=app;
+          check = app;
         } else {
           const browser = this.iab.create(page.httpUrl, '_system');
           browser.close();
