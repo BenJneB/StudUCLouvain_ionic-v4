@@ -29,6 +29,6 @@ export class Page {
   httpUrl: string;
 
   constructor(){
-      
+
   }
 }

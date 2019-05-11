@@ -84,11 +84,7 @@ export class AppComponent {
     private toast: Toast,
     private nav: NavController
   ) {
-    this.user.getCampus();
-    this.alertPresented = false;
     this.initializeApp();
-    this.getAllPages();
-
     platform.ready().then(() => {
     	 this.wso2Service.getToken();
       translateService.setDefaultLang('fr');
@@ -163,9 +159,12 @@ export class AppComponent {
   }
 
   initializeApp() {
+    this.user.getCampus();
+    this.alertPresented = false;
     this.platform.ready().then(() => {
       this.statusBar.styleDefault();
     });
+    this.getAllPages();
   }
 
   async getElementToClose(element: any){
