@@ -25,14 +25,10 @@ import { AlertController, IonItemSliding, IonList,
   ModalController, ToastController, NavController} from '@ionic/angular';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { FormControl } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-
-
 import { UserService } from '../../services/utils-services/user-service';
 import { SportsService } from '../../services/rss-services/sports-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
-
 import { SportItem } from '../../entity/sportItem';
 import { debounceTime } from 'rxjs/operators';
 import { SportsFilterPage } from './sports-filter/sports-filter';
@@ -83,7 +79,6 @@ export class SportsPage {
     public toastCtrl: ToastController,
     private calendar: Calendar,
     public connService : ConnectivityService,
-    private translateService: TranslateService,
     private loader: LoaderService,
     public navCtrl: NavController,
     private utilsServices: UtilsService)
@@ -96,13 +91,13 @@ export class SportsPage {
     this.updateDateLimit();
     //Check connxion, if it's ok, load and display sports
     if(this.connService.isOnline()) {
-      this.loadSports();
+      this.loadSports(this.segment);
+      this.loadSports('team');
       this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
         this.searching = false;
         this.updateDisplayedSports();
       });
       this.loader.present("Please wait..");
-      //this.nosport=true;
     }
     //If not go back to previous page and pop an alert
     else{
@@ -113,7 +108,7 @@ export class SportsPage {
 
   /*Reload sport after refreshing the page*/
   public doRefresh(refresher) {
-    this.loadSports();
+    this.loadSports(this.segment);
     refresher.target.complete();
   }
 
@@ -122,36 +117,32 @@ export class SportsPage {
   }
 
   /*Load sports to display*/
-  public loadSports() {
+  public loadSports(segment: string) {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
-    //Check the connexion, if it's ok, load them else return to previous page and display an alert
     if(this.connService.isOnline()) {
-      //get sports for all students
-      this.sportsService.getSports(this.segment).then(
+      this.sportsService.getSports(segment).then(
         result => {
-          this.sports = result.sports;
-          this.shownSports = result.shownSports;
-          this.filters = result.categories;
-          this.searching = false;
-          this.nosport = this.sports.length == 0;
-          this.updateDisplayedSports();
-      })
-      this.sportsService.getTeams(this.segment).then(
-        result => {
-          this.teams = result.teams;
-          this.shownTeams = result.shownTeams;
-          this.filtersT = result.categoriesT;
-          this.searching = false;          
-          this.noteams = this.teams.length == 0;
-          this.updateDisplayedSports();
+          this.assignDatas(
+            segment == 'team' ? true : false, 
+            result
+          );
       })
     } else {
       this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
+  }
+
+  private assignDatas(isTeam: boolean, result: any) {
+      isTeam ? this.teams = result.sports : this.sports = result.sports;
+      isTeam ? this.shownTeams = result.shownSports : this.shownSports = result.shownSports;
+      isTeam ? this.filtersT = result.categories : this.filters = result.categories;
+      isTeam ? this.noteams = result.sports.length == 0 : this.nosport = result.sports.length == 0;
+    this.searching = false;
+    this.updateDisplayedSports();
   }
 
   /*Sort sports BY DAY*/
@@ -185,9 +176,9 @@ export class SportsPage {
   public updateDisplayedSports() {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
-
-    if (this.segment === 'all') { //List of sports for all students
-      this.filterDisplayedSports(this.sports);
+    const callFilter = this.segment === 'all' || this.segment === 'team';
+    if (callFilter == true) { //List of sports for all students
+      this.displayedSports = this.filterDisplayedSports(this.sports, this.excludedFilters);
     }
     else if (this.segment === 'favorites') { //list of sports put in favorite
       let favSports = [];
@@ -200,9 +191,6 @@ export class SportsPage {
       });
       this.displayedSports = favSports;
     }
-    else if (this.segment === 'team') { //List of sports for university teams
-      this.filterDisplayedSports(this.teams);
-    }
 
     this.shownSports = this.displayedSports.length;
     this.searching = false;
@@ -210,36 +198,36 @@ export class SportsPage {
     this.loader.dismiss();
   }
 
-  private filterDisplayedSports(items: Array<SportItem>) {
-    this.displayedSports = this.utilsServices.filterItems('sport', items, this.excludedFilters, this.dateLimit, this.searchTerm);
+  private filterDisplayedSports(items: Array<SportItem>, excluded: any) {
+    return this.utilsServices.filterItems('sport', items, excluded, this.dateLimit, this.searchTerm);
   }
 
+  private getFiltersData(isTeam: boolean){
+    if (isTeam == true) {
+      return {
+        filters: this.filtersT,
+        exclude: this.excludedFiltersT
+      }
+    } else {
+      return {
+        filters: this.filters,
+        exclude: this.excludedFilters
+      }
+    }
+  }
   /*Display a modal to select as filter only the sports that the user want to see*/
   async presentFilter() {
-    if(this.filters === undefined){
-      this.filters = [];
+    const datas = this.getFiltersData(this.segment === 'team')
+    let filters = datas['filters'];
+    const excluded = datas['exclude'];
+    if (filters === undefined) {
+      filters = [];
     }
-    if(this.filtersT === undefined){
-      this.filtersT = [];
-    }
-    let cat;
-    let exclude;
-    if(this.segment === 'all'){
-      cat = this.filters;
-      exclude = this.excludedFilters;
-    }
-    if(this.segment === 'team'){ 
-      cat = this.filtersT;
-      exclude = this.excludedFiltersT;
-    }
-    //Create a modal in which the filter will be by the SportsFilterPage
-    let modal = await this.modalCtrl.create(
-      {
+    let modal = await this.modalCtrl.create({
         component: SportsFilterPage,
-        componentProps: { excludedFilters : exclude, filters : cat, dateRange : this.dateRange}
-      })
-      await modal.present();
-    //Applied changing of date range when dismiss the modal
+        componentProps: { excludedFilters : excluded, filters : filters, dateRange : this.dateRange}
+    })
+    await modal.present();
     await modal.onDidDismiss().then((data) => {
       if (data) {
         data = data.data;

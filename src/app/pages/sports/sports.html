@@ -97,6 +97,9 @@
   </ion-list-header>
 </ion-content>
 
-<ion-footer text-center *ngIf="segment=='all' || segment=='team'">
-  <ion-icon name='help-circle'></ion-icon><p style="color:white">{{'SPORTS.SWIPE' | translate}}</p>
+<ion-footer style="opacity: 0.5" text-center *ngIf="segment=='all' || segment=='team'">
+  <ion-toolbar color="sport">
+    <ion-icon name='help-circle'></ion-icon>
+    <ion-title>{{'SPORTS.SWIPE' | translate}}</ion-title>
+  </ion-toolbar>
 </ion-footer>
