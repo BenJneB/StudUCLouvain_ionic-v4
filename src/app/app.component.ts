@@ -35,9 +35,6 @@ import { CacheService } from "ionic-cache";
 import { Router } from '@angular/router';
 import { Toast } from '@ionic-native/toast/ngx';
 
-
-//declare var TestFairy: any;
-
 @Component({
   selector: 'app-root',
   templateUrl: 'app.component.html'
@@ -45,24 +42,36 @@ import { Toast } from '@ionic-native/toast/ngx';
 
 
 export class AppComponent {
-  rootPage ='';// = 'HomePage';
+  rootPage = '';
   alertPresented: any;
   page: any;
   homePage;
   checked=false;
   lastTimeBackPress = 0;
-    timePeriodToExit = 2000;
-    @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
+  timePeriodToExit = 2000;
+  @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
 
-  campusPages: Array<{title: string, component: any, icon: any,
+  campusPages: Array<{
+    title: string,
+    component: string, 
+    icon: string,
     iosSchemaName: string, androidPackageName: string,
-    appUrl: string, httpUrl: string}>;
-  studiePages: Array<{title: string, component: any, icon: any,
+    appUrl: string, httpUrl: string
+  }>;
+  studiePages: Array<{
+    title: string,
+    component: string, 
+    icon: string,
     iosSchemaName: string, androidPackageName: string,
-    appUrl: string, httpUrl: string}>;
-  toolPages: Array<{title: string, component: any, icon: any,
+    appUrl: string, httpUrl: string
+  }>;
+  toolPages: Array<{
+    title: string,
+    component: string, 
+    icon: string,
     iosSchemaName: string, androidPackageName: string,
-    appUrl: string, httpUrl: string}>;
+    appUrl: string, httpUrl: string
+  }>;
 
   constructor(public platform: Platform,
     public menu: MenuController,
@@ -70,7 +79,6 @@ export class AppComponent {
     private appAvailability : AppAvailability,
     private iab: InAppBrowser,
     private device: Device,
-    private alertCtrl : AlertController,
     private popoverCtrl: PopoverController,
     private user: UserService,
     private statusBar: StatusBar,
@@ -88,58 +96,30 @@ export class AppComponent {
     this.alertPresented = false;
     this.initializeApp();
 
-    this.homePage =
-      {title: 'MENU.HOME', component: 'HomePage', icon: "./assets/img/home.png",
-      iosSchemaName: null, androidPackageName: null,
-      appUrl: null, httpUrl: null}
-    ;
-    this.campusPages =[
-      { title: 'MENU.NEWS', component: '/news', icon: "./assets/img/news.png",
-        iosSchemaName: null, androidPackageName: null,
-        appUrl: null, httpUrl: null },
-      { title: 'MENU.EVENTS', component: '/events', icon: "./assets/img/event.png",
-        iosSchemaName: null, androidPackageName: null,
-        appUrl: null, httpUrl: null  },
-      { title: 'MENU.SPORTS', component: '/sports', icon: "./assets/img/sport.png",
-        iosSchemaName: null, androidPackageName: null,
-        appUrl: null, httpUrl: null  },
-
+    this.homePage = this.getPageData('MENU.HOME', '/home', './assets/img/home.png', { ios: null, android: null }, { app: null, http: null });
+    this.campusPages = [
+      this.getPageData('MENU.NEWS', '/news', './assets/img/news.png', { ios: null, android: null }, { app: null, http: null }),
+      this.getPageData('MENU.EVENTS', '/events', './assets/img/event.png', { ios: null, android: null }, { app: null, http: null }),
+      this.getPageData('MENU.SPORTS', '/sports', './assets/img/sport.png', { ios: null, android: null }, { app: null, http: null }),
     ];
-    this.studiePages =[
-      { title: 'MENU.STUDIES', component: '/studies', icon: "./assets/img/études.png",
-        iosSchemaName: null, androidPackageName: null,
-        appUrl: null, httpUrl: null  },
-      { title: 'MENU.LIBRARY', component: '/libraries', icon: "./assets/img/biblio.png",
-        iosSchemaName: null, androidPackageName: null,
-        appUrl: null, httpUrl: null  },
-      { title: 'MENU.HELP', component: '/support',
-        icon: "./assets/img/support.png", iosSchemaName: null,
-        androidPackageName: null, appUrl: null, httpUrl: null }
+    this.studiePages = [
+      this.getPageData('MENU.STUDIES', '/studies', './assets/img/études.png', { ios: null, android: null }, { app: null, http: null }),
+      this.getPageData('MENU.LIBRARIES', '/libraries', './assets/img/biblio.png', { ios: null, android: null }, { app: null, http: null }),
+      this.getPageData('MENU.HELP', '/support', './assets/img/support.png', { ios: null, android: null }, { app: null, http: null }),
     ];
-    this.toolPages =[
-      { title: 'MENU.PARTY', component: '/guindaille', icon: "./assets/img/g2.png",
-        iosSchemaName: null, androidPackageName: null,
-        appUrl: null, httpUrl: null  },
-      { title: 'MENU.MAP', component: '/map', icon: "./assets/img/cartes.png",
-        iosSchemaName: null, androidPackageName: null,
-        appUrl: null, httpUrl: null  },
-      { title: 'MENU.RESTAURANT', component: 'RestaurantPage', icon : "./assets/img/resto.png",
-        iosSchemaName: 'id1156050719',
-        androidPackageName: 'com.apptree.resto4u',
-        appUrl: 'apptreeresto4u://',
-        httpUrl: 'https://uclouvain.be/fr/decouvrir/resto-u' },
-      { title: 'MENU.MOBILITY', component: '/mobility', icon : "./assets/img/mobilité.png",
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null, httpUrl: null },
-      { title: 'MENU.PARAM', component: '/settings', icon : "./assets/img/setting.png",
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null, httpUrl: null },
-      { title: 'MENU.CREDITS', component: '/credit', icon : "./assets/img/signature.png",
-        iosSchemaName: null,
-        androidPackageName: null,
-        appUrl: null, httpUrl: null }
+    this.toolPages = [
+      this.getPageData('MENU.PARTY', '/guindaille', './assets/img/g2.png', { ios: null, android: null }, { app: null, http: null }),
+      this.getPageData('MENU.MAP', '/map', './assets/img/cartes.png', { ios: null, android: null }, { app: null, http: null }),
+      this.getPageData(
+        'MENU.RESTAURANT',
+        'R', 
+        './assets/img/resto.png', 
+        { ios: 'id1156050719', android: 'com.apptree.resto4u' }, 
+        { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }
+      ),
+      this.getPageData('MENU.MOBILITY', '/mobility', './assets/img/mobilité.png', { ios: null, android: null }, { app: null, http: null }),
+      this.getPageData('MENU.PARAM', '/settings', './assets/img/setting.png', { ios: null, android: null }, { app: null, http: null }),
+      this.getPageData('MENU.CREDITS', '/credit', './assets/img/signature.png', { ios: null, android: null }, { app: null, http: null }),
     ];
     platform.ready().then(() => {
     	 this.wso2Service.getToken();
@@ -162,6 +142,16 @@ export class AppComponent {
       })
 
     })
+  }
+
+  private getPageData(title: string, route: string, icon: string, schemas: any, urls: any) {
+    return {
+      title: title,
+      component: route, 
+      icon: icon,
+      iosSchemaName: schemas['ios'], androidPackageName: schemas['android'],
+      appUrl: urls['app'], httpUrl: urls['http']
+    };
   }
 
   initializeApp() {
