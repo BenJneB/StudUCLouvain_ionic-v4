@@ -120,9 +120,7 @@ export class SportsPage {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
-    //Check the connexion, if it's ok, load them else return to previous page and display an alert
     if(this.connService.isOnline()) {
-      //get sports for all students
       this.sportsService.getSports(this.segment).then(
         result => {
           this.assignDatas(false, result);
@@ -231,8 +229,9 @@ export class SportsPage {
   /*Display a modal to select as filter only the sports that the user want to see*/
   async presentFilter() {
     const datas = this.getFiltersData(this.segment === 'team')
-    let filters = datas['filters'],  excluded = datas['exclude'];
-    if(filters === undefined){
+    let filters = datas['filters'];
+    const excluded = datas['exclude'];
+    if(filters === undefined) {
       filters = [];
     }
     let modal = await this.modalCtrl.create({
