@@ -164,7 +164,7 @@ import { Device } from '@ionic-native/device/ngx';
         return await disclaimerAlert.present();
     }
 
-    filterItems(type:string, items: Array<any>, excluded: Array<any>, dateLimit: Date, search: string) {
+    filterItems(type: string, items: Array<any>, excluded: Array<any>, dateLimit: Date, search: string) {
         let index: string, title: string, date: Date;
         return items.filter((item) => {
             ({ index, title, date } = this.getFilterFields(type, index, item, title, date));
@@ -178,8 +178,7 @@ import { Device } from '@ionic-native/device/ngx';
             index = item.category;
             title = item.title;
             date = item.startDate;
-        }
-        else {
+        } else {
             index = item.sport;
             title = item.sport;
             date = item.date;
