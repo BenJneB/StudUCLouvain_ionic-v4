@@ -25,14 +25,10 @@ import { AlertController, IonItemSliding, IonList,
   ModalController, ToastController, NavController} from '@ionic/angular';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { FormControl } from '@angular/forms';
-import { TranslateService } from '@ngx-translate/core';
-
-
 import { UserService } from '../../services/utils-services/user-service';
 import { SportsService } from '../../services/rss-services/sports-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
-
 import { SportItem } from '../../entity/sportItem';
 import { debounceTime } from 'rxjs/operators';
 import { SportsFilterPage } from './sports-filter/sports-filter';
@@ -83,7 +79,6 @@ export class SportsPage {
     public toastCtrl: ToastController,
     private calendar: Calendar,
     public connService : ConnectivityService,
-    private translateService: TranslateService,
     private loader: LoaderService,
     public navCtrl: NavController,
     private utilsServices: UtilsService)
@@ -131,20 +126,12 @@ export class SportsPage {
       //get sports for all students
       this.sportsService.getSports(this.segment).then(
         result => {
-          this.sports = result.sports;
-          this.shownSports = result.shownSports;
-          this.filters = result.categories;
-          this.searching = false;
-          this.nosport = this.sports.length == 0;
+          this.assignDatas(false, result);
           this.updateDisplayedSports();
       })
       this.sportsService.getTeams(this.segment).then(
         result => {
-          this.teams = result.teams;
-          this.shownTeams = result.shownTeams;
-          this.filtersT = result.categoriesT;
-          this.searching = false;          
-          this.noteams = this.teams.length == 0;
+          this.assignDatas(true, result);
           this.updateDisplayedSports();
       })
     } else {
@@ -152,6 +139,21 @@ export class SportsPage {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
+  }
+
+  private assignDatas(isTeam: boolean, result: any) {
+    if (isTeam == true) {
+      this.teams = result.sports;
+      this.shownTeams = result.shownSports;
+      this.filtersT = result.categories;
+    } else {
+      this.sports = result.sports;
+      this.shownSports = result.shownSports;
+      this.filters = result.categories;
+    }
+    this.searching = false;
+    if (isTeam == true) this.noteams = this.sports.length == 0;
+    else this.nosport = this.sports.length == 0;
   }
 
   /*Sort sports BY DAY*/

@@ -115,9 +115,9 @@ export class SportsService {
     return this.rssService.load(this.urlT, true).then(result => {
       this.extractSports(result, false);
       return {
-        teams: this.teams,
-        shownTeams: this.shownTeams,
-        categoriesT: this.allCategoriesT
+        sports: this.teams,
+        shownSports: this.shownTeams,
+        categories: this.allCategoriesT
       }
     }) 
     .catch(error => {
