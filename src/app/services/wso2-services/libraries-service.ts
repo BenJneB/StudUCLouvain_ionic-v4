@@ -81,48 +81,34 @@ export class LibrariesService {
     } else {
       lib.locationId = data.locationId;
     }
-
     if ( data.mapLocation == null ) {
       lib.mapLocation = new MapLocation(lib.name,"","","","");
     } else {
       lib.mapLocation = new MapLocation(lib.name, data.address.street + ", " + data.address.postalCode + ", " + data.address.locality, "","",""); //TODO update maplocation with lat lng code
     }
-
     if ( data.phone == null ) {
       lib.phone = "";
     } else {
       lib.phone = data.phone.substr(3);
     }
-
     if ( data.email == null ) {
       lib.email = false;
     } else {
       lib.email = data.email;
     }
-
-
     if ( data.website == null ) {
       lib.website = "";
     } else {
       lib.website = data.website;
     }
-
     if(data.openingHours) {
-      for( let i=0; i < data.openingHours.length; i++) {
-        lib.openingHours.push(new TimeSlot(data.openingHours[i].day, data.openingHours[i].startHour, data.openingHours[i].endHour));
-      }
+      this.getOpeningHours(data.openingHours, lib.openingHours);
     }
-
     if(data.openingExaminationHours) {
-      for( let i=0; i < data.openingExaminationHours.length; i++) {
-        lib.openingExaminationHours.push(new TimeSlot(data.openingExaminationHours[i].day, data.openingExaminationHours[i].startHour, data.openingExaminationHours[i].endHour));
-      }
+      this.getOpeningHours(data.openingExaminationHours, lib.openingExaminationHours);
     }
-
     if(data.openingSummerHours) {
-      for( let i=0; i < data.openingSummerHours.length; i++) {
-        lib.openingSummerHours.push(new TimeSlot(data.openingSummerHours[i].day, data.openingSummerHours[i].startHour, data.openingSummerHours[i].endHour));
-      }
+      this.getOpeningHours(data.openingSummerHours, lib.openingSummerHours);
     }
 
     lib.openingHoursNote = data.openingHoursNote;
@@ -133,5 +119,11 @@ export class LibrariesService {
       lib.closedDates = data.closedDates;
     }
     return lib;
+  }
+
+  private getOpeningHours(data: any, lib: Array<TimeSlot>) {
+    for (let i = 0; i < data.length; i++) {
+      lib.push(new TimeSlot(data[i].day, data[i].startHour, data[i].endHour));
+    }
   }
 }
