@@ -1,3 +1,4 @@
+import { UtilsService } from './../../services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -64,9 +65,15 @@ export class EventsPage {
   year = this.now.getFullYear();
   noevents:any =false;
   displayedEventsD : any = [];
-
+  
   weekUCL = 5;
-
+  texts = {
+    'FAV': 'EVENTS.MESSAGEFAV',
+    'FAV2': 'EVENTS.MESSAGEFAV2',
+    'FAV3': 'EVENTS.MESSAGEFAV3',
+    'CANCEL': 'EVENTS.CANCEL',
+    'DEL': 'EVENTS.DEL',
+  }
   constructor(
     public alertCtrl: AlertController,
     private navCtrl: NavController,
@@ -81,6 +88,7 @@ export class EventsPage {
     private cache: CacheService,
     private loader: LoaderService,
     private router: Router,
+    private utilsServices: UtilsService,
   ) {
     this.title = 'Evénements';
     this.searchControl = new FormControl();
@@ -92,11 +100,18 @@ export class EventsPage {
       this.cachedOrNot();
       this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
         this.searching = false;
-        this.updateDisplayedEvents();
+        this.updateDisplayed();
       });
 
   }
 
+  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string) {
+    this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts, this.updateDisplayed.bind(this));
+  }
+
+  addFavorite(slidingItem: IonItemSliding, itemData: any) {
+    this.utilsServices.addFavorite(slidingItem, itemData, this.texts, this.updateDisplayed.bind(this));
+  }
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
     if(this.connService.isOnline()) {
@@ -152,7 +167,7 @@ export class EventsPage {
           this.shownEvents = data.shownEvents;
           this.filters = data.categories;
           this.searching=false;
-          this.updateDisplayedEvents();
+          this.updateDisplayed();
         })
         .catch(() => {
           console.log("Oh no! My data is expired or doesn't exist!");
@@ -180,7 +195,7 @@ export class EventsPage {
           this.filters = result.categories;
           this.searching = false;
           this.noevents = this.events.length == 0;
-          this.updateDisplayedEvents();
+          this.updateDisplayed();
       })
     } else {
       this.searching = false;
@@ -235,7 +250,7 @@ export class EventsPage {
   }
 
   /*Update the displayed events and close the loading when it's finished*/
-  public updateDisplayedEvents() {
+  public updateDisplayed() {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
 
@@ -283,7 +298,7 @@ export class EventsPage {
           this.updateDateLimit();
         }
         this.excludedFilters = data[0];
-        this.updateDisplayedEvents();
+        this.updateDisplayed();
       }
   });
 }
@@ -311,62 +326,4 @@ export class EventsPage {
         slidingItem.close();
       });
   }
-
-  /*Add an event to the favorites*/
-  addFavorite(slidingItem: IonItemSliding, itemData: any) {
-    if (this.user.hasFavorite(itemData.guid)) {
-      // woops, they already favorited it! What shall we do!?
-      // prompt them to remove it
-      let message:string;
-      this.translateService.get('EVENTS.MESSAGEFAV').subscribe((res:string) => {message=res;});
-      this.removeFavorite(slidingItem, itemData, message);
-    } else {
-      // remember this session as a user favorite
-      this.user.addFavorite(itemData.guid);
-      let message:string;
-      this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res:string) => {message=res;});
-      let toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000
-      }).then(toast => toast.present());
-      slidingItem.close();
-    }
-
-  }
-
-  /*Remove an event from the favorites*/
-  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string) {
-    let message:string;
-    let cancel:string;
-    let delet:string;
-    this.translateService.get('EVENTS.MESSAGEFAV3').subscribe((res:string) => {message=res;});
-    this.translateService.get('EVENTS.CANCEL').subscribe((res:string) => {cancel=res;});
-    this.translateService.get('EVENTS.DEL').subscribe((res:string) => {delet=res;});
-    let alert = this.alertCtrl.create({
-      header: title,
-      message: message,
-      buttons: [
-        {
-          text: cancel,
-          handler: () => {
-            // they clicked the cancel button, do not remove the session
-            // close the sliding item and hide the option buttons
-            slidingItem.close();
-          }
-        },
-        {
-          text: delet,
-          handler: () => {
-            // they want to remove this session from their favorites
-            this.user.removeFavorite(itemData.guid);
-            this.updateDisplayedEvents();
-
-            // close the sliding item and hide the option buttons
-            slidingItem.close();
-          }
-        }
-      ]
-    }).then(alert => alert.present());
-  }
-
 }

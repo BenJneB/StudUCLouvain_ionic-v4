@@ -1,3 +1,4 @@
+import { UtilsService } from './../services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Daubry Benjamin & Marchesini Bruno
@@ -23,8 +24,6 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, AlertController, LoadingController, IonContent} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Device } from '@ionic-native/device/ngx';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { AppComponent } from '../app.component';
 import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
@@ -100,78 +99,40 @@ export class HomePage {
               public userS:UserService,
               public nav : NavController,
               private iab: InAppBrowser,
-              private appAvailability: AppAvailability,
-              private device: Device,
               private alertCtrl : AlertController,
               private translateService: TranslateService,
               public market: Market,
               public loadingCtrl: LoadingController,
               public studentService : StudentService,
-              public splashscreen: SplashScreen
+              public splashscreen: SplashScreen,
+              private utilsServices: UtilsService
             )
   {
-      console.log("OH YEAR");
       this.where = "";
-      console.log(this.title);
       document.title = this.title;
-      //this.resize();
       //this.userS.removeCampus('');
   }
 
   /*Set the title*/
   ionViewDidEnter() {
-    console.log("OH YEARDDDD");
     setTimeout(()=>{
       this.splashscreen.hide();
     },1000);
-    //this.resize();
   }
 
   /*Update the public variable campus for the user*/
   updateCampus(){
-    console.log(this.where)
     this.userS.addCampus(this.where);
-   // this.resize();
   }
 
   /*Change page when click on a page of the home of launchExternalApp if it's the resto U*/
   changePage(page) {
     if(page.iosSchemaName != null && page.androidPackageName != null){
-      this.launchExternalApp(page);
+      this.utilsServices.launchExternalApp(page);
     }
     else{
       this.nav.navigateForward([page.component, {title: page.title}]);
     }
-  }
-
-  /*launch external application*/
-  launchExternalApp(page) {
-    let app: string;
-    //let storeUrl:string;
-    let check:string;
-    if (this.device.platform === 'iOS') {
-      app = page.iosSchemaName;
-      //storeUrl=page.httpUrl;
-      check=page.appUrl;
-    } else if (this.device.platform === 'Android') {
-      app = page.androidPackageName;
-      //storeUrl= 'market://details?id='+ app;
-      check=app;
-    } else {
-      const browser = this.iab.create(page.httpUrl, '_system');
-      browser.close();
-    }
-    this.appAvailability.check(check).then(
-      () => { // success callback
-      console.log("have APP");
-        const browser = this.iab.create(page.appUrl, '_system');
-        browser.close();
-      },
-      () => { // error callback
-      console.log("not have APP");
-        this.market.open(app);
-      }
-    );
   }
 
   /*Open the URL for the social media of the UCL*/
@@ -201,7 +162,7 @@ export class HomePage {
     this.translateService.get('HOME.FR').subscribe((res:string) => {fr=res;});
     this.translateService.get('HOME.EN').subscribe((res:string) => {en=res;});
 
-    let settingsAlert = this.alertCtrl.create({
+    this.alertCtrl.create({
             header: settings,
             message: message,
             inputs : [

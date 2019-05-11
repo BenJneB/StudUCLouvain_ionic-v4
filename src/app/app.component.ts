@@ -84,9 +84,7 @@ export class AppComponent {
     private toast: Toast,
     private nav: NavController
   ) {
-console.log("Startin App");
     this.user.getCampus();
-    //this.user.getDisclaimer();
     this.alertPresented = false;
     this.initializeApp();
 
@@ -145,9 +143,6 @@ console.log("Startin App");
     ];
     platform.ready().then(() => {
     	 this.wso2Service.getToken();
-      /*if ((<any>window).TestFairy) {
-        TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
-      }*/
       translateService.setDefaultLang('fr');
       this.user.storage.get('lan').then((data) =>
       {
@@ -167,76 +162,45 @@ console.log("Startin App");
       })
 
     })
-
-    /*this.storage.get('disclaimer').then((disclaimer) => {
-      if(!disclaimer) this.disclaimer();
-    });*/
-    //this.disclaimer();
-
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
     });
   }
 
+    async getElementToClose(element: any){
+      try {
+        const elem = await element.getTop();
+        if (elem) {
+            elem.dismiss();
+            return;
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    }
     backButtonEvent() {
       this.platform.backButton.subscribe(async () => {
-          // close action sheet
-          try {
-              const element = await this.actionSheetCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-          }
-
-          // close popover
-          try {
-              const element = await this.popoverCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-          }
-
-          // close modal
-          try {
-              const element = await this.modalCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-              console.log(error);
-
-          }
-
-          // close side menua
+          this.getElementToClose(this.actionSheetCtrl);
+          this.getElementToClose(this.popoverCtrl);
+          this.getElementToClose(this.modalCtrl);
           try {
               const element = await this.menu.getOpen();
               if (element) {
                   this.menu.close();
                   return;
-
               }
-
           } catch (error) {
-
+            console.log(error);
           }
 
           this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
               if (outlet && outlet.canGoBack()) {
                   outlet.pop();
-
               } else if (this.router.url === 'home') {
                   if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
-                      // this.platform.exitApp(); // Exit from app
                       navigator['app'].exitApp(); // work in ionic 4
 
                   } else {
@@ -245,7 +209,7 @@ console.log("Startin App");
                           '2000',
                           'center')
                           .subscribe(toast => {
-                              // console.log(JSON.stringify(toast));
+
                           });
                       this.lastTimeBackPress = new Date().getTime();
                   }
@@ -308,26 +272,6 @@ console.log("Startin App");
   else this.openRootPage(this.homePage);
 } */
 
-  disclaimer(){
-        //let title:string;
-    //let message:string;
-    //this.translateService.get('HOME.WARNING').subscribe((res:string) => {title=res;});
-    //this.translateService.get('HOME.MESSAGE3').subscribe((res:string) => {message=res;});
-     let disclaimerAlert = this.alertCtrl.create({
-            header: "Avertissement",
-            message: "<p>Version beta de l'application Stud@UCLouvain.</p> <p>Cette version n'est pas publique et est uniquement destinée à une phase de test.</p>",
-
-            buttons: [
-                {
-                    text: "OK",
-                    handler: data => {
-
-                    }
-                }
-            ]
-        }).then(alert => alert.present());
-  }
-
   openRootPage(page) {
     let activeUrl = this.router.url;
 
@@ -374,5 +318,4 @@ console.log("Startin App");
   		}
   	);
   }
-
 }

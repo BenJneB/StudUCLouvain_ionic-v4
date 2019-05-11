@@ -20,11 +20,8 @@
 */
 
 import { Injectable } from '@angular/core';
-
 import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-//import { EventItem } from '../../app/entity/eventItem';
-//import { SportItem } from '../../app/entity/sportItem';
 
 
 @Injectable({ 
@@ -33,7 +30,6 @@ import { Storage } from '@ionic/storage';
 export class UserService {
 
   favorites: string[] = [];
-  sports: string[] = [];
   campus: string = "";
   slots: Array<{course:string, TP:string, CM:string}> = [];
   fac: string = "";
@@ -46,32 +42,19 @@ export class UserService {
     //USE THIS LINE TO CLEAR THE STORAGE
     //storage.clear();
     this.getFavorites();
-    //this.storage.set('campus',"");
     this.getCampus();
-    this.getSports();
     this.getSlots();
     this.getFac();
     this.getDisclaimer();
   }
 
   getFavorites(){
-    this.storage.get('listEvents').then((data) =>
+    this.storage.get('listFavorites').then((data) =>
     {
       if(data==null){
         this.favorites=[];
       } else {
         this.favorites=data;
-        }
-    });
-  }
-
-  getSports(){
-    this.storage.get('listSports').then((data) =>
-    {
-      if(data==null){
-        this.sports=[];
-      } else {
-        this.sports=data;
         }
     });
   }
@@ -137,10 +120,6 @@ export class UserService {
     return (this.favorites.indexOf(itemGuid) > -1);
   };
 
-  hasFavoriteS(itemGuid : string) {
-    return (this.sports.indexOf(itemGuid) > -1);
-  };
-
   hasCampus() {
     return(this.campus.length > 0);
   }
@@ -178,20 +157,10 @@ export class UserService {
 
   addFavorite(itemGuid: string) {
     this.favorites.push(itemGuid);
-    this.storage.set('listEvents',this.favorites);
-
+    this.storage.set('listFavorites',this.favorites);
   };
-
-
-  addFavoriteS(itemGuid : string) {
-    this.sports.push(itemGuid);
-    this.storage.set('listSports',this.sports);
-  };
-
-
 
   addCampus(campus: string) {
-    console.log(campus)
     this.campus = campus;
     this.storage.set('campus',this.campus);
   };
@@ -224,15 +193,9 @@ export class UserService {
     if (index > -1) {
       this.favorites.splice(index, 1);
     }
-    this.storage.set('listEvents',this.favorites);
+    this.storage.set('listFavorites',this.favorites);
   };
-  removeFavoriteS(itemGuid: string) {
-    let index = this.sports.indexOf(itemGuid);
-    if (index > -1) {
-      this.sports.splice(index, 1);
-    }
-    this.storage.set('listSports',this.sports);
-  };
+
   removeCampus(campus: string) {
     this.campus="";
     this.storage.set('campus',this.campus);

@@ -13,7 +13,7 @@ import { EventsFilterModule } from './events-filter/events-filter.module';
   imports: [
   	IonicModule,
     TranslateModule.forChild(),
-          ReactiveFormsModule,
+    ReactiveFormsModule,
     CommonModule,
     FormsModule,
     EventsFilterModule,
