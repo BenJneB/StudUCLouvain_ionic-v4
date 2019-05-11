@@ -140,7 +140,6 @@ export class StudiesPage {
 
   /*Get course program of student*/
   loadActivities(){
-
     if(this.connService.isOnline()) {
       this.login().then((res) => {
   	  	if(this.status){
@@ -148,11 +147,6 @@ export class StudiesPage {
   	  			let result:any = res;
   	  			this.sigles = result.activities.activity;
             for(let sigle of this.sigles){
-              //let name;
-              //this.checkExist(sigle).then(data => {
-                //name=data;
-                //this.activities.push({'name':name.nameFR,'sigle':sigle});
-              //})
               this.activities.push({'name':'', 'sigle':sigle});
             }
   	  		})
@@ -236,11 +230,7 @@ export class StudiesPage {
         {
           name: 'acronym',
           placeholder: sigle
-        }/*,
-        {
-          name:'name',
-          placeholder:'Nom du cours'
-        }*/
+        }
       ],
       buttons: [
         {
@@ -252,43 +242,27 @@ export class StudiesPage {
           text: save,
           cssClass: 'save',
           handler: data => {
-            let check; 
             let acro = data.acronym.toUpperCase();
             let already = false;
             for(let item of this.listCourses){
               if(item.acronym === acro) already = true;
             }
-            if(!already){
-              this.checkExist(acro).then(data2 => {
-                check = data2;
-                if(check.exist){
-                  this.addCourse(acro, check.nameFR);
-                  //this.addCourse(acro,data.name);
-                }
-                else{
-                  this.toastBadCourse();
-                  this.showPrompt();
-                }
-              })
-            }
-            else{
-              this.toastAlreadyCourse();
-            }
+            this.checkCourseExisting(already, acro);
           }
         }
       ]
     }).then(alert => alert.present());
   }
 
-  toastAlreadyCourse() {
+  async toastAlreadyCourse() {
     let msg;
     this.translateService.get('STUDY.ALCOURSE').subscribe((res:string) => {msg=res;});
-    let toast = this.toastCtrl.create({
+    const toast = await this.toastCtrl.create({
       message: msg,
       duration: 2000,
       position: 'middle'
-    }).then(toast => toast.present());
-
+    });
+    return await toast.present();
   }
 
   addCourseFromProgram(acro:string){
@@ -306,7 +280,6 @@ export class StudiesPage {
         check = data2;
         if (check.exist) {
           this.addCourse(acro, check.nameFR);
-          //this.addCourse(acro,data.name);
         }
         else {
           this.toastBadCourse();
@@ -373,7 +346,6 @@ export class StudiesPage {
   openWeekPage(){
     this.studentService.weekSchedule().then((res) => {
       let result:any = res;
-      //result.sort((a, b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
       this.navCtrl.navigateForward(['HebdoPage', {schedule:result}]);
     });
   }
@@ -390,7 +362,6 @@ export class StudiesPage {
 
   openExamPage(){
     this.unavailableAlert();
-      //this.navCtrl.push('ExamPage');
   }
 
   /*Launch moodle or ucl portal*/
