@@ -99,7 +99,7 @@ export class AppComponent {
   private getToolsPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
     const pages = ['guindaille', 'map', 'resto', 'mobility', 'settings', 'credits'];
     const toolData = [];
-    for (const page of pages) {
+    for (const page of pages) { 
       if (page === 'resto') {
         toolData.push(this.getPageData(
           page.toUpperCase(), 
