@@ -42,6 +42,7 @@ import { Wso2Service } from './services/wso2-services/wso2-service';
 import { CacheService } from "ionic-cache";
 import { Router } from '@angular/router';
 import { Toast } from '@ionic-native/toast/ngx';
+import { Page } from './entity/page';
 
 @Component({
   selector: 'app-root',
@@ -58,30 +59,13 @@ export class AppComponent {
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
+  
+  campusPages: Array<Page>;
+  studiePages: Array<Page>;
+  toolPages: Array<Page>;
 
-  campusPages: Array<{
-    title: string,
-    component: string, 
-    icon: string,
-    iosSchemaName: string, androidPackageName: string,
-    appUrl: string, httpUrl: string
-  }>;
-  studiePages: Array<{
-    title: string,
-    component: string, 
-    icon: string,
-    iosSchemaName: string, androidPackageName: string,
-    appUrl: string, httpUrl: string
-  }>;
-  toolPages: Array<{
-    title: string,
-    component: string, 
-    icon: string,
-    iosSchemaName: string, androidPackageName: string,
-    appUrl: string, httpUrl: string
-  }>;
-
-  constructor(public platform: Platform,
+  constructor(
+    public platform: Platform,
     public menu: MenuController,
     public market: Market,
     private appAvailability : AppAvailability,
@@ -103,54 +87,7 @@ export class AppComponent {
     this.user.getCampus();
     this.alertPresented = false;
     this.initializeApp();
-    const nullSchemas = { ios: null, android: null };
-    const nullUrls = { app: null, http: null };
-    this.homePage = this.getPageStruct(this.getPageData('HOME', 'home', 'home', nullSchemas, nullUrls))
-
-    const campusDatas = [
-      this.getPageData('NEWS', 'news', 'news', nullSchemas, nullUrls),
-      this.getPageData('EVENTS', 'events', 'event', nullSchemas, nullUrls),
-      this.getPageData('SPORTS', 'sports', 'sport', nullSchemas, nullUrls),
-    ]
-    this.campusPages = [];
-    for (const page of campusDatas){
-      this.campusPages.push(
-        this.getPageStruct(page)
-      )
-    }
-
-    const studiesData = [
-      this.getPageData('STUDIES', 'studies', 'études', nullSchemas, nullUrls),
-      this.getPageData('LIBRARY', 'libraries', 'biblio', nullSchemas, nullUrls),
-      this.getPageData('HELP', 'support', 'support', nullSchemas, nullUrls),
-    ]
-    this.studiePages = [];
-    for (const page of studiesData){
-      this.studiePages.push(
-        this.getPageStruct(page)
-      )
-    }
-
-    const toolData = [
-      this.getPageData('PARTY', 'guindaille', 'g2', nullSchemas, nullUrls),
-      this.getPageData('MAP', 'map', 'cartes', nullSchemas, nullUrls),
-      this.getPageData(
-        'RESTAURANT', 
-        'R', 
-        'resto', 
-        { ios: 'id1156050719', android: 'com.apptree.resto4u' }, 
-        { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }
-      ),
-      this.getPageData('MOBILITY', 'mobility', 'mobilité', nullSchemas, nullUrls),
-      this.getPageData('PARAM', 'settings', 'setting', nullSchemas, nullUrls),
-      this.getPageData('CREDITS', 'credit', 'signature', nullSchemas, nullUrls),
-    ]
-    this.toolPages = [];
-    for (const page of toolData){
-      this.toolPages.push(
-        this.getPageStruct(page)
-      )
-    }
+    this.getAllPages();
 
     platform.ready().then(() => {
     	 this.wso2Service.getToken();
@@ -175,6 +112,42 @@ export class AppComponent {
     })
   }
 
+  private getAllPages() {
+    const nullSchemas = { ios: null, android: null };
+    const nullUrls = { app: null, http: null };
+    this.homePage = this.getPageStruct(this.getPageData('HOME', 'home', 'home', nullSchemas, nullUrls));
+    const campusDatas = [
+      this.getPageData('NEWS', 'news', 'news', nullSchemas, nullUrls),
+      this.getPageData('EVENTS', 'events', 'event', nullSchemas, nullUrls),
+      this.getPageData('SPORTS', 'sports', 'sport', nullSchemas, nullUrls),
+    ];
+    this.campusPages = [];
+    for (const page of campusDatas) {
+      this.campusPages.push(this.getPageStruct(page));
+    }
+    const studiesData = [
+      this.getPageData('STUDIES', 'studies', 'études', nullSchemas, nullUrls),
+      this.getPageData('LIBRARY', 'libraries', 'biblio', nullSchemas, nullUrls),
+      this.getPageData('HELP', 'support', 'support', nullSchemas, nullUrls),
+    ];
+    this.studiePages = [];
+    for (const page of studiesData) {
+      this.studiePages.push(this.getPageStruct(page));
+    }
+    const toolData = [
+      this.getPageData('PARTY', 'guindaille', 'g2', nullSchemas, nullUrls),
+      this.getPageData('MAP', 'map', 'cartes', nullSchemas, nullUrls),
+      this.getPageData('RESTAURANT', 'R', 'resto', { ios: 'id1156050719', android: 'com.apptree.resto4u' }, { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }),
+      this.getPageData('MOBILITY', 'mobility', 'mobilité', nullSchemas, nullUrls),
+      this.getPageData('PARAM', 'settings', 'setting', nullSchemas, nullUrls),
+      this.getPageData('CREDITS', 'credit', 'signature', nullSchemas, nullUrls),
+    ];
+    this.toolPages = [];
+    for (const page of toolData) {
+      this.toolPages.push(this.getPageStruct(page));
+    }
+  }
+
   private getPageData(title: string, route: string, icon: string, nullSchemas: any, nullUrls: any) {
     return { title: title, route: route, icon: icon, schemas: nullSchemas, urls: nullUrls };
   }
@@ -195,106 +168,102 @@ export class AppComponent {
     });
   }
 
-    async getElementToClose(element: any){
-      try {
-        const elem = await element.getTop();
-        if (elem) {
-            elem.dismiss();
-            return;
-        }
-      } catch (error) {
-        console.log(error);
+  async getElementToClose(element: any){
+    try {
+      const elem = await element.getTop();
+      if (elem) {
+          elem.dismiss();
+          return;
       }
+    } catch (error) {
+      console.log(error);
     }
-    backButtonEvent() {
-      this.platform.backButton.subscribe(async () => {
-          this.getElementToClose(this.actionSheetCtrl);
-          this.getElementToClose(this.popoverCtrl);
-          this.getElementToClose(this.modalCtrl);
-          try {
-              const element = await this.menu.getOpen();
-              if (element) {
-                  this.menu.close();
-                  return;
-              }
-          } catch (error) {
-            console.log(error);
-          }
-
-          this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
-              if (outlet && outlet.canGoBack()) {
-                  outlet.pop();
-              } else if (this.router.url === 'home') {
-                  if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
-                      navigator['app'].exitApp(); // work in ionic 4
-
-                  } else {
-                      this.toast.show(
-                          `Press back again to exit App.`,
-                          '2000',
-                          'center')
-                          .subscribe(toast => {
-
-                          });
-                      this.lastTimeBackPress = new Date().getTime();
-                  }
-              }
-          });
-      });
-    // Confirm exit
-    /* this.platform.registerBackButtonAction(() => {
-
-        let activePortal = this.ionicApp._loadingPortal.getActive() ||
-           this.ionicApp._modalPortal.getActive() ||
-           this.ionicApp._toastPortal.getActive() ||
-            this.ionicApp._overlayPortal.getActive();
-
-        if (activePortal) {
-            activePortal.dismiss();
-            return
-        }
-        else if (this.menu.isOpen()) { // Close menu if open
-            this.menu.close();
-            return
-        }
-        if (this.nav.length() == 1) {
-          this.confirmExitApp();
-        } else {
-          this.nav.pop();
-        }
-
-    }); */
   }
+  backButtonEvent() {
+    this.platform.backButton.subscribe(async () => {
+        this.getElementToClose(this.actionSheetCtrl);
+        this.getElementToClose(this.popoverCtrl);
+        this.getElementToClose(this.modalCtrl);
+        try {
+            const element = await this.menu.getOpen();
+            if (element) {
+                this.menu.close();
+                return;
+            }
+        } catch (error) {
+          console.log(error);
+        }
+        this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+            if (outlet && outlet.canGoBack()) {
+                outlet.pop();
+            } else if (this.router.url === 'home') {
+                if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+                    navigator['app'].exitApp(); // work in ionic 4
+                } else {
+                    this.toast.show(
+                        `Press back again to exit App.`,
+                        '2000',
+                        'center')
+                        .subscribe(toast => {
+                        });
+                    this.lastTimeBackPress = new Date().getTime();
+                }
+            }
+        });
+    });
+  // Confirm exit
+  /* this.platform.registerBackButtonAction(() => {
+
+      let activePortal = this.ionicApp._loadingPortal.getActive() ||
+          this.ionicApp._modalPortal.getActive() ||
+          this.ionicApp._toastPortal.getActive() ||
+          this.ionicApp._overlayPortal.getActive();
+
+      if (activePortal) {
+          activePortal.dismiss();
+          return
+      }
+      else if (this.menu.isOpen()) { // Close menu if open
+          this.menu.close();
+          return
+      }
+      if (this.nav.length() == 1) {
+        this.confirmExitApp();
+      } else {
+        this.nav.pop();
+      }
+  }); */
+}
 
 
 /* 
-  confirmExitApp() {
-    let activeVC = this.nav.getActive();
-    let page = activeVC.instance;
-    if(page instanceof HomePage){
-      if(!this.alertPresented){
-        this.alertPresented = true;
-        let confirmAlert = this.alertCtrl.create({
-            header: "Fermeture",
-            message: "Désirez-vous quitter l'application ?",
-            buttons: [
-                {
-                    text: 'Annuler',
-                    handler: () => {
-                      this.alertPresented = false;
-                    }
-                },
-                {
-                    text: 'Quitter',
-                    handler: () => {
-                        this.platform.exitApp();
-                    }
-                }
-            ]
-        }).then(alert => alert.present());
-    }confirmExitApp
-  }
-  else this.openRootPage(this.homePage);
+confirmExitApp() {
+  let activeVC = this.nav.getActive();
+  let page = activeVC.instance;
+  if(page instanceof HomePage){
+    if(!this.alertPresented){
+      this.alertPresented = true;
+      let confirmAlert = this.alertCtrl.create({
+          header: "Fermeture",
+          message: "Désirez-vous quitter l'application ?",
+          buttons: [
+              {
+                  text: 'Annuler',
+                  handler: () => {
+                    this.alertPresented = false;
+                  }
+              },
+              {
+                  text: 'Quitter',
+                  handler: () => {
+                      this.platform.exitApp();
+                  }
+              }
+          ]
+      }).then(alert => alert.present());
+  }confirmExitApp
+}
+else this.openRootPage(this.homePage);
 } */
 
   openRootPage(page) {
@@ -309,7 +278,6 @@ export class AppComponent {
 	        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
 	    }
 	    else {if(page != this.homePage){
-
       		this.nav.navigateForward([page.component, {title: page.title}]);
   		}}
     }
