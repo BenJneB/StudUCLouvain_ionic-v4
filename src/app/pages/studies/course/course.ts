@@ -31,6 +31,7 @@ import { Activity } from '../../../entity/activity'
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { ModalInfoPage } from './modal-info/modal-info';
 import { ActivatedRoute, Router } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 @Component({
   selector: 'page-course',
@@ -52,16 +53,19 @@ export class CoursePage {
   noEx:boolean;
 
 
-  constructor(public navCtrl: NavController,
-              public courseService: CourseService,
-              private calendar: Calendar,
-              public toastCtrl: ToastController,
-              public userS:UserService,
-              public modalCtrl: ModalController,
-              private alertCtrl : AlertController,
-              private translateService: TranslateService,
-              private route: ActivatedRoute, 
-              private router: Router)
+  constructor(
+    public navCtrl: NavController,
+    public courseService: CourseService,
+    private calendar: Calendar,
+    public toastCtrl: ToastController,
+    public userS:UserService,
+    public modalCtrl: ModalController,
+    private alertCtrl : AlertController,
+    private translateService: TranslateService,
+    private route: ActivatedRoute, 
+    private router: Router,
+    private utilsServices: UtilsService
+  )
   {
     this.route.queryParams.subscribe(params => {
 
@@ -127,26 +131,7 @@ export class CoursePage {
         }).then(toast => toast.present());
         slidingItem.close();
     });
-      this.alert();
-  }
-
-  /*Create and display the alert that say that if a course is add to the calendar if this course is changed, the calendar doesn't take that in account*/
-  alert(){
-    let title:string;
-    let message:string;
-    this.translateService.get('COURSE.WARNING').subscribe((res:string) => {title=res;});
-    this.translateService.get('COURSE.MESSAGE3').subscribe((res:string) => {message=res;});
-         let disclaimerAlert = this.alertCtrl.create({
-            header: title,
-            message: message,
-            buttons: [
-                {
-                    text: "OK",
-                    handler: data => {
-                    }
-                }
-            ]
-        }).then(alert => alert.present());
+      this.utilsServices.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 
   /*Filter TP if a slot is selectionned*/
@@ -265,27 +250,8 @@ export class CoursePage {
       message: message,
       duration: 3000
     }).then(toast => toast.present());
-    this.alertAll();
+    this.utilsServices.alertCourse({'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4'});
   }
-
-  /*Alert to warning that changes are possible*/
-  alertAll(){
-    let title:string;
-    let message:string;
-    this.translateService.get('STUDY.WARNING').subscribe((res:string) => {title=res;});
-    this.translateService.get('STUDY.MESSAGE4').subscribe((res:string) => {message=res;});
-       let disclaimerAlert = this.alertCtrl.create({
-          header: title,
-          message: message,
-          buttons: [
-              {
-                  text: "OK",
-                  handler: data => {
-                  }
-              }
-          ]
-      }).then(alert => alert.present());
-   }
 
    openModalInfo(){
 
