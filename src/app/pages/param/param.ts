@@ -54,7 +54,7 @@ export class ParamPage {
     private utilsService: UtilsService
   )
   {
-    this.translateService.get('MENU.PARAM').subscribe((res:string) => {this.title=res;});
+    this.translateService.get('MENU.SETTINGS').subscribe((res:string) => {this.title=res;});
   }
 
   /*Create and display an alert for the choice of campus and save the choice of the user in the public variable*/

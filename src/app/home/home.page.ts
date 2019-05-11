@@ -76,11 +76,11 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  guindaillePage = { title: 'MENU.PARTY', component: '/guindaille',
+  guindaillePage = { title: 'MENU.GUINDAILLE', component: '/guindaille',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 
-  paramPage = { title: 'MENU.PARAM', component: '/settings',
+  paramPage = { title: 'MENU.SETTINGS', component: '/settings',
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null  };
 

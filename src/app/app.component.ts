@@ -91,15 +91,15 @@ export class AppComponent {
     const nullSchemas = { ios: null, android: null };
     const nullUrls = { app: null, http: null };
     this.homePage = this.getPageStruct(this.getPageData('HOME', 'home', 'home', nullSchemas, nullUrls));
-    this.getCampusPages(nullSchemas, nullUrls);
-    this.getStudiesPages(nullSchemas, nullUrls);
+    this.campusPages = this.getOtherPages(false, nullSchemas, nullUrls);
+    this.studiePages = this.getOtherPages(true, nullSchemas, nullUrls);
     this.getToolsPages(nullSchemas, nullUrls);
   }
 
   private getToolsPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
     const pages = ['guindaille', 'map', 'resto', 'mobility', 'settings', 'credits'];
     const toolData = [];
-    for (let page of pages) {
+    for (const page of pages) {
       if (page === 'resto') {
         toolData.push(this.getPageData(
           page.toUpperCase(), 
@@ -117,29 +117,17 @@ export class AppComponent {
     }
   }
   
-
-  private getStudiesPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
-    const pages = ['studies', 'libraries', 'support'];
-    const studiesData = [];
-    for (let page of pages) {
-      studiesData.push( this.getPageData(page.toUpperCase(), page, page, nullSchemas, nullUrls),)
+  private getOtherPages(studies: boolean, nullSchemas: { ios: string; android: string; }, nullUrls: { app: string; http: string; }) {
+    const pages = studies ? ['studies', 'libraries', 'support'] : ['news', 'events', 'sports'];
+    const datas = [];
+    for (const page of pages) {
+      datas.push(this.getPageData(page.toUpperCase(), page, page, nullSchemas, nullUrls))
     }
-    this.studiePages = [];
-    for (const page of studiesData) {
-      this.studiePages.push(this.getPageStruct(page));
+    const pagesR = [];
+    for (const page of datas) {
+      pagesR.push(this.getPageStruct(page));
     }
-  }
-
-  private getCampusPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
-    const pages = ['news', 'events', 'sports'];
-    const campusDatas = [];
-    for (let page of pages) {
-      campusDatas.push( this.getPageData(page.toUpperCase(), page, page, nullSchemas, nullUrls),)
-    }
-    this.campusPages = [];
-    for (const page of campusDatas) {
-      this.campusPages.push(this.getPageStruct(page));
-    }
+    return pagesR;
   }
 
   private getPageData(title: string, route: string, icon: string, nullSchemas: any, nullUrls: any) {
