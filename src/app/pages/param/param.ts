@@ -1,3 +1,4 @@
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Daubry Benjamin & Marchesini Bruno
@@ -44,12 +45,16 @@ export class ParamPage {
   setting2:string ="Langue";
 
 
-  constructor(public navCtrl: NavController,
-              public modalCtrl: ModalController,
-              public userS:UserService,
-              private alertCtrl : AlertController,
-              private translateService: TranslateService) {
-              this.translateService.get('MENU.PARAM').subscribe((res:string) => {this.title=res;});
+  constructor(
+    public navCtrl: NavController,
+    public modalCtrl: ModalController,
+    public userS:UserService,
+    private alertCtrl : AlertController,
+    private translateService: TranslateService,
+    private utilsService: UtilsService
+  )
+  {
+    this.translateService.get('MENU.PARAM').subscribe((res:string) => {this.title=res;});
   }
 
   /*Create and display an alert for the choice of campus and save the choice of the user in the public variable*/
@@ -113,38 +118,8 @@ export class ParamPage {
     this.translateService.get('HOME.FR').subscribe((res:string) => {fr=res;});
     this.translateService.get('HOME.EN').subscribe((res:string) => {en=res;});
     this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
-    let languageAlert = await this.alertCtrl.create({
-      header: setting2,
-      message : message2,
-      inputs : [
-        {
-          type:'radio',
-          label:fr,
-          value:'fr',
-          checked:(check2 == 'fr')
-        },
-        {
-          type:'radio',
-          label:en,
-          value:'en',
-          checked:(check2 == 'en')
-        }
-      ],
-      buttons: [
-      {
-        text:save,
-        handler:data => {
-           this.languageChanged(data);
-        }
-      }]
-    });
+    let languageAlert = await this.utilsService.languageAlert(setting2, message2, fr, check2, en, save);
     await languageAlert.present();
-  }
-
-  /*When the language change, translate the page with the applied language*/
-  languageChanged(event:string) {
-    this.userS.storage.set('lan',event);
-    this.translateService.use(event);
   }
 
   openTuto(){

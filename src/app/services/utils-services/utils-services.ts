@@ -185,4 +185,39 @@ import { Device } from '@ionic-native/device/ngx';
         }
         return { index, title, date };
     }
+
+    languageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
+        return this.alertCtrl.create({
+          header: settings,
+          message: message2,
+          inputs: [
+            {
+              type: 'radio',
+              label: fr,
+              value: 'fr',
+              checked: (check2 == 'fr')
+            },
+            {
+              type: 'radio',
+              label: en,
+              value: 'en',
+              checked: (check2 == 'en')
+            }
+          ],
+          buttons: [
+            {
+              text: save,
+              handler: data => {
+                this.languageChanged(data);
+              }
+            }
+          ]
+        });
+      }
+
+    /*When the language change, translate the page with the applied language*/
+    private languageChanged(event:string) {
+        this.user.storage.set('lan',event);
+        this.translateService.use(event);
+    }
 }
