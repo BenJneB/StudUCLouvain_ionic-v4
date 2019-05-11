@@ -181,33 +181,22 @@ export class AppComponent {
     });
   }
 
+    async getElementToClose(element: any){
+      try {
+        const elem = await element.getTop();
+        if (elem) {
+            elem.dismiss();
+            return;
+        }
+      } catch (error) {
+        console.log(error);
+      };
+    }
     backButtonEvent() {
       this.platform.backButton.subscribe(async () => {
-          try {
-              const element = await this.actionSheetCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-          }
-          try {
-              const element = await this.popoverCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-          }
-          try {
-              const element = await this.modalCtrl.getTop();
-              if (element) {
-                  element.dismiss();
-                  return;
-              }
-          } catch (error) {
-              console.log(error);
-          }
+          this.getElementToClose(this.actionSheetCtrl);
+          this.getElementToClose(this.popoverCtrl);
+          this.getElementToClose(this.modalCtrl);
           try {
               const element = await this.menu.getOpen();
               if (element) {
@@ -216,7 +205,7 @@ export class AppComponent {
               }
           } catch (error) {
             console.log(error);
-          }
+          };
 
           this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
               if (outlet && outlet.canGoBack()) {

@@ -80,22 +80,23 @@ import { UserService } from './user-service';
         this.translateService.get(texts['DEL']).subscribe((res: string) => {
             del = res;
         });
-        return await this.presentAlert(title, message, cancel, slidingItem, del, itemData, update);
+        const alertTexts = { 'title': title, 'message': message, 'cancel': cancel, 'del': del };
+        return await this.presentAlert(alertTexts, slidingItem, itemData, update);
     }
 
-    private async presentAlert(title: string, message: string, cancel: string, slidingItem: IonItemSliding, del: string, itemData: any, update: () => void) {
+    private async presentAlert(texts: {}, slidingItem: IonItemSliding, itemData: any, update: () => void) {
         const alert = await this.alertCtrl.create({
-            header: title,
-            message: message,
+            header: texts['title'],
+            message: texts['message'],
             buttons: [
                 {
-                    text: cancel,
+                    text: texts['cancel'],
                     handler: () => {
                         slidingItem.close();
                     }
                 },
                 {
-                    text: del,
+                    text: texts['del'],
                     handler: () => {
                         this.user.removeFavorite(itemData.guid);
                         slidingItem.close();
