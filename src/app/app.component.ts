@@ -143,9 +143,6 @@ export class AppComponent {
     ];
     platform.ready().then(() => {
     	 this.wso2Service.getToken();
-      /*if ((<any>window).TestFairy) {
-        TestFairy.begin("b7514d146f2609b445cf858970110d58580938fc");
-      }*/
       translateService.setDefaultLang('fr');
       this.user.storage.get('lan').then((data) =>
       {
@@ -165,18 +162,10 @@ export class AppComponent {
       })
 
     })
-
-    /*this.storage.get('disclaimer').then((disclaimer) => {
-      if(!disclaimer) this.disclaimer();
-    });*/
-    //this.disclaimer();
-
   }
 
   initializeApp() {
     this.platform.ready().then(() => {
-      // Okay, so the platform is ready and our plugins are available.
-      // Here you can do any higher level native things you might need.
       this.statusBar.styleDefault();
     });
   }
@@ -190,7 +179,7 @@ export class AppComponent {
         }
       } catch (error) {
         console.log(error);
-      };
+      }
     }
     backButtonEvent() {
       this.platform.backButton.subscribe(async () => {
@@ -205,7 +194,7 @@ export class AppComponent {
               }
           } catch (error) {
             console.log(error);
-          };
+          }
 
           this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
               if (outlet && outlet.canGoBack()) {

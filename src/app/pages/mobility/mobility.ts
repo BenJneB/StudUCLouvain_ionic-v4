@@ -23,9 +23,9 @@ import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 @Component({
   selector: 'page-mobility',
@@ -37,12 +37,14 @@ export class MobilityPage {
   carpoolingPage;
   busPage;
   trainPage;
-  constructor(public nav: NavController,
-              public market: Market,
-              private iab: InAppBrowser,
-              private appAvailability: AppAvailability,
-              private device: Device,
-              private translateService: TranslateService)
+  constructor(
+    public nav: NavController,
+    public market: Market,
+    private iab: InAppBrowser,
+    private device: Device,
+    private translateService: TranslateService,
+    private utilsServices: UtilsService
+  )
   {
     this.title = "Mobilité";
     let titlecar:string;
@@ -63,36 +65,19 @@ export class MobilityPage {
                             appUrl: 'sncb://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
   }
 
-  /*Launch external app*/
   launchExternalApp(page:any) {
     let app: string;
-    //let storeUrl:string;
     let check:string;
-
-    //Check the platform of the user
     if (this.device.platform === 'iOS') {
       app = page.iosSchemaName;
-      //storeUrl=page.httpUrl;
       check=page.appUrl;
     } else if (this.device.platform === 'Android') {
       app = page.androidPackageName;
-      //storeUrl= 'market://details?id='+ app;
       check=app;
     } else {
       const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();
     }
-
-    //Check if the app is installed, if yes launch app else return the user to the market
-    this.appAvailability.check(check).then(
-      () => { // success callback
-        const browser = this.iab.create(page.appUrl, '_system');
-        browser.close();
-      },
-      () => { // error callback
-        this.market.open(app);
-      }
-    );
-    //this.nav.push(page.component, {title: page.title});
+    this.utilsServices.checkAvailability(check, page, app);
   }
 }

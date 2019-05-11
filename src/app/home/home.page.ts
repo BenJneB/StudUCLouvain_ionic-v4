@@ -1,3 +1,4 @@
+import { UtilsService } from './../services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Daubry Benjamin & Marchesini Bruno
@@ -24,7 +25,6 @@ import { NavController, AlertController, LoadingController, IonContent} from '@i
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Device } from '@ionic-native/device/ngx';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { AppComponent } from '../app.component';
 import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
@@ -100,14 +100,14 @@ export class HomePage {
               public userS:UserService,
               public nav : NavController,
               private iab: InAppBrowser,
-              private appAvailability: AppAvailability,
               private device: Device,
               private alertCtrl : AlertController,
               private translateService: TranslateService,
               public market: Market,
               public loadingCtrl: LoadingController,
               public studentService : StudentService,
-              public splashscreen: SplashScreen
+              public splashscreen: SplashScreen,
+              private utilsServices: UtilsService
             )
   {
       this.where = "";
@@ -151,15 +151,7 @@ export class HomePage {
       const browser = this.iab.create(page.httpUrl, '_system');
       browser.close();
     }
-    this.appAvailability.check(check).then(
-      () => { // success callback
-        const browser = this.iab.create(page.appUrl, '_system');
-        browser.close();
-      },
-      () => { // error callback
-        this.market.open(app);
-      }
-    );
+    this.utilsServices.checkAvailability(check, page, app);
   }
 
   /*Open the URL for the social media of the UCL*/

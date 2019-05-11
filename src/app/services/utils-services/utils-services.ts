@@ -3,6 +3,9 @@ import * as xml2js from 'xml2js';
 import { IonItemSliding, ToastController, AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 import { UserService } from './user-service';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { Market } from '@ionic-native/market/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -12,7 +15,10 @@ import { UserService } from './user-service';
         public toastCtrl: ToastController,
         public user: UserService,
         private translateService: TranslateService,
-        public alertCtrl: AlertController
+        public alertCtrl: AlertController,
+        private appAvailability: AppAvailability,
+        public market: Market,
+        private iab: InAppBrowser,
     ) {
 
     }
@@ -30,7 +36,6 @@ import { UserService } from './user-service';
         return res;
     }
 
-      /*Add an event to the favorites*/
   async addFavorite(slidingItem: IonItemSliding, itemData: any, texts: any, update: () => void) {
          if (this.user.hasFavorite(itemData.guid)) {
             let message: string;
@@ -68,7 +73,6 @@ import { UserService } from './user-service';
         await slidingItem.close();
     }
 
-  /*Remove an event from the favorites*/
     async  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any, update: () => void) {
         let message: string, cancel: string, del: string;
         this.translateService.get(texts['FAV3']).subscribe((res: string) => {
@@ -107,4 +111,13 @@ import { UserService } from './user-service';
         });
         return await alert.present();
     }
+
+    checkAvailability(check: string, page: any, app: string) {
+        this.appAvailability.check(check).then(() => {
+          const browser = this.iab.create(page.appUrl, '_system');
+          browser.close();
+        }, () => {
+          this.market.open(app);
+        });
+      }
 }
