@@ -20,7 +20,16 @@
 */
 
 import { Component, ViewChildren, QueryList } from '@angular/core';
-import { MenuController, NavController, Platform,LoadingController, ActionSheetController, PopoverController, ModalController, IonRouterOutlet } from '@ionic/angular';
+import { 
+  MenuController, 
+  NavController, 
+  Platform,
+  LoadingController, 
+  ActionSheetController, 
+  PopoverController, 
+  ModalController, 
+  IonRouterOutlet 
+} from '@ionic/angular';
 import { Device } from '@ionic-native/device/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Market } from '@ionic-native/market/ngx';
@@ -104,7 +113,7 @@ export class AppComponent {
       this.getPageData('SPORTS', 'sports', 'sport', nullSchemas, nullUrls),
     ]
     this.campusPages = [];
-    for (let page of campusDatas){
+    for (const page of campusDatas){
       this.campusPages.push(
         this.getPageStruct(page)
       )
@@ -116,7 +125,7 @@ export class AppComponent {
       this.getPageData('HELP', 'support', 'support', nullSchemas, nullUrls),
     ]
     this.studiePages = [];
-    for (let page of studiesData){
+    for (const page of studiesData){
       this.studiePages.push(
         this.getPageStruct(page)
       )
@@ -137,7 +146,7 @@ export class AppComponent {
       this.getPageData('CREDITS', 'credit', 'signature', nullSchemas, nullUrls),
     ]
     this.toolPages = [];
-    for (let page of toolData){
+    for (const page of toolData){
       this.toolPages.push(
         this.getPageStruct(page)
       )
