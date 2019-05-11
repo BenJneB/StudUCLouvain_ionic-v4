@@ -176,8 +176,8 @@ export class SportsPage {
   public updateDisplayedSports() {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
-
-    if (this.segment === 'all') { //List of sports for all students
+    const callFilter = this.segment === 'all' || this.segment === 'team';
+    if (callFilter == true) { //List of sports for all students
       this.displayedSports = this.filterDisplayedSports(this.sports, this.excludedFilters);
     }
     else if (this.segment === 'favorites') { //list of sports put in favorite
@@ -190,9 +190,6 @@ export class SportsPage {
         }
       });
       this.displayedSports = favSports;
-    }
-    else if (this.segment === 'team') { //List of sports for university teams
-      this.displayedSports = this.filterDisplayedSports(this.teams, this.excludedFiltersT);
     }
 
     this.shownSports = this.displayedSports.length;
