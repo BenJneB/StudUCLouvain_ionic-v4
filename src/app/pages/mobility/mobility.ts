@@ -21,8 +21,6 @@
 
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
-import { Device } from '@ionic-native/device/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
@@ -40,8 +38,6 @@ export class MobilityPage {
   constructor(
     public nav: NavController,
     public market: Market,
-    private iab: InAppBrowser,
-    private device: Device,
     private translateService: TranslateService,
     private utilsServices: UtilsService
   )
@@ -63,21 +59,5 @@ export class MobilityPage {
                             iosSchemaName: 'id403212064',
                             androidPackageName: 'de.hafas.android.sncbnmbs',
                             appUrl: 'sncb://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
-  }
-
-  launchExternalApp(page:any) {
-    let app: string;
-    let check:string;
-    if (this.device.platform === 'iOS') {
-      app = page.iosSchemaName;
-      check=page.appUrl;
-    } else if (this.device.platform === 'Android') {
-      app = page.androidPackageName;
-      check=app;
-    } else {
-      const browser = this.iab.create(page.httpUrl, '_system');
-      browser.close();
-    }
-    this.utilsServices.checkAvailability(check, page, app);
   }
 }

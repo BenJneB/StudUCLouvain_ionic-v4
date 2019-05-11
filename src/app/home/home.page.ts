@@ -24,7 +24,6 @@ import { Component, ViewChild } from '@angular/core';
 import { NavController, AlertController, LoadingController, IonContent} from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Device } from '@ionic-native/device/ngx';
 import { AppComponent } from '../app.component';
 import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
@@ -100,7 +99,6 @@ export class HomePage {
               public userS:UserService,
               public nav : NavController,
               private iab: InAppBrowser,
-              private device: Device,
               private alertCtrl : AlertController,
               private translateService: TranslateService,
               public market: Market,
@@ -130,28 +128,11 @@ export class HomePage {
   /*Change page when click on a page of the home of launchExternalApp if it's the resto U*/
   changePage(page) {
     if(page.iosSchemaName != null && page.androidPackageName != null){
-      this.launchExternalApp(page);
+      this.utilsServices.launchExternalApp(page);
     }
     else{
       this.nav.navigateForward([page.component, {title: page.title}]);
     }
-  }
-
-  /*launch external application*/
-  launchExternalApp(page) {
-    let app: string;
-    let check:string;
-    if (this.device.platform === 'iOS') {
-      app = page.iosSchemaName;
-      check=page.appUrl;
-    } else if (this.device.platform === 'Android') {
-      app = page.androidPackageName;
-      check=app;
-    } else {
-      const browser = this.iab.create(page.httpUrl, '_system');
-      browser.close();
-    }
-    this.utilsServices.checkAvailability(check, page, app);
   }
 
   /*Open the URL for the social media of the UCL*/

@@ -6,6 +6,7 @@ import { UserService } from './user-service';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Device } from '@ionic-native/device/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -19,6 +20,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
         private appAvailability: AppAvailability,
         public market: Market,
         private iab: InAppBrowser,
+        private device: Device,
     ) {
 
     }
@@ -112,12 +114,28 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
         return await alert.present();
     }
 
-    checkAvailability(check: string, page: any, app: string) {
+    private checkAvailability(check: string, page: any, app: string) {
         this.appAvailability.check(check).then(() => {
           const browser = this.iab.create(page.appUrl, '_system');
           browser.close();
         }, () => {
           this.market.open(app);
         });
-      }
+    }
+
+    launchExternalApp(page:any) {
+        let app: string;
+        let check:string;
+        if (this.device.platform === 'iOS') {
+          app = page.iosSchemaName;
+          check=page.appUrl;
+        } else if (this.device.platform === 'Android') {
+          app = page.androidPackageName;
+          check=app;
+        } else {
+          const browser = this.iab.create(page.httpUrl, '_system');
+          browser.close();
+        }
+        this.checkAvailability(check, page, app);
+    }
 }
