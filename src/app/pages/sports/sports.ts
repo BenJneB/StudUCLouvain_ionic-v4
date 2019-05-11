@@ -137,17 +137,10 @@ export class SportsPage {
   }
 
   private assignDatas(isTeam: boolean, result: any) {
-    if (isTeam == true) {
-      this.teams = result.sports;
-      this.shownTeams = result.shownSports;
-      this.filtersT = result.categories;
-      this.noteams = this.sports.length == 0;
-    } else {
-      this.sports = result.sports;
-      this.shownSports = result.shownSports;
-      this.filters = result.categories;
-      this.nosport = this.sports.length == 0;
-    }
+      isTeam ? this.teams = result.sports : this.sports = result.sports;
+      isTeam ? this.shownTeams = result.shownSports : this.shownSports = result.shownSports;
+      isTeam ? this.filtersT = result.categories : this.filters = result.categories;
+      isTeam ? this.noteams = result.sports.length == 0 : this.nosport = result.sports.length == 0;
     this.searching = false;
     this.updateDisplayedSports();
   }
