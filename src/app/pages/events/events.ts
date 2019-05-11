@@ -259,10 +259,7 @@ export class EventsPage {
     } else if (this.segment === 'favorites') {
       let favEvents = [];
       this.events.filter((item) => {
-        const fav = this.utilsServices.filterFavoriteItems(item, this.searchTerm);
-        if (fav !== undefined) {
-          favEvents.push(this.utilsServices.filterFavoriteItems(item, this.searchTerm));
-        }
+        favEvents = this.utilsServices.filterFavoriteItems(item, favEvents, this.searchTerm);
       });
 
       this.displayedEvents = favEvents;

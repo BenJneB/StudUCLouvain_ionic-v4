@@ -183,10 +183,7 @@ export class SportsPage {
     else if (this.segment === 'favorites') { //list of sports put in favorite
       let favSports = [];
       this.sports.filter((item) => {
-        const fav = this.utilsServices.filterFavoriteItems(item, this.searchTerm);
-        if (fav !== undefined) {
-          favSports.push(this.utilsServices.filterFavoriteItems(item, this.searchTerm));
-        }
+        favSports = this.utilsServices.filterFavoriteItems(item, favSports, this.searchTerm);
       });
       this.displayedSports = favSports;
     }
