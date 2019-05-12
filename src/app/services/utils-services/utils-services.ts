@@ -258,7 +258,7 @@ import { NavigationExtras, Router } from '@angular/router';
       }
 
       goToDetail(item: any, page: string) {
-        let navigationExtras: NavigationExtras = {
+        const navigationExtras: NavigationExtras = {
           state: {
             item: item
           }
