@@ -151,12 +151,12 @@ export class EventsPage {
         await this.cache.getItem(key)
         .then((data) => {
           this.loader.present('Please wait...');
-          this.events=data.events;
+          this.events=data.items;
           this.events.forEach(function(element) {
             element.startDate = new Date(element.startDate);
             element.endDate = new Date(element.endDate);
           });
-          this.shownEvents = data.shownEvents;
+          this.shownEvents = data.showItems;
           this.filters = data.categories;
           this.searching=false;
           this.updateDisplayed();
@@ -181,7 +181,7 @@ export class EventsPage {
       this.eventsService.getEvents(this.segment).then(
         res => {
           let result:any = res;
-          this.events = result.events;
+          this.events = result.items;
           if(key) this.cache.saveItem(key, result);
           this.shownEvents = result.shownEvents;
           this.filters = result.categories;

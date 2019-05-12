@@ -197,8 +197,8 @@ export class NewsPage {
       await this.cache.getItem(key)
       .then((data) => {
         this.loader.present('Please wait...');
-        this.news=data.news;
-        this.shownNews = data.shownNews;
+        this.news=data.items;
+        this.shownNews = data.showItems;
         this.searching=false;
         this.updateDisplayed();
       })
@@ -224,9 +224,9 @@ export class NewsPage {
       this.newsService.getNews(actu)
       .then(
         result => {
-          this.news = result.news;
+          this.news = result.items;
           if(key) this.cache.saveItem(key, result);
-          this.shownNews = result.shownNews;
+          this.shownNews = result.showItems;
           this.searching = false;
           this.nonews = this.news.length == 0;
           this.updateDisplayed();
