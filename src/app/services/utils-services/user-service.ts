@@ -148,19 +148,6 @@ export class UserService {
     this.storage.set('fac',this.fac);
   };
 
-
-  addSlotTP(acronym: string, slot: string) {
-    const index = this.slots.findIndex(item => item.course === acronym);
-    if (index > -1) {
-      this.slots[index].TP = slot;
-    }
-    else {
-      const item = { course: acronym, TP: slot, CM: '' };
-      this.slots.push(item);
-    }
-    this.storage.set('slots',this.slots);
-  }
-
   removeFavorite(itemGuid: string) {
     let index = this.favorites.indexOf(itemGuid);
     if (index > -1) {
@@ -193,14 +180,24 @@ removeSlot(acronym: string, type: string){
   this.storage.set('slots',this.slots);
 }
 
-  addSlotCM(acronym: string, slot: string) {
+  addSlot(acronym: string, slot: string, type: string) {
     const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
-      this.slots[index].CM = slot;
-    } else {
-      let item = { course: acronym, TP: '', CM: slot };
+      if (type === 'TP') {
+        this.slots[index].TP = slot;
+      } else {
+        this.slots[index].CM = slot;
+      }
+    }
+    else {
+      let item;
+      if (type == 'TP') {
+        item = { course: acronym, TP: slot, CM: '' };
+      } else {
+        item = { course: acronym, TP: '', CM: slot };
+      }
       this.slots.push(item);
     }
-    this.storage.set('slots', this.slots);
+    this.storage.set('slots',this.slots);
   }
 }

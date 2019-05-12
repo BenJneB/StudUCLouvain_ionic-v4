@@ -193,11 +193,11 @@ export class CoursePage {
           handler: data => {
             if(segment == "Cours magistral") {
               this.slotCM = data;
-              this.userS.addSlotCM(this.course.acronym,this.slotCM);
+              this.userS.addSlot(this.course.acronym,this.slotCM, 'CM');
             }
             if(segment == "TD") {
               this.slotTP = data;
-              this.userS.addSlotTP(this.course.acronym,this.slotTP);
+              this.userS.addSlot(this.course.acronym,this.slotTP, 'TP');
             }
             this.updateDisplayed();
           }
