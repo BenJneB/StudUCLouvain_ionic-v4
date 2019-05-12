@@ -113,7 +113,7 @@ export class EventsPage {
   }
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
-    this.utilsServices.doRefresh(refresher, this.loadEvents.bind(this));
+    this.utilsServices.doRefresh(refresher, 'cache-event', this.loadEvents.bind(this));
   }
 
   public onSearchInput(){

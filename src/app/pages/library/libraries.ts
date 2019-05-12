@@ -59,7 +59,7 @@ export class LibrariesPage {
 
   /*Reload the libraries if we refresh the page*/
   public doRefresh(refresher) {
-    this.utilsServices.doRefresh(refresher, this.loadLibraries.bind(this));
+    this.utilsServices.doRefresh(refresher, 'cache-libraries', this.loadLibraries.bind(this));
   }
 
   /*Load libraries*/

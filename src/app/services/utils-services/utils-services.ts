@@ -245,10 +245,10 @@ import { ConnectivityService } from './connectivity-service';
         };
     }
 
-    doRefresh(refresher: any, load?: (segment: string) => void) {
+    doRefresh(refresher: any, cache: string, load: (segment: string) => void) {
         if (this.connService.isOnline()) {
-          this.cache.removeItem('cache-event');
-          load('cache-event');
+          this.cache.removeItem(cache);
+          load(cache);
         } else {
           this.connService.presentConnectionAlert();
         }
