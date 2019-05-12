@@ -25,6 +25,9 @@ import { Device } from '@ionic-native/device/ngx';
 
     }
 
+    nullSchemas = { ios: null, android: null };
+    nullUrls = { app: null, http: null };
+
     public convertToJson(data: string): Object {
         let res;
 
@@ -227,4 +230,14 @@ import { Device } from '@ionic-native/device/ngx';
         this.user.storage.set('lan', event);
         this.translateService.use(event);
     }
+
+    getPageStruct(page: any) {
+        return {
+          title: 'MENU.' + page['title'],
+          component: '/' + page['route'],
+          icon: './assets/img/' + page['icon'] + '.png',
+          iosSchemaName: page['schemas']['ios'], androidPackageName: page['schemas']['android'],
+          appUrl: page['urls']['app'], httpUrl: page['urls']['http']
+        };
+      }
 }

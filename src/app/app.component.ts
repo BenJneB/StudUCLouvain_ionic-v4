@@ -1,3 +1,4 @@
+import { UtilsService } from './services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire and Corentin Lamy
@@ -82,15 +83,16 @@ export class AppComponent {
     public cache: CacheService,
     private router: Router,
     private toast: Toast,
-    private nav: NavController
+    private nav: NavController,
+    private utilsServices: UtilsService
   ) {
     this.initializeApp();
   }
 
   private getAllPages() {
-    const nullSchemas = { ios: null, android: null };
-    const nullUrls = { app: null, http: null };
-    this.homePage = this.getPageStruct(this.getPageData('HOME', 'home', 'home', nullSchemas, nullUrls));
+    const nullSchemas = this.utilsServices.nullSchemas;
+    const nullUrls = this.utilsServices.nullUrls;
+    this.homePage = this.utilsServices.getPageStruct(this.getPageData('HOME', 'home', 'home', nullSchemas, nullUrls));
     this.campusPages = this.getOtherPages(false, nullSchemas, nullUrls);
     this.studiePages = this.getOtherPages(true, nullSchemas, nullUrls);
     this.getToolsPages(nullSchemas, nullUrls);
@@ -99,7 +101,7 @@ export class AppComponent {
   private getToolsPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
     const pages = ['guindaille', 'map', 'resto', 'mobility', 'settings', 'credits'];
     const toolData = [];
-    for (const page of pages) {
+    for (const page of pages) { 
       if (page === 'resto') {
         toolData.push(this.getPageData(
           page.toUpperCase(), 
@@ -113,7 +115,7 @@ export class AppComponent {
     }
     this.toolPages = [];
     for (const page of toolData) {
-      this.toolPages.push(this.getPageStruct(page));
+      this.toolPages.push(this.utilsServices.getPageStruct(page));
     }
   }
   
@@ -125,23 +127,13 @@ export class AppComponent {
     }
     const pagesR = [];
     for (const page of datas) {
-      pagesR.push(this.getPageStruct(page));
+      pagesR.push(this.utilsServices.getPageStruct(page));
     }
     return pagesR;
   }
 
   private getPageData(title: string, route: string, icon: string, nullSchemas: any, nullUrls: any) {
     return { title: title, route: route, icon: icon, schemas: nullSchemas, urls: nullUrls };
-  }
-
-  private getPageStruct(page: any) {
-    return {
-      title: 'MENU.' + page['title'],
-      component: '/' + page['route'], 
-      icon: './assets/img/' + page['icon'] + '.png',
-      iosSchemaName: page['schemas']['ios'], androidPackageName: page['schemas']['android'],
-      appUrl: page['urls']['app'], httpUrl: page['urls']['http']
-    };
   }
 
   initializeApp() {
