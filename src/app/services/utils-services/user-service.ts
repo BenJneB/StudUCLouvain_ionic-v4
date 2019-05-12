@@ -191,7 +191,7 @@ removeSlot(acronym: string, type: string){
     }
     else {
       let item;
-      if (type == 'TP') {
+      if (type === 'TP') {
         item = { course: acronym, TP: slot, CM: '' };
       } else {
         item = { course: acronym, TP: '', CM: slot };
