@@ -24,7 +24,7 @@ import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 
-@Injectable({ 
+@Injectable({
   providedIn: 'root' 
 })
 export class UserService {
@@ -92,7 +92,7 @@ export class UserService {
   }
 
   getSlotCM(acronym:string){
-    var index = this.slots.findIndex(item => item.course === acronym);
+    let index = this.slots.findIndex(item => item.course === acronym);
     if(index>-1) return this.slots[index].CM;
     else return "";
   }
@@ -149,7 +149,7 @@ export class UserService {
   };
 
 
-  addSlotTP(acronym:string, slot:string){
+  addSlotTP(acronym: string, slot: string) {
     var index = this.slots.findIndex(item => item.course === acronym);
     if(index>-1){
       this.slots[index].TP = slot;
@@ -181,27 +181,27 @@ export class UserService {
     this.removeSlot(acronym, 'TP');
   }
 
-  removeSlotCM(acronym:string){
+  removeSlotCM(acronym: string){
     this.removeSlot(acronym, 'CM');
 }
 
-removeSlot(acronym:string, type:string){
+removeSlot(acronym: string, type: string){
   var index = this.slots.findIndex(item => item.course === acronym);
-  if(index > -1){
+  if (index > -1) {
     this.slots[index][type] = "";
   }
   this.storage.set('slots',this.slots);
 }
 
-  addSlotCM(acronym:string, slot:string){
+  addSlotCM(acronym: string, slot: string){
     var index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1){
+    if (index > -1) {
       this.slots[index].CM = slot;
     }
     else{
-      let item = {course:acronym,TP:"",CM:slot};
+      let item = { course: acronym, TP: "", CM: slot };
       this.slots.push(item);
     }
-    this.storage.set('slots',this.slots);
+    this.storage.set('slots', this.slots);
   }
 }
