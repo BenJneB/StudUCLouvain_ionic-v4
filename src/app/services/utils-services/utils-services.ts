@@ -7,6 +7,8 @@ import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Device } from '@ionic-native/device/ngx';
+import { CacheService } from 'ionic-cache';
+import { ConnectivityService } from './connectivity-service';
 
 @Injectable({
     providedIn: 'root'
@@ -21,6 +23,8 @@ import { Device } from '@ionic-native/device/ngx';
         public market: Market,
         private iab: InAppBrowser,
         private device: Device,
+        private cache: CacheService,
+        public connService: ConnectivityService,
     ) {
 
     }
@@ -239,5 +243,15 @@ import { Device } from '@ionic-native/device/ngx';
           iosSchemaName: page['schemas']['ios'], androidPackageName: page['schemas']['android'],
           appUrl: page['urls']['app'], httpUrl: page['urls']['http']
         };
+    }
+
+    doRefresh(refresher: any, cache: string, load: (segment: string) => void) {
+        if (this.connService.isOnline()) {
+          this.cache.removeItem(cache);
+          load(cache);
+        } else {
+          this.connService.presentConnectionAlert();
+        }
+        refresher.target.complete();
       }
 }
