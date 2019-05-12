@@ -32,45 +32,21 @@ export class EventsService {
   events: Array<EventItem> = [];
   allCategories: any = [];
   shownEvents = 0;
-
-
   url = "http://louvainfo.be/calendrier/feed/calendar/";
 
-  constructor(public user:UserService, public rssService : RssService) {}
+  constructor(public user: UserService, public rssService: RssService) {}
 
   /*Get the events*/
   public getEvents(segment:string) {
     this.events = [];
-    return this.rssService.load(this.url).then(result => {
-      this.extractEvents(result);
-      return {
-        events: this.events,
-        shownEvents: this.shownEvents,
-        categories: this.allCategories
-      }
-    })
-    .catch(error => {
-      if(error == 1) {
-        return this.getEvents(segment);
-      } else {
-        if(error == 2) {
-          console.log("Loading events : GET req timed out > limit, suppose no news to be displayed");
-        } else {
-          console.log("Error loading events : " + error);
-        }
-        return {
-          events: [],
-          shownEvents: 0
-        }
-      }
-    });
+    return this.rssService.loadItems(segment, this.url, this.extractEvents.bind(this));
   }
 
   /*Extraction of events*/
   private extractEvents(data: any) {
-    this.shownEvents=0;
+    this.shownEvents = 0;
     let maxDescLength = 20;
-    if(data === undefined){
+    if (data === undefined) {
       console.log("Error events data undefined!!!")
       return;
     }
@@ -95,6 +71,11 @@ export class EventsService {
       let newEventItem = new EventItem(item.description, item.link, item.title, item.photo, trimmedDescription, item.location,
                       hidden, favorite, item.guid, startDate, endDate, item.category, iconCategory);
       this.events.push(newEventItem);
+    }
+    return {
+      items: this.events,
+      shownItems: this.shownEvents,
+      categories: this.allCategories
     }
   }
 

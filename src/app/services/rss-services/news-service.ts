@@ -64,29 +64,7 @@ export class NewsService {
           break;
        }
     }
-    return this.rssService.load(baseURL).then(result => {
-      console.log(result);
-        this.extractNews(result);
-        return {
-          news: this.news,
-          shownNews: this.shownNews
-        }
-    })
-    .catch(error => {
-      if(error == 1) {
-        return this.getNews(segment);
-      } else {
-        if(error == 2) {
-          console.log("Loading news : GET req timed out > limit, suppose no news to be displayed");
-        } else {
-          console.log("Error loading news : " + error);
-        }
-        return {
-          news: [],
-          shownNews: 0
-        }
-      }
-    });
+    return this.rssService.loadItems(segment, baseURL, this.extractNews.bind(this));
   }
 
   /*Extract news*/
@@ -113,6 +91,10 @@ export class NewsService {
       if(item.enclosure != null) img = item.enclosure.$.url;
       let newNewsItem = new NewsItem(item.description || "No description...", item.link || "No link", item.title || "No title", img, trimmedDescription, hidden, item.guid, pubDate);
       this.news.push(newNewsItem);
+    }
+    return {
+      items: this.news,
+      shownItems: this.shownNews
     }
   }
 

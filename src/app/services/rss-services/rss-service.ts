@@ -57,7 +57,26 @@ export class RssService {
           reject(err);
         });;
     });
+  }
 
-    
+  loadItems(segment: string, url: string, extract: (data: any) => any) {
+    return this.load(url).then(result => {
+      return extract(result);
+    })
+      .catch(error => {
+        if (error === 1) {
+          return this.loadItems(segment, url, extract);
+        } else {
+          if (error === 2) {
+            console.log('Loading items : GET req timed out > limit, suppose no items to display');
+          }  else {
+            console.log('Error loading items : ' + error);
+          }
+          return {
+            items: [],
+            shownItems: 0
+          };
+        }
+      });
   }
 }
