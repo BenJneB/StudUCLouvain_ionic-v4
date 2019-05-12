@@ -204,12 +204,11 @@ export class AppComponent {
     this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
       if (outlet && outlet.canGoBack()) {
         outlet.pop();
-      }
-      else if (this.router.url === 'home') {
+      } else
+      if (this.router.url === 'home') {
         if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
           navigator['app'].exitApp(); // work in ionic 4
-        }
-        else {
+        } else {
           this.toast.show(`Press back again to exit App.`, '2000', 'center')
             .subscribe(toast => {
             });
