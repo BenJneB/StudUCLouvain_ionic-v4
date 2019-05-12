@@ -1,4 +1,3 @@
-import { UtilsService } from './../../services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -26,10 +25,9 @@ import { AlertController, IonItemSliding, IonList, NavController,
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
-
 import { CacheService } from 'ionic-cache';
 import { LoaderService } from '../../services/utils-services/loader-service';
-
+import { UtilsService } from './../../services/utils-services/utils-services';
 import { UserService } from '../../services/utils-services/user-service';
 import { EventsService } from '../../services/rss-services/events-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
@@ -37,7 +35,6 @@ import { EventsFilterPage } from '../../pages/events/events-filter/events-filter
 import { EventItem } from '../../entity/eventItem';
 import { debounceTime } from 'rxjs/operators';
 import { OverlayEventDetail } from '@ionic/core';
-import { NavigationExtras, Router } from '@angular/router';
 
 @Component({
   selector: 'page-events',
@@ -86,7 +83,6 @@ export class EventsPage {
     private translateService: TranslateService,
     private cache: CacheService,
     private loader: LoaderService,
-    private router: Router,
     private utilsServices: UtilsService,
   ) {
     this.title = 'Evénements';
@@ -104,6 +100,10 @@ export class EventsPage {
 
   }
 
+  public goToEventDetail(event: EventItem) {
+    this.utilsServices.goToDetail(event, 'events/details');
+  }
+
   removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string) {
     this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts, this.updateDisplayed.bind(this));
   }
@@ -118,16 +118,6 @@ export class EventsPage {
 
   public onSearchInput(){
     this.searching = true;
-  }
-
-  /*Open the details page for an event*/
-  public goToEventDetail(event: EventItem) {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        event: event
-      }
-    };
-    this.router.navigate( ['events/details'], navigationExtras);
   }
 
   /*To display or close a group of events (1 group = events for one week)*/

@@ -43,9 +43,8 @@ export class EventsDetailsPage {
     private route: ActivatedRoute
     ) {
       this.route.queryParams.subscribe(params => {
-
         if (this.router.getCurrentNavigation().extras.state) {
-          this.event = this.router.getCurrentNavigation().extras.state.event;
+          this.event = this.router.getCurrentNavigation().extras.state.items;
         }
       });
   }

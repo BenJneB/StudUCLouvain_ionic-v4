@@ -23,13 +23,11 @@ import { trigger, state, style, animate, transition } from '@angular/animations'
 import { Component } from '@angular/core';
 import { NavController, ModalController, Platform,LoadingController} from '@ionic/angular';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { RepertoireService } from '../../services/wso2-services/repertoire-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-
 import { EmployeeItem } from '../../entity/employeeItem';
 import { LoaderService } from 'src/app/services/utils-services/loader-service';
-import { Router, NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'page-support',
@@ -61,7 +59,8 @@ export class SupportPage {
               public repService : RepertoireService,
               public connService : ConnectivityService,
               public loader: LoaderService,
-              private router: Router)
+              private utilsServices: UtilsService
+  )
   {
     this.title = "Support";
   }
@@ -101,12 +100,7 @@ export class SupportPage {
 
   /*Open the page with the details for the employee selectionned*/
   goToEmpDetails(emp: EmployeeItem) {
-    let navigationExtras: NavigationExtras = {
-      state: {
-        emp: emp
-      }
-    };
-    this.router.navigate(['employee'], navigationExtras);
+    this.utilsServices.goToDetail(emp, 'employee');
   }
 
   /*Show or close the informations for the section selectionned*/
