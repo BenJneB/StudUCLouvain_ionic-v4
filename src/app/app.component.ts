@@ -21,7 +21,7 @@ import { UtilsService } from './services/utils-services/utils-services';
 */
 
 import { Component, ViewChildren, QueryList } from '@angular/core';
-import { 
+import {
   MenuController, 
   NavController,
   Platform,
@@ -40,7 +40,7 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from './services/utils-services/user-service';
 import { Wso2Service } from './services/wso2-services/wso2-service';
-import { CacheService } from "ionic-cache";
+import { CacheService } from 'ionic-cache';
 import { Router } from '@angular/router';
 import { Toast } from '@ionic-native/toast/ngx';
 import { Page } from './entity/page';
@@ -101,7 +101,7 @@ export class AppComponent {
   private getToolsPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
     const pages = ['guindaille', 'map', 'resto', 'mobility', 'settings', 'credits'];
     const toolData = [];
-    for (const page of pages) { 
+    for (const page of pages) {
       if (page === 'resto') {
         toolData.push(this.getPageData(
           page.toUpperCase(), 
@@ -158,7 +158,7 @@ export class AppComponent {
        } else {
          this.rootPage = 'HomePage';
        }
-     })
+     });
    })
   }
 
@@ -225,13 +225,13 @@ export class AppComponent {
     this.menu.close();
     this.page = page;
 
-    if(!((activeUrl === this.homePage.url) && page === this.homePage)){
+    if(!((activeUrl === this.homePage.url) && page === this.homePage)) {
 	    if(page.iosSchemaName !== null && page.androidPackageName !== null){
 	        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
 	    }
 	    else {
         if(page != this.homePage) {
-      		this.nav.navigateForward([page.component, {title: page.title}]);
+      		this.nav.navigateForward([page.component, { title: page.title }]);
         }
       }
     }
@@ -240,25 +240,25 @@ export class AppComponent {
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
 	  let app: string;
-    	let check:string;
+    let check:string;
   	if (this.device.platform === 'iOS') {
   		app = iosSchemaName;
-      	check=appUrl;
+      	check = appUrl;
   	} else if (this.device.platform === 'Android') {
   		app = androidPackageName;
-      	check=app;
+      check = app;
 
   	} else {
   		const browser = this.iab.create(httpUrl, '_system');
       browser.close();
-  	}
+    }
   	this.appAvailability.check(check).then(
   		() => { // success callback
   			const browser = this.iab.create(appUrl, '_system');
         browser.close();
   		},
-  		() => { // error callback
-  			this.market.open(app);
+      () => { // error callback
+        this.market.open(app);
   		}
   	);
   }
