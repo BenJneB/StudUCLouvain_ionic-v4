@@ -22,14 +22,14 @@ import { UtilsService } from './services/utils-services/utils-services';
 
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import {
-  MenuController, 
+  MenuController,
   NavController,
   Platform,
-  LoadingController, 
-  ActionSheetController, 
-  PopoverController, 
-  ModalController, 
-  IonRouterOutlet 
+  LoadingController,
+  ActionSheetController,
+  PopoverController,
+  ModalController,
+  IonRouterOutlet
 } from '@ionic/angular';
 import { Device } from '@ionic-native/device/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -37,7 +37,6 @@ import { Market } from '@ionic-native/market/ngx';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { TranslateService } from '@ngx-translate/core';
-
 import { UserService } from './services/utils-services/user-service';
 import { Wso2Service } from './services/wso2-services/wso2-service';
 import { CacheService } from 'ionic-cache';
@@ -69,7 +68,7 @@ export class AppComponent {
     public platform: Platform,
     public menu: MenuController,
     public market: Market,
-    private appAvailability : AppAvailability,
+    private appAvailability: AppAvailability,
     private iab: InAppBrowser,
     private device: Device,
     private popoverCtrl: PopoverController,
@@ -150,8 +149,7 @@ export class AppComponent {
       this.cache.setDefaultTTL(60 * 60 * 2);
       this.cache.setOfflineInvalidate(false);
      // this.user.storage.set('first',null);
-     this.user.storage.get('first').then((data) =>
-     {
+     this.user.storage.get('first').then((data) => {
        if(data==null) {
          this.rootPage = 'TutoPage';
          this.user.storage.set('first',false);
@@ -166,8 +164,7 @@ export class AppComponent {
     this.user.storage.get('lan').then((data) => {
       if (data != null) {
         this.translateService.use(data);
-      }
-      else {
+      } else {
         this.translateService.use('fr');
       }
     });
@@ -226,8 +223,8 @@ export class AppComponent {
     this.page = page;
 
     if(!((activeUrl === this.homePage.url) && page === this.homePage)) {
-	    if(page.iosSchemaName !== null && page.androidPackageName !== null){
-	        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
+	    if(page.iosSchemaName !== null && page.androidPackageName !== null) {
+        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
 	    }
 	    else {
         if(page != this.homePage) {
@@ -242,12 +239,12 @@ export class AppComponent {
 	  let app: string;
     let check:string;
   	if (this.device.platform === 'iOS') {
-  		app = iosSchemaName;
-      	check = appUrl;
-  	} else if (this.device.platform === 'Android') {
-  		app = androidPackageName;
+      app = iosSchemaName;
+      check = appUrl;
+    } else 
+    if (this.device.platform === 'Android') {
+      app = androidPackageName;
       check = app;
-
   	} else {
   		const browser = this.iab.create(httpUrl, '_system');
       browser.close();
@@ -259,7 +256,6 @@ export class AppComponent {
   		},
       () => { // error callback
         this.market.open(app);
-  		}
-  	);
+      });
   }
 }
