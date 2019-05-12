@@ -30,9 +30,9 @@ import { Storage } from '@ionic/storage';
 export class UserService {
 
   favorites: string[] = [];
-  campus: string = "";
+  campus: string = '';
   slots: Array<{course:string, TP:string, CM:string}> = [];
-  fac: string = "";
+  fac: string = '';
 
   constructor(
     public eventss: Events,
@@ -60,8 +60,8 @@ export class UserService {
   getCampus(){
     this.storage.get('campus').then((data) =>
     {
-      if(data == null){
-        this.campus = "";
+      if(data == null) {
+        this.campus = '';
       } else {
         this.campus=data;
         }
@@ -71,8 +71,8 @@ export class UserService {
   getFac(){
     this.storage.get('fac').then((data) =>
     {
-      if(data == null){
-        this.fac = "";
+      if(data == null) {
+        this.fac = '';
       } else {
         this.fac=data;
         }
@@ -91,16 +91,18 @@ export class UserService {
     })
   }
 
-  getSlotCM(acronym:string){
+  getSlotCM(acronym: string) {
     let index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1) return this.slots[index].CM;
-    else return "";
+    if (index  >-1) {
+      return this.slots[index].CM;
+    }
+    else return '';
   }
 
-  getSlotTP(acronym:string){
-    var index = this.slots.findIndex(item => item.course === acronym);
+  getSlotTP(acronym: string) {
+    let index = this.slots.findIndex(item => item.course === acronym);
     if(index>-1) return this.slots[index].TP;
-    else return "";
+    else return '';
   }
 
   hasFavorite(itemGuid: string) {
@@ -115,8 +117,8 @@ export class UserService {
     return(this.fac.length > 0);
   }
 
-  hasSlotTP(acronym:string){
-    var index = this.slots.findIndex(item => item.course === acronym);
+  hasSlotTP(acronym: string){
+    let index = this.slots.findIndex(item => item.course === acronym);
     if(index > -1){
       return this.slots[index].TP.length >0;
     }
@@ -124,8 +126,8 @@ export class UserService {
 
   }
 
-  hasSlotCM(acronym:string){
-    var index = this.slots.findIndex(item => item.course === acronym);
+  hasSlotCM(acronym: string) {
+    let index = this.slots.findIndex(item => item.course === acronym);
     if(index > -1){
       return this.slots[index].CM.length >0;
     }
@@ -150,12 +152,12 @@ export class UserService {
 
 
   addSlotTP(acronym: string, slot: string) {
-    var index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1){
+    let index = this.slots.findIndex(item => item.course === acronym);
+    if (index > -1) {
       this.slots[index].TP = slot;
     }
-    else{
-      let item = {course:acronym,TP:slot,CM:""};
+    else {
+      let item = { course: acronym, TP: slot, CM: '' };
       this.slots.push(item);
     }
     this.storage.set('slots',this.slots);
@@ -170,11 +172,11 @@ export class UserService {
   };
 
   removeCampus() {
-    this.campus="";
+    this.campus = '';
     this.storage.set('campus',this.campus);
   };
   removeFac() {
-    this.fac="";
+    this.fac = '';
     this.storage.set('fac',this.fac);
   };
   removeSlotTP(acronym:string){
@@ -186,20 +188,20 @@ export class UserService {
 }
 
 removeSlot(acronym: string, type: string){
-  var index = this.slots.findIndex(item => item.course === acronym);
+  let index = this.slots.findIndex(item => item.course === acronym);
   if (index > -1) {
-    this.slots[index][type] = "";
+    this.slots[index][type] = '';
   }
   this.storage.set('slots',this.slots);
 }
 
   addSlotCM(acronym: string, slot: string){
-    var index = this.slots.findIndex(item => item.course === acronym);
+    let index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
       this.slots[index].CM = slot;
     }
     else{
-      let item = { course: acronym, TP: "", CM: slot };
+      let item = { course: acronym, TP: '', CM: slot };
       this.slots.push(item);
     }
     this.storage.set('slots', this.slots);
