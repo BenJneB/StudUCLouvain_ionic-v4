@@ -25,11 +25,11 @@ import {
   MenuController, 
   NavController,
   Platform,
-  LoadingController, 
+  LoadingController,
   ActionSheetController, 
   PopoverController, 
   ModalController, 
-  IonRouterOutlet 
+  IonRouterOutlet
 } from '@ionic/angular';
 import { Device } from '@ionic-native/device/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
@@ -150,8 +150,7 @@ export class AppComponent {
       this.cache.setDefaultTTL(60 * 60 * 2);
       this.cache.setOfflineInvalidate(false);
      // this.user.storage.set('first',null);
-     this.user.storage.get('first').then((data) =>
-     {
+     this.user.storage.get('first').then((data) => {
        if(data==null) {
          this.rootPage = 'TutoPage';
          this.user.storage.set('first',false);
@@ -166,8 +165,7 @@ export class AppComponent {
     this.user.storage.get('lan').then((data) => {
       if (data != null) {
         this.translateService.use(data);
-      }
-      else {
+      } else {
         this.translateService.use('fr');
       }
     });
@@ -226,8 +224,8 @@ export class AppComponent {
     this.page = page;
 
     if(!((activeUrl === this.homePage.url) && page === this.homePage)) {
-	    if(page.iosSchemaName !== null && page.androidPackageName !== null){
-	        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
+	    if(page.iosSchemaName !== null && page.androidPackageName !== null) {
+        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
 	    }
 	    else {
         if(page != this.homePage) {
@@ -242,10 +240,10 @@ export class AppComponent {
 	  let app: string;
     let check:string;
   	if (this.device.platform === 'iOS') {
-  		app = iosSchemaName;
-      	check = appUrl;
+      app = iosSchemaName;
+      check = appUrl;
   	} else if (this.device.platform === 'Android') {
-  		app = androidPackageName;
+      app = androidPackageName;
       check = app;
 
   	} else {
@@ -259,7 +257,6 @@ export class AppComponent {
   		},
       () => { // error callback
         this.market.open(app);
-  		}
-  	);
+      });
   }
 }
