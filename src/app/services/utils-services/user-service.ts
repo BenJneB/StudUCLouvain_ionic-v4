@@ -121,23 +121,19 @@ export class UserService {
     return(this.fac.length > 0);
   }
 
-  hasSlotTP(acronym: string){
+  hasSlot(acronym: string, type: string) {
     let index = this.slots.findIndex(item => item.course === acronym);
     if(index > -1) {
-      return this.slots[index].TP.length >0;
+      const elem = this.slots[index];
+      if (type === 'TP') {
+        return elem.TP.length > 0;
+      } else {
+        return elem.CM.length > 0;
+      }
     } else { 
       return index > -1;
     }
 
-  }
-
-  hasSlotCM(acronym: string) {
-    let index = this.slots.findIndex(item => item.course === acronym);
-    if(index > -1){
-      return this.slots[index].CM.length >0;
-    } else { 
-      return index > -1;
-    }
   }
 
   addFavorite(itemGuid: string) {
