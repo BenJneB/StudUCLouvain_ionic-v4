@@ -93,12 +93,10 @@ export class LibrariesPage {
   }
 
   async cachedOrNot(){
-      //this.cache.removeItem('cache-event');
+      // this.cache.removeItem('cache-event');
       let key = 'cache-libraries';
       await this.cache.getItem(key)
         .then((data) => {
-          //this.presentLoading();
-          console.log("cached libraries");
           this.libraries=data;
           this.searching=false;
         })
