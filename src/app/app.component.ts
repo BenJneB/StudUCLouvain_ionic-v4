@@ -55,11 +55,11 @@ export class AppComponent {
   alertPresented: any;
   page: any;
   homePage;
-  checked=false;
+  checked = false;
   lastTimeBackPress = 0;
   timePeriodToExit = 2000;
   @ViewChildren(IonRouterOutlet) routerOutlets: QueryList<IonRouterOutlet>;
-  
+
   campusPages: Array<Page>;
   studiePages: Array<Page>;
   toolPages: Array<Page>;
@@ -103,7 +103,7 @@ export class AppComponent {
     for (const page of pages) {
       if (page === 'resto') {
         toolData.push(this.getPageData(
-          page.toUpperCase(), 
+          page.toUpperCase(),
           page, page,
           { ios: 'id1156050719', android: 'com.apptree.resto4u' },
           { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }
@@ -150,14 +150,14 @@ export class AppComponent {
       this.cache.setOfflineInvalidate(false);
      // this.user.storage.set('first',null);
      this.user.storage.get('first').then((data) => {
-       if(data==null) {
+       if (data === null) {
          this.rootPage = 'TutoPage';
-         this.user.storage.set('first',false);
+         this.user.storage.set('first', false);
        } else {
          this.rootPage = 'HomePage';
        }
      });
-   })
+   });
   }
 
   private getLanguage() {
@@ -216,19 +216,18 @@ export class AppComponent {
 }
 
   openRootPage(page) {
-    let activeUrl = this.router.url;
+    const activeUrl = this.router.url;
 
     // close the menu when clicking a link from the menu
     this.menu.close();
     this.page = page;
 
-    if(!((activeUrl === this.homePage.url) && page === this.homePage)) {
-	    if(page.iosSchemaName !== null && page.androidPackageName !== null) {
+    if (!((activeUrl === this.homePage.url) && page === this.homePage)) {
+      if (page.iosSchemaName !== null && page.androidPackageName !== null) {
         this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
-	    }
-	    else {
-        if(page != this.homePage) {
-      		this.nav.navigateForward([page.component, { title: page.title }]);
+	    } else {
+        if (page !== this.homePage) {
+          this.nav.navigateForward([page.component, { title: page.title }]);
         }
       }
     }
@@ -236,22 +235,22 @@ export class AppComponent {
   }
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
-	  let app: string;
-    let check:string;
-  	if (this.device.platform === 'iOS') {
+    let app: string;
+    let check: string;
+    if (this.device.platform === 'iOS') {
       app = iosSchemaName;
       check = appUrl;
-    } else 
+    } else
     if (this.device.platform === 'Android') {
       app = androidPackageName;
       check = app;
-  	} else {
-  		const browser = this.iab.create(httpUrl, '_system');
+    } else {
+      const browser = this.iab.create(httpUrl, '_system');
       browser.close();
     }
-  	this.appAvailability.check(check).then(
-  		() => { // success callback
-  			const browser = this.iab.create(appUrl, '_system');
+    this.appAvailability.check(check).then(
+      () => { // success callback
+        const browser = this.iab.create(appUrl, '_system');
         browser.close();
   		},
       () => { // error callback
