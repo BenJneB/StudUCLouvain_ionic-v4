@@ -9,6 +9,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { CacheService } from 'ionic-cache';
 import { ConnectivityService } from './connectivity-service';
+import { NavigationExtras, Router } from '@angular/router';
 
 @Injectable({
     providedIn: 'root'
@@ -25,6 +26,7 @@ import { ConnectivityService } from './connectivity-service';
         private device: Device,
         private cache: CacheService,
         public connService: ConnectivityService,
+        private router: Router,
     ) {
 
     }
@@ -253,5 +255,14 @@ import { ConnectivityService } from './connectivity-service';
           this.connService.presentConnectionAlert();
         }
         refresher.target.complete();
+      }
+
+      goToDetail(item: any, page: string) {
+        const navigationExtras: NavigationExtras = {
+          state: {
+            item: item
+          }
+        };
+        this.router.navigate( [page], navigationExtras);
       }
 }
