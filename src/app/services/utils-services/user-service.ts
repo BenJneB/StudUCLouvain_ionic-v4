@@ -91,19 +91,15 @@ export class UserService {
     })
   }
 
-  getSlotCM(acronym: string) {
+  getSlot(acronym: string, type: string) {
     let index = this.slots.findIndex(item => item.course === acronym);
-    if (index  >-1) {
-      return this.slots[index].CM;
-    } else {
-      return '';
-    }
-  }
-
-  getSlotTP(acronym: string) {
-    let index = this.slots.findIndex(item => item.course === acronym);
-    if(index > -1) {
-      return this.slots[index].TP;
+    if (index  > -1) {
+      const elem = this.slots[index];
+      if (type === 'TP') {
+        return elem.TP;
+      } else {
+        return elem.CM;
+      }
     } else {
       return '';
     }
