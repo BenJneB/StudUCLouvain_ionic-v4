@@ -64,15 +64,13 @@ export class RssService {
       return extract(result);
     })
       .catch(error => {
-        if (error == 1) {
+        if (error === 1) {
           return this.loadItems(segment, url, extract);
-        }
-        else {
-          if (error == 2) {
-            console.log("Loading items : GET req timed out > limit, suppose no items to display");
-          }
-          else {
-            console.log("Error loading items : " + error);
+        } else {
+          if (error === 2) {
+            console.log('Loading items : GET req timed out > limit, suppose no items to display');
+          }  else {
+            console.log('Error loading items : ' + error);
           }
           return {
             items: [],
