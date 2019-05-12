@@ -234,7 +234,7 @@ import { Device } from '@ionic-native/device/ngx';
     getPageStruct(page: any) {
         return {
           title: 'MENU.' + page['title'],
-          component: '/' + page['route'], 
+          component: '/' + page['route'],
           icon: './assets/img/' + page['icon'] + '.png',
           iosSchemaName: page['schemas']['ios'], androidPackageName: page['schemas']['android'],
           appUrl: page['urls']['app'], httpUrl: page['urls']['http']
