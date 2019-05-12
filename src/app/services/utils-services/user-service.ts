@@ -190,14 +190,19 @@ removeSlot(acronym: string, type: string){
       }
     }
     else {
-      let item;
-      if (type === 'TP') {
-        item = { course: acronym, TP: slot, CM: '' };
-      } else {
-        item = { course: acronym, TP: '', CM: slot };
-      }
-      this.slots.push(item);
+      this.pushItem(type, acronym, slot);
     }
     this.storage.set('slots',this.slots);
+  }
+
+  private pushItem(type: string, acronym: string, slot: string) {
+    let item;
+    if (type === 'TP') {
+      item = { course: acronym, TP: slot, CM: '' };
+    }
+    else {
+      item = { course: acronym, TP: '', CM: slot };
+    }
+    this.slots.push(item);
   }
 }
