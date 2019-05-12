@@ -43,9 +43,7 @@ export class StudentService {
     return new Promise(resolve => {
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
-          console.log(data);
           if(data['activities']!=null){
-            console.log(data);
             resolve({activities : data['activities']});
           }
         });
@@ -78,7 +76,7 @@ export class StudentService {
       for (var _i = 0; _i < C; _i++) {
           let date = this.getDate(_i);
           let day = this.getDay(_i);
-          let url = newUrl+date;
+          const url = newUrl + date;
           this.wso2Service.loadStudent(url).subscribe(
             data => {
               let res: any;
@@ -100,7 +98,7 @@ export class StudentService {
   private extractSchedule(res: any, date: string) {
     let items = res.items.item;
     let dayDate = date.substr(5);
-    dayDate = dayDate.substr(3) + "/" + dayDate.substr(0, 2);
+    dayDate = dayDate.substr(3) + '/' + dayDate.substr(0, 2);
     for (let cours of items) {
       let name: any;
       let res: any;
@@ -119,7 +117,7 @@ export class StudentService {
     let schedule: Array<any> = [];
     return new Promise(resolve => {
           let date = this.getDate(0);
-          let url = newUrl+date;
+          const url = newUrl + date;
           this.wso2Service.loadStudent(url).subscribe(
             data => {
               let res: any;
@@ -174,7 +172,6 @@ export class StudentService {
         (data) => {
           let res:any;
           res=data;
-          console.log(res.lireInscriptionAnacResponse.return);
           resolve(res.lireInscriptionAnacResponse.return);
         },
         (err) => {
