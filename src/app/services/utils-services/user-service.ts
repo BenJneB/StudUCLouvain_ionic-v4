@@ -46,10 +46,10 @@ export class UserService {
     this.getFac();
   }
 
-  getFavorites(){
+  getFavorites() {
     this.storage.get('listFavorites').then((data) =>
     {
-      if(data==null){
+      if(data == null) {
         this.favorites=[];
       } else {
         this.favorites=data;
@@ -82,7 +82,7 @@ export class UserService {
   getSlots(){
     this.storage.get('slots').then((data) =>
     {
-      if(data==null){
+      if(data == null){
         this.slots = [];
       }
       else{
@@ -95,14 +95,18 @@ export class UserService {
     let index = this.slots.findIndex(item => item.course === acronym);
     if (index  >-1) {
       return this.slots[index].CM;
+    } else {
+      return '';
     }
-    else return '';
   }
 
   getSlotTP(acronym: string) {
     let index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1) return this.slots[index].TP;
-    else return '';
+    if(index > -1) {
+      return this.slots[index].TP;
+    } else {
+      return '';
+    }
   }
 
   hasFavorite(itemGuid: string) {
@@ -119,10 +123,11 @@ export class UserService {
 
   hasSlotTP(acronym: string){
     let index = this.slots.findIndex(item => item.course === acronym);
-    if(index > -1){
+    if(index > -1) {
       return this.slots[index].TP.length >0;
+    } else { 
+      return index > -1;
     }
-    else return index > -1;
 
   }
 
@@ -130,8 +135,9 @@ export class UserService {
     let index = this.slots.findIndex(item => item.course === acronym);
     if(index > -1){
       return this.slots[index].CM.length >0;
+    } else { 
+      return index > -1;
     }
-    else return index > -1;
   }
 
   addFavorite(itemGuid: string) {
