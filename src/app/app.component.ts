@@ -22,13 +22,13 @@ import { UtilsService } from './services/utils-services/utils-services';
 
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import {
-  MenuController, 
+  MenuController,
   NavController,
   Platform,
   LoadingController,
-  ActionSheetController, 
-  PopoverController, 
-  ModalController, 
+  ActionSheetController,
+  PopoverController,
+  ModalController,
   IonRouterOutlet
 } from '@ionic/angular';
 import { Device } from '@ionic-native/device/ngx';
@@ -37,7 +37,6 @@ import { Market } from '@ionic-native/market/ngx';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { TranslateService } from '@ngx-translate/core';
-
 import { UserService } from './services/utils-services/user-service';
 import { Wso2Service } from './services/wso2-services/wso2-service';
 import { CacheService } from 'ionic-cache';
@@ -69,7 +68,7 @@ export class AppComponent {
     public platform: Platform,
     public menu: MenuController,
     public market: Market,
-    private appAvailability : AppAvailability,
+    private appAvailability: AppAvailability,
     private iab: InAppBrowser,
     private device: Device,
     private popoverCtrl: PopoverController,
@@ -242,10 +241,10 @@ export class AppComponent {
   	if (this.device.platform === 'iOS') {
       app = iosSchemaName;
       check = appUrl;
-  	} else if (this.device.platform === 'Android') {
+    } else 
+    if (this.device.platform === 'Android') {
       app = androidPackageName;
       check = app;
-
   	} else {
   		const browser = this.iab.create(httpUrl, '_system');
       browser.close();
