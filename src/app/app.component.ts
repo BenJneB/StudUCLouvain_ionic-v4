@@ -149,7 +149,7 @@ export class AppComponent {
      this.getLanguage();
       this.cache.setDefaultTTL(60 * 60 * 2);
       this.cache.setOfflineInvalidate(false);
-     //this.user.storage.set('first',null);
+     // this.user.storage.set('first',null);
      this.user.storage.get('first').then((data) =>
      {
        if(data==null) {
@@ -216,60 +216,7 @@ export class AppComponent {
             }
         });
     });
-  // Confirm exit
-  /* this.platform.registerBackButtonAction(() => {
-
-      let activePortal = this.ionicApp._loadingPortal.getActive() ||
-          this.ionicApp._modalPortal.getActive() ||
-          this.ionicApp._toastPortal.getActive() ||
-          this.ionicApp._overlayPortal.getActive();
-
-      if (activePortal) {
-          activePortal.dismiss();
-          return
-      }
-      else if (this.menu.isOpen()) { // Close menu if open
-          this.menu.close();
-          return
-      }
-      if (this.nav.length() == 1) {
-        this.confirmExitApp();
-      } else {
-        this.nav.pop();
-      }
-  }); */
 }
-
-
-/* 
-confirmExitApp() {
-  let activeVC = this.nav.getActive();
-  let page = activeVC.instance;
-  if(page instanceof HomePage){
-    if(!this.alertPresented){
-      this.alertPresented = true;
-      let confirmAlert = this.alertCtrl.create({
-          header: "Fermeture",
-          message: "Désirez-vous quitter l'application ?",
-          buttons: [
-              {
-                  text: 'Annuler',
-                  handler: () => {
-                    this.alertPresented = false;
-                  }
-              },
-              {
-                  text: 'Quitter',
-                  handler: () => {
-                      this.platform.exitApp();
-                  }
-              }
-          ]
-      }).then(alert => alert.present());
-  }confirmExitApp
-}
-else this.openRootPage(this.homePage);
-} */
 
   openRootPage(page) {
     let activeUrl = this.router.url;
