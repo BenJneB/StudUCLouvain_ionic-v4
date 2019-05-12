@@ -24,7 +24,7 @@ import { ConnectivityService } from './connectivity-service';
         private iab: InAppBrowser,
         private device: Device,
         private cache: CacheService,
-        public connService : ConnectivityService,
+        public connService: ConnectivityService,
     ) {
 
     }
@@ -246,7 +246,7 @@ import { ConnectivityService } from './connectivity-service';
     }
 
     doRefresh(refresher: any, load?: (segment: string) => void) {
-        if(this.connService.isOnline()) {
+        if (this.connService.isOnline()) {
           this.cache.removeItem('cache-event');
           load('cache-event');
         } else {
