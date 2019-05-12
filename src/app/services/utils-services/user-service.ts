@@ -31,15 +31,15 @@ export class UserService {
 
   favorites: string[] = [];
   campus: string = '';
-  slots: Array<{course:string, TP:string, CM:string}> = [];
+  slots: Array<{ course: string, TP: string, CM: string }> = [];
   fac: string = '';
 
   constructor(
     public eventss: Events,
     public storage: Storage
   ) {
-    //USE THIS LINE TO CLEAR THE STORAGE
-    //storage.clear();
+    // USE THIS LINE TO CLEAR THE STORAGE
+    // storage.clear();
     this.getFavorites();
     this.getCampus();
     this.getSlots();
@@ -50,7 +50,7 @@ export class UserService {
     this.storage.get('listFavorites').then((data) =>
     {
       if(data == null) {
-        this.favorites=[];
+        this.favorites = [];
       } else {
         this.favorites=data;
         }
@@ -63,7 +63,7 @@ export class UserService {
       if(data == null) {
         this.campus = '';
       } else {
-        this.campus=data;
+        this.campus = data;
         }
     });
   }
@@ -79,7 +79,7 @@ export class UserService {
     });
   }
 
-  getSlots(){
+  getSlots() {
     this.storage.get('slots').then((data) =>
     {
       if(data == null){
@@ -88,11 +88,11 @@ export class UserService {
       else{
         this.slots = data;
       }
-    })
+    });
   }
 
   getSlot(acronym: string, type: string) {
-    let index = this.slots.findIndex(item => item.course === acronym);
+    const index = this.slots.findIndex(item => item.course === acronym);
     if (index  > -1) {
       const elem = this.slots[index];
       if (type === 'TP') {
@@ -107,7 +107,7 @@ export class UserService {
 
   hasFavorite(itemGuid: string) {
     return (this.favorites.indexOf(itemGuid) > -1);
-  };
+  }
 
   hasCampus() {
     return(this.campus.length > 0);
@@ -135,31 +135,18 @@ export class UserService {
   addFavorite(itemGuid: string) {
     this.favorites.push(itemGuid);
     this.storage.set('listFavorites',this.favorites);
-  };
+  }
 
   addCampus(campus: string) {
     this.campus = campus;
     this.storage.set('campus',this.campus);
-  };
+  }
 
 
   addFac(fac: string) {
     this.fac = fac;
     this.storage.set('fac',this.fac);
   };
-
-
-  addSlotTP(acronym: string, slot: string) {
-    let index = this.slots.findIndex(item => item.course === acronym);
-    if (index > -1) {
-      this.slots[index].TP = slot;
-    }
-    else {
-      let item = { course: acronym, TP: slot, CM: '' };
-      this.slots.push(item);
-    }
-    this.storage.set('slots',this.slots);
-  }
 
   removeFavorite(itemGuid: string) {
     let index = this.favorites.indexOf(itemGuid);
@@ -177,11 +164,11 @@ export class UserService {
     this.fac = '';
     this.storage.set('fac',this.fac);
   };
-  removeSlotTP(acronym:string){
+  removeSlotTP(acronym: string) {
     this.removeSlot(acronym, 'TP');
   }
 
-  removeSlotCM(acronym: string){
+  removeSlotCM(acronym: string) {
     this.removeSlot(acronym, 'CM');
 }
 
@@ -193,15 +180,29 @@ removeSlot(acronym: string, type: string){
   this.storage.set('slots',this.slots);
 }
 
-  addSlotCM(acronym: string, slot: string){
-    let index = this.slots.findIndex(item => item.course === acronym);
+  addSlot(acronym: string, slot: string, type: string) {
+    const index = this.slots.findIndex(item => item.course === acronym);
     if (index > -1) {
-      this.slots[index].CM = slot;
+      if (type === 'TP') {
+        this.slots[index].TP = slot;
+      } else {
+        this.slots[index].CM = slot;
+      }
     }
-    else{
-      let item = { course: acronym, TP: '', CM: slot };
-      this.slots.push(item);
+    else {
+      this.pushItem(type, acronym, slot);
     }
-    this.storage.set('slots', this.slots);
+    this.storage.set('slots',this.slots);
+  }
+
+  private pushItem(type: string, acronym: string, slot: string) {
+    let item;
+    if (type === 'TP') {
+      item = { course: acronym, TP: slot, CM: '' };
+    }
+    else {
+      item = { course: acronym, TP: '', CM: slot };
+    }
+    this.slots.push(item);
   }
 }

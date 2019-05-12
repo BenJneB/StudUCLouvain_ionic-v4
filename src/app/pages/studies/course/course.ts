@@ -191,17 +191,11 @@ export class CoursePage {
       {
           text: apply,
           handler: data => {
-            if(segment == "Cours magistral") {
-              this.slotCM = data;
-              this.userS.addSlotCM(this.course.acronym,this.slotCM);
-            }
-            if(segment == "TD") {
-              this.slotTP = data;
-              this.userS.addSlotTP(this.course.acronym,this.slotTP);
-            }
+            this.addSlot(segment, data);
             this.updateDisplayed();
           }
-      }]};
+      }
+    ]};
     let aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
     let array = this.getSlots(segment);
     for(let i=0; i< array.length; i++) {
@@ -213,6 +207,15 @@ export class CoursePage {
     if(options.inputs.length > 1)prompt.then(prompt => prompt.present());
   }
 
+  private addSlot(segment: string, data: any) {
+    const type = segment === 'Cours magistral' ? 'CM' : 'TP';
+    if (type === 'TP') {
+      this.slotTP = data;
+    } else {
+      this.slotCM = data;
+    }
+    this.userS.addSlot(this.course.acronym, data, type);
+  }
   /*Return the different slots available for a course TP or CM */
   getSlots(segment:string){
     let act: Activity[] = this.course.activities;
