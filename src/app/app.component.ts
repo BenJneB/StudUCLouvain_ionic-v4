@@ -23,7 +23,7 @@ import { UtilsService } from './services/utils-services/utils-services';
 import { Component, ViewChildren, QueryList } from '@angular/core';
 import { 
   MenuController, 
-  NavController, 
+  NavController,
   Platform,
   LoadingController, 
   ActionSheetController, 
@@ -79,7 +79,7 @@ export class AppComponent {
     private actionSheetCtrl: ActionSheetController,
     public translateService: TranslateService,
     public loadingCtrl: LoadingController,
-    private wso2Service : Wso2Service,
+    private wso2Service: Wso2Service,
     public cache: CacheService,
     private router: Router,
     private toast: Toast,
@@ -105,7 +105,7 @@ export class AppComponent {
       if (page === 'resto') {
         toolData.push(this.getPageData(
           page.toUpperCase(), 
-          page, page, 
+          page, page,
           { ios: 'id1156050719', android: 'com.apptree.resto4u' },
           { app: 'apptreeresto4u://', http: 'https://uclouvain.be/fr/decouvrir/resto-u' }
         ));
@@ -118,12 +118,12 @@ export class AppComponent {
       this.toolPages.push(this.utilsServices.getPageStruct(page));
     }
   }
-  
+
   private getOtherPages(studies: boolean, nullSchemas: { ios: string; android: string; }, nullUrls: { app: string; http: string; }) {
     const pages = studies ? ['studies', 'libraries', 'support'] : ['news', 'events', 'sports'];
     const datas = [];
     for (const page of pages) {
-      datas.push(this.getPageData(page.toUpperCase(), page, page, nullSchemas, nullUrls))
+      datas.push(this.getPageData(page.toUpperCase(), page, page, nullSchemas, nullUrls));
     }
     const pagesR = [];
     for (const page of datas) {
@@ -149,14 +149,15 @@ export class AppComponent {
      this.getLanguage();
       this.cache.setDefaultTTL(60 * 60 * 2);
       this.cache.setOfflineInvalidate(false);
-     //this.user.storage.set('first',null);
+     // this.user.storage.set('first',null);
      this.user.storage.get('first').then((data) =>
      {
        if(data==null) {
          this.rootPage = 'TutoPage';
          this.user.storage.set('first',false);
+       } else {
+         this.rootPage = 'HomePage';
        }
-       else this.rootPage = 'HomePage';
      })
    })
   }
@@ -172,7 +173,7 @@ export class AppComponent {
     });
   }
 
-  async getElementToClose(element: any){
+  async getElementToClose(element: any) {
     try {
       const elem = await element.getTop();
       if (elem) {
@@ -215,60 +216,7 @@ export class AppComponent {
             }
         });
     });
-  // Confirm exit
-  /* this.platform.registerBackButtonAction(() => {
-
-      let activePortal = this.ionicApp._loadingPortal.getActive() ||
-          this.ionicApp._modalPortal.getActive() ||
-          this.ionicApp._toastPortal.getActive() ||
-          this.ionicApp._overlayPortal.getActive();
-
-      if (activePortal) {
-          activePortal.dismiss();
-          return
-      }
-      else if (this.menu.isOpen()) { // Close menu if open
-          this.menu.close();
-          return
-      }
-      if (this.nav.length() == 1) {
-        this.confirmExitApp();
-      } else {
-        this.nav.pop();
-      }
-  }); */
 }
-
-
-/* 
-confirmExitApp() {
-  let activeVC = this.nav.getActive();
-  let page = activeVC.instance;
-  if(page instanceof HomePage){
-    if(!this.alertPresented){
-      this.alertPresented = true;
-      let confirmAlert = this.alertCtrl.create({
-          header: "Fermeture",
-          message: "Désirez-vous quitter l'application ?",
-          buttons: [
-              {
-                  text: 'Annuler',
-                  handler: () => {
-                    this.alertPresented = false;
-                  }
-              },
-              {
-                  text: 'Quitter',
-                  handler: () => {
-                      this.platform.exitApp();
-                  }
-              }
-          ]
-      }).then(alert => alert.present());
-  }confirmExitApp
-}
-else this.openRootPage(this.homePage);
-} */
 
   openRootPage(page) {
     let activeUrl = this.router.url;
@@ -277,28 +225,27 @@ else this.openRootPage(this.homePage);
     this.menu.close();
     this.page = page;
 
-    if(!((activeUrl == this.homePage.url) && page == this.homePage)){
-	    if(page.iosSchemaName != null && page.androidPackageName != null){
+    if(!((activeUrl === this.homePage.url) && page === this.homePage)){
+	    if(page.iosSchemaName !== null && page.androidPackageName !== null){
 	        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
 	    }
-	    else {if(page != this.homePage){
+	    else {
+        if(page != this.homePage) {
       		this.nav.navigateForward([page.component, {title: page.title}]);
-  		}}
+        }
+      }
     }
 
   }
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
 	  let app: string;
-    	//let storeUrl:string;
     	let check:string;
   	if (this.device.platform === 'iOS') {
   		app = iosSchemaName;
-      //storeUrl=httpUrl;
       	check=appUrl;
   	} else if (this.device.platform === 'Android') {
   		app = androidPackageName;
-      //storeUrl= 'market://details?id='+ app;
       	check=app;
 
   	} else {
