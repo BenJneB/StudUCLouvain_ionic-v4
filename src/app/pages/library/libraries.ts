@@ -28,6 +28,7 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
 
 import { LibraryItem } from '../../entity/libraryItem';
 import { NavigationExtras, Router } from '@angular/router';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 @Component({
   selector: 'page-libraries',
@@ -44,7 +45,8 @@ export class LibrariesPage {
     public libService : LibrariesService,
     public connService : ConnectivityService,
     private cache:CacheService,
-    private router: Router
+    private router: Router,
+    private utilsServices: UtilsService,
     )
   {
     this.cachedOrNot();
@@ -57,15 +59,7 @@ export class LibrariesPage {
 
   /*Reload the libraries if we refresh the page*/
   public doRefresh(refresher) {
-    if(this.connService.isOnline()) {
-      this.cache.removeItem('cache-libraries');
-      this.loadLibraries('cache-libraries');
-      refresher.target.complete();
-    }
-    else{
-      this.connService.presentConnectionAlert();
-      refresher.target.complete();
-    }
+    this.utilsServices.doRefresh(refresher);
   }
 
   /*Load libraries*/

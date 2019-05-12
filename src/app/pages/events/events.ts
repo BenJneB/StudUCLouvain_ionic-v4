@@ -84,7 +84,6 @@ export class EventsPage {
     private calendar: Calendar,
     public connService : ConnectivityService,
     private translateService: TranslateService,
-    private loadingCtrl: LoadingController,
     private cache: CacheService,
     private loader: LoaderService,
     private router: Router,
@@ -114,14 +113,7 @@ export class EventsPage {
   }
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
-    if(this.connService.isOnline()) {
-      this.cache.removeItem('cache-event');
-      this.loadEvents('cache-event');
-      refresher.target.complete();
-    } else {
-      this.connService.presentConnectionAlert();
-      refresher.tagert.complete();
-    }
+    this.utilsServices.doRefresh(refresher, this.loadEvents.bind(this));
   }
 
   public onSearchInput(){
