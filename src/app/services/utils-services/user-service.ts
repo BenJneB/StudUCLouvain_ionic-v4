@@ -24,15 +24,15 @@ import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 
-@Injectable({ 
+@Injectable({
   providedIn: 'root' 
 })
 export class UserService {
 
   favorites: string[] = [];
-  campus: string = "";
+  campus: string = '';
   slots: Array<{course:string, TP:string, CM:string}> = [];
-  fac: string = "";
+  fac: string = '';
 
   constructor(
     public eventss: Events,
@@ -46,10 +46,10 @@ export class UserService {
     this.getFac();
   }
 
-  getFavorites(){
+  getFavorites() {
     this.storage.get('listFavorites').then((data) =>
     {
-      if(data==null){
+      if(data == null) {
         this.favorites=[];
       } else {
         this.favorites=data;
@@ -60,8 +60,8 @@ export class UserService {
   getCampus(){
     this.storage.get('campus').then((data) =>
     {
-      if(data == null){
-        this.campus = "";
+      if(data == null) {
+        this.campus = '';
       } else {
         this.campus=data;
         }
@@ -71,8 +71,8 @@ export class UserService {
   getFac(){
     this.storage.get('fac').then((data) =>
     {
-      if(data == null){
-        this.fac = "";
+      if(data == null) {
+        this.fac = '';
       } else {
         this.fac=data;
         }
@@ -82,7 +82,7 @@ export class UserService {
   getSlots(){
     this.storage.get('slots').then((data) =>
     {
-      if(data==null){
+      if(data == null){
         this.slots = [];
       }
       else{
@@ -91,16 +91,18 @@ export class UserService {
     })
   }
 
-  getSlotCM(acronym:string){
-    var index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1) return this.slots[index].CM;
-    else return "";
-  }
-
-  getSlotTP(acronym:string){
-    var index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1) return this.slots[index].TP;
-    else return "";
+  getSlot(acronym: string, type: string) {
+    let index = this.slots.findIndex(item => item.course === acronym);
+    if (index  > -1) {
+      const elem = this.slots[index];
+      if (type === 'TP') {
+        return elem.TP;
+      } else {
+        return elem.CM;
+      }
+    } else {
+      return '';
+    }
   }
 
   hasFavorite(itemGuid: string) {
@@ -115,21 +117,19 @@ export class UserService {
     return(this.fac.length > 0);
   }
 
-  hasSlotTP(acronym:string){
-    var index = this.slots.findIndex(item => item.course === acronym);
-    if(index > -1){
-      return this.slots[index].TP.length >0;
+  hasSlot(acronym: string, type: string) {
+    let index = this.slots.findIndex(item => item.course === acronym);
+    if(index > -1) {
+      const elem = this.slots[index];
+      if (type === 'TP') {
+        return elem.TP.length > 0;
+      } else {
+        return elem.CM.length > 0;
+      }
+    } else { 
+      return index > -1;
     }
-    else return index > -1;
 
-  }
-
-  hasSlotCM(acronym:string){
-    var index = this.slots.findIndex(item => item.course === acronym);
-    if(index > -1){
-      return this.slots[index].CM.length >0;
-    }
-    else return index > -1;
   }
 
   addFavorite(itemGuid: string) {
@@ -149,13 +149,13 @@ export class UserService {
   };
 
 
-  addSlotTP(acronym:string, slot:string){
-    var index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1){
+  addSlotTP(acronym: string, slot: string) {
+    let index = this.slots.findIndex(item => item.course === acronym);
+    if (index > -1) {
       this.slots[index].TP = slot;
     }
-    else{
-      let item = {course:acronym,TP:slot,CM:""};
+    else {
+      let item = { course: acronym, TP: slot, CM: '' };
       this.slots.push(item);
     }
     this.storage.set('slots',this.slots);
@@ -170,38 +170,38 @@ export class UserService {
   };
 
   removeCampus() {
-    this.campus="";
+    this.campus = '';
     this.storage.set('campus',this.campus);
   };
   removeFac() {
-    this.fac="";
+    this.fac = '';
     this.storage.set('fac',this.fac);
   };
   removeSlotTP(acronym:string){
     this.removeSlot(acronym, 'TP');
   }
 
-  removeSlotCM(acronym:string){
+  removeSlotCM(acronym: string){
     this.removeSlot(acronym, 'CM');
 }
 
-removeSlot(acronym:string, type:string){
-  var index = this.slots.findIndex(item => item.course === acronym);
-  if(index > -1){
-    this.slots[index][type] = "";
+removeSlot(acronym: string, type: string){
+  let index = this.slots.findIndex(item => item.course === acronym);
+  if (index > -1) {
+    this.slots[index][type] = '';
   }
   this.storage.set('slots',this.slots);
 }
 
-  addSlotCM(acronym:string, slot:string){
-    var index = this.slots.findIndex(item => item.course === acronym);
-    if(index>-1){
+  addSlotCM(acronym: string, slot: string){
+    let index = this.slots.findIndex(item => item.course === acronym);
+    if (index > -1) {
       this.slots[index].CM = slot;
     }
     else{
-      let item = {course:acronym,TP:"",CM:slot};
+      let item = { course: acronym, TP: '', CM: slot };
       this.slots.push(item);
     }
-    this.storage.set('slots',this.slots);
+    this.storage.set('slots', this.slots);
   }
 }
