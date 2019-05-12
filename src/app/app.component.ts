@@ -181,6 +181,7 @@ export class AppComponent {
       console.log(error);
     }
   }
+
   backButtonEvent() {
     this.platform.backButton.subscribe(async () => {
         this.getElementToClose(this.actionSheetCtrl);
@@ -195,25 +196,28 @@ export class AppComponent {
         } catch (error) {
           console.log(error);
         }
-        this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
-            if (outlet && outlet.canGoBack()) {
-                outlet.pop();
-            } else if (this.router.url === 'home') {
-                if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
-                    navigator['app'].exitApp(); // work in ionic 4
-                } else {
-                    this.toast.show(
-                        `Press back again to exit App.`,
-                        '2000',
-                        'center')
-                        .subscribe(toast => {
-                        });
-                    this.lastTimeBackPress = new Date().getTime();
-                }
-            }
-        });
+        this.confirmExitApp();
     });
 }
+
+  private confirmExitApp() {
+    this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
+      if (outlet && outlet.canGoBack()) {
+        outlet.pop();
+      }
+      else if (this.router.url === 'home') {
+        if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+          navigator['app'].exitApp(); // work in ionic 4
+        }
+        else {
+          this.toast.show(`Press back again to exit App.`, '2000', 'center')
+            .subscribe(toast => {
+            });
+          this.lastTimeBackPress = new Date().getTime();
+        }
+      }
+    });
+  }
 
   openRootPage(page) {
     const activeUrl = this.router.url;
@@ -222,16 +226,11 @@ export class AppComponent {
     this.menu.close();
     this.page = page;
 
-    if (!((activeUrl === this.homePage.url) && page === this.homePage)) {
-      if (page.iosSchemaName !== null && page.androidPackageName !== null) {
-        this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
-	    } else {
-        if (page !== this.homePage) {
-          this.nav.navigateForward([page.component, { title: page.title }]);
-        }
-      }
+    if (page.iosSchemaName !== null && page.androidPackageName !== null) {
+      this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
+    } else {
+      this.nav.navigateForward([page.component, { title: page.title }]);
     }
-
   }
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
@@ -252,7 +251,7 @@ export class AppComponent {
       () => { // success callback
         const browser = this.iab.create(appUrl, '_system');
         browser.close();
-  		},
+      },
       () => { // error callback
         this.market.open(app);
       });
