@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Date : 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.  
 
