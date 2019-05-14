@@ -137,8 +137,8 @@ export class GuindaillePage {
         subHeader: '',
         buttons: ['OK'],
         image: 'assets/img/guindaille/' + number + '.png',
-      }
-    });;
+      };
+    });
 
     //get the good value
     this.translateService.get('GUINDAILLE.TITLE1').subscribe((res:string) => {this.alt=res;});
