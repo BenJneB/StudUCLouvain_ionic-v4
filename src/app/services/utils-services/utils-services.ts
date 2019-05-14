@@ -204,7 +204,7 @@ async addFavorite(slidingItem: IonItemSliding, itemData: any, texts: any, update
       firstReminderMinutes: 15
     };
     this.calendar.createEventWithOptions(itemData.title, itemData.location, null, itemData.start, itemData.end, options).then(() => {
-      this.presentToast(message, slidingItem);
+      this.alertService.presentToast(message, slidingItem);
     });
   }
 }
