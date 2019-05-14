@@ -19,7 +19,7 @@ export const EVENT_TEXTS = {
   'FAV3': 'EVENTS.MESSAGEFAV3',
   'CANCEL': 'EVENTS.CANCEL',
   'DEL': 'EVENTS.DEL',
-}
+};
 
 @Injectable({
   providedIn: 'root'

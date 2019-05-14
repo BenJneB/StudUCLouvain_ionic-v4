@@ -59,7 +59,6 @@ export class UserService {
     if (type === 'fac') {
       return this.fac;
     }
-    return undefined;
   }
 
   getFavorites(type: string) {
@@ -102,7 +101,7 @@ export class UserService {
   }
 
   hasSlot(acronym: string, type: string) {
-    let index = this.slots.findIndex(item => item.course === acronym);
+    const index = this.slots.findIndex(item => item.course === acronym);
     if(index > -1) {
       const elem = this.slots[index];
       if (type === 'TP') {
@@ -110,7 +109,7 @@ export class UserService {
       } else {
         return elem.CM.length > 0;
       }
-    } else { 
+    } else {
       return index > -1;
     }
 
@@ -133,7 +132,7 @@ export class UserService {
   };
 
   removeFavorite(itemGuid: string) {
-    let index = this.favorites.indexOf(itemGuid);
+    const index = this.favorites.indexOf(itemGuid);
     if (index > -1) {
       this.favorites.splice(index, 1);
     }
@@ -157,7 +156,7 @@ export class UserService {
 }
 
 removeSlot(acronym: string, type: string){
-  let index = this.slots.findIndex(item => item.course === acronym);
+  const index = this.slots.findIndex(item => item.course === acronym);
   if (index > -1) {
     this.slots[index][type] = '';
   }
