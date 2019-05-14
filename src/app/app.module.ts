@@ -66,6 +66,7 @@ import { Toast } from '@ionic-native/toast/ngx';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UtilsService } from './services/utils-services/utils-services';
+import { AlertService } from './services/utils-services/alert-service';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -107,6 +108,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     CourseService,
     StudiesService,
     EventsService,
+    AlertService,
     InAppBrowser,
     Market,
     POIService,

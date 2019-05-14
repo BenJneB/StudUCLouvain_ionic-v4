@@ -24,6 +24,7 @@ import { NavController, NavParams, IonItemSliding, ToastController, ModalControl
 import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from './../../../services/utils-services/utils-services';
 import { UserService } from '../../../services/utils-services/user-service';
+import { AlertService } from 'src/app/services/utils-services/alert-service';
 
 @Component({
   selector: 'page-hebdo',
@@ -41,7 +42,8 @@ export class HebdoPage {
     public modalCtrl: ModalController,
     private translateService: TranslateService,
     public navParams:NavParams,
-    private utilsServices: UtilsService
+    private utilsServices: UtilsService,
+    private alertService: AlertService
   ) {
 
   }
@@ -67,8 +69,8 @@ export class HebdoPage {
       location: activity.entityCode,
       start: new Date(activity.eventstarttime),
       end: new Date(activity.eventendtime)
-    }
+    };
     this.utilsServices.createEventInCalendar(datas, message, slidingItem);
-      this.utilsServices.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
+      this.utilsServices.alertService({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 }

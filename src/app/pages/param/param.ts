@@ -1,3 +1,4 @@
+import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -51,7 +52,7 @@ export class ParamPage {
     public userS:UserService,
     private alertCtrl : AlertController,
     private translateService: TranslateService,
-    private utilsService: UtilsService
+    private alertService: AlertService
   )
   {
     this.translateService.get('MENU.SETTINGS').subscribe((res:string) => {this.title=res;});
@@ -118,7 +119,7 @@ export class ParamPage {
     this.translateService.get('HOME.FR').subscribe((res:string) => {fr=res;});
     this.translateService.get('HOME.EN').subscribe((res:string) => {en=res;});
     this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
-    let languageAlert = await this.utilsService.languageAlert(setting2, message2, fr, check2, en, save);
+    let languageAlert = await this.alertService.languageAlert(setting2, message2, fr, check2, en, save);
     await languageAlert.present();
   }
 
