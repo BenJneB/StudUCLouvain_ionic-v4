@@ -24,7 +24,7 @@ import { NavController, NavParams, IonItemSliding, ToastController, ModalControl
 import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from './../../../services/utils-services/utils-services';
 import { UserService } from '../../../services/utils-services/user-service';
-import { Calendar } from '@ionic-native/calendar/ngx';
+import { AlertService } from 'src/app/services/utils-services/alert-service';
 
 @Component({
   selector: 'page-hebdo',
@@ -37,13 +37,13 @@ export class HebdoPage {
 
   constructor(
     public navCtrl: NavController,
-    private calendar: Calendar,
     public toastCtrl: ToastController,
     public userS:UserService,
     public modalCtrl: ModalController,
     private translateService: TranslateService,
     public navParams:NavParams,
-    private utilsServices: UtilsService
+    private utilsServices: UtilsService,
+    private alertService: AlertService
   ) {
 
   }
@@ -62,20 +62,15 @@ export class HebdoPage {
 
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem : IonItemSliding, activity : any){
-    let options:any = {
-      firstReminderMinutes:15
-    };
     let message:string;
     this.translateService.get('COURSE.MESSAGE').subscribe((res:string) => {message=res;});
-    this.calendar.createEventWithOptions(activity.name +" : " + activity.type,
-      activity.entitycode, null, new Date(activity.eventstarttime),
-      new Date(activity.eventendtime), options).then(() => {
-        let toast = this.toastCtrl.create({
-          message: message,
-          duration: 3000
-        }).then(toast => toast.present());
-        slidingItem.close();
-    });
-      this.utilsServices.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
+    const datas = {
+      title: activity.name + ' : ' + activity.type,
+      location: activity.entityCode,
+      start: new Date(activity.eventstarttime),
+      end: new Date(activity.eventendtime)
+    };
+    this.utilsServices.createEventInCalendar(datas, message, slidingItem);
+      this.utilsServices.alertService({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 }

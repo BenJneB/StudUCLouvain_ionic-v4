@@ -21,8 +21,7 @@
 
 import { Component, ViewChild } from '@angular/core';
 import { AlertController, IonItemSliding, IonList, NavController,
-  ModalController, ToastController, LoadingController } from '@ionic/angular';
-import { Calendar } from '@ionic-native/calendar/ngx';
+  ModalController, ToastController } from '@ionic/angular';
 import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from 'ionic-cache';
@@ -78,7 +77,6 @@ export class EventsPage {
     private eventsService: EventsService,
     public user: UserService,
     public toastCtrl: ToastController,
-    private calendar: Calendar,
     public connService : ConnectivityService,
     private translateService: TranslateService,
     private cache: CacheService,
@@ -287,19 +285,14 @@ export class EventsPage {
 
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: IonItemSliding, itemData: any):void{
-    let options:any = {
-      firstReminderMinutes:15
-    };
     let message:string;
     this.translateService.get('EVENTS.MESSAGE').subscribe((res:string) => {message=res;});
-
-    this.calendar.createEventWithOptions(itemData.title, itemData.location,
-      null, itemData.startDate, itemData.endDate, options).then(() => {
-        let toast = this.toastCtrl.create({
-          message:  message,
-          duration: 3000
-        }).then(toast => toast.present());
-        slidingItem.close();
-      });
+    const datas = {
+      title: itemData.title,
+      location: itemData.location,
+      start: itemData.startDate,
+      end: itemData.endDate
+    }
+    this.utilsServices.createEventInCalendar(datas, message, slidingItem);
   }
 }

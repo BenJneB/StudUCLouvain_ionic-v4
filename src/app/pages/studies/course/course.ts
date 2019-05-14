@@ -32,6 +32,7 @@ import { Calendar } from '@ionic-native/calendar/ngx';
 import { ModalInfoPage } from './modal-info/modal-info';
 import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { AlertService } from 'src/app/services/utils-services/alert-service';
 
 @Component({
   selector: 'page-course',
@@ -64,7 +65,8 @@ export class CoursePage {
     private translateService: TranslateService,
     private route: ActivatedRoute, 
     private router: Router,
-    private utilsServices: UtilsService
+    private utilsServices: UtilsService,
+    private alertService: AlertService
   )
   {
     this.route.queryParams.subscribe(params => {
@@ -117,21 +119,16 @@ export class CoursePage {
 
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem : IonItemSliding, activity : Activity){
-    let options:any = {
-      firstReminderMinutes:15
-    };
     let message:string;
     this.translateService.get('COURSE.MESSAGE').subscribe((res:string) => {message=res;});
-    this.calendar.createEventWithOptions(this.course.name +" : " + activity.type,
-      activity.auditorium, null, activity.start,
-      activity.end, options).then(() => {
-        let toast = this.toastCtrl.create({
-          message: message,
-          duration: 3000
-        }).then(toast => toast.present());
-        slidingItem.close();
-    });
-      this.utilsServices.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
+    const datas = {
+      title: this.course.name + ' : ' + activity.type,
+      location: activity.auditorium,
+      start: activity.start,
+      end: activity.end
+    }
+    this.utilsServices.createEventInCalendar(datas, message, slidingItem);
+    this.alertService.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 
   /*Filter TP if a slot is selectionned*/
@@ -247,23 +244,17 @@ export class CoursePage {
     }
     let message:string;
     this.translateService.get('STUDY.MESSAGE3').subscribe((res:string) => {message=res;});
-
-    let toast = this.toastCtrl.create({
-      message: message,
-      duration: 3000
-    }).then(toast => toast.present());
-    this.utilsServices.alertCourse({'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4'});
+    this.alertService.presentToast(message);
+    this.alertService.alertCourse({'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4'});
   }
 
    openModalInfo(){
-
     let myModal = this.modalCtrl.create(
       {
         component: ModalInfoPage, 
         componentProps: {course: this.course, year: this.year},
         cssClass: "modal-fullscreen" 
       }).then(modal => modal.present());
-
    }
 
      /*Open or close the schedule*/
