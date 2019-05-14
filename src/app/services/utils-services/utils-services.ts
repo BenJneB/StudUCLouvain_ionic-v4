@@ -10,6 +10,7 @@ import { Device } from '@ionic-native/device/ngx';
 import { CacheService } from 'ionic-cache';
 import { ConnectivityService } from './connectivity-service';
 import { NavigationExtras, Router } from '@angular/router';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 @Injectable({
     providedIn: 'root'
@@ -27,6 +28,7 @@ import { NavigationExtras, Router } from '@angular/router';
         private cache: CacheService,
         public connService: ConnectivityService,
         private router: Router,
+        private calendar: Calendar,
     ) {
 
     }
@@ -264,5 +266,14 @@ import { NavigationExtras, Router } from '@angular/router';
           }
         };
         this.router.navigate( [page], navigationExtras);
+      }
+
+      createEventInCalendar(itemData: any, message: string, slidingItem: IonItemSliding) {
+        const options:any = {
+          firstReminderMinutes:15
+        };
+        this.calendar.createEventWithOptions(itemData.title, itemData.location, null, itemData.start, itemData.end, options).then(() => {
+          this.presentToast(message, slidingItem);
+        });
       }
 }

@@ -117,21 +117,16 @@ export class CoursePage {
 
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem : IonItemSliding, activity : Activity){
-    let options:any = {
-      firstReminderMinutes:15
-    };
     let message:string;
     this.translateService.get('COURSE.MESSAGE').subscribe((res:string) => {message=res;});
-    this.calendar.createEventWithOptions(this.course.name +" : " + activity.type,
-      activity.auditorium, null, activity.start,
-      activity.end, options).then(() => {
-        let toast = this.toastCtrl.create({
-          message: message,
-          duration: 3000
-        }).then(toast => toast.present());
-        slidingItem.close();
-    });
-      this.utilsServices.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
+    const datas = {
+      title: this.course.name + ' : ' + activity.type,
+      location: activity.auditorium,
+      start: activity.start,
+      end: activity.end
+    }
+    this.utilsServices.createEventInCalendar(datas, message, slidingItem);
+    this.utilsServices.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 
   /*Filter TP if a slot is selectionned*/
