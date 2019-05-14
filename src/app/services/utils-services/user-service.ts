@@ -40,54 +40,38 @@ export class UserService {
   ) {
     // USE THIS LINE TO CLEAR THE STORAGE
     // storage.clear();
-    this.getFavorites();
-    this.getCampus();
-    this.getSlots();
-    this.getFac();
+    this.getFavorites('listFavorites');
+    this.getFavorites('campus');
+    this.getFavorites('fac');
+    this.getFavorites('slots');
   }
 
-  getFavorites() {
-    this.storage.get('listFavorites').then((data) =>
+  private getGoodItems(type: string) {
+    if (type === 'slots') {
+      return this.slots;
+    } else
+    if (type === 'campus') {
+      return this.campus;
+    } else
+    if (type === 'listFavorites') {
+      return this.favorites;
+    } else
+    if (type === 'fac') {
+      return this.fac;
+    }
+    return undefined;
+  }
+
+  getFavorites(type: string) {
+    const isString = type === 'campus' || type === 'fac';
+    this.storage.get(type).then((data) =>
     {
+      let items = this.getGoodItems(type);
       if(data == null) {
-        this.favorites = [];
+        items = isString ? '' : [];
       } else {
-        this.favorites=data;
+        items = data;
         }
-    });
-  }
-
-  getCampus(){
-    this.storage.get('campus').then((data) =>
-    {
-      if(data == null) {
-        this.campus = '';
-      } else {
-        this.campus = data;
-        }
-    });
-  }
-
-  getFac(){
-    this.storage.get('fac').then((data) =>
-    {
-      if(data == null) {
-        this.fac = '';
-      } else {
-        this.fac=data;
-        }
-    });
-  }
-
-  getSlots() {
-    this.storage.get('slots').then((data) =>
-    {
-      if(data == null){
-        this.slots = [];
-      }
-      else{
-        this.slots = data;
-      }
     });
   }
 

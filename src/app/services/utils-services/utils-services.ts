@@ -13,6 +13,14 @@ import { ConnectivityService } from './connectivity-service';
 import { NavigationExtras, Router } from '@angular/router';
 import { Calendar } from '@ionic-native/calendar/ngx';
 
+export const EVENT_TEXTS = {
+  'FAV': 'EVENTS.MESSAGEFAV',
+  'FAV2': 'EVENTS.MESSAGEFAV2',
+  'FAV3': 'EVENTS.MESSAGEFAV3',
+  'CANCEL': 'EVENTS.CANCEL',
+  'DEL': 'EVENTS.DEL',
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -48,7 +56,7 @@ export class UtilsService {
       return res;
   }
 
-async addFavorite(slidingItem: IonItemSliding, itemData: any, texts: any, update: () => void) {
+async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, update?: () => void) {
         if (this.user.hasFavorite(itemData.guid)) {
           let message: string;
           this.translateService.get(texts['FAV']).subscribe((res: string) => {
@@ -75,7 +83,7 @@ async addFavorite(slidingItem: IonItemSliding, itemData: any, texts: any, update
       }
   }
 
-  async  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any, update: () => void) {
+  async  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any, update?: () => void) {
       let message: string, cancel: string, del: string;
       this.translateService.get(texts['FAV3']).subscribe((res: string) => {
           message = res;
@@ -106,7 +114,9 @@ async addFavorite(slidingItem: IonItemSliding, itemData: any, texts: any, update
                   handler: () => {
                       this.user.removeFavorite(itemData.guid);
                       slidingItem.close();
-                      update();
+                      if (update !== undefined) {
+                        update();
+                      }
                   }
               }
           ]
