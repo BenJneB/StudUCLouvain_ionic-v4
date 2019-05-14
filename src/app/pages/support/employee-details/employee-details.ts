@@ -52,7 +52,7 @@ export class EmployeeDetailsPage {
         this.route.queryParams.subscribe(params => {
 
       if (this.router.getCurrentNavigation().extras.state) {
-        this.empDetails = this.router.getCurrentNavigation().extras.state.emp;
+        this.empDetails = this.router.getCurrentNavigation().extras.state.items;
       }
       this.searching = true;
     //Check if the connexion is Ok before search details pour an employee

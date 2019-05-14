@@ -203,10 +203,10 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
   goToDetail(item: any, page: string) {
     const navigationExtras: NavigationExtras = {
       state: {
-        item: item
+        items: item
       }
     };
-    this.router.navigate( [page], navigationExtras);
+    this.router.navigate([page], navigationExtras);
   }
 
   createEventInCalendar(itemData: any, message: string, slidingItem: IonItemSliding) {
