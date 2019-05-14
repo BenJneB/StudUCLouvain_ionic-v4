@@ -264,7 +264,7 @@ export class SportsPage {
 
   /*Add a sport to favorite, each slot for the day selected*/
   addFavorite(slidingItem: IonItemSliding, itemData: SportItem) {
-    this.utilsServices.addFavorite(slidingItem, itemData, this.texts, this.updateDisplayedSports.bind(this));
+    this.utilsServices.addFavorite(itemData, this.texts, slidingItem, this.updateDisplayedSports.bind(this));
   }
 
   /*Remove a sport of the favorites*/

@@ -41,54 +41,29 @@ export class UserService {
     // USE THIS LINE TO CLEAR THE STORAGE
     // storage.clear();
     this.getFavorites();
-    this.getCampus();
-    this.getSlots();
-    this.getFac();
   }
 
   getFavorites() {
-    this.storage.get('listFavorites').then((data) =>
-    {
-      if(data == null) {
-        this.favorites = [];
-      } else {
-        this.favorites=data;
-        }
+    Promise.all([
+      this.storage.get('campus'),
+      this.storage.get('listFavorites'),
+      this.storage.get('fac'),
+      this.storage.get('slots')
+    ]).then(values => {
+      this.campus = this.getFavoritesData('campus', values[0]);
+      this.favorites = this.getFavoritesData('listFavorites', values[1]);
+      this.fac = this.getFavoritesData('fac', values[2]);
+      this.slots = this.getFavoritesData('slots', values[3]);
     });
   }
 
-  getCampus(){
-    this.storage.get('campus').then((data) =>
-    {
-      if(data == null) {
-        this.campus = '';
-      } else {
-        this.campus = data;
-        }
-    });
-  }
-
-  getFac(){
-    this.storage.get('fac').then((data) =>
-    {
-      if(data == null) {
-        this.fac = '';
-      } else {
-        this.fac=data;
-        }
-    });
-  }
-
-  getSlots() {
-    this.storage.get('slots').then((data) =>
-    {
-      if(data == null){
-        this.slots = [];
-      }
-      else{
-        this.slots = data;
-      }
-    });
+  private getFavoritesData(type: string, data: any) {
+    const isString = type === 'campus' || type === 'fac';
+    if(data === null) {
+      return isString ? '' : [];
+    } else {
+      return data;
+    }
   }
 
   getSlot(acronym: string, type: string) {
@@ -118,7 +93,7 @@ export class UserService {
   }
 
   hasSlot(acronym: string, type: string) {
-    let index = this.slots.findIndex(item => item.course === acronym);
+    const index = this.slots.findIndex(item => item.course === acronym);
     if(index > -1) {
       const elem = this.slots[index];
       if (type === 'TP') {
@@ -126,7 +101,7 @@ export class UserService {
       } else {
         return elem.CM.length > 0;
       }
-    } else { 
+    } else {
       return index > -1;
     }
 
@@ -149,7 +124,7 @@ export class UserService {
   };
 
   removeFavorite(itemGuid: string) {
-    let index = this.favorites.indexOf(itemGuid);
+    const index = this.favorites.indexOf(itemGuid);
     if (index > -1) {
       this.favorites.splice(index, 1);
     }
@@ -173,7 +148,7 @@ export class UserService {
 }
 
 removeSlot(acronym: string, type: string){
-  let index = this.slots.findIndex(item => item.course === acronym);
+  const index = this.slots.findIndex(item => item.course === acronym);
   if (index > -1) {
     this.slots[index][type] = '';
   }

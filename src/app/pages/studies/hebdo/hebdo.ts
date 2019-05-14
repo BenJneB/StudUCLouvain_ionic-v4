@@ -71,6 +71,6 @@ export class HebdoPage {
       end: new Date(activity.eventendtime)
     };
     this.utilsServices.createEventInCalendar(datas, message, slidingItem);
-      this.utilsServices.alertService({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
+    this.alertService.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 }

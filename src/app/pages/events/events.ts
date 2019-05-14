@@ -26,7 +26,7 @@ import { FormControl } from '@angular/forms';
 import { TranslateService } from '@ngx-translate/core';
 import { CacheService } from 'ionic-cache';
 import { LoaderService } from '../../services/utils-services/loader-service';
-import { UtilsService } from './../../services/utils-services/utils-services';
+import { UtilsService, EVENT_TEXTS } from './../../services/utils-services/utils-services';
 import { UserService } from '../../services/utils-services/user-service';
 import { EventsService } from '../../services/rss-services/events-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
@@ -107,7 +107,7 @@ export class EventsPage {
   }
 
   addFavorite(slidingItem: IonItemSliding, itemData: any) {
-    this.utilsServices.addFavorite(slidingItem, itemData, this.texts, this.updateDisplayed.bind(this));
+    this.utilsServices.addFavorite(itemData, EVENT_TEXTS, slidingItem, this.updateDisplayed.bind(this));
   }
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
