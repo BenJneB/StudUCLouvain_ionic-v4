@@ -1,6 +1,6 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Daubry Benjamin & Marchesini Bruno
+    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date : 2018-2019
     This file is part of StudUCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
