@@ -121,12 +121,4 @@ export class EventsService {
 
     return new Date(year, month, day, hours, minutes);
   }
-
-  /*Return the items of filter*/
-  public filterItems(myList, searchTerm){
-    return myList.filter((item) => {
-      return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-    });
-  }
-
 }

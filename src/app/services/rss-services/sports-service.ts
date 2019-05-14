@@ -142,16 +142,10 @@ export class SportsService {
       }
       if (item.activite) {
         if(isSport){
-          if (this.allCategories.indexOf(item.activite) < 0) {
-            this.allCategories.push(item.activite);
-          }
-          this.allCategories.sort();
+          this.getCategories(this.allCategories, item);
         }
         else{
-          if (this.allCategoriesT.indexOf(item.activite) < 0) {
-            this.allCategoriesT.push(item.activite);
-          }
-          this.allCategoriesT.sort();
+          this.getCategories(this.allCategoriesT, item);
         }
       }
       if(isSport) this.shownSports++;
@@ -167,6 +161,13 @@ export class SportsService {
     }
   }
 
+  private getCategories(categories: any, item: any) {
+    if (categories.indexOf(item.activite) < 0) {
+      categories.push(item.activite);
+    }
+    categories.sort();
+  }
+
   /*Return a date in good form by splitting for the sport*/
   private createDateForSport(str : string, hour: string):Date{
       let timeSplit = hour.split(":");
@@ -178,13 +179,4 @@ export class SportsService {
       let minutes = parseInt(timeSplit[1]);
       return new Date(year, month, day, hours, minutes);
   }
-
-  /*Return the items of filter*/
-  public filterItems(myList, searchTerm){
-    return myList.filter((item) => {
-      return item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1;
-    });
-
-  }
-
 }
