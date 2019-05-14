@@ -13,9 +13,9 @@
 
 => Render (Same + Guindaille&Tuto to fix)
 
-=> Refactor ? (Rss +- done)
+=> Refactor (WIP)
 
-=> Satisfy codeclimate. Maybe after fix all pages ?
+==> Satisfy codeclimate (WIP : Statut D ==> C)
 
 => Re integrate travis/pr and diff/total-coverage
 
