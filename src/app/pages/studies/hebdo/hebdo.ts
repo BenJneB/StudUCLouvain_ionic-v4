@@ -24,7 +24,6 @@ import { NavController, NavParams, IonItemSliding, ToastController, ModalControl
 import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from './../../../services/utils-services/utils-services';
 import { UserService } from '../../../services/utils-services/user-service';
-import { Calendar } from '@ionic-native/calendar/ngx';
 
 @Component({
   selector: 'page-hebdo',
@@ -37,7 +36,6 @@ export class HebdoPage {
 
   constructor(
     public navCtrl: NavController,
-    private calendar: Calendar,
     public toastCtrl: ToastController,
     public userS:UserService,
     public modalCtrl: ModalController,
