@@ -1,3 +1,4 @@
+import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { Injectable } from '@angular/core';
 import * as xml2js from 'xml2js';
 import { IonItemSliding, ToastController, AlertController } from '@ionic/angular';
@@ -29,6 +30,7 @@ export class UtilsService {
       public connService: ConnectivityService,
       private router: Router,
       private calendar: Calendar,
+      private alertService: AlertService
   ) { }
 
   nullSchemas = { ios: null, android: null };
@@ -69,18 +71,8 @@ async addFavorite(slidingItem: IonItemSliding, itemData: any, texts: any, update
           this.translateService.get(texts['FAV2']).subscribe((res: string) => {
               message = res;
           });
-          await this.presentToast(message, slidingItem);
+          await this.alertService.presentToast(message, slidingItem);
       }
-  }
-
-
-  private async presentToast(message: string, slidingItem: IonItemSliding) {
-      const toast = await this.toastCtrl.create({
-          message: message,
-          duration: 3000
-      });
-      await toast.present();
-      await slidingItem.close();
   }
 
   async  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any, update: () => void) {
@@ -209,7 +201,7 @@ async addFavorite(slidingItem: IonItemSliding, itemData: any, texts: any, update
 
   createEventInCalendar(itemData: any, message: string, slidingItem: IonItemSliding) {
     const options: any = {
-      firstReminderMinutes:15
+      firstReminderMinutes: 15
     };
     this.calendar.createEventWithOptions(itemData.title, itemData.location, null, itemData.start, itemData.end, options).then(() => {
       this.presentToast(message, slidingItem);

@@ -1,4 +1,7 @@
 import { Injectable } from '@angular/core';
+import { IonItemSliding, ToastController, AlertController } from '@ionic/angular';
+import { UserService } from './user-service';
+import { TranslateService } from '@ngx-translate/core';
 
 @Injectable({
     providedIn: 'root'
@@ -9,14 +12,6 @@ import { Injectable } from '@angular/core';
         public user: UserService,
         private translateService: TranslateService,
         public alertCtrl: AlertController,
-        private appAvailability: AppAvailability,
-        public market: Market,
-        private iab: InAppBrowser,
-        private device: Device,
-        private cache: CacheService,
-        public connService: ConnectivityService,
-        private router: Router,
-        private calendar: Calendar,
     ) { }
 
     async alertCourse(texts) {
@@ -34,8 +29,7 @@ import { Injectable } from '@angular/core';
             buttons: [
                 {
                     text: 'OK',
-                    handler: data => {
-                    }
+                    handler: () => {}
                 }
             ]
         });
@@ -72,5 +66,16 @@ import { Injectable } from '@angular/core';
       private languageChanged(event: string) {
         this.user.storage.set('lan', event);
         this.translateService.use(event);
+    }
+
+    async presentToast(message: string, slidingItem?: IonItemSliding) {
+        const toast = await this.toastCtrl.create({
+            message: message,
+            duration: 3000
+        });
+        await toast.present();
+        if (slidingItem !== undefined) {
+          await slidingItem.close();
+        }
     }
   }

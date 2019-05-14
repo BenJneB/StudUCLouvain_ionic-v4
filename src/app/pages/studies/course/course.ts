@@ -244,23 +244,17 @@ export class CoursePage {
     }
     let message:string;
     this.translateService.get('STUDY.MESSAGE3').subscribe((res:string) => {message=res;});
-
-    let toast = this.toastCtrl.create({
-      message: message,
-      duration: 3000
-    }).then(toast => toast.present());
+    this.alertService.presentToast(message);
     this.alertService.alertCourse({'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4'});
   }
 
    openModalInfo(){
-
     let myModal = this.modalCtrl.create(
       {
         component: ModalInfoPage, 
         componentProps: {course: this.course, year: this.year},
         cssClass: "modal-fullscreen" 
       }).then(modal => modal.present());
-
    }
 
      /*Open or close the schedule*/

@@ -1,3 +1,4 @@
+import { AlertService } from './../../../services/utils-services/alert-service';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -40,7 +41,8 @@ export class EventsDetailsPage {
     private translateService: TranslateService,
     public toastCtrl: ToastController,
     private router: Router,
-    private route: ActivatedRoute
+    private route: ActivatedRoute,
+    private alertService: AlertService
     ) {
       this.route.queryParams.subscribe(params => {
         if (this.router.getCurrentNavigation().extras.state) {
@@ -61,10 +63,7 @@ export class EventsDetailsPage {
 
     if(!this.user.hasFavorite(event.guid)){
       this.user.addFavorite(event.guid);
-      let toast = this.toastCtrl.create({
-        message: message,
-        duration: 3000
-      }).then(alert => alert.present());
+      this.alertService.presentToast(message);
     }
 
   }
