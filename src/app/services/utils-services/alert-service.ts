@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IonItemSliding, ToastController, AlertController } from '@ionic/angular';
 import { UserService } from './user-service';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertInput } from '@ionic/core';
 
 @Injectable({
     providedIn: 'root'
@@ -84,24 +85,9 @@ import { TranslateService } from '@ngx-translate/core';
         header: setting,
         message: message,
         inputs: [
-          {
-            type: 'radio',
-            label: 'Louvain-la-Neuve',
-            value: 'LLN',
-            checked: (check === 'LLN')
-          },
-          {
-            type: 'radio',
-            label: 'Woluwé',
-            value: 'Woluwe',
-            checked: (check === 'Woluwe')
-          },
-          {
-            type: 'radio',
-            label: 'Mons',
-            value: 'Mons',
-            checked: (check === 'Mons')
-          },
+          this.getRadioCampus(check, 'Louvain-la-Neuve', 'LLN'),
+          this.getRadioCampus(check, 'Woluwé', 'Woluwe'),
+          this.getRadioCampus(check, 'Mons', 'Mons'),
           {
             type: 'radio',
             label: 'Tournai',
@@ -126,4 +112,13 @@ import { TranslateService } from '@ngx-translate/core';
       });
       await settingsAlert.present();
     }
+
+  private getRadioCampus(check: string, label: string, value: string): AlertInput {
+    return {
+      type: 'radio',
+      label: label,
+      value: value,
+      checked: (check === value)
+    };
+  }
   }
