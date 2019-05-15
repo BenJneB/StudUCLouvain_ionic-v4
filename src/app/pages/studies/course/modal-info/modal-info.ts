@@ -32,7 +32,7 @@ import { StudentService} from '../../../../services/wso2-services/student-servic
 export class ModalInfoPage {
   course = this.navParams.get('course');
   year = this.navParams.get('year');
-  information:any;
+  information: any;
   langue;
 
 
@@ -45,19 +45,19 @@ export class ModalInfoPage {
     this.getInfo().then(data => {
       console.log(data);
       this.information=data;
-      this.langue=data.langue;
+      this.langue =data.langue;
     });
   }
 
-    getInfo() : Promise<any>{
-      let response:any;
+    getInfo(): Promise<any>{
+      let response: any;
       return new Promise(resolve => {
         this.studentService.checkCourse(this.course.acronym,this.year).then(
         (data) =>{
           console.log(data);
-          let res:any = data;
+          let res: any = data;
           console.log(res);
-          if(data === 400) {
+          if (data === 400) {
 
             this.closeModal();
             resolve(400);
@@ -75,21 +75,25 @@ export class ModalInfoPage {
             let quadri = res.quadrimestre
             let resume = res.resumeCoursMap.entry[1].value;
             let vol = {'vol1':res.volTot1, 'vol2' : res.volTot2, 'vol1Coef':res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef};
-            if(res.cahierChargesExiste){
+            if (res.cahierChargesExiste) {
               cahier = res.cahierChargesMap.entry[1].value;
- 
             }
-
-            response={'cahierCharges':cahier, 'offre' : offres,
-                        'campus':campus, 'entite': entite,
-                        'prof': teacher, 'localisation': loca,
-                        'credit' : credit, 'programmeprerequis' : progpre,
-                        'quadri' : quadri, 'resume': resume, 'volume' : vol, 'langue':langue
-                      };
-                      console.log(response);
+            response = {
+              cahierCharges: cahier, 
+              offre: offres,
+              campus:campus,
+              entite: entite,
+              prof: teacher,
+              localisation: loca,
+              credit : credit,
+              programmeprerequis: progpre,
+              quadri: quadri,
+              resume: resume,
+              volume: vol,
+              langue: langue
+            };
             resolve(response);
           }
-          
         })
       })    
     }

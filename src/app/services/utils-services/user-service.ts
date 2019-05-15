@@ -38,8 +38,8 @@ export class UserService {
     public eventss: Events,
     public storage: Storage
   ) {
-    // USE THIS LINE TO CLEAR THE STORAGE
-    // storage.clear();
+   //  USE THIS LINE TO CLEAR THE STORAGE
+   //  storage.clear();
     this.getFavorites();
   }
 
@@ -59,7 +59,7 @@ export class UserService {
 
   private getFavoritesData(type: string, data: any) {
     const isString = type === 'campus' || type === 'fac';
-    if(data === null) {
+    if (data === null) {
       return isString ? '' : [];
     } else {
       return data;
@@ -94,7 +94,7 @@ export class UserService {
 
   hasSlot(acronym: string, type: string) {
     const index = this.slots.findIndex(item => item.course === acronym);
-    if(index > -1) {
+    if (index > -1) {
       const elem = this.slots[index];
       if (type === 'TP') {
         return elem.TP.length > 0;
@@ -147,7 +147,7 @@ export class UserService {
     this.removeSlot(acronym, 'CM');
 }
 
-removeSlot(acronym: string, type: string){
+removeSlot(acronym: string, type: string) {
   const index = this.slots.findIndex(item => item.course === acronym);
   if (index > -1) {
     this.slots[index][type] = '';

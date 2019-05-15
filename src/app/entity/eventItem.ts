@@ -38,7 +38,7 @@ export class EventItem {
     description: string,
     link: string,
     title: string,
-    image:string,
+    image: string,
     trimmedDescription: string,
     location: string,
     hidden: boolean,

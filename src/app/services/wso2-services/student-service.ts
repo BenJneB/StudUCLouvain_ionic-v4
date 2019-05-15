@@ -36,26 +36,26 @@ export class StudentService {
   }
 
   /*Search activities (courses)*/
-  public searchActivities(){
+  public searchActivities() {
     this.activities = [];
     let newUrl = this.url ;
-    newUrl += "activities";
+    newUrl += 'activities';
     return new Promise(resolve => {
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
-          if(data['activities']!=null){
+          if (data['activities']!= null) {
             resolve({activities : data['activities']});
           }
         });
     });
   }
 
-  public checkCourse(sigle:string, year){
+  public checkCourse(sigle: string, year) {
     let newUrl = this.courseUrl  + year + '/' +  sigle + '/fullInformation';
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         (data) => {
-          let res:any;
+          let res: any;
           res=data;
           resolve(res.ficheActivite);
         },
@@ -68,9 +68,9 @@ export class StudentService {
   }
 
   public weekSchedule() {
-    let newUrl = this.url +"courseSchedules?date=";
+    let newUrl = this.url + 'courseSchedules?date= ';
     var C =  7 - new Date().getDay();
-    if(C==7) C=C-1;
+    if (C==7) C=C-1;
     let schedule: Array<any> = [];
     return new Promise(resolve => {
       for (var _i = 0; _i < C; _i++) {
@@ -111,8 +111,8 @@ export class StudentService {
     return { dayDate, items, res };
   }
 
-    public todaySchedule(){
-    let newUrl = this.url +"courseSchedules?date=";
+    public todaySchedule() {
+    let newUrl = this.url + 'courseSchedules?date= ';
 
     let schedule: Array<any> = [];
     return new Promise(resolve => {
@@ -135,42 +135,42 @@ export class StudentService {
     })
   }
 
-  getDay(i:number):string{
-    let day:string = '';
-    if(i===0) day = 'Lundi';
-    if(i===1) day = 'Mardi';
-    if(i===2) day = 'Mercredi';
-    if(i===3) day = 'Jeudi';
-    if(i===4) day = 'Vendredi';
-    if(i===5) day = 'Samedi';
+  getDay(i:number): string{
+    let day: string = '';
+    if (i===0) day = 'Lundi';
+    if (i===1) day = 'Mardi';
+    if (i===2) day = 'Mercredi';
+    if (i===3) day = 'Jeudi';
+    if (i===4) day = 'Vendredi';
+    if (i===5) day = 'Samedi';
 
     return day;
   }
 
-  getDate(i:number):string{
+  getDate(i:number): string{
     var today = new Date();
-    //var today = new Date("10/16/2017");
+   // var today = new Date('10/16/2017');
     today.setDate(today.getDate() + i);
     var d = today.getDate();
     var dd = d.toString();
     var m = today.getMonth()+1;
     var mm = m.toString();
-    if(m < 10) {
-        mm="0"+mm;
+    if (m < 10) {
+        mm= '0' +mm;
     }
-    if(d<10){
-      dd="0"+dd;
+    if (d<10) {
+      dd= '0' +dd;
     }
     var yyyy= today.getFullYear();
-    return yyyy+"-"+mm+"-"+dd;
+    return yyyy + '-' + mm + '-' + dd;
   }
 
-  getStatus(){
-    let newUrl = this.url + "inscriptions";
+  getStatus() {
+    let newUrl = this.url + 'inscriptions';
     return new Promise(resolve => {
       this.wso2Service.loadStudent(newUrl).subscribe(
         (data) => {
-          let res:any;
+          let res: any;
           res=data;
           resolve(res.lireInscriptionAnacResponse.return);
         },

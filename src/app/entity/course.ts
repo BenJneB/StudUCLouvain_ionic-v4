@@ -26,9 +26,9 @@ export class Course {
   public name : string;
   public activities : Activity[];
 
-  constructor(name : string, acronym : string, activities : Activity[]){
+  constructor(name : string, acronym : string, activities : Activity[]) {
     this.acronym=acronym;
-    this.name=name;
+    this.name =name;
     this.activities=activities;
   }
 }

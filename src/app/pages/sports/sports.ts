@@ -60,14 +60,14 @@ export class SportsPage {
   excludedFilters : any = [];
   excludedFiltersT : any = [];
   displayedSports : Array<SportItem> = [];
-  displayedSportsD :any = [];
+  displayedSportsD : any = [];
   dateRange: any = 7;
   dateLimit: Date = new Date();
-  campus:string;
+  campus: string;
   shownGroup = null;
   loading;
-  nosport:any = false;
-  noteams:any = false;
+  nosport: any = false;
+  noteams: any = false;
   texts = {
     'FAV': 'SPORTS.MESSAGEFAV',
     'FAV2': 'SPORTS.FAVADD',
@@ -94,11 +94,11 @@ export class SportsPage {
   /*update the date with in real time value, load sport and display them*/
   ngOnInit() {
     this.updateDateLimit();
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.loadSports(this.segment);
       this.loadSports('team');
       this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
-      this.loader.present("Please wait..");
+      this.loader.present('Please wait..');
     } else{
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -110,7 +110,7 @@ export class SportsPage {
     refresher.target.complete();
   }
 
-  public onSearchInput(){
+  public onSearchInput() {
     this.searching = true;
   }
 
@@ -118,11 +118,11 @@ export class SportsPage {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.sportsService.getSports(segment).then(
         result => {
           this.assignDatas(
-            segment == 'team' ? true : false, 
+            segment === 'team' ? true : false, 
             result
           );
       })
@@ -137,19 +137,19 @@ export class SportsPage {
       isTeam ? this.teams = result.sports : this.sports = result.sports;
       isTeam ? this.shownTeams = result.shownSports : this.shownSports = result.shownSports;
       isTeam ? this.filtersT = result.categories : this.filters = result.categories;
-      isTeam ? this.noteams = result.sports.length == 0 : this.nosport = result.sports.length == 0;
+      isTeam ? this.noteams = result.sports.length === 0 : this.nosport = result.sports.length === 0;
     this.searching = false;
     this.updateDisplayed();
   }
 
   /*Sort sports BY DAY*/
-  public changeArray(array){
-    var groups = array.reduce(function(obj,item){
+  public changeArray(array) {
+    var groups = array.reduce(function(obj,item) {
       obj[item.jour] = obj[item.jour] || [];
       obj[item.jour].push(item);
       return obj;
     }, {});
-    var sportsD = Object.keys(groups).map(function(key){
+    var sportsD = Object.keys(groups).map(function(key) {
     return {jour: key, name: groups[key]};
     });
     return sportsD;
@@ -160,10 +160,10 @@ export class SportsPage {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     const callFilter = this.segment === 'all' || this.segment === 'team';
-    if (callFilter == true) { //List of sports for all students
+    if (callFilter === true) {// List of sports for all students
       this.displayedSports = this.filterDisplayedSports(this.sports, this.excludedFilters);
     }
-    else if (this.segment === 'favorites') { //list of sports put in favorite
+    else if (this.segment === 'favorites') {// list of sports put in favorite
       let favSports = [];
       this.sports.filter((item) => {
         favSports = this.utilsServices.filterFavoriteItems(item, favSports, this.searchTerm);
@@ -181,8 +181,8 @@ export class SportsPage {
     return this.utilsServices.filterItems('sport', items, excluded, this.dateLimit, this.searchTerm);
   }
 
-  private getFiltersData(isTeam: boolean){
-    if (isTeam == true) {
+  private getFiltersData(isTeam: boolean) {
+    if (isTeam === true) {
       return {
         filters: this.filtersT,
         exclude: this.excludedFiltersT
@@ -211,27 +211,27 @@ export class SportsPage {
       if (data) {
         data = data.data;
         let tmpRange = data[1];
-        if(tmpRange !== this.dateRange) {
+        if (tmpRange !== this.dateRange) {
           this.dateRange = tmpRange;
           this.updateDateLimit();
         }
         let newExclude = data[0];
-        if(this.segment === 'all') this.excludedFilters = newExclude;
-        if(this.segment === 'team') this.excludedFiltersT = newExclude;
+        if (this.segment === 'all') this.excludedFilters = newExclude;
+        if (this.segment === 'team') this.excludedFiltersT = newExclude;
         this.updateDisplayed();
       }
     });
   }
 
   /*Update the dateLimit when that is changed by the filter*/
-  private updateDateLimit(){
+  private updateDateLimit() {
     let today = new Date();
     this.dateLimit = new Date(today.getFullYear(), today.getMonth(), today.getUTCDate()+this.dateRange);
   }
 
   /*Add a sport to calendar of the smartphone*/
-  addToCalendar(slidingItem: IonItemSliding, itemData: SportItem){
-    let options:any = {
+  addToCalendar(slidingItem: IonItemSliding, itemData: SportItem) {
+    let options: any = {
       firstReminderMinutes:30
     };
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,

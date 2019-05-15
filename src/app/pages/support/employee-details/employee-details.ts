@@ -45,7 +45,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EmployeeDetailsPage {
   empDetails: EmployeeItem;
   shownGroup = null;
-  address:any;
+  address: any;
   searching: boolean = false;
 
   constructor(public navCtrl: NavController, private route: ActivatedRoute, private router: Router, public repService: RepertoireService, public connService: ConnectivityService) {
@@ -55,18 +55,18 @@ export class EmployeeDetailsPage {
         this.empDetails = this.router.getCurrentNavigation().extras.state.items;
       }
       this.searching = true;
-    //Check if the connexion is Ok before search details pour an employee
-    if(this.connService.isOnline()) {
+   // Check if the connexion is Ok before search details pour an employee
+    if (this.connService.isOnline()) {
       this.repService.loadEmpDetails(this.empDetails).then(
         res => {
-          let result:any = res;
+          let result: any = res;
           this.empDetails = result.empDetails;
           console.log(this.empDetails);
           this.searching = false;
         }
       );
     }
-    //if not return to previous page and pop up an alert
+   // if not return to previous page and pop up an alert
     else {
       this.searching = false;
       this.connService.presentConnectionAlert();
@@ -80,7 +80,7 @@ export class EmployeeDetailsPage {
 
   /*Open page with some aditionnal information*/
   openPage(url: string) {
-    //InAppBrowser.open(url, '_blank');
+   // InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');
   }
 }

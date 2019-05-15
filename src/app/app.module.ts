@@ -67,10 +67,11 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { UtilsService } from './services/utils-services/utils-services';
 import { AlertService } from './services/utils-services/alert-service';
+import { TransService } from './services/utils-services/trans-services';
 
 
 export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http,'./assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 
@@ -109,6 +110,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     StudiesService,
     EventsService,
     AlertService,
+    TransService,
     InAppBrowser,
     Market,
     POIService,

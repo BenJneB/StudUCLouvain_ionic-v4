@@ -35,19 +35,19 @@ export class RssService {
   }
 
   /*Load data from the RSS flux*/
-  load(url: string, isSport:boolean = false){
+  load(url: string, isSport: boolean = false) {
     return new Promise( (resolve, reject) => {
       this.http.get(url, {responseType: 'text'}).pipe(timeout(5000),
       map(data =>  this.utilsServices.convertToJson(data))).subscribe( result => {
           this.nbCalls++;
           if (isSport) result = result['xml'];
           else result = result['rss']['channel'];
-          if (result == null) {
-            if(this.nbCalls >= this.callLimit) {
+          if (result === null) {
+            if (this.nbCalls >= this.callLimit) {
               this.nbCalls = 0;
-              reject(2); //2 = data.query.results == null  & callLimit reached, no neitemsws to display
+              reject(2); // 2 = data.query.results === null  & callLimit reached, no neitemsws to display
             }
-            reject(1); //1 = data.query.results == null, retry rssService
+            reject(1); // 1 = data.query.results === null, retry rssService
           } else {
             this.nbCalls = 0;
             resolve(result['item']);

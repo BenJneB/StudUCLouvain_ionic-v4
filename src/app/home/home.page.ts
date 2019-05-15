@@ -41,9 +41,9 @@ export class HomePage {
   @ViewChild('home') content: IonContent;
 
 
-  title:string = "Stud.UCLouvain";
+  title: string = 'Stud.UCLouvain';
   shownGroup = null;
-  where = "";
+  where = '';
   myApp : AppComponent;
 
   /*Create an object Page for each feature of our application display in the home page*/
@@ -108,9 +108,9 @@ export class HomePage {
               private utilsServices: UtilsService
             )
   {
-      this.where = "";
+      this.where = '';
       document.title = this.title;
-      //this.userS.removeCampus('');
+     // this.userS.removeCampus('');
   }
 
   /*Set the title*/
@@ -121,13 +121,13 @@ export class HomePage {
   }
 
   /*Update the public variable campus for the user*/
-  updateCampus(){
+  updateCampus() {
     this.userS.addCampus(this.where);
   }
 
   /*Change page when click on a page of the home of launchExternalApp if it's the resto U*/
   changePage(page) {
-    if(page.iosSchemaName != null && page.androidPackageName != null){
+    if (page.iosSchemaName != null && page.androidPackageName != null) {
       this.utilsServices.launchExternalApp(page);
     }
     else{
@@ -138,34 +138,42 @@ export class HomePage {
   /*Open the URL for the social media of the UCL*/
   public openURL(url: string) {
     this.iab.create(url, '_system');
-    //fab.close();
+   // fab.close();
   }
   public openUCL(url: string) {
     this.iab.create(url, '_system');
   }
 
   /*action when click on the floating urgency button, display the text to help the user in an alert*/
-  emergency(){
-    let close :string;
-    this.translateService.get('HOME.CLOSE').subscribe((res:string) => {close=res;});
-    let urg:string;
-    this.translateService.get('HOME.URG').subscribe((res:string) => {urg=res;});
+  emergency() {
+    let close : string;
+    this.translateService.get('HOME.CLOSE').subscribe((res: string) => {close =res;});
+    let urg: string;
+    this.translateService.get('HOME.URG').subscribe((res: string) => {urg=res;});
     let msg1,msg2,msg3,msg4,msg5,msg6,msg7,msg8,msg9 : string;
-    this.translateService.get('GUINDAILLE.HELP1').subscribe((res:string) => {msg1=res;});
-    this.translateService.get('GUINDAILLE.HELP2').subscribe((res:string) => {msg2=res;});
-    this.translateService.get('GUINDAILLE.HELP3').subscribe((res:string) => {msg3=res;});
-    this.translateService.get('GUINDAILLE.HELP4').subscribe((res:string) => {msg4=res;});
-    this.translateService.get('GUINDAILLE.HELP5').subscribe((res:string) => {msg5=res;});
-    this.translateService.get('GUINDAILLE.HELP6').subscribe((res:string) => {msg6=res;});
-    this.translateService.get('GUINDAILLE.HELP7').subscribe((res:string) => {msg7=res;});
-    this.translateService.get('GUINDAILLE.HELP8').subscribe((res:string) => {msg8=res;});
-    this.translateService.get('GUINDAILLE.HELP9').subscribe((res:string) => {msg9=res;});
-    let out:string;
-    this.translateService.get('GUINDAILLE.HELP18').subscribe((res:string) => {out=res;});
+    this.translateService.get('GUINDAILLE.HELP1').subscribe((res: string) => {msg1=res;});
+    this.translateService.get('GUINDAILLE.HELP2').subscribe((res: string) => {msg2=res;});
+    this.translateService.get('GUINDAILLE.HELP3').subscribe((res: string) => {msg3=res;});
+    this.translateService.get('GUINDAILLE.HELP4').subscribe((res: string) => {msg4=res;});
+    this.translateService.get('GUINDAILLE.HELP5').subscribe((res: string) => {msg5=res;});
+    this.translateService.get('GUINDAILLE.HELP6').subscribe((res: string) => {msg6=res;});
+    this.translateService.get('GUINDAILLE.HELP7').subscribe((res: string) => {msg7=res;});
+    this.translateService.get('GUINDAILLE.HELP8').subscribe((res: string) => {msg8=res;});
+    this.translateService.get('GUINDAILLE.HELP9').subscribe((res: string) => {msg9=res;});
+    let out: string;
+    this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {out=res;});
     let alert = this.alertCtrl.create({
       header: urg,
-      message: "<p> <strong>" + msg1 + "</strong>: <br><font size=\"+1\"><a href=\"tel:010 47 22 22\">010 47 22 22</a></font> </p> <p><strong>" + msg2 + "</strong>: <br><font size=\"+1\"><a href=\"tel:010 47 24 24\">010 47 24 24</a></font> <br>ou<br> <font size=\"+1\"><a href=\"tel:02 764 93 93\">02 764 93 93</a></font> <br>(Woluwe - St Gilles - Tournai)<br> ou <br><font size=\"+1\"><a href=\"tel:065 32 35 55\">065 32 35 55</a></font> (Mons)</p> <p><strong>Contact:</strong> <a href=\"mailto:security@uclouvain.be\">security@uclouvain.be</a></p> <p><strong>" + out + ":</strong> <font size=\"+1\"><a href=\"tel:112\">112</a></font></p>  <p> <br>" + msg3 + " <br><br> <strong>" + msg4 + "</strong> " + msg5 + "<br> <strong>" + msg6 + "</strong> " + msg7 + "<br> <strong>" + msg8 + "</strong> " + msg9 +"<br>",
-      cssClass: "emergency",
+      message: '<p> <strong>'
+      + msg1
+      + '</strong>: <br><font size=\' +1\'><a href=\'tel:010 47 22 22\'>010 47 22 22</a></font> </p> <p><strong>'
+      + msg2
+      + '</strong>: <br><font size=\' +1\'><a href=\'tel:010 47 24 24\'>010 47 24 24</a></font> <br>ou<br> <font size=\' +1\'><a href=\'tel:02 764 93 93\'>02 764 93 93</a></font> <br>(Woluwe - St Gilles - Tournai)<br> ou <br><font size=\' +1\'><a href=\'tel:065 32 35 55\'>065 32 35 55</a></font> (Mons)</p> <p><strong>Contact:</strong> <a href=\'mailto:security@uclouvain.be\'>security@uclouvain.be</a></p> <p><strong>'
+      + out + ':</strong> <font size=\' +1\'><a href=\'tel:112\'>112</a></font></p>  <p> <br>' + msg3
+      + ' <br><br> <strong>' + msg4 + '</strong> ' + msg5 + '<br> <strong>' + msg6 + '</strong> ' + msg7
+      + '<br> <strong>' + msg8 + '</strong> ' + msg9 + '<br>',
+
+      cssClass: 'emergency',
       buttons: [
       {
         text:close,

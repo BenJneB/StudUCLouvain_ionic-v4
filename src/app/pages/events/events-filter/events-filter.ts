@@ -38,21 +38,17 @@ export class EventsFilterPage {
     private eventService: EventsService,
     private navParams: NavParams
   ) {
-    //passed in array of categories names that should be excluded (unchecked)
+   // passed in array of categories names that should be excluded (unchecked)
         let excludedFilters = this.navParams.get('excludedFilters');
         let filters = this.navParams.get('filters');
         this.dateRange = this.navParams.get('dateRange');
-        console.log(filters);
         for (let filterName of filters) {
           this.categories.push({
             name: filterName,
-            iconCategory: this.eventService.getIconCategory(filterName),
+            iconCategory: 'assets/icon/events-icon/' + this.eventService.getIconCategory(filterName) + '.png',
             isChecked: (excludedFilters.indexOf(filterName) === -1)
           });
         }
-      
-  
-
   }
 
   /*Reset All of the Toggles to be checked*/
@@ -77,7 +73,7 @@ export class EventsFilterPage {
 
   /*Cancel Filter*/
   dismiss(data?: any) {
-    if(typeof data == "undefined" ) {
+    if (typeof data === 'undefined' ) {
       data = [];
     }
     this.results.push(data);

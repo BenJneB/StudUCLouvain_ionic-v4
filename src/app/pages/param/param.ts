@@ -1,3 +1,4 @@
+import { TransService } from './../../services/utils-services/trans-services';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 /*
@@ -43,7 +44,7 @@ import { UserService } from '../../services/utils-services/user-service';
 export class ParamPage {
   title: any;
   shownGroup = null;
-  setting2:string ="Langue";
+  setting2: string = 'Langue';
 
 
   constructor(
@@ -52,19 +53,19 @@ export class ParamPage {
     public userS:UserService,
     private alertCtrl : AlertController,
     private translateService: TranslateService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private transService: TransService
   )
   {
-    this.translateService.get('MENU.SETTINGS').subscribe((res:string) => {this.title=res;});
+    this.title = this.transService.getTranslation('MENU.SETTINGS');
   }
 
   /*Create and display an alert for the choice of campus and save the choice of the user in the public variable*/
-  async campus_choice(){
+  async campus_choice() {
     let check = this.userS.campus;
-    let setting, message, save;
-    this.translateService.get('HOME.SETTING1').subscribe((res:string) => {setting=res;});
-    this.translateService.get('HOME.MESSAGE').subscribe((res:string) => {message=res;});
-    this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
+    const setting = this.transService.getTranslation('HOME.SETTING1');
+    const message = this.transService.getTranslation('HOME.MESSAGE');
+    const save = this.transService.getTranslation('HOME.SAVE');
     let settingsAlert = await this.alertCtrl.create({
       header: setting,
       message: message,
@@ -73,19 +74,19 @@ export class ParamPage {
           type:'radio',
           label:'Louvain-la-Neuve',
           value:'LLN',
-          checked:(check == 'LLN')
+          checked:(check === 'LLN')
         },
         {
           type:'radio',
           label:'Woluwé',
           value:'Woluwe',
-          checked:(check == 'Woluwe')
+          checked:(check === 'Woluwe')
         },
         {
           type:'radio',
           label:'Mons',
           value:'Mons',
-          checked:(check == 'Mons')
+          checked:(check === 'Mons')
         },
         {
           type:'radio',
@@ -111,19 +112,18 @@ export class ParamPage {
   }
 
   /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
-  async language_choice(){
+  async language_choice() {
     let check2 = this.translateService.currentLang;
-    let message2, en, fr, setting2, save:string;
-    this.translateService.get('HOME.SETTING2').subscribe((res:string) => {setting2=res;});
-    this.translateService.get('HOME.MESSAGE2').subscribe((res:string) => {message2=res;});
-    this.translateService.get('HOME.FR').subscribe((res:string) => {fr=res;});
-    this.translateService.get('HOME.EN').subscribe((res:string) => {en=res;});
-    this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
-    let languageAlert = await this.alertService.languageAlert(setting2, message2, fr, check2, en, save);
+    const setting = this.transService.getTranslation('HOME.SETTING2');
+    const message = this.transService.getTranslation('HOME.MESSAGE2');
+    const save = this.transService.getTranslation('HOME.SAVE');
+    const fr = this.transService.getTranslation('HOME.FR');
+    const en = this.transService.getTranslation('HOME.EN');
+    let languageAlert = await this.alertService.languageAlert(setting, message, fr, check2, en, save);
     await languageAlert.present();
   }
 
-  openTuto(){
+  openTuto() {
     this.navCtrl.navigateForward('/tutos');
   }
 }

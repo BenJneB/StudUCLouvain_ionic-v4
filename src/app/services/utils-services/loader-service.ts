@@ -10,7 +10,7 @@ export class LoaderService {
 
   constructor(public loadingController: LoadingController) { }
 
-  async present(message:string) {
+  async present(message: string) {
     this.isLoading = true;
     return await this.loadingController.create({
       message: message

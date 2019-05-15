@@ -56,7 +56,7 @@ export class ModalProjectPage {
   }
 
   /*Get the available projects*/
-  getProjects(sessionId :string){
+  getProjects(sessionId : string) {
     this.studiesService.getProjects(sessionId).then(
       data => {
         this.projects = data;

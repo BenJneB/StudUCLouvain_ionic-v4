@@ -32,19 +32,19 @@ declare var Connection: any;
 })
 export class ConnectivityService {
   onDevice: boolean;
-  available:boolean;
-  enable:boolean;
+  available: boolean;
+  enable: boolean;
   constructor(public platform: Platform, 
               private network: Network, 
               private translateService: TranslateService, 
               private alertCtrl: AlertController,
-              private diagnostic: Diagnostic){
+              private diagnostic: Diagnostic) {
     this.onDevice = this.platform.is('cordova');
   }
 
   /*Check if there is a connexion*/
   isOnline(): boolean {
-    if(this.onDevice && this.network.type){
+    if (this.onDevice && this.network.type) {
       return this.network.type !== Connection.NONE;
     } else {
       return navigator.onLine;
@@ -52,12 +52,12 @@ export class ConnectivityService {
   }
   /*pop up an alert to say to the user to connect him to the internet*/
   presentConnectionAlert() {
-    let title:string;
-    let message:string;
-    let close:string;
-    this.translateService.get('NET.TITLE').subscribe((res:string) => {title=res;});
-    this.translateService.get('NET.CONNECT').subscribe((res:string) => {message=res;});
-    this.translateService.get('NET.CLOSE').subscribe((res:string) => {close=res;});
+    let title: string;
+    let message: string;
+    let close: string;
+    this.translateService.get('NET.TITLE').subscribe((res: string) => {title =res;});
+    this.translateService.get('NET.CONNECT').subscribe((res: string) => {message =res;});
+    this.translateService.get('NET.CLOSE').subscribe((res: string) => {close =res;});
     let alert = this.alertCtrl.create({
       header: title,
       subHeader: message,
@@ -75,9 +75,9 @@ export class ConnectivityService {
 
    async isLocationEnabled() {
 
-    console.log("start test location");
+    console.log('start test location');
     await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);
-    console.log("available : " + this.available);
+    console.log('available : ' + this.available);
     return this.available;
   }
 

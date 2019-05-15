@@ -46,10 +46,10 @@ export class SupportPage {
   shownGroup = null;
   employees: EmployeeItem[];
   searching: boolean = false;
-  lastname:string = "";
-  firstname:string = "";
+  lastname: string = '';
+  firstname: string = '';
   loading;
-  segment:string="aide";
+  segment: string = 'aide';
   shownHelp = null;
 
   constructor(public navCtrl: NavController,
@@ -62,31 +62,31 @@ export class SupportPage {
               private utilsServices: UtilsService
   )
   {
-    this.title = "Support";
+    this.title = 'Support';
   }
 
   /*Take the name and lastname in the good field to do the search and display the result*/
-  update(){
-    this.loader.present("Please wait..");
-    let options: Array<string>= [];
+  update() {
+    this.loader.present('Please wait..');
+    let options: Array<string> = [];
     let values: Array<string> = [];
-    if(this.lastname.length>0){
+    if (this.lastname.length>0) {
       values.push(this.lastname);
-      options.push("lastname");
+      options.push('lastname');
     }
-    if(this.firstname.length>0){
+    if (this.firstname.length>0) {
       values.push(this.firstname);
-      options.push("firstname");
+      options.push('firstname');
     }
     this.searchEmployees(options, values);
   }
 
   /*Search employees with the name and lastname in option, return the result and dismiss the loading pop up*/
-  searchEmployees(options:Array<string>, values:Array<string>){
-    if(this.connService.isOnline()) {
+  searchEmployees(options:Array<string>, values:Array<string>) {
+    if (this.connService.isOnline()) {
       this.repService.searchEmployees(options, values).then(
         res => {
-          let result:any = res;
+          let result: any = res;
           this.employees = result.employees;
           this.searching = true;
         }
@@ -105,6 +105,6 @@ export class SupportPage {
 
   /*Open url for some details on site of the UCL about support, etc for more informations*/
   public openURL(url: string) {
-    this.iab.create(url, '_system','location=yes');
+    this.iab.create(url, '_system', 'location=yes');
   }
 }

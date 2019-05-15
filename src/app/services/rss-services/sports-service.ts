@@ -36,47 +36,61 @@ export class SportsService {
   shownSports = 0;
   shownTeams = 0;
 
-  url = ""; //students
-  urlT = ""; //equipe universitaire
+  url = ''; // students
+  urlT = ''; // equipe universitaire
 
   constructor(public user:UserService, public rssService : RssService) {
 
   }
 
   /*Get the good URL in function of the user's campus*/
-  update(){
-    //reset url
-    this.url = "https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate=";
-    this.urlT = "https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate="
+  update() {
+   // reset url
+    this.url = 'https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate= ';
+    this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate= '
 
-    // first day of the week : today
-    let today:Date = new Date();
+   //  first day of the week : today
+    const { todayString, endString } = this.getSportsDates(dateToString);
 
-    //last day of the week : today +6
-    let end:Date = new Date();
-    end.setDate(today.getDate() + 6 );
+   // which campus ?
+    const site: string = this.getSportCampus();
 
-    //invert date
-    let todayString = dateToString(today);
-    let endString =  dateToString(end);
-
-    //which campus ?
-    let site:string;
-    let campus = this.user.campus;
-    if(campus == "LLN") site = 'louv';
-    if(campus == "Woluwe") site = 'wol';
-    if(campus == "Mons") site = 'mons';
-
-    //final URL
-    let restUrl = todayString + "&-enddate=" + endString + "&-site=" ;
+   // final URL
+    let restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
     let urlTemp = this.url + restUrl + site;
     let urlTempT = this.urlT + restUrl + 'louv';
     this.url = urlTemp;
     this.urlT = urlTempT;
 
-    function dateToString(date){
+    function dateToString(date) {
       return date.toISOString().split('T')[0];
     }
+  }
+
+  private getSportsDates(dateToString: (date: any) => any) {
+    let today: Date = new Date();
+    // last day of the week : today +6
+    let end: Date = new Date();
+    end.setDate(today.getDate() + 6);
+    // invert date
+    let todayString = dateToString(today);
+    let endString = dateToString(end);
+    return { todayString, endString };
+  }
+
+  private getSportCampus() {
+    let site: string;
+    let campus = this.user.campus;
+    if (campus === 'LLN') {
+      site = 'louv';
+    }
+    if (campus === 'Woluwe') {
+      site = 'wol';
+    }
+    if (campus === 'Mons') {
+      site = 'mons';
+    }
+    return site;
   }
 
   private getSportsDatas(segment: string) {
@@ -92,23 +106,23 @@ export class SportsService {
   }
 
   /*Get sports for the URL specific to the campus of the user*/
-  public getSports(segment:string) {
+  public getSports(segment: string) {
     const datas = this.getSportsDatas(segment);
     return this.rssService.load(datas['url'], true).then(result => {
-      this.extractSports(result, segment == 'team' ? false : true);
+      this.extractSports(result, segment === 'team' ? false : true);
       return {
         sports: datas['sports'],
         shownSports: datas['shownSports'],
         categories: datas['categories']
       }
     }) .catch(error => {
-      if(error == 1) {
+      if (error === 1) {
         return this.getSports(segment);
       } else {
-        if(error == 2) {
-          console.log("Loading sports : GET req timed out > limit, suppose no sports to be displayed");
+        if (error === 2) {
+          console.log('Loading sports : GET req timed out > limit, suppose no sports to be displayed');
         } else {
-          console.log("Error loading sports : " + error);
+          console.log('Error loading sports : ' + error);
         }
         return {
           sports: [],
@@ -120,12 +134,12 @@ export class SportsService {
   }
 
   /*Extract sports with all the details*/
-  private extractSports(data: any, isSport:boolean = true) {
-    if(data === undefined){
-      console.log("Error sports data undefined!!!")
+  private extractSports(data: any, isSport: boolean = true) {
+    if (data === undefined) {
+      console.log('Error sports data undefined!!!')
       return;
     }
-    if(data.length === undefined){
+    if (data.length === undefined) {
       let temp = data;
       data = [];
       data.push(temp);
@@ -141,23 +155,29 @@ export class SportsService {
         favorite = true;
       }
       if (item.activite) {
-        if(isSport){
+        if (isSport) {
           this.getCategories(this.allCategories, item);
         }
         else{
           this.getCategories(this.allCategoriesT, item);
         }
       }
-      if(isSport) this.shownSports++;
-      else this.shownTeams++;
+      if (isSport) {
+        this.shownSports++;
+      } else {
+        this.shownTeams++;
+      }
       let startDate = this.createDateForSport(item.date, item.hdebut);
       let endDate = this.createDateForSport(item.date, item.hfin);
       let newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, item.jour, startDate,
-                      hidden, favorite, endDate , item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
+                      hidden, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
 
 
-      if(isSport) this.sports.push(newSportItem);
-      else this.teams.push(newSportItem);
+      if (isSport) {
+        this.sports.push(newSportItem);
+      } else {
+        this.teams.push(newSportItem);
+      }
     }
   }
 
@@ -170,8 +190,8 @@ export class SportsService {
 
   /*Return a date in good form by splitting for the sport*/
   private createDateForSport(str : string, hour: string):Date{
-      let timeSplit = hour.split(":");
-      let dateSplit = str.split("/");
+      let timeSplit = hour.split(':');
+      let dateSplit = str.split('/');
       let year = parseInt(dateSplit[2]);
       let month = parseInt(dateSplit[1])-1;
       let day = parseInt(dateSplit[0]);

@@ -41,7 +41,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class GuindaillePage {
   header: any;
   shownGroup = null;
-  segment:string = 'pict';
+  segment: string = 'pict';
   numbersSlides =  Array.from({length: (6)}, (v, k) => k);
   numberPictos =  Array.from({length: (10)}, (v, k) => k);
   slides = [];
@@ -55,7 +55,7 @@ export class GuindaillePage {
     this.numbersSlides.map((numSlide) => {
       const title = 'GUINDAILLE.TITLEF' + (numSlide + 1);
       const subTitle = 'GUINDAILLE.EFFECT' + (numSlide + 1);
-      this.translateService.get([title, subTitle]).subscribe((res:string) => {
+      this.translateService.get([title, subTitle]).subscribe((res: string) => {
         this.slides[numSlide] = {
           header: res[title],
           subHeader: res[subTitle],
@@ -73,7 +73,7 @@ export class GuindaillePage {
     this.numberPictos.map((numPicto) => {
       const title = 'GUINDAILLE.TITLE' + (numPicto + 1);
       const subTitle = 'GUINDAILLE.PIC' + (numPicto + 1);
-      this.translateService.get([title, subTitle]).subscribe((res:string) => {
+      this.translateService.get([title, subTitle]).subscribe((res: string) => {
       this.pictos[numPicto] = {
         header: res[title],
         subHeader: res[subTitle],
