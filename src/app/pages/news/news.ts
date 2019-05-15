@@ -67,7 +67,7 @@ export class NewsPage {
   nonews: any = false;
   loading;
   fac: string = '';
-  listFac: any =[];
+  listFac: any = [];
   site: string = '';
   rss: string = '';
   //url = 'assets/data/fac.json';
@@ -228,7 +228,7 @@ export class NewsPage {
           if(key) this.cache.saveItem(key, result);
           this.shownNews = result.showItems;
           this.searching = false;
-          this.nonews = this.news.length == 0;
+          this.nonews = this.news.length === 0;
           this.updateDisplayed();
       })
     //If no connexion pop an alert and go back to previous page

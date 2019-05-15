@@ -70,7 +70,7 @@ export class StudiesService {
       let name = data.projects.project.$.name.toString();
       console.log('name : ' + name);
       let id = data.projects.project.$.id.toString();
-      console.log('id : '+ id);
+      console.log('id : ' + id);
       let project = new AdeProject(id, name);
       console.log('project' + project)
       console.log('projects' + projects)
@@ -81,7 +81,7 @@ export class StudiesService {
         let name = data.projects.project[i].$.name.toString();
         console.log('name : ' + name);
         let id = data.projects.project[i].$.id.toString();
-        console.log('id : '+ id);
+        console.log('id : ' + id);
         let project = new AdeProject(id, name);
         console.log('project' + project)
         console.log('projects' + projects)

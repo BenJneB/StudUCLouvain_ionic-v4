@@ -48,9 +48,9 @@ export class POIService {
   /*Put the good campus for the user to display the good map with the good locations*/
   update() {
     let campus = this.user.campus;
-    if(campus == 'LLN') this.url = this.urlLLN;
-    if(campus == 'Woluwe') this.url = this.urlWol;
-    if(campus == 'Mons') this.url = this.urlMons;
+    if(campus === 'LLN') this.url = this.urlLLN;
+    if(campus === 'Woluwe') this.url = this.urlWol;
+    if(campus === 'Mons') this.url = this.urlMons;
     if(campus != this.old) {
       this.zones = [];
       this.old = campus;
@@ -60,7 +60,7 @@ export class POIService {
   /*Load point of interest to load the list of locations and display that*/
   public loadResources() {
     this.update();
-    if(this.zones.length == 0) return new Promise(resolve => {
+    if(this.zones.length === 0) return new Promise(resolve => {
       this.http.get(this.url).pipe(
         map(res => res)).subscribe(data => {
           let tmpZones = data['zones'];

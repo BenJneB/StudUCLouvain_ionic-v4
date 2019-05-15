@@ -73,19 +73,19 @@ export class ParamPage {
           type:'radio',
           label:'Louvain-la-Neuve',
           value:'LLN',
-          checked:(check == 'LLN')
+          checked:(check === 'LLN')
         },
         {
           type:'radio',
           label:'Woluwé',
           value:'Woluwe',
-          checked:(check == 'Woluwe')
+          checked:(check === 'Woluwe')
         },
         {
           type:'radio',
           label:'Mons',
           value:'Mons',
-          checked:(check == 'Mons')
+          checked:(check === 'Mons')
         },
         {
           type:'radio',

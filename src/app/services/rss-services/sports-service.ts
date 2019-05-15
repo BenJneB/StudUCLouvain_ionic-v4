@@ -63,9 +63,9 @@ export class SportsService {
     //which campus ?
     let site: string;
     let campus = this.user.campus;
-    if(campus == 'LLN') site = 'louv';
-    if(campus == 'Woluwe') site = 'wol';
-    if(campus == 'Mons') site = 'mons';
+    if(campus === 'LLN') site = 'louv';
+    if(campus === 'Woluwe') site = 'wol';
+    if(campus === 'Mons') site = 'mons';
 
     //final URL
     let restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
@@ -95,17 +95,17 @@ export class SportsService {
   public getSports(segment: string) {
     const datas = this.getSportsDatas(segment);
     return this.rssService.load(datas['url'], true).then(result => {
-      this.extractSports(result, segment == 'team' ? false : true);
+      this.extractSports(result, segment === 'team' ? false : true);
       return {
         sports: datas['sports'],
         shownSports: datas['shownSports'],
         categories: datas['categories']
       }
     }) .catch(error => {
-      if(error == 1) {
+      if(error === 1) {
         return this.getSports(segment);
       } else {
-        if(error == 2) {
+        if(error === 2) {
           console.log('Loading sports : GET req timed out > limit, suppose no sports to be displayed');
         } else {
           console.log('Error loading sports : ' + error);

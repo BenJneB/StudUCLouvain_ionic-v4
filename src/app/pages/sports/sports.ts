@@ -122,7 +122,7 @@ export class SportsPage {
       this.sportsService.getSports(segment).then(
         result => {
           this.assignDatas(
-            segment == 'team' ? true : false, 
+            segment === 'team' ? true : false, 
             result
           );
       })
@@ -137,7 +137,7 @@ export class SportsPage {
       isTeam ? this.teams = result.sports : this.sports = result.sports;
       isTeam ? this.shownTeams = result.shownSports : this.shownSports = result.shownSports;
       isTeam ? this.filtersT = result.categories : this.filters = result.categories;
-      isTeam ? this.noteams = result.sports.length == 0 : this.nosport = result.sports.length == 0;
+      isTeam ? this.noteams = result.sports.length === 0 : this.nosport = result.sports.length === 0;
     this.searching = false;
     this.updateDisplayed();
   }
@@ -160,7 +160,7 @@ export class SportsPage {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     const callFilter = this.segment === 'all' || this.segment === 'team';
-    if (callFilter == true) { //List of sports for all students
+    if (callFilter === true) { //List of sports for all students
       this.displayedSports = this.filterDisplayedSports(this.sports, this.excludedFilters);
     }
     else if (this.segment === 'favorites') { //list of sports put in favorite
@@ -182,7 +182,7 @@ export class SportsPage {
   }
 
   private getFiltersData(isTeam: boolean) {
-    if (isTeam == true) {
+    if (isTeam === true) {
       return {
         filters: this.filtersT,
         exclude: this.excludedFiltersT

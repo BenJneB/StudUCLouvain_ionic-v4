@@ -161,7 +161,7 @@ export class EventsPage {
           this.shownEvents = result.shownEvents;
           this.filters = result.categories;
           this.searching = false;
-          this.noevents = this.events.length == 0;
+          this.noevents = this.events.length === 0;
           this.updateDisplayed();
       })
     } else {
@@ -211,7 +211,7 @@ export class EventsPage {
   /*Return first day of the week and last day of the week (to display range)*/
   getRangeWeek(week,year) {
     var d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
-    d1 = new Date(''+year+'');
+    d1 = new Date('' +year+ '');
     numOfdaysPastSinceLastMonday = d1.getDay() - 1;
     d1.setDate(d1.getDate() - numOfdaysPastSinceLastMonday);
     d1.setDate(d1.getDate() + (7 * (week - this.getISOWeek(d1))));

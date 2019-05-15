@@ -38,7 +38,7 @@ export class FacService {
 
   /*Load fac from Json file in assets*/
   public loadResources() {
-    if(this.facultes.length == 0) return new Promise(resolve => {
+    if(this.facultes.length === 0) return new Promise(resolve => {
       this.http.get(this.url).pipe(map(res => res)).subscribe(data => {
           for(let sector of data['secteurs']) {
             this.facultes.push(sector);

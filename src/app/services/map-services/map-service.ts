@@ -114,7 +114,7 @@ export class MapService {
   /*Load the map for the browser and check the connectivity, if no connexion display a message to ask to connect*/
   private loadBrowserGoogleMaps(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if(typeof google == 'undefined' || typeof google.maps == 'undefined') {
+      if(typeof google === 'undefined' || typeof google.maps === 'undefined') {
         this.showPleaseConnect();
         if(this.connectivityService.isOnline()) {
           window['mapInit'] = () => {
@@ -283,7 +283,7 @@ export class MapService {
     //console.log(this.markers);
     let marker = this.getMarker(location.title);
     if(!marker) {
-      let contentString = '<p>'+ location.address +'</p>';
+      let contentString = '<p>' + location.address + '</p>';
       if(this.onDevice) {
         this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng),  location.address, location.title);
       } else {
@@ -312,7 +312,7 @@ export class MapService {
          if(this.onDevice) {
          this.markers[i].remove();
           //this.markers[i].setMap(null);
-          //this.markers[i]=null;
+          //this.markers[i] = null;
           
           //console.log(this.markers);
       	}
@@ -337,7 +337,7 @@ export class MapService {
       title: title
     });
     this.markersB.push(marker);
-    this.addBrowserInfoWindow(marker, title+'\n'+content);
+    this.addBrowserInfoWindow(marker, title+ '\n' +content);
   }
   private addBrowserInfoWindow(marker, content) {
     let infoWindow = new google.maps.InfoWindow({
@@ -395,7 +395,7 @@ export class MapService {
 
   private setCenteredMarkerOnBrowser(title: string) {
     this.markersB.map((marker) => {
-      if(marker.getTitle() == title) {
+      if(marker.getTitle() === title) {
         this.map.panTo(marker.getPosition());
       }
     });
@@ -403,7 +403,7 @@ export class MapService {
 
   private setCenteredMarkerOnDevice(title: string, lat:number, lng:number) {
     this.markers.map((marker) => {
-      if(marker.getTitle() == title) {
+      if(marker.getTitle() === title) {
         let latLng = new LatLng(lat, lng);
         let camPos: CameraPosition<LatLng> = {
           target: latLng,
@@ -455,7 +455,7 @@ export class MapService {
             }
             this.hidePleaseConnect();
           } else {
-            if(typeof google == 'undefined' || typeof google.maps == 'undefined') {
+            if(typeof google === 'undefined' || typeof google.maps === 'undefined') {
               this.loadBrowserGoogleMaps();
             }
             else {

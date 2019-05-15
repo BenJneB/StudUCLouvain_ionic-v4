@@ -134,22 +134,26 @@ export class CoursePage {
   /*Filter TP if a slot is selectionned*/
   updateDisplayedTP() {
       let toFilter = this.courseSorted.tp;
-      if(toFilter.length==0) this.noTP = true;
-      else this.noTP = false;
+      this.noTP = toFilter.length === 0;
       let toPush;
-      if(this.slotTP != 'no') toPush = toFilter.filter(acti => ( acti.name === this.slotTP || acti.name.indexOf('-') > -1));
-      else toPush = this.courseSorted.tp;
+      if (this.slotTP != 'no') {
+        toPush = toFilter.filter(acti => ( acti.name === this.slotTP || acti.name.indexOf('-') > -1));
+      } else {
+        toPush = this.courseSorted.tp;
+      }
       this.displayedActi = this.displayedActi.concat(toPush);
   }
 
   /*Filter CM if a slot is selectionned*/
   updateDisplayedCM() {
       let toFilter = this.courseSorted.cm;
-  		if(toFilter.length==0) this.noCM = true;
-  		else this.noCM = false;
+  		this.noCM = toFilter.length === 0;
       let toPush:Array<Activity>;
-      if(this.slotCM != 'no') toPush = toFilter.filter(acti => ( acti.name === this.slotCM));
-      else toPush = this.courseSorted.cm;
+      if (this.slotCM != 'no') {
+        toPush = toFilter.filter(acti => ( acti.name === this.slotCM));
+      } else {
+        toPush = this.courseSorted.cm;
+      }
       this.displayedActi = this.displayedActi.concat(toPush);
   }
 
@@ -159,8 +163,7 @@ export class CoursePage {
     this.updateDisplayedCM();
     this.updateDisplayedTP();
     this.displayedActi = this.displayedActi.concat(this.courseSorted.ex);
-    if(this.courseSorted.ex.length == 0) this.noEx = true;
-    else this.noEx = false;
+    this.noEx = this.courseSorted.ex.length === 0;
   }
 
   /*Display a prompt to proprose to the students the slots available for the TP or the CM*/
@@ -196,11 +199,15 @@ export class CoursePage {
     let array = this.getSlots(segment);
     for(let i=0; i< array.length; i++) {
        let slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
-      options.inputs.push({ name : 'options', value: array[i].name , label: array[i].name + ' ' + array[i].start.getHours()+':'+array[i].start.getUTCMinutes() , type: 'radio', checked: slotChosen });
+      options.inputs.push({ name : 'options', value: array[i].name , label: array[i].name + ' ' + array[i].start.getHours()+ ':' +array[i].start.getUTCMinutes() , type: 'radio', checked: slotChosen });
     }
-    if(options.inputs.length > 1) options.inputs.push({name:'options', value:'no', label : 'Toutes', type : 'radio', checked: aucun});
+    if (options.inputs.length > 1) {
+      options.inputs.push({name:'options', value:'no', label : 'Toutes', type : 'radio', checked: aucun});
+    }
     let prompt = this.alertCtrl.create(options);
-    if(options.inputs.length > 1)prompt.then(prompt => prompt.present());
+    if (options.inputs.length > 1) {
+      prompt.then(prompt => prompt.present());
+    }
   }
 
   private addSlot(segment: string, data: any) {
@@ -216,18 +223,22 @@ export class CoursePage {
   getSlots(segment: string) {
     let act: Activity[] = this.course.activities;
      act = act.filter(
-      acti => (acti.type == segment || (acti.type == 'TP' && segment == 'TD') || (segment == 'Examen' && acti.isExam))
+      acti => (acti.type === segment || (acti.type === 'TP' && segment === 'TD') || (segment === 'Examen' && acti.isExam))
       );
     //retrieve name of each slot
     let slots = act.map(item => item.name)
       .filter((value, index, self) => self.indexOf(value) === index); //keep only different
     //delete some session (like seance aide etude)
-    if(segment == 'TD') slots = slots.filter(acti => acti.indexOf('_') !== -1);
-    if(segment == 'Cours magistral') slots = slots.filter(acti => acti.indexOf('-') !== -1);
+    if (segment === 'TD') {
+      slots = slots.filter(acti => acti.indexOf('_') !== -1);
+    }
+    if (segment === 'Cours magistral') {
+      slots = slots.filter(acti => acti.indexOf('-') !== -1);
+    }
     let newAct: Activity[] = [];
     //retrieve one activity of each slot
     for(let i=0; i< slots.length; i++) {
-      let activity:Activity = act.find(acti => acti.name == slots[i]);
+      let activity:Activity = act.find(acti => acti.name === slots[i]);
       newAct.push(activity);
     }
     return newAct;
@@ -239,7 +250,7 @@ export class CoursePage {
       firstReminderMinutes:15
     };
     for (let activity of this.displayedActi) {
-      this.calendar.createEventWithOptions(this.course.name +' : ' + activity.type,
+      this.calendar.createEventWithOptions(this.course.name + ' : ' + activity.type,
         activity.auditorium, null, activity.start,activity.end, options);
     }
     let message: string;
