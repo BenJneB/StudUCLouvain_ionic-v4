@@ -76,7 +76,7 @@ export class MapPage {
       console.log(this.userLocation);
       this.selectedLocation = this.userLocation;
       this.showedLocations.push(this.selectedLocation);
-      if(result[0]) {
+      if (result[0]) {
         this.mapService.addMarker(this.selectedLocation);
       }
     }, (error) => {
@@ -127,7 +127,7 @@ export class MapPage {
 
   /*when select an location*/
   onSelect(data: any) {
-    if(this.selectedLocation !== data) {
+    if (this.selectedLocation !== data) {
       this.selectedLocation = data;
     }
     this.mapService.addMarker(this.selectedLocation);

@@ -70,11 +70,11 @@ export class SupportPage {
     this.loader.present('Please wait..');
     let options: Array<string> = [];
     let values: Array<string> = [];
-    if(this.lastname.length>0) {
+    if (this.lastname.length>0) {
       values.push(this.lastname);
       options.push('lastname');
     }
-    if(this.firstname.length>0) {
+    if (this.firstname.length>0) {
       values.push(this.firstname);
       options.push('firstname');
     }
@@ -83,7 +83,7 @@ export class SupportPage {
 
   /*Search employees with the name and lastname in option, return the result and dismiss the loading pop up*/
   searchEmployees(options:Array<string>, values:Array<string>) {
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.repService.searchEmployees(options, values).then(
         res => {
           let result: any = res;

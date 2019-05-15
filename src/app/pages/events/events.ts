@@ -150,14 +150,14 @@ export class EventsPage {
 
    // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
 
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
 
       this.loader.present('Please wait...');
       this.eventsService.getEvents(this.segment).then(
         res => {
           let result: any = res;
           this.events = result.items;
-          if(key) this.cache.saveItem(key, result);
+          if (key) this.cache.saveItem(key, result);
           this.shownEvents = result.shownEvents;
           this.filters = result.categories;
           this.searching = false;
@@ -247,7 +247,7 @@ export class EventsPage {
 
   /*Display the modal with the filters and update data with them*/
   async presentFilter() {
-    if(this.filters === undefined) {
+    if (this.filters === undefined) {
       this.filters = [];
     }
     let modal = await this.modalCtrl.create(
@@ -261,7 +261,7 @@ export class EventsPage {
       if (data) {
         data=data.data;
         let tmpRange = data[1];
-        if(tmpRange !== this.dateRange) {
+        if (tmpRange !== this.dateRange) {
           this.dateRange = tmpRange;
           this.updateDateLimit();
         }

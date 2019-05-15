@@ -101,19 +101,19 @@ export class LibrariesService {
     } else {
       lib.website = data.website;
     }
-    if(data.openingHours) {
+    if (data.openingHours) {
       this.getOpeningHours(data.openingHours, lib.openingHours);
     }
-    if(data.openingExaminationHours) {
+    if (data.openingExaminationHours) {
       this.getOpeningHours(data.openingExaminationHours, lib.openingExaminationHours);
     }
-    if(data.openingSummerHours) {
+    if (data.openingSummerHours) {
       this.getOpeningHours(data.openingSummerHours, lib.openingSummerHours);
     }
 
     lib.openingHoursNote = data.openingHoursNote;
 
-    if(data.closedDates.length === undefined) {
+    if (data.closedDates.length === undefined) {
       lib.closedDates = [data.closedDates];
     } else {
       lib.closedDates = data.closedDates;

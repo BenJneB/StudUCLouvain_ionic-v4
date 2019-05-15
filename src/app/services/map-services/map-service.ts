@@ -102,7 +102,7 @@ export class MapService {
     this.mapElement = mapElement;
     this.pleaseConnect = pleaseConnect;
 
-    if(this.onDevice) {
+    if (this.onDevice) {
       console.log('Device wtf?');
       return this.loadDeviceGoogleMaps();
     } else {
@@ -114,9 +114,9 @@ export class MapService {
   /*Load the map for the browser and check the connectivity, if no connexion display a message to ask to connect*/
   private loadBrowserGoogleMaps(): Promise<any> {
     return new Promise((resolve, reject) => {
-      if(typeof google === 'undefined' || typeof google.maps === 'undefined') {
+      if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
         this.showPleaseConnect();
-        if(this.connectivityService.isOnline()) {
+        if (this.connectivityService.isOnline()) {
           window['mapInit'] = () => {
             this.initBrowserMap().then(
               (init) => {
@@ -128,7 +128,7 @@ export class MapService {
           }
           let script = document.createElement('script');
           script.id = 'googleMaps';
-          if(this.apiKey) {
+          if (this.apiKey) {
             script.src = 'http://maps.google.com/maps/api/js?key= ' + this.apiKey + '&callback=mapInit';
           } else {
             script.src = 'http://maps.google.com/maps/api/js?callback=mapInit';
@@ -137,7 +137,7 @@ export class MapService {
         }
       }
       else {
-        if(this.connectivityService.isOnline()) {
+        if (this.connectivityService.isOnline()) {
           this.initBrowserMap().then(
             (init) => {
               resolve(init);
@@ -183,7 +183,7 @@ export class MapService {
   /*Load the map for the device and check the connectivity, if no connexion display a message to ask to connect*/
   private loadDeviceGoogleMaps(): Promise<any>{
     return new Promise((resolve, reject) => {
-      if(this.connectivityService.isOnline()) {
+      if (this.connectivityService.isOnline()) {
         this.initDeviceMap().then(
           (init) => {
             resolve(true);
@@ -203,7 +203,7 @@ export class MapService {
   /*Initializes the map, center the map on the position of the user by getting her, put the type of map in roadmap and set a zoom to 15*/
    private async initDeviceMap(): Promise<any> {
     console.log('Geolocation enabled ?');
-    if(await this.connectivityService.isLocationEnabled() ) {
+    if (await this.connectivityService.isLocationEnabled() ) {
       console.log('Geolocation enabled');
       return new Promise((resolve, reject) => {
         console.log('initDeviceMap - ask geolocation');
@@ -246,9 +246,9 @@ export class MapService {
             console.log('Geolocation disabled');
               let campus = this.userS.campus;
               let latLng: LatLng;
-              if(campus === 'LLN') latLng = new LatLng(50.66808100000001,4.611832400000026);
-              if(campus === 'Woluwe') latLng = new LatLng(50.8489094,4.432088300000032);
-              if(campus === 'Mons') latLng = new LatLng(50.45424080000001,3.956658999999945);
+              if (campus === 'LLN') latLng = new LatLng(50.66808100000001,4.611832400000026);
+              if (campus === 'Woluwe') latLng = new LatLng(50.8489094,4.432088300000032);
+              if (campus === 'Mons') latLng = new LatLng(50.45424080000001,3.956658999999945);
 
               this.userLocation = new MapLocation( 'Campus Position',
                                         '',
@@ -282,15 +282,15 @@ export class MapService {
   addMarker(location: MapLocation) {
    // console.log(this.markers);
     let marker = this.getMarker(location.title);
-    if(!marker) {
+    if (!marker) {
       let contentString = '<p>' + location.address + '</p>';
-      if(this.onDevice) {
+      if (this.onDevice) {
         this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng),  location.address, location.title);
       } else {
         this.addBrowserMarker(parseFloat(location.lat), parseFloat(location.lng), contentString, location.title);
       }
     } else {
-      if(this.onDevice) {
+      if (this.onDevice) {
         marker.showInfoWindow();
       }
     }
@@ -302,21 +302,21 @@ export class MapService {
      // console.log(location);
      // console.log(this.markers);
       let m;
-      if(this.onDevice) m = this.markers;
+      if (this.onDevice) m = this.markers;
       else m = this.markersB;
       for(var i=0;i<m.length; i++) {
-         if(m[i].getTitle() === location.title) {
+         if (m[i].getTitle() === location.title) {
          // console.log(this.markers[i]);
          // let m: Marker = this.markers[i];
         // m.remove();
-         if(this.onDevice) {
+         if (this.onDevice) {
          this.markers[i].remove();
          // this.markers[i].setMap(null);
          // this.markers[i] = null;
           
          // console.log(this.markers);
       	}
-          if(!this.onDevice) {
+          if (!this.onDevice) {
            // m.remove();
             this.markersB[i].setMap(null);
            // this.map.clear();
@@ -368,16 +368,16 @@ export class MapService {
   /*Get a marker for the selected location*/
   private getMarker(title: string): Marker{
     let res = null;
-    if(this.onDevice) {
+    if (this.onDevice) {
 	    this.markers.map((marker) => {
-	      if(marker.getTitle() === title) {
+	      if (marker.getTitle() === title) {
 	        res=marker;
 	      }
 	    });
 	}
 	else{
 		this.markersB.map((marker) => {
-	      if(marker.getTitle() === title) {
+	      if (marker.getTitle() === title) {
 	        res=marker;
 	      }
 	    });
@@ -386,7 +386,7 @@ export class MapService {
   }
 
   setCenteredMarker(location: MapLocation) {
-    if(this.onDevice) {
+    if (this.onDevice) {
       this.setCenteredMarkerOnDevice(location.title, parseFloat(location.lat), parseFloat(location.lng));
     } else {
       this.setCenteredMarkerOnBrowser(location.title);
@@ -395,7 +395,7 @@ export class MapService {
 
   private setCenteredMarkerOnBrowser(title: string) {
     this.markersB.map((marker) => {
-      if(marker.getTitle() === title) {
+      if (marker.getTitle() === title) {
         this.map.panTo(marker.getPosition());
       }
     });
@@ -403,7 +403,7 @@ export class MapService {
 
   private setCenteredMarkerOnDevice(title: string, lat:number, lng:number) {
     this.markers.map((marker) => {
-      if(marker.getTitle() === title) {
+      if (marker.getTitle() === title) {
         let latLng = new LatLng(lat, lng);
         let camPos: CameraPosition<LatLng> = {
           target: latLng,
@@ -416,21 +416,21 @@ export class MapService {
 
   /*Disable Map*/
   disableMap() {
-    if(this.map && this.onDevice) {
+    if (this.map && this.onDevice) {
       this.map.setClickable(false);
     }
   }
 
   /*Enable Map*/
   enableMap() {
-    if(this.map && this.onDevice) {
+    if (this.map && this.onDevice) {
       this.map.setClickable(true);
     }
   }
 
   /*If no connexion disable the map and display message*/
   private showPleaseConnect() {
-    if(this.pleaseConnect) {
+    if (this.pleaseConnect) {
       this.pleaseConnect.style.display = 'block';
       this.disableMap();
     }
@@ -438,7 +438,7 @@ export class MapService {
 
   /*Enable map and undisplay message*/
   private hidePleaseConnect() {
-    if(this.pleaseConnect) {
+    if (this.pleaseConnect) {
       this.pleaseConnect.style.display = 'none';
       this.enableMap();
     }
@@ -449,17 +449,17 @@ export class MapService {
     document.addEventListener('online',
       () => {setTimeout(
         () => {
-          if(this.onDevice) {
-            if(!this.mapInitialised) {
+          if (this.onDevice) {
+            if (!this.mapInitialised) {
               this.initDeviceMap();
             }
             this.hidePleaseConnect();
           } else {
-            if(typeof google === 'undefined' || typeof google.maps === 'undefined') {
+            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
               this.loadBrowserGoogleMaps();
             }
             else {
-              if(!this.mapInitialised) {
+              if (!this.mapInitialised) {
                 this.initBrowserMap();
               }
 
@@ -481,7 +481,7 @@ export class MapService {
 
 
   clearMarkers() {
-    if(this.onDevice) {
+    if (this.onDevice) {
       this.map.clear();
     } else {
       this.markersB.map(

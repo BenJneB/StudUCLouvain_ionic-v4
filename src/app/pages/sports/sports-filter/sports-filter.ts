@@ -69,7 +69,7 @@ export class SportsFilterPage {
 
   /*Dismiss filter*/
   dismiss(data?: any) {
-    if(typeof data === 'undefined' ) {
+    if (typeof data === 'undefined' ) {
       data = [];
     }
     this.results.push(data);

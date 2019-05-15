@@ -56,7 +56,7 @@ export class EmployeeDetailsPage {
       }
       this.searching = true;
    // Check if the connexion is Ok before search details pour an employee
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.repService.loadEmpDetails(this.empDetails).then(
         res => {
           let result: any = res;

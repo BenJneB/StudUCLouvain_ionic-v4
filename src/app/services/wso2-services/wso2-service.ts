@@ -43,7 +43,7 @@ export class Wso2Service {
       map(res => res),
       catchError((error) => {
         console.log(error.status);
-        if(error.status === 401) {
+        if (error.status === 401) {
           console.log('ok');
           this.getToken();
           return this.load(url);

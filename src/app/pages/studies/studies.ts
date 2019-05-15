@@ -136,7 +136,7 @@ export class StudiesPage {
       }))
       .subscribe(
         data => {
-          if(data!= null) {
+          if (data!= null) {
             this.status=data.toString();
             resolve(data);
           }
@@ -146,9 +146,9 @@ export class StudiesPage {
 
   /*Get course program of student*/
   loadActivities() {
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.login().then((res) => {
-  	  	if(this.status) {
+  	  	if (this.status) {
   	  		this.studentService.searchActivities().then((res) => {
   	  			let result: any = res;
   	  			this.sigles = result.activities.activity;
@@ -192,7 +192,7 @@ export class StudiesPage {
 
   /*Set project and connect to ADE*/
   initializeSession() {
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.studiesService.openSession().then(
         data => {
           this.sessionId = data;
@@ -251,7 +251,7 @@ export class StudiesPage {
             let acro = data.acronym.toUpperCase();
             let already = false;
             for(let item of this.listCourses) {
-              if(item.acronym === acro) already = true;
+              if (item.acronym === acro) already = true;
             }
             this.checkCourseExisting(already, acro);
           }
@@ -274,7 +274,7 @@ export class StudiesPage {
   addCourseFromProgram(acro: string) {
     let already = false;
     for(let item of this.listCourses) {
-      if(item.acronym === acro) already = true;
+      if (item.acronym === acro) already = true;
     }
     this.checkCourseExisting(already, acro);
   }
@@ -313,7 +313,7 @@ export class StudiesPage {
   getCourses() {
     this.storage.get('listCourses').then((data) =>
     {
-      if(data== null) {
+      if (data== null) {
         this.listCourses= []
       } else {
         this.listCourses=data}

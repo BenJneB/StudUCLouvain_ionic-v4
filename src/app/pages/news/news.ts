@@ -47,7 +47,7 @@ export class NewsPage {
 /*  //  USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
   resize()
   {
-    if(this.content)
+    if (this.content)
     {
       this.content.resize();
       console.debug('content resize', this.content)
@@ -94,7 +94,7 @@ export class NewsPage {
   /*load the view, Call function to load news, display them*/
   ngOnInit() {
    // Check the connexion, if it's ok, load the news
-   // if(this.connService.isOnline()) {
+   // if (this.connService.isOnline()) {
       this.cachedOrNot();
       this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
         this.searching = false;
@@ -129,7 +129,7 @@ export class NewsPage {
   findSite() {
     for(let sector of this.listFac) {
       for(let facs of sector.facs) {
-        if(facs.acro === this.fac) {
+        if (facs.acro === this.fac) {
           return {'site':facs.site, 'rss': facs.rss};
         }
       }
@@ -147,13 +147,13 @@ export class NewsPage {
     const doRefresh = this.segment === 'univ' || (
       this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac()
     );
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       if (doRefresh) {
-        if(this.segment=== 'univ') {
+        if (this.segment=== 'univ') {
           let part = this.subsegment;
           let key;
-          if(part === 'P1') key = 'cache-P1';
-          else if(part === 'P2') key = 'cache-P2';
+          if (part === 'P1') key = 'cache-P1';
+          else if (part === 'P2') key = 'cache-P2';
           else key = 'cache-P3';
           this.cache.removeItem(key);
           this.loadNews(key);
@@ -170,10 +170,10 @@ export class NewsPage {
   /*Tab change*/
   tabChanged() {
    // this.resize();
-    if(this.segment=== 'univ') this.cachedOrNot();
-    if(this.segment=== 'fac') {
+    if (this.segment=== 'univ') this.cachedOrNot();
+    if (this.segment=== 'fac') {
       this.fac=this.userS.fac;
-      if(this.facsegment === 'news' && this.userS.hasFac()) {
+      if (this.facsegment === 'news' && this.userS.hasFac()) {
         let links = this.findSite();
         this.site = links.site;
         this.rss = links.rss;
@@ -189,10 +189,10 @@ export class NewsPage {
    // this.cache.removeItem('cache-P1');
     let key;
     let part = this.subsegment;
-    if(this.segment === 'univ') {
+    if (this.segment === 'univ') {
 
-      if(part === 'P1') key = 'cache-P1';
-      else if(part === 'P2') key = 'cache-P2';
+      if (part === 'P1') key = 'cache-P1';
+      else if (part === 'P2') key = 'cache-P2';
       else key = 'cache-P3';
       await this.cache.getItem(key)
       .then((data) => {
@@ -217,15 +217,15 @@ export class NewsPage {
     this.searching = true;
     this.news = [];
    // Check connexion before load news
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.loader.present('Please wait...');
       let actu = this.subsegment;
-      if(this.segment === 'fac' && this.facsegment === 'news') actu = this.rss;
+      if (this.segment === 'fac' && this.facsegment === 'news') actu = this.rss;
       this.newsService.getNews(actu)
       .then(
         result => {
           this.news = result.items;
-          if(key) this.cache.saveItem(key, result);
+          if (key) this.cache.saveItem(key, result);
           this.shownNews = result.showItems;
           this.searching = false;
           this.nonews = this.news.length === 0;

@@ -43,7 +43,7 @@ export class RssService {
           if (isSport) result = result['xml'];
           else result = result['rss']['channel'];
           if (result === null) {
-            if(this.nbCalls >= this.callLimit) {
+            if (this.nbCalls >= this.callLimit) {
               this.nbCalls = 0;
               reject(2); // 2 = data.query.results === null  & callLimit reached, no neitemsws to display
             }

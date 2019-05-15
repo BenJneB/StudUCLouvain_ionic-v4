@@ -61,7 +61,7 @@ export class EventsDetailsPage {
     let message: string;
     this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res: string) => {message =res;});
 
-    if(!this.user.hasFavorite(event.guid)) {
+    if (!this.user.hasFavorite(event.guid)) {
       this.user.addFavorite(event.guid);
       this.alertService.presentToast(message);
     }

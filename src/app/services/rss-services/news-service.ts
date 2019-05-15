@@ -69,7 +69,7 @@ export class NewsService {
 
   /*Extract news*/
   private extractNews(data : any) {
-    if(data.length === undefined) {
+    if (data.length === undefined) {
       let temp = data;
       data = [];
       data.push(temp);
@@ -80,7 +80,7 @@ export class NewsService {
       let item = data[i];
 
       let trimmedDescription = '...';
-      if(item.description !== undefined) {
+      if (item.description !== undefined) {
         trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
       }
       let hidden = false;
@@ -88,7 +88,7 @@ export class NewsService {
       this.shownNews++;
       let pubDate = this.createDateForNews(item.pubDate);
       let img = '';
-      if(item.enclosure != null) img = item.enclosure.$.url;
+      if (item.enclosure != null) img = item.enclosure.$.url;
       let newNewsItem = new NewsItem(item.description || 'No description...', item.link || 'No link', item.title || 'No title', img, trimmedDescription, hidden, item.guid, pubDate);
       this.news.push(newNewsItem);
     }

@@ -45,7 +45,7 @@ export class RepertoireService {
     newUrl += 'search?';
     for(var i=0; i<options.length; i++) {
       newUrl += options[i] + ' = ' + values[i];
-      if(i!= options.length-1) {
+      if (i!= options.length-1) {
         newUrl += '&';
       }
     }
@@ -54,7 +54,7 @@ export class RepertoireService {
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         data => {
-          if(data['persons']!= null) {
+          if (data['persons']!= null) {
             this.extractEmployees(data['persons'].person);
             resolve({employees:this.employees});
           }
@@ -78,7 +78,7 @@ export class RepertoireService {
 
   /*Extract the employees*/
   private extractEmployees(data: any) {
-    if(data!= null) {
+    if (data!= null) {
       for (let i = 0; i < data.length; i++) {
         let item = data[i];
         let employee = new EmployeeItem(item.matric_fgs, item.lastname, item.firstname, item.email, item.departments);

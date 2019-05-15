@@ -77,10 +77,10 @@ export class CoursePage {
         this.year = this.router.getCurrentNavigation().extras.state.year;
         this.courseSorted = {cm : [], tp : [], ex :[]};
         let acro = this.course.acronym;
-        if(this.userS.hasSlot(acro, 'CM')) {
+        if (this.userS.hasSlot(acro, 'CM')) {
           this.slotCM = this.userS.getSlot(acro, 'CM');
         }
-        if(this.userS.hasSlot(acro, 'TP')) {
+        if (this.userS.hasSlot(acro, 'TP')) {
           this.slotTP = this.userS.getSlot(acro, 'TP');
         }
       }

@@ -68,9 +68,9 @@ export class CourseService {
     /*Extract the activity*/
     extractActivity(data): Activity[]{
       let activities : Activity[] = [];
-      if(data.activities !== undefined) {
+      if (data.activities !== undefined) {
         let activitiesList = data.activities.activity
-        if(activitiesList.length=== undefined) {
+        if (activitiesList.length=== undefined) {
            activitiesList = [];
            activitiesList.push(data.activities.activity)
          }
@@ -89,7 +89,7 @@ export class CourseService {
       let type : string = jsonActivity._type;
       let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
-      if(events !== undefined) {
+      if (events !== undefined) {
         events = this.handleSpecialCase(events);
         
         for(let i=0; i<events.length; i++) {

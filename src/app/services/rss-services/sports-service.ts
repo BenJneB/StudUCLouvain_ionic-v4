@@ -63,9 +63,9 @@ export class SportsService {
    // which campus ?
     let site: string;
     let campus = this.user.campus;
-    if(campus === 'LLN') site = 'louv';
-    if(campus === 'Woluwe') site = 'wol';
-    if(campus === 'Mons') site = 'mons';
+    if (campus === 'LLN') site = 'louv';
+    if (campus === 'Woluwe') site = 'wol';
+    if (campus === 'Mons') site = 'mons';
 
    // final URL
     let restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
@@ -102,10 +102,10 @@ export class SportsService {
         categories: datas['categories']
       }
     }) .catch(error => {
-      if(error === 1) {
+      if (error === 1) {
         return this.getSports(segment);
       } else {
-        if(error === 2) {
+        if (error === 2) {
           console.log('Loading sports : GET req timed out > limit, suppose no sports to be displayed');
         } else {
           console.log('Error loading sports : ' + error);
@@ -121,11 +121,11 @@ export class SportsService {
 
   /*Extract sports with all the details*/
   private extractSports(data: any, isSport: boolean = true) {
-    if(data === undefined) {
+    if (data === undefined) {
       console.log('Error sports data undefined!!!')
       return;
     }
-    if(data.length === undefined) {
+    if (data.length === undefined) {
       let temp = data;
       data = [];
       data.push(temp);
@@ -141,14 +141,14 @@ export class SportsService {
         favorite = true;
       }
       if (item.activite) {
-        if(isSport) {
+        if (isSport) {
           this.getCategories(this.allCategories, item);
         }
         else{
           this.getCategories(this.allCategoriesT, item);
         }
       }
-      if(isSport) this.shownSports++;
+      if (isSport) this.shownSports++;
       else this.shownTeams++;
       let startDate = this.createDateForSport(item.date, item.hdebut);
       let endDate = this.createDateForSport(item.date, item.hfin);
@@ -156,7 +156,7 @@ export class SportsService {
                       hidden, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
 
 
-      if(isSport) this.sports.push(newSportItem);
+      if (isSport) this.sports.push(newSportItem);
       else this.teams.push(newSportItem);
     }
   }

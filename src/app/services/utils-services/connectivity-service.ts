@@ -44,7 +44,7 @@ export class ConnectivityService {
 
   /*Check if there is a connexion*/
   isOnline(): boolean {
-    if(this.onDevice && this.network.type) {
+    if (this.onDevice && this.network.type) {
       return this.network.type !== Connection.NONE;
     } else {
       return navigator.onLine;

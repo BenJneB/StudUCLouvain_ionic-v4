@@ -23,7 +23,7 @@ import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { MapLocation } from '../../entity/mapLocation';
 import { UserService } from '../utils-services/user-service';
-import { map, catchError } from 'rxjs/operators';
+import { map } from 'rxjs/operators';
 
 
 @Injectable({ 
@@ -48,10 +48,16 @@ export class POIService {
   /*Put the good campus for the user to display the good map with the good locations*/
   update() {
     let campus = this.user.campus;
-    if(campus === 'LLN') this.url = this.urlLLN;
-    if(campus === 'Woluwe') this.url = this.urlWol;
-    if(campus === 'Mons') this.url = this.urlMons;
-    if(campus != this.old) {
+    if (campus === 'LLN') {
+      this.url = this.urlLLN;
+    }
+    if (campus === 'Woluwe') {
+      this.url = this.urlWol;
+    }
+    if (campus === 'Mons') {
+      this.url = this.urlMons;
+    }
+    if (campus != this.old) {
       this.zones = [];
       this.old = campus;
     }
@@ -60,7 +66,7 @@ export class POIService {
   /*Load point of interest to load the list of locations and display that*/
   public loadResources() {
     this.update();
-    if(this.zones.length === 0) return new Promise(resolve => {
+    if (this.zones.length === 0) return new Promise(resolve => {
       this.http.get(this.url).pipe(
         map(res => res)).subscribe(data => {
           let tmpZones = data['zones'];
@@ -74,10 +80,12 @@ export class POIService {
 
          // Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
           function compare(a,b) {
-            if (a.nom < b.nom)
+            if (a.nom < b.nom) {
               return -1;
-            if (a.nom > b.nom)
+            }
+            if (a.nom > b.nom) {
               return 1;
+            }
             return 0;
           }
 

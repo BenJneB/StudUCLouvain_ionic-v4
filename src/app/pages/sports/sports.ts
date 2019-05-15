@@ -94,7 +94,7 @@ export class SportsPage {
   /*update the date with in real time value, load sport and display them*/
   ngOnInit() {
     this.updateDateLimit();
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.loadSports(this.segment);
       this.loadSports('team');
       this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
@@ -118,7 +118,7 @@ export class SportsPage {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.sportsService.getSports(segment).then(
         result => {
           this.assignDatas(
@@ -211,13 +211,13 @@ export class SportsPage {
       if (data) {
         data = data.data;
         let tmpRange = data[1];
-        if(tmpRange !== this.dateRange) {
+        if (tmpRange !== this.dateRange) {
           this.dateRange = tmpRange;
           this.updateDateLimit();
         }
         let newExclude = data[0];
-        if(this.segment === 'all') this.excludedFilters = newExclude;
-        if(this.segment === 'team') this.excludedFiltersT = newExclude;
+        if (this.segment === 'all') this.excludedFilters = newExclude;
+        if (this.segment === 'team') this.excludedFiltersT = newExclude;
         this.updateDisplayed();
       }
     });

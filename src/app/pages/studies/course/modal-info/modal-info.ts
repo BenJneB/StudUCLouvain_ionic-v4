@@ -57,7 +57,7 @@ export class ModalInfoPage {
           console.log(data);
           let res: any = data;
           console.log(res);
-          if(data === 400) {
+          if (data === 400) {
 
             this.closeModal();
             resolve(400);
@@ -75,7 +75,7 @@ export class ModalInfoPage {
             let quadri = res.quadrimestre
             let resume = res.resumeCoursMap.entry[1].value;
             let vol = {'vol1':res.volTot1, 'vol2' : res.volTot2, 'vol1Coef':res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef};
-            if(res.cahierChargesExiste) {
+            if (res.cahierChargesExiste) {
               cahier = res.cahierChargesMap.entry[1].value;
             }
             response = {

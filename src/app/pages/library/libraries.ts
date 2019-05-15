@@ -66,12 +66,12 @@ export class LibrariesPage {
   loadLibraries(key?) {
     this.searching = true;
    // Check the connexion, if it's ok => load the data else go back to the previous page and pop an alert
-    if(this.connService.isOnline()) {
+    if (this.connService.isOnline()) {
       this.libService.loadLibraries().then(
         res => {
           let result: any = res;
           this.libraries = result.libraries;
-          if(key)this.cache.saveItem(key, this.libraries);
+          if (key)this.cache.saveItem(key, this.libraries);
           this.searching = false;
         }
       );
