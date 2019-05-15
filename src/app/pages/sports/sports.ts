@@ -122,7 +122,7 @@ export class SportsPage {
       this.sportsService.getSports(segment).then(
         result => {
           this.assignDatas(
-            segment === 'team' ? true: false, 
+            segment === 'team' ? true : false, 
             result
           );
       })
@@ -134,10 +134,10 @@ export class SportsPage {
   }
 
   private assignDatas(isTeam: boolean, result: any) {
-      isTeam ? this.teams = result.sports: this.sports = result.sports;
-      isTeam ? this.shownTeams = result.shownSports: this.shownSports = result.shownSports;
-      isTeam ? this.filtersT = result.categories: this.filters = result.categories;
-      isTeam ? this.noteams = result.sports.length === 0: this.nosport = result.sports.length === 0;
+      isTeam ? this.teams = result.sports : this.sports = result.sports;
+      isTeam ? this.shownTeams = result.shownSports : this.shownSports = result.shownSports;
+      isTeam ? this.filtersT = result.categories : this.filters = result.categories;
+      isTeam ? this.noteams = result.sports.length === 0 : this.nosport = result.sports.length === 0;
     this.searching = false;
     this.updateDisplayed();
   }

@@ -119,7 +119,7 @@ export class AppComponent {
   }
 
   private getOtherPages(studies: boolean, nullSchemas: { ios: string; android: string; }, nullUrls: { app: string; http: string; }) {
-    const pages = studies ? ['studies', 'libraries', 'support']: ['news', 'events', 'sports'];
+    const pages = studies ? ['studies', 'libraries', 'support'] : ['news', 'events', 'sports'];
     const datas = [];
     for (const page of pages) {
       datas.push(this.getPageData(page.toUpperCase(), page, page, nullSchemas, nullUrls));

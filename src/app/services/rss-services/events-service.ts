@@ -52,7 +52,7 @@ export class EventsService {
     }
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
-      let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...': item.description;
+      let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
       let favorite = false;
       let hidden = false;
       let iconCategory = 'assets/icon/events-icon/other.png';

@@ -96,12 +96,12 @@ export class SportsService {
   private getSportsDatas(segment: string) {
     this.update();
     const isSport = segment === 'all';
-    isSport ? this.sports = []: this.teams = [];
+    isSport ? this.sports = [] : this.teams = [];
     return {
-      sports: isSport ? this.sports: this.teams,
-      shownSports: isSport ? this.shownSports: this.shownTeams,
-      url: isSport ? this.url: this.urlT,
-      categories: isSport ? this.allCategories: this.allCategoriesT
+      sports: isSport ? this.sports : this.teams,
+      shownSports: isSport ? this.shownSports : this.shownTeams,
+      url: isSport ? this.url : this.urlT,
+      categories: isSport ? this.allCategories : this.allCategoriesT
     }
   }
 
@@ -109,7 +109,7 @@ export class SportsService {
   public getSports(segment: string) {
     const datas = this.getSportsDatas(segment);
     return this.rssService.load(datas['url'], true).then(result => {
-      this.extractSports(result, segment === 'team' ? false: true);
+      this.extractSports(result, segment === 'team' ? false : true);
       return {
         sports: datas['sports'],
         shownSports: datas['shownSports'],

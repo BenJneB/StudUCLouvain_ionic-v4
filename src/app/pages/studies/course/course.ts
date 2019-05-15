@@ -219,7 +219,7 @@ export class CoursePage {
   }
 
   private addSlot(segment: string, data: any) {
-    const type = segment === 'Cours magistral' ? 'CM': 'TP';
+    const type = segment === 'Cours magistral' ? 'CM' : 'TP';
     if (type === 'TP') {
       this.slotTP = data;
     } else {

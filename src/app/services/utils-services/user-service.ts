@@ -60,7 +60,7 @@ export class UserService {
   private getFavoritesData(type: string, data: any) {
     const isString = type === 'campus' || type === 'fac';
     if (data === null) {
-      return isString ? '': [];
+      return isString ? '' : [];
     } else {
       return data;
     }

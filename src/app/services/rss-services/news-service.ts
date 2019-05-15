@@ -116,7 +116,7 @@ export class NewsService {
   private getTrimmedDescription(item: any, maxDescLength: number) {
     let trimmedDescription = '...';
     if (item.description !== undefined) {
-      trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...': item.description;
+      trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
     }
     return trimmedDescription;
   }
