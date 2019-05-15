@@ -43,7 +43,7 @@ import { UserService } from '../../services/utils-services/user-service';
 export class ParamPage {
   title: any;
   shownGroup = null;
-  setting2: string ='Langue';
+  setting2: string = 'Langue';
 
 
   constructor(

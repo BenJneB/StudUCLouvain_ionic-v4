@@ -49,7 +49,7 @@ export class SupportPage {
   lastname: string = '';
   firstname: string = '';
   loading;
-  segment: string='aide';
+  segment: string = 'aide';
   shownHelp = null;
 
   constructor(public navCtrl: NavController,
@@ -68,7 +68,7 @@ export class SupportPage {
   /*Take the name and lastname in the good field to do the search and display the result*/
   update() {
     this.loader.present('Please wait..');
-    let options: Array<string>= [];
+    let options: Array<string> = [];
     let values: Array<string> = [];
     if(this.lastname.length>0) {
       values.push(this.lastname);

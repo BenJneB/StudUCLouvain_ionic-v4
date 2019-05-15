@@ -129,7 +129,7 @@ export class MapService {
           let script = document.createElement('script');
           script.id = 'googleMaps';
           if(this.apiKey) {
-            script.src = 'http://maps.google.com/maps/api/js?key=' + this.apiKey + '&callback=mapInit';
+            script.src = 'http://maps.google.com/maps/api/js?key= ' + this.apiKey + '&callback=mapInit';
           } else {
             script.src = 'http://maps.google.com/maps/api/js?callback=mapInit';
           }

@@ -57,19 +57,19 @@ export class NewsPage {
   news: Array<NewsItem> = [];
   segment = 'univ';
   subsegment = 'P1';
-  facsegment='news';
+  facsegment= 'news';
   shownNews = 0;
   displayedNews : Array<NewsItem> = [];
   searching: any = false;
   searchControl: FormControl;
   searchTerm: string = '';
-  title: string ='Actualités' ;
+  title: string = 'Actualités' ;
   nonews: any = false;
   loading;
-  fac: string='';
-  listFac: any=[];
-  site: string='';
-  rss: string='';
+  fac: string = '';
+  listFac: any =[];
+  site: string = '';
+  rss: string = '';
   //url = 'assets/data/fac.json';
 
   constructor(
@@ -144,12 +144,12 @@ export class NewsPage {
 
   /*Reload news if pull bellow the view*/
   public doRefresh(refresher) {
-    const doRefresh = this.segment ==='univ' || (
-      this.segment === 'fac' && this.facsegment ==='news' && this.userS.hasFac()
+    const doRefresh = this.segment === 'univ' || (
+      this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac()
     );
     if(this.connService.isOnline()) {
       if (doRefresh) {
-        if(this.segment==='univ') {
+        if(this.segment=== 'univ') {
           let part = this.subsegment;
           let key;
           if(part === 'P1') key = 'cache-P1';
@@ -170,8 +170,8 @@ export class NewsPage {
   /*Tab change*/
   tabChanged() {
     //this.resize();
-    if(this.segment==='univ') this.cachedOrNot();
-    if(this.segment==='fac') {
+    if(this.segment=== 'univ') this.cachedOrNot();
+    if(this.segment=== 'fac') {
       this.fac=this.userS.fac;
       if(this.facsegment === 'news' && this.userS.hasFac()) {
         let links = this.findSite();

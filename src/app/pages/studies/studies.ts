@@ -93,8 +93,8 @@ export class StudiesPage {
       (data) =>{
         let res: any = data;
         let exist: boolean;
-        let nameFR: string='';
-        let nameEN: string ='';
+        let nameFR: string = '';
+        let nameEN: string = '';
         if(data === 400) exist=false;
         else{
           let names = res.intituleCompletMap.entry;
@@ -323,8 +323,8 @@ export class StudiesPage {
 
   /*Remove course from storage*/
   removeCourse(course: Course) {
-    let index= this.listCourses.indexOf(course);
-    if(index>= 0) {
+    const index = this.listCourses.indexOf(course);
+    if (index >= 0) {
       this.listCourses.splice(index,1);
     }
     this.storage.set('listCourses',this.listCourses);

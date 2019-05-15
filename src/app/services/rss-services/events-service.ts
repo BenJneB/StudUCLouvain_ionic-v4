@@ -81,29 +81,31 @@ export class EventsService {
 
   /*Get the good icon for a catagory*/
   public getIconCategory(category : string): string{
+    let item: string;
     switch(category.toLowerCase()) {
       case 'sensibilisation' : {
-        return 'assets/icon/events-icon/sensibilisation.png';
+        item = 'assets/icon/events-icon/sensibilisation.png';
       }
       case 'animation' : {
-        return 'assets/icon/events-icon/animation.png';
+        item = 'assets/icon/events-icon/animation.png';
       }
       case 'culturel et artistique' : {
-        return 'assets/icon/events-icon/cultural.png';
+        item = 'assets/icon/events-icon/cultural.png';
       }
       case 'guindaille' : {
-        return 'assets/icon/events-icon/party.png';
+        item = 'assets/icon/events-icon/party.png';
       }
       case 'sportif' : {
-        return 'assets/icon/events-icon/sports.png';
+        item = 'assets/icon/events-icon/sports.png';
       }
       case 'services et aides' : {
-        return 'assets/icon/events-icon/services.png';
+        item = 'assets/icon/events-icon/services.png';
       }
       default: {
-        return 'assets/icon/events-icon/other.png';
+        item = 'assets/icon/events-icon/other.png';
       }
     }
+    return item;
   }
 
   /*Return a date in good form by splitting for the event*/

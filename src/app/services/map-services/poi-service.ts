@@ -33,7 +33,7 @@ export class POIService {
 
   zones: any = [];
   url = '';
-  urlLLN ='assets/data/resourcesLLN.json';
+  urlLLN = 'assets/data/resourcesLLN.json';
   urlMons = 'assets/data/resourcesMons.json';
   urlWol = 'assets/data/resourcesWoluwe.json';
   old = '';

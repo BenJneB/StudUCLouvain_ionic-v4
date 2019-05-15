@@ -46,8 +46,8 @@ export class SportsService {
   /*Get the good URL in function of the user's campus*/
   update() {
     //reset url
-    this.url = 'https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate=';
-    this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate='
+    this.url = 'https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate= ';
+    this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate= '
 
     // first day of the week : today
     let today:Date = new Date();
@@ -68,7 +68,7 @@ export class SportsService {
     if(campus == 'Mons') site = 'mons';
 
     //final URL
-    let restUrl = todayString + '&-enddate=' + endString + '&-site=' ;
+    let restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
     let urlTemp = this.url + restUrl + site;
     let urlTempT = this.urlT + restUrl + 'louv';
     this.url = urlTemp;

@@ -44,7 +44,7 @@ export class RepertoireService {
     let newUrl = this.url ;
     newUrl += 'search?';
     for(var i=0; i<options.length; i++) {
-      newUrl += options[i] + '=' + values[i];
+      newUrl += options[i] + '= ' + values[i];
       if(i!= options.length-1) {
         newUrl += '&';
       }
