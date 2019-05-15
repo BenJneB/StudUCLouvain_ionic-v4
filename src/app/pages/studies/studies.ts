@@ -227,7 +227,7 @@ export class StudiesPage {
     this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => {addcourse = res;});
     this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => {message = res;});
     this.translateService.get('STUDY.SIGLE').subscribe((res: string) => {sigle = res;});
-    this.translateService.get('STUDY.CANCEL').subscribe((res: string) => {cancel= res;});
+    this.translateService.get('STUDY.CANCEL').subscribe((res: string) => {cancel = res;});
     this.translateService.get('STUDY.SAVE').subscribe((res: string) => {save = res;});
     let prompt = this.alertCtrl.create({
       header: addcourse,

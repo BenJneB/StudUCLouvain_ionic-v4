@@ -23,7 +23,6 @@ import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
-import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 @Component({
   selector: 'page-mobility',
@@ -39,12 +38,11 @@ export class MobilityPage {
     public nav: NavController,
     public market: Market,
     private translateService: TranslateService,
-    private utilsServices: UtilsService
   )
   {
     this.title = 'Mobilité';
     let titlecar: string;
-    this.translateService.get('MOBI.COVOIT').subscribe((res: string) => {titlecar= res;});
+    this.translateService.get('MOBI.COVOIT').subscribe((res: string) => {titlecar = res;});
 
    // Information to launch external app
     this.carpoolingPage = { title: titlecar, component: 'CarpoolingPage',

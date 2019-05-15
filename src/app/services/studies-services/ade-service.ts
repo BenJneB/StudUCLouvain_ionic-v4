@@ -54,7 +54,7 @@ export class AdeService {
 
   private getDataFromADE(encodedURL: string, sessionId?: string) {
     if (sessionId !== undefined) {
-      encodedURL = this.getBasicSessionUrl(sessionId) + encodedURL;;
+      encodedURL = this.getBasicSessionUrl(sessionId) + encodedURL;
     }
     return this.http.get(encodedURL, { responseType: 'text' }).pipe(map(res => {
       return this.utilsServices.convertToJson(res);
