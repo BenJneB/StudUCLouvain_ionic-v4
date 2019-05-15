@@ -37,7 +37,7 @@ export class CourseService {
     }
 
     /*Get the course ID for the acronym of the course*/
-    getCourseId(sessionId : string, acronym : string){
+    getCourseId(sessionId : string, acronym : string) {
       return new Promise <string>( (resolve, reject) => {
         this.ade.httpGetCourseId(sessionId, acronym).subscribe(
           data => {
@@ -48,14 +48,14 @@ export class CourseService {
     }
 
     /*Extract the course ID*/
-    extractCourseId(data){
+    extractCourseId(data) {
       if (data.resources.resource !== undefined) {
         return data.resources.resource._id;
       }
     }
 
     /*Get activity for a course ID obtained by getting this from a course selected by the user*/
-    getActivity(sessionId : string, courseId : string){
+    getActivity(sessionId : string, courseId : string) {
       return new Promise <Activity[]>( (resolve, reject) => {
         this.ade.httpGetActivity(sessionId, courseId).subscribe(
           data => {
@@ -66,15 +66,15 @@ export class CourseService {
     }
 
     /*Extract the activity*/
-    extractActivity(data) : Activity[]{
+    extractActivity(data): Activity[]{
       let activities : Activity[] = [];
-      if(data.activities !== undefined){
+      if(data.activities !== undefined) {
         let activitiesList = data.activities.activity
-        if(activitiesList.length=== undefined){
+        if(activitiesList.length=== undefined) {
            activitiesList = [];
            activitiesList.push(data.activities.activity)
          }
-        for (let i =0; i< activitiesList.length ;i++){
+        for (let i =0; i< activitiesList.length ;i++) {
           let activityElem = activitiesList[i];
           let newActivities : Activity[] = this.createNewActivities(activityElem);
           activities = activities.concat(newActivities);
@@ -84,15 +84,15 @@ export class CourseService {
     }
 
     /*For each activity collect the right variables to be able to display them*/
-    createNewActivities(jsonActivity) : Activity[] {
+    createNewActivities(jsonActivity): Activity[] {
       let activities : Activity[] = [];
       let type : string = jsonActivity._type;
       let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
-      if(events !== undefined){
+      if(events !== undefined) {
         events = this.handleSpecialCase(events);
         
-        for(let i=0; i<events.length; i++){
+        for(let i=0; i<events.length; i++) {
           let event = events[i];
           let endHour = event._endHour;
           let startHour = event._startHour;
@@ -119,9 +119,9 @@ export class CourseService {
   }
 
     /*Create a date*/
-    createDate(date : string, hour : string) : Date{
-      let splitDate = date.split("/")
-      let splitHour = hour.split(":")
+    createDate(date : string, hour : string): Date{
+      let splitDate = date.split('/')
+      let splitHour = hour.split(':')
       let newdate : Date = new Date(parseInt(splitDate[2]),
                             parseInt(splitDate[1])-1,
                             parseInt(splitDate[0]),
@@ -144,13 +144,13 @@ export class CourseService {
 
 
   private fillItems(participants: any, i: number, students: string, auditorium: string, teachers: string) {
-    if (participants[i]._category === "trainee") {
+    if (participants[i]._category === 'trainee') {
       students = students + participants[i]._name + this.space;
     }
-    if (participants[i]._category === "classroom") {
+    if (participants[i]._category === 'classroom') {
       auditorium = auditorium + participants[i]._name + ' ';
     }
-    if (participants[i]._category === "instructor") {
+    if (participants[i]._category === 'instructor') {
       teachers = teachers + participants[i]._name + '/';
     }
     return { students, auditorium, teachers };

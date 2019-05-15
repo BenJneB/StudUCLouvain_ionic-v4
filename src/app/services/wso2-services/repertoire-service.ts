@@ -39,22 +39,22 @@ export class RepertoireService {
   }
 
   /*Search employees that match with the options & values*/
-  public searchEmployees(options:Array<string>, values:Array<string>){
+  public searchEmployees(options:Array<string>, values:Array<string>) {
     this.employees = [];
     let newUrl = this.url ;
-    newUrl += "search?";
-    for(var i=0; i<options.length; i++){
-      newUrl += options[i] + "=" + values[i];
-      if(i!= options.length-1){
-        newUrl += "&";
+    newUrl += 'search?';
+    for(var i=0; i<options.length; i++) {
+      newUrl += options[i] + '=' + values[i];
+      if(i!= options.length-1) {
+        newUrl += '&';
       }
     }
-    newUrl += "&page=1&pageSize=10"
-    //newUrl += "&directory=E";
+    newUrl += '&page=1&pageSize=10'
+    //newUrl += '&directory=E';
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         data => {
-          if(data['persons']!=null){
+          if(data['persons']!=null) {
             this.extractEmployees(data['persons'].person);
             resolve({employees:this.employees});
           }
@@ -63,10 +63,10 @@ export class RepertoireService {
   }
 
   /*Load the details for a selected employee*/
-  public loadEmpDetails(emp:EmployeeItem){
+  public loadEmpDetails(emp:EmployeeItem) {
     return new Promise(resolve => {
 
-      let url_details = this.url + emp.matric_fgs + "/detail";
+      let url_details = this.url + emp.matric_fgs + '/detail';
 
       this.wso2Service.load(url_details).subscribe(
         data => {
@@ -77,8 +77,8 @@ export class RepertoireService {
   }
 
   /*Extract the employees*/
-  private extractEmployees(data: any){
-    if(data!=null){
+  private extractEmployees(data: any) {
+    if(data!=null) {
       for (let i = 0; i < data.length; i++) {
         let item = data[i];
         let employee = new EmployeeItem(item.matric_fgs, item.lastname, item.firstname, item.email, item.departments);
@@ -88,7 +88,7 @@ export class RepertoireService {
   }
 
   /*Extract the details for a selected employee*/
-  private extractEmployeeDetails(emp : EmployeeItem, data:any): EmployeeItem {
+  private extractEmployeeDetails(emp : EmployeeItem, data: any): EmployeeItem {
     console.log(data);
     emp.address = data.address
     emp.contracts = data.contracts;

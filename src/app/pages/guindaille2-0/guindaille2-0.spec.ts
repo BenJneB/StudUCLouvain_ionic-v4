@@ -3,7 +3,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { IonicModule } from '@ionic/angular';
 import { NavController, NavParams, ModalController, App } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
-import { TranslateModule, TranslateLoader} from "@ngx-translate/core";
+import { TranslateModule, TranslateLoader} from '@ngx-translate/core';
 
 import {GuindaillePage} from './guindaille2-0';
 

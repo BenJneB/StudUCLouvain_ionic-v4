@@ -50,7 +50,7 @@ export class LibrariesPage {
     )
   {
     this.cachedOrNot();
-    this.title = "Bibliothèques";
+    this.title = 'Bibliothèques';
   }
 
   ngOnInit() {
@@ -69,7 +69,7 @@ export class LibrariesPage {
     if(this.connService.isOnline()) {
       this.libService.loadLibraries().then(
         res => {
-          let result:any = res;
+          let result: any = res;
           this.libraries = result.libraries;
           if(key)this.cache.saveItem(key, this.libraries);
           this.searching = false;
@@ -92,7 +92,7 @@ export class LibrariesPage {
     this.router.navigate(['/libraries/details'], navigationExtras);
   }
 
-  async cachedOrNot(){
+  async cachedOrNot() {
       // this.cache.removeItem('cache-event');
       let key = 'cache-libraries';
       await this.cache.getItem(key)
@@ -101,7 +101,7 @@ export class LibrariesPage {
           this.searching=false;
         })
         .catch(() => {
-          console.log("Oh no! My data is expired or doesn't exist!");
+          console.log('Oh no! My data is expired or doesn\'t exist!');
           this.loadLibraries(key);
         });
     }

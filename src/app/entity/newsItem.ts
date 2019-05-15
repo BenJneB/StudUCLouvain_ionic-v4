@@ -33,7 +33,7 @@ export class NewsItem {
     description: string,
     link: string,
     title: string,
-    image:string,
+    image: string,
     trimmedDescription: string,
     hidden: boolean,
     guid: string,

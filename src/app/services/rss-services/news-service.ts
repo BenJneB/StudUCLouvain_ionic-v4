@@ -30,9 +30,9 @@ import { NewsItem } from '../../entity/newsItem';
   providedIn: 'root' 
 })
 export class NewsService {
-  url1 = "https://uclouvain.be/actualites/p1/rss";
-  url2 = "https://uclouvain.be/actualites/p2/rss";
-  url3 = "https://uclouvain.be/actualites/p3/rss";
+  url1 = 'https://uclouvain.be/actualites/p1/rss';
+  url2 = 'https://uclouvain.be/actualites/p2/rss';
+  url3 = 'https://uclouvain.be/actualites/p3/rss';
 
   news = [];
   shownNews = 0;
@@ -43,19 +43,19 @@ export class NewsService {
 
 
   /*Get the appropriate news in function of the tab in which the user is*/
-  public getNews(segment:string) {
+  public getNews(segment: string) {
     let baseURL;
     this.news = [];
     switch(segment) {
-       case "P2": {
+       case 'P2': {
           baseURL = this.url2;
           break;
        }
-       case "P3": {
+       case 'P3': {
           baseURL = this.url3;
           break;
        }
-       case "P1": {
+       case 'P1': {
          baseURL = this.url1;
          break;
        }
@@ -68,8 +68,8 @@ export class NewsService {
   }
 
   /*Extract news*/
-  private extractNews(data : any){
-    if(data.length === undefined){
+  private extractNews(data : any) {
+    if(data.length === undefined) {
       let temp = data;
       data = [];
       data.push(temp);
@@ -79,17 +79,17 @@ export class NewsService {
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
 
-      let trimmedDescription = "...";
+      let trimmedDescription = '...';
       if(item.description !== undefined) {
-        trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + "..." : item.description;
+        trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
       }
       let hidden = false;
 
       this.shownNews++;
       let pubDate = this.createDateForNews(item.pubDate);
-      let img = "";
+      let img = '';
       if(item.enclosure != null) img = item.enclosure.$.url;
-      let newNewsItem = new NewsItem(item.description || "No description...", item.link || "No link", item.title || "No title", img, trimmedDescription, hidden, item.guid, pubDate);
+      let newNewsItem = new NewsItem(item.description || 'No description...', item.link || 'No link', item.title || 'No title', img, trimmedDescription, hidden, item.guid, pubDate);
       this.news.push(newNewsItem);
     }
     return {
@@ -100,10 +100,10 @@ export class NewsService {
 
   /*Return a date in good form by splitting for the new*/
   private createDateForNews(str : string): Date{
-    //str : "Fri, 07 Jul 2017 08:51:52 +0200"
-    //new Date(Year : number, (month-1) : number, day : number)
-    let dateTimeSplit = str.split(" ");
-    let timeSplit = dateTimeSplit[4].split(":");
+    //str : 'Fri, 07 Jul 2017 08:51:52 +0200'
+    //new Date(Year : number, (month-1): number, day : number)
+    let dateTimeSplit = str.split(' ');
+    let timeSplit = dateTimeSplit[4].split(':');
 
     let year = parseInt(dateTimeSplit[3]);
     let month = this.getMonthNumber(dateTimeSplit[2]);
@@ -116,7 +116,7 @@ export class NewsService {
 
   /*Get the right month number*/
   private getMonthNumber(str: string) {
-    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return months.indexOf(str);
   }
 }

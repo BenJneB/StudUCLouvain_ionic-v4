@@ -40,7 +40,7 @@ export class TutoPage {
     },1000);
   }
 
-  goToHome(){
+  goToHome() {
   	this.navCtrl.navigateRoot('HomePage');
   }
 

@@ -41,7 +41,7 @@ export class LibrariesService {
   }
 
   /*Load the list of the libraries*/
-  public loadLibraries(){
+  public loadLibraries() {
     this.libraries = [];
     return new Promise(resolve => {
       this.wso2Service.load(this.url).subscribe(
@@ -53,7 +53,7 @@ export class LibrariesService {
   }
 
   /*Load the details of a specific library, the library selected by the user*/
-  public loadLibDetails(lib:LibraryItem){
+  public loadLibDetails(lib:LibraryItem) {
     return new Promise(resolve => {
       let url_details = this.url + '/' + lib.id;
       this.wso2Service.load(url_details).subscribe(
@@ -65,7 +65,7 @@ export class LibrariesService {
   }
 
   /*Extract the list of the libraries*/
-  private extractLibraries(data: any){
+  private extractLibraries(data: any) {
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
       let library = new LibraryItem(item.id, item.name);
@@ -75,19 +75,19 @@ export class LibrariesService {
 
   /*Extract all the details for a specific library, the library selected by the user*/
   /*Retrieves all the necessary information*/
-  private extractLibraryDetails(lib : LibraryItem, data:any): LibraryItem {
+  private extractLibraryDetails(lib : LibraryItem, data: any): LibraryItem {
     if ( data.locationId == null ) {
       lib.locationId = -1;
     } else {
       lib.locationId = data.locationId;
     }
     if ( data.mapLocation == null ) {
-      lib.mapLocation = new MapLocation(lib.name,"","","","");
+      lib.mapLocation = new MapLocation(lib.name,'','','','');
     } else {
-      lib.mapLocation = new MapLocation(lib.name, data.address.street + ", " + data.address.postalCode + ", " + data.address.locality, "","",""); //TODO update maplocation with lat lng code
+      lib.mapLocation = new MapLocation(lib.name, data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality, '','',''); //TODO update maplocation with lat lng code
     }
     if ( data.phone == null ) {
-      lib.phone = "";
+      lib.phone = '';
     } else {
       lib.phone = data.phone.substr(3);
     }
@@ -97,7 +97,7 @@ export class LibrariesService {
       lib.email = data.email;
     }
     if ( data.website == null ) {
-      lib.website = "";
+      lib.website = '';
     } else {
       lib.website = data.website;
     }

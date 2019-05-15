@@ -58,7 +58,7 @@ export class EventsPage {
 
   now = new Date();
   year = this.now.getFullYear();
-  noevents:any =false;
+  noevents: any =false;
   displayedEventsD : any = [];
   
   weekUCL = 5;
@@ -109,7 +109,7 @@ export class EventsPage {
     this.utilsServices.doRefresh(refresher, 'cache-event', this.loadEvents.bind(this));
   }
 
-  public onSearchInput(){
+  public onSearchInput() {
     this.searching = true;
   }
 
@@ -120,7 +120,7 @@ export class EventsPage {
 
 
     /*Check if data are cached or not */
-    async cachedOrNot(){
+    async cachedOrNot() {
       //this.cache.removeItem('cache-event');
         let key = 'cache-event';
         await this.cache.getItem(key)
@@ -137,7 +137,7 @@ export class EventsPage {
           this.updateDisplayed();
         })
         .catch(() => {
-          console.log("Oh no! My data is expired or doesn't exist!");
+          console.log('Oh no! My data is expired or doesn\'t exist!');
           this.loadEvents(key);
         });
     }
@@ -155,7 +155,7 @@ export class EventsPage {
       this.loader.present('Please wait...');
       this.eventsService.getEvents(this.segment).then(
         res => {
-          let result:any = res;
+          let result: any = res;
           this.events = result.items;
           if(key) this.cache.saveItem(key, result);
           this.shownEvents = result.shownEvents;
@@ -172,8 +172,8 @@ export class EventsPage {
   }
 
    /*Make an array with events sorted by week*/
-   changeArray(array, weekUCL){
-    var groups = array.reduce(function(obj,item){
+   changeArray(array, weekUCL) {
+    var groups = array.reduce(function(obj,item) {
       var date = new Date(item.startDate.getTime());
       date.setHours(0,0,0,0);
       date.setDate(date.getDate() + 3 - (date.getDay() +6) %7);
@@ -182,7 +182,7 @@ export class EventsPage {
       obj[week].push(item);
       return obj;
     }, {});
-    var eventsD = Object.keys(groups).map(function(key){
+    var eventsD = Object.keys(groups).map(function(key) {
       return {
         weeks: key, 
         event: groups[key]
@@ -209,17 +209,17 @@ export class EventsPage {
   }
 
   /*Return first day of the week and last day of the week (to display range)*/
-  getRangeWeek(week,year){
+  getRangeWeek(week,year) {
     var d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
     d1 = new Date(''+year+'');
     numOfdaysPastSinceLastMonday = d1.getDay() - 1;
     d1.setDate(d1.getDate() - numOfdaysPastSinceLastMonday);
     d1.setDate(d1.getDate() + (7 * (week - this.getISOWeek(d1))));
-    rangeIsFrom = (d1.getMonth() + 1) + "-" + d1.getDate() + "-" + d1.getFullYear();
+    rangeIsFrom = (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear();
     d1.setDate(d1.getDate() + 6);
-    rangeIsTo = (d1.getMonth() + 1) + "-" + d1.getDate() + "-" + d1.getFullYear() ;
-    rangeIsTo = rangeIsTo.replace(/-/g, "/")
-    rangeIsFrom = rangeIsFrom.replace(/-/g, "/")
+    rangeIsTo = (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear() ;
+    rangeIsTo = rangeIsTo.replace(/-/g, '/')
+    rangeIsFrom = rangeIsFrom.replace(/-/g, '/')
     return {from:rangeIsFrom, to:rangeIsTo};
   }
 
@@ -247,7 +247,7 @@ export class EventsPage {
 
   /*Display the modal with the filters and update data with them*/
   async presentFilter() {
-    if(this.filters === undefined){
+    if(this.filters === undefined) {
       this.filters = [];
     }
     let modal = await this.modalCtrl.create(
@@ -272,15 +272,15 @@ export class EventsPage {
 }
 
   /*Update the date limit, take account if a change is done by filter with the dateRange value*/
-  private updateDateLimit(){
+  private updateDateLimit() {
     let today = new Date();
     this.dateLimit = new Date(today.getFullYear(), today.getMonth()+this.dateRange, today.getUTCDate()+1);
   }
 
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: IonItemSliding, itemData: any):void{
-    let message:string;
-    this.translateService.get('EVENTS.MESSAGE').subscribe((res:string) => {message=res;});
+    let message: string;
+    this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => {message=res;});
     const datas = {
       title: itemData.title,
       location: itemData.location,

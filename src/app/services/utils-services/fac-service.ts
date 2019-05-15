@@ -40,7 +40,7 @@ export class FacService {
   public loadResources() {
     if(this.facultes.length == 0) return new Promise(resolve => {
       this.http.get(this.url).pipe(map(res => res)).subscribe(data => {
-          for(let sector of data['secteurs']){
+          for(let sector of data['secteurs']) {
             this.facultes.push(sector);
           }
         resolve(this.facultes);

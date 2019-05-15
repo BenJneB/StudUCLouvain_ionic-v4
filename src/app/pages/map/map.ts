@@ -40,12 +40,12 @@ export class MapPage {
   filters : any;
   excludedFilters : any = [];
   selectedLocation: any = [];
-  userLocation:any = [];
+  userLocation: any = [];
   showLocationList = false;
   title: any;
   searching: boolean = false;
-  temp:any;
-  temp2:any;
+  temp: any;
+  temp2: any;
 
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
@@ -54,12 +54,12 @@ export class MapPage {
               public platform: Platform,
               public poilocations: POIService)
   {
-    console.log("map constr")
-      this.title = "Carte";
+    console.log('map constr')
+      this.title = 'Carte';
   }
 
   /*ngAfterViewInit() is called after the view is initially rendered, load map and list of positions*/
- /*  ngAfterViewInit(){
+ /*  ngAfterViewInit() {
     let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
     console.log(mapLoaded);
     let zones = this.poilocations.loadResources();
@@ -84,13 +84,13 @@ export class MapPage {
   } */
 
   ngAfterViewInit() {
-    console.log("aft vie in")
+    console.log('aft vie in')
 		this.platform.ready().then( () => {
 
       this.mapService.loadMap();
-      console.log("after load");
+      console.log('after load');
     });
-    console.log("end")
+    console.log('end')
 	}
   /*Use to display or close the list of a type of positions (auditoires, parkings, bibliotheques, ...)*/
   toggleDetails(data) {
@@ -115,19 +115,19 @@ export class MapPage {
   }
 
   /*push a location to display*/
-  addShowedLocations(rawLocation){
+  addShowedLocations(rawLocation) {
     this.showedLocations.push(rawLocation);
   }
 
   /*remove a location displayed*/
-  removeShowedLocations(rawLocation){
+  removeShowedLocations(rawLocation) {
     let locToRemove = this.showedLocations.find(item => item.title === rawLocation.title);
     this.showedLocations.splice(this.showedLocations.indexOf(locToRemove),1);
   }
 
   /*when select an location*/
-  onSelect(data:any){
-    if(this.selectedLocation !== data){
+  onSelect(data: any) {
+    if(this.selectedLocation !== data) {
       this.selectedLocation = data;
     }
     this.mapService.addMarker(this.selectedLocation);

@@ -32,12 +32,12 @@ export class EventsService {
   events: Array<EventItem> = [];
   allCategories: any = [];
   shownEvents = 0;
-  url = "http://louvainfo.be/calendrier/feed/calendar/";
+  url = 'http://louvainfo.be/calendrier/feed/calendar/';
 
   constructor(public user: UserService, public rssService: RssService) {}
 
   /*Get the events*/
-  public getEvents(segment:string) {
+  public getEvents(segment: string) {
     this.events = [];
     return this.rssService.loadItems(segment, this.url, this.extractEvents.bind(this));
   }
@@ -47,15 +47,15 @@ export class EventsService {
     this.shownEvents = 0;
     let maxDescLength = 20;
     if (data === undefined) {
-      console.log("Error events data undefined!!!")
+      console.log('Error events data undefined!!!')
       return;
     }
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
-      let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + "..." : item.description;
+      let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
       let favorite = false;
       let hidden = false;
-      let iconCategory = "assets/icon/events-icon/other.png";
+      let iconCategory = 'assets/icon/events-icon/other.png';
       if (this.user.hasFavorite(item.guid)) {
         favorite = true;
       }
@@ -80,38 +80,38 @@ export class EventsService {
   }
 
   /*Get the good icon for a catagory*/
-  public getIconCategory(category : string):string{
+  public getIconCategory(category : string): string{
     switch(category.toLowerCase()) {
-      case "sensibilisation" : {
-        return "assets/icon/events-icon/sensibilisation.png";
+      case 'sensibilisation' : {
+        return 'assets/icon/events-icon/sensibilisation.png';
       }
-      case "animation" : {
-        return "assets/icon/events-icon/animation.png";
+      case 'animation' : {
+        return 'assets/icon/events-icon/animation.png';
       }
-      case "culturel et artistique" : {
-        return "assets/icon/events-icon/cultural.png";
+      case 'culturel et artistique' : {
+        return 'assets/icon/events-icon/cultural.png';
       }
-      case "guindaille" : {
-        return "assets/icon/events-icon/party.png";
+      case 'guindaille' : {
+        return 'assets/icon/events-icon/party.png';
       }
-      case "sportif" : {
-        return "assets/icon/events-icon/sports.png";
+      case 'sportif' : {
+        return 'assets/icon/events-icon/sports.png';
       }
-      case "services et aides" : {
-        return "assets/icon/events-icon/services.png";
+      case 'services et aides' : {
+        return 'assets/icon/events-icon/services.png';
       }
       default: {
-        return "assets/icon/events-icon/other.png";
+        return 'assets/icon/events-icon/other.png';
       }
     }
   }
 
   /*Return a date in good form by splitting for the event*/
   private createDateForEvent(str : string):Date{
-    //new Date(Year : number, (month-1) : number, day : number)
-    let dateTimeSplit = str.split(" ");
-    let dateSplit = dateTimeSplit[0].split("/");
-    let timeSplit = dateTimeSplit[1].split(":");
+    //new Date(Year : number, (month-1): number, day : number)
+    let dateTimeSplit = str.split(' ');
+    let dateSplit = dateTimeSplit[0].split('/');
+    let timeSplit = dateTimeSplit[1].split(':');
 
     let year = parseInt(dateSplit[2]);
     let month = parseInt(dateSplit[1])-1;

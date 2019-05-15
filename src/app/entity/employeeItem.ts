@@ -26,10 +26,10 @@ export class EmployeeItem {
   email: string;
   departments: any;
   address: any;
-  businessContacts:any;
-  contracts:any;
-  gender:string;
-  photo_url:string;
+  businessContacts: any;
+  contracts: any;
+  gender: string;
+  photo_url: string;
 
   constructor(
     matric_fgs: number,

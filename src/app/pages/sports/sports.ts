@@ -60,14 +60,14 @@ export class SportsPage {
   excludedFilters : any = [];
   excludedFiltersT : any = [];
   displayedSports : Array<SportItem> = [];
-  displayedSportsD :any = [];
+  displayedSportsD : any = [];
   dateRange: any = 7;
   dateLimit: Date = new Date();
-  campus:string;
+  campus: string;
   shownGroup = null;
   loading;
-  nosport:any = false;
-  noteams:any = false;
+  nosport: any = false;
+  noteams: any = false;
   texts = {
     'FAV': 'SPORTS.MESSAGEFAV',
     'FAV2': 'SPORTS.FAVADD',
@@ -98,7 +98,7 @@ export class SportsPage {
       this.loadSports(this.segment);
       this.loadSports('team');
       this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
-      this.loader.present("Please wait..");
+      this.loader.present('Please wait..');
     } else{
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -110,7 +110,7 @@ export class SportsPage {
     refresher.target.complete();
   }
 
-  public onSearchInput(){
+  public onSearchInput() {
     this.searching = true;
   }
 
@@ -143,13 +143,13 @@ export class SportsPage {
   }
 
   /*Sort sports BY DAY*/
-  public changeArray(array){
-    var groups = array.reduce(function(obj,item){
+  public changeArray(array) {
+    var groups = array.reduce(function(obj,item) {
       obj[item.jour] = obj[item.jour] || [];
       obj[item.jour].push(item);
       return obj;
     }, {});
-    var sportsD = Object.keys(groups).map(function(key){
+    var sportsD = Object.keys(groups).map(function(key) {
     return {jour: key, name: groups[key]};
     });
     return sportsD;
@@ -181,7 +181,7 @@ export class SportsPage {
     return this.utilsServices.filterItems('sport', items, excluded, this.dateLimit, this.searchTerm);
   }
 
-  private getFiltersData(isTeam: boolean){
+  private getFiltersData(isTeam: boolean) {
     if (isTeam == true) {
       return {
         filters: this.filtersT,
@@ -224,14 +224,14 @@ export class SportsPage {
   }
 
   /*Update the dateLimit when that is changed by the filter*/
-  private updateDateLimit(){
+  private updateDateLimit() {
     let today = new Date();
     this.dateLimit = new Date(today.getFullYear(), today.getMonth(), today.getUTCDate()+this.dateRange);
   }
 
   /*Add a sport to calendar of the smartphone*/
-  addToCalendar(slidingItem: IonItemSliding, itemData: SportItem){
-    let options:any = {
+  addToCalendar(slidingItem: IonItemSliding, itemData: SportItem) {
+    let options: any = {
       firstReminderMinutes:30
     };
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,

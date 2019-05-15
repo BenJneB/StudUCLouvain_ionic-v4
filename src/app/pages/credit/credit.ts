@@ -40,7 +40,7 @@ export class CreditPage {
               private iab: InAppBrowser,
               private appVersion: AppVersion) 
   {
-    this.title = "Crédits";
+    this.title = 'Crédits';
     this.appVersion.getVersionNumber().then(version => {
       this.version = version;
       console.log(this.version);

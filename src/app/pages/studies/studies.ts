@@ -52,16 +52,16 @@ export class StudiesPage {
   public title = 'Etudes';
   public sessionId: string;
   public project : AdeProject = null;
-  private username:string = "";
-  private password: string = "";
-  public error:string = "";
-  status: string = "";
+  private username: string = '';
+  private password: string = '';
+  public error: string = '';
+  status: string = '';
   sigles: any;
-  activities:any = [];
-  response:any;
+  activities: any = [];
+  response: any;
   language;
-  private statusInsc:string = "";
-  private prog:string = "";
+  private statusInsc: string = '';
+  private prog: string = '';
 
   constructor(
     public studiesService: StudiesService,
@@ -79,22 +79,22 @@ export class StudiesPage {
     private studentService: StudentService)
   {
     this.initializeSession();
-    this.menu.enable(true, "studiesMenu");
+    this.menu.enable(true, 'studiesMenu');
     this.getCourses();
 
 
   }
 
-  checkExist(sigle:string) : Promise<any>{
-    let response:any;
-    let year = parseInt(this.project.name.split("-")[0]);
+  checkExist(sigle: string): Promise<any>{
+    let response: any;
+    let year = parseInt(this.project.name.split('-')[0]);
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle,year).then(
       (data) =>{
-        let res:any = data;
-        let exist:boolean;
-        let nameFR:string='';
-        let nameEN:string ='';
+        let res: any = data;
+        let exist: boolean;
+        let nameFR: string='';
+        let nameEN: string ='';
         if(data === 400) exist=false;
         else{
           let names = res.intituleCompletMap.entry;
@@ -102,7 +102,7 @@ export class StudiesPage {
           nameEN = names[0].value;
           exist=true;
         }
-        response={'exist':exist,'nameFR':nameFR, 'nameEN':nameEN};
+        response= {'exist':exist,'nameFR':nameFR, 'nameEN':nameEN};
         resolve(response);
       })
       })    
@@ -110,7 +110,7 @@ export class StudiesPage {
 
   toastBadCourse() {
     let msg;
-    this.translateService.get('STUDY.BADCOURSE').subscribe((res:string) => {msg=res;});
+    this.translateService.get('STUDY.BADCOURSE').subscribe((res: string) => {msg=res;});
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 2000,
@@ -119,18 +119,18 @@ export class StudiesPage {
   }
 
  /*Authenticate a student*/
-  private login(){
-  	this.error = "";
+  private login() {
+  	this.error = '';
   	return new Promise(resolve => {
       this.wso2Service.login(this.username,this.password).pipe(
       catchError(error => {
-      	if(error.status == 400) this.translateService.get('STUDY.BADLOG').subscribe((res:string) => {this.error=res;});
-      	else this.translateService.get('STUDY.ERROR').subscribe((res:string) => {this.error=res;});
+      	if(error.status == 400) this.translateService.get('STUDY.BADLOG').subscribe((res: string) => {this.error=res;});
+      	else this.translateService.get('STUDY.ERROR').subscribe((res: string) => {this.error=res;});
       	return error;
       }))
       .subscribe(
         data => {
-          if(data!=null){
+          if(data!=null) {
             this.status=data.toString();
             resolve(data);
           }
@@ -139,28 +139,28 @@ export class StudiesPage {
   }
 
   /*Get course program of student*/
-  loadActivities(){
+  loadActivities() {
     if(this.connService.isOnline()) {
       this.login().then((res) => {
-  	  	if(this.status){
+  	  	if(this.status) {
   	  		this.studentService.searchActivities().then((res) => {
-  	  			let result:any = res;
+  	  			let result: any = res;
   	  			this.sigles = result.activities.activity;
-            for(let sigle of this.sigles){
+            for(let sigle of this.sigles) {
               this.activities.push({'name':'', 'sigle':sigle});
             }
   	  		})
           .catch((err) => {
-            console.log("Error during load of course program");
+            console.log('Error during load of course program');
           });
 
           this.studentService.getStatus().then((res) => {
-            let result:any = res;
+            let result: any = res;
             this.statusInsc = result[0].etatInscription;
             this.prog = result[0].intitOffreComplet;
           })
           .catch((err) => {
-            console.log("Error during load of inscription status");
+            console.log('Error during load of inscription status');
           })
   	  	}
         
@@ -173,7 +173,7 @@ export class StudiesPage {
   }
 
   /*Open modalprojectpage to choose an ade project*/
-  async openModalProject(){
+  async openModalProject() {
     let obj = {sessionId : this.sessionId};
 
     let myModal = await this.modalCtrl.create({component: ModalProjectPage, componentProps: obj});
@@ -185,7 +185,7 @@ export class StudiesPage {
   }
 
   /*Set project and connect to ADE*/
-  initializeSession(){
+  initializeSession() {
     if(this.connService.isOnline()) {
       this.studiesService.openSession().then(
         data => {
@@ -213,16 +213,16 @@ export class StudiesPage {
 
   /*Add a course manually, show a prompt to the user for this where he can put the name and the acronym of the course*/
   showPrompt() {
-    let addcourse:string;
-    let message:string;
+    let addcourse: string;
+    let message: string;
     let sigle: string;
-    let cancel:string;
-    let save:string;
-    this.translateService.get('STUDY.ADDCOURSE').subscribe((res:string) => {addcourse=res;});
-    this.translateService.get('STUDY.MESSAGE').subscribe((res:string) => {message=res;});
-    this.translateService.get('STUDY.SIGLE').subscribe((res:string) => {sigle=res;});
-    this.translateService.get('STUDY.CANCEL').subscribe((res:string) => {cancel=res;});
-    this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
+    let cancel: string;
+    let save: string;
+    this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => {addcourse=res;});
+    this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => {message=res;});
+    this.translateService.get('STUDY.SIGLE').subscribe((res: string) => {sigle=res;});
+    this.translateService.get('STUDY.CANCEL').subscribe((res: string) => {cancel=res;});
+    this.translateService.get('STUDY.SAVE').subscribe((res: string) => {save=res;});
     let prompt = this.alertCtrl.create({
       header: addcourse,
       message: message,
@@ -244,7 +244,7 @@ export class StudiesPage {
           handler: data => {
             let acro = data.acronym.toUpperCase();
             let already = false;
-            for(let item of this.listCourses){
+            for(let item of this.listCourses) {
               if(item.acronym === acro) already = true;
             }
             this.checkCourseExisting(already, acro);
@@ -256,7 +256,7 @@ export class StudiesPage {
 
   async toastAlreadyCourse() {
     let msg;
-    this.translateService.get('STUDY.ALCOURSE').subscribe((res:string) => {msg=res;});
+    this.translateService.get('STUDY.ALCOURSE').subscribe((res: string) => {msg=res;});
     const toast = await this.toastCtrl.create({
       message: msg,
       duration: 2000,
@@ -265,9 +265,9 @@ export class StudiesPage {
     return await toast.present();
   }
 
-  addCourseFromProgram(acro:string){
+  addCourseFromProgram(acro: string) {
     let already = false;
-    for(let item of this.listCourses){
+    for(let item of this.listCourses) {
       if(item.acronym === acro) already = true;
     }
     this.checkCourseExisting(already, acro);
@@ -293,7 +293,7 @@ export class StudiesPage {
     return check;
   }
 
-  async addCourse(sigle:string, name:string){
+  async addCourse(sigle: string, name: string) {
       this.saveCourse(name, sigle);
       const toast = await this.toastCtrl.create({
         message: 'Cours ajouté',
@@ -304,10 +304,10 @@ export class StudiesPage {
   }
 
   /*Retrieve list of course added previously in the storage*/
-  getCourses(){
+  getCourses() {
     this.storage.get('listCourses').then((data) =>
     {
-      if(data==null){
+      if(data==null) {
         this.listCourses=[]
       } else {
         this.listCourses=data}
@@ -315,24 +315,24 @@ export class StudiesPage {
   }
 
   /*Save course into storage*/
-  saveCourse(name: string, tag: string){
+  saveCourse(name: string, tag: string) {
     let course = new Course(name,tag, null);
     this.listCourses.push(course);
     this.storage.set('listCourses',this.listCourses);
   }
 
   /*Remove course from storage*/
-  removeCourse(course: Course){
+  removeCourse(course: Course) {
     let index= this.listCourses.indexOf(course);
-    if(index>= 0){
+    if(index>= 0) {
       this.listCourses.splice(index,1);
     }
     this.storage.set('listCourses',this.listCourses);
   }
 
   /*Open CoursePage of a course to have the schedule*/
-  openCoursePage(course: Course){
-    let year = parseInt(this.project.name.split("-")[0]);
+  openCoursePage(course: Course) {
+    let year = parseInt(this.project.name.split('-')[0]);
     const navigationExtras: NavigationExtras = {
       state: {
         course: course,
@@ -343,14 +343,14 @@ export class StudiesPage {
     this.navCtrl.navigateForward(['/course'], navigationExtras);
   }
 
-  openWeekPage(){
+  openWeekPage() {
     this.studentService.weekSchedule().then((res) => {
-      let result:any = res;
+      let result: any = res;
       this.navCtrl.navigateForward(['HebdoPage', {schedule:result}]);
     });
   }
 
-  unavailableAlert(){
+  unavailableAlert() {
 
     let alert = this.alertCtrl.create({
       header: 'Indisponible',
@@ -360,7 +360,7 @@ export class StudiesPage {
 
   }
 
-  openExamPage(){
+  openExamPage() {
     this.unavailableAlert();
   }
 

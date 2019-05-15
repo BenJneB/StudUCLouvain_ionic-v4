@@ -43,7 +43,7 @@ import { UserService } from '../../services/utils-services/user-service';
 export class ParamPage {
   title: any;
   shownGroup = null;
-  setting2:string ="Langue";
+  setting2: string ='Langue';
 
 
   constructor(
@@ -55,16 +55,16 @@ export class ParamPage {
     private alertService: AlertService
   )
   {
-    this.translateService.get('MENU.SETTINGS').subscribe((res:string) => {this.title=res;});
+    this.translateService.get('MENU.SETTINGS').subscribe((res: string) => {this.title=res;});
   }
 
   /*Create and display an alert for the choice of campus and save the choice of the user in the public variable*/
-  async campus_choice(){
+  async campus_choice() {
     let check = this.userS.campus;
     let setting, message, save;
-    this.translateService.get('HOME.SETTING1').subscribe((res:string) => {setting=res;});
-    this.translateService.get('HOME.MESSAGE').subscribe((res:string) => {message=res;});
-    this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
+    this.translateService.get('HOME.SETTING1').subscribe((res: string) => {setting=res;});
+    this.translateService.get('HOME.MESSAGE').subscribe((res: string) => {message=res;});
+    this.translateService.get('HOME.SAVE').subscribe((res: string) => {save=res;});
     let settingsAlert = await this.alertCtrl.create({
       header: setting,
       message: message,
@@ -111,19 +111,19 @@ export class ParamPage {
   }
 
   /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
-  async language_choice(){
+  async language_choice() {
     let check2 = this.translateService.currentLang;
-    let message2, en, fr, setting2, save:string;
-    this.translateService.get('HOME.SETTING2').subscribe((res:string) => {setting2=res;});
-    this.translateService.get('HOME.MESSAGE2').subscribe((res:string) => {message2=res;});
-    this.translateService.get('HOME.FR').subscribe((res:string) => {fr=res;});
-    this.translateService.get('HOME.EN').subscribe((res:string) => {en=res;});
-    this.translateService.get('HOME.SAVE').subscribe((res:string) => {save=res;});
+    let message2, en, fr, setting2, save: string;
+    this.translateService.get('HOME.SETTING2').subscribe((res: string) => {setting2=res;});
+    this.translateService.get('HOME.MESSAGE2').subscribe((res: string) => {message2=res;});
+    this.translateService.get('HOME.FR').subscribe((res: string) => {fr=res;});
+    this.translateService.get('HOME.EN').subscribe((res: string) => {en=res;});
+    this.translateService.get('HOME.SAVE').subscribe((res: string) => {save=res;});
     let languageAlert = await this.alertService.languageAlert(setting2, message2, fr, check2, en, save);
     await languageAlert.present();
   }
 
-  openTuto(){
+  openTuto() {
     this.navCtrl.navigateForward('/tutos');
   }
 }

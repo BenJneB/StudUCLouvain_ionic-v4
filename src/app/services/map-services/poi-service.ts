@@ -46,11 +46,11 @@ export class POIService {
   }
 
   /*Put the good campus for the user to display the good map with the good locations*/
-  update(){
+  update() {
     let campus = this.user.campus;
-    if(campus == "LLN") this.url = this.urlLLN;
-    if(campus == "Woluwe") this.url = this.urlWol;
-    if(campus == "Mons") this.url = this.urlMons;
+    if(campus == 'LLN') this.url = this.urlLLN;
+    if(campus == 'Woluwe') this.url = this.urlWol;
+    if(campus == 'Mons') this.url = this.urlMons;
     if(campus != this.old) {
       this.zones = [];
       this.old = campus;

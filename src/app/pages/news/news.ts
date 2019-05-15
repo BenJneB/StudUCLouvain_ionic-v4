@@ -50,26 +50,26 @@ export class NewsPage {
     if(this.content)
     {
       this.content.resize();
-      console.debug("content resize", this.content)
+      console.debug('content resize', this.content)
     }
   } */
 
   news: Array<NewsItem> = [];
-  segment = "univ";
-  subsegment = "P1";
-  facsegment="news";
+  segment = 'univ';
+  subsegment = 'P1';
+  facsegment='news';
   shownNews = 0;
   displayedNews : Array<NewsItem> = [];
   searching: any = false;
   searchControl: FormControl;
   searchTerm: string = '';
-  title:string ="Actualités" ;
-  nonews:any = false;
+  title: string ='Actualités' ;
+  nonews: any = false;
   loading;
-  fac:string="";
-  listFac:any=[];
-  site:string="";
-  rss:string="";
+  fac: string='';
+  listFac: any=[];
+  site: string='';
+  rss: string='';
   //url = 'assets/data/fac.json';
 
   constructor(
@@ -115,7 +115,7 @@ export class NewsPage {
   }
 
   /*Select the good fac for the selection of the user and load the good news*/
-  updateFac(fac:string){
+  updateFac(fac: string) {
     this.fac = fac;
     this.userS.addFac(this.fac);
     //this.resize();
@@ -126,9 +126,9 @@ export class NewsPage {
   }
 
   /*If there is a site for a fac, return the good site*/
-  findSite(){
-    for(let sector of this.listFac){
-      for(let facs of sector.facs){
+  findSite() {
+    for(let sector of this.listFac) {
+      for(let facs of sector.facs) {
         if(facs.acro === this.fac) {
           return {'site':facs.site, 'rss': facs.rss};
         }
@@ -137,7 +137,7 @@ export class NewsPage {
   }
 
   /*Remove a fac for a user*/
-  removeFac(fac:string){
+  removeFac(fac: string) {
     this.userS.removeFac();
         //this.resize();
   }
@@ -149,7 +149,7 @@ export class NewsPage {
     );
     if(this.connService.isOnline()) {
       if (doRefresh) {
-        if(this.segment==='univ'){
+        if(this.segment==='univ') {
           let part = this.subsegment;
           let key;
           if(part === 'P1') key = 'cache-P1';
@@ -168,12 +168,12 @@ export class NewsPage {
   }
 
   /*Tab change*/
-  tabChanged(){
+  tabChanged() {
     //this.resize();
     if(this.segment==='univ') this.cachedOrNot();
-    if(this.segment==='fac'){
+    if(this.segment==='fac') {
       this.fac=this.userS.fac;
-      if(this.facsegment === 'news' && this.userS.hasFac()){
+      if(this.facsegment === 'news' && this.userS.hasFac()) {
         let links = this.findSite();
         this.site= links.site;
         this.rss = links.rss;
@@ -185,11 +185,11 @@ export class NewsPage {
   }
 
 /*Check if data are cached or not */
-  async cachedOrNot(){
+  async cachedOrNot() {
     //this.cache.removeItem('cache-P1');
     let key;
     let part = this.subsegment;
-    if(this.segment === 'univ'){
+    if(this.segment === 'univ') {
 
       if(part === 'P1') key = 'cache-P1';
       else if(part === 'P2') key = 'cache-P2';
@@ -203,7 +203,7 @@ export class NewsPage {
         this.updateDisplayed();
       })
       .catch(() => {
-        console.log("Oh no! My data is expired or doesn't exist!");
+        console.log('Oh no! My data is expired or doesn\'t exist!');
         this.loadNews(key);
       });
     }

@@ -45,7 +45,7 @@ import { Router, ActivatedRoute } from '@angular/router';
 export class EmployeeDetailsPage {
   empDetails: EmployeeItem;
   shownGroup = null;
-  address:any;
+  address: any;
   searching: boolean = false;
 
   constructor(public navCtrl: NavController, private route: ActivatedRoute, private router: Router, public repService: RepertoireService, public connService: ConnectivityService) {
@@ -59,7 +59,7 @@ export class EmployeeDetailsPage {
     if(this.connService.isOnline()) {
       this.repService.loadEmpDetails(this.empDetails).then(
         res => {
-          let result:any = res;
+          let result: any = res;
           this.empDetails = result.empDetails;
           console.log(this.empDetails);
           this.searching = false;

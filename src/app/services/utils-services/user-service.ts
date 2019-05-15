@@ -147,7 +147,7 @@ export class UserService {
     this.removeSlot(acronym, 'CM');
 }
 
-removeSlot(acronym: string, type: string){
+removeSlot(acronym: string, type: string) {
   const index = this.slots.findIndex(item => item.course === acronym);
   if (index > -1) {
     this.slots[index][type] = '';

@@ -63,7 +63,7 @@ export class AdeService {
     return this.AdeserviceBaseUrl + 'sessionId=' + sessionId
   }
   /*Get the projects from ADE*/
-  httpGetProjects(sessionId: string){
+  httpGetProjects(sessionId: string) {
     const encodedURL: string = this.getBasicSessionUrl(sessionId) + this.AdeServiceGetProjects;
     return this.getDataFromADE(encodedURL);
   }
