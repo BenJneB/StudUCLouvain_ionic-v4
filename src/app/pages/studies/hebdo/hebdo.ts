@@ -48,18 +48,6 @@ export class HebdoPage {
 
   }
 
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
-
-  isGroupShown(group) {
-      return this.shownGroup === group;
-  }
-
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem : IonItemSliding, activity : any){
     let message:string;
