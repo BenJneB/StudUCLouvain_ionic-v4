@@ -87,7 +87,7 @@ export class StudiesPage {
 
   checkExist(sigle: string): Promise<any>{
     let response: any;
-    let year = parseInt(this.project.name.split('-')[0]);
+    let year = parseInt(this.project.name.split('-')[0], 10);
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle,year).then(
       (data) =>{
@@ -95,8 +95,9 @@ export class StudiesPage {
         let exist: boolean;
         let nameFR: string = '';
         let nameEN: string = '';
-        if(data === 400) exist=false;
-        else{
+        if (data === 400) {
+          exist=false;
+        } else {
           let names = res.intituleCompletMap.entry;
           nameFR = names[1].value;
           nameEN = names[0].value;
@@ -124,8 +125,11 @@ export class StudiesPage {
   	return new Promise(resolve => {
       this.wso2Service.login(this.username,this.password).pipe(
       catchError(error => {
-      	if(error.status === 400) this.translateService.get('STUDY.BADLOG').subscribe((res: string) => {this.error=res;});
-      	else this.translateService.get('STUDY.ERROR').subscribe((res: string) => {this.error=res;});
+      	if (error.status === 400) {
+          this.translateService.get('STUDY.BADLOG').subscribe((res: string) => {this.error=res;});
+        } else {
+          this.translateService.get('STUDY.ERROR').subscribe((res: string) => {this.error=res;});
+        }
       	return error;
       }))
       .subscribe(
@@ -332,7 +336,7 @@ export class StudiesPage {
 
   /*Open CoursePage of a course to have the schedule*/
   openCoursePage(course: Course) {
-    let year = parseInt(this.project.name.split('-')[0]);
+    let year = parseInt(this.project.name.split('-')[0], 10);
     const navigationExtras: NavigationExtras = {
       state: {
         course: course,

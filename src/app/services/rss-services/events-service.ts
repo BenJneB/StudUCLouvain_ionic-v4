@@ -83,25 +83,32 @@ export class EventsService {
   public getIconCategory(category : string): string{
     let item: string;
     switch(category.toLowerCase()) {
-      case 'sensibilisation' : {
+      case 'sensibilisation':
+      {
         item = 'assets/icon/events-icon/sensibilisation.png';
       }
-      case 'animation' : {
+      case 'animation':
+      {
         item = 'assets/icon/events-icon/animation.png';
       }
-      case 'culturel et artistique' : {
+      case 'culturel et artistique':
+      {
         item = 'assets/icon/events-icon/cultural.png';
       }
-      case 'guindaille' : {
+      case 'guindaille':
+      {
         item = 'assets/icon/events-icon/party.png';
       }
-      case 'sportif' : {
+      case 'sportif':
+      {
         item = 'assets/icon/events-icon/sports.png';
       }
-      case 'services et aides' : {
+      case 'services et aides':
+      {
         item = 'assets/icon/events-icon/services.png';
       }
-      default: {
+      default:
+      {
         item = 'assets/icon/events-icon/other.png';
       }
     }

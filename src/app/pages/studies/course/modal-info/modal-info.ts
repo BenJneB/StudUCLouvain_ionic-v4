@@ -77,19 +77,23 @@ export class ModalInfoPage {
             let vol = {'vol1':res.volTot1, 'vol2' : res.volTot2, 'vol1Coef':res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef};
             if(res.cahierChargesExiste) {
               cahier = res.cahierChargesMap.entry[1].value;
- 
             }
-
-            response= {'cahierCharges':cahier, 'offre' : offres,
-                        'campus':campus, 'entite': entite,
-                        'prof': teacher, 'localisation': loca,
-                        'credit' : credit, 'programmeprerequis' : progpre,
-                        'quadri' : quadri, 'resume': resume, 'volume' : vol, 'langue':langue
-                      };
-                      console.log(response);
+            response= {
+              cahierCharges: cahier, 
+              offre: offres,
+              campus:campus,
+              entite: entite,
+              prof: teacher,
+              localisation: loca,
+              credit : credit,
+              programmeprerequis: progpre,
+              quadri: quadri,
+              resume: resume,
+              volume: vol,
+              langue: langue
+            };
             resolve(response);
           }
-          
         })
       })    
     }
