@@ -89,7 +89,16 @@ export class NewsService {
       let pubDate = this.createDateForNews(item.pubDate);
       let img = '';
       if (item.enclosure != null) img = item.enclosure.$.url;
-      let newNewsItem = new NewsItem(item.description || 'No description...', item.link || 'No link', item.title || 'No title', img, trimmedDescription, hidden, item.guid, pubDate);
+      let newNewsItem = new NewsItem(
+        item.description || 'No description...', 
+        item.link || 'No link', 
+        item.title || 'No title', 
+        img, 
+        trimmedDescription, 
+        hidden, 
+        item.guid, 
+        pubDate
+      );
       this.news.push(newNewsItem);
     }
     return {

@@ -63,9 +63,15 @@ export class SportsService {
    // which campus ?
     let site: string;
     let campus = this.user.campus;
-    if (campus === 'LLN') site = 'louv';
-    if (campus === 'Woluwe') site = 'wol';
-    if (campus === 'Mons') site = 'mons';
+    if (campus === 'LLN') {
+      site = 'louv';
+    }
+    if (campus === 'Woluwe') {
+      site = 'wol';
+    }
+    if (campus === 'Mons') {
+      site = 'mons';
+    }
 
    // final URL
     let restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
@@ -148,16 +154,22 @@ export class SportsService {
           this.getCategories(this.allCategoriesT, item);
         }
       }
-      if (isSport) this.shownSports++;
-      else this.shownTeams++;
+      if (isSport) {
+        this.shownSports++;
+      } else {
+        this.shownTeams++;
+      }
       let startDate = this.createDateForSport(item.date, item.hdebut);
       let endDate = this.createDateForSport(item.date, item.hfin);
       let newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, item.jour, startDate,
                       hidden, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
 
 
-      if (isSport) this.sports.push(newSportItem);
-      else this.teams.push(newSportItem);
+      if (isSport) {
+        this.sports.push(newSportItem);
+      } else {
+        this.teams.push(newSportItem);
+      }
     }
   }
 
