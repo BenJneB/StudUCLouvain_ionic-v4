@@ -41,7 +41,7 @@ export class HomePage {
   @ViewChild('home') content: IonContent;
 
 
-  title: string = 'Stud.UCLouvain';
+  title = 'Stud.UCLouvain';
   shownGroup = null;
   where = '';
   myApp: AppComponent;
@@ -146,21 +146,21 @@ export class HomePage {
   /*action when click on the floating urgency button, display the text to help the user in an alert*/
   emergency() {
     let close: string;
-    this.translateService.get('HOME.CLOSE').subscribe((res: string) => {close =res;});
+    this.translateService.get('HOME.CLOSE').subscribe((res: string) => {close = res;});
     let urg: string;
-    this.translateService.get('HOME.URG').subscribe((res: string) => {urg=res;});
+    this.translateService.get('HOME.URG').subscribe((res: string) => {urg = res;});
     let msg1,msg2,msg3,msg4,msg5,msg6,msg7,msg8,msg9: string;
-    this.translateService.get('GUINDAILLE.HELP1').subscribe((res: string) => {msg1=res;});
-    this.translateService.get('GUINDAILLE.HELP2').subscribe((res: string) => {msg2=res;});
-    this.translateService.get('GUINDAILLE.HELP3').subscribe((res: string) => {msg3=res;});
-    this.translateService.get('GUINDAILLE.HELP4').subscribe((res: string) => {msg4=res;});
-    this.translateService.get('GUINDAILLE.HELP5').subscribe((res: string) => {msg5=res;});
-    this.translateService.get('GUINDAILLE.HELP6').subscribe((res: string) => {msg6=res;});
-    this.translateService.get('GUINDAILLE.HELP7').subscribe((res: string) => {msg7=res;});
-    this.translateService.get('GUINDAILLE.HELP8').subscribe((res: string) => {msg8=res;});
-    this.translateService.get('GUINDAILLE.HELP9').subscribe((res: string) => {msg9=res;});
+    this.translateService.get('GUINDAILLE.HELP1').subscribe((res: string) => {msg1 = res;});
+    this.translateService.get('GUINDAILLE.HELP2').subscribe((res: string) => {msg2 = res;});
+    this.translateService.get('GUINDAILLE.HELP3').subscribe((res: string) => {msg3 = res;});
+    this.translateService.get('GUINDAILLE.HELP4').subscribe((res: string) => {msg4 = res;});
+    this.translateService.get('GUINDAILLE.HELP5').subscribe((res: string) => {msg5 = res;});
+    this.translateService.get('GUINDAILLE.HELP6').subscribe((res: string) => {msg6 = res;});
+    this.translateService.get('GUINDAILLE.HELP7').subscribe((res: string) => {msg7 = res;});
+    this.translateService.get('GUINDAILLE.HELP8').subscribe((res: string) => {msg8 = res;});
+    this.translateService.get('GUINDAILLE.HELP9').subscribe((res: string) => {msg9 = res;});
     let out: string;
-    this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {out=res;});
+    this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {out = res;});
     let alert = this.alertCtrl.create({
       header: urg,
       message: '<p> <strong>'

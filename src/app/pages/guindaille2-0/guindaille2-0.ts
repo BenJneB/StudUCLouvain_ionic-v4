@@ -41,7 +41,7 @@ import { TranslateService } from '@ngx-translate/core';
 export class GuindaillePage {
   header: any;
   shownGroup = null;
-  segment: string = 'pict';
+  segment = 'pict';
   numbersSlides =  Array.from({length: (6)}, (v, k) => k);
   numberPictos =  Array.from({length: (10)}, (v, k) => k);
   slides = [];

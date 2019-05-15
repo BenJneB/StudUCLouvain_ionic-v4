@@ -30,9 +30,9 @@ import { Storage } from '@ionic/storage';
 export class UserService {
 
   favorites: string[] = [];
-  campus: string = '';
+  campus = '';
   slots: Array< { course: string, TP: string, CM: string }> = [];
-  fac: string = '';
+  fac = '';
 
   constructor(
     public eventss: Events,

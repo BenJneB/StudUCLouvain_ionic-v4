@@ -86,7 +86,7 @@ export class CourseService {
     /*For each activity collect the right variables to be able to display them*/
     createNewActivities(jsonActivity): Activity[] {
       const activities: Activity[] = [];
-      const type: string = jsonActivity._type;
+      const type = jsonActivity._type;
       let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
       if (events !== undefined) {
@@ -133,9 +133,9 @@ export class CourseService {
     }
 
     getItems(participants) {
-      let students: string = '';
-      let teachers: string = '';
-      let auditorium: string = '';
+      let students = '';
+      let teachers = '';
+      let auditorium = '';
       for (let i=0; i < participants.length; i++) {
         ({ students, auditorium, teachers } = this.fillItems(participants, i, students, auditorium, teachers));
       }

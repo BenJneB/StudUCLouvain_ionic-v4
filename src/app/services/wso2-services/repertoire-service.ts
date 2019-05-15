@@ -31,7 +31,7 @@ import { Wso2Service} from './wso2-service';
   providedIn: 'root' 
 })
 export class RepertoireService {
-  employees:Array<EmployeeItem> = [];
+  employees: Array<EmployeeItem> = [];
   url = 'directories/v1/employees/';
   options: any;
 
@@ -39,7 +39,7 @@ export class RepertoireService {
   }
 
   /*Search employees that match with the options & values*/
-  public searchEmployees(options:Array<string>, values:Array<string>) {
+  public searchEmployees(options: Array<string>, values: Array<string>) {
     this.employees = [];
     let newUrl = this.url ;
     newUrl += 'search?';

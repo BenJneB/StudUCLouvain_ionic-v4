@@ -53,7 +53,7 @@ export class SportsPage {
   shownSports = 0;
   shownTeams = 0;
   title: any;
-  searchTerm: string = '';
+  searchTerm = '';
   searchControl: FormControl;
   filters: any = [];
   filtersT: any = [];

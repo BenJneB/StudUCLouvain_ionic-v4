@@ -33,7 +33,7 @@ import { Wso2Service} from './wso2-service';
   providedIn: 'root' 
 })
 export class LibrariesService {
-  libraries:Array<LibraryItem> = [];
+  libraries: Array<LibraryItem> = [];
   url = 'libraries/v1/list';
   options: any;
 

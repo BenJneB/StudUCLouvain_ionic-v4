@@ -49,7 +49,7 @@ import { FacService } from './services/utils-services/fac-service';
 import { CourseService } from './services/studies-services/course-service';
 import { StudiesService } from './services/studies-services/studies-service';
 import { EventsService } from './services/rss-services/events-service';
-import { MapService } from './services/map-services/map-service'
+import { MapService } from './services/map-services/map-service';
 import { POIService } from './services/map-services/poi-service';
 import { UserService } from './services/utils-services/user-service';
 import { RssService } from './services/rss-services/rss-service';

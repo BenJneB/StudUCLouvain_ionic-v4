@@ -46,7 +46,7 @@ export class EventsPage {
   segment = 'all';
   shownEvents = 0;
   title: any;
-  searchTerm: string = '';
+  searchTerm = '';
   searchControl: FormControl;
   filters: any = [];
   excludedFilters: any = [];
@@ -133,7 +133,7 @@ export class EventsPage {
           });
           this.shownEvents = data.showItems;
           this.filters = data.categories;
-          this.searching=false;
+          this.searching =false;
           this.updateDisplayed();
         })
         .catch(() => {
@@ -280,7 +280,7 @@ export class EventsPage {
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: IonItemSliding, itemData: any):void {
     let message: string;
-    this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => {message =res;});
+    this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => {message = res;});
     const datas = {
       title: itemData.title,
       location: itemData.location,
