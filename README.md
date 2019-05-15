@@ -1,4 +1,4 @@
-# StudUCLouvain_ionic-v4
+# StudUCLouvain_ionic-v4 (Clean in WIP -- Not Fixed)
 ## WIP - Work In Progress
 ### Migration to ionic-v4
 
