@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -68,7 +68,7 @@ export class NewsService {
   }
 
   /*Extract news*/
-  private extractNews(data : any) {
+  private extractNews(data: any) {
     if (data.length === undefined) {
       let temp = data;
       data = [];
@@ -122,9 +122,9 @@ export class NewsService {
   }
 
   /*Return a date in good form by splitting for the new*/
-  private createDateForNews(str : string): Date{
-   // str : 'Fri, 07 Jul 2017 08:51:52 +0200'
-   // new Date(Year : number, (month-1): number, day : number)
+  private createDateForNews(str: string): Date{
+   // str: 'Fri, 07 Jul 2017 08:51:52 +0200'
+   // new Date(Year: number, (month-1): number, day: number)
     let dateTimeSplit = str.split(' ');
     let timeSplit = dateTimeSplit[4].split(':');
 

@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -33,20 +33,20 @@ import { AdeProject } from '../../../entity/adeProject';
   templateUrl: 'modal-project.html',
 })
 export class ModalProjectPage {
-  sessionId : string;
+  sessionId: string;
   public projects;
 
   constructor(public navCtrl: NavController,
     public storage:Storage,
     public navParams: NavParams,
     public viewCtrl: ModalController,
-    public studiesService : StudiesService)
+    public studiesService: StudiesService)
   {
     this.sessionId = this.navParams.get('sessionId');
   }
 
   /*Set the project and close de view of the modal*/
-  closeModal(project : AdeProject) {
+  closeModal(project: AdeProject) {
     this.studiesService.setProject(this.sessionId, project.id).then(
       data => {
         this.storage.set('adeProject',project);
@@ -56,7 +56,7 @@ export class ModalProjectPage {
   }
 
   /*Get the available projects*/
-  getProjects(sessionId : string) {
+  getProjects(sessionId: string) {
     this.studiesService.getProjects(sessionId).then(
       data => {
         this.projects = data;

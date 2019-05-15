@@ -1,8 +1,8 @@
 import { UtilsService } from './../services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -44,7 +44,7 @@ export class HomePage {
   title: string = 'Stud.UCLouvain';
   shownGroup = null;
   where = '';
-  myApp : AppComponent;
+  myApp: AppComponent;
 
   /*Create an object Page for each feature of our application display in the home page*/
 
@@ -97,13 +97,13 @@ export class HomePage {
 
   constructor(
               public userS:UserService,
-              public nav : NavController,
+              public nav: NavController,
               private iab: InAppBrowser,
-              private alertCtrl : AlertController,
+              private alertCtrl: AlertController,
               private translateService: TranslateService,
               public market: Market,
               public loadingCtrl: LoadingController,
-              public studentService : StudentService,
+              public studentService: StudentService,
               public splashscreen: SplashScreen,
               private utilsServices: UtilsService
             )
@@ -146,11 +146,11 @@ export class HomePage {
 
   /*action when click on the floating urgency button, display the text to help the user in an alert*/
   emergency() {
-    let close : string;
+    let close: string;
     this.translateService.get('HOME.CLOSE').subscribe((res: string) => {close =res;});
     let urg: string;
     this.translateService.get('HOME.URG').subscribe((res: string) => {urg=res;});
-    let msg1,msg2,msg3,msg4,msg5,msg6,msg7,msg8,msg9 : string;
+    let msg1,msg2,msg3,msg4,msg5,msg6,msg7,msg8,msg9: string;
     this.translateService.get('GUINDAILLE.HELP1').subscribe((res: string) => {msg1=res;});
     this.translateService.get('GUINDAILLE.HELP2').subscribe((res: string) => {msg2=res;});
     this.translateService.get('GUINDAILLE.HELP3').subscribe((res: string) => {msg3=res;});

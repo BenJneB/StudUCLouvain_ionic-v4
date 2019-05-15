@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -32,7 +32,7 @@ import { AlertService } from 'src/app/services/utils-services/alert-service';
 })
 
 export class HebdoPage {
-  schedule : Array<any> = this.navParams.get('schedule');
+  schedule: Array<any> = this.navParams.get('schedule');
   shownGroup = null;
 
   constructor(
@@ -49,11 +49,11 @@ export class HebdoPage {
   }
 
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
-  addToCalendar(slidingItem : IonItemSliding, activity : any) {
+  addToCalendar(slidingItem: IonItemSliding, activity: any) {
     let message: string;
     this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => {message =res;});
     const datas = {
-      title: activity.name + ' : ' + activity.type,
+      title: activity.name + ': ' + activity.type,
       location: activity.entityCode,
       start: new Date(activity.eventstarttime),
       end: new Date(activity.eventendtime)

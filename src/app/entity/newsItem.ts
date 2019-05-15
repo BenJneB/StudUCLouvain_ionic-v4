@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
     
@@ -25,9 +25,9 @@ export class NewsItem {
   title: string;
   image: string;
   trimmedDescription: string;
-  hidden : boolean;
-  guid : string;
-  pubDate : Date;
+  hidden: boolean;
+  guid: string;
+  pubDate: Date;
 
   constructor(
     description: string,
@@ -37,7 +37,7 @@ export class NewsItem {
     trimmedDescription: string,
     hidden: boolean,
     guid: string,
-    pubDate : Date
+    pubDate: Date
   ) {
     this.description = description;
     this.link = link;

@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
-    Date : 2018-2019
+    Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -37,8 +37,8 @@ export class MapPage {
   @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
   showedLocations: MapLocation[] = [];
   zones: any;
-  filters : any;
-  excludedFilters : any = [];
+  filters: any;
+  excludedFilters: any = [];
   selectedLocation: any = [];
   userLocation: any = [];
   showLocationList = false;

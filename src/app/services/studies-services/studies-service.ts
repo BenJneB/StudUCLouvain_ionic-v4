@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -31,11 +31,11 @@ import { AdeProject } from '../../entity/adeProject';
 })
 export class StudiesService {
   url: string;
-  projects : AdeProject[];
+  projects: AdeProject[];
   data: any;
   constructor(
     public http: HttpClient,
-    public ade : AdeService) {}
+    public ade: AdeService) {}
 
   /*Open session for the user*/
   openSession() {
@@ -50,7 +50,7 @@ export class StudiesService {
   }
 
   /*Get the projects ADE*/
-  getProjects(sessionId : string) {
+  getProjects(sessionId: string) {
     return new Promise( (resolve, reject) => {
       console.log('Studiesservice getProjects')
       this.ade.httpGetProjects(sessionId).subscribe(
@@ -63,14 +63,14 @@ export class StudiesService {
 
   /*Extract the projects ADE*/
   extractAdeProjects(data): AdeProject[]{
-    let projects : AdeProject[] = [];
+    const projects: AdeProject[] = [];
     console.log(data.projects)
     console.log(data.projects.project.length)
     if (data.projects.project.length === undefined) {
       let name = data.projects.project.$.name.toString();
-      console.log('name : ' + name);
+      console.log('name: ' + name);
       let id = data.projects.project.$.id.toString();
-      console.log('id : ' + id);
+      console.log('id: ' + id);
       let project = new AdeProject(id, name);
       console.log('project' + project)
       console.log('projects' + projects)
@@ -79,9 +79,9 @@ export class StudiesService {
     else{
       for(let i=0 ; i<data.projects.project.length ; i++) {
         let name = data.projects.project[i].$.name.toString();
-        console.log('name : ' + name);
+        console.log('name: ' + name);
         let id = data.projects.project[i].$.id.toString();
-        console.log('id : ' + id);
+        console.log('id: ' + id);
         let project = new AdeProject(id, name);
         console.log('project' + project)
         console.log('projects' + projects)
@@ -94,9 +94,9 @@ export class StudiesService {
   }
 
   /*Set the project selected by the user*/
-  setProject(sessionId : string, projectId : string) {
+  setProject(sessionId: string, projectId: string) {
     return new Promise( (resolve, reject) => {
-      console.log('studiesService setProject:' + sessionId + ' projectId : ' +  projectId);
+      console.log('studiesService setProject:' + sessionId + ' projectId: ' +  projectId);
       this.ade.httpSetProject(sessionId, projectId).subscribe(
         data => { resolve(data);       }
       );

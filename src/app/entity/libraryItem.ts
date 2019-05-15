@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -26,24 +26,24 @@ export class LibraryItem {
   id: number;
   name: string;
   locationId: number;
-  mapLocation : MapLocation;
+  mapLocation: MapLocation;
   phone: string;
-  email : boolean;
-  website : string;
+  email: boolean;
+  website: string;
   openingHours: Array<TimeSlot>;
   openingExaminationHours: Array<TimeSlot>;
   openingSummerHours: Array<TimeSlot>;
-  openingHoursNote : string;
-  closedDates : Array<{from: string, description: string}>;
+  openingHoursNote: string;
+  closedDates: Array<{from: string, description: string}>;
 
   constructor(
     id: number,
     name: string,
     locationId?: number,
-    mapLocation? : MapLocation,
+    mapLocation?: MapLocation,
     phone?: string,
-    email? : boolean,
-    website? : string,
+    email?: boolean,
+    website?: string,
     openingHours?: Array<TimeSlot>,
     openingExaminationHours?: Array<TimeSlot>,
     openingSummerHours?: Array<TimeSlot>,

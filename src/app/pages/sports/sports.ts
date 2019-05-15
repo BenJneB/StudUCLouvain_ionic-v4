@@ -1,8 +1,8 @@
 import { UtilsService } from './../../services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -55,12 +55,12 @@ export class SportsPage {
   title: any;
   searchTerm: string = '';
   searchControl: FormControl;
-  filters : any = [];
-  filtersT : any = [];
-  excludedFilters : any = [];
-  excludedFiltersT : any = [];
-  displayedSports : Array<SportItem> = [];
-  displayedSportsD : any = [];
+  filters: any = [];
+  filtersT: any = [];
+  excludedFilters: any = [];
+  excludedFiltersT: any = [];
+  displayedSports: Array<SportItem> = [];
+  displayedSportsD: any = [];
   dateRange: any = 7;
   dateLimit: Date = new Date();
   campus: string;
@@ -83,7 +83,7 @@ export class SportsPage {
     public user: UserService,
     public toastCtrl: ToastController,
     private calendar: Calendar,
-    public connService : ConnectivityService,
+    public connService: ConnectivityService,
     private loader: LoaderService,
     public navCtrl: NavController,
     private utilsServices: UtilsService)
@@ -204,7 +204,7 @@ export class SportsPage {
     }
     let modal = await this.modalCtrl.create({
         component: SportsFilterPage,
-        componentProps: { excludedFilters : excluded, filters : filters, dateRange : this.dateRange}
+        componentProps: { excludedFilters: excluded, filters: filters, dateRange: this.dateRange}
     })
     await modal.present();
     await modal.onDidDismiss().then((data) => {

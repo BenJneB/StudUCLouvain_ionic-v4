@@ -1,8 +1,8 @@
 import { TransService } from './../../services/utils-services/trans-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -46,13 +46,13 @@ import { NavigationExtras } from '@angular/router';
 
 export class StudiesPage {
   public people: any;
-  public data : any;
+  public data: any;
   segment = 'prog';
   public listCourses: Course[];
-  public course : Course;
+  public course: Course;
   public title = 'Etudes';
   public sessionId: string;
-  public project : AdeProject = null;
+  public project: AdeProject = null;
   private username: string = '';
   private password: string = '';
   public error: string = '';
@@ -74,7 +74,7 @@ export class StudiesPage {
     public platform: Platform,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
-    public connService : ConnectivityService,
+    public connService: ConnectivityService,
     private translateService: TranslateService,
     private wso2Service: Wso2Service,
     private studentService: StudentService,
@@ -180,7 +180,7 @@ export class StudiesPage {
 
   /*Open modalprojectpage to choose an ade project*/
   async openModalProject() {
-    let obj = {sessionId : this.sessionId};
+    let obj = {sessionId: this.sessionId};
 
     let myModal = await this.modalCtrl.create({component: ModalProjectPage, componentProps: obj});
     await myModal.present();

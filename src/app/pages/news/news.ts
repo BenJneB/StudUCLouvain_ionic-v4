@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
-    Date : 2018-2019
+    Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -59,7 +59,7 @@ export class NewsPage {
   subsegment = 'P1';
   facsegment= 'news';
   shownNews = 0;
-  displayedNews : Array<NewsItem> = [];
+  displayedNews: Array<NewsItem> = [];
   searching: any = false;
   searchControl: FormControl;
   searchTerm: string = '';
@@ -73,13 +73,13 @@ export class NewsPage {
  // url = 'assets/data/fac.json';
 
   constructor(
-    public platform : Platform,
+    public platform: Platform,
     public navCtrl: NavController,
     public userS:UserService,
-    public newsService : NewsService,
-    public connService : ConnectivityService,
+    public newsService: NewsService,
+    public connService: ConnectivityService,
     private iab: InAppBrowser,
-    public alertCtrl : AlertController,
+    public alertCtrl: AlertController,
     public facService: FacService,
     private cache: CacheService,
     private loader: LoaderService,

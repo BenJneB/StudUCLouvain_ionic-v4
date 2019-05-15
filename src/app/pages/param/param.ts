@@ -3,8 +3,8 @@ import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -51,7 +51,7 @@ export class ParamPage {
     public navCtrl: NavController,
     public modalCtrl: ModalController,
     public userS:UserService,
-    private alertCtrl : AlertController,
+    private alertCtrl: AlertController,
     private translateService: TranslateService,
     private alertService: AlertService,
     private transService: TransService
@@ -69,7 +69,7 @@ export class ParamPage {
     let settingsAlert = await this.alertCtrl.create({
       header: setting,
       message: message,
-      inputs : [
+      inputs: [
         {
           type:'radio',
           label:'Louvain-la-Neuve',
