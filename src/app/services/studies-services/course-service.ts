@@ -30,6 +30,7 @@ import { Activity } from '../../entity/activity';
 })
 export class CourseService {
 
+    space = '<br>&nbsp;&nbsp;&nbsp;&nbsp;';
     constructor(
       public http: HttpClient,
       public ade : AdeService) {
@@ -96,9 +97,7 @@ export class CourseService {
           let startHour = event._startHour;
           let date = event._date;
           let participants = event.eventParticipants.eventParticipant
-          let teachers = this.getTeachers(participants)
-          let students = this.getStudents(participants)
-          let auditorium = this.getAuditorium(participants)
+          let { teachers, students, auditorium } = this.getItems(participants)
           let start = this.createDate(date, startHour);
           let end = this.createDate(date, endHour);
           let name = event.$.name;
@@ -131,40 +130,23 @@ export class CourseService {
       return newdate;
     }
 
-    /*Get teacher from the participants*/
-    getTeachers(participants) : string {
-      let teachers : string = "";
-      for(let i=0; i < participants.length; i++){
-        if(participants[i]._category === "instructor"){
-          teachers = teachers + participants[i]._name + "/";
-        }
-      }
-      return teachers;
-    }
-
-    /*Get students accepted at a course in the participants*/
-    getStudents(participants) : string {
-      let students : string = "";
+    getItems(participants) {
+      let students: string = '';
+      let teachers: string = '';
+      let auditorium: string = '';
       for(let i=0; i < participants.length; i++){
         if(participants[i]._category === "trainee"){
-          students = students + participants[i]._name + "<br>&nbsp;&nbsp;&nbsp;&nbsp;";
+          students = students + participants[i]._name + this.space;
         }
-      }
-
-      return students.substr(0,students.length-28);
-    }
-
-    /*Get Auditorium in which the course is presented*/
-    getAuditorium(participants) : string {
-      let auditorium : string = " ";
-      for(let i=0; i < participants.length; i++){
         if(participants[i]._category === "classroom"){
-          auditorium = auditorium + participants[i]._name + " ";
+          auditorium = auditorium + participants[i]._name + ' ';
+        }
+        if(participants[i]._category === "instructor"){
+          teachers = teachers + participants[i]._name + '/';
         }
       }
-      return auditorium;
+      students = students.substr(0,students.length-28)
+      return { teachers, students, auditorium };
     }
-
-
 
 }
