@@ -35,7 +35,7 @@ export class TutoPage {
 
   ionViewDidEnter() {
     console.log('ngOnInit TutoPage');
-    setTimeout(()=> {
+    setTimeout(() => {
       this.splashscreen.hide();
     },1000);
   }

@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { IonItemSliding, ToastController, AlertController } from '@ionic/angular';
 import { UserService } from './user-service';
 import { TranslateService } from '@ngx-translate/core';
+import { AlertInput } from '@ionic/core';
 
 @Injectable({
     providedIn: 'root'
@@ -78,4 +79,37 @@ import { TranslateService } from '@ngx-translate/core';
           await slidingItem.close();
         }
     }
+
+    async campusChoiceAlert(setting: string, message: string, check: string, save: string) {
+      const settingsAlert = await this.alertCtrl.create({
+        header: setting,
+        message: message,
+        inputs: [
+          this.getRadioCampus('Louvain-la-Neuve', 'LLN', check = check),
+          this.getRadioCampus('Woluwé', 'Woluwe', check = check),
+          this.getRadioCampus('Mons', 'Mons', check = check),
+          this.getRadioCampus('Tournai', 'Tournai'),
+          this.getRadioCampus('St-Gilles', 'StG'),
+        ],
+        buttons: [
+          {
+            text: save,
+            handler: data => {
+              this.user.addCampus(data);
+            }
+          }
+        ]
+      });
+      await settingsAlert.present();
+    }
+
+  private getRadioCampus(label: string, value: string, check?: string): AlertInput {
+    return {
+      type: 'radio',
+      label: label,
+      value: value,
+      checked: (check === value),
+      disabled: check === undefined ? true : false
+    };
   }
+}

@@ -120,7 +120,7 @@ export class CoursePage {
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem: IonItemSliding, activity: Activity) {
     let message: string;
-    this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => {message = res;});
+    this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => {message = res; });
     const datas = {
       title: this.course.name + ': ' + activity.type,
       location: activity.auditorium,
@@ -172,10 +172,10 @@ export class CoursePage {
     let message: string;
     let cancel: string;
     let apply: string;
-    this.translateService.get('COURSE.TITLE').subscribe((res: string) => {title = res;});
-    this.translateService.get('COURSE.MESSAGE2').subscribe((res: string) => {message = res;});
-    this.translateService.get('COURSE.CANCEL').subscribe((res: string) => {cancel = res;});
-    this.translateService.get('COURSE.APPLY').subscribe((res: string) => {apply = res;});
+    this.translateService.get('COURSE.TITLE').subscribe((res: string) => {title = res; });
+    this.translateService.get('COURSE.MESSAGE2').subscribe((res: string) => {message = res; });
+    this.translateService.get('COURSE.CANCEL').subscribe((res: string) => {cancel = res; });
+    this.translateService.get('COURSE.APPLY').subscribe((res: string) => {apply = res; });
     var options = {
       title: title,
       message: message,
@@ -262,7 +262,7 @@ export class CoursePage {
         activity.auditorium, null, activity.start,activity.end, options);
     }
     let message: string;
-    this.translateService.get('STUDY.MESSAGE3').subscribe((res: string) => {message = res;});
+    this.translateService.get('STUDY.MESSAGE3').subscribe((res: string) => {message = res; });
     this.alertService.presentToast(message);
     this.alertService.alertCourse({'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4'});
   }
