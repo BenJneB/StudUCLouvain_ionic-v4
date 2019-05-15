@@ -80,7 +80,7 @@ export class EventsService {
   }
 
   /*Get the good icon for a catagory*/
-  public getIconCategory(category: string): string{
+  public getIconCategory(category: string): string {
     switch(category.toLowerCase()) {
       case 'sensibilisation': return 'sensibilisation';
       case 'animation': return 'animation';
@@ -93,7 +93,7 @@ export class EventsService {
   }
 
   /*Return a date in good form by splitting for the event*/
-  private createDateForEvent(str: string):Date{
+  private createDateForEvent(str: string):Date {
    // new Date(Year: number, (month-1): number, day: number)
     let dateTimeSplit = str.split(' ');
     let dateSplit = dateTimeSplit[0].split('/');

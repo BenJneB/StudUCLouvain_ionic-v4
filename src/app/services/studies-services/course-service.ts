@@ -66,7 +66,7 @@ export class CourseService {
     }
 
     /*Extract the activity*/
-    extractActivity(data): Activity[]{
+    extractActivity(data): Activity[] {
       let activities: Activity[] = [];
       if (data.activities !== undefined) {
         let activitiesList = data.activities.activity
@@ -119,7 +119,7 @@ export class CourseService {
   }
 
     /*Create a date*/
-    createDate(date: string, hour: string): Date{
+    createDate(date: string, hour: string): Date {
       let splitDate = date.split('/')
       let splitHour = hour.split(':')
       const newdate: Date = new Date(

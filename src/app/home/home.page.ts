@@ -115,7 +115,7 @@ export class HomePage {
 
   /*Set the title*/
   ionViewDidEnter() {
-    setTimeout(()=>{
+    setTimeout(()=> {
       this.splashscreen.hide();
     },1000);
   }
@@ -129,8 +129,7 @@ export class HomePage {
   changePage(page) {
     if (page.iosSchemaName != null && page.androidPackageName != null) {
       this.utilsServices.launchExternalApp(page);
-    }
-    else{
+    } else {
       this.nav.navigateForward([page.component, {title: page.title}]);
     }
   }

@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-//import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 import { HttpLoaderFactory } from '../app.module'
 
 import { HomePage } from './home.page';

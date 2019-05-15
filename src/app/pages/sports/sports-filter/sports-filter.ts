@@ -27,7 +27,7 @@ import { NavParams, ModalController } from '@ionic/angular';
   templateUrl: 'sports-filter.html'
 })
 export class SportsFilterPage {
-  categories: Array<{name: string, isChecked: boolean}> = [];
+  categories: Array< {name: string, isChecked: boolean}> = [];
   dateRange: any;
   results: any = [];
 

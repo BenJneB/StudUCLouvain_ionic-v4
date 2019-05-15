@@ -29,7 +29,7 @@ import { EventsService } from '../../../services/rss-services/events-service';
   templateUrl: 'events-filter.html'
 })
 export class EventsFilterPage {
-  categories: Array<{name: string, iconCategory: string, isChecked: boolean}> = [];
+  categories: Array< {name: string, iconCategory: string, isChecked: boolean}> = [];
   dateRange: any;
   results: any = [];
 

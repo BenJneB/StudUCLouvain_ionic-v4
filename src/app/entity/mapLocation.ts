@@ -19,7 +19,7 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-export class MapLocation{
+export class MapLocation {
   public title: string;
   public code: string;
   public address: string;

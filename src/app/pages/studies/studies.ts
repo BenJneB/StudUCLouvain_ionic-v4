@@ -87,12 +87,12 @@ export class StudiesPage {
 
   }
 
-  checkExist(sigle: string): Promise<any>{
+  checkExist(sigle: string): Promise<any> {
     let response: any;
     let year = parseInt(this.project.name.split('-')[0], 10);
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle,year).then(
-      (data) =>{
+      (data) => {
         let res: any = data;
         let exist: boolean;
         let nameFR: string = '';
@@ -137,7 +137,7 @@ export class StudiesPage {
       .subscribe(
         data => {
           if (data!= null) {
-            this.status=data.toString();
+            this.status =data.toString();
             resolve(data);
           }
         });
@@ -172,7 +172,7 @@ export class StudiesPage {
         
     	});
     }
-    else{
+    else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
@@ -314,9 +314,9 @@ export class StudiesPage {
     this.storage.get('listCourses').then((data) =>
     {
       if (data== null) {
-        this.listCourses= []
+        this.listCourses = []
       } else {
-        this.listCourses=data}
+        this.listCourses =data}
     });
   }
 

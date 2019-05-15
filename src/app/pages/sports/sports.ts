@@ -99,7 +99,7 @@ export class SportsPage {
       this.loadSports('team');
       this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
       this.loader.present('Please wait..');
-    } else{
+    } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }

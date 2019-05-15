@@ -21,12 +21,12 @@
 
 
 
-export class AdeProject{
+export class AdeProject {
   id: string;
   name: string;
 
   constructor(id: string, name: string) {
     this.id=id;
-    this.name =name;
+    this.name = name;
   }
 }

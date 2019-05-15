@@ -2,7 +2,7 @@
 import {throwError as observableThrowError} from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-//import { wso2Header } from '../../app/variables-config';
+// import { wso2Header } from '../../app/variables-config';
 import { wso2HeaderStudent } from '../../variables-config';
 import { map, catchError } from 'rxjs/operators';
 
@@ -47,8 +47,7 @@ export class Wso2Service {
           console.log('ok');
           this.getToken();
           return this.load(url);
-        }
-        else{
+        } else {
           return observableThrowError(new Error(error.status));
         }
       })
@@ -88,7 +87,7 @@ export class Wso2Service {
     let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-   // let body = `grant_type =password&username =${user}&password=${pass}`;
+   // let body = `grant_type =password&username =$ {user}&password=$ {pass}`;
     let body = new HttpParams().set('grant_type', 'password').set('username',user).set('password',pass);
    // this.optionsStudent = new RequestOptions({headers: headers});
 

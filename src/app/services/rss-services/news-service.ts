@@ -122,7 +122,7 @@ export class NewsService {
   }
 
   /*Return a date in good form by splitting for the new*/
-  private createDateForNews(str: string): Date{
+  private createDateForNews(str: string): Date {
    // str: 'Fri, 07 Jul 2017 08:51:52 +0200'
    // new Date(Year: number, (month-1): number, day: number)
     let dateTimeSplit = str.split(' ');

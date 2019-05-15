@@ -44,16 +44,16 @@ export class ModalInfoPage {
   {
     this.getInfo().then(data => {
       console.log(data);
-      this.information=data;
+      this.information =data;
       this.langue =data.langue;
     });
   }
 
-    getInfo(): Promise<any>{
+    getInfo(): Promise<any> {
       let response: any;
       return new Promise(resolve => {
         this.studentService.checkCourse(this.course.acronym,this.year).then(
-        (data) =>{
+        (data) => {
           console.log(data);
           let res: any = data;
           console.log(res);
@@ -61,9 +61,8 @@ export class ModalInfoPage {
 
             this.closeModal();
             resolve(400);
-          }
-          else{
-             let cahier = '';
+          } else {
+            let cahier = '';
             let campus = res.campus;
             let teacher = res.fichesIntervenants;
             let offres = res.fichesOffres;

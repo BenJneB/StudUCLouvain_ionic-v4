@@ -20,15 +20,15 @@ describe('Guindaille2-0', () => {
 						TranslateModule.forRoot(this)],
 			providers:[
 				NavController,
-				{provide:NavParams, useClass:NavParamsMock},
-				//{provide:TranslateService, useClass: TranslateServiceMock},
+				 {provide:NavParams, useClass:NavParamsMock},
+				// {provide:TranslateService, useClass: TranslateServiceMock},
 				ModalController,
 				AlertController,
 			]
 		})
 	}));
 
-	beforeEach(() =>{
+	beforeEach(() => {
 		fixture = TestBed.createComponent(GuindaillePage);
 		component = fixture.componentInstance;
 		//expect(component).toBeDefined();

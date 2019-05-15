@@ -56,7 +56,7 @@ export class StudentService {
       this.wso2Service.load(newUrl).subscribe(
         (data) => {
           let res: any;
-          res=data;
+          res =data;
           resolve(res.ficheActivite);
         },
         (err) => {
@@ -135,7 +135,7 @@ export class StudentService {
     })
   }
 
-  getDay(i:number): string{
+  getDay(i:number): string {
     let day: string = '';
     if (i===0) day = 'Lundi';
     if (i===1) day = 'Mardi';
@@ -147,7 +147,7 @@ export class StudentService {
     return day;
   }
 
-  getDate(i:number): string{
+  getDate(i:number): string {
     var today = new Date();
    // var today = new Date('10/16/2017');
     today.setDate(today.getDate() + i);
@@ -171,7 +171,7 @@ export class StudentService {
       this.wso2Service.loadStudent(newUrl).subscribe(
         (data) => {
           let res: any;
-          res=data;
+          res =data;
           resolve(res.lireInscriptionAnacResponse.return);
         },
         (err) => {

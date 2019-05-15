@@ -159,7 +159,7 @@ export class MapService {
     this.mapInitialised = true;
     return new Promise((resolve, reject) => {
       this.geolocation.getCurrentPosition().then((position) => {
-          this.userLocation =new MapLocation( 'Ma Position',
+          this.userLocation = new MapLocation( 'Ma Position',
                                       'Mon adresse',
                                       String(position.coords.latitude),
                                       String(position.coords.longitude),
@@ -181,7 +181,7 @@ export class MapService {
   }
 
   /*Load the map for the device and check the connectivity, if no connexion display a message to ask to connect*/
-  private loadDeviceGoogleMaps(): Promise<any>{
+  private loadDeviceGoogleMaps(): Promise<any> {
     return new Promise((resolve, reject) => {
       if (this.connectivityService.isOnline()) {
         this.initDeviceMap().then(
@@ -241,7 +241,7 @@ export class MapService {
           })
         })
       }
-        else{
+        else {
           return new Promise((resolve, reject) => {
             console.log('Geolocation disabled');
               let campus = this.userS.campus;
@@ -366,19 +366,19 @@ export class MapService {
   }
 
   /*Get a marker for the selected location*/
-  private getMarker(title: string): Marker{
+  private getMarker(title: string): Marker {
     let res = null;
     if (this.onDevice) {
 	    this.markers.map((marker) => {
 	      if (marker.getTitle() === title) {
-	        res=marker;
+	        res =marker;
 	      }
 	    });
 	}
-	else{
+	else {
 		this.markersB.map((marker) => {
 	      if (marker.getTitle() === title) {
-	        res=marker;
+	        res =marker;
 	      }
 	    });
 	}

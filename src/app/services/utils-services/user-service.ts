@@ -31,7 +31,7 @@ export class UserService {
 
   favorites: string[] = [];
   campus: string = '';
-  slots: Array<{ course: string, TP: string, CM: string }> = [];
+  slots: Array< { course: string, TP: string, CM: string }> = [];
   fac: string = '';
 
   constructor(
