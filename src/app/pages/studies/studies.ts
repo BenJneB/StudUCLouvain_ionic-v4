@@ -1,3 +1,4 @@
+import { TransService } from './../../services/utils-services/trans-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -76,8 +77,9 @@ export class StudiesPage {
     public connService : ConnectivityService,
     private translateService: TranslateService,
     private wso2Service: Wso2Service,
-    private studentService: StudentService)
-  {
+    private studentService: StudentService,
+    private transService: TransService
+  ) {
     this.initializeSession();
     this.menu.enable(true, 'studiesMenu');
     this.getCourses();
@@ -126,9 +128,9 @@ export class StudiesPage {
       this.wso2Service.login(this.username,this.password).pipe(
       catchError(error => {
       	if (error.status === 400) {
-          this.translateService.get('STUDY.BADLOG').subscribe((res: string) => {this.error=res;});
+          this.error = this.transService.getTranslation('STUDY.BADLOG');
         } else {
-          this.translateService.get('STUDY.ERROR').subscribe((res: string) => {this.error=res;});
+          this.error = this.transService.getTranslation('STUDY.ERROR');
         }
       	return error;
       }))
