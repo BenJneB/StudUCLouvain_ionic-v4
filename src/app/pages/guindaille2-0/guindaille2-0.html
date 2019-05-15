@@ -49,46 +49,8 @@
 
     <ion-grid class="gelem" no-lines>
           <ion-row>
-            <ion-col col-4>
-              <img alt="alterner" src="./assets/img/guindaille/alterner.png" align="middle"  height="auto" (click)="showAlert(alterner)"/>
-            </ion-col >
-            <ion-col col-4>
-              <img alt="bruit" src="./assets/img/guindaille/Bruit-exterieur.png" align="middle"  height="auto" (click)="showAlert(bruit)"/>
-            </ion-col>
-            <ion-col col-4>
-              <img alt="eau" src="./assets/img/guindaille/eau-gratuite.png" align="middle"  height="auto" (click)="showAlert(eau)"/>
-            </ion-col>
-          </ion-row>
-
-
-          <ion-row>
-            <ion-col col-4>
-              <img alt="ou" src="./assets/img/guindaille/jen-suis-ou.png" align="middle"  height="auto" (click)="showAlert(ou)"/>
-            </ion-col>
-            <ion-col col-4>
-              <img alt="cans" src="./assets/img/guindaille/no-cans-no-glass.png" align="middle"  height="auto" (click)="showAlert(cans)"/>
-            </ion-col>
-            <ion-col col-4>
-              <img alt="preservatif" src="./assets/img/guindaille/preservatif-jy-pense.png" align="middle"  height="auto" (click)="showAlert(preservatif)"/>
-            </ion-col>
-          </ion-row>
-
-          <ion-row>
-            <ion-col col-4>
-              <img alt="racompagner" src="./assets/img/guindaille/racompagner.png" align="middle"  height="auto" (click)="showAlert(racompagner)"/>
-            </ion-col>
-            <ion-col col-4>
-              <img alt="uriner" src="./assets/img/guindaille/uriner-dans-le-pot.png" align="middle"  height="auto" (click)="showAlert(uriner)"/>
-            </ion-col>
-            <ion-col col-4>
-              <img alt="urinerD" src="./assets/img/guindaille/uriner-dehors.png" align="middle"  height="auto" (click)="showAlert(dehors)"/>
-            </ion-col>
-          </ion-row>
-
-
-          <ion-row>
-            <ion-col size="4" offset="4" >
-              <img alt="violence" src="./assets/img/guindaille/Violence-arrete-toi-avant.png" align="middle" align="center" (click)="showAlert(violence)"/>
+            <ion-col size="4" *ngFor="let pict of pictos; let l = last" [offset]="l ? 4 : 0">
+              <img [src]="pict.image" align="middle"  height="auto" (click)="showAlert(pict)"/>
             </ion-col>
           </ion-row>
         </ion-grid>

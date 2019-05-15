@@ -31,15 +31,11 @@ page-guindaille2-0 {
              url("assets/fonts/Museoregular/Museo.svg#Museo") format("svg");
     }
 
-
-
-
     .guindaille {
         font-family: 'Museo' !important;
 
         background-color: map-get($colors, guindaille) !important;
     }
-
 
     .gtext {
         font-family: 'Museo' !important;
@@ -104,8 +100,6 @@ page-guindaille2-0 {
         background-color: map-get($colors, guindaille);
         padding-bottom: 61px !important;
     }
-
-
 
     .guindaille > .fixed-content{
         background-color: map-get($colors, guindaille);
