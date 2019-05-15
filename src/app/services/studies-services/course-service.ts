@@ -134,19 +134,24 @@ export class CourseService {
       let students: string = '';
       let teachers: string = '';
       let auditorium: string = '';
-      for(let i=0; i < participants.length; i++){
-        if(participants[i]._category === "trainee"){
-          students = students + participants[i]._name + this.space;
-        }
-        if(participants[i]._category === "classroom"){
-          auditorium = auditorium + participants[i]._name + ' ';
-        }
-        if(participants[i]._category === "instructor"){
-          teachers = teachers + participants[i]._name + '/';
-        }
+      for (let i=0; i < participants.length; i++) {
+        ({ students, auditorium, teachers } = this.fillItems(participants, i, students, auditorium, teachers));
       }
-      students = students.substr(0,students.length-28)
+      students = students.substr(0,students.length-28);
       return { teachers, students, auditorium };
     }
 
+
+  private fillItems(participants: any, i: number, students: string, auditorium: string, teachers: string) {
+    if (participants[i]._category === "trainee") {
+      students = students + participants[i]._name + this.space;
+    }
+    if (participants[i]._category === "classroom") {
+      auditorium = auditorium + participants[i]._name + ' ';
+    }
+    if (participants[i]._category === "instructor") {
+      teachers = teachers + participants[i]._name + '/';
+    }
+    return { students, auditorium, teachers };
+  }
 }
