@@ -50,28 +50,10 @@ export class SportsService {
     this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate= '
 
    //  first day of the week : today
-    let today:Date = new Date();
-
-   // last day of the week : today +6
-    let end:Date = new Date();
-    end.setDate(today.getDate() + 6 );
-
-   // invert date
-    let todayString = dateToString(today);
-    let endString =  dateToString(end);
+    let { todayString, endString } = this.getSportsDates(dateToString);
 
    // which campus ?
-    let site: string;
-    let campus = this.user.campus;
-    if (campus === 'LLN') {
-      site = 'louv';
-    }
-    if (campus === 'Woluwe') {
-      site = 'wol';
-    }
-    if (campus === 'Mons') {
-      site = 'mons';
-    }
+    let site: string = this.getSportCampus();
 
    // final URL
     let restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
@@ -83,6 +65,32 @@ export class SportsService {
     function dateToString(date) {
       return date.toISOString().split('T')[0];
     }
+  }
+
+  private getSportsDates(dateToString: (date: any) => any) {
+    let today: Date = new Date();
+    // last day of the week : today +6
+    let end: Date = new Date();
+    end.setDate(today.getDate() + 6);
+    // invert date
+    let todayString = dateToString(today);
+    let endString = dateToString(end);
+    return { todayString, endString };
+  }
+
+  private getSportCampus() {
+    let site: string;
+    let campus = this.user.campus;
+    if (campus === 'LLN') {
+      site = 'louv';
+    }
+    if (campus === 'Woluwe') {
+      site = 'wol';
+    }
+    if (campus === 'Mons') {
+      site = 'mons';
+    }
+    return site;
   }
 
   private getSportsDatas(segment: string) {

@@ -162,7 +162,7 @@ export class StudentService {
       dd= '0' +dd;
     }
     var yyyy= today.getFullYear();
-    return yyyy+ '-' +mm+ '-' +dd;
+    return yyyy + '-' + mm + '-' + dd;
   }
 
   getStatus() {
