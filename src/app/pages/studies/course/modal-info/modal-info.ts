@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -74,7 +74,7 @@ export class ModalInfoPage {
             let progpre = res.programmesEtPrerequis;
             let quadri = res.quadrimestre
             let resume = res.resumeCoursMap.entry[1].value;
-            let vol = {'vol1':res.volTot1, 'vol2' : res.volTot2, 'vol1Coef':res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef};
+            let vol = {'vol1':res.volTot1, 'vol2': res.volTot2, 'vol1Coef':res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef};
             if (res.cahierChargesExiste) {
               cahier = res.cahierChargesMap.entry[1].value;
             }
@@ -85,7 +85,7 @@ export class ModalInfoPage {
               entite: entite,
               prof: teacher,
               localisation: loca,
-              credit : credit,
+              credit: credit,
               programmeprerequis: progpre,
               quadri: quadri,
               resume: resume,

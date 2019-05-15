@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -40,15 +40,15 @@ import { AlertService } from 'src/app/services/utils-services/alert-service';
 })
 
 export class CoursePage {
-  sessionId : string;
-  course : Course;
+  sessionId: string;
+  course: Course;
   year;
   segment = 'Cours magistral';
   slotTP: string = 'no';
   shownGroup = null;
   slotCM: string = 'no';
-  displayedActi : Array<Activity> = [];
-  courseSorted : {cm:Array<Activity>, tp:Array<Activity>, ex:Array<Activity>};
+  displayedActi: Array<Activity> = [];
+  courseSorted: {cm:Array<Activity>, tp:Array<Activity>, ex:Array<Activity>};
   noTP: boolean;
   noCM: boolean;
   noEx: boolean;
@@ -61,7 +61,7 @@ export class CoursePage {
     public toastCtrl: ToastController,
     public userS:UserService,
     public modalCtrl: ModalController,
-    private alertCtrl : AlertController,
+    private alertCtrl: AlertController,
     private translateService: TranslateService,
     private route: ActivatedRoute, 
     private router: Router,
@@ -75,7 +75,7 @@ export class CoursePage {
         this.sessionId = this.router.getCurrentNavigation().extras.state.sessionId;
         this.course = this.router.getCurrentNavigation().extras.state.course;
         this.year = this.router.getCurrentNavigation().extras.state.year;
-        this.courseSorted = {cm : [], tp : [], ex :[]};
+        this.courseSorted = {cm: [], tp: [], ex:[]};
         let acro = this.course.acronym;
         if (this.userS.hasSlot(acro, 'CM')) {
           this.slotCM = this.userS.getSlot(acro, 'CM');
@@ -94,7 +94,7 @@ export class CoursePage {
   }
 
   /*Get sessions of the course to display for the selectionned project and display them*/
-  getCourse(sessionId : string, acronym : string) {
+  getCourse(sessionId: string, acronym: string) {
     this.courseService.getCourseId(sessionId, acronym).then(
       data => {
         let courseId = data;
@@ -118,11 +118,11 @@ export class CoursePage {
   }
 
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
-  addToCalendar(slidingItem : IonItemSliding, activity : Activity) {
+  addToCalendar(slidingItem: IonItemSliding, activity: Activity) {
     let message: string;
     this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => {message =res;});
     const datas = {
-      title: this.course.name + ' : ' + activity.type,
+      title: this.course.name + ': ' + activity.type,
       location: activity.auditorium,
       start: activity.start,
       end: activity.end
@@ -179,8 +179,8 @@ export class CoursePage {
     var options = {
       title: title,
       message: message,
-      inputs : [],
-      buttons : [
+      inputs: [],
+      buttons: [
       {
           text: cancel,
           handler: data => {
@@ -201,7 +201,7 @@ export class CoursePage {
        let slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
       options.inputs.push(
         { 
-          name : 'options',
+          name: 'options',
           value: array[i].name,
           label: array[i].name + ' ' + array[i].start.getHours() + ':' + array[i].start.getUTCMinutes(),
           type: 'radio',
@@ -219,7 +219,7 @@ export class CoursePage {
   }
 
   private addSlot(segment: string, data: any) {
-    const type = segment === 'Cours magistral' ? 'CM' : 'TP';
+    const type = segment === 'Cours magistral' ? 'CM': 'TP';
     if (type === 'TP') {
       this.slotTP = data;
     } else {
@@ -258,7 +258,7 @@ export class CoursePage {
       firstReminderMinutes:15
     };
     for (let activity of this.displayedActi) {
-      this.calendar.createEventWithOptions(this.course.name + ' : ' + activity.type,
+      this.calendar.createEventWithOptions(this.course.name + ': ' + activity.type,
         activity.auditorium, null, activity.start,activity.end, options);
     }
     let message: string;

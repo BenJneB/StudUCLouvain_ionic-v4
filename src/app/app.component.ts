@@ -1,8 +1,8 @@
 import { UtilsService } from './services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -119,7 +119,7 @@ export class AppComponent {
   }
 
   private getOtherPages(studies: boolean, nullSchemas: { ios: string; android: string; }, nullUrls: { app: string; http: string; }) {
-    const pages = studies ? ['studies', 'libraries', 'support'] : ['news', 'events', 'sports'];
+    const pages = studies ? ['studies', 'libraries', 'support']: ['news', 'events', 'sports'];
     const datas = [];
     for (const page of pages) {
       datas.push(this.getPageData(page.toUpperCase(), page, page, nullSchemas, nullUrls));

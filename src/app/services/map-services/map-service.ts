@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -20,7 +20,7 @@
 */
 
 
-// This code is inspired from the great Josh Morony tutorials :
+// This code is inspired from the great Josh Morony tutorials:
 // https://www.joshmorony.com/creating-an-advanced-google-maps-component-in-ionic-2/
 
 import { Injectable } from '@angular/core';
@@ -57,7 +57,7 @@ export class MapService {
   onDevice: boolean;
 
   constructor(public connectivityService: ConnectivityService,
-              private geolocation : Geolocation,
+              private geolocation: Geolocation,
               private platform: Platform,
               public menuCtrl: MenuController,
               public userS: UserService) {
@@ -173,7 +173,7 @@ export class MapService {
           this.map = new google.maps.Map(this.mapElement, mapOptions);
           resolve(true);
         }).catch((error) => {
-          console.log('Map error loadDeviceGoogleMaps : ' + error);
+          console.log('Map error loadDeviceGoogleMaps: ' + error);
           reject(false);
         });
 
@@ -236,7 +236,7 @@ export class MapService {
               resolve(true);
             });
           }, (error) => {
-            console.log('Map error initDeviceMap : ' + error);
+            console.log('Map error initDeviceMap: ' + error);
             reject(false);
           })
         })

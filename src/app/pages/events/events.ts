@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
-    Date : 2018-2019
+    Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -48,9 +48,9 @@ export class EventsPage {
   title: any;
   searchTerm: string = '';
   searchControl: FormControl;
-  filters : any = [];
-  excludedFilters : any = [];
-  displayedEvents : Array<EventItem> = [];
+  filters: any = [];
+  excludedFilters: any = [];
+  displayedEvents: Array<EventItem> = [];
   dateRange: any = 1;
   dateLimit: Date = new Date();
   loading;
@@ -59,7 +59,7 @@ export class EventsPage {
   now = new Date();
   year = this.now.getFullYear();
   noevents: any =false;
-  displayedEventsD : any = [];
+  displayedEventsD: any = [];
   
   weekUCL = 5;
   texts = {
@@ -76,7 +76,7 @@ export class EventsPage {
     private eventsService: EventsService,
     public user: UserService,
     public toastCtrl: ToastController,
-    public connService : ConnectivityService,
+    public connService: ConnectivityService,
     private translateService: TranslateService,
     private cache: CacheService,
     private loader: LoaderService,
@@ -253,7 +253,7 @@ export class EventsPage {
     let modal = await this.modalCtrl.create(
       {
         component: EventsFilterPage, 
-        componentProps:{ excludedFilters : this.excludedFilters, filters : this.filters, dateRange : this.dateRange}
+        componentProps:{ excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange}
       }
       );
       await modal.present();

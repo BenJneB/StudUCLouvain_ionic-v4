@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -52,7 +52,7 @@ export class EventsService {
     }
     for (let i = 0; i < data.length; i++) {
       let item = data[i];
-      let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
+      let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...': item.description;
       let favorite = false;
       let hidden = false;
       let iconCategory = 'assets/icon/events-icon/other.png';
@@ -80,7 +80,7 @@ export class EventsService {
   }
 
   /*Get the good icon for a catagory*/
-  public getIconCategory(category : string): string{
+  public getIconCategory(category: string): string{
     switch(category.toLowerCase()) {
       case 'sensibilisation': return 'sensibilisation';
       case 'animation': return 'animation';
@@ -93,8 +93,8 @@ export class EventsService {
   }
 
   /*Return a date in good form by splitting for the event*/
-  private createDateForEvent(str : string):Date{
-   // new Date(Year : number, (month-1): number, day : number)
+  private createDateForEvent(str: string):Date{
+   // new Date(Year: number, (month-1): number, day: number)
     let dateTimeSplit = str.split(' ');
     let dateSplit = dateTimeSplit[0].split('/');
     let timeSplit = dateTimeSplit[1].split(':');

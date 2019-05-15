@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -33,11 +33,11 @@ export class CourseService {
     space = '<br>&nbsp;&nbsp;&nbsp;&nbsp;';
     constructor(
       public http: HttpClient,
-      public ade : AdeService) {
+      public ade: AdeService) {
     }
 
     /*Get the course ID for the acronym of the course*/
-    getCourseId(sessionId : string, acronym : string) {
+    getCourseId(sessionId: string, acronym: string) {
       return new Promise <string>( (resolve, reject) => {
         this.ade.httpGetCourseId(sessionId, acronym).subscribe(
           data => {
@@ -55,7 +55,7 @@ export class CourseService {
     }
 
     /*Get activity for a course ID obtained by getting this from a course selected by the user*/
-    getActivity(sessionId : string, courseId : string) {
+    getActivity(sessionId: string, courseId: string) {
       return new Promise <Activity[]>( (resolve, reject) => {
         this.ade.httpGetActivity(sessionId, courseId).subscribe(
           data => {
@@ -67,7 +67,7 @@ export class CourseService {
 
     /*Extract the activity*/
     extractActivity(data): Activity[]{
-      let activities : Activity[] = [];
+      let activities: Activity[] = [];
       if (data.activities !== undefined) {
         let activitiesList = data.activities.activity
         if (activitiesList.length=== undefined) {
@@ -76,7 +76,7 @@ export class CourseService {
          }
         for (let i =0; i< activitiesList.length ;i++) {
           let activityElem = activitiesList[i];
-          let newActivities : Activity[] = this.createNewActivities(activityElem);
+          let newActivities: Activity[] = this.createNewActivities(activityElem);
           activities = activities.concat(newActivities);
         }
       }
@@ -85,8 +85,8 @@ export class CourseService {
 
     /*For each activity collect the right variables to be able to display them*/
     createNewActivities(jsonActivity): Activity[] {
-      let activities : Activity[] = [];
-      let type : string = jsonActivity._type;
+      let activities: Activity[] = [];
+      let type: string = jsonActivity._type;
       let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
       if (events !== undefined) {
@@ -119,10 +119,10 @@ export class CourseService {
   }
 
     /*Create a date*/
-    createDate(date : string, hour : string): Date{
+    createDate(date: string, hour: string): Date{
       let splitDate = date.split('/')
       let splitHour = hour.split(':')
-      let newdate : Date = new Date(parseInt(splitDate[2]),
+      let newdate: Date = new Date(parseInt(splitDate[2]),
                             parseInt(splitDate[1])-1,
                             parseInt(splitDate[0]),
                             parseInt(splitHour[0]),

@@ -1,7 +1,7 @@
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date : 2018-2019
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -39,7 +39,7 @@ export class SportsService {
   url = ''; // students
   urlT = ''; // equipe universitaire
 
-  constructor(public user:UserService, public rssService : RssService) {
+  constructor(public user:UserService, public rssService: RssService) {
 
   }
 
@@ -49,7 +49,7 @@ export class SportsService {
     this.url = 'https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate= ';
     this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate= '
 
-   //  first day of the week : today
+   //  first day of the week: today
     const { todayString, endString } = this.getSportsDates(dateToString);
 
    // which campus ?
@@ -69,7 +69,7 @@ export class SportsService {
 
   private getSportsDates(dateToString: (date: any) => any) {
     let today: Date = new Date();
-    // last day of the week : today +6
+    // last day of the week: today +6
     let end: Date = new Date();
     end.setDate(today.getDate() + 6);
     // invert date
@@ -96,12 +96,12 @@ export class SportsService {
   private getSportsDatas(segment: string) {
     this.update();
     const isSport = segment === 'all';
-    isSport ? this.sports = [] : this.teams = [];
+    isSport ? this.sports = []: this.teams = [];
     return {
-      sports: isSport ? this.sports : this.teams,
-      shownSports: isSport ? this.shownSports : this.shownTeams,
-      url: isSport ? this.url : this.urlT,
-      categories: isSport ? this.allCategories : this.allCategoriesT
+      sports: isSport ? this.sports: this.teams,
+      shownSports: isSport ? this.shownSports: this.shownTeams,
+      url: isSport ? this.url: this.urlT,
+      categories: isSport ? this.allCategories: this.allCategoriesT
     }
   }
 
@@ -109,7 +109,7 @@ export class SportsService {
   public getSports(segment: string) {
     const datas = this.getSportsDatas(segment);
     return this.rssService.load(datas['url'], true).then(result => {
-      this.extractSports(result, segment === 'team' ? false : true);
+      this.extractSports(result, segment === 'team' ? false: true);
       return {
         sports: datas['sports'],
         shownSports: datas['shownSports'],
@@ -120,9 +120,9 @@ export class SportsService {
         return this.getSports(segment);
       } else {
         if (error === 2) {
-          console.log('Loading sports : GET req timed out > limit, suppose no sports to be displayed');
+          console.log('Loading sports: GET req timed out > limit, suppose no sports to be displayed');
         } else {
-          console.log('Error loading sports : ' + error);
+          console.log('Error loading sports: ' + error);
         }
         return {
           sports: [],
@@ -189,7 +189,7 @@ export class SportsService {
   }
 
   /*Return a date in good form by splitting for the sport*/
-  private createDateForSport(str : string, hour: string):Date{
+  private createDateForSport(str: string, hour: string):Date{
       let timeSplit = hour.split(':');
       let dateSplit = str.split('/');
       let year = parseInt(dateSplit[2]);
