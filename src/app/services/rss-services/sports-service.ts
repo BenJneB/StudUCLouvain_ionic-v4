@@ -25,7 +25,7 @@ import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 import { SportItem } from '../../entity/sportItem';
 
-@Injectable({ 
+@Injectable( { 
   providedIn: 'root' 
 })
 export class SportsService {
@@ -158,7 +158,7 @@ export class SportsService {
         if (isSport) {
           this.getCategories(this.allCategories, item);
         }
-        else{
+        else {
           this.getCategories(this.allCategoriesT, item);
         }
       }
@@ -189,7 +189,7 @@ export class SportsService {
   }
 
   /*Return a date in good form by splitting for the sport*/
-  private createDateForSport(str: string, hour: string):Date{
+  private createDateForSport(str: string, hour: string):Date {
       let timeSplit = hour.split(':');
       let dateSplit = str.split('/');
       let year = parseInt(dateSplit[2]);

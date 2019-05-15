@@ -38,7 +38,7 @@ import { AdeProject } from '../../entity/adeProject';
 import { ModalProjectPage } from './modal-project/modal-project';
 import { NavigationExtras } from '@angular/router';
 
-@Component({
+@Component( {
   selector: 'page-studies',
   templateUrl: 'studies.html',
 
@@ -87,12 +87,12 @@ export class StudiesPage {
 
   }
 
-  checkExist(sigle: string): Promise<any>{
+  checkExist(sigle: string): Promise<any> {
     let response: any;
     let year = parseInt(this.project.name.split('-')[0], 10);
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle,year).then(
-      (data) =>{
+      (data) => {
         let res: any = data;
         let exist: boolean;
         let nameFR: string = '';
@@ -114,7 +114,7 @@ export class StudiesPage {
   toastBadCourse() {
     let msg;
     this.translateService.get('STUDY.BADCOURSE').subscribe((res: string) => {msg=res;});
-    let toast = this.toastCtrl.create({
+    let toast = this.toastCtrl.create( {
       message: msg,
       duration: 2000,
       position: 'middle'
@@ -137,7 +137,7 @@ export class StudiesPage {
       .subscribe(
         data => {
           if (data!= null) {
-            this.status=data.toString();
+            this.status =data.toString();
             resolve(data);
           }
         });
@@ -153,7 +153,7 @@ export class StudiesPage {
   	  			let result: any = res;
   	  			this.sigles = result.activities.activity;
             for(let sigle of this.sigles) {
-              this.activities.push({'name':'', 'sigle':sigle});
+              this.activities.push( {'name':'', 'sigle':sigle});
             }
   	  		})
           .catch((err) => {
@@ -172,7 +172,7 @@ export class StudiesPage {
         
     	});
     }
-    else{
+    else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
@@ -182,7 +182,7 @@ export class StudiesPage {
   async openModalProject() {
     let obj = {sessionId: this.sessionId};
 
-    let myModal = await this.modalCtrl.create({component: ModalProjectPage, componentProps: obj});
+    let myModal = await this.modalCtrl.create( {component: ModalProjectPage, componentProps: obj});
     await myModal.present();
     await myModal.onDidDismiss().then(data => {
       this.project = data.data;
@@ -229,7 +229,7 @@ export class StudiesPage {
     this.translateService.get('STUDY.SIGLE').subscribe((res: string) => {sigle =res;});
     this.translateService.get('STUDY.CANCEL').subscribe((res: string) => {cancel=res;});
     this.translateService.get('STUDY.SAVE').subscribe((res: string) => {save =res;});
-    let prompt = this.alertCtrl.create({
+    let prompt = this.alertCtrl.create( {
       header: addcourse,
       message: message,
       inputs: [
@@ -263,7 +263,7 @@ export class StudiesPage {
   async toastAlreadyCourse() {
     let msg;
     this.translateService.get('STUDY.ALCOURSE').subscribe((res: string) => {msg=res;});
-    const toast = await this.toastCtrl.create({
+    const toast = await this.toastCtrl.create( {
       message: msg,
       duration: 2000,
       position: 'middle'
@@ -301,7 +301,7 @@ export class StudiesPage {
 
   async addCourse(sigle: string, name: string) {
       this.saveCourse(name, sigle);
-      const toast = await this.toastCtrl.create({
+      const toast = await this.toastCtrl.create( {
         message: 'Cours ajouté',
         duration: 1000,
         position: 'bottom'
@@ -314,9 +314,9 @@ export class StudiesPage {
     this.storage.get('listCourses').then((data) =>
     {
       if (data== null) {
-        this.listCourses= []
+        this.listCourses = []
       } else {
-        this.listCourses=data}
+        this.listCourses =data}
     });
   }
 
@@ -358,7 +358,7 @@ export class StudiesPage {
 
   unavailableAlert() {
 
-    let alert = this.alertCtrl.create({
+    let alert = this.alertCtrl.create( {
       header: 'Indisponible',
       subHeader: 'Cette fonctionnalité n\'est pas encore disponible',
       buttons: ['OK']

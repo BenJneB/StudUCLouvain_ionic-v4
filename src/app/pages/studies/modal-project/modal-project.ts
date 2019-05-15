@@ -28,7 +28,7 @@ import { StudiesService} from '../../../services/studies-services/studies-servic
 
 import { AdeProject } from '../../../entity/adeProject';
 
-@Component({
+@Component( {
   selector: 'page-modal-project',
   templateUrl: 'modal-project.html',
 })

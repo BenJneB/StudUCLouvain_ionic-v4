@@ -29,13 +29,13 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
 import { EmployeeItem } from '../../entity/employeeItem';
 import { LoaderService } from 'src/app/services/utils-services/loader-service';
 
-@Component({
+@Component( {
   selector: 'page-support',
   templateUrl: 'support.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
+      state('true', style( { height: '45px' })),
+      state('false', style( { height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])

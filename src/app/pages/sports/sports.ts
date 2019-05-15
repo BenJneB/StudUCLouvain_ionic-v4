@@ -38,7 +38,7 @@ import { LoaderService } from '../../services/utils-services/loader-service';
 import { SportItem } from '../../entity/sportItem';
 import { SportsFilterPage } from './sports-filter/sports-filter';
 
-@Component({
+@Component( {
   selector: 'page-sports',
   templateUrl: 'sports.html'
 })
@@ -99,7 +99,7 @@ export class SportsPage {
       this.loadSports('team');
       this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
       this.loader.present('Please wait..');
-    } else{
+    } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
@@ -202,7 +202,7 @@ export class SportsPage {
     if (filters === undefined) {
       filters = [];
     }
-    let modal = await this.modalCtrl.create({
+    let modal = await this.modalCtrl.create( {
         component: SportsFilterPage,
         componentProps: { excludedFilters: excluded, filters: filters, dateRange: this.dateRange}
     })
@@ -236,7 +236,7 @@ export class SportsPage {
     };
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
       itemData.salle, itemData.date, itemData.hfin, options).then(() => {
-        let toast = this.toastCtrl.create({
+        let toast = this.toastCtrl.create( {
           message: 'Sport créé',
           duration: 3000
         }).then(toast => toast.present());

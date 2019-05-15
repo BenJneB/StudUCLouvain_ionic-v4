@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { TranslateService } from '@ngx-translate/core';
 import { resolve } from 'url';
 
-@Injectable({
+@Injectable( {
     providedIn: 'root'
   })
   export class TransService {

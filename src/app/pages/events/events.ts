@@ -34,7 +34,7 @@ import { EventsFilterPage } from '../../pages/events/events-filter/events-filter
 import { EventItem } from '../../entity/eventItem';
 import { OverlayEventDetail } from '@ionic/core';
 
-@Component({
+@Component( {
   selector: 'page-events',
   templateUrl: 'events.html'
 })
@@ -126,7 +126,7 @@ export class EventsPage {
         await this.cache.getItem(key)
         .then((data) => {
           this.loader.present('Please wait...');
-          this.events=data.items;
+          this.events =data.items;
           this.events.forEach(function(element) {
             element.startDate = new Date(element.startDate);
             element.endDate = new Date(element.endDate);
@@ -253,7 +253,7 @@ export class EventsPage {
     let modal = await this.modalCtrl.create(
       {
         component: EventsFilterPage, 
-        componentProps:{ excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange}
+        componentProps: { excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange}
       }
       );
       await modal.present();
@@ -278,7 +278,7 @@ export class EventsPage {
   }
 
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
-  public createEvent(slidingItem: IonItemSliding, itemData: any):void{
+  public createEvent(slidingItem: IonItemSliding, itemData: any):void {
     let message: string;
     this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => {message =res;});
     const datas = {

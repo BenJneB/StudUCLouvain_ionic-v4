@@ -44,7 +44,7 @@ import { Router } from '@angular/router';
 import { Toast } from '@ionic-native/toast/ngx';
 import { Page } from './entity/page';
 
-@Component({
+@Component( {
   selector: 'app-root',
   templateUrl: 'app.component.html'
 })

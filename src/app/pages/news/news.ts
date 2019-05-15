@@ -35,7 +35,7 @@ import { NewsItem } from '../../entity/newsItem';
 import { debounceTime } from 'rxjs/operators';
 import { Router, NavigationExtras } from '@angular/router';
 
-@Component({
+@Component( {
   selector: 'page-news',
   templateUrl: 'news.html'
 })
@@ -103,7 +103,7 @@ export class NewsPage {
      // this.presentLoading();
    // }
    // If no connexion, go back to the previous page and pop an alert
-    /*else{
+    /*else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }*/
@@ -197,7 +197,7 @@ export class NewsPage {
       await this.cache.getItem(key)
       .then((data) => {
         this.loader.present('Please wait...');
-        this.news=data.items;
+        this.news =data.items;
         this.shownNews = data.showItems;
         this.searching=false;
         this.updateDisplayed();
@@ -207,7 +207,7 @@ export class NewsPage {
         this.loadNews(key);
       });
     }
-    else{
+    else {
       this.loadNews();
     }
   }

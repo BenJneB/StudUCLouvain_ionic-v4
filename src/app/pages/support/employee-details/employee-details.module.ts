@@ -7,7 +7,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-@NgModule({
+@NgModule( {
   declarations: [EmployeeDetailsPage],
   imports: [
   	IonicModule,

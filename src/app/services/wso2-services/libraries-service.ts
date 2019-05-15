@@ -29,7 +29,7 @@ import { Wso2Service} from './wso2-service';
 
 
 
-@Injectable({ 
+@Injectable( { 
   providedIn: 'root' 
 })
 export class LibrariesService {
@@ -47,7 +47,7 @@ export class LibrariesService {
       this.wso2Service.load(this.url).subscribe(
         data => {
           this.extractLibraries(data['return'].library);
-          resolve({libraries:this.libraries});
+          resolve( {libraries:this.libraries});
         });
     });
   }
@@ -59,7 +59,7 @@ export class LibrariesService {
       this.wso2Service.load(url_details).subscribe(
         data => {
           lib = this.extractLibraryDetails(lib, data['return'].library);
-          resolve({libDetails:lib});
+          resolve( {libDetails:lib});
         });
     });
   }

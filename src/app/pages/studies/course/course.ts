@@ -34,7 +34,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 
-@Component({
+@Component( {
   selector: 'page-course',
   templateUrl: 'course.html'
 })
@@ -128,7 +128,7 @@ export class CoursePage {
       end: activity.end
     }
     this.utilsServices.createEventInCalendar(datas, message, slidingItem);
-    this.alertService.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
+    this.alertService.alertCourse( {'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 
   /*Filter TP if a slot is selectionned*/
@@ -210,7 +210,7 @@ export class CoursePage {
       );
     }
     if (options.inputs.length > 1) {
-      options.inputs.push({name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun});
+      options.inputs.push( {name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun});
     }
     let prompt = this.alertCtrl.create(options);
     if (options.inputs.length > 1) {
@@ -264,7 +264,7 @@ export class CoursePage {
     let message: string;
     this.translateService.get('STUDY.MESSAGE3').subscribe((res: string) => {message =res;});
     this.alertService.presentToast(message);
-    this.alertService.alertCourse({'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4'});
+    this.alertService.alertCourse( {'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4'});
   }
 
    openModalInfo() {

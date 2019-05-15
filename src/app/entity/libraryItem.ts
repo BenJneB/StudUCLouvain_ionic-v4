@@ -34,7 +34,7 @@ export class LibraryItem {
   openingExaminationHours: Array<TimeSlot>;
   openingSummerHours: Array<TimeSlot>;
   openingHoursNote: string;
-  closedDates: Array<{from: string, description: string}>;
+  closedDates: Array< {from: string, description: string}>;
 
   constructor(
     id: number,
@@ -48,7 +48,7 @@ export class LibraryItem {
     openingExaminationHours?: Array<TimeSlot>,
     openingSummerHours?: Array<TimeSlot>,
     openingHoursNote?: string,
-    closedDates?: Array<{from: string, description: string}>
+    closedDates?: Array< {from: string, description: string}>
   ) {
     this.id = id;
     this.name = name;

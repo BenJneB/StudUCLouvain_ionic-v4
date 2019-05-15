@@ -34,7 +34,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { IonicStorageModule  } from '@ionic/storage';*/
 
-//import { UserService } from '../providers/utils-services/user-service';
+// import { UserService } from '../providers/utils-services/user-service';
 
 
 import { AppComponent } from './app.component';
@@ -50,12 +50,12 @@ describe('MyApp Component', () => {
   let component;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule({
+    TestBed.configureTestingModule( {
       declarations: [AppComponent],
       imports: [
         IonicModule.forRoot(),
         TranslateModule.forRoot()
-        /*TranslateModule.forRoot({
+        /*TranslateModule.forRoot( {
                     loader: {
                         provide: TranslateLoader,
                         useFactory: HttpLoaderFactory,

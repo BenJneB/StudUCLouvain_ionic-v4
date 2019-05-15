@@ -26,7 +26,7 @@ import { UserService } from '../utils-services/user-service';
 import { map } from 'rxjs/operators';
 
 
-@Injectable({ 
+@Injectable( { 
   providedIn: 'root' 
 })
 export class POIService {

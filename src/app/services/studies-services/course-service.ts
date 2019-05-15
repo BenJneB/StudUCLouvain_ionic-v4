@@ -25,7 +25,7 @@ import { AdeService } from './ade-service';
 
 import { Activity } from '../../entity/activity';
 
-@Injectable({ 
+@Injectable( { 
   providedIn: 'root' 
 })
 export class CourseService {
@@ -66,7 +66,7 @@ export class CourseService {
     }
 
     /*Extract the activity*/
-    extractActivity(data): Activity[]{
+    extractActivity(data): Activity[] {
       let activities: Activity[] = [];
       if (data.activities !== undefined) {
         let activitiesList = data.activities.activity
@@ -119,7 +119,7 @@ export class CourseService {
   }
 
     /*Create a date*/
-    createDate(date: string, hour: string): Date{
+    createDate(date: string, hour: string): Date {
       let splitDate = date.split('/')
       let splitHour = hour.split(':')
       const newdate: Date = new Date(
@@ -137,7 +137,7 @@ export class CourseService {
       let teachers: string = '';
       let auditorium: string = '';
       for (let i=0; i < participants.length; i++) {
-        ({ students, auditorium, teachers } = this.fillItems(participants, i, students, auditorium, teachers));
+        ( { students, auditorium, teachers } = this.fillItems(participants, i, students, auditorium, teachers));
       }
       students = students.substr(0,students.length-28);
       return { teachers, students, auditorium };

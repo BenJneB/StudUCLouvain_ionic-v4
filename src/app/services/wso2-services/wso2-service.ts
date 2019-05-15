@@ -2,7 +2,7 @@
 import {throwError as observableThrowError} from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
-//import { wso2Header } from '../../app/variables-config';
+// import { wso2Header } from '../../app/variables-config';
 import { wso2HeaderStudent } from '../../variables-config';
 import { map, catchError } from 'rxjs/operators';
 
@@ -12,7 +12,7 @@ import { map, catchError } from 'rxjs/operators';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
-@Injectable({ 
+@Injectable( { 
   providedIn: 'root' 
 })
 export class Wso2Service {
@@ -28,9 +28,9 @@ export class Wso2Service {
     .subscribe(
         data => {
              // console.log(this.token);
-              this.headers = new HttpHeaders({'Authorization' : this.token});
+              this.headers = new HttpHeaders( {'Authorization' : this.token});
               this.headers.append('Accept', 'application/json');
-             // this.options = new RequestOptions({ headers: headers });
+             // this.options = new RequestOptions( { headers: headers });
         });
   }
 
@@ -48,7 +48,7 @@ export class Wso2Service {
           this.getToken();
           return this.load(url);
         }
-        else{
+        else {
           return observableThrowError(new Error(error.status));
         }
       })
@@ -58,13 +58,13 @@ export class Wso2Service {
   /*Retrieves the token*/
   getToken() {
     console.log('gettoken')
-    let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
+    let headers = new HttpHeaders( { 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
    // let body = 'grant_type =client_credentials';
     let body = new HttpParams().set('grant_type', 'client_credentials');
 
-   // this.optionsToken = new RequestOptions({headers: headers});
+   // this.optionsToken = new RequestOptions( {headers: headers});
 
     let finalUrl = this.wso2ServiceBaseUrl + 'token';
    // console.log(finalUrl);
@@ -85,12 +85,12 @@ export class Wso2Service {
 
   /*Log in the user*/
   login(user : string, pass : string) {
-    let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
+    let headers = new HttpHeaders( { 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-   // let body = `grant_type =password&username =${user}&password=${pass}`;
+   // let body = `grant_type =password&username =$ {user}&password=$ {pass}`;
     let body = new HttpParams().set('grant_type', 'password').set('username',user).set('password',pass);
-   // this.optionsStudent = new RequestOptions({headers: headers});
+   // this.optionsStudent = new RequestOptions( {headers: headers});
 
     let finalUrl = this.wso2ServiceBaseUrl + 'token';
 
@@ -106,9 +106,9 @@ export class Wso2Service {
 
   /*Load the student*/
   loadStudent(url: string) {
-    let headers = new HttpHeaders({'Authorization': this.tokenStudent});
+    let headers = new HttpHeaders( {'Authorization': this.tokenStudent});
     headers.append('Accept', 'application/json');
-   // this.optionsStudent = new RequestOptions({ headers: headers });
+   // this.optionsStudent = new RequestOptions( { headers: headers });
     let finalUrl = this.wso2ServiceBaseUrl + url;
    // console.log(finalUrl);
    // console.log(this.tokenStudent);

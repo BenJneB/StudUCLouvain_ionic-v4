@@ -25,7 +25,7 @@ import { NavController, NavParams, ModalController }
 
 import { StudentService} from '../../../../services/wso2-services/student-service';
 
-@Component({
+@Component( {
   selector: 'page-modal-info',
   templateUrl: 'modal-info.html',
 })
@@ -44,16 +44,16 @@ export class ModalInfoPage {
   {
     this.getInfo().then(data => {
       console.log(data);
-      this.information=data;
+      this.information =data;
       this.langue =data.langue;
     });
   }
 
-    getInfo(): Promise<any>{
+    getInfo(): Promise<any> {
       let response: any;
       return new Promise(resolve => {
         this.studentService.checkCourse(this.course.acronym,this.year).then(
-        (data) =>{
+        (data) => {
           console.log(data);
           let res: any = data;
           console.log(res);
@@ -62,7 +62,7 @@ export class ModalInfoPage {
             this.closeModal();
             resolve(400);
           }
-          else{
+          else {
              let cahier = '';
             let campus = res.campus;
             let teacher = res.fichesIntervenants;

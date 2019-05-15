@@ -31,7 +31,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { UserService } from '../services/utils-services/user-service';
 import { StudentService } from '../services/wso2-services/student-service';
 
-@Component({
+@Component( {
   selector: 'app-home',
   templateUrl: 'home.page.html',
 
@@ -115,7 +115,7 @@ export class HomePage {
 
   /*Set the title*/
   ionViewDidEnter() {
-    setTimeout(()=>{
+    setTimeout(()=> {
       this.splashscreen.hide();
     },1000);
   }
@@ -130,7 +130,7 @@ export class HomePage {
     if (page.iosSchemaName != null && page.androidPackageName != null) {
       this.utilsServices.launchExternalApp(page);
     }
-    else{
+    else {
       this.nav.navigateForward([page.component, {title: page.title}]);
     }
   }
@@ -162,7 +162,7 @@ export class HomePage {
     this.translateService.get('GUINDAILLE.HELP9').subscribe((res: string) => {msg9=res;});
     let out: string;
     this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {out=res;});
-    let alert = this.alertCtrl.create({
+    let alert = this.alertCtrl.create( {
       header: urg,
       message: '<p> <strong>'
       + msg1

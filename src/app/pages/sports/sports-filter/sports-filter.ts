@@ -22,12 +22,12 @@
 import { Component } from '@angular/core';
 import { NavParams, ModalController } from '@ionic/angular';
 
-@Component({
+@Component( {
   selector: 'page-sports-filter',
   templateUrl: 'sports-filter.html'
 })
 export class SportsFilterPage {
-  categories: Array<{name: string, isChecked: boolean}> = [];
+  categories: Array< {name: string, isChecked: boolean}> = [];
   dateRange: any;
   results: any = [];
 
@@ -40,7 +40,7 @@ export class SportsFilterPage {
     let filters = this.navParams.get('filters');
     this.dateRange = this.navParams.get('dateRange');
     for (let filterName of filters) {
-      this.categories.push({
+      this.categories.push( {
         name: filterName,
         isChecked: (excludedFilters.indexOf(filterName) === -1)
       });

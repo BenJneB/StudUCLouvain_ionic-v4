@@ -23,7 +23,7 @@ import { HttpClient } from '@angular/common/http';
 import { Wso2Service} from './wso2-service';
 
 
-@Injectable({ 
+@Injectable( { 
   providedIn: 'root' 
 })
 export class StudentService {
@@ -44,7 +44,7 @@ export class StudentService {
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
           if (data['activities']!= null) {
-            resolve({activities: data['activities']});
+            resolve( {activities: data['activities']});
           }
         });
     });
@@ -56,7 +56,7 @@ export class StudentService {
       this.wso2Service.load(newUrl).subscribe(
         (data) => {
           let res: any;
-          res=data;
+          res =data;
           resolve(res.ficheActivite);
         },
         (err) => {
@@ -84,7 +84,7 @@ export class StudentService {
               if (res.items != null) {
                 let dayDate;
                 let items;
-                ({ dayDate, items, res } = this.extractSchedule(res, date));
+                ( { dayDate, items, res } = this.extractSchedule(res, date));
                 let daySchedule = { date: dayDate, schedule: items, day: day };
                 schedule.push(daySchedule);
                 schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
@@ -125,7 +125,7 @@ export class StudentService {
               if (res.items != null) {
                 let dayDate;
                 let items;
-                ({ dayDate, items, res } = this.extractSchedule(res, date));
+                ( { dayDate, items, res } = this.extractSchedule(res, date));
                 let daySchedule = { date: dayDate, schedule: items };
                 schedule.push(daySchedule);
                 schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
@@ -135,7 +135,7 @@ export class StudentService {
     })
   }
 
-  getDay(i:number): string{
+  getDay(i:number): string {
     let day: string = '';
     if (i===0) day = 'Lundi';
     if (i===1) day = 'Mardi';
@@ -147,7 +147,7 @@ export class StudentService {
     return day;
   }
 
-  getDate(i:number): string{
+  getDate(i:number): string {
     var today = new Date();
    // var today = new Date('10/16/2017');
     today.setDate(today.getDate() + i);
@@ -171,7 +171,7 @@ export class StudentService {
       this.wso2Service.loadStudent(newUrl).subscribe(
         (data) => {
           let res: any;
-          res=data;
+          res =data;
           resolve(res.lireInscriptionAnacResponse.return);
         },
         (err) => {

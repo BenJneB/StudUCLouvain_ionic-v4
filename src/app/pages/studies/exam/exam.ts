@@ -26,7 +26,7 @@ import { UserService } from '../../../services/utils-services/user-service';
 
 
 
-@Component({
+@Component( {
   selector: 'page-exam',
   templateUrl: 'exam.html'
 })

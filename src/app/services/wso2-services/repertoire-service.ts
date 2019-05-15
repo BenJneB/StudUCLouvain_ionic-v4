@@ -27,7 +27,7 @@ import { Wso2Service} from './wso2-service';
 
 
 
-@Injectable({ 
+@Injectable( { 
   providedIn: 'root' 
 })
 export class RepertoireService {
@@ -56,7 +56,7 @@ export class RepertoireService {
         data => {
           if (data['persons']!= null) {
             this.extractEmployees(data['persons'].person);
-            resolve({employees:this.employees});
+            resolve( {employees:this.employees});
           }
         });
     });
@@ -71,7 +71,7 @@ export class RepertoireService {
       this.wso2Service.load(url_details).subscribe(
         data => {
           emp = this.extractEmployeeDetails(emp, data['businessInformation']);
-          resolve({empDetails:emp});
+          resolve( {empDetails:emp});
         });
     });
   }

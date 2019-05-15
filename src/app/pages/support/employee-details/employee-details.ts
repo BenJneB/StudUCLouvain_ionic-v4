@@ -30,13 +30,13 @@ import { EmployeeItem } from '../../../entity/employeeItem';
 import { Router, ActivatedRoute } from '@angular/router';
 
 
-@Component({
+@Component( {
   selector: 'page-employee-details',
   templateUrl: 'employee-details.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
+      state('true', style( { height: '45px' })),
+      state('false', style( { height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])

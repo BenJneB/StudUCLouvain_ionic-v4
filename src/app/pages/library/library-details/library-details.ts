@@ -30,13 +30,13 @@ import { ConnectivityService } from '../../../services/utils-services/connectivi
 import { LibraryItem } from '../../../entity/libraryItem';
 import { ActivatedRoute, Router } from '@angular/router';
 
-@Component({
+@Component( {
   selector: 'page-library-details',
   templateUrl: 'library-details.html',
   animations: [
     trigger('expand', [
-      state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
+      state('true', style( { height: '45px' })),
+      state('false', style( { height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])

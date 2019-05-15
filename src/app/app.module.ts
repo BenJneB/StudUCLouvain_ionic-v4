@@ -76,7 +76,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 
 
-@NgModule({
+@NgModule( {
   declarations: [
     AppComponent
   ],
@@ -87,10 +87,10 @@ export function HttpLoaderFactory(http: HttpClient) {
     BrowserModule,
     IonicModule.forRoot(),
     AppRoutingModule,
-    CacheModule.forRoot({ keyPrefix: 'UCL-cache' }),
+    CacheModule.forRoot( { keyPrefix: 'UCL-cache' }),
     IonicStorageModule.forRoot(),
     HttpClientModule,
-    TranslateModule.forRoot({
+    TranslateModule.forRoot( {
         loader: {
             provide: TranslateLoader,
             useFactory: (HttpLoaderFactory),

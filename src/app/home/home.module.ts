@@ -2,7 +2,7 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
 import { HttpClient } from '@angular/common/http';
-//import { Http } from '@angular/http';
+// import { Http } from '@angular/http';
 import { HttpLoaderFactory } from '../app.module'
 
 import { HomePage } from './home.page';
@@ -11,14 +11,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
-@NgModule({
+@NgModule( {
   declarations: [HomePage],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
   	IonicModule,
-  	TranslateModule.forChild({
+  	TranslateModule.forChild( {
         loader: {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,

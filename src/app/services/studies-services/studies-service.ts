@@ -26,7 +26,7 @@ import { AdeService } from './ade-service';
 import { AdeProject } from '../../entity/adeProject';
 
 
-@Injectable({ 
+@Injectable( { 
   providedIn: 'root' 
 })
 export class StudiesService {
@@ -62,7 +62,7 @@ export class StudiesService {
   }
 
   /*Extract the projects ADE*/
-  extractAdeProjects(data): AdeProject[]{
+  extractAdeProjects(data): AdeProject[] {
     const projects: AdeProject[] = [];
     console.log(data.projects)
     console.log(data.projects.project.length)
@@ -76,7 +76,7 @@ export class StudiesService {
       console.log('projects' + projects)
       projects.push(project)
     }
-    else{
+    else {
       for(let i=0 ; i<data.projects.project.length ; i++) {
         let name = data.projects.project[i].$.name.toString();
         console.log('name: ' + name);

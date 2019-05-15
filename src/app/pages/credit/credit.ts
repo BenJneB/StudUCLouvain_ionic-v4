@@ -25,7 +25,7 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 
 
-@Component({
+@Component( {
   selector: 'page-credit',
   templateUrl: 'credit.html',
 })

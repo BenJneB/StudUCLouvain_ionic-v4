@@ -8,7 +8,7 @@ import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {CommonModule} from '@angular/common';
 import { EventsFilterModule } from './events-filter/events-filter.module';
 
-@NgModule({
+@NgModule( {
   declarations: [EventsPage],
   imports: [
   	IonicModule,

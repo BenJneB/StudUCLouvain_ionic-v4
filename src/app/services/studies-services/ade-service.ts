@@ -35,7 +35,7 @@ import { UtilsService } from '../utils-services/utils-services';
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html
   for more info on providers and Angular 2 DI.
 */
-@Injectable({
+@Injectable( {
   providedIn: 'root'
 })
 export class AdeService {
@@ -82,7 +82,7 @@ export class AdeService {
 
   /*For a course selected get the activities*/
   httpGetActivity(sessionId: string, courseId: string) {
-    const encodedURL: string = this.getBasicSessionUrl(sessionId) + '&function=getActivities&resources= ' + courseId + '&detail=17';
+    const encodedURL: string = this.getBasicSessionUrl(sessionId) + '&function=getActivities&resources = ' + courseId + '&detail=17';
     return this.getDataFromADE(encodedURL);
   }
 
