@@ -4,7 +4,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ExamPage } from './exam';
 
-@NgModule( {
+@NgModule({
   declarations: [ExamPage],
   imports: [
   	IonicModule,

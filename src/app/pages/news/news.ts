@@ -35,7 +35,7 @@ import { NewsItem } from '../../entity/newsItem';
 import { debounceTime } from 'rxjs/operators';
 import { Router, NavigationExtras } from '@angular/router';
 
-@Component( {
+@Component({
   selector: 'page-news',
   templateUrl: 'news.html'
 })

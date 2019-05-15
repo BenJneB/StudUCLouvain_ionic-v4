@@ -24,7 +24,7 @@ import { HttpClient } from '@angular/common/http';
 import { timeout, map } from 'rxjs/operators';
 import { UtilsService } from '../utils-services/utils-services';
 
-@Injectable( { 
+@Injectable({ 
   providedIn: 'root' 
 })
 export class RssService {

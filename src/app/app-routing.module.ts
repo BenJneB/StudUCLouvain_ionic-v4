@@ -24,7 +24,7 @@ const routes: Routes = [
   { path: 'tutos', loadChildren: './pages/tuto/tuto.module#TutoPageModule' },
 ];
 
-@NgModule( {
+@NgModule({
   imports: [
     RouterModule.forRoot(routes, { preloadingStrategy: PreloadAllModules })
   ],

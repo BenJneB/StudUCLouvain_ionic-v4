@@ -29,7 +29,7 @@ import { UserService } from '../../../services/utils-services/user-service';
 import { EventItem } from '../../../entity/eventItem';
 import { Router, ActivatedRoute } from '@angular/router';
 
-@Component( {
+@Component({
   selector: 'page-events-details',
   templateUrl: 'events-details.html'
 })

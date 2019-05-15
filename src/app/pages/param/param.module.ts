@@ -7,7 +7,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 
-@NgModule( {
+@NgModule({
   declarations: [ParamPage],
   imports: [
   	IonicModule,

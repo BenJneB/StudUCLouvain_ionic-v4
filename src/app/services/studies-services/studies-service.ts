@@ -26,7 +26,7 @@ import { AdeService } from './ade-service';
 import { AdeProject } from '../../entity/adeProject';
 
 
-@Injectable( { 
+@Injectable({ 
   providedIn: 'root' 
 })
 export class StudiesService {

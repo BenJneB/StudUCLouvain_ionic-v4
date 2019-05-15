@@ -26,7 +26,7 @@ import { UtilsService } from './../../../services/utils-services/utils-services'
 import { UserService } from '../../../services/utils-services/user-service';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 
-@Component( {
+@Component({
   selector: 'page-hebdo',
   templateUrl: 'hebdo.html'
 })
@@ -59,6 +59,6 @@ export class HebdoPage {
       end: new Date(activity.eventendtime)
     };
     this.utilsServices.createEventInCalendar(datas, message, slidingItem);
-    this.alertService.alertCourse( {'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
+    this.alertService.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 }

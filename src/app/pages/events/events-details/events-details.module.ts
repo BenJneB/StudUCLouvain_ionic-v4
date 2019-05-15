@@ -6,7 +6,7 @@ import { EventsDetailsPage } from './events-details';
 import {RouterModule} from '@angular/router';
 import { FormsModule } from '@angular/forms';
 
-@NgModule( {
+@NgModule({
   declarations: [EventsDetailsPage],
   imports: [
       IonicModule,

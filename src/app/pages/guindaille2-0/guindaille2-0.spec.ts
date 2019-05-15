@@ -14,7 +14,7 @@ describe('Guindaille2-0', () => {
 	let fixture;
 	let component;
 	beforeEach(async(() => {
-		TestBed.configureTestingModule( {
+		TestBed.configureTestingModule({
 			declarations:[GuindaillePage],
 			imports: [	IonicModule.forRoot(this),
 						TranslateModule.forRoot(this)],

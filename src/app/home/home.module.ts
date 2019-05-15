@@ -11,14 +11,14 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
-@NgModule( {
+@NgModule({
   declarations: [HomePage],
   imports: [
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
   	IonicModule,
-  	TranslateModule.forChild( {
+  	TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,

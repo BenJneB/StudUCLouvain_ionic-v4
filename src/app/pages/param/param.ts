@@ -29,13 +29,13 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../services/utils-services/user-service';
 
-@Component( {
+@Component({
   selector: 'page-param',
   templateUrl: 'param.html',
   animations: [
     trigger('expand', [
-      state('true', style( { height: '45px' })),
-      state('false', style( { height: '0'})),
+      state('true', style({ height: '45px' })),
+      state('false', style({ height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -66,7 +66,7 @@ export class ParamPage {
     const setting = this.transService.getTranslation('HOME.SETTING1');
     const message = this.transService.getTranslation('HOME.MESSAGE');
     const save = this.transService.getTranslation('HOME.SAVE');
-    let settingsAlert = await this.alertCtrl.create( {
+    let settingsAlert = await this.alertCtrl.create({
       header: setting,
       message: message,
       inputs: [

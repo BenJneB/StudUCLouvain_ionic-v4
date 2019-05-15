@@ -25,13 +25,13 @@ import { NavController, ModalController } from '@ionic/angular';
 import { AlertController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-@Component( {
+@Component({
   selector: 'page-guindaille2-0',
   templateUrl: 'guindaille2-0.html',
   animations: [
     trigger('expand', [
-      state('true', style( { height: '45px' })),
-      state('false', style( { height: '0'})),
+      state('true', style({ height: '45px' })),
+      state('false', style({ height: '0'})),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -42,8 +42,8 @@ export class GuindaillePage {
   header: any;
   shownGroup = null;
   segment: string = 'pict';
-  numbersSlides =  Array.from( {length: (6)}, (v, k) => k);
-  numberPictos =  Array.from( {length: (10)}, (v, k) => k);
+  numbersSlides =  Array.from({length: (6)}, (v, k) => k);
+  numberPictos =  Array.from({length: (10)}, (v, k) => k);
   slides = [];
   pictos = [];
 

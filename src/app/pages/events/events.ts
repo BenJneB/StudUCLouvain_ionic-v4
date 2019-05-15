@@ -34,7 +34,7 @@ import { EventsFilterPage } from '../../pages/events/events-filter/events-filter
 import { EventItem } from '../../entity/eventItem';
 import { OverlayEventDetail } from '@ionic/core';
 
-@Component( {
+@Component({
   selector: 'page-events',
   templateUrl: 'events.html'
 })

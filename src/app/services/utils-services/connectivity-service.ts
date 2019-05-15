@@ -27,7 +27,7 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 
 declare var Connection: any;
 
-@Injectable( { 
+@Injectable({ 
   providedIn: 'root' 
 })
 export class ConnectivityService {
@@ -58,7 +58,7 @@ export class ConnectivityService {
     this.translateService.get('NET.TITLE').subscribe((res: string) => {title =res;});
     this.translateService.get('NET.CONNECT').subscribe((res: string) => {message =res;});
     this.translateService.get('NET.CLOSE').subscribe((res: string) => {close =res;});
-    let alert = this.alertCtrl.create( {
+    let alert = this.alertCtrl.create({
       header: title,
       subHeader: message,
       buttons: [close]

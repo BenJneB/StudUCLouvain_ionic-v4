@@ -23,7 +23,7 @@ export const EVENT_TEXTS = {
   'DEL': 'EVENTS.DEL',
 };
 
-@Injectable( {
+@Injectable({
   providedIn: 'root'
 })
 export class UtilsService {
@@ -101,7 +101,7 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
   }
 
   private async presentAlert(texts: {}, slidingItem: IonItemSliding, itemData: any, update: () => void) {
-      const alert = await this.alertCtrl.create( {
+      const alert = await this.alertCtrl.create({
           header: texts['title'],
           message: texts['message'],
           buttons: [
@@ -154,7 +154,7 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
   filterItems(type: string, items: Array<any>, excluded: Array<any>, dateLimit: Date, search: string) {
       let index: string, title: string, date: Date;
       return items.filter((item) => {
-          ( { index, title, date } = this.getFilterFields(type, index, item, title, date));
+          ({ index, title, date } = this.getFilterFields(type, index, item, title, date));
           return (excluded.indexOf(index) < 0) && (title.toLowerCase().indexOf(search.toLowerCase()) > -1)
           && (Math.floor(date.getTime() / 86400000) <= Math.floor(dateLimit.getTime() / 86400000));
       });

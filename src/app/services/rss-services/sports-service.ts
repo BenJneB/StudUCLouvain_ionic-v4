@@ -25,7 +25,7 @@ import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 import { SportItem } from '../../entity/sportItem';
 
-@Injectable( { 
+@Injectable({ 
   providedIn: 'root' 
 })
 export class SportsService {

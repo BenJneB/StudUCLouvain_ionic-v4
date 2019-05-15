@@ -50,12 +50,12 @@ describe('MyApp Component', () => {
   let component;
 
   beforeEach(async(() => {
-    TestBed.configureTestingModule( {
+    TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [
         IonicModule.forRoot(),
         TranslateModule.forRoot()
-        /*TranslateModule.forRoot( {
+        /*TranslateModule.forRoot({
                     loader: {
                         provide: TranslateLoader,
                         useFactory: HttpLoaderFactory,

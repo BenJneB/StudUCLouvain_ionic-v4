@@ -25,7 +25,7 @@ import { AdeService } from './ade-service';
 
 import { Activity } from '../../entity/activity';
 
-@Injectable( { 
+@Injectable({ 
   providedIn: 'root' 
 })
 export class CourseService {
@@ -137,7 +137,7 @@ export class CourseService {
       let teachers: string = '';
       let auditorium: string = '';
       for (let i=0; i < participants.length; i++) {
-        ( { students, auditorium, teachers } = this.fillItems(participants, i, students, auditorium, teachers));
+        ({ students, auditorium, teachers } = this.fillItems(participants, i, students, auditorium, teachers));
       }
       students = students.substr(0,students.length-28);
       return { teachers, students, auditorium };

@@ -3,7 +3,7 @@ import { IonItemSliding, ToastController, AlertController } from '@ionic/angular
 import { UserService } from './user-service';
 import { TranslateService } from '@ngx-translate/core';
 
-@Injectable( {
+@Injectable({
     providedIn: 'root'
   })
   export class AlertService {
@@ -23,7 +23,7 @@ import { TranslateService } from '@ngx-translate/core';
         this.translateService.get(texts['message']).subscribe((res: string) => {
             message = res;
         });
-        const disclaimerAlert = await this.alertCtrl.create( {
+        const disclaimerAlert = await this.alertCtrl.create({
             header: title,
             message: message,
             buttons: [
@@ -37,7 +37,7 @@ import { TranslateService } from '@ngx-translate/core';
     }
 
     languageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
-        return this.alertCtrl.create( {
+        return this.alertCtrl.create({
           header: settings,
           message: message2,
           inputs: [
@@ -69,7 +69,7 @@ import { TranslateService } from '@ngx-translate/core';
     }
 
     async presentToast(message: string, slidingItem?: IonItemSliding) {
-        const toast = await this.toastCtrl.create( {
+        const toast = await this.toastCtrl.create({
             message: message,
             duration: 3000
         });

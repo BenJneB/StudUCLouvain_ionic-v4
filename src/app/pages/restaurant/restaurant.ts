@@ -22,7 +22,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from '@ionic/angular';
 
-@Component( {
+@Component({
   selector: 'page-restaurant',
   templateUrl: 'restaurant.html'
 })

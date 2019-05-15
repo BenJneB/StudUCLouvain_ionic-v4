@@ -25,7 +25,7 @@ import { NavController, NavParams, ModalController }
 
 import { StudentService} from '../../../../services/wso2-services/student-service';
 
-@Component( {
+@Component({
   selector: 'page-modal-info',
   templateUrl: 'modal-info.html',
 })

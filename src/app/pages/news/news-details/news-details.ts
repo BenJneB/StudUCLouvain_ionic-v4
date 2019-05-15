@@ -25,7 +25,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 
 import { NewsItem } from '../../../entity/newsItem';
 
-@Component( {
+@Component({
   selector: 'page-news-details',
   templateUrl: 'news-details.html'
 })

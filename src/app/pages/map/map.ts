@@ -27,7 +27,7 @@ import { MapService } from '../../services/map-services/map-service';
 
 import { MapLocation } from '../../entity/mapLocation';
 
-@Component( {
+@Component({
   selector: 'page-map',
   templateUrl: 'map.html'
 })

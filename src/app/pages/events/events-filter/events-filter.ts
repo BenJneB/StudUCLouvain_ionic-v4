@@ -24,7 +24,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 
 import { EventsService } from '../../../services/rss-services/events-service';
 
-@Component( {
+@Component({
   selector: 'page-events-filter',
   templateUrl: 'events-filter.html'
 })
@@ -43,7 +43,7 @@ export class EventsFilterPage {
         let filters = this.navParams.get('filters');
         this.dateRange = this.navParams.get('dateRange');
         for (let filterName of filters) {
-          this.categories.push( {
+          this.categories.push({
             name: filterName,
             iconCategory: 'assets/icon/events-icon/' + this.eventService.getIconCategory(filterName) + '.png',
             isChecked: (excludedFilters.indexOf(filterName) === -1)

@@ -6,7 +6,7 @@ import { NewsDetailsPage } from './news-details';
 import { FormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
 
-@NgModule( {
+@NgModule({
   declarations: [NewsDetailsPage],
   imports: [
     IonicModule,

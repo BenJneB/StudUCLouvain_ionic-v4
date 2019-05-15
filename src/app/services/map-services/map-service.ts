@@ -41,7 +41,7 @@ import { jsApiKey } from '../../variables-config';
 
 declare var google;
 
-@Injectable( { 
+@Injectable({ 
   providedIn: 'root' 
 })
 export class MapService {
@@ -330,7 +330,7 @@ export class MapService {
   /*Add Marker in the map for the browser*/
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
     let latLng = new google.maps.LatLng(lat, lng);
-    let marker = new google.maps.Marker( {
+    let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: latLng,
@@ -340,7 +340,7 @@ export class MapService {
     this.addBrowserInfoWindow(marker, title+ '\n' +content);
   }
   private addBrowserInfoWindow(marker, content) {
-    let infoWindow = new google.maps.InfoWindow( {
+    let infoWindow = new google.maps.InfoWindow({
       content: content
     });
     google.maps.event.addListener(marker, 'click', () => {

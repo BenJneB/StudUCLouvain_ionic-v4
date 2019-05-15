@@ -24,7 +24,7 @@ import { NavController } from '@ionic/angular';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 
-@Component( {
+@Component({
   selector: 'page-tuto',
   templateUrl: 'tuto.html',
 })

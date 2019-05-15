@@ -7,7 +7,7 @@ import { LibrariesPage } from './libraries';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 
-@NgModule( {
+@NgModule({
   declarations: [LibrariesPage],
   imports: [
     IonicModule,

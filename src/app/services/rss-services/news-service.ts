@@ -26,7 +26,7 @@ import { RssService } from './rss-service';
 import { NewsItem } from '../../entity/newsItem';
 
 
-@Injectable( { 
+@Injectable({ 
   providedIn: 'root' 
 })
 export class NewsService {

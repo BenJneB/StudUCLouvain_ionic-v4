@@ -8,7 +8,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { SportsFilterPageModule } from './sports-filter/sports-filter.module';
 
-@NgModule( {
+@NgModule({
   declarations: [SportsPage],
   imports: [
     IonicModule,

@@ -25,7 +25,7 @@ import { Market } from '@ionic-native/market/ngx';
 import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
-@Component( {
+@Component({
   selector: 'page-mobility',
   templateUrl: 'mobility.html'
 })

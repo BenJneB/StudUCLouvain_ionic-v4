@@ -24,7 +24,7 @@ import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 
-@Injectable( {
+@Injectable({
   providedIn: 'root' 
 })
 export class UserService {

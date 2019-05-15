@@ -30,7 +30,7 @@ import { LibraryItem } from '../../entity/libraryItem';
 import { NavigationExtras, Router } from '@angular/router';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
-@Component( {
+@Component({
   selector: 'page-libraries',
   templateUrl: 'libraries.html'
 })
