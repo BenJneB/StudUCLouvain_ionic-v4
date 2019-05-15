@@ -32,7 +32,6 @@ import { EventsService } from '../../services/rss-services/events-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { EventsFilterPage } from '../../pages/events/events-filter/events-filter';
 import { EventItem } from '../../entity/eventItem';
-import { debounceTime } from 'rxjs/operators';
 import { OverlayEventDetail } from '@ionic/core';
 
 @Component({
@@ -91,11 +90,7 @@ export class EventsPage {
   ngOnInit() {
     this.updateDateLimit();
       this.cachedOrNot();
-      this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
-        this.searching = false;
-        this.updateDisplayed();
-      });
-
+      this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
   }
 
   public goToEventDetail(event: EventItem) {
@@ -119,18 +114,10 @@ export class EventsPage {
   }
 
   /*To display or close a group of events (1 group = events for one week)*/
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
+
 
   /*Check if the display group is the group in arg*/
-  isGroupShown(group) {
-      return this.shownGroup === group;
-  }
+
 
     /*Check if data are cached or not */
     async cachedOrNot(){
@@ -190,20 +177,27 @@ export class EventsPage {
       var date = new Date(item.startDate.getTime());
       date.setHours(0,0,0,0);
       date.setDate(date.getDate() + 3 - (date.getDay() +6) %7);
-      var temp = new Date(date.getFullYear(),0,4);
-      var week = 1 + Math.round(((date.getTime() - temp.getTime()) /86400000 -3 + (temp.getDay() +6) %7)/7);// - weekUCL;
+      var week = this.getWeek(date);// - weekUCL;
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
     }, {});
     var eventsD = Object.keys(groups).map(function(key){
-      return {weeks: key, event: groups[key]};
+      return {
+        weeks: key, 
+        event: groups[key]
+      };
     });
     return eventsD;
   }
 
+  private getWeek(date: Date) {
+    let temp = new Date(date.getFullYear(), 0, 4);
+    return 1 + Math.round(((date.getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7); // - weekUCL;
+  }
+
   /*Returns the ISO week of the date*/
-  getWeek(d:Date) {
+  getISOWeek(d:Date) {
     var date = new Date(d.getTime());
     date.setHours(0, 0, 0, 0);
     // Thursday in current week decides the year.
@@ -211,7 +205,7 @@ export class EventsPage {
     // January 4 is always in week 1.
     var week1 = new Date(date.getFullYear(), 0, 4);
     // Adjust to Thursday in week 1 and count number of weeks from date to week1.
-    return 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+    return this.getWeek(date);
   }
 
   /*Return first day of the week and last day of the week (to display range)*/
@@ -220,7 +214,7 @@ export class EventsPage {
     d1 = new Date(''+year+'');
     numOfdaysPastSinceLastMonday = d1.getDay() - 1;
     d1.setDate(d1.getDate() - numOfdaysPastSinceLastMonday);
-    d1.setDate(d1.getDate() + (7 * (week - this.getWeek(d1))));
+    d1.setDate(d1.getDate() + (7 * (week - this.getISOWeek(d1))));
     rangeIsFrom = (d1.getMonth() + 1) + "-" + d1.getDate() + "-" + d1.getFullYear();
     d1.setDate(d1.getDate() + 6);
     rangeIsTo = (d1.getMonth() + 1) + "-" + d1.getDate() + "-" + d1.getFullYear() ;

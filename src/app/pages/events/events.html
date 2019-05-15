@@ -57,11 +57,11 @@
 
   <ion-list #eventsList *ngFor="let item of displayedEventsD"  [hidden]="shownEvents === 0">
 
-    <ion-item-divider *ngIf="item.event.length > 0" (click)="toggleGroup(item.weeks)">
+    <ion-item-divider *ngIf="item.event.length > 0" (click)="utilsServices.toggleGroup(item.weeks, shownGroup)">
         <ion-label style="width: 100%;" text-center> [{{getRangeWeek(item.weeks,year).from | date: 'dd/MM'}} &mdash; {{getRangeWeek(item.weeks,year).to | date: 'dd/MM'}}] ({{item.event.length}}) </ion-label>
     </ion-item-divider>
 
-    <ion-item-sliding #slidingItem *ngFor="let event of item.event" [hidden]="!isGroupShown(item.weeks) || event.hidden">
+    <ion-item-sliding #slidingItem *ngFor="let event of item.event" [hidden]="!utilsServices.isGroupShown(item.weeks, shownGroup) || event.hidden">
 
 
         <ion-item button (click)="goToEventDetail(event)" >

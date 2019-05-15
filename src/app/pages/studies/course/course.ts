@@ -256,18 +256,4 @@ export class CoursePage {
         cssClass: "modal-fullscreen" 
       }).then(modal => modal.present());
    }
-
-     /*Open or close the schedule*/
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
-
-  /*The selectionned schedule is displayed?*/
-  isGroupShown(group) {
-      return this.shownGroup === group;
-  }
 }

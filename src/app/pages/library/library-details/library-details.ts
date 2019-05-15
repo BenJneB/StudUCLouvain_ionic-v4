@@ -1,3 +1,4 @@
+import { UtilsService } from './../../../services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -52,7 +53,8 @@ export class LibraryDetailsPage {
     private route: ActivatedRoute,
     private router: Router,
     public libService: LibrariesService,
-    public connService: ConnectivityService
+    public connService: ConnectivityService,
+    private utilsServices: UtilsService
     ) {
       this.route.queryParams.subscribe(params => {
         if (this.router.getCurrentNavigation().extras.state) {
@@ -74,20 +76,6 @@ export class LibraryDetailsPage {
           }
         }
       });
-  }
-
-  /*Open or close the schedule*/
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
-
-  /*The selectionned schedule is displayed?*/
-  isGroupShown(group) {
-      return this.shownGroup === group;
   }
 
   /*Open the page of the library for more details*/

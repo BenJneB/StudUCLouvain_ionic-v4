@@ -47,22 +47,22 @@
   <!----------------INFORMATIONS ---------------------->
   <ng-container *ngIf="segment==='info'">
 
-    <ion-item-divider  (click)="toggleGroup('prob_app')">
+    <ion-item-divider  (click)="utilsServices.toggleGroup('prob_app', shownGroup)">
       {{'HELP.PROB' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('prob_app')">
+    <ion-item [hidden]="!utilsServices.isGroupShown('prob_app', shownGroup)">
       <div item-content>
         <p [innerHTML]="'HELP.TEXTP1' | translate"></p>
         <p><a href="mailto:studuclouvain@uclouvain.be">studuclouvain@uclouvain.be</a> </p>
       </div>
     </ion-item>
 
-    <ion-item-divider  (click)="toggleGroup('service_desk')">
+    <ion-item-divider  (click)="utilsServices.toggleGroup('service_desk', shownGroup)">
       {{'HELP.DESK' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('service_desk')">
+    <ion-item [hidden]="!utilsServices.isGroupShown('service_desk', shownGroup)">
       <div item-content>
         <p [innerHTML]="'HELP.TEXT1' | translate"></p>
         <p> {{'HELP.TEXT2' | translate}}</p>
@@ -71,11 +71,11 @@
       </div>
     </ion-item>
 
-    <ion-item-divider  (click)="toggleGroup('smartcard')">
+    <ion-item-divider  (click)="utilsServices.toggleGroup('smartcard', shownGroup)">
       {{'HELP.CARD' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('smartcard')">
+    <ion-item [hidden]="!utilsServices.isGroupShown('smartcard', shownGroup)">
       <div item-content>
         <p>{{'HELP.TEXT5' | translate}}</p>
         <p [innerHTML]="'HELP.TEXT6' | translate"></p>
@@ -89,11 +89,11 @@
       </div>
     </ion-item>
 
-    <ion-item-divider  (click)="toggleGroup('wifi')">
+    <ion-item-divider  (click)="utilsServices.toggleGroup('wifi', shownGroup)">
       {{'HELP.WIFI' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('wifi')">
+    <ion-item [hidden]="!utilsServices.isGroupShown('wifi', shownGroup)">
       <div item-content>
         <p>{{'HELP.TEXT11' | translate}}</p>
         <h4 style="text-align: justify;">{{'HELP.TEXT12' | translate}}</h4>
@@ -123,11 +123,11 @@
       </div>
     </ion-item>
 
-    <ion-item-divider  (click)="toggleGroup('rep')" no-lines>
+    <ion-item-divider  (click)="utilsServices.toggleGroup('rep', shownGroup)" no-lines>
       {{'HELP.REPERTOIRE' | translate}}
     </ion-item-divider>
 
-      <ion-card [hidden]="!isGroupShown('rep')">
+      <ion-card [hidden]="!utilsServices.isGroupShown('rep', shownGroup)">
         <ion-card-content>
           <ion-list no-lines class="ilist">
             <ion-item no-lines [(ngModel)]="lastname" ngDefaultControl>
@@ -200,11 +200,11 @@
     </ion-row>
   </ion-card>
 
-  <ion-item-divider  (click)="toggleGroup('socfi')">
+  <ion-item-divider  (click)="utilsServices.toggleGroup('socfi', shownGroup)">
     <strong>{{'HELP.SOCFI' | translate}}</strong>
   </ion-item-divider>
 
-  <ion-item [hidden]="!isGroupShown('socfi')" text-wrap>
+  <ion-item [hidden]="!utilsServices.isGroupShown('socfi', shownGroup)" text-wrap>
     <ion-label>
     <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide/aidesociale.html')">
       <ion-icon slot="start" name='share-alt'></ion-icon>
@@ -229,11 +229,11 @@
     </ion-label>
   </ion-item>
 
-  <ion-item-divider  (click)="toggleGroup('sante')">
+  <ion-item-divider  (click)="utilsServices.toggleGroup('sante', shownGroup)">
     <strong>{{'HELP.SANTE' | translate}}</strong>
   </ion-item-divider>
 
-  <ion-item [hidden]="!isGroupShown('sante')" text-wrap>
+  <ion-item [hidden]="!utilsServices.isGroupShown('sante', shownGroup)" text-wrap>
     <ion-label>
     <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide/aide-sante.html')">
       <ion-icon slot="start" name='share-alt'></ion-icon>
@@ -257,11 +257,11 @@
     </ion-label>
   </ion-item>
 
-  <ion-item-divider  (click)="toggleGroup('psyped')">
+  <ion-item-divider  (click)="utilsServices.toggleGroup('psyped', shownGroup)">
     <strong>{{'HELP.PSYPED' | translate}}</strong>
   </ion-item-divider>
 
-  <ion-item [hidden]="!isGroupShown('psyped')" text-wrap>
+  <ion-item [hidden]="!utilsServices.isGroupShown('psyped', shownGroup)" text-wrap>
     <ion-label>
     <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide/planning.html')">
       <ion-icon slot="start" name='share-alt'></ion-icon>

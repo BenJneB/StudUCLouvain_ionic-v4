@@ -103,19 +103,6 @@ export class SupportPage {
     this.utilsServices.goToDetail(emp, 'employee');
   }
 
-  /*Show or close the informations for the section selectionned*/
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
-
-  isGroupShown(group) {
-      return this.shownGroup === group;
-  }
-
   /*Open url for some details on site of the UCL about support, etc for more informations*/
   public openURL(url: string) {
     this.iab.create(url, '_system','location=yes');
