@@ -199,7 +199,7 @@ export class CoursePage {
     let array = this.getSlots(segment);
     for(let i=0; i< array.length; i++) {
        let slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
-      options.inputs.push({ name : 'options', value: array[i].name , label: array[i].name + ' ' + array[i].start.getHours()+ ':' +array[i].start.getUTCMinutes() , type: 'radio', checked: slotChosen });
+      options.inputs.push({ name : 'options', value: array[i].name, label: array[i].name + ' ' + array[i].start.getHours()+ ':' +array[i].start.getUTCMinutes(), type: 'radio', checked: slotChosen });
     }
     if (options.inputs.length > 1) {
       options.inputs.push({name:'options', value:'no', label : 'Toutes', type : 'radio', checked: aucun});
