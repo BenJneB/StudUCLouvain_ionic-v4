@@ -84,33 +84,19 @@ export class EventsService {
     let item: string;
     switch(category.toLowerCase()) {
       case 'sensibilisation':
-      {
-        item = 'assets/icon/events-icon/sensibilisation.png';
-      }
+      { item = 'assets/icon/events-icon/sensibilisation.png'; }
       case 'animation':
-      {
-        item = 'assets/icon/events-icon/animation.png';
-      }
+      { item = 'assets/icon/events-icon/animation.png'; }
       case 'culturel et artistique':
-      {
-        item = 'assets/icon/events-icon/cultural.png';
-      }
+      { item = 'assets/icon/events-icon/cultural.png'; }
       case 'guindaille':
-      {
-        item = 'assets/icon/events-icon/party.png';
-      }
+      { item = 'assets/icon/events-icon/party.png'; }
       case 'sportif':
-      {
-        item = 'assets/icon/events-icon/sports.png';
-      }
+      { item = 'assets/icon/events-icon/sports.png'; }
       case 'services et aides':
-      {
-        item = 'assets/icon/events-icon/services.png';
-      }
+      { item = 'assets/icon/events-icon/services.png'; }
       default:
-      {
-        item = 'assets/icon/events-icon/other.png';
-      }
+      { item = 'assets/icon/events-icon/other.png'; }
     }
     return item;
   }
