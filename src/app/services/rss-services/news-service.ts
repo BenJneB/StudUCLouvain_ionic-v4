@@ -87,11 +87,11 @@ export class NewsService {
 
   private fillNews(data: any, i: number, maxDescLength: number) {
     let item = data[i];
-    let trimmedDescription = this.getTrimmedDescription(item, maxDescLength);
+    const trimmedDescription = this.getTrimmedDescription(item, maxDescLength);
     let hidden = false;
     this.shownNews++;
     let pubDate = this.createDateForNews(item.pubDate);
-    let img = this.getImg(item);
+    const img = this.getImg(item);
     let newNewsItem = new NewsItem(
       item.description || 'No description...', 
       item.link || 'No link', 
