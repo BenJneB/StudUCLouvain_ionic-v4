@@ -32,7 +32,6 @@ import { EventsService } from '../../services/rss-services/events-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { EventsFilterPage } from '../../pages/events/events-filter/events-filter';
 import { EventItem } from '../../entity/eventItem';
-import { debounceTime } from 'rxjs/operators';
 import { OverlayEventDetail } from '@ionic/core';
 
 @Component({
@@ -94,8 +93,6 @@ export class EventsPage {
       this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
   }
 
-
-
   public goToEventDetail(event: EventItem) {
     this.utilsServices.goToDetail(event, 'events/details');
   }
@@ -117,18 +114,10 @@ export class EventsPage {
   }
 
   /*To display or close a group of events (1 group = events for one week)*/
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
+
 
   /*Check if the display group is the group in arg*/
-  isGroupShown(group) {
-      return this.shownGroup === group;
-  }
+
 
     /*Check if data are cached or not */
     async cachedOrNot(){

@@ -36,7 +36,6 @@ import { SportsService } from '../../services/rss-services/sports-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
 import { SportItem } from '../../entity/sportItem';
-import { debounceTime } from 'rxjs/operators';
 import { SportsFilterPage } from './sports-filter/sports-filter';
 
 @Component({
@@ -154,20 +153,6 @@ export class SportsPage {
     return {jour: key, name: groups[key]};
     });
     return sportsD;
-  }
-
-  /*Display or close the group of sports for one day*/
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
-
-  /*Check if the list is shown or not*/
-  isGroupShown(group) {
-      return this.shownGroup === group;
   }
 
   /*Display the good list of sports according to the tab*/

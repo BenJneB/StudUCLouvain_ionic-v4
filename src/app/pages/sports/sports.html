@@ -58,11 +58,11 @@
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" ></ion-searchbar>
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD"  [hidden]="shownSports === 0" >
-        <ion-item-divider *ngIf="item.name.length > 0" (click)="toggleGroup(item.jour)" text-center class="all" [ngClass]="{'team' : segment == 'team'}">
+        <ion-item-divider *ngIf="item.name.length > 0" (click)="utilsServices.toggleGroup(item.jour, shownGroup)" text-center class="all" [ngClass]="{'team' : segment == 'team'}">
             <ion-label style="width: 100%;" text-center> {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}}) </ion-label>
         </ion-item-divider>
 
-        <ion-item-sliding #slidingItem *ngFor="let sport of item.name" [hidden]="!isGroupShown(item.jour) || sport.hidden">
+        <ion-item-sliding #slidingItem *ngFor="let sport of item.name" [hidden]="!utilsServices.isGroupShown(item.jour, shownGroup) || sport.hidden">
             <ion-item text-center class="all" [ngClass]="{'team' : segment == 'team'}">
               <ion-label>
               <h3>{{sport.sport}} {{sport.sexe}}  {{sport.type}}</h3>

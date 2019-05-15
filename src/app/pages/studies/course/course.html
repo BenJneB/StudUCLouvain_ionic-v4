@@ -57,8 +57,8 @@
           &mdash; {{activity.end | date: 'H:mm' }} </p>
         <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
         <p>{{'COURSE.STUDENT' | translate}} : 
-        <ion-button (click)="toggleGroup(activity.start)"> {{'COURSE.SHOW' | translate }} </ion-button> </p>
-        <p [hidden]="!isGroupShown(activity.start)" style="display:inline" [innerHTML]="activity.students"></p>
+        <ion-button (click)="utilsServices.toggleGroup(activity.start, shownGroup)"> {{'COURSE.SHOW' | translate }} </ion-button> </p>
+        <p [hidden]="!utilsServices.isGroupShown(activity.start, shownGroup)" style="display:inline" [innerHTML]="activity.students"></p>
         <p *ngIf="activity.teachers.length>0"> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
         <p> {{activity.name}} </p>
       </ion-item>

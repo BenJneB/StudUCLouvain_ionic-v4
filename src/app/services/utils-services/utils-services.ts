@@ -219,11 +219,22 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
       this.alertService.presentToast(message, slidingItem);
     });
   }
-  
+
   updateSearchControl(searchControl: FormControl, searching: boolean, update: () => void) {
     searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
       searching = false;
       update();
     });
   }
+
+  isGroupShown(group: string, shownGroup: string) {
+    return shownGroup === group;
+  }
+  toggleGroup(group: string, shownGroup: string) {
+    if (this.isGroupShown(group, shownGroup)) {
+        return null;
+    } else {
+        return group;
+    }
+}
 }
