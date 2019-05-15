@@ -54,7 +54,7 @@ export class GuindaillePage {
   {
     this.numbersSlides.map((numSlide) => {
       const title = 'GUINDAILLE.TITLEF' + (numSlide + 1);
-      const subTitle = 'GUINDAILLE.EFFECT' + (numSlide + 1); 
+      const subTitle = 'GUINDAILLE.EFFECT' + (numSlide + 1);
       this.translateService.get([title, subTitle]).subscribe((res:string) => {
         this.slides[numSlide] = {
           header: res[title],
@@ -64,12 +64,12 @@ export class GuindaillePage {
         };
       });
     });
-    let pictoListImg = [
-      'alterner', 'Bruit-exterieur', 'eau-gratuite', 
-      'jen-suis-ou', 'no-cans-no-glass', 'preservatif-jy-pense', 
+    const pictoListImg = [
+      'alterner', 'Bruit-exterieur', 'eau-gratuite',
+      'jen-suis-ou', 'no-cans-no-glass', 'preservatif-jy-pense',
       'racompagner', 'uriner-dans-le-pot', 'uriner-dehors',
       'Violence-arrete-toi-avant'
-    ]
+    ];
     this.numberPictos.map((numPicto) => {
       const title = 'GUINDAILLE.TITLE' + (numPicto + 1);
       const subTitle = 'GUINDAILLE.PIC' + (numPicto + 1);
