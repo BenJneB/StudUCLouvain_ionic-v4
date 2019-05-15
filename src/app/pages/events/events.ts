@@ -177,7 +177,7 @@ export class EventsPage {
       var date = new Date(item.startDate.getTime());
       date.setHours(0,0,0,0);
       date.setDate(date.getDate() + 3 - (date.getDay() +6) %7);
-      var week = this.getWeek(date);// - weekUCL;
+      var week = this.getWeek(date); // - weekUCL;
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
@@ -193,7 +193,7 @@ export class EventsPage {
 
   private getWeek(date: Date) {
     let temp = new Date(date.getFullYear(), 0, 4);
-    return 1 + Math.round(((date.getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7);//  - weekUCL;
+    return 1 + Math.round(((date.getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7); //  - weekUCL;
   }
 
   /*Returns the ISO week of the date*/
@@ -280,7 +280,7 @@ export class EventsPage {
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: IonItemSliding, itemData: any):void{
     let message: string;
-    this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => {message=res;});
+    this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => {message =res;});
     const datas = {
       title: itemData.title,
       location: itemData.location,

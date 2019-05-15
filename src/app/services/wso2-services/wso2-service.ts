@@ -61,7 +61,7 @@ export class Wso2Service {
     let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-   // let body = 'grant_type=client_credentials';
+   // let body = 'grant_type =client_credentials';
     let body = new HttpParams().set('grant_type', 'client_credentials');
 
    // this.optionsToken = new RequestOptions({headers: headers});
@@ -88,7 +88,7 @@ export class Wso2Service {
     let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
-   // let body = `grant_type=password&username=${user}&password=${pass}`;
+   // let body = `grant_type =password&username =${user}&password=${pass}`;
     let body = new HttpParams().set('grant_type', 'password').set('username',user).set('password',pass);
    // this.optionsStudent = new RequestOptions({headers: headers});
 

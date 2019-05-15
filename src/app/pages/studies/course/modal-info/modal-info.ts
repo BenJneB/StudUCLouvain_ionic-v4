@@ -45,7 +45,7 @@ export class ModalInfoPage {
     this.getInfo().then(data => {
       console.log(data);
       this.information=data;
-      this.langue=data.langue;
+      this.langue =data.langue;
     });
   }
 
@@ -78,7 +78,7 @@ export class ModalInfoPage {
             if(res.cahierChargesExiste) {
               cahier = res.cahierChargesMap.entry[1].value;
             }
-            response= {
+            response = {
               cahierCharges: cahier, 
               offre: offres,
               campus:campus,

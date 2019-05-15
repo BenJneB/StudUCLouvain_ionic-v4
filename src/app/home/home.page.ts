@@ -147,7 +147,7 @@ export class HomePage {
   /*action when click on the floating urgency button, display the text to help the user in an alert*/
   emergency() {
     let close : string;
-    this.translateService.get('HOME.CLOSE').subscribe((res: string) => {close=res;});
+    this.translateService.get('HOME.CLOSE').subscribe((res: string) => {close =res;});
     let urg: string;
     this.translateService.get('HOME.URG').subscribe((res: string) => {urg=res;});
     let msg1,msg2,msg3,msg4,msg5,msg6,msg7,msg8,msg9 : string;

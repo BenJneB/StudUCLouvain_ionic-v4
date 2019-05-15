@@ -105,7 +105,7 @@ export class StudiesPage {
           nameEN = names[0].value;
           exist=true;
         }
-        response= {'exist':exist, 'nameFR':nameFR, 'nameEN':nameEN};
+        response = {'exist':exist, 'nameFR':nameFR, 'nameEN':nameEN};
         resolve(response);
       })
       })    
@@ -224,11 +224,11 @@ export class StudiesPage {
     let sigle: string;
     let cancel: string;
     let save: string;
-    this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => {addcourse=res;});
-    this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => {message=res;});
-    this.translateService.get('STUDY.SIGLE').subscribe((res: string) => {sigle=res;});
+    this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => {addcourse =res;});
+    this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => {message =res;});
+    this.translateService.get('STUDY.SIGLE').subscribe((res: string) => {sigle =res;});
     this.translateService.get('STUDY.CANCEL').subscribe((res: string) => {cancel=res;});
-    this.translateService.get('STUDY.SAVE').subscribe((res: string) => {save=res;});
+    this.translateService.get('STUDY.SAVE').subscribe((res: string) => {save =res;});
     let prompt = this.alertCtrl.create({
       header: addcourse,
       message: message,

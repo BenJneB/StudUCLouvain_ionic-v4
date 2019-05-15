@@ -36,8 +36,8 @@ export class SportsService {
   shownSports = 0;
   shownTeams = 0;
 
-  url = '';// students
-  urlT = '';// equipe universitaire
+  url = ''; // students
+  urlT = ''; // equipe universitaire
 
   constructor(public user:UserService, public rssService : RssService) {
 

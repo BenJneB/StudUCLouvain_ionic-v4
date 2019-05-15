@@ -45,9 +45,9 @@ export class RssService {
           if (result === null) {
             if(this.nbCalls >= this.callLimit) {
               this.nbCalls = 0;
-              reject(2);// 2 = data.query.results === null  & callLimit reached, no neitemsws to display
+              reject(2); // 2 = data.query.results === null  & callLimit reached, no neitemsws to display
             }
-            reject(1);// 1 = data.query.results === null, retry rssService
+            reject(1); // 1 = data.query.results === null, retry rssService
           } else {
             this.nbCalls = 0;
             resolve(result['item']);

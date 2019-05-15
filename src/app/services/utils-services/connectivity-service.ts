@@ -55,9 +55,9 @@ export class ConnectivityService {
     let title: string;
     let message: string;
     let close: string;
-    this.translateService.get('NET.TITLE').subscribe((res: string) => {title=res;});
-    this.translateService.get('NET.CONNECT').subscribe((res: string) => {message=res;});
-    this.translateService.get('NET.CLOSE').subscribe((res: string) => {close=res;});
+    this.translateService.get('NET.TITLE').subscribe((res: string) => {title =res;});
+    this.translateService.get('NET.CONNECT').subscribe((res: string) => {message =res;});
+    this.translateService.get('NET.CLOSE').subscribe((res: string) => {close =res;});
     let alert = this.alertCtrl.create({
       header: title,
       subHeader: message,

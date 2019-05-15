@@ -175,7 +175,7 @@ export class NewsPage {
       this.fac=this.userS.fac;
       if(this.facsegment === 'news' && this.userS.hasFac()) {
         let links = this.findSite();
-        this.site= links.site;
+        this.site = links.site;
         this.rss = links.rss;
 
         this.loadNews();
