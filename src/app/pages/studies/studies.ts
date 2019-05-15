@@ -113,7 +113,7 @@ export class StudiesPage {
 
   toastBadCourse() {
     let msg;
-    this.translateService.get('STUDY.BADCOURSE').subscribe((res: string) => {msg = res;});
+    this.translateService.get('STUDY.BADCOURSE').subscribe((res: string) => {msg = res; });
     let toast = this.toastCtrl.create({
       message: msg,
       duration: 2000,
@@ -224,11 +224,11 @@ export class StudiesPage {
     let sigle: string;
     let cancel: string;
     let save: string;
-    this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => {addcourse = res;});
-    this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => {message = res;});
-    this.translateService.get('STUDY.SIGLE').subscribe((res: string) => {sigle = res;});
-    this.translateService.get('STUDY.CANCEL').subscribe((res: string) => {cancel = res;});
-    this.translateService.get('STUDY.SAVE').subscribe((res: string) => {save = res;});
+    this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => {addcourse = res; });
+    this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => {message = res; });
+    this.translateService.get('STUDY.SIGLE').subscribe((res: string) => {sigle = res; });
+    this.translateService.get('STUDY.CANCEL').subscribe((res: string) => {cancel = res; });
+    this.translateService.get('STUDY.SAVE').subscribe((res: string) => {save = res; });
     let prompt = this.alertCtrl.create({
       header: addcourse,
       message: message,
@@ -262,7 +262,7 @@ export class StudiesPage {
 
   async toastAlreadyCourse() {
     let msg;
-    this.translateService.get('STUDY.ALCOURSE').subscribe((res: string) => {msg = res;});
+    this.translateService.get('STUDY.ALCOURSE').subscribe((res: string) => {msg = res; });
     const toast = await this.toastCtrl.create({
       message: msg,
       duration: 2000,

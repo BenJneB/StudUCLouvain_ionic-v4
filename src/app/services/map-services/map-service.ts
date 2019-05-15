@@ -265,7 +265,7 @@ export class MapService {
                 zoom: 5
               }
               
-            this.map = GoogleMaps.create(this.mapElement,mapOptions);
+            this.map = GoogleMaps.create(this.mapElement, mapOptions);
             console.log('Map created');
             this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
               console.log('Map is ready!');
@@ -346,7 +346,7 @@ export class MapService {
     google.maps.event.addListener(marker, 'click', () => {
       infoWindow.open(this.map, marker);
     });
-    infoWindow.open(this.map,marker);
+    infoWindow.open(this.map, marker);
   }
 
   /*Add Marker in the map for the device*/
