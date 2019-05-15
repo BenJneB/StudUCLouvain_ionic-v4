@@ -76,7 +76,7 @@ export class CourseService {
          }
         for (let i =0; i< activitiesList.length ;i++) {
           let activityElem = activitiesList[i];
-          let newActivities: Activity[] = this.createNewActivities(activityElem);
+          const newActivities: Activity[] = this.createNewActivities(activityElem);
           activities = activities.concat(newActivities);
         }
       }
@@ -85,8 +85,8 @@ export class CourseService {
 
     /*For each activity collect the right variables to be able to display them*/
     createNewActivities(jsonActivity): Activity[] {
-      let activities: Activity[] = [];
-      let type: string = jsonActivity._type;
+      const activities: Activity[] = [];
+      const type: string = jsonActivity._type;
       let isExam = type.indexOf('Examen') !== -1;
       let events = jsonActivity.events.event;
       if (events !== undefined) {
@@ -122,12 +122,13 @@ export class CourseService {
     createDate(date: string, hour: string): Date{
       let splitDate = date.split('/')
       let splitHour = hour.split(':')
-      let newdate: Date = new Date(parseInt(splitDate[2]),
-                            parseInt(splitDate[1])-1,
-                            parseInt(splitDate[0]),
-                            parseInt(splitHour[0]),
-                            parseInt(splitHour[1])
-                            );
+      const newdate: Date = new Date(
+        parseInt(splitDate[2]),
+        parseInt(splitDate[1])-1,
+        parseInt(splitDate[0]),
+        parseInt(splitHour[0]),
+        parseInt(splitHour[1])
+      );
       return newdate;
     }
 

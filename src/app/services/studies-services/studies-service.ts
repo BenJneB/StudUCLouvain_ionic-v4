@@ -63,7 +63,7 @@ export class StudiesService {
 
   /*Extract the projects ADE*/
   extractAdeProjects(data): AdeProject[]{
-    let projects: AdeProject[] = [];
+    const projects: AdeProject[] = [];
     console.log(data.projects)
     console.log(data.projects.project.length)
     if (data.projects.project.length === undefined) {
