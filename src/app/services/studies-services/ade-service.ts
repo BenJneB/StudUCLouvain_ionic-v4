@@ -48,7 +48,7 @@ export class AdeService {
 
   /*Open a session*/
   httpOpenSession() {
-    const encodedURL: string = this.AdeserviceBaseUrl + this.AdeserviceConnection;
+    const encodedURL = this.AdeserviceBaseUrl + this.AdeserviceConnection;
     return this.getDataFromADE(encodedURL);
   }
 
@@ -64,25 +64,25 @@ export class AdeService {
   }
   /*Get the projects from ADE*/
   httpGetProjects(sessionId: string) {
-    const encodedURL: string = this.getBasicSessionUrl(sessionId) + this.AdeServiceGetProjects;
+    const encodedURL = this.getBasicSessionUrl(sessionId) + this.AdeServiceGetProjects;
     return this.getDataFromADE(encodedURL);
   }
 
   /*Set the project selected by the user*/
   httpSetProject(sessionId: string, projectId: string) {
-    const encodedURL: string = this.getBasicSessionUrl(sessionId) + '&function=setProject&projectId= ' + projectId;
+    const encodedURL = this.getBasicSessionUrl(sessionId) + '&function=setProject&projectId= ' + projectId;
     return this.getDataFromADE(encodedURL);
   }
 
   /*For a course selected and its acronym get the course id*/
   httpGetCourseId(sessionId: string, acronym: string) {
-    const encodedURL: string = this.getBasicSessionUrl(sessionId) + '&function=getResources&code= ' + acronym;
+    const encodedURL = this.getBasicSessionUrl(sessionId) + '&function=getResources&code= ' + acronym;
     return this.getDataFromADE(encodedURL);
   }
 
   /*For a course selected get the activities*/
   httpGetActivity(sessionId: string, courseId: string) {
-    const encodedURL: string = this.getBasicSessionUrl(sessionId) + '&function=getActivities&resources = ' + courseId + '&detail=17';
+    const encodedURL = this.getBasicSessionUrl(sessionId) + '&function=getActivities&resources = ' + courseId + '&detail=17';
     return this.getDataFromADE(encodedURL);
   }
 

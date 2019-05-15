@@ -19,8 +19,8 @@ export class Wso2Service {
 
   wso2ServiceBaseUrl = 'https://api.sgsi.ucl.ac.be:8243/';
 
-  private token: string = '';
-  private tokenStudent: string = '';
+  private token = '';
+  private tokenStudent = '';
   headers: HttpHeaders;
 
   constructor(public http: HttpClient) {

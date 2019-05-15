@@ -25,8 +25,8 @@ import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 import { EventItem } from '../../entity/eventItem';
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class EventsService {
   events: Array<EventItem> = [];

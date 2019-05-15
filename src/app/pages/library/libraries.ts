@@ -98,7 +98,7 @@ export class LibrariesPage {
       await this.cache.getItem(key)
         .then((data) => {
           this.libraries =data;
-          this.searching=false;
+          this.searching =false;
         })
         .catch(() => {
           console.log('Oh no! My data is expired or doesn\'t exist!');

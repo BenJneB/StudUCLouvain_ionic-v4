@@ -46,10 +46,10 @@ export class SupportPage {
   shownGroup = null;
   employees: EmployeeItem[];
   searching: boolean = false;
-  lastname: string = '';
-  firstname: string = '';
+  lastname = '';
+  firstname = '';
   loading;
-  segment: string = 'aide';
+  segment = 'aide';
   shownHelp = null;
 
   constructor(public navCtrl: NavController,
@@ -82,7 +82,7 @@ export class SupportPage {
   }
 
   /*Search employees with the name and lastname in option, return the result and dismiss the loading pop up*/
-  searchEmployees(options:Array<string>, values:Array<string>) {
+  searchEmployees(options: Array<string>, values: Array<string>) {
     if (this.connService.isOnline()) {
       this.repService.searchEmployees(options, values).then(
         res => {

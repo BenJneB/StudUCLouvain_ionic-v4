@@ -62,14 +62,14 @@ export class NewsPage {
   displayedNews: Array<NewsItem> = [];
   searching: any = false;
   searchControl: FormControl;
-  searchTerm: string = '';
-  title: string = 'Actualités' ;
+  searchTerm = '';
+  title = 'Actualités' ;
   nonews: any = false;
   loading;
-  fac: string = '';
+  fac = '';
   listFac: any = [];
-  site: string = '';
-  rss: string = '';
+  site = '';
+  rss = '';
  // url = 'assets/data/fac.json';
 
   constructor(
@@ -199,7 +199,7 @@ export class NewsPage {
         this.loader.present('Please wait...');
         this.news =data.items;
         this.shownNews = data.showItems;
-        this.searching=false;
+        this.searching =false;
         this.updateDisplayed();
       })
       .catch(() => {

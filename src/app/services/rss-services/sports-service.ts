@@ -53,7 +53,7 @@ export class SportsService {
     const { todayString, endString } = this.getSportsDates(dateToString);
 
    // which campus ?
-    const site: string = this.getSportCampus();
+    const site = this.getSportCampus();
 
    // final URL
     let restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;

@@ -39,7 +39,7 @@ export class EmployeeItem {
     departments: any,
     address?: any,
     businessContacts?: Array<any>,
-    contracts?:Array<any>,
+    contracts?: Array<any>,
     gender?: string,
     photo_url?: string
   ) {

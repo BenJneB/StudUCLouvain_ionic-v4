@@ -59,7 +59,7 @@ export class EventsDetailsPage {
   /*ADD EVENT TO FAVORITE*/
   public addFavorite(event: EventItem) {
     let message: string;
-    this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res: string) => {message =res;});
+    this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res: string) => {message = res;});
 
     if (!this.user.hasFavorite(event.guid)) {
       this.user.addFavorite(event.guid);

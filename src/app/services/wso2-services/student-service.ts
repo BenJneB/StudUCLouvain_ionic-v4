@@ -136,7 +136,7 @@ export class StudentService {
   }
 
   getDay(i:number): string {
-    let day: string = '';
+    let day = '';
     if (i===0) day = 'Lundi';
     if (i===1) day = 'Mardi';
     if (i===2) day = 'Mercredi';

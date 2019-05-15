@@ -26,7 +26,7 @@ export class AdeProject {
   name: string;
 
   constructor(id: string, name: string) {
-    this.id=id;
+    this.id = id;
     this.name = name;
   }
 }

@@ -44,7 +44,7 @@ export class MobilityPage {
   {
     this.title = 'Mobilité';
     let titlecar: string;
-    this.translateService.get('MOBI.COVOIT').subscribe((res: string) => {titlecar=res;});
+    this.translateService.get('MOBI.COVOIT').subscribe((res: string) => {titlecar= res;});
 
    // Information to launch external app
     this.carpoolingPage = { title: titlecar, component: 'CarpoolingPage',
