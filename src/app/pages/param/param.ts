@@ -24,7 +24,7 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 import { trigger, state, style, animate, transition } from '@angular/animations';
 import { Component } from '@angular/core';
-import { NavController, ModalController, AlertController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../../services/utils-services/user-service';
@@ -50,8 +50,7 @@ export class ParamPage {
   constructor(
     public navCtrl: NavController,
     public modalCtrl: ModalController,
-    public userS:UserService,
-    private alertCtrl: AlertController,
+    public userS: UserService,
     private translateService: TranslateService,
     private alertService: AlertService,
     private transService: TransService
@@ -62,64 +61,22 @@ export class ParamPage {
 
   /*Create and display an alert for the choice of campus and save the choice of the user in the public variable*/
   async campus_choice() {
-    let check = this.userS.campus;
+    const check = this.userS.campus;
     const setting = this.transService.getTranslation('HOME.SETTING1');
     const message = this.transService.getTranslation('HOME.MESSAGE');
     const save = this.transService.getTranslation('HOME.SAVE');
-    let settingsAlert = await this.alertCtrl.create({
-      header: setting,
-      message: message,
-      inputs: [
-        {
-          type:'radio',
-          label:'Louvain-la-Neuve',
-          value:'LLN',
-          checked:(check === 'LLN')
-        },
-        {
-          type:'radio',
-          label:'Woluwé',
-          value:'Woluwe',
-          checked:(check === 'Woluwe')
-        },
-        {
-          type:'radio',
-          label:'Mons',
-          value:'Mons',
-          checked:(check === 'Mons')
-        },
-        {
-          type:'radio',
-          label:'Tournai',
-          value:'Tournai',
-          disabled:true,
-        },
-        {
-          type:'radio',
-          label:'St-Gilles',
-          value:'StG',
-          disabled:true
-        }],
-      buttons: [
-      {
-        text: save,
-        handler: data => {
-          this.userS.addCampus(data);
-        }
-      }]
-    });
-    await settingsAlert.present();
+    await this.alertService.campusChoiceAlert(setting, message, check, save);
   }
 
   /*Create and display an alert for the choice of language and save the choice of the user in the public variable*/
   async language_choice() {
-    let check2 = this.translateService.currentLang;
+    const check2 = this.translateService.currentLang;
     const setting = this.transService.getTranslation('HOME.SETTING2');
     const message = this.transService.getTranslation('HOME.MESSAGE2');
     const save = this.transService.getTranslation('HOME.SAVE');
     const fr = this.transService.getTranslation('HOME.FR');
     const en = this.transService.getTranslation('HOME.EN');
-    let languageAlert = await this.alertService.languageAlert(setting, message, fr, check2, en, save);
+    const languageAlert = await this.alertService.languageAlert(setting, message, fr, check2, en, save);
     await languageAlert.present();
   }
 

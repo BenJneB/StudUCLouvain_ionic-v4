@@ -78,4 +78,52 @@ import { TranslateService } from '@ngx-translate/core';
           await slidingItem.close();
         }
     }
+
+    async campusChoiceAlert(setting: string, message: string, check: string, save: string) {
+      const settingsAlert = await this.alertCtrl.create({
+        header: setting,
+        message: message,
+        inputs: [
+          {
+            type: 'radio',
+            label: 'Louvain-la-Neuve',
+            value: 'LLN',
+            checked: (check === 'LLN')
+          },
+          {
+            type: 'radio',
+            label: 'Woluwé',
+            value: 'Woluwe',
+            checked: (check === 'Woluwe')
+          },
+          {
+            type: 'radio',
+            label: 'Mons',
+            value: 'Mons',
+            checked: (check === 'Mons')
+          },
+          {
+            type: 'radio',
+            label: 'Tournai',
+            value: 'Tournai',
+            disabled: true,
+          },
+          {
+            type: 'radio',
+            label: 'St-Gilles',
+            value: 'StG',
+            disabled: true
+          }
+        ],
+        buttons: [
+          {
+            text: save,
+            handler: data => {
+              this.user.addCampus(data);
+            }
+          }
+        ]
+      });
+      await settingsAlert.present();
+    }
   }
