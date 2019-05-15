@@ -85,21 +85,11 @@ import { AlertInput } from '@ionic/core';
         header: setting,
         message: message,
         inputs: [
-          this.getRadioCampus(check, 'Louvain-la-Neuve', 'LLN'),
-          this.getRadioCampus(check, 'Woluwé', 'Woluwe'),
-          this.getRadioCampus(check, 'Mons', 'Mons'),
-          {
-            type: 'radio',
-            label: 'Tournai',
-            value: 'Tournai',
-            disabled: true,
-          },
-          {
-            type: 'radio',
-            label: 'St-Gilles',
-            value: 'StG',
-            disabled: true
-          }
+          this.getRadioCampus('Louvain-la-Neuve', 'LLN', check=check),
+          this.getRadioCampus('Woluwé', 'Woluwe', check=check),
+          this.getRadioCampus('Mons', 'Mons', check=check),
+          this.getRadioCampus('Tournai', 'Tournai'),
+          this.getRadioCampus('St-Gilles', 'StG'),
         ],
         buttons: [
           {
@@ -113,12 +103,13 @@ import { AlertInput } from '@ionic/core';
       await settingsAlert.present();
     }
 
-  private getRadioCampus(check: string, label: string, value: string): AlertInput {
+  private getRadioCampus(label: string, value: string, check?: string): AlertInput {
     return {
       type: 'radio',
       label: label,
       value: value,
-      checked: (check === value)
+      checked: (check === value),
+      disabled: check === undefined ? true : false
     };
   }
-  }
+}
