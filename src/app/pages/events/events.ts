@@ -91,12 +91,10 @@ export class EventsPage {
   ngOnInit() {
     this.updateDateLimit();
       this.cachedOrNot();
-      this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
-        this.searching = false;
-        this.updateDisplayed();
-      });
-
+      this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
   }
+
+
 
   public goToEventDetail(event: EventItem) {
     this.utilsServices.goToDetail(event, 'events/details');

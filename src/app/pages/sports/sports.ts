@@ -98,10 +98,7 @@ export class SportsPage {
     if(this.connService.isOnline()) {
       this.loadSports(this.segment);
       this.loadSports('team');
-      this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
-        this.searching = false;
-        this.updateDisplayedSports();
-      });
+      this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
       this.loader.present("Please wait..");
     } else{
       this.navCtrl.pop();
@@ -143,7 +140,7 @@ export class SportsPage {
       isTeam ? this.filtersT = result.categories : this.filters = result.categories;
       isTeam ? this.noteams = result.sports.length == 0 : this.nosport = result.sports.length == 0;
     this.searching = false;
-    this.updateDisplayedSports();
+    this.updateDisplayed();
   }
 
   /*Sort sports BY DAY*/
@@ -174,7 +171,7 @@ export class SportsPage {
   }
 
   /*Display the good list of sports according to the tab*/
-  public updateDisplayedSports() {
+  public updateDisplayed() {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     const callFilter = this.segment === 'all' || this.segment === 'team';
@@ -236,7 +233,7 @@ export class SportsPage {
         let newExclude = data[0];
         if(this.segment === 'all') this.excludedFilters = newExclude;
         if(this.segment === 'team') this.excludedFiltersT = newExclude;
-        this.updateDisplayedSports();
+        this.updateDisplayed();
       }
     });
   }
@@ -264,11 +261,11 @@ export class SportsPage {
 
   /*Add a sport to favorite, each slot for the day selected*/
   addFavorite(slidingItem: IonItemSliding, itemData: SportItem) {
-    this.utilsServices.addFavorite(itemData, this.texts, slidingItem, this.updateDisplayedSports.bind(this));
+    this.utilsServices.addFavorite(itemData, this.texts, slidingItem, this.updateDisplayed.bind(this));
   }
 
   /*Remove a sport of the favorites*/
   removeFavorite(slidingItem: IonItemSliding, itemData: SportItem, title: string) {
-    this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts, this.updateDisplayedSports.bind(this));
+    this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts, this.updateDisplayed.bind(this));
   }
 }
