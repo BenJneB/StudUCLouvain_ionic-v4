@@ -63,7 +63,7 @@ export class EventsService {
         if (this.allCategories.indexOf(item.category) < 0) {
           this.allCategories.push(item.category);
         }
-        iconCategory = this.getIconCategory(item.category);
+        iconCategory = 'assets/icon/events-icon/' + this.getIconCategory(item.category) + '.png';
       }
       this.shownEvents++;
       let startDate = this.createDateForEvent(item.date_begin);
@@ -81,24 +81,15 @@ export class EventsService {
 
   /*Get the good icon for a catagory*/
   public getIconCategory(category : string): string{
-    let item: string;
     switch(category.toLowerCase()) {
-      case 'sensibilisation':
-      { item = 'assets/icon/events-icon/sensibilisation.png'; }
-      case 'animation':
-      { item = 'assets/icon/events-icon/animation.png'; }
-      case 'culturel et artistique':
-      { item = 'assets/icon/events-icon/cultural.png'; }
-      case 'guindaille':
-      { item = 'assets/icon/events-icon/party.png'; }
-      case 'sportif':
-      { item = 'assets/icon/events-icon/sports.png'; }
-      case 'services et aides':
-      { item = 'assets/icon/events-icon/services.png'; }
-      default:
-      { item = 'assets/icon/events-icon/other.png'; }
+      case 'sensibilisation': return 'sensibilisation';
+      case 'animation': return 'animation';
+      case 'culturel et artistique': return 'cultural';
+      case 'guindaille': return 'party';
+      case 'sportif': return 'sports';
+      case 'services et aides': return 'services'
+      default: return 'other';
     }
-    return item;
   }
 
   /*Return a date in good form by splitting for the event*/
