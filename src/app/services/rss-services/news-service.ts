@@ -87,16 +87,11 @@ export class NewsService {
 
   private fillNews(data: any, i: number, maxDescLength: number) {
     let item = data[i];
-    let trimmedDescription = '...';
-    if (item.description !== undefined) {
-      trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
-    }
+    let trimmedDescription = this.getTrimmedDescription(item, maxDescLength);
     let hidden = false;
     this.shownNews++;
     let pubDate = this.createDateForNews(item.pubDate);
-    let img = '';
-    if (item.enclosure != null)
-      img = item.enclosure.$.url;
+    let img = this.getImg(item);
     let newNewsItem = new NewsItem(
       item.description || 'No description...', 
       item.link || 'No link', 
@@ -108,6 +103,21 @@ export class NewsService {
       pubDate
     );
     this.news.push(newNewsItem);
+  }
+
+  private getImg(item: any) {
+    let img = '';
+    if (item.enclosure != null)
+      img = item.enclosure.$.url;
+    return img;
+  }
+
+  private getTrimmedDescription(item: any, maxDescLength: number) {
+    let trimmedDescription = '...';
+    if (item.description !== undefined) {
+      trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
+    }
+    return trimmedDescription;
   }
 
   /*Return a date in good form by splitting for the new*/
