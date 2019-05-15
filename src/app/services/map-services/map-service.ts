@@ -63,8 +63,8 @@ export class MapService {
               public userS: UserService) {
                 console.log('test yolo');
                 console.log('yolo');
-    //Check the platform used
-    //this.onDevice = this.platform.is('cordova');
+   // Check the platform used
+   // this.onDevice = this.platform.is('cordova');
     console.log('yolo2');
 
     this.apiKey = jsApiKey;
@@ -216,19 +216,19 @@ export class MapService {
                                         String(position.latLng.lng),
                                         'MYPOS');
 
-            //let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
+           // let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
             let latLng = position.latLng;
             let mapOptions = {
               center: latLng,
               zoom: 15,
               mapTypeId: GoogleMapsMapTypeId.ROADMAP
             }
-            // create CameraPosition
+           //  create CameraPosition
             let camPos: CameraPosition<LatLng> = {
               target: latLng,
               zoom: 15
             };
-            //this.map = new GoogleMap(this.mapElement, mapOptions);
+           // this.map = new GoogleMap(this.mapElement, mapOptions);
             this.map = GoogleMaps.create(this.mapElement, mapOptions);
             this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
               console.log('Map is ready!');
@@ -280,7 +280,7 @@ export class MapService {
 
   /*Add marker in the map for a location selected*/
   addMarker(location: MapLocation) {
-    //console.log(this.markers);
+   // console.log(this.markers);
     let marker = this.getMarker(location.title);
     if(!marker) {
       let contentString = '<p>' + location.address + '</p>';
@@ -294,33 +294,33 @@ export class MapService {
         marker.showInfoWindow();
       }
     }
-    //console.log(this.markers);
+   // console.log(this.markers);
   }
 
   /*Remove a marker for a location unselected*/
   removeMarker(location: MapLocation) {
-      //console.log(location);
-      //console.log(this.markers);
+     // console.log(location);
+     // console.log(this.markers);
       let m;
       if(this.onDevice) m = this.markers;
       else m = this.markersB;
       for(var i=0;i<m.length; i++) {
          if(m[i].getTitle() === location.title) {
-          //console.log(this.markers[i]);
-          //let m: Marker = this.markers[i];
-         //m.remove();
+         // console.log(this.markers[i]);
+         // let m: Marker = this.markers[i];
+        // m.remove();
          if(this.onDevice) {
          this.markers[i].remove();
-          //this.markers[i].setMap(null);
-          //this.markers[i] = null;
+         // this.markers[i].setMap(null);
+         // this.markers[i] = null;
           
-          //console.log(this.markers);
+         // console.log(this.markers);
       	}
           if(!this.onDevice) {
-            //m.remove();
+           // m.remove();
             this.markersB[i].setMap(null);
-            //this.map.clear();
-            //this.addMarker(this.userLocation);
+           // this.map.clear();
+           // this.addMarker(this.userLocation);
           }
           this.markers.splice(i,1);
         }

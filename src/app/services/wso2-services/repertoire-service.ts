@@ -50,7 +50,7 @@ export class RepertoireService {
       }
     }
     newUrl += '&page=1&pageSize=10'
-    //newUrl += '&directory=E';
+   // newUrl += '&directory=E';
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         data => {
@@ -95,7 +95,7 @@ export class RepertoireService {
     emp.businessContacts = data.businessContacts;
     emp.gender = data.gender;
     emp.photo_url = data.photo_url;
-    //let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments, data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
+   // let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments, data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
     return emp;
   }
 }

@@ -55,7 +55,7 @@ export class EmployeeDetailsPage {
         this.empDetails = this.router.getCurrentNavigation().extras.state.items;
       }
       this.searching = true;
-    //Check if the connexion is Ok before search details pour an employee
+   // Check if the connexion is Ok before search details pour an employee
     if(this.connService.isOnline()) {
       this.repService.loadEmpDetails(this.empDetails).then(
         res => {
@@ -66,7 +66,7 @@ export class EmployeeDetailsPage {
         }
       );
     }
-    //if not return to previous page and pop up an alert
+   // if not return to previous page and pop up an alert
     else {
       this.searching = false;
       this.connService.presentConnectionAlert();
@@ -80,7 +80,7 @@ export class EmployeeDetailsPage {
 
   /*Open page with some aditionnal information*/
   openPage(url: string) {
-    //InAppBrowser.open(url, '_blank');
+   // InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');
   }
 }

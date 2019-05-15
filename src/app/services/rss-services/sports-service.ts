@@ -36,8 +36,8 @@ export class SportsService {
   shownSports = 0;
   shownTeams = 0;
 
-  url = ''; //students
-  urlT = ''; //equipe universitaire
+  url = '';// students
+  urlT = '';// equipe universitaire
 
   constructor(public user:UserService, public rssService : RssService) {
 
@@ -45,29 +45,29 @@ export class SportsService {
 
   /*Get the good URL in function of the user's campus*/
   update() {
-    //reset url
+   // reset url
     this.url = 'https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate= ';
     this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate= '
 
-    // first day of the week : today
+   //  first day of the week : today
     let today:Date = new Date();
 
-    //last day of the week : today +6
+   // last day of the week : today +6
     let end:Date = new Date();
     end.setDate(today.getDate() + 6 );
 
-    //invert date
+   // invert date
     let todayString = dateToString(today);
     let endString =  dateToString(end);
 
-    //which campus ?
+   // which campus ?
     let site: string;
     let campus = this.user.campus;
     if(campus === 'LLN') site = 'louv';
     if(campus === 'Woluwe') site = 'wol';
     if(campus === 'Mons') site = 'mons';
 
-    //final URL
+   // final URL
     let restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
     let urlTemp = this.url + restUrl + site;
     let urlTempT = this.urlT + restUrl + 'louv';

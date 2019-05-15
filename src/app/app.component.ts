@@ -148,7 +148,7 @@ export class AppComponent {
      this.getLanguage();
       this.cache.setDefaultTTL(60 * 60 * 2);
       this.cache.setOfflineInvalidate(false);
-     // this.user.storage.set('first',null);
+    //  this.user.storage.set('first',null);
      this.user.storage.get('first').then((data) => {
        if (data === null) {
          this.rootPage = 'TutoPage';
@@ -207,7 +207,7 @@ export class AppComponent {
       } else
       if (this.router.url === 'home') {
         if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
-          navigator['app'].exitApp(); // work in ionic 4
+          navigator['app'].exitApp();//  work in ionic 4
         } else {
           this.toast.show(`Press back again to exit App.`, '2000', 'center')
             .subscribe(toast => {
@@ -221,7 +221,7 @@ export class AppComponent {
   openRootPage(page) {
     const activeUrl = this.router.url;
 
-    // close the menu when clicking a link from the menu
+   //  close the menu when clicking a link from the menu
     this.menu.close();
     this.page = page;
 
@@ -247,11 +247,11 @@ export class AppComponent {
       browser.close();
     }
     this.appAvailability.check(check).then(
-      () => { // success callback
+      () => {//  success callback
         const browser = this.iab.create(appUrl, '_system');
         browser.close();
       },
-      () => { // error callback
+      () => {//  error callback
         this.market.open(app);
       });
   }

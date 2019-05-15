@@ -105,7 +105,7 @@ export class StudiesPage {
           nameEN = names[0].value;
           exist=true;
         }
-        response= {'exist':exist,'nameFR':nameFR, 'nameEN':nameEN};
+        response= {'exist':exist, 'nameFR':nameFR, 'nameEN':nameEN};
         resolve(response);
       })
       })    
@@ -372,6 +372,6 @@ export class StudiesPage {
 
   /*Launch moodle or ucl portal*/
   launch(url) {
-    this.iab.create(url,'_system');
+    this.iab.create(url, '_system');
   }
 }

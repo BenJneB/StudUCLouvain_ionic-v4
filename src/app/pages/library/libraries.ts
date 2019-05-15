@@ -54,7 +54,7 @@ export class LibrariesPage {
   }
 
   ngOnInit() {
-    //this.loadLibraries();
+   // this.loadLibraries();
   }
 
   /*Reload the libraries if we refresh the page*/
@@ -65,7 +65,7 @@ export class LibrariesPage {
   /*Load libraries*/
   loadLibraries(key?) {
     this.searching = true;
-    //Check the connexion, if it's ok => load the data else go back to the previous page and pop an alert
+   // Check the connexion, if it's ok => load the data else go back to the previous page and pop an alert
     if(this.connService.isOnline()) {
       this.libService.loadLibraries().then(
         res => {
@@ -93,7 +93,7 @@ export class LibrariesPage {
   }
 
   async cachedOrNot() {
-      // this.cache.removeItem('cache-event');
+     //  this.cache.removeItem('cache-event');
       let key = 'cache-libraries';
       await this.cache.getItem(key)
         .then((data) => {

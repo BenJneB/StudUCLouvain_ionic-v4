@@ -121,7 +121,7 @@ export class EventsPage {
 
     /*Check if data are cached or not */
     async cachedOrNot() {
-      //this.cache.removeItem('cache-event');
+     // this.cache.removeItem('cache-event');
         let key = 'cache-event';
         await this.cache.getItem(key)
         .then((data) => {
@@ -148,7 +148,7 @@ export class EventsPage {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
 
-    //Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
+   // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
 
     if(this.connService.isOnline()) {
 
@@ -193,18 +193,18 @@ export class EventsPage {
 
   private getWeek(date: Date) {
     let temp = new Date(date.getFullYear(), 0, 4);
-    return 1 + Math.round(((date.getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7); // - weekUCL;
+    return 1 + Math.round(((date.getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7);//  - weekUCL;
   }
 
   /*Returns the ISO week of the date*/
   getISOWeek(d:Date) {
     var date = new Date(d.getTime());
     date.setHours(0, 0, 0, 0);
-    // Thursday in current week decides the year.
+   //  Thursday in current week decides the year.
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-    // January 4 is always in week 1.
+   //  January 4 is always in week 1.
     var week1 = new Date(date.getFullYear(), 0, 4);
-    // Adjust to Thursday in week 1 and count number of weeks from date to week1.
+   //  Adjust to Thursday in week 1 and count number of weeks from date to week1.
     return this.getWeek(date);
   }
 

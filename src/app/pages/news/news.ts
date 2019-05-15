@@ -44,7 +44,7 @@ export class NewsPage {
   @ViewChild('newsList', { read: IonList }) newsList: IonList;
   @ViewChild('news') content: IonContent;
 
-/*   // USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
+/*  //  USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
   resize()
   {
     if(this.content)
@@ -70,7 +70,7 @@ export class NewsPage {
   listFac: any = [];
   site: string = '';
   rss: string = '';
-  //url = 'assets/data/fac.json';
+ // url = 'assets/data/fac.json';
 
   constructor(
     public platform : Platform,
@@ -93,16 +93,16 @@ export class NewsPage {
 
   /*load the view, Call function to load news, display them*/
   ngOnInit() {
-    //Check the connexion, if it's ok, load the news
-    //if(this.connService.isOnline()) {
+   // Check the connexion, if it's ok, load the news
+   // if(this.connService.isOnline()) {
       this.cachedOrNot();
       this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
         this.searching = false;
         this.updateDisplayed();
       });
-      //this.presentLoading();
-    //}
-    //If no connexion, go back to the previous page and pop an alert
+     // this.presentLoading();
+   // }
+   // If no connexion, go back to the previous page and pop an alert
     /*else{
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -111,14 +111,14 @@ export class NewsPage {
 
   /*Open a page with the details of a news*/
   public openURL(url: string) {
-    this.iab.create(url, '_system','location=yes');
+    this.iab.create(url, '_system', 'location=yes');
   }
 
   /*Select the good fac for the selection of the user and load the good news*/
   updateFac(fac: string) {
     this.fac = fac;
     this.userS.addFac(this.fac);
-    //this.resize();
+   // this.resize();
     let links = this.findSite();
     this.site = links.site;
     this.rss = links.rss;
@@ -139,7 +139,7 @@ export class NewsPage {
   /*Remove a fac for a user*/
   removeFac(fac: string) {
     this.userS.removeFac();
-        //this.resize();
+       // this.resize();
   }
 
   /*Reload news if pull bellow the view*/
@@ -169,7 +169,7 @@ export class NewsPage {
 
   /*Tab change*/
   tabChanged() {
-    //this.resize();
+   // this.resize();
     if(this.segment=== 'univ') this.cachedOrNot();
     if(this.segment=== 'fac') {
       this.fac=this.userS.fac;
@@ -186,7 +186,7 @@ export class NewsPage {
 
 /*Check if data are cached or not */
   async cachedOrNot() {
-    //this.cache.removeItem('cache-P1');
+   // this.cache.removeItem('cache-P1');
     let key;
     let part = this.subsegment;
     if(this.segment === 'univ') {
@@ -216,7 +216,7 @@ export class NewsPage {
   public loadNews(key?) {
     this.searching = true;
     this.news = [];
-    //Check connexion before load news
+   // Check connexion before load news
     if(this.connService.isOnline()) {
       this.loader.present('Please wait...');
       let actu = this.subsegment;
@@ -231,9 +231,9 @@ export class NewsPage {
           this.nonews = this.news.length === 0;
           this.updateDisplayed();
       })
-    //If no connexion pop an alert and go back to previous page
+   // If no connexion pop an alert and go back to previous page
     } else {
-      //return [];
+     // return [];
       this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();

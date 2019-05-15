@@ -38,8 +38,8 @@ export class UserService {
     public eventss: Events,
     public storage: Storage
   ) {
-    // USE THIS LINE TO CLEAR THE STORAGE
-    // storage.clear();
+   //  USE THIS LINE TO CLEAR THE STORAGE
+   //  storage.clear();
     this.getFavorites();
   }
 

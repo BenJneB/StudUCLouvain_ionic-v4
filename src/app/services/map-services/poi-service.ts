@@ -72,7 +72,7 @@ export class POIService {
           let servicesLength = tmpZones.services.length;
           let parkingsLength = tmpZones.parkings.length;
 
-          //Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
+         // Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
           function compare(a,b) {
             if (a.nom < b.nom)
               return -1;

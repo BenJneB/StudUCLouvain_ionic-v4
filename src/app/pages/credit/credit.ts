@@ -49,6 +49,6 @@ export class CreditPage {
   }
 
   public openURL(url: string) {
-    this.iab.create(url, '_system','location=yes');
+    this.iab.create(url, '_system', 'location=yes');
   }
 }

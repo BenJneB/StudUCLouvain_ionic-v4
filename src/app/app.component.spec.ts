@@ -42,7 +42,7 @@ import { UserService } from './services/utils-services/user-service';
 import { Wso2Service } from './services/wso2-services/wso2-service';
 
 /*export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http,'./assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }*/
 
 describe('MyApp Component', () => {

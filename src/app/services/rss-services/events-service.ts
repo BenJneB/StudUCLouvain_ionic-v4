@@ -94,7 +94,7 @@ export class EventsService {
 
   /*Return a date in good form by splitting for the event*/
   private createDateForEvent(str : string):Date{
-    //new Date(Year : number, (month-1): number, day : number)
+   // new Date(Year : number, (month-1): number, day : number)
     let dateTimeSplit = str.split(' ');
     let dateSplit = dateTimeSplit[0].split('/');
     let timeSplit = dateTimeSplit[1].split(':');

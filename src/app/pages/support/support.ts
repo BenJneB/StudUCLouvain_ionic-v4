@@ -105,6 +105,6 @@ export class SupportPage {
 
   /*Open url for some details on site of the UCL about support, etc for more informations*/
   public openURL(url: string) {
-    this.iab.create(url, '_system','location=yes');
+    this.iab.create(url, '_system', 'location=yes');
   }
 }

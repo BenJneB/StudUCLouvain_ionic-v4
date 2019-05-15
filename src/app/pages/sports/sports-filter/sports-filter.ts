@@ -35,7 +35,7 @@ export class SportsFilterPage {
     public navParams: NavParams,
     public viewCtrl: ModalController)
   {
-    // passed in array of categories names that should be excluded (unchecked)
+   //  passed in array of categories names that should be excluded (unchecked)
     let excludedFilters = this.navParams.get('excludedFilters');
     let filters = this.navParams.get('filters');
     this.dateRange = this.navParams.get('dateRange');

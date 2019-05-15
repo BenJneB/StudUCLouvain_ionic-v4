@@ -149,7 +149,7 @@ export class StudentService {
 
   getDate(i:number): string{
     var today = new Date();
-    //var today = new Date('10/16/2017');
+   // var today = new Date('10/16/2017');
     today.setDate(today.getDate() + i);
     var d = today.getDate();
     var dd = d.toString();

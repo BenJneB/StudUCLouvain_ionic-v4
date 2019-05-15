@@ -160,10 +160,10 @@ export class SportsPage {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
     const callFilter = this.segment === 'all' || this.segment === 'team';
-    if (callFilter === true) { //List of sports for all students
+    if (callFilter === true) {// List of sports for all students
       this.displayedSports = this.filterDisplayedSports(this.sports, this.excludedFilters);
     }
-    else if (this.segment === 'favorites') { //list of sports put in favorite
+    else if (this.segment === 'favorites') {// list of sports put in favorite
       let favSports = [];
       this.sports.filter((item) => {
         favSports = this.utilsServices.filterFavoriteItems(item, favSports, this.searchTerm);

@@ -110,7 +110,7 @@ export class HomePage {
   {
       this.where = '';
       document.title = this.title;
-      //this.userS.removeCampus('');
+     // this.userS.removeCampus('');
   }
 
   /*Set the title*/
@@ -138,7 +138,7 @@ export class HomePage {
   /*Open the URL for the social media of the UCL*/
   public openURL(url: string) {
     this.iab.create(url, '_system');
-    //fab.close();
+   // fab.close();
   }
   public openUCL(url: string) {
     this.iab.create(url, '_system');

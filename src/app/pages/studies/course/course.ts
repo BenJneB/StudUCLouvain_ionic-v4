@@ -104,7 +104,7 @@ export class CoursePage {
               (a1,a2) => a1.start.valueOf() - a2.start.valueOf()
             ).filter(
                 activitie => activitie.end.valueOf() > Date.now().valueOf()
-              ); // display only activities finished after now time
+              );//  display only activities finished after now time
               this.displayedActi=this.course.activities;
               this.courseSorted.cm = this.course.activities.filter(acti => acti.type === 'Cours magistral');
               this.courseSorted.tp = this.course.activities.filter(acti => (acti.type === 'TD' || acti.type === 'TP'));
@@ -233,10 +233,10 @@ export class CoursePage {
      act = act.filter(
       acti => (acti.type === segment || (acti.type === 'TP' && segment === 'TD') || (segment === 'Examen' && acti.isExam))
       );
-    //retrieve name of each slot
+   // retrieve name of each slot
     let slots = act.map(item => item.name)
-      .filter((value, index, self) => self.indexOf(value) === index); //keep only different
-    //delete some session (like seance aide etude)
+      .filter((value, index, self) => self.indexOf(value) === index);// keep only different
+   // delete some session (like seance aide etude)
     if (segment === 'TD') {
       slots = slots.filter(acti => acti.indexOf('_') !== -1);
     }
@@ -244,7 +244,7 @@ export class CoursePage {
       slots = slots.filter(acti => acti.indexOf('-') !== -1);
     }
     let newAct: Activity[] = [];
-    //retrieve one activity of each slot
+   // retrieve one activity of each slot
     for(let i=0; i< slots.length; i++) {
       let activity:Activity = act.find(acti => acti.name === slots[i]);
       newAct.push(activity);
