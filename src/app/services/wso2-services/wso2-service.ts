@@ -47,8 +47,7 @@ export class Wso2Service {
           console.log('ok');
           this.getToken();
           return this.load(url);
-        }
-        else {
+        } else {
           return observableThrowError(new Error(error.status));
         }
       })

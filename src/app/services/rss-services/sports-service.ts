@@ -157,8 +157,7 @@ export class SportsService {
       if (item.activite) {
         if (isSport) {
           this.getCategories(this.allCategories, item);
-        }
-        else {
+        } else {
           this.getCategories(this.allCategoriesT, item);
         }
       }

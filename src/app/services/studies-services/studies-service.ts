@@ -75,8 +75,7 @@ export class StudiesService {
       console.log('project' + project)
       console.log('projects' + projects)
       projects.push(project)
-    }
-    else {
+    } else {
       for(let i=0 ; i<data.projects.project.length ; i++) {
         let name = data.projects.project[i].$.name.toString();
         console.log('name: ' + name);

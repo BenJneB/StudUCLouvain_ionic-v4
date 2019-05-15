@@ -61,9 +61,8 @@ export class ModalInfoPage {
 
             this.closeModal();
             resolve(400);
-          }
-          else {
-             let cahier = '';
+          } else {
+            let cahier = '';
             let campus = res.campus;
             let teacher = res.fichesIntervenants;
             let offres = res.fichesOffres;
