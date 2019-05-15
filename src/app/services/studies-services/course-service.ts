@@ -49,8 +49,9 @@ export class CourseService {
 
     /*Extract the course ID*/
     extractCourseId(data){
-      console.log(data);
-      if(data.resources.resource !== undefined) return data.resources.resource._id;
+      if (data.resources.resource !== undefined) {
+        return data.resources.resource._id;
+      }
     }
 
     /*Get activity for a course ID obtained by getting this from a course selected by the user*/
@@ -97,7 +98,7 @@ export class CourseService {
           let startHour = event._startHour;
           let date = event._date;
           let participants = event.eventParticipants.eventParticipant
-          let { teachers, students, auditorium } = this.getItems(participants)
+          const { teachers, students, auditorium } = this.getItems(participants)
           let start = this.createDate(date, startHour);
           let end = this.createDate(date, endHour);
           let name = event.$.name;
