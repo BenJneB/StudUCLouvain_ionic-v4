@@ -85,9 +85,9 @@ import { AlertInput } from '@ionic/core';
         header: setting,
         message: message,
         inputs: [
-          this.getRadioCampus('Louvain-la-Neuve', 'LLN', check=check),
-          this.getRadioCampus('Woluwé', 'Woluwe', check=check),
-          this.getRadioCampus('Mons', 'Mons', check=check),
+          this.getRadioCampus('Louvain-la-Neuve', 'LLN', check = check),
+          this.getRadioCampus('Woluwé', 'Woluwe', check = check),
+          this.getRadioCampus('Mons', 'Mons', check = check),
           this.getRadioCampus('Tournai', 'Tournai'),
           this.getRadioCampus('St-Gilles', 'StG'),
         ],
