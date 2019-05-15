@@ -50,10 +50,10 @@ export class SportsService {
     this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate= '
 
    //  first day of the week : today
-    let { todayString, endString } = this.getSportsDates(dateToString);
+    const { todayString, endString } = this.getSportsDates(dateToString);
 
    // which campus ?
-    let site: string = this.getSportCampus();
+    const site: string = this.getSportCampus();
 
    // final URL
     let restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
