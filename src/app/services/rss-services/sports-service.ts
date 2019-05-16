@@ -169,9 +169,7 @@ export class SportsService {
       let startDate = this.createDateForSport(item.date, item.hdebut);
       let endDate = this.createDateForSport(item.date, item.hfin);
       let newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, item.jour, startDate,
-                      hidden, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString()));
-
-
+                      hidden, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString() + item.hdebut.toString()));
       if (isSport) {
         this.sports.push(newSportItem);
       } else {

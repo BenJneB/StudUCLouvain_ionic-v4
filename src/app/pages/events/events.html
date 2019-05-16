@@ -26,7 +26,7 @@
           <ion-back-button></ion-back-button>
           <img src="./assets/img/s.png" height="28"/>
         </ion-buttons>
-    
+
     <ion-title horizontal="center">{{title | translate}}</ion-title>
     <ion-buttons *ngIf="segment==='all'" slot="end">
       <ion-button (click)="presentFilter()">
@@ -57,7 +57,7 @@
 
   <ion-list #eventsList *ngFor="let item of displayedEventsD"  [hidden]="shownEvents === 0">
 
-    <ion-item-divider *ngIf="item.event.length > 0" (click)="utilsServices.toggleGroup(item.weeks, shownGroup)">
+    <ion-item-divider *ngIf="item.event.length > 0" (click)="toggleGroup(item.weeks)">
         <ion-label style="width: 100%;" text-center> [{{getRangeWeek(item.weeks,year).from | date: 'dd/MM'}} &mdash; {{getRangeWeek(item.weeks,year).to | date: 'dd/MM'}}] ({{item.event.length}}) </ion-label>
     </ion-item-divider>
 

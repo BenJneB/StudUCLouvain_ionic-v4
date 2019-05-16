@@ -60,7 +60,7 @@ export class EventsPage {
   year = this.now.getFullYear();
   noevents: any =false;
   displayedEventsD: any = [];
-  
+
   weekUCL = 5;
   texts = {
     'FAV': 'EVENTS.MESSAGEFAV',
@@ -113,12 +113,6 @@ export class EventsPage {
     this.searching = true;
   }
 
-  /*To display or close a group of events (1 group = events for one week)*/
-
-
-  /*Check if the display group is the group in arg*/
-
-
     /*Check if data are cached or not */
     async cachedOrNot() {
      // this.cache.removeItem('cache-event');
@@ -126,14 +120,14 @@ export class EventsPage {
         await this.cache.getItem(key)
         .then((data) => {
           this.loader.present('Please wait...');
-          this.events =data.items;
+          this.events = data.items;
           this.events.forEach(function(element) {
             element.startDate = new Date(element.startDate);
             element.endDate = new Date(element.endDate);
           });
           this.shownEvents = data.showItems;
           this.filters = data.categories;
-          this.searching =false;
+          this.searching = false;
           this.updateDisplayed();
         })
         .catch(() => {
@@ -147,17 +141,16 @@ export class EventsPage {
   public loadEvents(key?) {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
-
    // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
-
     if (this.connService.isOnline()) {
-
       this.loader.present('Please wait...');
       this.eventsService.getEvents(this.segment).then(
         res => {
           let result: any = res;
           this.events = result.items;
-          if (key) this.cache.saveItem(key, result);
+          if (key) {
+            this.cache.saveItem(key, result);
+          }
           this.shownEvents = result.shownEvents;
           this.filters = result.categories;
           this.searching = false;
@@ -173,18 +166,19 @@ export class EventsPage {
 
    /*Make an array with events sorted by week*/
    changeArray(array, weekUCL) {
+     const getWeek = this.getWeek;
     var groups = array.reduce(function(obj,item) {
       var date = new Date(item.startDate.getTime());
       date.setHours(0,0,0,0);
       date.setDate(date.getDate() + 3 - (date.getDay() +6) %7);
-      var week = this.getWeek(date); // - weekUCL;
+      const week = getWeek(date); // - weekUCL;
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
     }, {});
     var eventsD = Object.keys(groups).map(function(key) {
       return {
-        weeks: key, 
+        weeks: key,
         event: groups[key]
       };
     });
@@ -227,13 +221,12 @@ export class EventsPage {
   public updateDisplayed() {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
-
     if (this.segment === 'all') {
       this.displayedEvents = this.utilsServices.filterItems('events', this.events, this.excludedFilters, this.dateLimit, this.searchTerm);
     } else if (this.segment === 'favorites') {
       let favEvents = [];
       this.events.filter((item) => {
-        favEvents = this.utilsServices.filterFavoriteItems(item, favEvents, this.searchTerm);
+        favEvents = this.utilsServices.filterFavoriteItems(item, favEvents, this.searchTerm, item.title);
       });
 
       this.displayedEvents = favEvents;
@@ -252,7 +245,7 @@ export class EventsPage {
     }
     let modal = await this.modalCtrl.create(
       {
-        component: EventsFilterPage, 
+        component: EventsFilterPage,
         componentProps: { excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange}
       }
       );
@@ -275,6 +268,10 @@ export class EventsPage {
   private updateDateLimit() {
     let today = new Date();
     this.dateLimit = new Date(today.getFullYear(), today.getMonth()+this.dateRange, today.getUTCDate()+1);
+  }
+
+  toggleGroup(week: string) {
+    this.shownGroup = this.utilsServices.toggleGroup(week, this.shownGroup);
   }
 
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/

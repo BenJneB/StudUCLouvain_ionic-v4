@@ -59,31 +59,32 @@ export class UtilsService {
   }
 
 async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, update?: () => void) {
-        if (this.user.hasFavorite(itemData.guid)) {
-          let message: string;
-          this.translateService.get(texts['FAV']).subscribe((res: string) => {
-              message = res;
-          });
-          this.removeFavorite(
-              slidingItem,
-              itemData,
-              message,
-              {
-                  'FAV3': texts['FAV3'],
-                  'CANCEL': texts['CANCEL'],
-                  'DEL': texts['DEL']
-              },
-              update
-          );
-      } else {
-          this.user.addFavorite(itemData.guid);
-          let message: string;
-          this.translateService.get(texts['FAV2']).subscribe((res: string) => {
-              message = res;
-          });
-          await this.alertService.presentToast(message, slidingItem);
-      }
+  console.log(itemData.guid);
+  if (this.user.hasFavorite(itemData.guid)) {
+    let message: string;
+    this.translateService.get(texts['FAV']).subscribe((res: string) => {
+        message = res;
+    });
+    this.removeFavorite(
+        slidingItem,
+        itemData,
+        message,
+        {
+            'FAV3': texts['FAV3'],
+            'CANCEL': texts['CANCEL'],
+            'DEL': texts['DEL']
+        },
+        update
+    );
+  } else {
+      this.user.addFavorite(itemData.guid);
+      let message: string;
+      this.translateService.get(texts['FAV2']).subscribe((res: string) => {
+          message = res;
+      });
+      await this.alertService.presentToast(message, slidingItem);
   }
+}
 
   async  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any, update?: () => void) {
       let message: string, cancel: string, del: string;
@@ -160,9 +161,9 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
       });
   }
 
-  filterFavoriteItems(item: any, favItems: any[], searchTerm: string) {
+  filterFavoriteItems(item: any, favItems: any[], searchTerm: string, title: string) {
       if (item.favorite || this.user.hasFavorite(item.guid)) {
-        if (item.title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
+        if (title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
           favItems.push(item);
         }
       }
@@ -230,6 +231,7 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
   isGroupShown(group: string, shownGroup: string) {
     return shownGroup === group;
   }
+
   toggleGroup(group: string, shownGroup: string) {
     if (this.isGroupShown(group, shownGroup)) {
         return null;

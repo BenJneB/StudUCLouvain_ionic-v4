@@ -32,7 +32,7 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-segment [(ngModel)]="segment" name="segment" (ionChange)="updateDisplayedSports()" >
+  <ion-segment [(ngModel)]="segment" name="segment" (ionChange)="updateDisplayed()" >
     <ion-segment-button value="all" style="color: white;">
       <ion-label>{{'SPORTS.ALL' | translate}}</ion-label>
     </ion-segment-button>
@@ -48,7 +48,7 @@
 <!--BODY-->
 <!--class="feed-list" -->
 <ion-content class="all" [ngClass]="{'team' : segment == 'team'}">
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher *ngIf="segment !== 'favorites'" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
       pullingText="Pull to refresh"
@@ -58,7 +58,7 @@
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" ></ion-searchbar>
 
   <ion-list #sportsList *ngFor="let item of displayedSportsD"  [hidden]="shownSports === 0" >
-        <ion-item-divider *ngIf="item.name.length > 0" (click)="utilsServices.toggleGroup(item.jour, shownGroup)" text-center class="all" [ngClass]="{'team' : segment == 'team'}">
+        <ion-item-divider *ngIf="item.name.length > 0" (click)="toggleGroup(item.jour)" text-center class="all" [ngClass]="{'team' : segment == 'team'}">
             <ion-label style="width: 100%;" text-center> {{item.jour}} {{item.name[0].date | date: 'dd/MM'}} ({{item.name.length}}) </ion-label>
         </ion-item-divider>
 

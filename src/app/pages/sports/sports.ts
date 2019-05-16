@@ -21,12 +21,12 @@ import { UtilsService } from './../../services/utils-services/utils-services';
 */
 
 import { Component, ViewChild } from '@angular/core';
-import { 
-  AlertController, 
-  IonItemSliding, 
+import {
+  AlertController,
+  IonItemSliding,
   IonList,
-  ModalController, 
-  ToastController, 
+  ModalController,
+  ToastController,
   NavController
 } from '@ionic/angular';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -114,6 +114,10 @@ export class SportsPage {
     this.searching = true;
   }
 
+  toggleGroup(day: string) {
+    this.shownGroup = this.utilsServices.toggleGroup(day, this.shownGroup);
+  }
+
   public loadSports(segment: string) {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
@@ -122,7 +126,7 @@ export class SportsPage {
       this.sportsService.getSports(segment).then(
         result => {
           this.assignDatas(
-            segment === 'team' ? true : false, 
+            segment === 'team' ? true : false,
             result
           );
       })
@@ -161,12 +165,13 @@ export class SportsPage {
     this.sportsList && this.sportsList.closeSlidingItems();
     const callFilter = this.segment === 'all' || this.segment === 'team';
     if (callFilter === true) {// List of sports for all students
-      this.displayedSports = this.filterDisplayedSports(this.sports, this.excludedFilters);
+      const sport = this.segment === 'all' ? this.sports : this.teams;
+      this.displayedSports = this.filterDisplayedSports(sport, this.excludedFilters);
     }
     else if (this.segment === 'favorites') {// list of sports put in favorite
       let favSports = [];
       this.sports.filter((item) => {
-        favSports = this.utilsServices.filterFavoriteItems(item, favSports, this.searchTerm);
+        favSports = this.utilsServices.filterFavoriteItems(item, favSports, this.searchTerm, item.sport);
       });
       this.displayedSports = favSports;
     }

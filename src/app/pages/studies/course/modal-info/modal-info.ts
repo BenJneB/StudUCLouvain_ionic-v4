@@ -78,7 +78,7 @@ export class ModalInfoPage {
               cahier = res.cahierChargesMap.entry[1].value;
             }
             response = {
-              cahierCharges: cahier, 
+              cahierCharges: cahier,
               offre: offres,
               campus:campus,
               entite: entite,
@@ -94,11 +94,11 @@ export class ModalInfoPage {
             resolve(response);
           }
         })
-      })    
+      })
     }
 
    closeModal() {
- 
+
      this.viewCtrl.dismiss();
    }
 
