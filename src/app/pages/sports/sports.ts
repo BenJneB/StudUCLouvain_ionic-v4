@@ -169,11 +169,7 @@ export class SportsPage {
       this.displayedSports = this.filterDisplayedSports(sport, this.excludedFilters);
     }
     else if (this.segment === 'favorites') {// list of sports put in favorite
-      let favSports = [];
-      this.sports.filter((item) => {
-        favSports = this.utilsServices.filterFavoriteItems(item, favSports, this.searchTerm, item.sport);
-      });
-      this.displayedSports = favSports;
+      this.displayedSports = this.utilsServices.filterFavoriteItems(this.sports, this.searchTerm, 'sports');
     }
 
     this.shownSports = this.displayedSports.length;
@@ -183,7 +179,7 @@ export class SportsPage {
   }
 
   private filterDisplayedSports(items: Array<SportItem>, excluded: any) {
-    return this.utilsServices.filterItems('sport', items, excluded, this.dateLimit, this.searchTerm);
+    return this.utilsServices.filterItems('sports', items, excluded, this.dateLimit, this.searchTerm);
   }
 
   private getFiltersData(isTeam: boolean) {

@@ -59,7 +59,6 @@ export class UtilsService {
   }
 
 async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, update?: () => void) {
-  console.log(itemData.guid);
   if (this.user.hasFavorite(itemData.guid)) {
     let message: string;
     this.translateService.get(texts['FAV']).subscribe((res: string) => {
@@ -115,6 +114,7 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
               {
                   text: texts['del'],
                   handler: () => {
+                      console.log("DELEEEETE", itemData.guid);
                       this.user.removeFavorite(itemData.guid);
                       slidingItem.close();
                       if (update !== undefined) {
@@ -161,14 +161,18 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
       });
   }
 
-  filterFavoriteItems(item: any, favItems: any[], searchTerm: string, title: string) {
+  filterFavoriteItems(items: any, searchTerm: string, type: string) {
+    let favItems = [];
+    items.filter((item: any) => {
       if (item.favorite || this.user.hasFavorite(item.guid)) {
+        const title = type === 'sports' ? item.sport : item.title;
         if (title.toLowerCase().indexOf(searchTerm.toLowerCase()) > -1) {
           favItems.push(item);
         }
       }
-      return favItems;
-    }
+    });
+    return favItems;
+  }
 
   private getFilterFields(type: string, index: string, item: any, title: string, date: Date) {
       if (type === 'events') {
@@ -180,6 +184,7 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
           title = item.sport;
           date = item.date;
       }
+      console.log(index, title, date)
       return { index, title, date };
   }
 

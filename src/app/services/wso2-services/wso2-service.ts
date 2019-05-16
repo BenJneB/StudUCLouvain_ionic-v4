@@ -36,15 +36,12 @@ export class Wso2Service {
 
   /*Load wso2 service*/
   load(url: string) {
-   // console.log(this.token);
-   // console.log(this.token);
     let finalUrl = this.wso2ServiceBaseUrl + url;
     return  this.http.get(finalUrl, {headers: this.headers}).pipe(
       map(res => res),
       catchError((error) => {
         console.log(error.status);
         if (error.status === 401) {
-          console.log('ok');
           this.getToken();
           return this.load(url);
         } else {
@@ -56,7 +53,6 @@ export class Wso2Service {
 
   /*Retrieves the token*/
   getToken() {
-    console.log('gettoken')
     let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent});
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
 
@@ -66,18 +62,12 @@ export class Wso2Service {
    // this.optionsToken = new RequestOptions({headers: headers});
 
     let finalUrl = this.wso2ServiceBaseUrl + 'token';
-   // console.log(finalUrl);
-   // console.log(this.optionsToken);
     return this.http.post(finalUrl, body, {headers: headers}).pipe(
       map(res => {
         this.token = 'Bearer ' + res['access_token'];
-       // console.log(this.token);
-        console.log('Token ok');
-
         return 'OK';
       }),
       catchError((error: any) => {
-          console.log('Token error');
           return observableThrowError(error)
     }));
   }
@@ -96,7 +86,6 @@ export class Wso2Service {
     return this.http.post(finalUrl,body, {headers: headers}).pipe(
         map(res => {
           this.tokenStudent = 'Bearer ' + res['access_token'];
-          console.log('Login ok');
           return 'OK';
         }),
         catchError((error: any) => { return observableThrowError(error)})
@@ -109,8 +98,6 @@ export class Wso2Service {
     headers.append('Accept', 'application/json');
    // this.optionsStudent = new RequestOptions({ headers: headers });
     let finalUrl = this.wso2ServiceBaseUrl + url;
-   // console.log(finalUrl);
-   // console.log(this.tokenStudent);
     return  this.http.get(finalUrl, {headers: headers}).pipe(map(res => res));
   }
 

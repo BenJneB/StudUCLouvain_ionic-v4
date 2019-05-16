@@ -38,7 +38,6 @@ export class NewsService {
   shownNews = 0;
 
   constructor(public http: HttpClient, public rssService: RssService) {
-    console.log('Hello NewsService Provider');
   }
 
 

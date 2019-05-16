@@ -40,7 +40,6 @@ export class StudiesService {
   /*Open session for the user*/
   openSession() {
     return new Promise<string>( (resolve, reject) => {
-      console.log('StudiesService openSession')
       this.ade.httpOpenSession().subscribe(
         data => {
           resolve( data['session'].$.id);
@@ -52,7 +51,6 @@ export class StudiesService {
   /*Get the projects ADE*/
   getProjects(sessionId: string) {
     return new Promise( (resolve, reject) => {
-      console.log('Studiesservice getProjects')
       this.ade.httpGetProjects(sessionId).subscribe(
         data => {
           resolve(this.extractAdeProjects(data));
@@ -68,34 +66,23 @@ export class StudiesService {
     console.log(data.projects.project.length)
     if (data.projects.project.length === undefined) {
       let name = data.projects.project.$.name.toString();
-      console.log('name: ' + name);
       let id = data.projects.project.$.id.toString();
-      console.log('id: ' + id);
       let project = new AdeProject(id, name);
-      console.log('project' + project)
-      console.log('projects' + projects)
       projects.push(project)
     } else {
       for(let i=0 ; i<data.projects.project.length ; i++) {
         let name = data.projects.project[i].$.name.toString();
-        console.log('name: ' + name);
         let id = data.projects.project[i].$.id.toString();
-        console.log('id: ' + id);
         let project = new AdeProject(id, name);
-        console.log('project' + project)
-        console.log('projects' + projects)
         projects.push(project)
       }
     }
-    console.log('extractAdeProjects return projects ');
-    console.log(projects);
     return projects;
   }
 
   /*Set the project selected by the user*/
   setProject(sessionId: string, projectId: string) {
     return new Promise( (resolve, reject) => {
-      console.log('studiesService setProject:' + sessionId + ' projectId: ' +  projectId);
       this.ade.httpSetProject(sessionId, projectId).subscribe(
         data => { resolve(data);       }
       );

@@ -65,9 +65,8 @@ export class ConnectivityService {
     }).then(alert => alert.present());
   }
 
-    successCallback = (isAvailable) => { 
-                      console.log('Is available? ' + isAvailable); 
-                      this.available = isAvailable; 
+    successCallback = (isAvailable) => {
+                      this.available = isAvailable;
                       return isAvailable;
                     };
 
@@ -75,9 +74,7 @@ export class ConnectivityService {
 
    async isLocationEnabled() {
 
-    console.log('start test location');
     await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);
-    console.log('available: ' + this.available);
     return this.available;
   }
 

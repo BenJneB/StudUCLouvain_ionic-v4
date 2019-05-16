@@ -169,7 +169,7 @@ export class StudiesPage {
             console.log('Error during load of inscription status');
           })
   	  	}
-        
+
     	});
     }
     else {

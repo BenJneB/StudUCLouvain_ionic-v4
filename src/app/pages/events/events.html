@@ -46,7 +46,7 @@
 
 <!--BODY-->
 <ion-content class="feed-list">
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher *ngIf="segment !== 'favorites'" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content
       pullingIcon="arrow-dropdown"
       pullingText="Pull to refresh"
@@ -62,22 +62,19 @@
     </ion-item-divider>
 
     <ion-item-sliding #slidingItem *ngFor="let event of item.event" [hidden]="!utilsServices.isGroupShown(item.weeks, shownGroup) || event.hidden">
-
-
         <ion-item button (click)="goToEventDetail(event)" >
           <ion-thumbnail item-left>
             <img [src]="event.iconCategory">
           </ion-thumbnail>
           &nbsp;
             <ion-label>
-            <h3>{{event.title}}</h3>
+            <h3>{{event.title}}</h3>{{event.guid}}
             <p [innerHtml]="event.trimmedDescription"></p>
             <p [innerHtml]="event.location"></p>
             <p>
                 <ion-icon slot="start" name="calendar"></ion-icon>
               {{event.startDate | date: 'dd/MM/yyyy H:mm' }} &mdash; {{event.endDate | date: 'dd/MM/yyyy H:mm' }}</p>
           </ion-label>
-          
         </ion-item>
 
         <ion-item-options>
