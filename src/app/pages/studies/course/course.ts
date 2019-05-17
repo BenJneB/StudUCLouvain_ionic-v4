@@ -139,7 +139,7 @@ export class CoursePage {
       let toFilter = this.courseSorted.tp;
       this.noTP = toFilter.length === 0;
       let toPush;
-      if (this.slotTP != 'no') {
+      if (this.slotTP !== 'no') {
         toPush = toFilter.filter(acti => ( acti.name === this.slotTP || acti.name.indexOf('-') > -1));
       } else {
         toPush = this.courseSorted.tp;
@@ -152,7 +152,7 @@ export class CoursePage {
       let toFilter = this.courseSorted.cm;
       this.noCM = toFilter.length === 0;
       let toPush: Array<Activity>;
-      if (this.slotCM != 'no') {
+      if (this.slotCM !== 'no') {
         toPush = toFilter.filter(acti => ( acti.name === this.slotCM));
       } else {
         toPush = this.courseSorted.cm;

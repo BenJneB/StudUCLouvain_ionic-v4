@@ -127,7 +127,7 @@ export class StudiesPage {
       }))
       .subscribe(
         data => {
-          if (data != null) {
+          if (data !== null) {
             this.status = data.toString();
             resolve(data);
           }
@@ -293,7 +293,7 @@ export class StudiesPage {
   getCourses() {
     this.storage.get('listCourses').then((data) =>
     {
-      if (data == null) {
+      if (data === null) {
         this.listCourses = []
       } else {
         this.listCourses = data}

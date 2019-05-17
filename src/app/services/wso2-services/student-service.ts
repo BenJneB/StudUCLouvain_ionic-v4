@@ -43,7 +43,7 @@ export class StudentService {
     return new Promise(resolve => {
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
-          if (data['activities']!= null) {
+          if (data['activities']!== null) {
             resolve({activities: data['activities']});
           }
         });
@@ -81,7 +81,7 @@ export class StudentService {
             data => {
               let res: any;
               res = data;
-              if (res.items != null) {
+              if (res.items !== null) {
                 let dayDate;
                 let items;
                 ({ dayDate, items, res } = this.extractSchedule(res, date));
@@ -122,7 +122,7 @@ export class StudentService {
             data => {
               let res: any;
               res = data;
-              if (res.items != null) {
+              if (res.items !== null) {
                 let dayDate;
                 let items;
                 ({ dayDate, items, res } = this.extractSchedule(res, date));

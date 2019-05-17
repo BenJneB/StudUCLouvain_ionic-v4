@@ -57,7 +57,7 @@ export class POIService {
     if (campus === 'Mons') {
       this.url = this.urlMons;
     }
-    if (campus != this.old) {
+    if (campus !== this.old) {
       this.zones = [];
       this.old = campus;
     }
