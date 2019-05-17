@@ -143,7 +143,7 @@ export class StudiesPage {
   	  		this.studentService.searchActivities().then((res) => {
   	  			let result: any = res;
   	  			this.sigles = result.activities.activity;
-            for(let sigle of this.sigles) {
+            for (let sigle of this.sigles) {
               this.activities.push({'name':'', 'sigle':sigle});
             }
   	  		})
@@ -241,7 +241,7 @@ export class StudiesPage {
           handler: data => {
             let acro = data.acronym.toUpperCase();
             let already = false;
-            for(let item of this.listCourses) {
+            for (let item of this.listCourses) {
               if (item.acronym === acro) already = true;
             }
             this.checkCourseExisting(already, acro);
@@ -253,7 +253,7 @@ export class StudiesPage {
 
   addCourseFromProgram(acro: string) {
     let already = false;
-    for(let item of this.listCourses) {
+    for (let item of this.listCourses) {
       if (item.acronym === acro) already = true;
     }
     this.checkCourseExisting(already, acro);

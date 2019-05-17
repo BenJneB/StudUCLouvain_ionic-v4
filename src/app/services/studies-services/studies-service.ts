@@ -70,7 +70,7 @@ export class StudiesService {
       let project = new AdeProject(id, name);
       projects.push(project)
     } else {
-      for(let i = 0 ; i <data.projects.project.length ; i++) {
+      for (let i = 0 ; i <data.projects.project.length ; i++) {
         let name = data.projects.project[i].$.name.toString();
         let id = data.projects.project[i].$.id.toString();
         let project = new AdeProject(id, name);

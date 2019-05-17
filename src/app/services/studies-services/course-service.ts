@@ -92,7 +92,7 @@ export class CourseService {
       if (events !== undefined) {
         events = this.handleSpecialCase(events);
         
-        for(let i = 0; i <events.length; i++) {
+        for (let i = 0; i <events.length; i++) {
           let event = events[i];
           let endHour = event._endHour;
           let startHour = event._startHour;
