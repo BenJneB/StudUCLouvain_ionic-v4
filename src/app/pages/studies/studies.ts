@@ -1,3 +1,4 @@
+import { catchError } from 'rxjs/operators';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,24 +20,24 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { AlertService } from 'src/app/services/utils-services/alert-service';
-import { TransService } from './../../services/utils-services/trans-services';
+
 import { Component } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { AlertController, MenuController, ModalController, ToastController } from '@ionic/angular';
-import { NavController, Platform } from '@ionic/angular';
+import {
+    AlertController, MenuController, ModalController, NavController, Platform, ToastController
+} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { StudiesService} from '../../services/studies-services/studies-service';
-import { StudentService} from '../../services/wso2-services/student-service';
-import { Wso2Service} from '../../services/wso2-services/wso2-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { catchError } from 'rxjs/operators';
-
-import { Course } from '../../entity/course';
 import { AdeProject } from '../../entity/adeProject';
+import { Course } from '../../entity/course';
+import { StudiesService } from '../../services/studies-services/studies-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { TransService } from '../../services/utils-services/trans-services';
+import { StudentService } from '../../services/wso2-services/student-service';
+import { Wso2Service } from '../../services/wso2-services/wso2-service';
 import { ModalProjectPage } from './modal-project/modal-project';
-import { NavigationExtras } from '@angular/router';
 
 @Component({
   selector: 'page-studies',
@@ -99,17 +100,17 @@ export class StudiesPage {
         let nameFR = '';
         let nameEN = '';
         if (data === 400) {
-          exist=false;
+          exist = false;
         } else {
           let names = res.intituleCompletMap.entry;
           nameFR = names[1].value;
           nameEN = names[0].value;
           exist=true;
         }
-        response = {'exist':exist, 'nameFR':nameFR, 'nameEN':nameEN};
+        response = { exist: exist, nameFR: nameFR, nameEN: nameEN};
         resolve(response);
-      })
-      })
+      });
+    })
   }
 
  /*Authenticate a student*/
@@ -138,19 +139,9 @@ export class StudiesPage {
   /*Get course program of student*/
   loadActivities() {
     if (this.connService.isOnline()) {
-      this.login().then((res) => {
+      this.login().then(() => {
   	  	if (this.status) {
-  	  		this.studentService.searchActivities().then((res) => {
-  	  			let result: any = res;
-  	  			this.sigles = result.activities.activity;
-            for (let sigle of this.sigles) {
-              this.activities.push({'name':'', 'sigle':sigle});
-            }
-  	  		})
-          .catch((err) => {
-            console.log('Error during load of course program');
-          });
-
+  	  		this.searchActivities();
           this.studentService.getStatus().then((res) => {
             let result: any = res;
             this.statusInsc = result[0].etatInscription;
@@ -167,6 +158,19 @@ export class StudiesPage {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
+  }
+
+  private searchActivities() {
+    this.studentService.searchActivities().then((res) => {
+      let result: any = res;
+      this.sigles = result.activities.activity;
+      for (let sigle of this.sigles) {
+        this.activities.push({ 'name': '', 'sigle': sigle });
+      }
+    })
+      .catch((err) => {
+        console.log('Error during load of course program');
+      });
   }
 
   /*Open modalprojectpage to choose an ade project*/
@@ -201,26 +205,18 @@ export class StudiesPage {
             }
           )
       });
-    }
-     else {
+    } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }
 
   /*Add a course manually, show a prompt to the user for this where he can put the name and the acronym of the course*/
-  showPrompt() {
-    let addcourse: string;
-    let message: string;
-    let sigle: string;
-    let cancel: string;
-    let save: string;
-    this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => {addcourse = res; });
-    this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => {message = res; });
-    this.translateService.get('STUDY.SIGLE').subscribe((res: string) => {sigle = res; });
-    this.translateService.get('STUDY.CANCEL').subscribe((res: string) => {cancel = res; });
-    this.translateService.get('STUDY.SAVE').subscribe((res: string) => {save = res; });
-    let prompt = this.alertCtrl.create({
+  async showPrompt() {
+    const { addcourse, message, sigle, cancel, save }: {
+      addcourse: string; message: string; sigle: string; cancel: string; save: string;
+    } = this.getPromptTexts();
+    const prompt = await this.alertCtrl.create({
       header: addcourse,
       message: message,
       inputs: [
@@ -232,8 +228,6 @@ export class StudiesPage {
       buttons: [
         {
           text: cancel,
-          handler: data => {
-          }
         },
         {
           text: save,
@@ -248,12 +242,23 @@ export class StudiesPage {
           }
         }
       ]
-    }).then(alert => alert.present());
+    });
+    await prompt.present();
+  }
+
+  private getPromptTexts() {
+    let addcourse: string, message: string, sigle: string, cancel: string, save: string;
+    this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => { addcourse = res; });
+    this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => { message = res; });
+    this.translateService.get('STUDY.SIGLE').subscribe((res: string) => { sigle = res; });
+    this.translateService.get('STUDY.CANCEL').subscribe((res: string) => { cancel = res; });
+    this.translateService.get('STUDY.SAVE').subscribe((res: string) => { save = res; });
+    return { addcourse, message, sigle, cancel, save };
   }
 
   addCourseFromProgram(acro: string) {
     let already = false;
-    for (let item of this.listCourses) {
+    for (const item of this.listCourses) {
       if (item.acronym === acro) already = true;
     }
     this.checkCourseExisting(already, acro);
@@ -302,9 +307,9 @@ export class StudiesPage {
 
   /*Save course into storage*/
   saveCourse(name: string, tag: string) {
-    let course = new Course(name,tag, null);
+    const course = new Course(name,tag, null);
     this.listCourses.push(course);
-    this.storage.set('listCourses',this.listCourses);
+    this.storage.set('listCourses', this.listCourses);
   }
 
   /*Remove course from storage*/
@@ -331,19 +336,22 @@ export class StudiesPage {
 
   openWeekPage() {
     this.studentService.weekSchedule().then((res) => {
-      let result: any = res;
-      this.navCtrl.navigateForward(['HebdoPage', {schedule:result}]);
+      const navigationExtras: NavigationExtras = {
+        state: {
+          schedule: res
+        }
+      };
+      this.navCtrl.navigateForward(['HebdoPage'], navigationExtras);
     });
   }
 
-  unavailableAlert() {
-
-    let alert = this.alertCtrl.create({
+  async unavailableAlert() {
+    const alert = await this.alertCtrl.create({
       header: 'Indisponible',
       subHeader: 'Cette fonctionnalité n\'est pas encore disponible',
       buttons: ['OK']
-    }).then(alert => alert.present());
-
+    });
+    await alert.present();
   }
 
   openExamPage() {
