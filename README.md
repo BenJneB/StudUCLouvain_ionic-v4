@@ -8,9 +8,9 @@
 
 ### 95% Done :
 
-=> Refactor (WIP)
+=> Refactor (WIP - 22 duplications - 16 smells remaining)
 
-==> Satisfy codeclimate (WIP : Statut D ==> A)
+==> Satisfy codeclimate/tslint (WIP : Statut D ==> A)
 
 
 ### To Do :
