@@ -78,7 +78,7 @@ export class RepertoireService {
 
   /*Extract the employees*/
   private extractEmployees(data: any) {
-    if (data!= null) {
+    if (data != null) {
       for (let i = 0; i < data.length; i++) {
         let item = data[i];
         let employee = new EmployeeItem(item.matric_fgs, item.lastname, item.firstname, item.email, item.departments);

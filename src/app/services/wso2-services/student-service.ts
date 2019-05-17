@@ -56,7 +56,7 @@ export class StudentService {
       this.wso2Service.load(newUrl).subscribe(
         (data) => {
           let res: any;
-          res =data;
+          res = data;
           resolve(res.ficheActivite);
         },
         (err) => {
@@ -171,7 +171,7 @@ export class StudentService {
       this.wso2Service.loadStudent(newUrl).subscribe(
         (data) => {
           let res: any;
-          res =data;
+          res = data;
           resolve(res.lireInscriptionAnacResponse.return);
         },
         (err) => {

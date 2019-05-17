@@ -87,7 +87,7 @@ export class NewsPage {
   {
       this.searchControl = new FormControl();
       this.facService.loadResources().then((data) => {
-        this.listFac=data;
+        this.listFac= data;
       });
   }
 
@@ -197,7 +197,7 @@ export class NewsPage {
       await this.cache.getItem(key)
       .then((data) => {
         this.loader.present('Please wait...');
-        this.news =data.items;
+        this.news = data.items;
         this.shownNews = data.showItems;
         this.searching =false;
         this.updateDisplayed();

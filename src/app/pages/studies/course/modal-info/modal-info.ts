@@ -44,8 +44,8 @@ export class ModalInfoPage {
   {
     this.getInfo().then(data => {
       console.log(data);
-      this.information =data;
-      this.langue =data.langue;
+      this.information = data;
+      this.langue = data.langue;
     });
   }
 
