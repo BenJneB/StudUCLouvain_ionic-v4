@@ -1,4 +1,5 @@
-import { UtilsService } from './services/utils-services/utils-services';
+import { CacheService } from 'ionic-cache';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,30 +20,24 @@ import { UtilsService } from './services/utils-services/utils-services';
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-import { Component, ViewChildren, QueryList } from '@angular/core';
-import {
-  MenuController,
-  NavController,
-  Platform,
-  LoadingController,
-  ActionSheetController,
-  PopoverController,
-  ModalController,
-  IonRouterOutlet
-} from '@ionic/angular';
-import { Device } from '@ionic-native/device/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Market } from '@ionic-native/market/ngx';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { TranslateService } from '@ngx-translate/core';
-import { UserService } from './services/utils-services/user-service';
-import { Wso2Service } from './services/wso2-services/wso2-service';
-import { CacheService } from 'ionic-cache';
+import { Component, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Market } from '@ionic-native/market/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import {
+    ActionSheetController, IonRouterOutlet, LoadingController, MenuController, ModalController,
+    NavController, Platform, PopoverController
+} from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+
 import { Page } from './entity/page';
+import { UserService } from './services/utils-services/user-service';
+import { UtilsService } from './services/utils-services/utils-services';
+import { Wso2Service } from './services/wso2-services/wso2-service';
 
 @Component({
   selector: 'app-root',

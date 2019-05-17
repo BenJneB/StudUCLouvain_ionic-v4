@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { IonItemSliding, ToastController, AlertController, ModalController } from '@ionic/angular';
-import { UserService } from './user-service';
-import { TranslateService } from '@ngx-translate/core';
+import { AlertController, IonItemSliding, ModalController, ToastController } from '@ionic/angular';
 import { AlertInput } from '@ionic/core';
+import { TranslateService } from '@ngx-translate/core';
+
+import { UserService } from './user-service';
 
 @Injectable({
     providedIn: 'root'

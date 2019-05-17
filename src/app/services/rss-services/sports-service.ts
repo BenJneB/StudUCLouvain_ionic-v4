@@ -18,15 +18,14 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Injectable } from '@angular/core';
 
+import { SportItem } from '../../entity/sportItem';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
-import { SportItem } from '../../entity/sportItem';
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class SportsService {
   sports: Array<SportItem> = [];
@@ -154,41 +153,53 @@ export class SportsService {
       if (this.user.hasFavorite(item.guid)) {
         favorite = true;
       }
-      if (item.activite) {
-        if (isSport) {
-          this.getCategories(this.allCategories, item);
-        } else {
-          this.getCategories(this.allCategoriesT, item);
-        }
-      }
-      if (isSport) {
-        this.shownSports++;
-      } else {
-        this.shownTeams++;
-      }
-      let startDate = this.createDateForSport(item.date, item.hdebut);
-      let endDate = this.createDateForSport(item.date, item.hfin);
-      let newSportItem = new SportItem(
-          item.activite,
-          item.genre,
-          item.lieu,
-          item.salle,
-          item.jour,
-          startDate,
-          hidden,
-          favorite,
-          endDate,
-          item.type,
-          item.online,
-          item.remarque,
-          item.active,
-          item.activite.concat(item.date.toString() + item.hdebut.toString())
-      );
-      if (isSport) {
-        this.sports.push(newSportItem);
-      } else {
-        this.teams.push(newSportItem);
-      }
+      this.updateEventsData(item, isSport);
+      this.pushSportItem(item, hidden, favorite, isSport);
+    }
+  }
+
+  private pushSportItem(item: any, hidden: boolean, favorite: boolean, isSport: boolean) {
+    let startDate = this.createDateForSport(item.date, item.hdebut);
+    let endDate = this.createDateForSport(item.date, item.hfin);
+    let newSportItem = new SportItem(
+      item.activite,
+      item.genre,
+      item.lieu,
+      item.salle,
+      item.jour,
+      startDate,
+      hidden,
+      favorite,
+      endDate,
+      item.type,
+      item.online,
+      item.remarque,
+      item.active,
+      item.activite.concat(item.date.toString() + item.hdebut.toString())
+    );
+    if (isSport) {
+      this.sports.push(newSportItem);
+    } else {
+      this.teams.push(newSportItem);
+    }
+  }
+
+  private updateEventsData(item: any, isSport: boolean) {
+    if (item.activite) {
+      this.getGoodCategories(isSport, item);
+    }
+    if (isSport) {
+      this.shownSports++;
+    }  else {
+      this.shownTeams++;
+    }
+  }
+
+  private getGoodCategories(isSport: boolean, item: any) {
+    if (isSport) {
+      this.getCategories(this.allCategories, item);
+    } else {
+      this.getCategories(this.allCategoriesT, item);
     }
   }
 

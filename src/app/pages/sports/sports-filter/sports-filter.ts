@@ -1,4 +1,5 @@
 import { AlertService } from 'src/app/services/utils-services/alert-service';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,7 +20,6 @@ import { AlertService } from 'src/app/services/utils-services/alert-service';
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
