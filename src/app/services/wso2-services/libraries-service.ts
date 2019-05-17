@@ -29,8 +29,8 @@ import { Wso2Service} from './wso2-service';
 
 
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class LibrariesService {
   libraries: Array<LibraryItem> = [];
@@ -85,9 +85,9 @@ export class LibrariesService {
       lib.mapLocation = new MapLocation(lib.name, '', '', '', '');
     } else {
       lib.mapLocation = new MapLocation(
-        lib.name, 
-        data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality, 
-        '', 
+        lib.name,
+        data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality,
+        '',
         '',
         ''
       ); // TODO update maplocation with lat lng code

@@ -74,7 +74,7 @@ export class CourseService {
            activitiesList = [];
            activitiesList.push(data.activities.activity)
          }
-        for (let i =0; i< activitiesList.length ;i++) {
+        for (let i = 0; i < activitiesList.length ; i++) {
           let activityElem = activitiesList[i];
           const newActivities: Activity[] = this.createNewActivities(activityElem);
           activities = activities.concat(newActivities);
@@ -92,7 +92,7 @@ export class CourseService {
       if (events !== undefined) {
         events = this.handleSpecialCase(events);
         
-        for(let i=0; i<events.length; i++) {
+        for (let i = 0; i <events.length; i++) {
           let event = events[i];
           let endHour = event._endHour;
           let startHour = event._startHour;
@@ -136,7 +136,7 @@ export class CourseService {
       let students = '';
       let teachers = '';
       let auditorium = '';
-      for (let i=0; i < participants.length; i++) {
+      for (let i = 0; i < participants.length; i++) {
         ({ students, auditorium, teachers } = this.fillItems(participants, i, students, auditorium, teachers));
       }
       students = students.substr(0,students.length-28);

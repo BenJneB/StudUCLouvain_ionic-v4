@@ -166,8 +166,8 @@ export class EventsPage {
    /*Make an array with events sorted by week*/
    changeArray(array, weekUCL) {
      const getWeek = this.getWeek;
-    var groups = array.reduce(function(obj,item) {
-      var date = new Date(item.startDate.getTime());
+    let groups = array.reduce(function(obj,item) {
+      let date = new Date(item.startDate.getTime());
       date.setHours(0,0,0,0);
       date.setDate(date.getDate() + 3 - (date.getDay() +6) %7);
       const week = getWeek(date); // - weekUCL;
@@ -175,7 +175,7 @@ export class EventsPage {
       obj[week].push(item);
       return obj;
     }, {});
-    var eventsD = Object.keys(groups).map(function(key) {
+    let eventsD = Object.keys(groups).map(function(key) {
       return {
         weeks: key,
         event: groups[key]
@@ -191,19 +191,19 @@ export class EventsPage {
 
   /*Returns the ISO week of the date*/
   getISOWeek(d:Date) {
-    var date = new Date(d.getTime());
+    let date = new Date(d.getTime());
     date.setHours(0, 0, 0, 0);
    //  Thursday in current week decides the year.
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
    //  January 4 is always in week 1.
-    var week1 = new Date(date.getFullYear(), 0, 4);
+    let week1 = new Date(date.getFullYear(), 0, 4);
    //  Adjust to Thursday in week 1 and count number of weeks from date to week1.
     return this.getWeek(date);
   }
 
   /*Return first day of the week and last day of the week (to display range)*/
   getRangeWeek(week,year) {
-    var d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
+    let d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
     d1 = new Date('' + year + '');
     numOfdaysPastSinceLastMonday = d1.getDay() - 1;
     d1.setDate(d1.getDate() - numOfdaysPastSinceLastMonday);

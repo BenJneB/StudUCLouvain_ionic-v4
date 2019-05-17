@@ -43,7 +43,7 @@ export class RepertoireService {
     this.employees = [];
     let newUrl = this.url ;
     newUrl += 'search?';
-    for(var i=0; i<options.length; i++) {
+    for (let i = 0; i < options.length; i++) {
       newUrl += options[i] + ' = ' + values[i];
       if (i!== options.length-1) {
         newUrl += '&';
