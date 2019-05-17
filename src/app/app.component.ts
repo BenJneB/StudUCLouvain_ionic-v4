@@ -162,7 +162,7 @@ export class AppComponent {
 
   private getLanguage() {
     this.user.storage.get('lan').then((data) => {
-      if (data != null) {
+      if (data !== null) {
         this.translateService.use(data);
       } else {
         this.translateService.use('fr');

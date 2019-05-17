@@ -106,7 +106,7 @@ export class NewsService {
 
   private getImg(item: any) {
     let img = '';
-    if (item.enclosure != null) {
+    if (item.enclosure !== null) {
       img = item.enclosure.$.url;
     }
     return img;

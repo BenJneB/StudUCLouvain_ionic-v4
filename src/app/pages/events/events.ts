@@ -246,7 +246,7 @@ export class EventsPage {
       await modal.present();
      await modal.onDidDismiss().then((data: OverlayEventDetail) => {
       if (data) {
-        data=data.data;
+        data = data.data;
         let tmpRange = data[1];
         if (tmpRange !== this.dateRange) {
           this.dateRange = tmpRange;

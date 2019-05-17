@@ -97,7 +97,7 @@ export class LibrariesPage {
       let key = 'cache-libraries';
       await this.cache.getItem(key)
         .then((data) => {
-          this.libraries =data;
+          this.libraries = data;
           this.searching =false;
         })
         .catch(() => {
