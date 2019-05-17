@@ -30,7 +30,7 @@
     </ion-title>
   </ion-col></ion-row>
     <ion-buttons slot="end">
-      <ion-button (click)="applyFilters()" strong>{{'EVENTS.APPLY' | translate}}</ion-button>
+      <ion-button (click)="alertService.applyFilters(categories, dateRange)" strong>{{'EVENTS.APPLY' | translate}}</ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>

@@ -125,12 +125,19 @@ import { AlertInput } from '@ionic/core';
     return await toast.present();
   }
 
-    dismissFilterToast(results: any, dateRange: any, data?: any) {
+  private dismissFilterToast(results: any, dateRange: any, data?: any) {
       if (typeof data === 'undefined' ) {
         data = [];
       }
       results.push(data);
       results.push(dateRange);
       this.viewCtrl.dismiss(results);
+      return results;
     }
+
+  applyFilters(categories: any, dateRange: any) {
+    let results: any = [];
+    let excludedFilters = categories.filter(c => !c.isChecked).map(c => c.name);
+    results = this.dismissFilterToast(results, dateRange, excludedFilters);
+  }
 }

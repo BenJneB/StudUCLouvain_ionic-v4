@@ -30,7 +30,6 @@ import { NavParams } from '@ionic/angular';
 export class SportsFilterPage {
   categories: Array< {name: string, isChecked: boolean}> = [];
   dateRange: any;
-  results: any = [];
 
   constructor(
     public navParams: NavParams,
@@ -61,11 +60,5 @@ export class SportsFilterPage {
     this.categories.forEach(category => {
       category.isChecked = false;
     });
-  }
-
-  /*Pass back a new array of categories name to exclude*/
-  applyFilters() {
-    let excludedFilters = this.categories.filter(c => !c.isChecked).map(c => c.name);
-    this.alertService.dismissFilterToast(this.results, this.dateRange, excludedFilters);
   }
 }
