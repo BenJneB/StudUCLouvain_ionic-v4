@@ -1,4 +1,3 @@
-import { TransService } from './../../services/utils-services/trans-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,7 +18,8 @@ import { TransService } from './../../services/utils-services/trans-services';
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
+import { AlertService } from 'src/app/services/utils-services/alert-service';
+import { TransService } from './../../services/utils-services/trans-services';
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertController, MenuController, ModalController, ToastController } from '@ionic/angular';
@@ -31,7 +31,7 @@ import { StudiesService} from '../../services/studies-services/studies-service';
 import { StudentService} from '../../services/wso2-services/student-service';
 import { Wso2Service} from '../../services/wso2-services/wso2-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { map, catchError } from 'rxjs/operators';
+import { catchError } from 'rxjs/operators';
 
 import { Course } from '../../entity/course';
 import { AdeProject } from '../../entity/adeProject';
@@ -78,7 +78,8 @@ export class StudiesPage {
     private translateService: TranslateService,
     private wso2Service: Wso2Service,
     private studentService: StudentService,
-    private transService: TransService
+    private transService: TransService,
+    private alertService: AlertService
   ) {
     this.initializeSession();
     this.menu.enable(true, 'studiesMenu');
@@ -109,17 +110,6 @@ export class StudiesPage {
         resolve(response);
       })
       })
-  }
-
-  async toastBadCourse() {
-    let msg;
-    this.translateService.get('STUDY.BADCOURSE').subscribe((res: string) => {msg = res; });
-    const toast = await this.toastCtrl.create({
-      message: msg,
-      duration: 2000,
-      position: 'middle'
-    });
-    return await toast.present();
   }
 
  /*Authenticate a student*/
@@ -261,17 +251,6 @@ export class StudiesPage {
     }).then(alert => alert.present());
   }
 
-  async toastAlreadyCourse() {
-    let msg;
-    this.translateService.get('STUDY.ALCOURSE').subscribe((res: string) => {msg = res; });
-    const toast = await this.toastCtrl.create({
-      message: msg,
-      duration: 2000,
-      position: 'middle'
-    });
-    return await toast.present();
-  }
-
   addCourseFromProgram(acro: string) {
     let already = false;
     for(let item of this.listCourses) {
@@ -289,13 +268,13 @@ export class StudiesPage {
           this.addCourse(acro, check.nameFR);
         }
         else {
-          this.toastBadCourse();
+          this.alertService.toastCourse('STUDY.BADCOURSE');
           this.showPrompt();
         }
       });
     }
     else {
-      this.toastAlreadyCourse();
+      this.alertService.toastCourse('STUDY.ALCOURSE');
     }
     return check;
   }
