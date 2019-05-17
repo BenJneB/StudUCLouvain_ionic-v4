@@ -304,7 +304,7 @@ export class MapService {
       let m;
       if (this.onDevice) m = this.markers;
       else m = this.markersB;
-      for(let i = 0;i<m.length; i++) {
+      for(let i = 0;i < m.length; i++) {
          if (m[i].getTitle() === location.title) {
          // console.log(this.markers[i]);
          // let m: Marker = this.markers[i];
