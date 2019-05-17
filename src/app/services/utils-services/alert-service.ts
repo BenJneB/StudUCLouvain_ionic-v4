@@ -137,7 +137,7 @@ import { AlertInput } from '@ionic/core';
 
   applyFilters(categories: any, dateRange: any) {
     let results: any = [];
-    let excludedFilters = categories.filter(c => !c.isChecked).map(c => c.name);
+    const excludedFilters = categories.filter(c => !c.isChecked).map(c => c.name);
     results = this.dismissFilterToast(results, dateRange, excludedFilters);
   }
 }
