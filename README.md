@@ -6,14 +6,14 @@
 ### Pages have not all functionalities.
 
 
-### 95% Done
+### 95% Done :
 
 => Refactor (WIP)
 
 ==> Satisfy codeclimate (WIP : Statut D ==> A)
 
 
-### ToDo:
+### To Do :
 
 => Routes (Main : Studies, Map)
 
