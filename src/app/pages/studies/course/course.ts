@@ -108,7 +108,7 @@ export class CoursePage {
             ).filter(
                 activitie => activitie.end.valueOf() > Date.now().valueOf()
               ); //  display only activities finished after now time
-              this.displayedActi=this.course.activities;
+              this.displayedActi =this.course.activities;
               this.courseSorted.cm = this.course.activities.filter(acti => acti.type === 'Cours magistral');
               this.courseSorted.tp = this.course.activities.filter(acti => (acti.type === 'TD' || acti.type === 'TP'));
               this.courseSorted.ex = this.course.activities.filter(acti => acti.isExam);
@@ -200,7 +200,7 @@ export class CoursePage {
     ]};
     let aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
     let array = this.getSlots(segment);
-    for(let i=0; i< array.length; i++) {
+    for(let i = 0; i< array.length; i++) {
        let slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
       options.inputs.push(
         {
@@ -248,7 +248,7 @@ export class CoursePage {
     }
     let newAct: Activity[] = [];
    // retrieve one activity of each slot
-    for(let i=0; i< slots.length; i++) {
+    for(let i = 0; i< slots.length; i++) {
       let activity: Activity = act.find(acti => acti.name === slots[i]);
       newAct.push(activity);
     }
