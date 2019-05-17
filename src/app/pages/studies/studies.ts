@@ -89,7 +89,7 @@ export class StudiesPage {
 
   checkExist(sigle: string): Promise<any> {
     let response: any;
-    let year = parseInt(this.project.name.split('-')[0], 10);
+    const year = parseInt(this.project.name.split('-')[0], 10);
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle,year).then(
       (data) => {
@@ -108,22 +108,23 @@ export class StudiesPage {
         response = {'exist':exist, 'nameFR':nameFR, 'nameEN':nameEN};
         resolve(response);
       })
-      })    
+      })
   }
 
-  toastBadCourse() {
+  async toastBadCourse() {
     let msg;
     this.translateService.get('STUDY.BADCOURSE').subscribe((res: string) => {msg = res; });
-    let toast = this.toastCtrl.create({
+    const toast = await this.toastCtrl.create({
       message: msg,
       duration: 2000,
       position: 'middle'
-    }).then(toast => toast.present());
+    });
+    return await toast.present();
   }
 
  /*Authenticate a student*/
   private login() {
-  	this.error = '';
+    this.error = '';
   	return new Promise(resolve => {
       this.wso2Service.login(this.username,this.password).pipe(
       catchError(error => {
@@ -197,12 +198,12 @@ export class StudiesPage {
         data => {
           this.sessionId = data;
           this.storage.get('adeProject').then(
-            (data) => {
-              this.project=data;
+            (dataProject) => {
+              this.project = dataProject;
               if (this.project === null || this.project === undefined) {
                 this.openModalProject();
               } else {
-                this.studiesService.setProject(this.sessionId,this.project.id).then(
+                this.studiesService.setProject(this.sessionId, this.project.id).then(
                   data => {
                   }
                 );
