@@ -154,41 +154,37 @@ export class SportsService {
       if (this.user.hasFavorite(item.guid)) {
         favorite = true;
       }
-      if (item.activite) {
-        if (isSport) {
-          this.getCategories(this.allCategories, item);
-        } else {
-          this.getCategories(this.allCategoriesT, item);
-        }
-      }
+      this.updateEventsData(item, isSport);
+      this.pushSportItem(item, hidden, favorite, isSport);
+    }
+  }
+
+  private pushSportItem(item: any, hidden: boolean, favorite: boolean, isSport: boolean) {
+    let startDate = this.createDateForSport(item.date, item.hdebut);
+    let endDate = this.createDateForSport(item.date, item.hfin);
+    let newSportItem = new SportItem(item.activite, item.genre, item.lieu, item.salle, item.jour, startDate, hidden, favorite, endDate, item.type, item.online, item.remarque, item.active, item.activite.concat(item.date.toString() + item.hdebut.toString()));
+    if (isSport) {
+      this.sports.push(newSportItem);
+    }
+    else {
+      this.teams.push(newSportItem);
+    }
+  }
+
+  private updateEventsData(item: any, isSport: boolean) {
+    if (item.activite) {
       if (isSport) {
-        this.shownSports++;
-      } else {
-        this.shownTeams++;
+        this.getCategories(this.allCategories, item);
       }
-      let startDate = this.createDateForSport(item.date, item.hdebut);
-      let endDate = this.createDateForSport(item.date, item.hfin);
-      let newSportItem = new SportItem(
-          item.activite,
-          item.genre,
-          item.lieu,
-          item.salle,
-          item.jour,
-          startDate,
-          hidden,
-          favorite,
-          endDate,
-          item.type,
-          item.online,
-          item.remarque,
-          item.active,
-          item.activite.concat(item.date.toString() + item.hdebut.toString())
-      );
-      if (isSport) {
-        this.sports.push(newSportItem);
-      } else {
-        this.teams.push(newSportItem);
+      else {
+        this.getCategories(this.allCategoriesT, item);
       }
+    }
+    if (isSport) {
+      this.shownSports++;
+    }
+    else {
+      this.shownTeams++;
     }
   }
 
