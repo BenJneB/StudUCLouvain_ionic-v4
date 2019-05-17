@@ -213,7 +213,7 @@ export class StudiesPage {
 
   /*Add a course manually, show a prompt to the user for this where he can put the name and the acronym of the course*/
   async showPrompt() {
-    let { addcourse, message, sigle, cancel, save }: {
+    const { addcourse, message, sigle, cancel, save }: {
       addcourse: string; message: string; sigle: string; cancel: string; save: string;
     } = this.getPromptTexts();
     const prompt = await this.alertCtrl.create({
