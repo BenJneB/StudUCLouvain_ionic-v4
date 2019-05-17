@@ -248,7 +248,7 @@ export class NewsPage {
       return (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
     });
     this.shownNews = this.displayedNews.length;
-    this.nonews = this.shownNews == 0;
+    this.nonews = this.shownNews === 0;
     this.searching = false;
     this.loader.dismiss();
   }
