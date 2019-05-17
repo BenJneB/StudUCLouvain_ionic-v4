@@ -78,6 +78,9 @@ export class LibraryDetailsPage {
       });
   }
 
+  toggleGroup(hours: string) {
+    this.shownGroup = this.utilsServices.toggleGroup(hours, this.shownGroup);
+  }
   /*Open the page of the library for more details*/
   openPage(url: string) {
     window.open(url, '_blank');

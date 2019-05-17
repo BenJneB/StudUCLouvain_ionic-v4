@@ -130,7 +130,7 @@ export class HomePage {
     if (page.iosSchemaName != null && page.androidPackageName != null) {
       this.utilsServices.launchExternalApp(page);
     } else {
-      this.nav.navigateForward([page.component, {title: page.title}]);
+      this.nav.navigateForward([page.component]);
     }
   }
 

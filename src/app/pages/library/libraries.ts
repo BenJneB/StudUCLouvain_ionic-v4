@@ -101,7 +101,6 @@ export class LibrariesPage {
           this.searching =false;
         })
         .catch(() => {
-          console.log('Oh no! My data is expired or doesn\'t exist!');
           this.loadLibraries(key);
         });
     }

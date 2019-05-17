@@ -47,7 +47,9 @@ export class HebdoPage {
   ) {
 
   }
-
+  toggleGroup(date: string) {
+    this.shownGroup = this.utilsServices.toggleGroup(date, this.shownGroup);
+  }
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem: IonItemSliding, activity: any) {
     let message: string;

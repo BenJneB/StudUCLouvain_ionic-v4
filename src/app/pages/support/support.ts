@@ -81,6 +81,10 @@ export class SupportPage {
     this.searchEmployees(options, values);
   }
 
+  toggleGroup(category: string) {
+    this.shownGroup = this.utilsServices.toggleGroup(category, this.shownGroup);
+  }
+
   /*Search employees with the name and lastname in option, return the result and dismiss the loading pop up*/
   searchEmployees(options: Array<string>, values: Array<string>) {
     if (this.connService.isOnline()) {

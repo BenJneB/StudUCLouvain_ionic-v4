@@ -67,7 +67,7 @@
       {{libDetails.openingHoursNote}}
     </ion-row>
 
-    <ion-item-divider  (click)="utilsServices.toggleGroup('opening_hours', shownGroup)">
+    <ion-item-divider  (click)="toggleGroup('opening_hours')">
       {{'LIBRARY.HOUR' | translate}}
     </ion-item-divider>
 
@@ -79,7 +79,7 @@
       </ion-label>
     </ion-item>
 
-    <ion-item-divider  (click)="utilsServices.toggleGroup('opening_examination_hours', shownGroup)">
+    <ion-item-divider  (click)="toggleGroup('opening_examination_hours')">
       {{'LIBRARY.EXAMHOUR' | translate}}
     </ion-item-divider>
 
@@ -91,7 +91,7 @@
     </ion-label>
     </ion-item>
 
-    <ion-item-divider  (click)="utilsServices.toggleGroup('opening_summer_hours', shownGroup)">
+    <ion-item-divider  (click)="toggleGroup('opening_summer_hours')">
       {{'LIBRARY.SUMMERHOUR' | translate}}
     </ion-item-divider>
 
@@ -103,7 +103,7 @@
     </ion-label>
     </ion-item>
 
-    <ion-item-divider  (click)="utilsServices.toggleGroup('closed_dates', shownGroup)">
+    <ion-item-divider  (click)="toggleGroup('closed_dates')">
       {{'LIBRARY.CLOSED' | translate}}
     </ion-item-divider>
 

@@ -203,7 +203,6 @@ export class NewsPage {
         this.updateDisplayed();
       })
       .catch(() => {
-        console.log('Oh no! My data is expired or doesn\'t exist!');
         this.loadNews(key);
       });
     }

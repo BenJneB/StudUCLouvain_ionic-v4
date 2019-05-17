@@ -23,8 +23,8 @@ import { HttpClient } from '@angular/common/http';
 import { Wso2Service} from './wso2-service';
 
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class StudentService {
   activities: Array<String> = [];
@@ -181,6 +181,4 @@ export class StudentService {
         });
     })
   }
-
-
 }

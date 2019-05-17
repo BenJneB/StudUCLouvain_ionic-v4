@@ -26,8 +26,8 @@ import { RssService } from './rss-service';
 import { NewsItem } from '../../entity/newsItem';
 
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class NewsService {
   url1 = 'https://uclouvain.be/actualites/p1/rss';
@@ -38,7 +38,6 @@ export class NewsService {
   shownNews = 0;
 
   constructor(public http: HttpClient, public rssService: RssService) {
-    console.log('Hello NewsService Provider');
   }
 
 
@@ -93,13 +92,13 @@ export class NewsService {
     let pubDate = this.createDateForNews(item.pubDate);
     const img = this.getImg(item);
     let newNewsItem = new NewsItem(
-      item.description || 'No description...', 
-      item.link || 'No link', 
-      item.title || 'No title', 
-      img, 
+      item.description || 'No description...',
+      item.link || 'No link',
+      item.title || 'No title',
+      img,
       trimmedDescription,
-      hidden, 
-      item.guid, 
+      hidden,
+      item.guid,
       pubDate
     );
     this.news.push(newNewsItem);

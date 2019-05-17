@@ -63,7 +63,7 @@ export class CoursePage {
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
     private translateService: TranslateService,
-    private route: ActivatedRoute, 
+    private route: ActivatedRoute,
     private router: Router,
     private utilsServices: UtilsService,
     private alertService: AlertService
@@ -88,6 +88,9 @@ export class CoursePage {
 
   }
 
+  toggleGroup(infos: string) {
+    this.shownGroup = this.utilsServices.toggleGroup(infos, this.shownGroup);
+  }
   /*Display the available sessions for a course*/
   ngOnInit() {
     this.getCourse(this.sessionId, this.course.acronym);
@@ -200,12 +203,12 @@ export class CoursePage {
     for(let i=0; i< array.length; i++) {
        let slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
       options.inputs.push(
-        { 
+        {
           name: 'options',
           value: array[i].name,
           label: array[i].name + ' ' + array[i].start.getHours() + ':' + array[i].start.getUTCMinutes(),
           type: 'radio',
-          checked: slotChosen 
+          checked: slotChosen
         }
       );
     }

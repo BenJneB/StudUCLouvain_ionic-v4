@@ -34,14 +34,13 @@ export class TutoPage {
   }
 
   ionViewDidEnter() {
-    console.log('ngOnInit TutoPage');
     setTimeout(() => {
       this.splashscreen.hide();
     },1000);
   }
 
   goToHome() {
-  	this.navCtrl.navigateRoot('HomePage');
+  	this.navCtrl.navigateForward(['/home']);
   }
 
 }
