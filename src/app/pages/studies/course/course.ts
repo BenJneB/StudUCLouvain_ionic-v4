@@ -179,7 +179,7 @@ export class CoursePage {
     this.translateService.get('COURSE.MESSAGE2').subscribe((res: string) => {message = res; });
     this.translateService.get('COURSE.CANCEL').subscribe((res: string) => {cancel = res; });
     this.translateService.get('COURSE.APPLY').subscribe((res: string) => {apply = res; });
-    var options = {
+    let options = {
       title: title,
       message: message,
       inputs: [],

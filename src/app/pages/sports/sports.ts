@@ -148,12 +148,12 @@ export class SportsPage {
 
   /*Sort sports BY DAY*/
   public changeArray(array) {
-    var groups = array.reduce(function(obj,item) {
+    let groups = array.reduce(function(obj,item) {
       obj[item.jour] = obj[item.jour] || [];
       obj[item.jour].push(item);
       return obj;
     }, {});
-    var sportsD = Object.keys(groups).map(function(key) {
+    let sportsD = Object.keys(groups).map(function(key) {
     return {jour: key, name: groups[key]};
     });
     return sportsD;

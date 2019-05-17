@@ -69,11 +69,11 @@ export class StudentService {
 
   public weekSchedule() {
     let newUrl = this.url + 'courseSchedules?date= ';
-    var C =  7 - new Date().getDay();
+    let C =  7 - new Date().getDay();
     if (C==7) C=C-1;
     let schedule: Array<any> = [];
     return new Promise(resolve => {
-      for (var _i = 0; _i < C; _i++) {
+      for (let _i = 0; _i < C; _i++) {
           let date = this.getDate(_i);
           let day = this.getDay(_i);
           const url = newUrl + date;
@@ -148,20 +148,20 @@ export class StudentService {
   }
 
   getDate(i:number): string {
-    var today = new Date();
-   // var today = new Date('10/16/2017');
+    let today = new Date();
+   // let today = new Date('10/16/2017');
     today.setDate(today.getDate() + i);
-    var d = today.getDate();
-    var dd = d.toString();
-    var m = today.getMonth()+1;
-    var mm = m.toString();
+    let d = today.getDate();
+    let dd = d.toString();
+    let m = today.getMonth()+1;
+    let mm = m.toString();
     if (m < 10) {
         mm= '0' +mm;
     }
     if (d<10) {
       dd= '0' +dd;
     }
-    var yyyy= today.getFullYear();
+    let yyyy= today.getFullYear();
     return yyyy + '-' + mm + '-' + dd;
   }
 
