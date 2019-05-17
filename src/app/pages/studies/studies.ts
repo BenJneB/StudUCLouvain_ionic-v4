@@ -233,17 +233,22 @@ export class StudiesPage {
           text: save,
           cssClass: 'save',
           handler: data => {
-            let acro = data.acronym.toUpperCase();
-            let already = false;
-            for (let item of this.listCourses) {
-              if (item.acronym === acro) already = true;
-            }
-            this.checkCourseExisting(already, acro);
+            this.handleSavePrompt(data);
           }
         }
       ]
     });
     await prompt.present();
+  }
+
+  private handleSavePrompt(data: any) {
+    let acro = data.acronym.toUpperCase();
+    let already = false;
+    for (let item of this.listCourses) {
+      if (item.acronym === acro)
+        already = true;
+    }
+    this.checkCourseExisting(already, acro);
   }
 
   private getPromptTexts() {
