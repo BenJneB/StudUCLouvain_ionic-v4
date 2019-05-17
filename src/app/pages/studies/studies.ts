@@ -350,17 +350,13 @@ export class StudiesPage {
     });
   }
 
-  async unavailableAlert() {
+  async openExamPage() {
     const alert = await this.alertCtrl.create({
       header: 'Indisponible',
       subHeader: 'Cette fonctionnalité n\'est pas encore disponible',
       buttons: ['OK']
     });
     await alert.present();
-  }
-
-  openExamPage() {
-    this.unavailableAlert();
   }
 
   /*Launch moodle or ucl portal*/
