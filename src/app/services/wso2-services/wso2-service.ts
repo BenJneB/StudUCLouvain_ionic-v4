@@ -63,10 +63,16 @@ export class Wso2Service {
     let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent });
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     let finalUrl = this.wso2ServiceBaseUrl + 'token';
-    return this.http.post(finalUrl, body, { headers: headers }).pipe(map(res => {
-      this.tokenStudent = 'Bearer ' + res['access_token'];
-      return 'OK';
-    }), catchError((error: any) => { return observableThrowError(error); }));
+    return this.http.post(
+      finalUrl,
+      body,
+      { headers: headers }
+      ).pipe(
+      map(res => {
+        this.tokenStudent = 'Bearer ' + res['access_token'];
+        return 'OK';
+      }),
+      catchError((error: any) => observableThrowError(error)));
   }
 
   loadStudent(url: string) {
