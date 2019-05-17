@@ -18,26 +18,20 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-
 // This code is inspired from the great Josh Morony tutorials:
 // https://www.joshmorony.com/creating-an-advanced-google-maps-component-in-ionic-2/
-
 import { Injectable } from '@angular/core';
-import { ConnectivityService } from '../utils-services/connectivity-service';
-import { UserService } from '../utils-services/user-service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { Platform, MenuController } from '@ionic/angular';
-import { GoogleMaps,
-   GoogleMapsEvent,
-   LatLng,
-   LocationService,
-   CameraPosition,
-   MarkerOptions,
-   Marker,
-   GoogleMapsMapTypeId} from '@ionic-native/google-maps';
+import {
+    CameraPosition, GoogleMaps, GoogleMapsEvent, GoogleMapsMapTypeId, LatLng, LocationService,
+    Marker, MarkerOptions
+} from '@ionic-native/google-maps';
+import { MenuController, Platform } from '@ionic/angular';
+
 import { MapLocation } from '../../entity/mapLocation';
 import { jsApiKey } from '../../variables-config';
+import { ConnectivityService } from '../utils-services/connectivity-service';
+import { UserService } from '../utils-services/user-service';
 
 declare var google;
 

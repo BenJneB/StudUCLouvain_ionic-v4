@@ -18,12 +18,11 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-import { Injectable} from '@angular/core';
-import { Network } from '@ionic-native/network/ngx';
-import { Platform, AlertController} from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
+import { Injectable } from '@angular/core';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { AlertController, Platform } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
 
 declare var Connection: any;
 

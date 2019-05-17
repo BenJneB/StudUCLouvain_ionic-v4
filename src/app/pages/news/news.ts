@@ -1,3 +1,6 @@
+import { CacheService } from 'ionic-cache';
+import { debounceTime } from 'rxjs/operators';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -18,22 +21,18 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component, ViewChild } from '@angular/core';
-import { IonList, IonContent, NavController, Platform, AlertController } from '@ionic/angular';
 import { FormControl } from '@angular/forms';
+import { NavigationExtras, Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { CacheService } from 'ionic-cache';
-
-import { NewsService } from '../../services/rss-services/news-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { LoaderService } from '../../services/utils-services/loader-service';
-import { UserService } from '../../services/utils-services/user-service';
-import { FacService } from '../../services/utils-services/fac-service';
+import { AlertController, IonContent, IonList, NavController, Platform } from '@ionic/angular';
 
 import { NewsItem } from '../../entity/newsItem';
-import { debounceTime } from 'rxjs/operators';
-import { Router, NavigationExtras } from '@angular/router';
+import { NewsService } from '../../services/rss-services/news-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { FacService } from '../../services/utils-services/fac-service';
+import { LoaderService } from '../../services/utils-services/loader-service';
+import { UserService } from '../../services/utils-services/user-service';
 
 @Component({
   selector: 'page-news',

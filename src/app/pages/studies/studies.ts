@@ -1,24 +1,4 @@
 import { catchError } from 'rxjs/operators';
-/*
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 
 import { Component } from '@angular/core';
@@ -39,6 +19,26 @@ import { StudentService } from '../../services/wso2-services/student-service';
 import { Wso2Service } from '../../services/wso2-services/wso2-service';
 import { ModalProjectPage } from './modal-project/modal-project';
 
+/*
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
+    This file is part of Stud.UCLouvain
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    Stud.UCLouvain is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Stud.UCLouvain is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+*/
 @Component({
   selector: 'page-studies',
   templateUrl: 'studies.html',
@@ -233,17 +233,22 @@ export class StudiesPage {
           text: save,
           cssClass: 'save',
           handler: data => {
-            let acro = data.acronym.toUpperCase();
-            let already = false;
-            for (let item of this.listCourses) {
-              if (item.acronym === acro) already = true;
-            }
-            this.checkCourseExisting(already, acro);
+            this.handleSavePrompt(data);
           }
         }
       ]
     });
     await prompt.present();
+  }
+
+  private handleSavePrompt(data: any) {
+    let acro = data.acronym.toUpperCase();
+    let already = false;
+    for (let item of this.listCourses) {
+      if (item.acronym === acro)
+        already = true;
+    }
+    this.checkCourseExisting(already, acro);
   }
 
   private getPromptTexts() {
@@ -345,17 +350,13 @@ export class StudiesPage {
     });
   }
 
-  async unavailableAlert() {
+  async openExamPage() {
     const alert = await this.alertCtrl.create({
       header: 'Indisponible',
       subHeader: 'Cette fonctionnalité n\'est pas encore disponible',
       buttons: ['OK']
     });
     await alert.present();
-  }
-
-  openExamPage() {
-    this.unavailableAlert();
   }
 
   /*Launch moodle or ucl portal*/

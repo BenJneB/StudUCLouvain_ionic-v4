@@ -1,4 +1,15 @@
 /*
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component } from '@angular/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ModalController, NavController, Platform } from '@ionic/angular';
+import { LoaderService } from 'src/app/services/utils-services/loader-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
+
+import { EmployeeItem } from '../../entity/employeeItem';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { RepertoireService } from '../../services/wso2-services/repertoire-service';
+
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -18,16 +29,6 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { Component } from '@angular/core';
-import { NavController, ModalController, Platform,LoadingController} from '@ionic/angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { UtilsService } from 'src/app/services/utils-services/utils-services';
-import { RepertoireService } from '../../services/wso2-services/repertoire-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { EmployeeItem } from '../../entity/employeeItem';
-import { LoaderService } from 'src/app/services/utils-services/loader-service';
 
 @Component({
   selector: 'page-support',

@@ -1,6 +1,6 @@
-import { TransService } from './../../services/utils-services/trans-services';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -21,12 +21,12 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
+import { ModalController, NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
+import { TransService } from '../../services/utils-services/trans-services';
 import { UserService } from '../../services/utils-services/user-service';
 
 @Component({

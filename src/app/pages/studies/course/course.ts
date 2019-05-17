@@ -1,3 +1,6 @@
+import { AlertService } from 'src/app/services/utils-services/alert-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -18,21 +21,19 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component } from '@angular/core';
-import { NavController, IonItemSliding, ToastController, AlertController, ModalController  } from '@ionic/angular';
+import { ActivatedRoute, Router } from '@angular/router';
+import { Calendar } from '@ionic-native/calendar/ngx';
+import {
+    AlertController, IonItemSliding, ModalController, NavController, ToastController
+} from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
+import { Activity } from '../../../entity/activity';
+import { Course } from '../../../entity/course';
 import { CourseService } from '../../../services/studies-services/course-service';
 import { UserService } from '../../../services/utils-services/user-service';
-
-import { Course } from '../../../entity/course';
-import { Activity } from '../../../entity/activity'
-import { Calendar } from '@ionic-native/calendar/ngx';
 import { ModalInfoPage } from './modal-info/modal-info';
-import { ActivatedRoute, Router } from '@angular/router';
-import { UtilsService } from 'src/app/services/utils-services/utils-services';
-import { AlertService } from 'src/app/services/utils-services/alert-service';
 
 @Component({
   selector: 'page-course',

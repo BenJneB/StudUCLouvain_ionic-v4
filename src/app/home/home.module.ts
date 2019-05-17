@@ -6,10 +6,10 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
-// import { Http } from '@angular/http';
 import { HttpLoaderFactory } from '../app.module';
 import { HomePage } from './home.page';
 
+// import { Http } from '@angular/http';
 @NgModule({
   declarations: [HomePage],
   imports: [

@@ -18,12 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-import { Component} from '@angular/core';
-import { NavController, ModalController } from '@ionic/angular';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Component } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version/ngx';
-
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ModalController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'page-credit',

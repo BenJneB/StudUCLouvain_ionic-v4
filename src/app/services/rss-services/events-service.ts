@@ -18,12 +18,11 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Injectable } from '@angular/core';
 
+import { EventItem } from '../../entity/eventItem';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
-import { EventItem } from '../../entity/eventItem';
 
 @Injectable({
   providedIn: 'root'

@@ -1,4 +1,3 @@
-import { AlertService } from './../../../services/utils-services/alert-service';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,15 +18,14 @@ import { AlertService } from './../../../services/utils-services/alert-service';
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { UserService } from '../../../services/utils-services/user-service';
-
 import { EventItem } from '../../../entity/eventItem';
-import { Router, ActivatedRoute } from '@angular/router';
+import { AlertService } from '../../../services/utils-services/alert-service';
+import { UserService } from '../../../services/utils-services/user-service';
 
 @Component({
   selector: 'page-events-details',

@@ -1,5 +1,7 @@
+import { map } from 'rxjs/operators';
+import * as xml2js from 'xml2js';
 
-import {map} from 'rxjs/operators';
+import { HttpClient } from '@angular/common/http';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -20,12 +22,9 @@ import {map} from 'rxjs/operators';
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import * as xml2js from 'xml2js';
-import { UtilsService } from '../utils-services/utils-services';
 
+import { UtilsService } from '../utils-services/utils-services';
 
 
 // import X2JS from 'x2js';

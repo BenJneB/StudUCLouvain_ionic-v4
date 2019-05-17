@@ -1,4 +1,13 @@
-import { UtilsService } from './../../../services/utils-services/utils-services';
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+
+import { LibraryItem } from '../../../entity/libraryItem';
+import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
+import { UtilsService } from '../../../services/utils-services/utils-services';
+import { LibrariesService } from '../../../services/wso2-services/libraries-service';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -20,15 +29,8 @@ import { UtilsService } from './../../../services/utils-services/utils-services'
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-import { trigger, state, style, animate, transition } from '@angular/animations';
-import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
 
-import { LibrariesService } from '../../../services/wso2-services/libraries-service';
-import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
 
-import { LibraryItem } from '../../../entity/libraryItem';
-import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'page-library-details',
@@ -58,9 +60,7 @@ export class LibraryDetailsPage {
     ) {
       this.route.queryParams.subscribe(params => {
         if (this.router.getCurrentNavigation().extras.state) {
-          console.log(this.router.getCurrentNavigation().extras.state);
           this.libDetails = this.router.getCurrentNavigation().extras.state.lib;
-          console.log(this.libDetails);
           this.searching = true;
           if (this.connService.isOnline()) {
             this.libService.loadLibDetails(this.libDetails).then(
@@ -81,6 +81,7 @@ export class LibraryDetailsPage {
   toggleGroup(hours: string) {
     this.shownGroup = this.utilsServices.toggleGroup(hours, this.shownGroup);
   }
+
   /*Open the page of the library for more details*/
   openPage(url: string) {
     window.open(url, '_blank');

@@ -1,19 +1,21 @@
-import { AlertService } from 'src/app/services/utils-services/alert-service';
-import { Injectable } from '@angular/core';
-import * as xml2js from 'xml2js';
-import { IonItemSliding, ToastController, AlertController } from '@ionic/angular';
-import { TranslateService } from '@ngx-translate/core';
-import { UserService } from './user-service';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { Market } from '@ionic-native/market/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Device } from '@ionic-native/device/ngx';
 import { CacheService } from 'ionic-cache';
-import { ConnectivityService } from './connectivity-service';
-import { NavigationExtras, Router } from '@angular/router';
-import { Calendar } from '@ionic-native/calendar/ngx';
-import { FormControl } from '@angular/forms';
 import { debounceTime } from 'rxjs/operators';
+import { AlertService } from 'src/app/services/utils-services/alert-service';
+import * as xml2js from 'xml2js';
+
+import { Injectable } from '@angular/core';
+import { FormControl } from '@angular/forms';
+import { NavigationExtras, Router } from '@angular/router';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { Calendar } from '@ionic-native/calendar/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Market } from '@ionic-native/market/ngx';
+import { AlertController, IonItemSliding, ToastController } from '@ionic/angular';
+import { TranslateService } from '@ngx-translate/core';
+
+import { ConnectivityService } from './connectivity-service';
+import { UserService } from './user-service';
 
 export const EVENT_TEXTS = {
   'FAV': 'EVENTS.MESSAGEFAV',

@@ -1,4 +1,3 @@
-import { UtilsService } from './../../services/utils-services/utils-services';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,23 +18,19 @@ import { UtilsService } from './../../services/utils-services/utils-services';
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component, ViewChild } from '@angular/core';
-import {
-  AlertController,
-  IonItemSliding,
-  IonList,
-  ModalController,
-  ToastController,
-  NavController
-} from '@ionic/angular';
-import { Calendar } from '@ionic-native/calendar/ngx';
 import { FormControl } from '@angular/forms';
-import { UserService } from '../../services/utils-services/user-service';
+import { Calendar } from '@ionic-native/calendar/ngx';
+import {
+    AlertController, IonItemSliding, IonList, ModalController, NavController, ToastController
+} from '@ionic/angular';
+
+import { SportItem } from '../../entity/sportItem';
 import { SportsService } from '../../services/rss-services/sports-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
-import { SportItem } from '../../entity/sportItem';
+import { UserService } from '../../services/utils-services/user-service';
+import { UtilsService } from '../../services/utils-services/utils-services';
 import { SportsFilterPage } from './sports-filter/sports-filter';
 
 @Component({

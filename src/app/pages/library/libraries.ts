@@ -1,3 +1,6 @@
+import { CacheService } from 'ionic-cache';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -18,17 +21,13 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component } from '@angular/core';
+import { NavigationExtras, Router } from '@angular/router';
 import { NavController, Platform } from '@ionic/angular';
-import { CacheService } from 'ionic-cache';
-
-import { LibrariesService } from '../../services/wso2-services/libraries-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 
 import { LibraryItem } from '../../entity/libraryItem';
-import { NavigationExtras, Router } from '@angular/router';
-import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { LibrariesService } from '../../services/wso2-services/libraries-service';
 
 @Component({
   selector: 'page-libraries',
