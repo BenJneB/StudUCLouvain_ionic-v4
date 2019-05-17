@@ -74,7 +74,7 @@ export class CourseService {
            activitiesList = [];
            activitiesList.push(data.activities.activity)
          }
-        for (let i = 0; i < activitiesList.length ;i++) {
+        for (let i = 0; i < activitiesList.length ; i++) {
           let activityElem = activitiesList[i];
           const newActivities: Activity[] = this.createNewActivities(activityElem);
           activities = activities.concat(newActivities);
