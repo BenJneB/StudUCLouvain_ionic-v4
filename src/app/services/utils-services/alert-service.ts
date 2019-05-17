@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { IonItemSliding, ToastController, AlertController } from '@ionic/angular';
+import { IonItemSliding, ToastController, AlertController, ModalController } from '@ionic/angular';
 import { UserService } from './user-service';
 import { TranslateService } from '@ngx-translate/core';
 import { AlertInput } from '@ionic/core';
@@ -13,6 +13,7 @@ import { AlertInput } from '@ionic/core';
         public user: UserService,
         private translateService: TranslateService,
         public alertCtrl: AlertController,
+        private viewCtrl: ModalController,
     ) { }
 
     async alertCourse(texts) {
@@ -122,5 +123,21 @@ import { AlertInput } from '@ionic/core';
       position: 'middle'
     });
     return await toast.present();
+  }
+
+  private dismissFilterToast(results: any, dateRange: any, data?: any) {
+      if (typeof data === 'undefined' ) {
+        data = [];
+      }
+      results.push(data);
+      results.push(dateRange);
+      this.viewCtrl.dismiss(results);
+      return results;
+    }
+
+  applyFilters(categories: any, dateRange: any) {
+    let results: any = [];
+    const excludedFilters = categories.filter(c => !c.isChecked).map(c => c.name);
+    results = this.dismissFilterToast(results, dateRange, excludedFilters);
   }
 }

@@ -1,3 +1,4 @@
+import { AlertService } from 'src/app/services/utils-services/alert-service';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -20,7 +21,7 @@
 */
 
 import { Component } from '@angular/core';
-import { NavParams, ModalController } from '@ionic/angular';
+import { NavParams } from '@ionic/angular';
 
 @Component({
   selector: 'page-sports-filter',
@@ -29,11 +30,11 @@ import { NavParams, ModalController } from '@ionic/angular';
 export class SportsFilterPage {
   categories: Array< {name: string, isChecked: boolean}> = [];
   dateRange: any;
-  results: any = [];
 
   constructor(
     public navParams: NavParams,
-    public viewCtrl: ModalController)
+    private alertService: AlertService
+    )
   {
    //  passed in array of categories names that should be excluded (unchecked)
     let excludedFilters = this.navParams.get('excludedFilters');
@@ -59,21 +60,5 @@ export class SportsFilterPage {
     this.categories.forEach(category => {
       category.isChecked = false;
     });
-  }
-
-  /*Pass back a new array of categories name to exclude*/
-  applyFilters() {
-    let excludedFilters = this.categories.filter(c => !c.isChecked).map(c => c.name);
-    this.dismiss(excludedFilters);
-  }
-
-  /*Dismiss filter*/
-  dismiss(data?: any) {
-    if (typeof data === 'undefined' ) {
-      data = [];
-    }
-    this.results.push(data);
-    this.results.push(this.dateRange);
-    this.viewCtrl.dismiss(this.results);
   }
 }
