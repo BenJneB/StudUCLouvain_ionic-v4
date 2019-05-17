@@ -1,4 +1,21 @@
+import { Component } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { AlertController, MenuController, ModalController, NavController, Platform, ToastController } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
+import { TranslateService } from '@ngx-translate/core';
 import { catchError } from 'rxjs/operators';
+import { AlertService } from 'src/app/services/utils-services/alert-service';
+
+import { AdeProject } from '../../entity/adeProject';
+import { Course } from '../../entity/course';
+import { StudiesService } from '../../services/studies-services/studies-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { TransService } from '../../services/utils-services/trans-services';
+import { StudentService } from '../../services/wso2-services/student-service';
+import { Wso2Service } from '../../services/wso2-services/wso2-service';
+import { ModalProjectPage } from './modal-project/modal-project';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,26 +36,6 @@ import { catchError } from 'rxjs/operators';
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { AlertService } from 'src/app/services/utils-services/alert-service';
-
-import { Component } from '@angular/core';
-import { NavigationExtras } from '@angular/router';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import {
-    AlertController, MenuController, ModalController, NavController, Platform, ToastController
-} from '@ionic/angular';
-import { Storage } from '@ionic/storage';
-import { TranslateService } from '@ngx-translate/core';
-
-import { AdeProject } from '../../entity/adeProject';
-import { Course } from '../../entity/course';
-import { StudiesService } from '../../services/studies-services/studies-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { TransService } from '../../services/utils-services/trans-services';
-import { StudentService } from '../../services/wso2-services/student-service';
-import { Wso2Service } from '../../services/wso2-services/wso2-service';
-import { ModalProjectPage } from './modal-project/modal-project';
-
 @Component({
   selector: 'page-studies',
   templateUrl: 'studies.html',

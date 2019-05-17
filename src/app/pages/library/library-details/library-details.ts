@@ -1,17 +1,13 @@
-import { ActivatedRoute, Router } from '@angular/router';
-import {
-  animate,
-  state,
-  style,
-  transition,
-  trigger
-  } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
+
+import { LibraryItem } from '../../../entity/libraryItem';
 import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
 import { LibrariesService } from '../../../services/wso2-services/libraries-service';
-import { LibraryItem } from '../../../entity/libraryItem';
-import { NavController } from '@ionic/angular';
 import { UtilsService } from './../../../services/utils-services/utils-services';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
