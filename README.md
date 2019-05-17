@@ -6,16 +6,18 @@
 ### Pages have not all functionalities.
 
 
+### 95% Done
 
-#### ToDo:
+=> Refactor (WIP)
+
+==> Satisfy codeclimate (WIP : Statut D ==> A)
+
+
+### ToDo:
 
 => Routes (Main : Studies, Map)
 
 => Render (Same + Guindaille&Tuto to fix)
-
-=> Refactor (WIP)
-
-==> Satisfy codeclimate (WIP : Statut D ==> C)
 
 => Re integrate travis/pr and diff/total-coverage
 
