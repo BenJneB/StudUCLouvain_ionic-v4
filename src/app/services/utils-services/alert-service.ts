@@ -112,4 +112,15 @@ import { AlertInput } from '@ionic/core';
       disabled: check === undefined ? true : false
     };
   }
+
+  async toastCourse(key: string) {
+    let msg: string;
+    this.translateService.get(key).subscribe((res: string) => { msg = res; });
+    const toast = await this.toastCtrl.create({
+      message: msg,
+      duration: 2000,
+      position: 'middle'
+    });
+    return await toast.present();
+  }
 }
