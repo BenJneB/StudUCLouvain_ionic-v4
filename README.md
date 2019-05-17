@@ -15,7 +15,7 @@
 
 ### To Do :
 
-=> Routes (Main : Studies (= some sub pages), Map)
+=> Routes (Studies (= some sub pages), Map)
 
 => Render (Same + Guindaille&Tuto to fix)
 
