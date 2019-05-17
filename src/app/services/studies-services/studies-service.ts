@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -18,13 +19,10 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
 
-import { AdeService } from './ade-service';
 import { AdeProject } from '../../entity/adeProject';
-
+import { AdeService } from './ade-service';
 
 @Injectable({ 
   providedIn: 'root' 

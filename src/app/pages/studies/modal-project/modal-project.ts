@@ -18,15 +18,12 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController }
-        from '@ionic/angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
-import { StudiesService} from '../../../services/studies-services/studies-service';
-
 import { AdeProject } from '../../../entity/adeProject';
+import { StudiesService } from '../../../services/studies-services/studies-service';
 
 @Component({
   selector: 'page-modal-project',

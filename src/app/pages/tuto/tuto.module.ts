@@ -1,3 +1,4 @@
+import { CommonModule } from '@angular/common';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -18,14 +19,13 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { NgModule } from '@angular/core';
-import { IonicModule } from '@ionic/angular';
-import { TutoPage } from './tuto';
-import { TranslateModule } from '@ngx-translate/core';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router';
+import { IonicModule } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
+
+import { TutoPage } from './tuto';
 
 @NgModule({
   declarations: [

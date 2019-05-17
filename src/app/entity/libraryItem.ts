@@ -18,7 +18,6 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { MapLocation } from './mapLocation';
 import { TimeSlot } from './timeSlot';
 

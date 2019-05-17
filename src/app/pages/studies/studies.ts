@@ -1,11 +1,14 @@
+import { catchError } from 'rxjs/operators';
+import { AlertService } from 'src/app/services/utils-services/alert-service';
+
 import { Component } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { AlertController, MenuController, ModalController, NavController, Platform, ToastController } from '@ionic/angular';
+import {
+    AlertController, MenuController, ModalController, NavController, Platform, ToastController
+} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
-import { catchError } from 'rxjs/operators';
-import { AlertService } from 'src/app/services/utils-services/alert-service';
 
 import { AdeProject } from '../../entity/adeProject';
 import { Course } from '../../entity/course';

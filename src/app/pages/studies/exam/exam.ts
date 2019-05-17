@@ -18,13 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with StudUCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, ModalController  } from '@ionic/angular';
+import { ModalController, NavController, NavParams, ToastController } from '@ionic/angular';
 
 import { UserService } from '../../../services/utils-services/user-service';
-
-
 
 @Component({
   selector: 'page-exam',

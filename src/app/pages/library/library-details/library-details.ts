@@ -5,8 +5,8 @@ import { NavController } from '@ionic/angular';
 
 import { LibraryItem } from '../../../entity/libraryItem';
 import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
+import { UtilsService } from '../../../services/utils-services/utils-services';
 import { LibrariesService } from '../../../services/wso2-services/libraries-service';
-import { UtilsService } from './../../../services/utils-services/utils-services';
 
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved

@@ -1,3 +1,5 @@
+import { CacheService } from 'ionic-cache';
+
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -18,21 +20,21 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component, ViewChild } from '@angular/core';
-import { AlertController, IonItemSliding, IonList, NavController,
-  ModalController, ToastController } from '@ionic/angular';
 import { FormControl } from '@angular/forms';
+import {
+    AlertController, IonItemSliding, IonList, ModalController, NavController, ToastController
+} from '@ionic/angular';
+import { OverlayEventDetail } from '@ionic/core';
 import { TranslateService } from '@ngx-translate/core';
-import { CacheService } from 'ionic-cache';
-import { LoaderService } from '../../services/utils-services/loader-service';
-import { UtilsService, EVENT_TEXTS } from './../../services/utils-services/utils-services';
-import { UserService } from '../../services/utils-services/user-service';
+
+import { EventItem } from '../../entity/eventItem';
+import { EventsFilterPage } from '../../pages/events/events-filter/events-filter';
 import { EventsService } from '../../services/rss-services/events-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { EventsFilterPage } from '../../pages/events/events-filter/events-filter';
-import { EventItem } from '../../entity/eventItem';
-import { OverlayEventDetail } from '@ionic/core';
+import { LoaderService } from '../../services/utils-services/loader-service';
+import { UserService } from '../../services/utils-services/user-service';
+import { EVENT_TEXTS, UtilsService } from '../../services/utils-services/utils-services';
 
 @Component({
   selector: 'page-events',

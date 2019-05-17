@@ -18,12 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component } from '@angular/core';
-import { NavController, NavParams, ModalController }
-        from '@ionic/angular';
+import { ModalController, NavController, NavParams } from '@ionic/angular';
 
-import { StudentService} from '../../../../services/wso2-services/student-service';
+import { StudentService } from '../../../../services/wso2-services/student-service';
 
 @Component({
   selector: 'page-modal-info',

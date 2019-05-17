@@ -1,3 +1,5 @@
+import { CacheService } from 'ionic-cache';
+
 import { Component, QueryList, ViewChildren } from '@angular/core';
 import { Router } from '@angular/router';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
@@ -7,17 +9,10 @@ import { Market } from '@ionic-native/market/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import {
-  ActionSheetController,
-  IonRouterOutlet,
-  LoadingController,
-  MenuController,
-  ModalController,
-  NavController,
-  Platform,
-  PopoverController,
+    ActionSheetController, IonRouterOutlet, LoadingController, MenuController, ModalController,
+    NavController, Platform, PopoverController
 } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
-import { CacheService } from 'ionic-cache';
 
 import { Page } from './entity/page';
 import { UserService } from './services/utils-services/user-service';

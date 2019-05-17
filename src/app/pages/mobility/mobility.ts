@@ -18,10 +18,9 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
 import { Market } from '@ionic-native/market/ngx';
+import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 @Component({

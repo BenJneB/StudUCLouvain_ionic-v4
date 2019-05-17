@@ -18,17 +18,14 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
-import { RepertoireService } from '../../../services/wso2-services/repertoire-service';
-import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
-
 import { EmployeeItem } from '../../../entity/employeeItem';
-import { Router, ActivatedRoute } from '@angular/router';
-
+import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
+import { RepertoireService } from '../../../services/wso2-services/repertoire-service';
 
 @Component({
   selector: 'page-employee-details',

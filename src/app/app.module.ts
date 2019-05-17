@@ -1,3 +1,5 @@
+import { CacheModule } from 'ionic-cache';
+
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
@@ -24,7 +26,6 @@ import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { CacheModule } from 'ionic-cache';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';

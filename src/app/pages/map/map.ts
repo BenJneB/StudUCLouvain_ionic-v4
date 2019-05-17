@@ -18,14 +18,12 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { NavController, Platform, ActionSheetController, ModalController } from '@ionic/angular';
-
-import { POIService } from '../../services/map-services/poi-service';
-import { MapService } from '../../services/map-services/map-service';
+import { ActionSheetController, ModalController, NavController, Platform } from '@ionic/angular';
 
 import { MapLocation } from '../../entity/mapLocation';
+import { MapService } from '../../services/map-services/map-service';
+import { POIService } from '../../services/map-services/poi-service';
 
 @Component({
   selector: 'page-map',

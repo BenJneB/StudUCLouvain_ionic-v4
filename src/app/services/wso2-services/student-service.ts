@@ -1,3 +1,4 @@
+import { HttpClient } from '@angular/common/http';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,9 +20,8 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Wso2Service} from './wso2-service';
 
+import { Wso2Service } from './wso2-service';
 
 @Injectable({
   providedIn: 'root'
