@@ -20,9 +20,10 @@
 */
 
 import { Component } from '@angular/core';
-import { ModalController, NavParams } from '@ionic/angular';
+import { NavParams } from '@ionic/angular';
 
 import { EventsService } from '../../../services/rss-services/events-service';
+import { AlertService } from 'src/app/services/utils-services/alert-service';
 
 @Component({
   selector: 'page-events-filter',
@@ -34,9 +35,9 @@ export class EventsFilterPage {
   results: any = [];
 
   constructor(
-    public viewCtrl: ModalController,
     private eventService: EventsService,
-    private navParams: NavParams
+    private navParams: NavParams,
+    private alertService: AlertService
   ) {
    // passed in array of categories names that should be excluded (unchecked)
         let excludedFilters = this.navParams.get('excludedFilters');
@@ -68,16 +69,6 @@ export class EventsFilterPage {
   /*Pass Back a New Array of Categories Name to Exclude*/
   applyFilters() {
     let excludedFilters = this.categories.filter(c => !c.isChecked).map(c => c.name);
-    this.dismiss(excludedFilters);
-  }
-
-  /*Cancel Filter*/
-  dismiss(data?: any) {
-    if (typeof data === 'undefined' ) {
-      data = [];
-    }
-    this.results.push(data);
-    this.results.push(this.dateRange);
-    this.viewCtrl.dismiss(this.results);
+    this.alertService.dismissFilterToast(this.results, this.dateRange, excludedFilters);
   }
 }
