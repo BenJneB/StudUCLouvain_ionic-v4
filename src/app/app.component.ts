@@ -143,7 +143,7 @@ export class AppComponent {
     });
     this.getAllPages();
     this.platform.ready().then(() => {
-      this.wso2Service.getToken();
+      this.wso2Service.getAppToken();
       this.translateService.setDefaultLang('fr');
      this.getLanguage();
       this.cache.setDefaultTTL(60 * 60 * 2);
@@ -219,9 +219,6 @@ export class AppComponent {
   }
 
   openRootPage(page) {
-    const activeUrl = this.router.url;
-
-   //  close the menu when clicking a link from the menu
     this.menu.close();
     this.page = page;
 
@@ -247,11 +244,11 @@ export class AppComponent {
       browser.close();
     }
     this.appAvailability.check(check).then(
-      () => {//  success callback
+      () => {
         const browser = this.iab.create(appUrl, '_system');
         browser.close();
       },
-      () => {//  error callback
+      () => {
         this.market.open(app);
       });
   }

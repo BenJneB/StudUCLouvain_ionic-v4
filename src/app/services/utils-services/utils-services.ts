@@ -243,5 +243,5 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
     } else {
         return group;
     }
-}
+  }
 }

@@ -100,7 +100,7 @@ export function HttpLoaderFactory(http: HttpClient) {
   ],
   bootstrap: [AppComponent],
   entryComponents: [
-    
+
   ],
   providers: [
     { provide: ErrorHandler, useClass: ErrorHandler},

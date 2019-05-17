@@ -25,7 +25,7 @@ import { Storage } from '@ionic/storage';
 
 
 @Injectable({
-  providedIn: 'root' 
+  providedIn: 'root'
 })
 export class UserService {
 

@@ -163,7 +163,7 @@ export class SportsPage {
   public updateDisplayed() {
     this.searching = true;
     this.sportsList && this.sportsList.closeSlidingItems();
-    const callFilter = this.segment === 'all' || this.segment === 'team';
+    const callFilter = this.isNotFavorite();
     if (callFilter === true) {// List of sports for all students
       const sport = this.segment === 'all' ? this.sports : this.teams;
       this.displayedSports = this.filterDisplayedSports(sport, this.excludedFilters);
@@ -171,11 +171,14 @@ export class SportsPage {
     else if (this.segment === 'favorites') {// list of sports put in favorite
       this.displayedSports = this.utilsServices.filterFavoriteItems(this.sports, this.searchTerm, 'sports');
     }
-
     this.shownSports = this.displayedSports.length;
     this.searching = false;
     this.displayedSportsD = this.changeArray(this.displayedSports);
     this.loader.dismiss();
+  }
+
+  private isNotFavorite() {
+    return this.segment === 'all' || this.segment === 'team';
   }
 
   private filterDisplayedSports(items: Array<SportItem>, excluded: any) {
