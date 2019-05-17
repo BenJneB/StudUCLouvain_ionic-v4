@@ -114,7 +114,6 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
               {
                   text: texts['del'],
                   handler: () => {
-                      console.log("DELEEEETE", itemData.guid);
                       this.user.removeFavorite(itemData.guid);
                       slidingItem.close();
                       if (update !== undefined) {
@@ -162,7 +161,7 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
   }
 
   filterFavoriteItems(items: any, searchTerm: string, type: string) {
-    let favItems = [];
+    const favItems = [];
     items.filter((item: any) => {
       if (item.favorite || this.user.hasFavorite(item.guid)) {
         const title = type === 'sports' ? item.sport : item.title;
@@ -184,7 +183,6 @@ async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, updat
           title = item.sport;
           date = item.date;
       }
-      console.log(index, title, date)
       return { index, title, date };
   }
 
