@@ -223,7 +223,7 @@ export class EventsPage {
     if (this.segment === 'all') {
       this.displayedEvents = this.utilsServices.filterItems('events', this.events, this.excludedFilters, this.dateLimit, this.searchTerm);
     } else if (this.segment === 'favorites') {
-      this.displayedEvents = this.utilsServices.filterFavoriteItems(this.events, this.searchTerm, 'events');;
+      this.displayedEvents = this.utilsServices.filterFavoriteItems(this.events, this.searchTerm, 'events');
     }
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
