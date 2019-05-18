@@ -1,6 +1,12 @@
 // Ionic Variables and Theming. For more info, please see:
 // http://ionicframework.com/docs/theming/
 
+@mixin root-prop($prop: null, $value: null) {
+	@if ($prop and $value) {
+		#{$prop}: $value;
+	}
+}
+
 /** Ionic CSS Variables **/
 :root {
   /** primary **/
