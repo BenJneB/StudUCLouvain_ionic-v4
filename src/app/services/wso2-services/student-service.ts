@@ -37,20 +37,20 @@ export class StudentService {
 
   public searchActivities() {
     this.activities = [];
-    let newUrl = this.url ;
+    let newUrl = this.url;
     newUrl += 'activities';
     return new Promise(resolve => {
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
           if (data['activities'] !== null) {
-            resolve({activities: data['activities']});
+            resolve({ activities: data['activities'] });
           }
         });
     });
   }
 
   public checkCourse(sigle: string, year) {
-    const newUrl = this.courseUrl  + year + '/' +  sigle + '/fullInformation';
+    const newUrl = this.courseUrl + year + '/' + sigle + '/fullInformation';
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         (data) => {
@@ -68,16 +68,16 @@ export class StudentService {
 
   public weekSchedule() {
     const newUrl = this.url + 'courseSchedules?date= ';
-    let C =  7 - new Date().getDay();
+    let C = 7 - new Date().getDay();
     if (C === 7) { C = C - 1; }
     const schedule: Array<any> = [];
     return new Promise(resolve => {
       for (let _i = 0; _i < C; _i++) {
-          const date = this.getDate(_i);
-          const day = this.getDay(_i);
-          this.getSchedule(newUrl, date, schedule, day);
+        const date = this.getDate(_i);
+        const day = this.getDay(_i);
+        this.getSchedule(newUrl, date, schedule, day);
       }
-        resolve(schedule);
+      resolve(schedule);
     });
   }
 
@@ -87,24 +87,22 @@ export class StudentService {
     dayDate = dayDate.substr(3) + '/' + dayDate.substr(0, 2);
     for (const cours of items) {
       let name: any;
-      let res: any;
-      this.checkCourse(cours.cours, new Date().getFullYear()).then(data => {
-        res = data;
-        name = res.intituleCompletMap.entry[1].value;
+      this.checkCourse(cours.cours, new Date().getFullYear()).then((data: any) => {
+        name = data.intituleCompletMap.entry[1].value;
         cours['name'] = name;
       });
     }
     return { dayDate, items, res };
   }
 
-    public todaySchedule() {
+  public todaySchedule() {
     const newUrl = this.url + 'courseSchedules?date= ';
 
     const schedule: Array<any> = [];
     return new Promise(resolve => {
-          const date = this.getDate(0);
-          this.getSchedule(newUrl, date, schedule);
-        resolve(schedule);
+      const date = this.getDate(0);
+      this.getSchedule(newUrl, date, schedule);
+      resolve(schedule);
     });
   }
 

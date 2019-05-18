@@ -233,7 +233,7 @@ export class SportsPage {
         const toast = this.toastCtrl.create({
           message: 'Sport créé',
           duration: 3000
-        }).then(toast => toast.present());
+        }).then(t => t.present());
         slidingItem.close();
       });
   }
