@@ -22,7 +22,7 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { NavController, Platform } from '@ionic/angular';
 
 import { LibraryItem } from '../../entity/libraryItem';
@@ -44,15 +44,10 @@ export class LibrariesPage {
     public libService: LibrariesService,
     public connService: ConnectivityService,
     private cache: CacheService,
-    private router: Router,
     private utilsServices: UtilsService,
   ) {
     this.cachedOrNot();
     this.title = 'Bibliothèques';
-  }
-
-  ngOnInit() {
-    // this.loadLibraries();
   }
 
   /*Reload the libraries if we refresh the page*/

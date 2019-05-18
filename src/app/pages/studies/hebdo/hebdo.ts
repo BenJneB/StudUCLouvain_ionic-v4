@@ -21,6 +21,7 @@ import { AlertService } from 'src/app/services/utils-services/alert-service';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import {
     IonItemSliding, ModalController, NavController, NavParams, ToastController
 } from '@ionic/angular';
@@ -35,9 +36,8 @@ import { UtilsService } from '../../../services/utils-services/utils-services';
 })
 
 export class HebdoPage {
-  schedule: Array<any> = this.navParams.get('schedule');
   shownGroup = null;
-
+  schedule: Array<any>;
   constructor(
     public navCtrl: NavController,
     public toastCtrl: ToastController,
@@ -46,9 +46,15 @@ export class HebdoPage {
     private translateService: TranslateService,
     public navParams: NavParams,
     private utilsServices: UtilsService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private route: ActivatedRoute,
+    private router: Router,
   ) {
-
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.schedule = this.router.getCurrentNavigation().extras.state.items;
+      }
+    });
   }
   toggleGroup(date: string) {
     this.shownGroup = this.utilsServices.toggleGroup(date, this.shownGroup);
