@@ -1,4 +1,4 @@
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019

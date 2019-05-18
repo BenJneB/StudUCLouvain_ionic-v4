@@ -1,4 +1,4 @@
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -26,16 +26,16 @@ import { TranslateService } from '@ngx-translate/core';
 
 declare var Connection: any;
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class ConnectivityService {
   onDevice: boolean;
   available: boolean;
   enable: boolean;
-  constructor(public platform: Platform, 
-              private network: Network, 
-              private translateService: TranslateService, 
+  constructor(public platform: Platform,
+              private network: Network,
+              private translateService: TranslateService,
               private alertCtrl: AlertController,
               private diagnostic: Diagnostic) {
     this.onDevice = this.platform.is('cordova');

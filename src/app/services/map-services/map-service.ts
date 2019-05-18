@@ -1,4 +1,4 @@
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -35,8 +35,8 @@ import { UserService } from '../utils-services/user-service';
 
 declare var google;
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class MapService {
 
@@ -68,22 +68,22 @@ export class MapService {
     this.map = GoogleMaps.create('map');
     console.log(this.map);
     this.map.one( GoogleMapsEvent.MAP_READY ).then( ( data: any ) => {
-  
+
       let coordinates: LatLng = new LatLng( 36.7783, 119.4179 );
-  
+
       let position = {
         target: coordinates,
         zoom: 14
       };
-  
+
       this.map.animateCamera( position );
-  
+
       let markerOptions: MarkerOptions = {
         position: coordinates,
         icon: 'assets/images/marker.png',
         title: 'Hello California'
       };
-  
+
       const marker = this.map.addMarker( markerOptions )
       .then( ( marker: Marker ) => {
         marker.showInfoWindow();
@@ -258,7 +258,7 @@ export class MapService {
                 target: latLng,
                 zoom: 5
               }
-              
+
             this.map = GoogleMaps.create(this.mapElement, mapOptions);
             console.log('Map created');
             this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
@@ -307,7 +307,7 @@ export class MapService {
          this.markers[i].remove();
          // this.markers[i].setMap(null);
          // this.markers[i] = null;
-          
+
          // console.log(this.markers);
       	}
           if (!this.onDevice) {

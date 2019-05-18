@@ -7,8 +7,7 @@ import { Injectable } from '@angular/core';
 // import { wso2Header } from '../../app/variables-config';
 import { wso2HeaderStudent } from '../../variables-config';
 
-
-/*
+/**
   Generated class for the Wso2ServiceProvider provider.
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html

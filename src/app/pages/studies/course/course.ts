@@ -1,7 +1,7 @@
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -274,9 +274,9 @@ export class CoursePage {
    openModalInfo() {
     let myModal = this.modalCtrl.create(
       {
-        component: ModalInfoPage, 
+        component: ModalInfoPage,
         componentProps: {course: this.course, year: this.year},
-        cssClass: 'modal-fullscreen' 
+        cssClass: 'modal-fullscreen'
       }).then(modal => modal.present());
    }
 }
