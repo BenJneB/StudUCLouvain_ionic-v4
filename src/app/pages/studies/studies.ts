@@ -174,7 +174,6 @@ export class StudiesPage {
   /*Open modalprojectpage to choose an ade project*/
   async openModalProject() {
     const obj = {sessionId: this.sessionId};
-
     const myModal = await this.modalCtrl.create({component: ModalProjectPage, componentProps: obj});
     await myModal.present();
     await myModal.onDidDismiss().then(data => {
