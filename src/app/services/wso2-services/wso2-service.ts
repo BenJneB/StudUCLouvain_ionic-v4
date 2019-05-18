@@ -19,7 +19,7 @@ import { wso2HeaderStudent } from '../../variables-config';
 export class Wso2Service {
 
   wso2ServiceBaseUrl = 'https://api.sgsi.ucl.ac.be:8243/';
-
+  nbCalls = 0;
   private token = '';
   private tokenStudent = '';
   headers: HttpHeaders;
@@ -35,11 +35,22 @@ export class Wso2Service {
 
   /*Load wso2 service*/
   load(url: string) {
+    // TODO: MAX RETRY
     const finalUrl = this.wso2ServiceBaseUrl + url;
+    console.log('IMPORTANT', finalUrl, this.headers);
     return this.http.get(finalUrl, { headers: this.headers }).pipe(
-      map(res => res),
+      map(res => {
+        this.nbCalls = 0;
+        console.log('map', res);
+        return res;
+      }),
       catchError((error) => {
-        console.log(error.status);
+        this.nbCalls++;
+        if (this.nbCalls >= 10) {
+          this.nbCalls = 0;
+          console.log('TOO MUCH CALL TO WSO !');
+          return;
+        }
         if (error.status === 401) {
           this.getAppToken();
           return this.load(url);
@@ -51,6 +62,7 @@ export class Wso2Service {
   }
 
   getAppToken() {
+    console.log('APP T !!!!');
     const body = new HttpParams().set('grant_type', 'client_credentials');
     return this.getToken(body);
   }

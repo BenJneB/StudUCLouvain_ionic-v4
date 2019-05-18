@@ -138,7 +138,7 @@ export class AppComponent {
     });
     this.getAllPages();
     this.platform.ready().then(() => {
-      this.wso2Service.getAppToken();
+      // this.wso2Service.getAppToken();
       this.translateService.setDefaultLang('fr');
       this.getLanguage();
       this.cache.setDefaultTTL(60 * 60 * 2);
