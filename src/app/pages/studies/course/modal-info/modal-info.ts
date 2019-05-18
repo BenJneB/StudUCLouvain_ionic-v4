@@ -59,17 +59,7 @@ export class ModalInfoPage {
             resolve(400);
           } else {
             let cahier = '';
-            const campus = res.campus;
-            const teacher = res.fichesIntervenants;
-            const offres = res.fichesOffres;
-            const langue = res.langueEnseignement;
-            const loca = res.localisation;
-            const credit = res.ects;
-            const entite = res.entiteCharge;
-            const progpre = res.programmesEtPrerequis;
-            const quadri = res.quadrimestre;
-            const resume = res.resumeCoursMap.entry[1].value;
-            const vol = { 'vol1': res.volTot1, 'vol2': res.volTot2, 'vol1Coef': res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef };
+            const { offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, vol, langue } = this.getDatas(res);
             if (res.cahierChargesExiste) {
               cahier = res.cahierChargesMap.entry[1].value;
             }
@@ -91,6 +81,21 @@ export class ModalInfoPage {
           }
         });
     });
+  }
+
+  private getDatas(res: any) {
+    const campus = res.campus;
+    const teacher = res.fichesIntervenants;
+    const offres = res.fichesOffres;
+    const langue = res.langueEnseignement;
+    const loca = res.localisation;
+    const credit = res.ects;
+    const entite = res.entiteCharge;
+    const progpre = res.programmesEtPrerequis;
+    const quadri = res.quadrimestre;
+    const resume = res.resumeCoursMap.entry[1].value;
+    const vol = { 'vol1': res.volTot1, 'vol2': res.volTot2, 'vol1Coef': res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef };
+    return { offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, vol, langue };
   }
 
   closeModal() {
