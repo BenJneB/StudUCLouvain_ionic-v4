@@ -129,15 +129,8 @@ export class StudentService {
   }
 
   getDay(i: number): string {
-    let day = '';
-    if (i === 0) { day = 'Lundi'; }
-    if (i === 1) { day = 'Mardi'; }
-    if (i === 2) { day = 'Mercredi'; }
-    if (i === 3) { day = 'Jeudi'; }
-    if (i === 4) { day = 'Vendredi'; }
-    if (i === 5) { day = 'Samedi'; }
-
-    return day;
+    const dayList = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    return dayList[i];;
   }
 
   getDate(i: number): string {
