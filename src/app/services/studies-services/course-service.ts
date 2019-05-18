@@ -39,12 +39,16 @@ export class CourseService {
     getCourseId(sessionId: string, acronym: string) {
       return new Promise <string>( (resolve, reject) => {
         this.ade.httpGetCourseId(sessionId, acronym).subscribe(
-          data => {
-            resolve(this.extractCourseId(data));
-          }
+          this.resolveData(resolve, this.extractCourseId)
         );
       });
     }
+
+  private resolveData(resolve: (value?) => void, extract: (data: any) => any)  {
+    return data => {
+      resolve(extract(data));
+    };
+  }
 
     /*Extract the course ID*/
     extractCourseId(data) {
@@ -57,9 +61,7 @@ export class CourseService {
     getActivity(sessionId: string, courseId: string) {
       return new Promise <Activity[]>( (resolve, reject) => {
         this.ade.httpGetActivity(sessionId, courseId).subscribe(
-          data => {
-            resolve(this.extractActivity(data));
-          }
+          this.resolveData(resolve, this.extractActivity)
         );
       });
     }
