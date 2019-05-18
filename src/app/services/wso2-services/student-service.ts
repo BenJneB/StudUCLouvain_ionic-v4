@@ -135,20 +135,17 @@ export class StudentService {
 
   getDate(i: number): string {
     const today = new Date();
-   // let today = new Date('10/16/2017');
     today.setDate(today.getDate() + i);
-    const d = today.getDate();
-    let dd = d.toString();
-    const m = today.getMonth() + 1;
-    let mm = m.toString();
-    if (m < 10) {
-        mm = '0' + mm;
+    let day = today.getDate().toString();
+    let month = (today.getMonth() + 1).toString();
+    if (month.length < 2) {
+      month = '0' + month;
     }
-    if (d < 10) {
-      dd = '0' + dd;
+    if (day.length < 2) {
+      day = '0' + day;
     }
     const yyyy = today.getFullYear();
-    return yyyy + '-' + mm + '-' + dd;
+    return yyyy + '-' + month + '-' + day;
   }
 
   getStatus() {
