@@ -69,7 +69,7 @@ export class StudiesPage {
     public studiesService: StudiesService,
     public navCtrl: NavController,
     private alertCtrl: AlertController,
-    public storage:Storage,
+    public storage: Storage,
     public menu: MenuController,
     public toastCtrl: ToastController,
     public platform: Platform,
@@ -93,31 +93,31 @@ export class StudiesPage {
     let response: any;
     const year = parseInt(this.project.name.split('-')[0], 10);
     return new Promise(resolve => {
-      this.studentService.checkCourse(sigle,year).then(
+      this.studentService.checkCourse(sigle, year).then(
       (data) => {
-        let res: any = data;
+        const res: any = data;
         let exist: boolean;
         let nameFR = '';
         let nameEN = '';
         if (data === 400) {
           exist = false;
         } else {
-          let names = res.intituleCompletMap.entry;
+          const names = res.intituleCompletMap.entry;
           nameFR = names[1].value;
           nameEN = names[0].value;
-          exist=true;
+          exist = true;
         }
         response = { exist: exist, nameFR: nameFR, nameEN: nameEN};
         resolve(response);
       });
-    })
+    });
   }
 
  /*Authenticate a student*/
   private login() {
     this.error = '';
   	return new Promise(resolve => {
-      this.wso2Service.login(this.username,this.password).pipe(
+      this.wso2Service.login(this.username, this.password).pipe(
       catchError(error => {
       	if (error.status === 400) {
           this.error = this.transService.getTranslation('STUDY.BADLOG');
@@ -143,18 +143,17 @@ export class StudiesPage {
   	  	if (this.status) {
   	  		this.searchActivities();
           this.studentService.getStatus().then((res) => {
-            let result: any = res;
+            const result: any = res;
             this.statusInsc = result[0].etatInscription;
             this.prog = result[0].intitOffreComplet;
           })
           .catch((err) => {
             console.log('Error during load of inscription status');
-          })
+          });
   	  	}
 
     	});
-    }
-    else {
+    } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
@@ -162,9 +161,9 @@ export class StudiesPage {
 
   private searchActivities() {
     this.studentService.searchActivities().then((res) => {
-      let result: any = res;
+      const result: any = res;
       this.sigles = result.activities.activity;
-      for (let sigle of this.sigles) {
+      for (const sigle of this.sigles) {
         this.activities.push({ 'name': '', 'sigle': sigle });
       }
     })
@@ -175,9 +174,9 @@ export class StudiesPage {
 
   /*Open modalprojectpage to choose an ade project*/
   async openModalProject() {
-    let obj = {sessionId: this.sessionId};
+    const obj = {sessionId: this.sessionId};
 
-    let myModal = await this.modalCtrl.create({component: ModalProjectPage, componentProps: obj});
+    const myModal = await this.modalCtrl.create({component: ModalProjectPage, componentProps: obj});
     await myModal.present();
     await myModal.onDidDismiss().then(data => {
       this.project = data.data;
@@ -203,7 +202,7 @@ export class StudiesPage {
                 );
               }
             }
-          )
+          );
       });
     } else {
       this.navCtrl.pop();
@@ -242,11 +241,12 @@ export class StudiesPage {
   }
 
   private handleSavePrompt(data: any) {
-    let acro = data.acronym.toUpperCase();
+    const acro = data.acronym.toUpperCase();
     let already = false;
-    for (let item of this.listCourses) {
-      if (item.acronym === acro)
+    for (const item of this.listCourses) {
+      if (item.acronym === acro) {
         already = true;
+      }
     }
     this.checkCourseExisting(already, acro);
   }
@@ -264,7 +264,7 @@ export class StudiesPage {
   addCourseFromProgram(acro: string) {
     let already = false;
     for (const item of this.listCourses) {
-      if (item.acronym === acro) already = true;
+      if (item.acronym === acro) { already = true; }
     }
     this.checkCourseExisting(already, acro);
   }
@@ -276,14 +276,12 @@ export class StudiesPage {
         check = data2;
         if (check.exist) {
           this.addCourse(acro, check.nameFR);
-        }
-        else {
+        } else {
           this.alertService.toastCourse('STUDY.BADCOURSE');
           this.showPrompt();
         }
       });
-    }
-    else {
+    } else {
       this.alertService.toastCourse('STUDY.ALCOURSE');
     }
     return check;
@@ -301,18 +299,17 @@ export class StudiesPage {
 
   /*Retrieve list of course added previously in the storage*/
   getCourses() {
-    this.storage.get('listCourses').then((data) =>
-    {
+    this.storage.get('listCourses').then((data) => {
       if (data === null) {
-        this.listCourses = []
+        this.listCourses = [];
       } else {
-        this.listCourses = data}
+        this.listCourses = data;}
     });
   }
 
   /*Save course into storage*/
   saveCourse(name: string, tag: string) {
-    const course = new Course(name,tag, null);
+    const course = new Course(name, tag, null);
     this.listCourses.push(course);
     this.storage.set('listCourses', this.listCourses);
   }
@@ -321,14 +318,14 @@ export class StudiesPage {
   removeCourse(course: Course) {
     const index = this.listCourses.indexOf(course);
     if (index >= 0) {
-      this.listCourses.splice(index,1);
+      this.listCourses.splice(index, 1);
     }
-    this.storage.set('listCourses',this.listCourses);
+    this.storage.set('listCourses', this.listCourses);
   }
 
   /*Open CoursePage of a course to have the schedule*/
   openCoursePage(course: Course) {
-    let year = parseInt(this.project.name.split('-')[0], 10);
+    const year = parseInt(this.project.name.split('-')[0], 10);
     const navigationExtras: NavigationExtras = {
       state: {
         course: course,

@@ -34,11 +34,10 @@ export class ModalProjectPage {
   public projects;
 
   constructor(public navCtrl: NavController,
-    public storage:Storage,
+    public storage: Storage,
     public navParams: NavParams,
     public viewCtrl: ModalController,
-    public studiesService: StudiesService)
-  {
+    public studiesService: StudiesService) {
     this.sessionId = this.navParams.get('sessionId');
   }
 
@@ -46,10 +45,10 @@ export class ModalProjectPage {
   closeModal(project: AdeProject) {
     this.studiesService.setProject(this.sessionId, project.id).then(
       data => {
-        this.storage.set('adeProject',project);
+        this.storage.set('adeProject', project);
         this.viewCtrl.dismiss(project);
       }
-    )
+    );
   }
 
   /*Get the available projects*/

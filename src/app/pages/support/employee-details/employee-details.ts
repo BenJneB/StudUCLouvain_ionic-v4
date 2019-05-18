@@ -43,7 +43,7 @@ export class EmployeeDetailsPage {
   empDetails: EmployeeItem;
   shownGroup = null;
   address: any;
-  searching: boolean = false;
+  searching = false;
 
   constructor(public navCtrl: NavController, private route: ActivatedRoute, private router: Router, public repService: RepertoireService, public connService: ConnectivityService) {
         this.route.queryParams.subscribe(params => {
@@ -56,15 +56,13 @@ export class EmployeeDetailsPage {
     if (this.connService.isOnline()) {
       this.repService.loadEmpDetails(this.empDetails).then(
         res => {
-          let result: any = res;
+          const result: any = res;
           this.empDetails = result.empDetails;
           console.log(this.empDetails);
           this.searching = false;
         }
       );
-    }
-   // if not return to previous page and pop up an alert
-    else {
+    } else {
       this.searching = false;
       this.connService.presentConnectionAlert();
     }

@@ -7,7 +7,6 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { NavParamsMock, TranslateServiceMock } from '../../../test-config/mocks-ionic';
 import { GuindaillePage } from './guindaille2-0';
 
-
 describe('Guindaille2-0', () => {
 	let fixture;
 	let component;
