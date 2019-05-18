@@ -128,14 +128,17 @@ export class NewsPage {
   /*If there is a site for a fac, return the good site*/
   findSite() {
     for (const sector of this.listFac) {
-      for (const facs of sector.facs) {
-        if (facs.acro === this.fac) {
-          return { 'site': facs.site, 'rss': facs.rss };
-        }
-      }
+      return this.getAvailableSites(sector);
     }
   }
 
+  private getAvailableSites(sector: any) {
+    for (const facs of sector.facs) {
+      if (facs.acro === this.fac) {
+        return { 'site': facs.site, 'rss': facs.rss };
+      }
+    }
+  }
   /*Remove a fac for a user*/
   removeFac(fac: string) {
     this.userS.removeFac();
@@ -148,18 +151,24 @@ export class NewsPage {
       this.segment === 'fac' && this.facsegment === 'news' && this.userS.hasFac()
     );
     if (this.connService.isOnline()) {
-      if (doRefresh) {
-        if (this.segment === 'univ') {
-          const key = this.getKey();
-          this.cache.removeItem(key);
-          this.loadNews(key);
-        } else { this.loadNews(); }
-      }
-      refresher.target.complete();
+      this.handleOnlineRefresh(doRefresh, refresher);
     } else {
       this.connService.presentConnectionAlert();
       refresher.target.complete();
     }
+  }
+
+  private handleOnlineRefresh(doRefresh: boolean, refresher: any) {
+    if (doRefresh) {
+      if (this.segment === 'univ') {
+        const key = this.getKey();
+        this.cache.removeItem(key);
+        this.loadNews(key);
+      } else {
+        this.loadNews();
+      }
+    }
+    refresher.target.complete();
   }
 
   private getKey() {
