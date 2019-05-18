@@ -76,20 +76,7 @@ export class StudentService {
       for (let _i = 0; _i < C; _i++) {
           const date = this.getDate(_i);
           const day = this.getDay(_i);
-          const url = newUrl + date;
-          this.wso2Service.loadStudent(url).subscribe(
-            data => {
-              let res: any;
-              res = data;
-              if (res.items !== null) {
-                let dayDate;
-                let items;
-                ({ dayDate, items, res } = this.extractSchedule(res, date));
-                const daySchedule = { date: dayDate, schedule: items, day: day };
-                schedule.push(daySchedule);
-                schedule.sort((a, b) => parseInt(a.date.substr(0, 2), 10) - parseInt(b.date.substr(0, 2), 10));
-              }
-            });
+          this.getSchedule(newUrl, date, schedule, day);
       }
         resolve(schedule);
     });
@@ -117,21 +104,24 @@ export class StudentService {
     const schedule: Array<any> = [];
     return new Promise(resolve => {
           const date = this.getDate(0);
-          const url = newUrl + date;
-          this.wso2Service.loadStudent(url).subscribe(
-            data => {
-              let res: any;
-              res = data;
-              if (res.items !== null) {
-                let dayDate;
-                let items;
-                ({ dayDate, items, res } = this.extractSchedule(res, date));
-                const daySchedule = { date: dayDate, schedule: items };
-                schedule.push(daySchedule);
-                schedule.sort((a, b) => parseInt(a.date.substr(0, 2), 10) - parseInt(b.date.substr(0, 2), 10));
-              }
-            });
+          this.getSchedule(newUrl, date, schedule);
         resolve(schedule);
+    });
+  }
+
+  private getSchedule(newUrl: string, date: string, schedule: any[], day?: string) {
+    const url = newUrl + date;
+    this.wso2Service.loadStudent(url).subscribe(data => {
+      let res: any;
+      res = data;
+      if (res.items !== null) {
+        let dayDate;
+        let items;
+        ({ dayDate, items, res } = this.extractSchedule(res, date));
+        const daySchedule = { date: dayDate, schedule: items, day?: day };
+        schedule.push(daySchedule);
+        schedule.sort((a, b) => parseInt(a.date.substr(0, 2), 10) - parseInt(b.date.substr(0, 2), 10));
+      }
     });
   }
 
