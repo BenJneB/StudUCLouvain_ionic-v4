@@ -34,7 +34,7 @@ export class TutoPage {
   ionViewDidEnter() {
     setTimeout(() => {
       this.splashscreen.hide();
-    },1000);
+    }, 1000);
   }
 
   goToHome() {

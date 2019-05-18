@@ -43,7 +43,7 @@ export class MapService {
   mapElement: any;
   pleaseConnect: any;
   map: any;
-  mapInitialised: boolean = false;
+  mapInitialised = false;
   markers: Array<Marker> = [];
   markersB: any = [];
   apiKey: string;
@@ -69,16 +69,16 @@ export class MapService {
     console.log(this.map);
     this.map.one( GoogleMapsEvent.MAP_READY ).then( ( data: any ) => {
 
-      let coordinates: LatLng = new LatLng( 36.7783, 119.4179 );
+      const coordinates: LatLng = new LatLng( 36.7783, 119.4179 );
 
-      let position = {
+      const position = {
         target: coordinates,
         zoom: 14
       };
 
       this.map.animateCamera( position );
 
-      let markerOptions: MarkerOptions = {
+      const markerOptions: MarkerOptions = {
         position: coordinates,
         icon: 'assets/images/marker.png',
         title: 'Hello California'
@@ -88,8 +88,8 @@ export class MapService {
       .then( ( marker: Marker ) => {
         marker.showInfoWindow();
       });
-    })
-    console.log('loaded map oooo!')
+    });
+    console.log('loaded map oooo!');
   }
   /*Initializes the map for the device or the browser*/
   init(mapElement: any, pleaseConnect: any): Promise<any> {
@@ -119,8 +119,8 @@ export class MapService {
                 reject(error);
               });
             this.hidePleaseConnect();
-          }
-          let script = document.createElement('script');
+          };
+          const script = document.createElement('script');
           script.id = 'googleMaps';
           if (this.apiKey) {
             script.src = 'http://maps.google.com/maps/api/js?key= ' + this.apiKey + '&callback=mapInit';
@@ -129,8 +129,7 @@ export class MapService {
           }
           document.body.appendChild(script);
         }
-      }
-      else {
+      } else {
         if (this.connectivityService.isOnline()) {
           this.initBrowserMap().then(
             (init) => {
@@ -139,8 +138,7 @@ export class MapService {
               reject(error);
             });
           this.hidePleaseConnect();
-        }
-        else {
+        } else {
           this.showPleaseConnect();
         }
       }
@@ -158,12 +156,12 @@ export class MapService {
                                       String(position.coords.latitude),
                                       String(position.coords.longitude),
                                       'MYPOS');
-          let latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          let mapOptions = {
+          const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+          const mapOptions = {
             center: latLng,
             zoom: 15,
             mapTypeId: google.maps.MapTypeId.ROADMAP
-          }
+          };
           this.map = new google.maps.Map(this.mapElement, mapOptions);
           resolve(true);
         }).catch((error) => {
@@ -181,12 +179,11 @@ export class MapService {
         this.initDeviceMap().then(
           (init) => {
             resolve(true);
-          },(error) => {
+          }, (error) => {
             reject(false);
           });
         this.hidePleaseConnect();
-      }
-      else {
+      } else {
         this.showPleaseConnect();
       }
 
@@ -211,14 +208,14 @@ export class MapService {
                                         'MYPOS');
 
            // let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
-            let latLng = position.latLng;
-            let mapOptions = {
+            const latLng = position.latLng;
+            const mapOptions = {
               center: latLng,
               zoom: 15,
               mapTypeId: GoogleMapsMapTypeId.ROADMAP
-            }
+            };
            //  create CameraPosition
-            let camPos: CameraPosition<LatLng> = {
+            const camPos: CameraPosition<LatLng> = {
               target: latLng,
               zoom: 15
             };
@@ -232,32 +229,31 @@ export class MapService {
           }, (error) => {
             console.log('Map error initDeviceMap: ' + error);
             reject(false);
-          })
-        })
-      }
-        else {
+          });
+        });
+      } else {
           return new Promise((resolve, reject) => {
             console.log('Geolocation disabled');
-              let campus = this.userS.campus;
+              const campus = this.userS.campus;
               let latLng: LatLng;
-              if (campus === 'LLN') latLng = new LatLng(50.66808100000001,4.611832400000026);
-              if (campus === 'Woluwe') latLng = new LatLng(50.8489094,4.432088300000032);
-              if (campus === 'Mons') latLng = new LatLng(50.45424080000001,3.956658999999945);
+              if (campus === 'LLN') { latLng = new LatLng(50.66808100000001,4.611832400000026); }
+              if (campus === 'Woluwe') { latLng = new LatLng(50.8489094,4.432088300000032); }
+              if (campus === 'Mons') { latLng = new LatLng(50.45424080000001,3.956658999999945); }
 
               this.userLocation = new MapLocation( 'Campus Position',
                                         '',
                                         String(latLng.lat),
                                         String(latLng.lng),
                                         'CAMPUSPOS');
-              let mapOptions = {
+              const mapOptions = {
                 center: latLng,
                 zoom: 15,
                 mapTypeId: GoogleMapsMapTypeId.ROADMAP
-              }
-              let camPos: CameraPosition<LatLng> = {
+              };
+              const camPos: CameraPosition<LatLng> = {
                 target: latLng,
                 zoom: 5
-              }
+              };
 
             this.map = GoogleMaps.create(this.mapElement, mapOptions);
             console.log('Map created');
@@ -275,9 +271,9 @@ export class MapService {
   /*Add marker in the map for a location selected*/
   addMarker(location: MapLocation) {
    // console.log(this.markers);
-    let marker = this.getMarker(location.title);
+    const marker = this.getMarker(location.title);
     if (!marker) {
-      let contentString = '<p>' + location.address + '</p>';
+      const contentString = '<p>' + location.address + '</p>';
       if (this.onDevice) {
         this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng),  location.address, location.title);
       } else {
@@ -296,8 +292,8 @@ export class MapService {
      // console.log(location);
      // console.log(this.markers);
       let m;
-      if (this.onDevice) m = this.markers;
-      else m = this.markersB;
+      if (this.onDevice) { m = this.markers; }
+      else { m = this.markersB; }
       for (let i = 0; i < m.length; i++) {
          if (m[i].getTitle() === location.title) {
          // console.log(this.markers[i]);
@@ -316,25 +312,25 @@ export class MapService {
            // this.map.clear();
            // this.addMarker(this.userLocation);
           }
-          this.markers.splice(i,1);
+          this.markers.splice(i, 1);
         }
       }
    }
 
   /*Add Marker in the map for the browser*/
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
-    let latLng = new google.maps.LatLng(lat, lng);
-    let marker = new google.maps.Marker({
+    const latLng = new google.maps.LatLng(lat, lng);
+    const marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       position: latLng,
       title: title
     });
     this.markersB.push(marker);
-    this.addBrowserInfoWindow(marker, title+ '\n' +content);
+    this.addBrowserInfoWindow(marker, title + '\n' + content);
   }
   private addBrowserInfoWindow(marker, content) {
-    let infoWindow = new google.maps.InfoWindow({
+    const infoWindow = new google.maps.InfoWindow({
       content: content
     });
     google.maps.event.addListener(marker, 'click', () => {
@@ -345,8 +341,8 @@ export class MapService {
 
   /*Add Marker in the map for the device*/
   private addDeviceMarker(lat: number, lng: number, address: string, title: string) {
-    let latLng = new LatLng(lat, lng);
-    let markerOptions: MarkerOptions = {
+    const latLng = new LatLng(lat, lng);
+    const markerOptions: MarkerOptions = {
       position: latLng,
       title: title,
       snippet: address
@@ -365,14 +361,13 @@ export class MapService {
     if (this.onDevice) {
 	    this.markers.map((marker) => {
 	      if (marker.getTitle() === title) {
-	        res =marker;
+	        res = marker;
 	      }
 	    });
-	}
-	else {
+	} else {
 		this.markersB.map((marker) => {
 	      if (marker.getTitle() === title) {
-	        res =marker;
+	        res = marker;
 	      }
 	    });
 	}
@@ -395,11 +390,11 @@ export class MapService {
     });
   }
 
-  private setCenteredMarkerOnDevice(title: string, lat:number, lng:number) {
+  private setCenteredMarkerOnDevice(title: string, lat: number, lng: number) {
     this.markers.map((marker) => {
       if (marker.getTitle() === title) {
-        let latLng = new LatLng(lat, lng);
-        let camPos: CameraPosition<LatLng> = {
+        const latLng = new LatLng(lat, lng);
+        const camPos: CameraPosition<LatLng> = {
           target: latLng,
           zoom: 15
         };
@@ -451,8 +446,7 @@ export class MapService {
           } else {
             if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
               this.loadBrowserGoogleMaps();
-            }
-            else {
+            } else {
               if (!this.mapInitialised) {
                 this.initBrowserMap();
               }
@@ -480,7 +474,7 @@ export class MapService {
     } else {
       this.markersB.map(
         marker => {
-         marker.setMap(null)
+         marker.setMap(null);
         }
       );
     }

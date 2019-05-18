@@ -36,18 +36,17 @@ import { LibrariesService } from '../../services/wso2-services/libraries-service
 export class LibrariesPage {
   title: any;
   libraries: LibraryItem[];
-  searching: boolean = false;
+  searching = false;
 
   constructor(
     public navCtrl: NavController,
     public platform: Platform,
     public libService: LibrariesService,
     public connService: ConnectivityService,
-    private cache:CacheService,
+    private cache: CacheService,
     private router: Router,
     private utilsServices: UtilsService,
-    )
-  {
+    ) {
     this.cachedOrNot();
     this.title = 'Bibliothèques';
   }
@@ -68,9 +67,9 @@ export class LibrariesPage {
     if (this.connService.isOnline()) {
       this.libService.loadLibraries().then(
         res => {
-          let result: any = res;
+          const result: any = res;
           this.libraries = result.libraries;
-          if (key)this.cache.saveItem(key, this.libraries);
+          if (key) {this.cache.saveItem(key, this.libraries); }
           this.searching = false;
         }
       );
@@ -83,7 +82,7 @@ export class LibrariesPage {
 
   /*Open the page with the details for the selectionned library*/
   goToLibDetails(lib: LibraryItem) {
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       state: {
         lib: lib
       }
@@ -93,11 +92,11 @@ export class LibrariesPage {
 
   async cachedOrNot() {
      //  this.cache.removeItem('cache-event');
-      let key = 'cache-libraries';
+      const key = 'cache-libraries';
       await this.cache.getItem(key)
         .then((data) => {
           this.libraries = data;
-          this.searching =false;
+          this.searching = false;
         })
         .catch(() => {
           this.loadLibraries(key);

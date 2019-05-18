@@ -61,7 +61,7 @@ export class AdeService {
   }
 
   getBasicSessionUrl(sessionId: string) {
-    return this.AdeserviceBaseUrl + 'sessionId= ' + sessionId
+    return this.AdeserviceBaseUrl + 'sessionId= ' + sessionId;
   }
   /*Get the projects from ADE*/
   httpGetProjects(sessionId: string) {

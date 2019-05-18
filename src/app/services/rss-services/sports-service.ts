@@ -38,7 +38,7 @@ export class SportsService {
   url = ''; // students
   urlT = ''; // equipe universitaire
 
-  constructor(public user:UserService, public rssService: RssService) {
+  constructor(public user: UserService, public rssService: RssService) {
 
   }
 
@@ -46,7 +46,7 @@ export class SportsService {
   update() {
    // reset url
     this.url = 'https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate= ';
-    this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate= '
+    this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate= ';
 
    //  first day of the week: today
     const { todayString, endString } = this.getSportsDates(dateToString);
@@ -55,9 +55,9 @@ export class SportsService {
     const site = this.getSportCampus();
 
    // final URL
-    let restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
-    let urlTemp = this.url + restUrl + site;
-    let urlTempT = this.urlT + restUrl + 'louv';
+    const restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
+    const urlTemp = this.url + restUrl + site;
+    const urlTempT = this.urlT + restUrl + 'louv';
     this.url = urlTemp;
     this.urlT = urlTempT;
 
@@ -67,19 +67,19 @@ export class SportsService {
   }
 
   private getSportsDates(dateToString: (date: any) => any) {
-    let today: Date = new Date();
+    const today: Date = new Date();
     // last day of the week: today +6
-    let end: Date = new Date();
+    const end: Date = new Date();
     end.setDate(today.getDate() + 6);
     // invert date
-    let todayString = dateToString(today);
-    let endString = dateToString(end);
+    const todayString = dateToString(today);
+    const endString = dateToString(end);
     return { todayString, endString };
   }
 
   private getSportCampus() {
     let site: string;
-    let campus = this.user.campus;
+    const campus = this.user.campus;
     if (campus === 'LLN') {
       site = 'louv';
     }
@@ -101,7 +101,7 @@ export class SportsService {
       shownSports: isSport ? this.shownSports : this.shownTeams,
       url: isSport ? this.url : this.urlT,
       categories: isSport ? this.allCategories : this.allCategoriesT
-    }
+    };
   }
 
   /*Get sports for the URL specific to the campus of the user*/
@@ -113,7 +113,7 @@ export class SportsService {
         sports: datas['sports'],
         shownSports: datas['shownSports'],
         categories: datas['categories']
-      }
+      };
     }) .catch(error => {
       if (error === 1) {
         return this.getSports(segment);
@@ -127,7 +127,7 @@ export class SportsService {
           sports: [],
           shownSports: 0,
           categories: []
-        }
+        };
       }
     });
   }
@@ -135,20 +135,20 @@ export class SportsService {
   /*Extract sports with all the details*/
   private extractSports(data: any, isSport: boolean = true) {
     if (data === undefined) {
-      console.log('Error sports data undefined!!!')
+      console.log('Error sports data undefined!!!');
       return;
     }
     if (data.length === undefined) {
-      let temp = data;
+      const temp = data;
       data = [];
       data.push(temp);
     }
     this.shownSports = 0;
     this.shownTeams = 0;
     for (let i = 0; i < data.length; i++) {
-      let item = data[i];
+      const item = data[i];
       let favorite = false;
-      let hidden = false;
+      const hidden = false;
 
       if (this.user.hasFavorite(item.guid)) {
         favorite = true;
@@ -159,9 +159,9 @@ export class SportsService {
   }
 
   private pushSportItem(item: any, hidden: boolean, favorite: boolean, isSport: boolean) {
-    let startDate = this.createDateForSport(item.date, item.hdebut);
-    let endDate = this.createDateForSport(item.date, item.hfin);
-    let newSportItem = new SportItem(
+    const startDate = this.createDateForSport(item.date, item.hdebut);
+    const endDate = this.createDateForSport(item.date, item.hfin);
+    const newSportItem = new SportItem(
       item.activite,
       item.genre,
       item.lieu,
@@ -211,14 +211,14 @@ export class SportsService {
   }
 
   /*Return a date in good form by splitting for the sport*/
-  private createDateForSport(str: string, hour: string):Date {
-      let timeSplit = hour.split(':');
-      let dateSplit = str.split('/');
-      let year = parseInt(dateSplit[2]);
-      let month = parseInt(dateSplit[1])-1;
-      let day = parseInt(dateSplit[0]);
-      let hours = parseInt(timeSplit[0]);
-      let minutes = parseInt(timeSplit[1]);
+  private createDateForSport(str: string, hour: string): Date {
+      const timeSplit = hour.split(':');
+      const dateSplit = str.split('/');
+      const year = parseInt(dateSplit[2], 10);
+      const month = parseInt(dateSplit[1], 10) - 1;
+      const day = parseInt(dateSplit[0], 10);
+      const hours = parseInt(timeSplit[0], 10);
+      const minutes = parseInt(timeSplit[1], 10);
       return new Date(year, month, day, hours, minutes);
   }
 }

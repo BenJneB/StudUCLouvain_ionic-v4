@@ -41,10 +41,10 @@ export class HebdoPage {
   constructor(
     public navCtrl: NavController,
     public toastCtrl: ToastController,
-    public userS:UserService,
+    public userS: UserService,
     public modalCtrl: ModalController,
     private translateService: TranslateService,
-    public navParams:NavParams,
+    public navParams: NavParams,
     private utilsServices: UtilsService,
     private alertService: AlertService
   ) {

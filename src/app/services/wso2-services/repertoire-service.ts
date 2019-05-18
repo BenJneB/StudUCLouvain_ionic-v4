@@ -42,33 +42,33 @@ export class RepertoireService {
     newUrl += 'search?';
     for (let i = 0; i < options.length; i++) {
       newUrl += options[i] + ' = ' + values[i];
-      if (i!== options.length-1) {
+      if (i !== options.length - 1) {
         newUrl += '&';
       }
     }
-    newUrl += '&page=1&pageSize=10'
+    newUrl += '&page=1&pageSize=10';
    // newUrl += '&directory=E';
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         data => {
-          if (data['persons']!== null) {
+          if (data['persons'] !== null) {
             this.extractEmployees(data['persons'].person);
-            resolve({employees:this.employees});
+            resolve({employees: this.employees});
           }
         });
     });
   }
 
   /*Load the details for a selected employee*/
-  public loadEmpDetails(emp:EmployeeItem) {
+  public loadEmpDetails(emp: EmployeeItem) {
     return new Promise(resolve => {
 
-      let url_details = this.url + emp.matric_fgs + '/detail';
+      const url_details = this.url + emp.matric_fgs + '/detail';
 
       this.wso2Service.load(url_details).subscribe(
         data => {
           emp = this.extractEmployeeDetails(emp, data['businessInformation']);
-          resolve({empDetails:emp});
+          resolve({empDetails: emp});
         });
     });
   }
@@ -77,8 +77,8 @@ export class RepertoireService {
   private extractEmployees(data: any) {
     if (data !== null) {
       for (let i = 0; i < data.length; i++) {
-        let item = data[i];
-        let employee = new EmployeeItem(item.matric_fgs, item.lastname, item.firstname, item.email, item.departments);
+        const item = data[i];
+        const employee = new EmployeeItem(item.matric_fgs, item.lastname, item.firstname, item.email, item.departments);
         this.employees.push(employee);
       }
     }
@@ -87,7 +87,7 @@ export class RepertoireService {
   /*Extract the details for a selected employee*/
   private extractEmployeeDetails(emp: EmployeeItem, data: any): EmployeeItem {
     console.log(data);
-    emp.address = data.address
+    emp.address = data.address;
     emp.contracts = data.contracts;
     emp.businessContacts = data.businessContacts;
     emp.gender = data.gender;

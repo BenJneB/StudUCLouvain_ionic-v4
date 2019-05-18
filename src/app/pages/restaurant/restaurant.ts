@@ -28,8 +28,7 @@ import { NavController, NavParams } from '@ionic/angular';
 export class RestaurantPage {
   public title: any;
   constructor(public navCtrl: NavController,
-              public navParams: NavParams)
-  {
+              public navParams: NavParams) {
     this.title = this.navParams.get('title');
   }
 

@@ -29,8 +29,7 @@ import { Injectable } from '@angular/core';
 export class FacService {
   facultes: any = [];
   url = 'assets/data/fac.json';
-  constructor(public http: HttpClient)
-  {
+  constructor(public http: HttpClient) {
 
   }
 
@@ -39,7 +38,7 @@ export class FacService {
     if (this.facultes.length === 0) {
       return new Promise(resolve => {
         this.http.get(this.url).pipe(map(res => res)).subscribe(data => {
-            for (let sector of data['secteurs']) {
+            for (const sector of data['secteurs']) {
               this.facultes.push(sector);
             }
           resolve(this.facultes);

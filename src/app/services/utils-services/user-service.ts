@@ -107,36 +107,36 @@ export class UserService {
 
   addFavorite(itemGuid: string) {
     this.favorites.push(itemGuid);
-    this.storage.set('listFavorites',this.favorites);
+    this.storage.set('listFavorites', this.favorites);
   }
 
   addCampus(campus: string) {
     this.campus = campus;
-    this.storage.set('campus',this.campus);
+    this.storage.set('campus', this.campus);
   }
 
 
   addFac(fac: string) {
     this.fac = fac;
-    this.storage.set('fac',this.fac);
-  };
+    this.storage.set('fac', this.fac);
+  }
 
   removeFavorite(itemGuid: string) {
     const index = this.favorites.indexOf(itemGuid);
     if (index > -1) {
       this.favorites.splice(index, 1);
     }
-    this.storage.set('listFavorites',this.favorites);
-  };
+    this.storage.set('listFavorites', this.favorites);
+  }
 
   removeCampus() {
     this.campus = '';
-    this.storage.set('campus',this.campus);
-  };
+    this.storage.set('campus', this.campus);
+  }
   removeFac() {
     this.fac = '';
-    this.storage.set('fac',this.fac);
-  };
+    this.storage.set('fac', this.fac);
+  }
   removeSlotTP(acronym: string) {
     this.removeSlot(acronym, 'TP');
   }
@@ -150,7 +150,7 @@ removeSlot(acronym: string, type: string) {
   if (index > -1) {
     this.slots[index][type] = '';
   }
-  this.storage.set('slots',this.slots);
+  this.storage.set('slots', this.slots);
 }
 
   addSlot(acronym: string, slot: string, type: string) {
@@ -161,19 +161,17 @@ removeSlot(acronym: string, type: string) {
       } else {
         this.slots[index].CM = slot;
       }
-    }
-    else {
+    } else {
       this.pushItem(type, acronym, slot);
     }
-    this.storage.set('slots',this.slots);
+    this.storage.set('slots', this.slots);
   }
 
   private pushItem(type: string, acronym: string, slot: string) {
     let item;
     if (type === 'TP') {
       item = { course: acronym, TP: slot, CM: '' };
-    }
-    else {
+    } else {
       item = { course: acronym, TP: '', CM: slot };
     }
     this.slots.push(item);

@@ -37,8 +37,7 @@ export class MobilityPage {
     public nav: NavController,
     public market: Market,
     private translateService: TranslateService,
-  )
-  {
+  ) {
     this.title = 'Mobilité';
     let titlecar: string;
     this.translateService.get('MOBI.COVOIT').subscribe((res: string) => {titlecar = res; });

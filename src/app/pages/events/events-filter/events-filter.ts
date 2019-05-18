@@ -39,10 +39,10 @@ export class EventsFilterPage {
     private alertService: AlertService
   ) {
    // passed in array of categories names that should be excluded (unchecked)
-        let excludedFilters = this.navParams.get('excludedFilters');
-        let filters = this.navParams.get('filters');
+        const excludedFilters = this.navParams.get('excludedFilters');
+        const filters = this.navParams.get('filters');
         this.dateRange = this.navParams.get('dateRange');
-        for (let filterName of filters) {
+        for (const filterName of filters) {
           this.categories.push({
             name: filterName,
             iconCategory: 'assets/icon/events-icon/' + this.eventService.getIconCategory(filterName) + '.png',
