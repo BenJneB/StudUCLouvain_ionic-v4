@@ -37,9 +37,9 @@ export class RssService {
 
   /*Load data from the RSS flux*/
   load(url: string, isSport: boolean = false) {
-    return new Promise( (resolve, reject) => {
-      this.http.get(url, {responseType: 'text'}).pipe(timeout(5000),
-      map(data =>  this.utilsServices.convertToJson(data))).subscribe( result => {
+    return new Promise((resolve, reject) => {
+      this.http.get(url, { responseType: 'text' }).pipe(timeout(5000),
+        map(data => this.utilsServices.convertToJson(data))).subscribe(result => {
           this.nbCalls++;
           if (isSport) {
             result = result['xml'];
@@ -57,9 +57,9 @@ export class RssService {
             resolve(result['item']);
           }
         },
-        err => {
-          reject(err);
-        });
+          err => {
+            reject(err);
+          });
     });
   }
 
@@ -73,7 +73,7 @@ export class RssService {
         } else {
           if (error === 2) {
             console.log('Loading items: GET req timed out > limit, suppose no items to display');
-          }  else {
+          } else {
             console.log('Error loading items: ' + error);
           }
           return {

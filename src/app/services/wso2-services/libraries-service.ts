@@ -44,7 +44,7 @@ export class LibrariesService {
       this.wso2Service.load(this.url).subscribe(
         data => {
           this.extractLibraries(data['return'].library);
-          resolve({libraries: this.libraries});
+          resolve({ libraries: this.libraries });
         });
     });
   }
@@ -56,7 +56,7 @@ export class LibrariesService {
       this.wso2Service.load(url_details).subscribe(
         data => {
           lib = this.extractLibraryDetails(lib, data['return'].library);
-          resolve({libDetails: lib});
+          resolve({ libDetails: lib });
         });
     });
   }
@@ -73,12 +73,12 @@ export class LibrariesService {
   /*Extract all the details for a specific library, the library selected by the user*/
   /*Retrieves all the necessary information*/
   private extractLibraryDetails(lib: LibraryItem, data: any): LibraryItem {
-    if ( data.locationId === null ) {
+    if (data.locationId === null) {
       lib.locationId = -1;
     } else {
       lib.locationId = data.locationId;
     }
-    if ( data.mapLocation === null ) {
+    if (data.mapLocation === null) {
       lib.mapLocation = new MapLocation(lib.name, '', '', '', '');
     } else {
       lib.mapLocation = new MapLocation(
@@ -89,17 +89,17 @@ export class LibrariesService {
         ''
       ); // TODO update maplocation with lat lng code
     }
-    if ( data.phone === null ) {
+    if (data.phone === null) {
       lib.phone = '';
     } else {
       lib.phone = data.phone.substr(3);
     }
-    if ( data.email === null ) {
+    if (data.email === null) {
       lib.email = false;
     } else {
       lib.email = data.email;
     }
-    if ( data.website === null ) {
+    if (data.website === null) {
       lib.website = '';
     } else {
       lib.website = data.website;

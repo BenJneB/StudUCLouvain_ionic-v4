@@ -44,15 +44,15 @@ export class NewsPage {
   @ViewChild('newsList', { read: IonList }) newsList: IonList;
   @ViewChild('news') content: IonContent;
 
-/*  //  USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
-  resize()
-  {
-    if (this.content)
+  /*  //  USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
+    resize()
     {
-      this.content.resize();
-      console.debug('content resize', this.content)
-    }
-  } */
+      if (this.content)
+      {
+        this.content.resize();
+        console.debug('content resize', this.content)
+      }
+    } */
 
   news: Array<NewsItem> = [];
   segment = 'univ';
@@ -63,14 +63,14 @@ export class NewsPage {
   searching: any = false;
   searchControl: FormControl;
   searchTerm = '';
-  title = 'Actualités' ;
+  title = 'Actualités';
   nonews: any = false;
   loading;
   fac = '';
   listFac: any = [];
   site = '';
   rss = '';
- // url = 'assets/data/fac.json';
+  // url = 'assets/data/fac.json';
 
   constructor(
     public platform: Platform,
@@ -85,24 +85,24 @@ export class NewsPage {
     private loader: LoaderService,
     private utilsServices: UtilsService,
     private router: Router) {
-      this.searchControl = new FormControl();
-      this.facService.loadResources().then((data) => {
-        this.listFac = data;
-      });
+    this.searchControl = new FormControl();
+    this.facService.loadResources().then((data) => {
+      this.listFac = data;
+    });
   }
 
   /*load the view, Call function to load news, display them*/
   ngOnInit() {
-   // Check the connexion, if it's ok, load the news
-   // if (this.connService.isOnline()) {
-      this.cachedOrNot();
-      this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
-        this.searching = false;
-        this.updateDisplayed();
-      });
-     // this.presentLoading();
-   // }
-   // If no connexion, go back to the previous page and pop an alert
+    // Check the connexion, if it's ok, load the news
+    // if (this.connService.isOnline()) {
+    this.cachedOrNot();
+    this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
+      this.searching = false;
+      this.updateDisplayed();
+    });
+    // this.presentLoading();
+    // }
+    // If no connexion, go back to the previous page and pop an alert
     /*else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -118,7 +118,7 @@ export class NewsPage {
   updateFac(fac: string) {
     this.fac = fac;
     this.userS.addFac(this.fac);
-   // this.resize();
+    // this.resize();
     const links = this.findSite();
     this.site = links.site;
     this.rss = links.rss;
@@ -130,7 +130,7 @@ export class NewsPage {
     for (const sector of this.listFac) {
       for (const facs of sector.facs) {
         if (facs.acro === this.fac) {
-          return {'site': facs.site, 'rss': facs.rss};
+          return { 'site': facs.site, 'rss': facs.rss };
         }
       }
     }
@@ -139,7 +139,7 @@ export class NewsPage {
   /*Remove a fac for a user*/
   removeFac(fac: string) {
     this.userS.removeFac();
-       // this.resize();
+    // this.resize();
   }
 
   /*Reload news if pull bellow the view*/
@@ -177,7 +177,7 @@ export class NewsPage {
 
   /*Tab change*/
   tabChanged() {
-   // this.resize();
+    // this.resize();
     if (this.segment === 'univ') { this.cachedOrNot(); }
     if (this.segment === 'fac') {
       this.fac = this.userS.fac;
@@ -192,22 +192,22 @@ export class NewsPage {
     }
   }
 
-/*Check if data are cached or not */
+  /*Check if data are cached or not */
   async cachedOrNot() {
-   // this.cache.removeItem('cache-P1');
+    // this.cache.removeItem('cache-P1');
     if (this.segment === 'univ') {
       const key = this.getKey();
       await this.cache.getItem(key)
-      .then((data) => {
-        this.loader.present('Please wait...');
-        this.news = data.items;
-        this.shownNews = data.showItems;
-        this.searching = false;
-        this.updateDisplayed();
-      })
-      .catch(() => {
-        this.loadNews(key);
-      });
+        .then((data) => {
+          this.loader.present('Please wait...');
+          this.news = data.items;
+          this.shownNews = data.showItems;
+          this.searching = false;
+          this.updateDisplayed();
+        })
+        .catch(() => {
+          this.loadNews(key);
+        });
     } else {
       this.loadNews();
     }
@@ -217,24 +217,24 @@ export class NewsPage {
   public loadNews(key?) {
     this.searching = true;
     this.news = [];
-   // Check connexion before load news
+    // Check connexion before load news
     if (this.connService.isOnline()) {
       this.loader.present('Please wait...');
       let actu = this.subsegment;
       if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
       this.newsService.getNews(actu)
-      .then(
-        result => {
-          this.news = result.items;
-          if (key) { this.cache.saveItem(key, result); }
-          this.shownNews = result.showItems;
-          this.searching = false;
-          this.nonews = this.news.length === 0;
-          this.updateDisplayed();
-      });
-   // If no connexion pop an alert and go back to previous page
+        .then(
+          result => {
+            this.news = result.items;
+            if (key) { this.cache.saveItem(key, result); }
+            this.shownNews = result.showItems;
+            this.searching = false;
+            this.nonews = this.news.length === 0;
+            this.updateDisplayed();
+          });
+      // If no connexion pop an alert and go back to previous page
     } else {
-     // return [];
+      // return [];
       this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();

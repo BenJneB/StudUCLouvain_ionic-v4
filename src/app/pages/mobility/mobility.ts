@@ -40,20 +40,26 @@ export class MobilityPage {
   ) {
     this.title = 'Mobilité';
     let titlecar: string;
-    this.translateService.get('MOBI.COVOIT').subscribe((res: string) => {titlecar = res; });
+    this.translateService.get('MOBI.COVOIT').subscribe((res: string) => { titlecar = res; });
 
-   // Information to launch external app
-    this.carpoolingPage = { title: titlecar, component: 'CarpoolingPage',
-                            iosSchemaName: 'id1143545052',
-                            androidPackageName: 'net.commuty.mobile',
-                            appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in' };
-    this.busPage = { title: 'NextRide', component: 'BusPage',
-                            iosSchemaName: 'id568042532',
-                            androidPackageName: 'be.thomashermine.prochainbus',
-                            appUrl: 'nextride://', httpUrl: 'https://nextride.be/timetables' };
-    this.trainPage = { title: 'SNCB', component: 'TrainPage',
-                            iosSchemaName: 'id403212064',
-                            androidPackageName: 'de.hafas.android.sncbnmbs',
-                            appUrl: 'sncb://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx' };
+    // Information to launch external app
+    this.carpoolingPage = {
+      title: titlecar, component: 'CarpoolingPage',
+      iosSchemaName: 'id1143545052',
+      androidPackageName: 'net.commuty.mobile',
+      appUrl: 'commutynet://', httpUrl: 'https://app.commuty.net/sign-in'
+    };
+    this.busPage = {
+      title: 'NextRide', component: 'BusPage',
+      iosSchemaName: 'id568042532',
+      androidPackageName: 'be.thomashermine.prochainbus',
+      appUrl: 'nextride://', httpUrl: 'https://nextride.be/timetables'
+    };
+    this.trainPage = {
+      title: 'SNCB', component: 'TrainPage',
+      iosSchemaName: 'id403212064',
+      androidPackageName: 'de.hafas.android.sncbnmbs',
+      appUrl: 'sncb://', httpUrl: 'http://www.belgianrail.be/fr/service-clientele/outils-voyage.aspx'
+    };
   }
 }

@@ -56,7 +56,7 @@ export class HebdoPage {
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem: IonItemSliding, activity: any) {
     let message: string;
-    this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => {message = res; });
+    this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => { message = res; });
     const datas = {
       title: activity.name + ': ' + activity.type,
       location: activity.entityCode,
@@ -64,6 +64,6 @@ export class HebdoPage {
       end: new Date(activity.eventendtime)
     };
     this.utilsServices.createEventInCalendar(datas, message, slidingItem);
-    this.alertService.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
+    this.alertService.alertCourse({ 'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3' });
   }
 }

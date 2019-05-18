@@ -33,7 +33,7 @@ import { RepertoireService } from '../../../services/wso2-services/repertoire-se
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
+      state('false', style({ height: '0' })),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -51,26 +51,26 @@ export class EmployeeDetailsPage {
     private router: Router,
     public repService: RepertoireService,
     public connService: ConnectivityService) {
-        this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(params => {
 
       if (this.router.getCurrentNavigation().extras.state) {
         this.empDetails = this.router.getCurrentNavigation().extras.state.items;
       }
       this.searching = true;
-   // Check if the connexion is Ok before search details pour an employee
-    if (this.connService.isOnline()) {
-      this.repService.loadEmpDetails(this.empDetails).then(
-        res => {
-          const result: any = res;
-          this.empDetails = result.empDetails;
-          console.log(this.empDetails);
-          this.searching = false;
-        }
-      );
-    } else {
-      this.searching = false;
-      this.connService.presentConnectionAlert();
-    }
+      // Check if the connexion is Ok before search details pour an employee
+      if (this.connService.isOnline()) {
+        this.repService.loadEmpDetails(this.empDetails).then(
+          res => {
+            const result: any = res;
+            this.empDetails = result.empDetails;
+            console.log(this.empDetails);
+            this.searching = false;
+          }
+        );
+      } else {
+        this.searching = false;
+        this.connService.presentConnectionAlert();
+      }
     });
 
   }
@@ -80,7 +80,7 @@ export class EmployeeDetailsPage {
 
   /*Open page with some aditionnal information*/
   openPage(url: string) {
-   // InAppBrowser.open(url, '_blank');
+    // InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');
   }
 }

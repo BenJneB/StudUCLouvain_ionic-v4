@@ -48,7 +48,7 @@ export class EmployeeItem {
     this.firstname = firstname;
     this.email = email;
     this.departments = departments;
-    this.address = address ;
+    this.address = address;
     this.businessContacts = businessContacts;
     this.contracts = contracts;
     this.gender = gender;

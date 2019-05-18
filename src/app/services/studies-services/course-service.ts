@@ -29,24 +29,24 @@ import { AdeService } from './ade-service';
 })
 export class CourseService {
 
-    space = '<br>&nbsp;&nbsp;&nbsp;&nbsp;';
-    constructor(
-      public http: HttpClient,
-      public ade: AdeService) {
-    }
+  space = '<br>&nbsp;&nbsp;&nbsp;&nbsp;';
+  constructor(
+    public http: HttpClient,
+    public ade: AdeService) {
+  }
 
-    /*Get the course ID for the acronym of the course*/
-    getCourseId(sessionId: string, acronym: string) {
-      this.getData(this.extractCourseId, this.ade.httpGetCourseId, sessionId, acronym);
-    }
+  /*Get the course ID for the acronym of the course*/
+  getCourseId(sessionId: string, acronym: string) {
+    this.getData(this.extractCourseId, this.ade.httpGetCourseId, sessionId, acronym);
+  }
 
-  getData(extract: (data: any) => any, getInfo: (sessionId: string, field: string) => void, sessionId: string, field: string)  {
-    return new Promise <Activity[]>( (resolve, reject) => {
+  getData(extract: (data: any) => any, getInfo: (sessionId: string, field: string) => void, sessionId: string, field: string) {
+    return new Promise<Activity[]>((resolve, reject) => {
       this.ade.httpGetActivity(sessionId, field).subscribe(
         data => {
           resolve(extract(data));
         });
-      });
+    });
   }
 
   /*Extract the course ID*/
@@ -61,49 +61,49 @@ export class CourseService {
     this.getData(this.extractActivity, this.ade.httpGetActivity, sessionId, courseId);
   }
 
-    /*Extract the activity*/
-    extractActivity(data): Activity[] {
-      let activities: Activity[] = [];
-      if (data.activities !== undefined) {
-        let activitiesList = data.activities.activity;
-        if (activitiesList.length === undefined) {
-           activitiesList = [];
-           activitiesList.push(data.activities.activity);
-         }
-        for (let i = 0; i < activitiesList.length ; i++) {
-          const activityElem = activitiesList[i];
-          const newActivities: Activity[] = this.createNewActivities(activityElem);
-          activities = activities.concat(newActivities);
-        }
+  /*Extract the activity*/
+  extractActivity(data): Activity[] {
+    let activities: Activity[] = [];
+    if (data.activities !== undefined) {
+      let activitiesList = data.activities.activity;
+      if (activitiesList.length === undefined) {
+        activitiesList = [];
+        activitiesList.push(data.activities.activity);
       }
-      return activities;
-    }
-
-    /*For each activity collect the right variables to be able to display them*/
-    createNewActivities(jsonActivity): Activity[] {
-      const activities: Activity[] = [];
-      const type = jsonActivity._type;
-      const isExam = type.indexOf('Examen') !== -1;
-      let events = jsonActivity.events.event;
-      if (events !== undefined) {
-        events = this.handleSpecialCase(events);
-
-        for (let i = 0; i < events.length; i++) {
-          const event = events[i];
-          const endHour = event._endHour;
-          const startHour = event._startHour;
-          const date = event._date;
-          const participants = event.eventParticipants.eventParticipant;
-          const { teachers, students, auditorium } = this.getItems(participants);
-          const start = this.createDate(date, startHour);
-          const end = this.createDate(date, endHour);
-          const name = event.$.name;
-          const activity = new Activity(type, teachers, students, start, end, auditorium, isExam, name);
-          activities.push(activity);
-        }
+      for (let i = 0; i < activitiesList.length; i++) {
+        const activityElem = activitiesList[i];
+        const newActivities: Activity[] = this.createNewActivities(activityElem);
+        activities = activities.concat(newActivities);
       }
-      return activities;
     }
+    return activities;
+  }
+
+  /*For each activity collect the right variables to be able to display them*/
+  createNewActivities(jsonActivity): Activity[] {
+    const activities: Activity[] = [];
+    const type = jsonActivity._type;
+    const isExam = type.indexOf('Examen') !== -1;
+    let events = jsonActivity.events.event;
+    if (events !== undefined) {
+      events = this.handleSpecialCase(events);
+
+      for (let i = 0; i < events.length; i++) {
+        const event = events[i];
+        const endHour = event._endHour;
+        const startHour = event._startHour;
+        const date = event._date;
+        const participants = event.eventParticipants.eventParticipant;
+        const { teachers, students, auditorium } = this.getItems(participants);
+        const start = this.createDate(date, startHour);
+        const end = this.createDate(date, endHour);
+        const name = event.$.name;
+        const activity = new Activity(type, teachers, students, start, end, auditorium, isExam, name);
+        activities.push(activity);
+      }
+    }
+    return activities;
+  }
 
   private handleSpecialCase(events: any) {
     if (events.length === undefined) {
@@ -114,30 +114,30 @@ export class CourseService {
     return events;
   }
 
-    /*Create a date*/
-    createDate(date: string, hour: string): Date {
-      const splitDate = date.split('/');
-      const splitHour = hour.split(':');
-      const newdate: Date = new Date(
-        parseInt(splitDate[2], 10),
-        parseInt(splitDate[1], 10) - 1,
-        parseInt(splitDate[0], 10),
-        parseInt(splitHour[0], 10),
-        parseInt(splitHour[1], 10)
-      );
-      return newdate;
-    }
+  /*Create a date*/
+  createDate(date: string, hour: string): Date {
+    const splitDate = date.split('/');
+    const splitHour = hour.split(':');
+    const newdate: Date = new Date(
+      parseInt(splitDate[2], 10),
+      parseInt(splitDate[1], 10) - 1,
+      parseInt(splitDate[0], 10),
+      parseInt(splitHour[0], 10),
+      parseInt(splitHour[1], 10)
+    );
+    return newdate;
+  }
 
-    getItems(participants) {
-      let students = '';
-      let teachers = '';
-      let auditorium = '';
-      for (let i = 0; i < participants.length; i++) {
-        ({ students, auditorium, teachers } = this.fillItems(participants, i, students, auditorium, teachers));
-      }
-      students = students.substr(0, students.length - 28);
-      return { teachers, students, auditorium };
+  getItems(participants) {
+    let students = '';
+    let teachers = '';
+    let auditorium = '';
+    for (let i = 0; i < participants.length; i++) {
+      ({ students, auditorium, teachers } = this.fillItems(participants, i, students, auditorium, teachers));
     }
+    students = students.substr(0, students.length - 28);
+    return { teachers, students, auditorium };
+  }
 
 
   private fillItems(participants: any, i: number, students: string, auditorium: string, teachers: string) {

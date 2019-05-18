@@ -21,15 +21,15 @@
 
 app-home {
 
-    .scroll-content{
+    .scroll-content {
         margin-top: 56px;
     }
 
-    .other{
+    .other {
         background-color: transparent;
     }
 
-    b{
+    b {
         color: black;
     }
 
@@ -55,33 +55,35 @@ app-home {
     }
 
 
-    ion-grid{
+    ion-grid {
         height: 100%;
 
-        ion-row.homeM{
+        ion-row.homeM {
             height: 20vh;
 
-            img{
+            img {
                 height: 16vh;
             }
-            p{
+
+            p {
                 margin-top: 0px;
             }
         }
 
-        ion-row.homeML{
+        ion-row.homeML {
             height: 25vh;
 
-            img{
+            img {
                 height: 18.75vh;
             }
-            p{
+
+            p {
                 margin-top: 0px;
             }
         }
     }
 
-/*     @media (all) and (orientation: landscape) {
+    /*     @media (all) and (orientation: landscape) {
         ion-row.homeM{
             display:none;
         }

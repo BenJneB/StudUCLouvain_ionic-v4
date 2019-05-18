@@ -13,11 +13,11 @@ describe('Guindaille2-0', () => {
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
 			declarations: [GuindaillePage],
-			imports: [	IonicModule.forRoot(this),
-						TranslateModule.forRoot(this)],
+			imports: [IonicModule.forRoot(this),
+			TranslateModule.forRoot(this)],
 			providers: [
 				NavController,
-				 {provide: NavParams, useClass: NavParamsMock},
+				{ provide: NavParams, useClass: NavParamsMock },
 				// {provide:TranslateService, useClass: TranslateServiceMock},
 				ModalController,
 				AlertController,
@@ -31,15 +31,15 @@ describe('Guindaille2-0', () => {
 		// expect(component).toBeDefined();
 	});
 
-	  it('should be created', () => {
-	    expect(component instanceof GuindaillePage).toBe(true);
-	  });
-	  it('should create', () => {
-    		expect(component).toBeDefined();
-  		});
-	  it('segment should be picto', () => {
-	    expect(component.segment).toBe('pict', 'on picto at first');
-	  });
+	it('should be created', () => {
+		expect(component instanceof GuindaillePage).toBe(true);
+	});
+	it('should create', () => {
+		expect(component).toBeDefined();
+	});
+	it('segment should be picto', () => {
+		expect(component.segment).toBe('pict', 'on picto at first');
+	});
 });
 
 

@@ -22,17 +22,19 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="setting">
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-          <img src="./assets/img/s.png" height="28"/>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <img src="./assets/img/s.png" height="28" />
+    </ion-buttons>
     <ion-title horizontal="center">{{title | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content padding>
-<ion-button expand="block" shape="round" color="setting" (click)="language_choice()">{{'SETTING.LANGUE' | translate }}</ion-button>
-<ion-button expand="block" shape="round" color="setting" (click)="campus_choice()">Campus</ion-button>
-<ion-button expand="block" shape="round" color="setting" (click)="openTuto()">{{'SETTING.TUTO' | translate }}</ion-button>
+  <ion-button expand="block" shape="round" color="setting" (click)="language_choice()">{{'SETTING.LANGUE' | translate }}
+  </ion-button>
+  <ion-button expand="block" shape="round" color="setting" (click)="campus_choice()">Campus</ion-button>
+  <ion-button expand="block" shape="round" color="setting" (click)="openTuto()">{{'SETTING.TUTO' | translate }}
+  </ion-button>
 </ion-content>

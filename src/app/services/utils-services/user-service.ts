@@ -29,15 +29,15 @@ export class UserService {
 
   favorites: string[] = [];
   campus = '';
-  slots: Array< { course: string, TP: string, CM: string }> = [];
+  slots: Array<{ course: string, TP: string, CM: string }> = [];
   fac = '';
 
   constructor(
     public eventss: Events,
     public storage: Storage
   ) {
-   //  USE THIS LINE TO CLEAR THE STORAGE
-   //  storage.clear();
+    //  USE THIS LINE TO CLEAR THE STORAGE
+    //  storage.clear();
     this.getFavorites();
   }
 
@@ -66,7 +66,7 @@ export class UserService {
 
   getSlot(acronym: string, type: string) {
     const index = this.slots.findIndex(item => item.course === acronym);
-    if (index  > -1) {
+    if (index > -1) {
       const elem = this.slots[index];
       if (type === 'TP') {
         return elem.TP;
@@ -83,11 +83,11 @@ export class UserService {
   }
 
   hasCampus() {
-    return(this.campus.length > 0);
+    return (this.campus.length > 0);
   }
 
   hasFac() {
-    return(this.fac.length > 0);
+    return (this.fac.length > 0);
   }
 
   hasSlot(acronym: string, type: string) {
@@ -143,15 +143,15 @@ export class UserService {
 
   removeSlotCM(acronym: string) {
     this.removeSlot(acronym, 'CM');
-}
-
-removeSlot(acronym: string, type: string) {
-  const index = this.slots.findIndex(item => item.course === acronym);
-  if (index > -1) {
-    this.slots[index][type] = '';
   }
-  this.storage.set('slots', this.slots);
-}
+
+  removeSlot(acronym: string, type: string) {
+    const index = this.slots.findIndex(item => item.course === acronym);
+    if (index > -1) {
+      this.slots[index][type] = '';
+    }
+    this.storage.set('slots', this.slots);
+  }
 
   addSlot(acronym: string, slot: string, type: string) {
     const index = this.slots.findIndex(item => item.course === acronym);

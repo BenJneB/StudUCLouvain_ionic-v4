@@ -33,14 +33,14 @@ export class StudiesService {
   data: any;
   constructor(
     public http: HttpClient,
-    public ade: AdeService) {}
+    public ade: AdeService) { }
 
   /*Open session for the user*/
   openSession() {
-    return new Promise<string>( (resolve, reject) => {
+    return new Promise<string>((resolve, reject) => {
       this.ade.httpOpenSession().subscribe(
         data => {
-          resolve( data['session'].$.id);
+          resolve(data['session'].$.id);
         }
       );
     });
@@ -48,13 +48,13 @@ export class StudiesService {
 
   /*Get the projects ADE*/
   getProjects(sessionId: string) {
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.ade.httpGetProjects(sessionId).subscribe(
         data => {
           resolve(this.extractAdeProjects(data));
-          }
-        );
-      });
+        }
+      );
+    });
   }
 
   /*Extract the projects ADE*/
@@ -68,7 +68,7 @@ export class StudiesService {
       const project = new AdeProject(id, name);
       projects.push(project);
     } else {
-      for (let i = 0 ; i < data.projects.project.length ; i++) {
+      for (let i = 0; i < data.projects.project.length; i++) {
         const name = data.projects.project[i].$.name.toString();
         const id = data.projects.project[i].$.id.toString();
         const project = new AdeProject(id, name);
@@ -80,9 +80,9 @@ export class StudiesService {
 
   /*Set the project selected by the user*/
   setProject(sessionId: string, projectId: string) {
-    return new Promise( (resolve, reject) => {
+    return new Promise((resolve, reject) => {
       this.ade.httpSetProject(sessionId, projectId).subscribe(
-        data => { resolve(data);       }
+        data => { resolve(data); }
       );
     });
   }

@@ -30,7 +30,7 @@ import { EventsService } from '../../../services/rss-services/events-service';
   templateUrl: 'events-filter.html'
 })
 export class EventsFilterPage {
-  categories: Array< {name: string, iconCategory: string, isChecked: boolean}> = [];
+  categories: Array<{ name: string, iconCategory: string, isChecked: boolean }> = [];
   dateRange: any;
 
   constructor(
@@ -38,17 +38,17 @@ export class EventsFilterPage {
     private navParams: NavParams,
     private alertService: AlertService
   ) {
-   // passed in array of categories names that should be excluded (unchecked)
-        const excludedFilters = this.navParams.get('excludedFilters');
-        const filters = this.navParams.get('filters');
-        this.dateRange = this.navParams.get('dateRange');
-        for (const filterName of filters) {
-          this.categories.push({
-            name: filterName,
-            iconCategory: 'assets/icon/events-icon/' + this.eventService.getIconCategory(filterName) + '.png',
-            isChecked: (excludedFilters.indexOf(filterName) === -1)
-          });
-        }
+    // passed in array of categories names that should be excluded (unchecked)
+    const excludedFilters = this.navParams.get('excludedFilters');
+    const filters = this.navParams.get('filters');
+    this.dateRange = this.navParams.get('dateRange');
+    for (const filterName of filters) {
+      this.categories.push({
+        name: filterName,
+        iconCategory: 'assets/icon/events-icon/' + this.eventService.getIconCategory(filterName) + '.png',
+        isChecked: (excludedFilters.indexOf(filterName) === -1)
+      });
+    }
   }
 
   /*Reset All of the Toggles to be checked*/

@@ -26,17 +26,17 @@ export class Wso2Service {
 
   constructor(public http: HttpClient) {
     this.getAppToken()
-    .subscribe(
+      .subscribe(
         data => {
-              this.headers = new HttpHeaders({'Authorization' : this.token});
-              this.headers.append('Accept', 'application/json');
+          this.headers = new HttpHeaders({ 'Authorization': this.token });
+          this.headers.append('Accept', 'application/json');
         });
   }
 
   /*Load wso2 service*/
   load(url: string) {
     const finalUrl = this.wso2ServiceBaseUrl + url;
-    return  this.http.get(finalUrl, {headers: this.headers}).pipe(
+    return this.http.get(finalUrl, { headers: this.headers }).pipe(
       map(res => res),
       catchError((error) => {
         console.log(error.status);
@@ -68,7 +68,7 @@ export class Wso2Service {
       finalUrl,
       body,
       { headers: headers }
-      ).pipe(
+    ).pipe(
       map(res => {
         this.tokenStudent = 'Bearer ' + res['access_token'];
         return 'OK';
@@ -77,9 +77,9 @@ export class Wso2Service {
   }
 
   loadStudent(url: string) {
-    const headers = new HttpHeaders({'Authorization': this.tokenStudent});
+    const headers = new HttpHeaders({ 'Authorization': this.tokenStudent });
     headers.append('Accept', 'application/json');
     const finalUrl = this.wso2ServiceBaseUrl + url;
-    return  this.http.get(finalUrl, {headers: headers}).pipe(map(res => res));
+    return this.http.get(finalUrl, { headers: headers }).pipe(map(res => res));
   }
 }

@@ -76,7 +76,7 @@ describe('MyApp Component', () => {
         Device,
         UserService*/
       ]
-    })
+    });
   }));
 
   beforeEach(() => {
@@ -84,7 +84,7 @@ describe('MyApp Component', () => {
     component = fixture.componentInstance;
   });
 
-  it ('should be created', () => {
+  it('should be created', () => {
     expect(component instanceof AppComponent).toBe(true);
   });
 

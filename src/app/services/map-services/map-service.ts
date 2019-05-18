@@ -51,14 +51,14 @@ export class MapService {
   onDevice: boolean;
 
   constructor(public connectivityService: ConnectivityService,
-              private geolocation: Geolocation,
-              private platform: Platform,
-              public menuCtrl: MenuController,
-              public userS: UserService) {
-                console.log('test yolo');
-                console.log('yolo');
-   // Check the platform used
-   // this.onDevice = this.platform.is('cordova');
+    private geolocation: Geolocation,
+    private platform: Platform,
+    public menuCtrl: MenuController,
+    public userS: UserService) {
+    console.log('test yolo');
+    console.log('yolo');
+    // Check the platform used
+    // this.onDevice = this.platform.is('cordova');
     console.log('yolo2');
 
     this.apiKey = jsApiKey;
@@ -67,16 +67,16 @@ export class MapService {
     console.log('before create');
     this.map = GoogleMaps.create('map');
     console.log(this.map);
-    this.map.one( GoogleMapsEvent.MAP_READY ).then( ( data: any ) => {
+    this.map.one(GoogleMapsEvent.MAP_READY).then((data: any) => {
 
-      const coordinates: LatLng = new LatLng( 36.7783, 119.4179 );
+      const coordinates: LatLng = new LatLng(36.7783, 119.4179);
 
       const position = {
         target: coordinates,
         zoom: 14
       };
 
-      this.map.animateCamera( position );
+      this.map.animateCamera(position);
 
       const markerOptions: MarkerOptions = {
         position: coordinates,
@@ -84,10 +84,10 @@ export class MapService {
         title: 'Hello California'
       };
 
-      const marker = this.map.addMarker( markerOptions )
-      .then( ( marker: Marker ) => {
-        marker.showInfoWindow();
-      });
+      const marker = this.map.addMarker(markerOptions)
+        .then((marker: Marker) => {
+          marker.showInfoWindow();
+        });
     });
     console.log('loaded map oooo!');
   }
@@ -151,23 +151,23 @@ export class MapService {
     this.mapInitialised = true;
     return new Promise((resolve, reject) => {
       this.geolocation.getCurrentPosition().then((position) => {
-          this.userLocation = new MapLocation( 'Ma Position',
-                                      'Mon adresse',
-                                      String(position.coords.latitude),
-                                      String(position.coords.longitude),
-                                      'MYPOS');
-          const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          const mapOptions = {
-            center: latLng,
-            zoom: 15,
-            mapTypeId: google.maps.MapTypeId.ROADMAP
-          };
-          this.map = new google.maps.Map(this.mapElement, mapOptions);
-          resolve(true);
-        }).catch((error) => {
-          console.log('Map error loadDeviceGoogleMaps: ' + error);
-          reject(false);
-        });
+        this.userLocation = new MapLocation('Ma Position',
+          'Mon adresse',
+          String(position.coords.latitude),
+          String(position.coords.longitude),
+          'MYPOS');
+        const latLng = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
+        const mapOptions = {
+          center: latLng,
+          zoom: 15,
+          mapTypeId: google.maps.MapTypeId.ROADMAP
+        };
+        this.map = new google.maps.Map(this.mapElement, mapOptions);
+        resolve(true);
+      }).catch((error) => {
+        console.log('Map error loadDeviceGoogleMaps: ' + error);
+        reject(false);
+      });
 
     });
   }
@@ -192,34 +192,34 @@ export class MapService {
   }
 
   /*Initializes the map, center the map on the position of the user by getting her, put the type of map in roadmap and set a zoom to 15*/
-   private async initDeviceMap(): Promise<any> {
+  private async initDeviceMap(): Promise<any> {
     console.log('Geolocation enabled ?');
-    if (await this.connectivityService.isLocationEnabled() ) {
+    if (await this.connectivityService.isLocationEnabled()) {
       console.log('Geolocation enabled');
       return new Promise((resolve, reject) => {
         console.log('initDeviceMap - ask geolocation');
         LocationService.getMyLocation().then(
           (position) => {
             console.log('initDeviceMap - geolocation answered');
-            this.userLocation = new MapLocation( 'Ma Position',
-                                        '',
-                                        String(position.latLng.lat),
-                                        String(position.latLng.lng),
-                                        'MYPOS');
+            this.userLocation = new MapLocation('Ma Position',
+              '',
+              String(position.latLng.lat),
+              String(position.latLng.lng),
+              'MYPOS');
 
-           // let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
+            // let latLng = new LatLng(position.coords.latitude, position.coords.longitude);
             const latLng = position.latLng;
             const mapOptions = {
               center: latLng,
               zoom: 15,
               mapTypeId: GoogleMapsMapTypeId.ROADMAP
             };
-           //  create CameraPosition
+            //  create CameraPosition
             const camPos: CameraPosition<LatLng> = {
               target: latLng,
               zoom: 15
             };
-           // this.map = new GoogleMap(this.mapElement, mapOptions);
+            // this.map = new GoogleMap(this.mapElement, mapOptions);
             this.map = GoogleMaps.create(this.mapElement, mapOptions);
             this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
               console.log('Map is ready!');
@@ -230,52 +230,52 @@ export class MapService {
             console.log('Map error initDeviceMap: ' + error);
             reject(false);
           });
+      });
+    } else {
+      return new Promise((resolve, reject) => {
+        console.log('Geolocation disabled');
+        const campus = this.userS.campus;
+        let latLng: LatLng;
+        if (campus === 'LLN') { latLng = new LatLng(50.66808100000001, 4.611832400000026); }
+        if (campus === 'Woluwe') { latLng = new LatLng(50.8489094, 4.432088300000032); }
+        if (campus === 'Mons') { latLng = new LatLng(50.45424080000001, 3.956658999999945); }
+
+        this.userLocation = new MapLocation('Campus Position',
+          '',
+          String(latLng.lat),
+          String(latLng.lng),
+          'CAMPUSPOS');
+        const mapOptions = {
+          center: latLng,
+          zoom: 15,
+          mapTypeId: GoogleMapsMapTypeId.ROADMAP
+        };
+        const camPos: CameraPosition<LatLng> = {
+          target: latLng,
+          zoom: 5
+        };
+
+        this.map = GoogleMaps.create(this.mapElement, mapOptions);
+        console.log('Map created');
+        this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
+          console.log('Map is ready!');
+
+
+          this.map.moveCamera(camPos);
+          resolve(true);
         });
-      } else {
-          return new Promise((resolve, reject) => {
-            console.log('Geolocation disabled');
-              const campus = this.userS.campus;
-              let latLng: LatLng;
-              if (campus === 'LLN') { latLng = new LatLng(50.66808100000001, 4.611832400000026); }
-              if (campus === 'Woluwe') { latLng = new LatLng(50.8489094, 4.432088300000032); }
-              if (campus === 'Mons') { latLng = new LatLng(50.45424080000001, 3.956658999999945); }
-
-              this.userLocation = new MapLocation( 'Campus Position',
-                                        '',
-                                        String(latLng.lat),
-                                        String(latLng.lng),
-                                        'CAMPUSPOS');
-              const mapOptions = {
-                center: latLng,
-                zoom: 15,
-                mapTypeId: GoogleMapsMapTypeId.ROADMAP
-              };
-              const camPos: CameraPosition<LatLng> = {
-                target: latLng,
-                zoom: 5
-              };
-
-            this.map = GoogleMaps.create(this.mapElement, mapOptions);
-            console.log('Map created');
-            this.map.on(GoogleMapsEvent.MAP_READY).subscribe(() => {
-              console.log('Map is ready!');
-
-
-              this.map.moveCamera(camPos);
-              resolve(true);
-            });
-        });
-      }
+      });
+    }
   }
 
   /*Add marker in the map for a location selected*/
   addMarker(location: MapLocation) {
-   // console.log(this.markers);
+    // console.log(this.markers);
     const marker = this.getMarker(location.title);
     if (!marker) {
       const contentString = '<p>' + location.address + '</p>';
       if (this.onDevice) {
-        this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng),  location.address, location.title);
+        this.addDeviceMarker(parseFloat(location.lat), parseFloat(location.lng), location.address, location.title);
       } else {
         this.addBrowserMarker(parseFloat(location.lat), parseFloat(location.lng), contentString, location.title);
       }
@@ -284,37 +284,37 @@ export class MapService {
         marker.showInfoWindow();
       }
     }
-   // console.log(this.markers);
+    // console.log(this.markers);
   }
 
   /*Remove a marker for a location unselected*/
   removeMarker(location: MapLocation) {
-     // console.log(location);
-     // console.log(this.markers);
-      let m;
-      if (this.onDevice) { m = this.markers; } else { m = this.markersB; }
-      for (let i = 0; i < m.length; i++) {
-         if (m[i].getTitle() === location.title) {
-         // console.log(this.markers[i]);
-         // let m: Marker = this.markers[i];
+    // console.log(location);
+    // console.log(this.markers);
+    let m;
+    if (this.onDevice) { m = this.markers; } else { m = this.markersB; }
+    for (let i = 0; i < m.length; i++) {
+      if (m[i].getTitle() === location.title) {
+        // console.log(this.markers[i]);
+        // let m: Marker = this.markers[i];
         // m.remove();
-         if (this.onDevice) {
-         this.markers[i].remove();
-         // this.markers[i].setMap(null);
-         // this.markers[i] = null;
+        if (this.onDevice) {
+          this.markers[i].remove();
+          // this.markers[i].setMap(null);
+          // this.markers[i] = null;
 
-         // console.log(this.markers);
-      	}
-          if (!this.onDevice) {
-           // m.remove();
-            this.markersB[i].setMap(null);
-           // this.map.clear();
-           // this.addMarker(this.userLocation);
-          }
-          this.markers.splice(i, 1);
+          // console.log(this.markers);
         }
+        if (!this.onDevice) {
+          // m.remove();
+          this.markersB[i].setMap(null);
+          // this.map.clear();
+          // this.addMarker(this.userLocation);
+        }
+        this.markers.splice(i, 1);
       }
-   }
+    }
+  }
 
   /*Add Marker in the map for the browser*/
   private addBrowserMarker(lat: number, lng: number, content: string, title: string) {
@@ -358,18 +358,18 @@ export class MapService {
   private getMarker(title: string): Marker {
     let res = null;
     if (this.onDevice) {
-	    this.markers.map((marker) => {
-	      if (marker.getTitle() === title) {
-	        res = marker;
-	      }
-	    });
-	} else {
-		this.markersB.map((marker) => {
-	      if (marker.getTitle() === title) {
-	        res = marker;
-	      }
-	    });
-	}
+      this.markers.map((marker) => {
+        if (marker.getTitle() === title) {
+          res = marker;
+        }
+      });
+    } else {
+      this.markersB.map((marker) => {
+        if (marker.getTitle() === title) {
+          res = marker;
+        }
+      });
+    }
     return res;
   }
 
@@ -435,25 +435,26 @@ export class MapService {
   /*Connectivity listener to check if the connexion persists*/
   private addConnectivityListeners() {
     document.addEventListener('online',
-      () => {setTimeout(
-        () => {
-          if (this.onDevice) {
-            if (!this.mapInitialised) {
-              this.initDeviceMap();
-            }
-            this.hidePleaseConnect();
-          } else {
-            if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
-              this.loadBrowserGoogleMaps();
-            } else {
+      () => {
+        setTimeout(
+          () => {
+            if (this.onDevice) {
               if (!this.mapInitialised) {
-                this.initBrowserMap();
+                this.initDeviceMap();
               }
-
               this.hidePleaseConnect();
+            } else {
+              if (typeof google === 'undefined' || typeof google.maps === 'undefined') {
+                this.loadBrowserGoogleMaps();
+              } else {
+                if (!this.mapInitialised) {
+                  this.initBrowserMap();
+                }
+
+                this.hidePleaseConnect();
+              }
             }
-          }
-        }, 2000);
+          }, 2000);
       }, false);
     document.addEventListener('offline',
       () => {
@@ -473,7 +474,7 @@ export class MapService {
     } else {
       this.markersB.map(
         marker => {
-         marker.setMap(null);
+          marker.setMap(null);
         }
       );
     }

@@ -9,10 +9,10 @@ import { EventsDetailsPage } from './events-details';
 @NgModule({
   declarations: [EventsDetailsPage],
   imports: [
-      IonicModule,
-      FormsModule,
-      TranslateModule.forChild(),
-      RouterModule.forChild([
+    IonicModule,
+    FormsModule,
+    TranslateModule.forChild(),
+    RouterModule.forChild([
       {
         path: '',
         component: EventsDetailsPage
