@@ -38,11 +38,4 @@ export class ExamPage {
               public navParams: NavParams) {
 
   }
-
-
-  ngOnInit() {
-
-  }
-
-
 }

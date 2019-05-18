@@ -102,8 +102,8 @@ export class CoursePage {
       data => {
         const courseId = data;
         this.courseService.getActivity(sessionId, courseId).then(
-          data => {
-            this.course.activities = data.sort(
+          courseData => {
+            this.course.activities = courseData.sort(
               (a1, a2) => a1.start.valueOf() - a2.start.valueOf()
             ).filter(
                 activitie => activitie.end.valueOf() > Date.now().valueOf()
@@ -186,9 +186,7 @@ export class CoursePage {
       buttons: [
       {
           text: cancel,
-          handler: data => {
-
-          }
+          handler: () => {}
       },
       {
           text: apply,
@@ -217,7 +215,7 @@ export class CoursePage {
     }
     const prompt = this.alertCtrl.create(options);
     if (options.inputs.length > 1) {
-      prompt.then(prompt => prompt.present());
+      prompt.then(p => p.present());
     }
   }
 
@@ -270,12 +268,13 @@ export class CoursePage {
     this.alertService.alertCourse({'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4'});
   }
 
-   openModalInfo() {
-    const myModal = this.modalCtrl.create(
+   async openModalInfo() {
+    const myModal = await this.modalCtrl.create(
       {
         component: ModalInfoPage,
         componentProps: {course: this.course, year: this.year},
         cssClass: 'modal-fullscreen'
-      }).then(modal => modal.present());
+      });
+      return await myModal.present();
    }
 }

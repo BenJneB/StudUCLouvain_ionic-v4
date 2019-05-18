@@ -82,7 +82,7 @@ export class MapPage {
 
   ngAfterViewInit() {
     console.log('aft vie in');
-		this.platform.ready().then( () => {
+    this.platform.ready().then( () => {
 
       this.mapService.loadMap();
       console.log('after load');

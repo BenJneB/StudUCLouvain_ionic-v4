@@ -50,18 +50,19 @@ export class ConnectivityService {
     }
   }
   /*pop up an alert to say to the user to connect him to the internet*/
-  presentConnectionAlert() {
+  async presentConnectionAlert() {
     let title: string;
     let message: string;
     let close: string;
     this.translateService.get('NET.TITLE').subscribe((res: string) => {title = res; });
     this.translateService.get('NET.CONNECT').subscribe((res: string) => {message = res; });
     this.translateService.get('NET.CLOSE').subscribe((res: string) => {close = res; });
-    const alert = this.alertCtrl.create({
+    const alert = await this.alertCtrl.create({
       header: title,
       subHeader: message,
       buttons: [close]
-    }).then(alert => alert.present());
+    });
+    return await alert.present();
   }
 
     successCallback = (isAvailable) => {

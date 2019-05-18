@@ -54,8 +54,7 @@ export class ParamPage {
     private translateService: TranslateService,
     private alertService: AlertService,
     private transService: TransService
-  )
-  {
+  ) {
     this.title = this.transService.getTranslation('MENU.SETTINGS');
   }
 

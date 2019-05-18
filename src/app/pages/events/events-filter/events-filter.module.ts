@@ -13,7 +13,7 @@ import { EventsFilterPage } from './events-filter';
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-  	TranslateModule.forChild(),
+    TranslateModule.forChild(),
   ],
   entryComponents: [
       EventsFilterPage

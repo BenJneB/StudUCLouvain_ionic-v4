@@ -13,7 +13,7 @@ import { CoursePage } from './course';
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-  	CommonModule,
+    CommonModule,
     TranslateModule.forChild(),
     RouterModule.forChild([
       {

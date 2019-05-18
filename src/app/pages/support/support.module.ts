@@ -13,7 +13,7 @@ import { SupportPage } from './support';
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-  	CommonModule,
+    CommonModule,
     TranslateModule.forChild(),
     RouterModule.forChild([
       {

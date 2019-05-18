@@ -47,7 +47,7 @@ export class POIService {
 
   /*Put the good campus for the user to display the good map with the good locations*/
   update() {
-    let campus = this.user.campus;
+    const campus = this.user.campus;
     if (campus === 'LLN') {
       this.url = this.urlLLN;
     }
@@ -70,17 +70,17 @@ export class POIService {
       return new Promise(resolve => {
         this.http.get(this.url).pipe(
           map(res => res)).subscribe(data => {
-            let tmpZones = data['zones'];
-            let auditoiresLength = tmpZones.auditoires.length;
-            let locauxLength = tmpZones.locaux.length;
-            let bibliothequesLength = tmpZones.bibliotheques.length;
-            let sportsLength = tmpZones.sports.length;
-            let restauULength = tmpZones.restaurants_universitaires.length;
-            let servicesLength = tmpZones.services.length;
-            let parkingsLength = tmpZones.parkings.length;
+            const tmpZones = data['zones'];
+            const auditoiresLength = tmpZones.auditoires.length;
+            const locauxLength = tmpZones.locaux.length;
+            const bibliothequesLength = tmpZones.bibliotheques.length;
+            const sportsLength = tmpZones.sports.length;
+            const restauULength = tmpZones.restaurants_universitaires.length;
+            const servicesLength = tmpZones.services.length;
+            const parkingsLength = tmpZones.parkings.length;
 
           // Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
-            function compare(a,b) {
+            function compare(a, b) {
               if (a.nom < b.nom) {
                 return -1;
               }
@@ -90,7 +90,7 @@ export class POIService {
               return 0;
             }
 
-            let newZone = {
+            const newZone = {
               auditoires: {
                 list: this.createMapLocations(tmpZones.auditoires.sort(compare)),
                 listChecked: Array(auditoiresLength).fill(false),
@@ -134,9 +134,9 @@ export class POIService {
 
   /*Create the locations for a type of places represented by a list (ex: auditoires, parkings, etc)*/
   private createMapLocations(list: any): Array<MapLocation> {
-    let locationsList: MapLocation[] = [];
-    for (let elem of list) {
-      let newLocation = new MapLocation(elem.nom,
+    const locationsList: MapLocation[] = [];
+    for (const elem of list) {
+      const newLocation = new MapLocation(elem.nom,
                                     elem.adresse,
                                     elem.coord.lat,
                                     elem.coord.lng,

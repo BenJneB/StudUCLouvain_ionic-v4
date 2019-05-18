@@ -10,8 +10,8 @@ import { RestaurantPage } from './restaurant';
 @NgModule({
   declarations: [RestaurantPage],
   imports: [
-  	IonicModule,
-  	TranslateModule.forChild(),
+    IonicModule,
+    TranslateModule.forChild(),
     ReactiveFormsModule,
     CommonModule,
     FormsModule,

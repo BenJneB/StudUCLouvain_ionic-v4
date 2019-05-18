@@ -125,11 +125,11 @@ export class NewsService {
     const dateTimeSplit = str.split(' ');
     const timeSplit = dateTimeSplit[4].split(':');
 
-    const year = parseInt(dateTimeSplit[3]);
+    const year = parseInt(dateTimeSplit[3], 10);
     const month = this.getMonthNumber(dateTimeSplit[2]);
-    const day = parseInt(dateTimeSplit[1]);
-    const hours = parseInt(timeSplit[0]);
-    const minutes = parseInt(timeSplit[1]);
+    const day = parseInt(dateTimeSplit[1], 10);
+    const hours = parseInt(timeSplit[0], 10);
+    const minutes = parseInt(timeSplit[1], 10);
 
     return new Date(year, month, day, hours, minutes);
   }

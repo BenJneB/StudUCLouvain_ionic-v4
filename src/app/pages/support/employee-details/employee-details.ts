@@ -45,7 +45,12 @@ export class EmployeeDetailsPage {
   address: any;
   searching = false;
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute, private router: Router, public repService: RepertoireService, public connService: ConnectivityService) {
+  constructor(
+    public navCtrl: NavController,
+    private route: ActivatedRoute,
+    private router: Router,
+    public repService: RepertoireService,
+    public connService: ConnectivityService) {
         this.route.queryParams.subscribe(params => {
 
       if (this.router.getCurrentNavigation().extras.state) {

@@ -92,7 +92,8 @@ export class RepertoireService {
     emp.businessContacts = data.businessContacts;
     emp.gender = data.gender;
     emp.photo_url = data.photo_url;
-   // let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments, data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
+   // let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments,
+   // data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
     return emp;
   }
 }
