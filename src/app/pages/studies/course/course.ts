@@ -179,7 +179,36 @@ export class CoursePage {
     this.translateService.get('COURSE.MESSAGE2').subscribe((res: string) => { message = res; });
     this.translateService.get('COURSE.CANCEL').subscribe((res: string) => { cancel = res; });
     this.translateService.get('COURSE.APPLY').subscribe((res: string) => { apply = res; });
-    const options = {
+    const options = this.getPromptOptions(title, message, cancel, apply, segment);
+    const aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
+    const array = this.getSlots(segment);
+    for (let i = 0; i < array.length; i++) {
+      const slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
+      options.inputs.push(
+        this.getInputsOption(array, i, slotChosen)
+      );
+    }
+    if (options.inputs.length > 1) {
+      options.inputs.push({ name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun });
+    }
+    const prompt = this.alertCtrl.create(options);
+    if (options.inputs.length > 1) {
+      prompt.then(p => p.present());
+    }
+  }
+
+  private getInputsOption(array: Activity[], i: number, slotChosen: boolean): any {
+    return {
+      name: 'options',
+      value: array[i].name,
+      label: array[i].name + ' ' + array[i].start.getHours() + ':' + array[i].start.getUTCMinutes(),
+      type: 'radio',
+      checked: slotChosen
+    };
+  }
+
+  private getPromptOptions(title: string, message: string, cancel: string, apply: string, segment: string) {
+    return {
       title: title,
       message: message,
       inputs: [],
@@ -197,27 +226,6 @@ export class CoursePage {
         }
       ]
     };
-    const aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
-    const array = this.getSlots(segment);
-    for (let i = 0; i < array.length; i++) {
-      const slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
-      options.inputs.push(
-        {
-          name: 'options',
-          value: array[i].name,
-          label: array[i].name + ' ' + array[i].start.getHours() + ':' + array[i].start.getUTCMinutes(),
-          type: 'radio',
-          checked: slotChosen
-        }
-      );
-    }
-    if (options.inputs.length > 1) {
-      options.inputs.push({ name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun });
-    }
-    const prompt = this.alertCtrl.create(options);
-    if (options.inputs.length > 1) {
-      prompt.then(p => p.present());
-    }
   }
 
   private addSlot(segment: string, data: any) {

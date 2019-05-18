@@ -89,21 +89,12 @@ export class LibrariesService {
         ''
       ); // TODO update maplocation with lat lng code
     }
-    if (data.phone === null) {
-      lib.phone = '';
-    } else {
-      lib.phone = data.phone.substr(3);
-    }
-    if (data.email === null) {
-      lib.email = false;
-    } else {
-      lib.email = data.email;
-    }
-    if (data.website === null) {
-      lib.website = '';
-    } else {
-      lib.website = data.website;
-    }
+    this.assignInfosDatas(data, lib);
+    this.assignHoursDaysDatas(data, lib);
+    return lib;
+  }
+
+  private assignHoursDaysDatas(data: any, lib: LibraryItem) {
     if (data.openingHours) {
       this.getOpeningHours(data.openingHours, lib.openingHours);
     }
@@ -113,15 +104,31 @@ export class LibrariesService {
     if (data.openingSummerHours) {
       this.getOpeningHours(data.openingSummerHours, lib.openingSummerHours);
     }
-
     lib.openingHoursNote = data.openingHoursNote;
-
     if (data.closedDates.length === undefined) {
       lib.closedDates = [data.closedDates];
     } else {
       lib.closedDates = data.closedDates;
     }
-    return lib;
+  }
+
+  private assignInfosDatas(data: any, lib: LibraryItem) {
+    const fieldsData = [
+      { datas: data.email, field: lib.email, nameField: 'email' },
+      { datas: data.website, field: lib.website, nameField: 'website' },
+      { datas: data.phone, field: lib.phone, nameField: 'phone' }
+    ];
+    for (const fieldItem of fieldsData) {
+      if (fieldItem.datas === null) {
+        fieldItem.field = this.assignField(fieldItem.nameField === 'email', false, true);
+      } else {
+        fieldItem.field = this.assignField(fieldItem.nameField === 'phone', fieldItem.datas.substr(3), fieldItem.datas);
+      }
+    }
+  }
+
+  private assignField(condition: boolean, yes: boolean | string, no: boolean | string) {
+    return condition ? yes : no;
   }
 
   private getOpeningHours(data: any, lib: Array<TimeSlot>) {
