@@ -22,7 +22,8 @@
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="dismiss()">{{'SPORTS.CANCEL' | translate}}</ion-button>
+      <ion-button (click)="alertService.applyFilters(categories, dateRange)">{{'SPORTS.CANCEL' | translate}}
+      </ion-button>
     </ion-buttons>
     <ion-row>
       <ion-col>

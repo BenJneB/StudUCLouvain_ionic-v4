@@ -37,7 +37,7 @@ export class CourseService {
 
   /*Get the course ID for the acronym of the course*/
   getCourseId(sessionId: string, acronym: string) {
-    this.getData(this.extractCourseId, this.ade.httpGetCourseId, sessionId, acronym);
+    return this.getData(this.extractCourseId, this.ade.httpGetCourseId, sessionId, acronym);
   }
 
   getData(extract: (data: any) => any, getInfo: (sessionId: string, field: string) => void, sessionId: string, field: string) {
@@ -57,8 +57,8 @@ export class CourseService {
   }
 
   /*Get activity for a course ID obtained by getting this from a course selected by the user*/
-  getActivity(sessionId: string, courseId: string) {
-    this.getData(this.extractActivity, this.ade.httpGetActivity, sessionId, courseId);
+  getActivity(sessionId: string, courseId: any) {
+    return this.getData(this.extractActivity, this.ade.httpGetActivity, sessionId, courseId);
   }
 
   /*Extract the activity*/
