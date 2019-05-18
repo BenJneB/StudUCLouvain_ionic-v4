@@ -214,11 +214,11 @@ export class SportsService {
   private createDateForSport(str: string, hour: string): Date {
       const timeSplit = hour.split(':');
       const dateSplit = str.split('/');
-      const year = parseInt(dateSplit[2]);
-      const month = parseInt(dateSplit[1]) - 1;
-      const day = parseInt(dateSplit[0]);
-      const hours = parseInt(timeSplit[0]);
-      const minutes = parseInt(timeSplit[1]);
+      const year = parseInt(dateSplit[2], 10);
+      const month = parseInt(dateSplit[1], 10) - 1;
+      const day = parseInt(dateSplit[0], 10);
+      const hours = parseInt(timeSplit[0], 10);
+      const minutes = parseInt(timeSplit[1], 10);
       return new Date(year, month, day, hours, minutes);
   }
 }

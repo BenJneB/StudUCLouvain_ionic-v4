@@ -122,11 +122,11 @@ export class CourseService {
       const splitDate = date.split('/');
       const splitHour = hour.split(':');
       const newdate: Date = new Date(
-        parseInt(splitDate[2]),
-        parseInt(splitDate[1]) - 1,
-        parseInt(splitDate[0]),
-        parseInt(splitHour[0]),
-        parseInt(splitHour[1])
+        parseInt(splitDate[2], 10),
+        parseInt(splitDate[1], 10) - 1,
+        parseInt(splitDate[0], 10),
+        parseInt(splitHour[0], 10),
+        parseInt(splitHour[1], 10)
       );
       return newdate;
     }

@@ -70,7 +70,7 @@ export class StudentService {
   public weekSchedule() {
     const newUrl = this.url + 'courseSchedules?date= ';
     let C =  7 - new Date().getDay();
-    if (C == 7) { C=C-1; }
+    if (C === 7) { C = C - 1; }
     const schedule: Array<any> = [];
     return new Promise(resolve => {
       for (let _i = 0; _i < C; _i++) {
@@ -87,7 +87,7 @@ export class StudentService {
                 ({ dayDate, items, res } = this.extractSchedule(res, date));
                 const daySchedule = { date: dayDate, schedule: items, day: day };
                 schedule.push(daySchedule);
-                schedule.sort((a, b) => parseInt(a.date.substr(0, 2)) - parseInt(b.date.substr(0, 2)));
+                schedule.sort((a, b) => parseInt(a.date.substr(0, 2), 10) - parseInt(b.date.substr(0, 2), 10));
               }
             });
       }
@@ -128,7 +128,7 @@ export class StudentService {
                 ({ dayDate, items, res } = this.extractSchedule(res, date));
                 const daySchedule = { date: dayDate, schedule: items };
                 schedule.push(daySchedule);
-                schedule.sort((a, b) => parseInt(a.date.substr(0, 2)) - parseInt(b.date.substr(0, 2)));
+                schedule.sort((a, b) => parseInt(a.date.substr(0, 2), 10) - parseInt(b.date.substr(0, 2), 10));
               }
             });
         resolve(schedule);

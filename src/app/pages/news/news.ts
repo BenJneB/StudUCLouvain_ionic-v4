@@ -148,11 +148,7 @@ export class NewsPage {
     if (this.connService.isOnline()) {
       if (doRefresh) {
         if (this.segment === 'univ') {
-          const part = this.subsegment;
-          let key;
-          if (part === 'P1') { key = 'cache-P1'; }
-          else if (part === 'P2') { key = 'cache-P2'; }
-          else { key = 'cache-P3'; }
+          const key = this.getKey();
           this.cache.removeItem(key);
           this.loadNews(key);
         } else { this.loadNews(); }
@@ -162,6 +158,19 @@ export class NewsPage {
       this.connService.presentConnectionAlert();
       refresher.target.complete();
     }
+  }
+
+  private getKey() {
+    const part = this.subsegment;
+    let key;
+    if (part === 'P1') {
+      key = 'cache-P1';
+    } else if (part === 'P2') {
+      key = 'cache-P2';
+    } else {
+      key = 'cache-P3';
+    }
+    return key;
   }
 
   /*Tab change*/
@@ -184,13 +193,8 @@ export class NewsPage {
 /*Check if data are cached or not */
   async cachedOrNot() {
    // this.cache.removeItem('cache-P1');
-    let key;
-    const part = this.subsegment;
     if (this.segment === 'univ') {
-
-      if (part === 'P1') { key = 'cache-P1'; }
-      else if (part === 'P2') { key = 'cache-P2'; }
-      else { key = 'cache-P3'; }
+      const key = this.getKey();
       await this.cache.getItem(key)
       .then((data) => {
         this.loader.present('Please wait...');
