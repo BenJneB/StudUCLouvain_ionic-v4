@@ -23,6 +23,8 @@ import { Market } from '@ionic-native/market/ngx';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
+import { UtilsService } from '../../services/utils-services/utils-services';
+
 @Component({
   selector: 'page-mobility',
   templateUrl: 'mobility.html'
@@ -37,6 +39,7 @@ export class MobilityPage {
     public nav: NavController,
     public market: Market,
     private translateService: TranslateService,
+    private utilsServices: UtilsService
   ) {
     this.title = 'Mobilité';
     let titlecar: string;
