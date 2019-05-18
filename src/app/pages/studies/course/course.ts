@@ -182,18 +182,20 @@ export class CoursePage {
     const options = this.getPromptOptions(title, message, cancel, apply, segment);
     const aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
     const array = this.getSlots(segment);
-    for (let i = 0; i < array.length; i++) {
-      const slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
-      options.inputs.push(
-        this.getInputsOption(array, i, slotChosen)
-      );
-    }
-    if (options.inputs.length > 1) {
-      options.inputs.push({ name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun });
-    }
+    this.fillInputs(array, options, aucun);
     const prompt = this.alertCtrl.create(options);
     if (options.inputs.length > 1) {
       prompt.then(p => p.present());
+    }
+  }
+
+  private fillInputs(array: Activity[], options: any, aucun: boolean) {
+    for (let i = 0; i < array.length; i++) {
+      const slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
+      options.inputs.push(this.getInputsOption(array, i, slotChosen));
+    }
+    if (options.inputs.length > 1) {
+      options.inputs.push({ name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun });
     }
   }
 
