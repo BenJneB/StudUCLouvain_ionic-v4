@@ -6,11 +6,8 @@
 ## Studies and Map Pages have not all functionalities fixed.
 
 
-### 95% Done :
-
-=> Refactor (WIP - 22 duplications - 16 smells remaining)
-
-==> Satisfy codeclimate/tslint (WIP : Statut D ==> A)
+### TO FIX
+#### ERROR Error: "Uncaught (in promise): overlay does not exist"
 
 
 ### To Do :
