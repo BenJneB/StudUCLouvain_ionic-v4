@@ -118,17 +118,17 @@ export class LibrariesService {
       { datas: data.website, field: lib.website, nameField: 'website' },
       { datas: data.phone, field: lib.phone, nameField: 'phone' }
     ];
-    for (const field of fieldsData) {
-      this.assignDatas(field);
+    for (const fieldItem of fieldsData) {
+      if (fieldItem.datas === null) {
+        fieldItem.field = this.assignField(fieldItem.nameField === 'email', false, true);
+      } else {
+        fieldItem.field = this.assignField(fieldItem.nameField === 'phone', fieldItem.datas.substr(3), fieldItem.datas);
+      }
     }
   }
 
-  private assignDatas(field: { datas: any; field: boolean; nameField: string; } | { datas: any; field: string; nameField: string; }) {
-    if (field.datas === null) {
-      field.field = field.nameField === 'email' ? false : true;
-    } else {
-      field.field = field.nameField === 'phone' ? field.datas.substr(3) : field.datas;
-    }
+  private assignField(condition: boolean, yes: boolean | string, no: boolean | string) {
+    return condition ? yes : no;
   }
 
   private getOpeningHours(data: any, lib: Array<TimeSlot>) {
