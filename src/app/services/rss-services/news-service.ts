@@ -43,7 +43,7 @@ export class NewsService {
   public getNews(segment: string) {
     let baseURL;
     this.news = [];
-    switch(segment) {
+    switch (segment) {
        case 'P2': {
           baseURL = this.url2;
           break;
@@ -67,29 +67,29 @@ export class NewsService {
   /*Extract news*/
   private extractNews(data: any) {
     if (data.length === undefined) {
-      let temp = data;
+      const temp = data;
       data = [];
       data.push(temp);
     }
     this.shownNews = 0;
-    let maxDescLength = 20;
+    const maxDescLength = 20;
     for (let i = 0; i < data.length; i++) {
       this.fillNews(data, i, maxDescLength);
     }
     return {
       items: this.news,
       shownItems: this.shownNews
-    }
+    };
   }
 
   private fillNews(data: any, i: number, maxDescLength: number) {
-    let item = data[i];
+    const item = data[i];
     const trimmedDescription = this.getTrimmedDescription(item, maxDescLength);
-    let hidden = false;
+    const hidden = false;
     this.shownNews++;
-    let pubDate = this.createDateForNews(item.pubDate);
+    const pubDate = this.createDateForNews(item.pubDate);
     const img = this.getImg(item);
-    let newNewsItem = new NewsItem(
+    const newNewsItem = new NewsItem(
       item.description || 'No description...',
       item.link || 'No link',
       item.title || 'No title',
@@ -122,21 +122,21 @@ export class NewsService {
   private createDateForNews(str: string): Date {
    // str: 'Fri, 07 Jul 2017 08:51:52 +0200'
    // new Date(Year: number, (month-1): number, day: number)
-    let dateTimeSplit = str.split(' ');
-    let timeSplit = dateTimeSplit[4].split(':');
+    const dateTimeSplit = str.split(' ');
+    const timeSplit = dateTimeSplit[4].split(':');
 
-    let year = parseInt(dateTimeSplit[3]);
-    let month = this.getMonthNumber(dateTimeSplit[2]);
-    let day = parseInt(dateTimeSplit[1]);
-    let hours = parseInt(timeSplit[0]);
-    let minutes = parseInt(timeSplit[1]);
+    const year = parseInt(dateTimeSplit[3]);
+    const month = this.getMonthNumber(dateTimeSplit[2]);
+    const day = parseInt(dateTimeSplit[1]);
+    const hours = parseInt(timeSplit[0]);
+    const minutes = parseInt(timeSplit[1]);
 
     return new Date(year, month, day, hours, minutes);
   }
 
   /*Get the right month number*/
   private getMonthNumber(str: string) {
-    let months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
     return months.indexOf(str);
   }
 }

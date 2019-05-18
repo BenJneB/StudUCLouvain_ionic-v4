@@ -56,7 +56,7 @@ export class NewsPage {
   news: Array<NewsItem> = [];
   segment = 'univ';
   subsegment = 'P1';
-  facsegment= 'news';
+  facsegment = 'news';
   shownNews = 0;
   displayedNews: Array<NewsItem> = [];
   searching: any = false;
@@ -74,7 +74,7 @@ export class NewsPage {
   constructor(
     public platform: Platform,
     public navCtrl: NavController,
-    public userS:UserService,
+    public userS: UserService,
     public newsService: NewsService,
     public connService: ConnectivityService,
     private iab: InAppBrowser,
@@ -82,11 +82,10 @@ export class NewsPage {
     public facService: FacService,
     private cache: CacheService,
     private loader: LoaderService,
-    private router: Router)
-  {
+    private router: Router) {
       this.searchControl = new FormControl();
       this.facService.loadResources().then((data) => {
-        this.listFac= data;
+        this.listFac = data;
       });
   }
 
@@ -118,7 +117,7 @@ export class NewsPage {
     this.fac = fac;
     this.userS.addFac(this.fac);
    // this.resize();
-    let links = this.findSite();
+    const links = this.findSite();
     this.site = links.site;
     this.rss = links.rss;
     this.loadNews();
@@ -126,10 +125,10 @@ export class NewsPage {
 
   /*If there is a site for a fac, return the good site*/
   findSite() {
-    for (let sector of this.listFac) {
-      for (let facs of sector.facs) {
+    for (const sector of this.listFac) {
+      for (const facs of sector.facs) {
         if (facs.acro === this.fac) {
-          return {'site':facs.site, 'rss': facs.rss};
+          return {'site': facs.site, 'rss': facs.rss};
         }
       }
     }
@@ -148,16 +147,15 @@ export class NewsPage {
     );
     if (this.connService.isOnline()) {
       if (doRefresh) {
-        if (this.segment=== 'univ') {
-          let part = this.subsegment;
+        if (this.segment === 'univ') {
+          const part = this.subsegment;
           let key;
-          if (part === 'P1') key = 'cache-P1';
-          else if (part === 'P2') key = 'cache-P2';
-          else key = 'cache-P3';
+          if (part === 'P1') { key = 'cache-P1'; }
+          else if (part === 'P2') { key = 'cache-P2'; }
+          else { key = 'cache-P3'; }
           this.cache.removeItem(key);
           this.loadNews(key);
-        }
-        else this.loadNews();
+        } else { this.loadNews(); }
       }
       refresher.target.complete();
     } else {
@@ -169,11 +167,11 @@ export class NewsPage {
   /*Tab change*/
   tabChanged() {
    // this.resize();
-    if (this.segment=== 'univ') this.cachedOrNot();
-    if (this.segment=== 'fac') {
-      this.fac=this.userS.fac;
+    if (this.segment === 'univ') { this.cachedOrNot(); }
+    if (this.segment === 'fac') {
+      this.fac = this.userS.fac;
       if (this.facsegment === 'news' && this.userS.hasFac()) {
-        let links = this.findSite();
+        const links = this.findSite();
         this.site = links.site;
         this.rss = links.rss;
 
@@ -187,25 +185,24 @@ export class NewsPage {
   async cachedOrNot() {
    // this.cache.removeItem('cache-P1');
     let key;
-    let part = this.subsegment;
+    const part = this.subsegment;
     if (this.segment === 'univ') {
 
-      if (part === 'P1') key = 'cache-P1';
-      else if (part === 'P2') key = 'cache-P2';
-      else key = 'cache-P3';
+      if (part === 'P1') { key = 'cache-P1'; }
+      else if (part === 'P2') { key = 'cache-P2'; }
+      else { key = 'cache-P3'; }
       await this.cache.getItem(key)
       .then((data) => {
         this.loader.present('Please wait...');
         this.news = data.items;
         this.shownNews = data.showItems;
-        this.searching =false;
+        this.searching = false;
         this.updateDisplayed();
       })
       .catch(() => {
         this.loadNews(key);
       });
-    }
-    else {
+    } else {
       this.loadNews();
     }
   }
@@ -218,17 +215,17 @@ export class NewsPage {
     if (this.connService.isOnline()) {
       this.loader.present('Please wait...');
       let actu = this.subsegment;
-      if (this.segment === 'fac' && this.facsegment === 'news') actu = this.rss;
+      if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
       this.newsService.getNews(actu)
       .then(
         result => {
           this.news = result.items;
-          if (key) this.cache.saveItem(key, result);
+          if (key) { this.cache.saveItem(key, result); }
           this.shownNews = result.showItems;
           this.searching = false;
           this.nonews = this.news.length === 0;
           this.updateDisplayed();
-      })
+      });
    // If no connexion pop an alert and go back to previous page
     } else {
      // return [];
@@ -254,7 +251,7 @@ export class NewsPage {
 
   /*When click on a news, go to the page with more details*/
   public goToNewsDetail(news: NewsItem) {
-    let navigationExtras: NavigationExtras = {
+    const navigationExtras: NavigationExtras = {
       state: {
         news: news
       }

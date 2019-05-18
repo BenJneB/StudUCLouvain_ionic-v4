@@ -36,8 +36,7 @@ export class CreditPage {
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
               private iab: InAppBrowser,
-              private appVersion: AppVersion)
-  {
+              private appVersion: AppVersion) {
     this.title = 'Crédits';
     this.appVersion.getVersionNumber().then(version => {
       this.version = version;

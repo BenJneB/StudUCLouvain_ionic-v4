@@ -41,8 +41,8 @@ export class RssService {
       this.http.get(url, {responseType: 'text'}).pipe(timeout(5000),
       map(data =>  this.utilsServices.convertToJson(data))).subscribe( result => {
           this.nbCalls++;
-          if (isSport) result = result['xml'];
-          else result = result['rss']['channel'];
+          if (isSport) { result = result['xml']; }
+          else { result = result['rss']['channel']; }
           if (result === null) {
             if (this.nbCalls >= this.callLimit) {
               this.nbCalls = 0;
@@ -56,7 +56,7 @@ export class RssService {
         },
         err => {
           reject(err);
-        });;
+        }); ;
     });
   }
 

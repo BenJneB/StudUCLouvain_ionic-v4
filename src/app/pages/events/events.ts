@@ -60,7 +60,7 @@ export class EventsPage {
 
   now = new Date();
   year = this.now.getFullYear();
-  noevents: any =false;
+  noevents: any = false;
   displayedEventsD: any = [];
 
   weekUCL = 5;
@@ -70,7 +70,7 @@ export class EventsPage {
     'FAV3': 'EVENTS.MESSAGEFAV3',
     'CANCEL': 'EVENTS.CANCEL',
     'DEL': 'EVENTS.DEL',
-  }
+  };
   constructor(
     public alertCtrl: AlertController,
     private navCtrl: NavController,
@@ -118,7 +118,7 @@ export class EventsPage {
     /*Check if data are cached or not */
     async cachedOrNot() {
      // this.cache.removeItem('cache-event');
-        let key = 'cache-event';
+        const key = 'cache-event';
         await this.cache.getItem(key)
         .then((data) => {
           this.loader.present('Please wait...');
@@ -147,7 +147,7 @@ export class EventsPage {
       this.loader.present('Please wait...');
       this.eventsService.getEvents(this.segment).then(
         res => {
-          let result: any = res;
+          const result: any = res;
           this.events = result.items;
           if (key) {
             this.cache.saveItem(key, result);
@@ -157,7 +157,7 @@ export class EventsPage {
           this.searching = false;
           this.noevents = this.events.length === 0;
           this.updateDisplayed();
-      })
+      });
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -168,16 +168,16 @@ export class EventsPage {
    /*Make an array with events sorted by week*/
    changeArray(array, weekUCL) {
      const getWeek = this.getWeek;
-    let groups = array.reduce(function(obj,item) {
-      let date = new Date(item.startDate.getTime());
-      date.setHours(0,0,0,0);
-      date.setDate(date.getDate() + 3 - (date.getDay() +6) %7);
+    const groups = array.reduce(function(obj, item) {
+      const date = new Date(item.startDate.getTime());
+      date.setHours(0, 0, 0, 0);
+      date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
       const week = getWeek(date); // - weekUCL;
       obj[week] = obj[week] || [];
       obj[week].push(item);
       return obj;
     }, {});
-    let eventsD = Object.keys(groups).map(function(key) {
+    const eventsD = Object.keys(groups).map(function(key) {
       return {
         weeks: key,
         event: groups[key]
@@ -187,24 +187,24 @@ export class EventsPage {
   }
 
   private getWeek(date: Date) {
-    let temp = new Date(date.getFullYear(), 0, 4);
+    const temp = new Date(date.getFullYear(), 0, 4);
     return 1 + Math.round(((date.getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7); //  - weekUCL;
   }
 
   /*Returns the ISO week of the date*/
-  getISOWeek(d:Date) {
-    let date = new Date(d.getTime());
+  getISOWeek(d: Date) {
+    const date = new Date(d.getTime());
     date.setHours(0, 0, 0, 0);
    //  Thursday in current week decides the year.
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
    //  January 4 is always in week 1.
-    let week1 = new Date(date.getFullYear(), 0, 4);
+    const week1 = new Date(date.getFullYear(), 0, 4);
    //  Adjust to Thursday in week 1 and count number of weeks from date to week1.
     return this.getWeek(date);
   }
 
   /*Return first day of the week and last day of the week (to display range)*/
-  getRangeWeek(week,year) {
+  getRangeWeek(week, year) {
     let d1, numOfdaysPastSinceLastMonday, rangeIsFrom, rangeIsTo;
     d1 = new Date('' + year + '');
     numOfdaysPastSinceLastMonday = d1.getDay() - 1;
@@ -213,9 +213,9 @@ export class EventsPage {
     rangeIsFrom = (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear();
     d1.setDate(d1.getDate() + 6);
     rangeIsTo = (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear() ;
-    rangeIsTo = rangeIsTo.replace(/-/g, '/')
-    rangeIsFrom = rangeIsFrom.replace(/-/g, '/')
-    return {from:rangeIsFrom, to:rangeIsTo};
+    rangeIsTo = rangeIsTo.replace(/-/g, '/');
+    rangeIsFrom = rangeIsFrom.replace(/-/g, '/');
+    return {from: rangeIsFrom, to: rangeIsTo};
   }
 
   /*Update the displayed events and close the loading when it's finished*/
@@ -229,7 +229,7 @@ export class EventsPage {
     }
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
-    this.displayedEventsD = this.changeArray(this.displayedEvents,this.weekUCL);
+    this.displayedEventsD = this.changeArray(this.displayedEvents, this.weekUCL);
     this.loader.dismiss();
   }
 
@@ -239,7 +239,7 @@ export class EventsPage {
     if (this.filters === undefined) {
       this.filters = [];
     }
-    let modal = await this.modalCtrl.create(
+    const modal = await this.modalCtrl.create(
       {
         component: EventsFilterPage,
         componentProps: { excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange}
@@ -249,7 +249,7 @@ export class EventsPage {
      await modal.onDidDismiss().then((data: OverlayEventDetail) => {
       if (data) {
         data = data.data;
-        let tmpRange = data[1];
+        const tmpRange = data[1];
         if (tmpRange !== this.dateRange) {
           this.dateRange = tmpRange;
           this.updateDateLimit();
@@ -262,8 +262,8 @@ export class EventsPage {
 
   /*Update the date limit, take account if a change is done by filter with the dateRange value*/
   private updateDateLimit() {
-    let today = new Date();
-    this.dateLimit = new Date(today.getFullYear(), today.getMonth()+this.dateRange, today.getUTCDate()+1);
+    const today = new Date();
+    this.dateLimit = new Date(today.getFullYear(), today.getMonth() + this.dateRange, today.getUTCDate() + 1);
   }
 
   toggleGroup(week: string) {
@@ -271,7 +271,7 @@ export class EventsPage {
   }
 
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
-  public createEvent(slidingItem: IonItemSliding, itemData: any):void {
+  public createEvent(slidingItem: IonItemSliding, itemData: any): void {
     let message: string;
     this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => {message = res; });
     const datas = {
@@ -279,7 +279,7 @@ export class EventsPage {
       location: itemData.location,
       start: itemData.startDate,
       end: itemData.endDate
-    }
+    };
     this.utilsServices.createEventInCalendar(datas, message, slidingItem);
   }
 }

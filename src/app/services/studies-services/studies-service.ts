@@ -60,19 +60,19 @@ export class StudiesService {
   /*Extract the projects ADE*/
   extractAdeProjects(data): AdeProject[] {
     const projects: AdeProject[] = [];
-    console.log(data.projects)
-    console.log(data.projects.project.length)
+    console.log(data.projects);
+    console.log(data.projects.project.length);
     if (data.projects.project.length === undefined) {
-      let name = data.projects.project.$.name.toString();
-      let id = data.projects.project.$.id.toString();
-      let project = new AdeProject(id, name);
-      projects.push(project)
+      const name = data.projects.project.$.name.toString();
+      const id = data.projects.project.$.id.toString();
+      const project = new AdeProject(id, name);
+      projects.push(project);
     } else {
-      for (let i = 0 ; i <data.projects.project.length ; i++) {
-        let name = data.projects.project[i].$.name.toString();
-        let id = data.projects.project[i].$.id.toString();
-        let project = new AdeProject(id, name);
-        projects.push(project)
+      for (let i = 0 ; i < data.projects.project.length ; i++) {
+        const name = data.projects.project[i].$.name.toString();
+        const id = data.projects.project[i].$.id.toString();
+        const project = new AdeProject(id, name);
+        projects.push(project);
       }
     }
     return projects;

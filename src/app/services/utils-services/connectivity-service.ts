@@ -57,7 +57,7 @@ export class ConnectivityService {
     this.translateService.get('NET.TITLE').subscribe((res: string) => {title = res; });
     this.translateService.get('NET.CONNECT').subscribe((res: string) => {message = res; });
     this.translateService.get('NET.CLOSE').subscribe((res: string) => {close = res; });
-    let alert = this.alertCtrl.create({
+    const alert = this.alertCtrl.create({
       header: title,
       subHeader: message,
       buttons: [close]
@@ -67,7 +67,7 @@ export class ConnectivityService {
     successCallback = (isAvailable) => {
                       this.available = isAvailable;
                       return isAvailable;
-                    };
+                    }
 
     errorCallback = (e) => console.error(e);
 

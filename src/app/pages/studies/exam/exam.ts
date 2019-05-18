@@ -33,10 +33,9 @@ export class ExamPage {
 
   constructor(public navCtrl: NavController,
               public toastCtrl: ToastController,
-              public userS:UserService,
+              public userS: UserService,
               public modalCtrl: ModalController,
-              public navParams:NavParams)
-  {
+              public navParams: NavParams) {
 
   }
 

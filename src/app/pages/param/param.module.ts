@@ -22,6 +22,6 @@ import { ParamPage } from './param';
       }
     ])
   ]
-  
+
 })
 export class ParamPageModule { }

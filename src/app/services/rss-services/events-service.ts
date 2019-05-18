@@ -44,16 +44,16 @@ export class EventsService {
   /*Extraction of events*/
   private extractEvents(data: any) {
     this.shownEvents = 0;
-    let maxDescLength = 20;
+    const maxDescLength = 20;
     if (data === undefined) {
-      console.log('Error events data undefined!!!')
+      console.log('Error events data undefined!!!');
       return;
     }
     for (let i = 0; i < data.length; i++) {
-      let item = data[i];
-      let trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
+      const item = data[i];
+      const trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
       let favorite = false;
-      let hidden = false;
+      const hidden = false;
       let iconCategory = 'assets/icon/events-icon/other.png';
       if (this.user.hasFavorite(item.guid)) {
         favorite = true;
@@ -65,9 +65,9 @@ export class EventsService {
         iconCategory = 'assets/icon/events-icon/' + this.getIconCategory(item.category) + '.png';
       }
       this.shownEvents++;
-      let startDate = this.createDateForEvent(item.date_begin);
-      let endDate = this.createDateForEvent(item.date_end);
-      let newEventItem = new EventItem(item.description, item.link, item.title, item.photo, trimmedDescription, item.location,
+      const startDate = this.createDateForEvent(item.date_begin);
+      const endDate = this.createDateForEvent(item.date_end);
+      const newEventItem = new EventItem(item.description, item.link, item.title, item.photo, trimmedDescription, item.location,
                       hidden, favorite, item.guid, startDate, endDate, item.category, iconCategory);
       this.events.push(newEventItem);
     }
@@ -75,34 +75,34 @@ export class EventsService {
       items: this.events,
       shownItems: this.shownEvents,
       categories: this.allCategories
-    }
+    };
   }
 
   /*Get the good icon for a catagory*/
   public getIconCategory(category: string): string {
-    switch(category.toLowerCase()) {
+    switch (category.toLowerCase()) {
       case 'sensibilisation': return 'sensibilisation';
       case 'animation': return 'animation';
       case 'culturel et artistique': return 'cultural';
       case 'guindaille': return 'party';
       case 'sportif': return 'sports';
-      case 'services et aides': return 'services'
+      case 'services et aides': return 'services';
       default: return 'other';
     }
   }
 
   /*Return a date in good form by splitting for the event*/
-  private createDateForEvent(str: string):Date {
+  private createDateForEvent(str: string): Date {
    // new Date(Year: number, (month-1): number, day: number)
-    let dateTimeSplit = str.split(' ');
-    let dateSplit = dateTimeSplit[0].split('/');
-    let timeSplit = dateTimeSplit[1].split(':');
+    const dateTimeSplit = str.split(' ');
+    const dateSplit = dateTimeSplit[0].split('/');
+    const timeSplit = dateTimeSplit[1].split(':');
 
-    let year = parseInt(dateSplit[2]);
-    let month = parseInt(dateSplit[1])-1;
-    let day = parseInt(dateSplit[0]);
-    let hours = parseInt(timeSplit[0]);
-    let minutes = parseInt(timeSplit[1]);
+    const year = parseInt(dateSplit[2]);
+    const month = parseInt(dateSplit[1]) - 1;
+    const day = parseInt(dateSplit[0]);
+    const hours = parseInt(timeSplit[0]);
+    const minutes = parseInt(timeSplit[1]);
 
     return new Date(year, month, day, hours, minutes);
   }

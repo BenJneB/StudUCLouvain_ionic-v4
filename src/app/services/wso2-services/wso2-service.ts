@@ -35,7 +35,7 @@ export class Wso2Service {
 
   /*Load wso2 service*/
   load(url: string) {
-    let finalUrl = this.wso2ServiceBaseUrl + url;
+    const finalUrl = this.wso2ServiceBaseUrl + url;
     return  this.http.get(finalUrl, {headers: this.headers}).pipe(
       map(res => res),
       catchError((error) => {
@@ -55,15 +55,15 @@ export class Wso2Service {
     return this.getToken(body);
   }
 
-  login(user : string, pass : string) {
-    const body = new HttpParams().set('grant_type', 'password').set('username',user).set('password',pass);
+  login(user: string, pass: string) {
+    const body = new HttpParams().set('grant_type', 'password').set('username', user).set('password', pass);
     return this.getToken(body);
   }
 
   private getToken(body: HttpParams) {
-    let headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent });
+    const headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent });
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
-    let finalUrl = this.wso2ServiceBaseUrl + 'token';
+    const finalUrl = this.wso2ServiceBaseUrl + 'token';
     return this.http.post(
       finalUrl,
       body,
@@ -77,9 +77,9 @@ export class Wso2Service {
   }
 
   loadStudent(url: string) {
-    let headers = new HttpHeaders({'Authorization': this.tokenStudent});
+    const headers = new HttpHeaders({'Authorization': this.tokenStudent});
     headers.append('Accept', 'application/json');
-    let finalUrl = this.wso2ServiceBaseUrl + url;
+    const finalUrl = this.wso2ServiceBaseUrl + url;
     return  this.http.get(finalUrl, {headers: headers}).pipe(map(res => res));
   }
 }
