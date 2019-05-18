@@ -79,7 +79,7 @@ export class POIService {
             const servicesLength = tmpZones.services.length;
             const parkingsLength = tmpZones.parkings.length;
 
-          // Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
+            // Create for the zone all the locations for each type places (ex: auditoires, parkings, etc) and push that
             function compare(a, b) {
               if (a.nom < b.nom) {
                 return -1;
@@ -94,36 +94,43 @@ export class POIService {
               auditoires: {
                 list: this.createMapLocations(tmpZones.auditoires.sort(compare)),
                 listChecked: Array(auditoiresLength).fill(false),
-                          showDetails: false},
+                showDetails: false
+              },
               locaux: {
                 list: this.createMapLocations(tmpZones.locaux.sort(compare)),
                 listChecked: Array(locauxLength).fill(false),
-                          showDetails: false},
+                showDetails: false
+              },
               bibliotheques: {
                 list: this.createMapLocations(tmpZones.bibliotheques.sort(compare)),
                 listChecked: Array(bibliothequesLength).fill(false),
-                          showDetails: false},
+                showDetails: false
+              },
               sports: {
                 list: this.createMapLocations(tmpZones.sports.sort(compare)),
                 listChecked: Array(sportsLength).fill(false),
-                          showDetails: false},
+                showDetails: false
+              },
               restaurants_universitaires: {
                 list: this.createMapLocations(tmpZones.restaurants_universitaires.sort(compare)),
                 listChecked: Array(restauULength).fill(false),
-                          showDetails: false},
+                showDetails: false
+              },
               services: {
                 list: this.createMapLocations(tmpZones.services.sort(compare)),
                 listChecked: Array(servicesLength).fill(false),
-                          showDetails: false},
+                showDetails: false
+              },
               parkings: {
                 list: this.createMapLocations(tmpZones.parkings.sort(compare)),
                 listChecked: Array(parkingsLength).fill(false),
-                          showDetails: false},
+                showDetails: false
+              },
               icon: 'arrow-dropdown',
             };
             this.zones.push(newZone);
-          resolve(this.zones);
-        });
+            resolve(this.zones);
+          });
       });
     } else {
       return new Promise(resolve => {
@@ -137,10 +144,10 @@ export class POIService {
     const locationsList: MapLocation[] = [];
     for (const elem of list) {
       const newLocation = new MapLocation(elem.nom,
-                                    elem.adresse,
-                                    elem.coord.lat,
-                                    elem.coord.lng,
-                                    elem.sigle);
+        elem.adresse,
+        elem.coord.lat,
+        elem.coord.lng,
+        elem.sigle);
       locationsList.push(newLocation);
     }
     return locationsList;

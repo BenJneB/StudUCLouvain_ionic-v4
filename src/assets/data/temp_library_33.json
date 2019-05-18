@@ -14,8 +14,7 @@
       "phone": "+32 (0) 10 47 46 31",
       "email": null,
       "website": "https://uclouvain.be/fr/bibliotheques/bdrt",
-      "openingHours": [
-        {
+      "openingHours": [{
           "day": "Lundi",
           "startHour": "10:00",
           "endHour": "18:45"
@@ -41,8 +40,7 @@
           "endHour": "16:45"
         }
       ],
-      "openingExaminationHours": [
-        {
+      "openingExaminationHours": [{
           "day": "Lundi",
           "startHour": "10:00",
           "endHour": "17:45"
@@ -68,8 +66,7 @@
           "endHour": "16:45"
         }
       ],
-      "openingSummerHours": [
-        {
+      "openingSummerHours": [{
           "day": "Lundi",
           "startHour": "10:00",
           "endHour": "16:45"
@@ -96,8 +93,7 @@
         }
       ],
       "openingHoursNote": " L’horaire d’été s’étale de la fin de la session d’examens de juin à la rentrée académique (mi-septembre).",
-      "closedDates": [
-        {
+      "closedDates": [{
           "from": "Mardi, 27 septembre 2016",
           "description": "Fête de la Fédération Wallonie-Bruxelles"
         },

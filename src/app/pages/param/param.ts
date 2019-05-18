@@ -35,7 +35,7 @@ import { UserService } from '../../services/utils-services/user-service';
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
+      state('false', style({ height: '0' })),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])

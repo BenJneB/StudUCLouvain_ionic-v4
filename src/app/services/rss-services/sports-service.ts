@@ -44,18 +44,18 @@ export class SportsService {
 
   /*Get the good URL in function of the user's campus*/
   update() {
-   // reset url
+    // reset url
     this.url = 'https://uclsport.uclouvain.be/smartrss.php?-public=etu&-startdate= ';
     this.urlT = 'https://uclsport.uclouvain.be/smartrss.php?-public=equip&-startdate= ';
 
-   //  first day of the week: today
+    //  first day of the week: today
     const { todayString, endString } = this.getSportsDates(dateToString);
 
-   // which campus ?
+    // which campus ?
     const site = this.getSportCampus();
 
-   // final URL
-    const restUrl = todayString + '&-enddate= ' + endString + '&-site= ' ;
+    // final URL
+    const restUrl = todayString + '&-enddate= ' + endString + '&-site= ';
     const urlTemp = this.url + restUrl + site;
     const urlTempT = this.urlT + restUrl + 'louv';
     this.url = urlTemp;
@@ -114,7 +114,7 @@ export class SportsService {
         shownSports: datas['shownSports'],
         categories: datas['categories']
       };
-    }) .catch(error => {
+    }).catch(error => {
       if (error === 1) {
         return this.getSports(segment);
       } else {
@@ -190,7 +190,7 @@ export class SportsService {
     }
     if (isSport) {
       this.shownSports++;
-    }  else {
+    } else {
       this.shownTeams++;
     }
   }
@@ -212,13 +212,13 @@ export class SportsService {
 
   /*Return a date in good form by splitting for the sport*/
   private createDateForSport(str: string, hour: string): Date {
-      const timeSplit = hour.split(':');
-      const dateSplit = str.split('/');
-      const year = parseInt(dateSplit[2], 10);
-      const month = parseInt(dateSplit[1], 10) - 1;
-      const day = parseInt(dateSplit[0], 10);
-      const hours = parseInt(timeSplit[0], 10);
-      const minutes = parseInt(timeSplit[1], 10);
-      return new Date(year, month, day, hours, minutes);
+    const timeSplit = hour.split(':');
+    const dateSplit = str.split('/');
+    const year = parseInt(dateSplit[2], 10);
+    const month = parseInt(dateSplit[1], 10) - 1;
+    const day = parseInt(dateSplit[0], 10);
+    const hours = parseInt(timeSplit[0], 10);
+    const minutes = parseInt(timeSplit[1], 10);
+    return new Date(year, month, day, hours, minutes);
   }
 }

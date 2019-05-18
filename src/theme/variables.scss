@@ -76,12 +76,12 @@
   --ion-color-light-tint: #f5f6f9;
 
   --ion-color-primary: #488aff;
-  --ion-color-danger:     #f53d3d;
+  --ion-color-danger: #f53d3d;
   --ion-color-guindaille: #dd156c;
   --ion-color-navbarColor: #009688;
-  --ion-color-news:#c10a27;
-  --ion-color-event:#ec690c;
-  --ion-color-sport:#f59d22;
+  --ion-color-news: #c10a27;
+  --ion-color-event: #ec690c;
+  --ion-color-sport: #f59d22;
   --ion-color-g2: #e62175;
   --ion-color-cred: #b3b3b3;
   --ion-color-bibli: #0071bc;
@@ -94,11 +94,12 @@
   --ion-color-mobilite: #006837;
   --ion-color-urg: #ec1c24;
   --ion-color-fun: #93278f;
-  --ion-color-uclouvain: rgb(0,33,78);
+  --ion-color-uclouvain: rgb(0, 33, 78);
   --ion-color-home: #002A6A;
 }
 
 $customColors: ('guindaille', 'navbarColor', 'news', 'event', 'sport', 'g2', 'cred', 'bibli', 'etudes', 'support', 'ucl', 'setting', 'map', 'resto', 'mobilite', 'urg', 'fun', 'uclouvain', 'home');
+
 @each $color in $customColors {
   .ion-color-#{$color} {
     --ion-color-base: var(--ion-color-#{$color}) !important;
@@ -113,26 +114,29 @@ $customColors: ('guindaille', 'navbarColor', 'news', 'event', 'sport', 'g2', 'cr
 ion-toolbar ion-buttons ion-back-button {
   color: light !important;
 }
+
 ion-segment-button ion-label {
   color: white;
 }
+
 ion-title {
   color: white;
 }
+
 .modal-fullscreen {
   .modal-wrapper {
-      position: absolute;
-      top: 0;
-      left: 0;
-      display: block;
-      width: 100%;
-      height: 100%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: block;
+    width: 100%;
+    height: 100%;
   }
 }
 
 .box {
- display: flex;
- align-items:center;
+  display: flex;
+  align-items: center;
 }
 
 .title.title-md {
@@ -143,20 +147,27 @@ ion-title {
   width: 100%;
   text-align: center;
 }
-.menu-title{
+
+.menu-title {
   display: inline-block;
 }
-.menu-title.ios.title-ios{
+
+.menu-title.ios.title-ios {
   padding: 0 !important;
   line-height: 3.5;
 }
+
 .back-button {
-z-index: 1;
+  z-index: 1;
 }
 
-ion-segment, ion-tab-bar, ion-tab-button {
-  background-color: rgb(0,33,78);
+ion-segment,
+ion-tab-bar,
+ion-tab-button {
+  background-color: rgb(0, 33, 78);
 }
-.segment-button, ion-tab-button {
+
+.segment-button,
+ion-tab-button {
   color: white !important;
 }

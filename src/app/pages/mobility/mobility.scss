@@ -20,23 +20,24 @@
 */
 
 page-mobility {
-    .scroll-content{
+    .scroll-content {
         margin-top: 56px;
     }
 
-    ion-grid{
+    ion-grid {
         height: 100%;
 
-        ion-row{
+        ion-row {
             height: 33%;
 
-            ion-col{
+            ion-col {
                 height: 100%;
 
-                img{
-                    max-height:100%;
+                img {
+                    max-height: 100%;
                 }
-                p{
+
+                p {
                     margin-top: 0px;
                 }
             }

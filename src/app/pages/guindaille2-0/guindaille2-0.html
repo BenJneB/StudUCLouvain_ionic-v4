@@ -22,12 +22,12 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="guindaille">
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-          <img src="./assets/img/s.png" height="28"/>
-        </ion-buttons>
-<ion-title horizontal="center">
-      <img alt="logo"   height="40" src="./assets/img/guindaille/logo.png" >
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+      <img src="./assets/img/s.png" height="28" />
+    </ion-buttons>
+    <ion-title horizontal="center">
+      <img alt="logo" height="40" src="./assets/img/guindaille/logo.png">
     </ion-title>
   </ion-toolbar>
   <ion-segment [(ngModel)]="segment" color="guindaille">
@@ -35,25 +35,25 @@
       <ion-label color="light">{{'GUINDAILLE.PICTO' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="effect">
-        <ion-label color="light">{{'GUINDAILLE.EFFECT' | translate}}</ion-label>
+      <ion-label color="light">{{'GUINDAILLE.EFFECT' | translate}}</ion-label>
     </ion-segment-button>
     <ion-segment-button value="help">
-        <ion-label color="light">{{'GUINDAILLE.HELP' | translate}}</ion-label>
+      <ion-label color="light">{{'GUINDAILLE.HELP' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
 </ion-header>
 
 <!--BODY-->
-<ion-content [ngClass]="{'guindailleHelp' : segment === 'help', 'guindaille' : segment !== 'help'}" >
+<ion-content [ngClass]="{'guindailleHelp' : segment === 'help', 'guindaille' : segment !== 'help'}">
   <ng-container *ngIf="segment==='pict'" class="gelem">
 
     <ion-grid class="gelem" no-lines>
-          <ion-row>
-            <ion-col size="4" *ngFor="let pict of pictos; let l = last" [offset]="l ? 4 : 0">
-              <img [src]="pict.image" align="middle"  height="auto" (click)="showAlert(pict)"/>
-            </ion-col>
-          </ion-row>
-        </ion-grid>
+      <ion-row>
+        <ion-col size="4" *ngFor="let pict of pictos; let l = last" [offset]="l ? 4 : 0">
+          <img [src]="pict.image" align="middle" height="auto" (click)="showAlert(pict)" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
   </ng-container>
 
   <ng-container *ngIf="segment==='effect'" class="gelem">
@@ -61,7 +61,7 @@
     <ion-item class="gelem" no-lines>
       <ion-slides pager>
         <ion-slide *ngFor="let slide of slides">
-          <img [src]="slide.image" class="slide-image" (click)="showAlert(slide)"/>
+          <img [src]="slide.image" class="slide-image" (click)="showAlert(slide)" />
         </ion-slide>
       </ion-slides>
       <p style="color:white">{{'GUINDAILLE.SLIDE' | translate}}</p>
@@ -70,13 +70,15 @@
 
   <ng-container *ngIf="segment==='help'" class="gelem">
 
-    <ion-item  class="gelem">
-      <div style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;" text-wrap>
+    <ion-item class="gelem">
+      <div
+        style="border: 2px solid #1c75c8; padding: 3px; background-color: #c5ddf6; -moz-border-radius-topleft: 5px; -moz-border-radius-topright: 5px; -moz-border-radius-bottomright: 5px; -moz-border-radius-bottomleft: 5px;"
+        text-wrap>
         <p>
           <strong>{{'GUINDAILLE.HELP1' | translate}}</strong>: <a href="tel:010 47 22 22">010 47 22 22</a>
         </p>
         <p>
-          <strong>{{'GUINDAILLE.HELP2' | translate}}</strong>: 
+          <strong>{{'GUINDAILLE.HELP2' | translate}}</strong>:
           <br>
           <a href="tel:010 47 24 24">010 47 24 24</a>
           <br>
@@ -121,6 +123,7 @@
 
 </ion-content>
 
-  <ion-footer class="gfoot" text-center *ngIf="segment === 'effect' || segment === 'pict'" [hidden]="segment === 'help'">
-    <ion-icon name='help-circle'></ion-icon><p class="gtextf">{{'GUINDAILLE.CLICK' | translate}}</p>
-  </ion-footer>
+<ion-footer class="gfoot" text-center *ngIf="segment === 'effect' || segment === 'pict'" [hidden]="segment === 'help'">
+  <ion-icon name='help-circle'></ion-icon>
+  <p class="gtextf">{{'GUINDAILLE.CLICK' | translate}}</p>
+</ion-footer>

@@ -45,4 +45,4 @@ import { TutoPage } from './tuto';
     ])
   ],
 })
-export class TutoPageModule {}
+export class TutoPageModule { }

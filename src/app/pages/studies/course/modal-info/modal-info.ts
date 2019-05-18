@@ -45,10 +45,10 @@ export class ModalInfoPage {
     });
   }
 
-    getInfo(): Promise<any> {
-      let response: any;
-      return new Promise(resolve => {
-        this.studentService.checkCourse(this.course.acronym, this.year).then(
+  getInfo(): Promise<any> {
+    let response: any;
+    return new Promise(resolve => {
+      this.studentService.checkCourse(this.course.acronym, this.year).then(
         (data) => {
           console.log(data);
           const res: any = data;
@@ -69,7 +69,7 @@ export class ModalInfoPage {
             const progpre = res.programmesEtPrerequis;
             const quadri = res.quadrimestre;
             const resume = res.resumeCoursMap.entry[1].value;
-            const vol = {'vol1': res.volTot1, 'vol2': res.volTot2, 'vol1Coef': res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef};
+            const vol = { 'vol1': res.volTot1, 'vol2': res.volTot2, 'vol1Coef': res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef };
             if (res.cahierChargesExiste) {
               cahier = res.cahierChargesMap.entry[1].value;
             }
@@ -90,10 +90,10 @@ export class ModalInfoPage {
             resolve(response);
           }
         });
-      });
-    }
+    });
+  }
 
-   closeModal() {
-     this.viewCtrl.dismiss();
-   }
+  closeModal() {
+    this.viewCtrl.dismiss();
+  }
 }

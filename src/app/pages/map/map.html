@@ -22,9 +22,9 @@
 <ion-header>
   <ion-toolbar color="map">
     <ion-buttons slot="start">
-        <ion-back-button></ion-back-button>
-        <img src="./assets/img/s.png" height="28"/>
-      </ion-buttons>
+      <ion-back-button></ion-back-button>
+      <img src="./assets/img/s.png" height="28" />
+    </ion-buttons>
     <ion-title horizontal="center">{{title | translate}}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -52,22 +52,24 @@
         <h3>{{auditoire.title}} {{auditoire.sigle}}</h3>
         <p>{{auditoire.address}}</p>
       </div>
-      <ion-toggle [(ngModel)]="zone.auditoires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(auditoire, zone.auditoires.listChecked, i)"></ion-toggle>
+      <ion-toggle [(ngModel)]="zone.auditoires.listChecked[i]" color="secondary"
+        (ionChange)="toggleLocation(auditoire, zone.auditoires.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider (click)="toggleDetails(zone.bibliotheques)" >
+    <ion-item-divider (click)="toggleDetails(zone.bibliotheques)">
       {{'MAP.LIBRARY' | translate}}
     </ion-item-divider>
 
     <ion-item *ngFor="let bibli of zone.bibliotheques.list, let i=index" [hidden]="!zone.bibliotheques.showDetails">
-      <div item-content >
+      <div item-content>
         <h3>{{bibli.title}} {{bibli.sigle}}</h3>
         <p>{{bibli.address}}</p>
       </div>
-      <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary" (ionChange)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)"></ion-toggle>
+      <ion-toggle [(ngModel)]="zone.bibliotheques.listChecked[i]" color="secondary"
+        (ionChange)="toggleLocation(bibli, zone.bibliotheques.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider (click)="toggleDetails(zone.locaux)" >
+    <ion-item-divider (click)="toggleDetails(zone.locaux)">
       {{'MAP.LOC' | translate}}
     </ion-item-divider>
 
@@ -75,7 +77,8 @@
       <div item-content>
         <h3>{{loc.title}}</h3>
       </div>
-      <ion-toggle [(ngModel)]="zone.locaux.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(loc, zone.locaux.listChecked, i)"></ion-toggle>
+      <ion-toggle [(ngModel)]="zone.locaux.listChecked[i]" color="secondary"
+        (ionChange)="toggleLocation(loc, zone.locaux.listChecked, i)"></ion-toggle>
     </ion-item>
 
     <ion-item-divider (click)="toggleDetails(zone.sports)">
@@ -87,22 +90,25 @@
         <h3>{{sport.title}}</h3>
         <p>{{sport.address}}</p>
       </div>
-      <ion-toggle [(ngModel)]="zone.sports.listChecked[i]" color="secondary" (ionChange)="toggleLocation(sport, zone.sports.listChecked, i)"></ion-toggle>
+      <ion-toggle [(ngModel)]="zone.sports.listChecked[i]" color="secondary"
+        (ionChange)="toggleLocation(sport, zone.sports.listChecked, i)"></ion-toggle>
     </ion-item>
 
     <ion-item-divider (click)="toggleDetails(zone.restaurants_universitaires)">
       {{'MAP.REST' | translate}}
     </ion-item-divider>
 
-    <ion-item *ngFor="let restau of zone.restaurants_universitaires.list, let i=index" [hidden]="!zone.restaurants_universitaires.showDetails">
-      <div item-content >
+    <ion-item *ngFor="let restau of zone.restaurants_universitaires.list, let i=index"
+      [hidden]="!zone.restaurants_universitaires.showDetails">
+      <div item-content>
         <h3>{{restau.title}}</h3>
         <p>{{restau.address}}</p>
       </div>
-      <ion-toggle [(ngModel)]="zone.restaurants_universitaires.listChecked[i]" color="secondary" (ionChange)="toggleLocation(restau, zone.restaurants_universitaires.listChecked, i)"></ion-toggle>
+      <ion-toggle [(ngModel)]="zone.restaurants_universitaires.listChecked[i]" color="secondary"
+        (ionChange)="toggleLocation(restau, zone.restaurants_universitaires.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider (click)="toggleDetails(zone.services)" >
+    <ion-item-divider (click)="toggleDetails(zone.services)">
       {{'MAP.SERV' | translate}}
     </ion-item-divider>
 
@@ -111,10 +117,11 @@
         <h3>{{service.title}}</h3>
         <p>{{service.address}}</p>
       </div>
-      <ion-toggle [(ngModel)]="zone.services.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(service, zone.services.listChecked, i)"></ion-toggle>
+      <ion-toggle [(ngModel)]="zone.services.listChecked[i]" color="secondary"
+        (ionChange)="toggleLocation(service, zone.services.listChecked, i)"></ion-toggle>
     </ion-item>
 
-    <ion-item-divider (click)="toggleDetails(zone.parkings)" >
+    <ion-item-divider (click)="toggleDetails(zone.parkings)">
       {{'MAP.PARK' | translate}}
     </ion-item-divider>
 
@@ -122,7 +129,8 @@
       <div item-content>
         <h3>{{parking.title}}</h3>
       </div>
-      <ion-toggle [(ngModel)]="zone.parkings.listChecked[i]" color="secondary"  (ionChange)="toggleLocation(parking, zone.parkings.listChecked, i)"></ion-toggle>
+      <ion-toggle [(ngModel)]="zone.parkings.listChecked[i]" color="secondary"
+        (ionChange)="toggleLocation(parking, zone.parkings.listChecked, i)"></ion-toggle>
     </ion-item>
   </ion-card>
 </ion-content>

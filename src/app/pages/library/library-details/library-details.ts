@@ -34,7 +34,7 @@ import { LibrariesService } from '../../../services/wso2-services/libraries-serv
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
+      state('false', style({ height: '0' })),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -53,25 +53,25 @@ export class LibraryDetailsPage {
     public libService: LibrariesService,
     public connService: ConnectivityService,
     private utilsServices: UtilsService
-    ) {
-      this.route.queryParams.subscribe(params => {
-        if (this.router.getCurrentNavigation().extras.state) {
-          this.libDetails = this.router.getCurrentNavigation().extras.state.items;
-          this.searching = true;
-          if (this.connService.isOnline()) {
-            this.libService.loadLibDetails(this.libDetails).then(
-              res => {
-                const result: any = res;
-                this.libDetails = result.libDetails;
-                this.searching = false;
-              }
-            );
-          } else {
-            this.searching = false;
-            this.connService.presentConnectionAlert();
-          }
+  ) {
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.libDetails = this.router.getCurrentNavigation().extras.state.items;
+        this.searching = true;
+        if (this.connService.isOnline()) {
+          this.libService.loadLibDetails(this.libDetails).then(
+            res => {
+              const result: any = res;
+              this.libDetails = result.libDetails;
+              this.searching = false;
+            }
+          );
+        } else {
+          this.searching = false;
+          this.connService.presentConnectionAlert();
         }
-      });
+      }
+    });
   }
 
   toggleGroup(hours: string) {

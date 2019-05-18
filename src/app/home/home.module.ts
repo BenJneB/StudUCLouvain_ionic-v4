@@ -18,11 +18,11 @@ import { HomePage } from './home.page';
     ReactiveFormsModule,
     IonicModule,
     TranslateModule.forChild({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: HttpLoaderFactory,
-            deps: [HttpClient]
-        }
+      loader: {
+        provide: TranslateLoader,
+        useFactory: HttpLoaderFactory,
+        deps: [HttpClient]
+      }
     }),
     RouterModule.forChild([
       {

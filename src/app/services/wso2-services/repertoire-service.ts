@@ -38,7 +38,7 @@ export class RepertoireService {
   /*Search employees that match with the options & values*/
   public searchEmployees(options: Array<string>, values: Array<string>) {
     this.employees = [];
-    let newUrl = this.url ;
+    let newUrl = this.url;
     newUrl += 'search?';
     for (let i = 0; i < options.length; i++) {
       newUrl += options[i] + ' = ' + values[i];
@@ -47,13 +47,13 @@ export class RepertoireService {
       }
     }
     newUrl += '&page=1&pageSize=10';
-   // newUrl += '&directory=E';
+    // newUrl += '&directory=E';
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         data => {
           if (data['persons'] !== null) {
             this.extractEmployees(data['persons'].person);
-            resolve({employees: this.employees});
+            resolve({ employees: this.employees });
           }
         });
     });
@@ -68,7 +68,7 @@ export class RepertoireService {
       this.wso2Service.load(url_details).subscribe(
         data => {
           emp = this.extractEmployeeDetails(emp, data['businessInformation']);
-          resolve({empDetails: emp});
+          resolve({ empDetails: emp });
         });
     });
   }
@@ -92,8 +92,8 @@ export class RepertoireService {
     emp.businessContacts = data.businessContacts;
     emp.gender = data.gender;
     emp.photo_url = data.photo_url;
-   // let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments,
-   // data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
+    // let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments,
+    // data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
     return emp;
   }
 }

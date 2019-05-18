@@ -17,6 +17,6 @@ import { ModalProjectPage } from './modal-project';
   ],
   entryComponents: [
     ModalProjectPage
-   ]
+  ]
 })
 export class ModalProjectPageModule { }

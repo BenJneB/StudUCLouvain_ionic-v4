@@ -24,13 +24,16 @@
     <ion-buttons slot="start">
       <ion-button (click)="dismiss()">{{'EVENTS.CANCEL' | translate}}</ion-button>
     </ion-buttons>
-    <ion-row><ion-col>
-    <ion-title>
-      {{'EVENTS.FILTER' | translate}}
-    </ion-title>
-  </ion-col></ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-title>
+          {{'EVENTS.FILTER' | translate}}
+        </ion-title>
+      </ion-col>
+    </ion-row>
     <ion-buttons slot="end">
-      <ion-button (click)="alertService.applyFilters(categories, dateRange)" strong>{{'EVENTS.APPLY' | translate}}</ion-button>
+      <ion-button (click)="alertService.applyFilters(categories, dateRange)" strong>{{'EVENTS.APPLY' | translate}}
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -38,11 +41,12 @@
 <!--BODY-->
 <ion-content class="outer-content">
   <ion-item>
-    <ion-label *ngIf="dateRange > 1" center >
-       {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}} {{'EVENTS.TIMEEVENTS3' | translate}}
+    <ion-label *ngIf="dateRange > 1" center>
+      {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}}
+      {{'EVENTS.TIMEEVENTS3' | translate}}
     </ion-label>
-    <ion-label *ngIf="dateRange == 1" center >
-       {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS4' | translate}}
+    <ion-label *ngIf="dateRange == 1" center>
+      {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS4' | translate}}
     </ion-label>
     <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
     </ion-range>
@@ -50,8 +54,8 @@
   <ion-toolbar color="uclouvain">
     <ion-buttons slot="start">
       <ion-button color="light" (click)="uncheckAll()">
-          <ion-label >{{'EVENTS.UNTOGGLE' | translate}}</ion-label>
-        <ion-icon  slot="end" name="done-all"></ion-icon>
+        <ion-label>{{'EVENTS.UNTOGGLE' | translate}}</ion-label>
+        <ion-icon slot="end" name="done-all"></ion-icon>
       </ion-button>
     </ion-buttons>
     <ion-buttons slot="end">

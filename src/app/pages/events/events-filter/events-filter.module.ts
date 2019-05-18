@@ -16,7 +16,7 @@ import { EventsFilterPage } from './events-filter';
     TranslateModule.forChild(),
   ],
   entryComponents: [
-      EventsFilterPage
-     ]
+    EventsFilterPage
+  ]
 })
 export class EventsFilterModule { }

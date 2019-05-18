@@ -33,7 +33,7 @@ export class EventsService {
   shownEvents = 0;
   url = 'http://louvainfo.be/calendrier/feed/calendar/';
 
-  constructor(public user: UserService, public rssService: RssService) {}
+  constructor(public user: UserService, public rssService: RssService) { }
 
   /*Get the events*/
   public getEvents(segment: string) {
@@ -68,7 +68,7 @@ export class EventsService {
       const startDate = this.createDateForEvent(item.date_begin);
       const endDate = this.createDateForEvent(item.date_end);
       const newEventItem = new EventItem(item.description, item.link, item.title, item.photo, trimmedDescription, item.location,
-                      hidden, favorite, item.guid, startDate, endDate, item.category, iconCategory);
+        hidden, favorite, item.guid, startDate, endDate, item.category, iconCategory);
       this.events.push(newEventItem);
     }
     return {
@@ -93,7 +93,7 @@ export class EventsService {
 
   /*Return a date in good form by splitting for the event*/
   private createDateForEvent(str: string): Date {
-   // new Date(Year: number, (month-1): number, day: number)
+    // new Date(Year: number, (month-1): number, day: number)
     const dateTimeSplit = str.split(' ');
     const dateSplit = dateTimeSplit[0].split('/');
     const timeSplit = dateTimeSplit[1].split(':');

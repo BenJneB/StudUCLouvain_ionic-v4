@@ -56,7 +56,7 @@ export class ModalProjectPage {
     this.studiesService.getProjects(sessionId).then(
       data => {
         this.projects = data;
-    });
+      });
   }
 
   ngOnInit() {

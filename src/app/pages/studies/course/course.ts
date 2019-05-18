@@ -49,7 +49,7 @@ export class CoursePage {
   shownGroup = null;
   slotCM = 'no';
   displayedActi: Array<Activity> = [];
-  courseSorted: {cm: Array<Activity>, tp: Array<Activity>, ex: Array<Activity>};
+  courseSorted: { cm: Array<Activity>, tp: Array<Activity>, ex: Array<Activity> };
   noTP: boolean;
   noCM: boolean;
   noEx: boolean;
@@ -75,7 +75,7 @@ export class CoursePage {
         this.sessionId = this.router.getCurrentNavigation().extras.state.sessionId;
         this.course = this.router.getCurrentNavigation().extras.state.course;
         this.year = this.router.getCurrentNavigation().extras.state.year;
-        this.courseSorted = {cm: [], tp: [], ex: []};
+        this.courseSorted = { cm: [], tp: [], ex: [] };
         const acro = this.course.acronym;
         if (this.userS.hasSlot(acro, 'CM')) {
           this.slotCM = this.userS.getSlot(acro, 'CM');
@@ -106,13 +106,13 @@ export class CoursePage {
             this.course.activities = courseData.sort(
               (a1, a2) => a1.start.valueOf() - a2.start.valueOf()
             ).filter(
-                activitie => activitie.end.valueOf() > Date.now().valueOf()
-              ); //  display only activities finished after now time
-              this.displayedActi = this.course.activities;
-              this.courseSorted.cm = this.course.activities.filter(acti => acti.type === 'Cours magistral');
-              this.courseSorted.tp = this.course.activities.filter(acti => (acti.type === 'TD' || acti.type === 'TP'));
-              this.courseSorted.ex = this.course.activities.filter(acti => acti.isExam);
-              this.updateDisplayed();
+              activitie => activitie.end.valueOf() > Date.now().valueOf()
+            ); //  display only activities finished after now time
+            this.displayedActi = this.course.activities;
+            this.courseSorted.cm = this.course.activities.filter(acti => acti.type === 'Cours magistral');
+            this.courseSorted.tp = this.course.activities.filter(acti => (acti.type === 'TD' || acti.type === 'TP'));
+            this.courseSorted.ex = this.course.activities.filter(acti => acti.isExam);
+            this.updateDisplayed();
           }
 
         );
@@ -123,7 +123,7 @@ export class CoursePage {
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem: IonItemSliding, activity: Activity) {
     let message: string;
-    this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => {message = res; });
+    this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => { message = res; });
     const datas = {
       title: this.course.name + ': ' + activity.type,
       location: activity.auditorium,
@@ -131,33 +131,33 @@ export class CoursePage {
       end: activity.end
     };
     this.utilsServices.createEventInCalendar(datas, message, slidingItem);
-    this.alertService.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
+    this.alertService.alertCourse({ 'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3' });
   }
 
   /*Filter TP if a slot is selectionned*/
   updateDisplayedTP() {
-      const toFilter = this.courseSorted.tp;
-      this.noTP = toFilter.length === 0;
-      let toPush;
-      if (this.slotTP !== 'no') {
-        toPush = toFilter.filter(acti => ( acti.name === this.slotTP || acti.name.indexOf('-') > -1));
-      } else {
-        toPush = this.courseSorted.tp;
-      }
-      this.displayedActi = this.displayedActi.concat(toPush);
+    const toFilter = this.courseSorted.tp;
+    this.noTP = toFilter.length === 0;
+    let toPush;
+    if (this.slotTP !== 'no') {
+      toPush = toFilter.filter(acti => (acti.name === this.slotTP || acti.name.indexOf('-') > -1));
+    } else {
+      toPush = this.courseSorted.tp;
+    }
+    this.displayedActi = this.displayedActi.concat(toPush);
   }
 
   /*Filter CM if a slot is selectionned*/
   updateDisplayedCM() {
-      const toFilter = this.courseSorted.cm;
-      this.noCM = toFilter.length === 0;
-      let toPush: Array<Activity>;
-      if (this.slotCM !== 'no') {
-        toPush = toFilter.filter(acti => ( acti.name === this.slotCM));
-      } else {
-        toPush = this.courseSorted.cm;
-      }
-      this.displayedActi = this.displayedActi.concat(toPush);
+    const toFilter = this.courseSorted.cm;
+    this.noCM = toFilter.length === 0;
+    let toPush: Array<Activity>;
+    if (this.slotCM !== 'no') {
+      toPush = toFilter.filter(acti => (acti.name === this.slotCM));
+    } else {
+      toPush = this.courseSorted.cm;
+    }
+    this.displayedActi = this.displayedActi.concat(toPush);
   }
 
   /*Update the display if a filter is applicated*/
@@ -175,31 +175,32 @@ export class CoursePage {
     let message: string;
     let cancel: string;
     let apply: string;
-    this.translateService.get('COURSE.TITLE').subscribe((res: string) => {title = res; });
-    this.translateService.get('COURSE.MESSAGE2').subscribe((res: string) => {message = res; });
-    this.translateService.get('COURSE.CANCEL').subscribe((res: string) => {cancel = res; });
-    this.translateService.get('COURSE.APPLY').subscribe((res: string) => {apply = res; });
+    this.translateService.get('COURSE.TITLE').subscribe((res: string) => { title = res; });
+    this.translateService.get('COURSE.MESSAGE2').subscribe((res: string) => { message = res; });
+    this.translateService.get('COURSE.CANCEL').subscribe((res: string) => { cancel = res; });
+    this.translateService.get('COURSE.APPLY').subscribe((res: string) => { apply = res; });
     const options = {
       title: title,
       message: message,
       inputs: [],
       buttons: [
-      {
+        {
           text: cancel,
-          handler: () => {}
-      },
-      {
+          handler: () => { }
+        },
+        {
           text: apply,
           handler: data => {
             this.addSlot(segment, data);
             this.updateDisplayed();
           }
-      }
-    ]};
+        }
+      ]
+    };
     const aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
     const array = this.getSlots(segment);
     for (let i = 0; i < array.length; i++) {
-       const slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
+      const slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
       options.inputs.push(
         {
           name: 'options',
@@ -211,7 +212,7 @@ export class CoursePage {
       );
     }
     if (options.inputs.length > 1) {
-      options.inputs.push({name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun});
+      options.inputs.push({ name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun });
     }
     const prompt = this.alertCtrl.create(options);
     if (options.inputs.length > 1) {
@@ -231,13 +232,13 @@ export class CoursePage {
   /*Return the different slots available for a course TP or CM */
   getSlots(segment: string) {
     let act: Activity[] = this.course.activities;
-     act = act.filter(
+    act = act.filter(
       acti => (acti.type === segment || (acti.type === 'TP' && segment === 'TD') || (segment === 'Examen' && acti.isExam))
-      );
-   // retrieve name of each slot
+    );
+    // retrieve name of each slot
     let slots = act.map(item => item.name)
       .filter((value, index, self) => self.indexOf(value) === index); // keep only different
-   // delete some session (like seance aide etude)
+    // delete some session (like seance aide etude)
     if (segment === 'TD') {
       slots = slots.filter(acti => acti.indexOf('_') !== -1);
     }
@@ -245,7 +246,7 @@ export class CoursePage {
       slots = slots.filter(acti => acti.indexOf('-') !== -1);
     }
     const newAct: Activity[] = [];
-   // retrieve one activity of each slot
+    // retrieve one activity of each slot
     for (let i = 0; i < slots.length; i++) {
       const activity: Activity = act.find(acti => acti.name === slots[i]);
       newAct.push(activity);
@@ -263,18 +264,18 @@ export class CoursePage {
         activity.auditorium, null, activity.start, activity.end, options);
     }
     let message: string;
-    this.translateService.get('STUDY.MESSAGE3').subscribe((res: string) => {message = res; });
+    this.translateService.get('STUDY.MESSAGE3').subscribe((res: string) => { message = res; });
     this.alertService.presentToast(message);
-    this.alertService.alertCourse({'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4'});
+    this.alertService.alertCourse({ 'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4' });
   }
 
-   async openModalInfo() {
+  async openModalInfo() {
     const myModal = await this.modalCtrl.create(
       {
         component: ModalInfoPage,
-        componentProps: {course: this.course, year: this.year},
+        componentProps: { course: this.course, year: this.year },
         cssClass: 'modal-fullscreen'
       });
-      return await myModal.present();
-   }
+    return await myModal.present();
+  }
 }

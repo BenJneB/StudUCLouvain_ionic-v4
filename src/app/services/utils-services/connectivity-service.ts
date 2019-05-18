@@ -34,10 +34,10 @@ export class ConnectivityService {
   available: boolean;
   enable: boolean;
   constructor(public platform: Platform,
-              private network: Network,
-              private translateService: TranslateService,
-              private alertCtrl: AlertController,
-              private diagnostic: Diagnostic) {
+    private network: Network,
+    private translateService: TranslateService,
+    private alertCtrl: AlertController,
+    private diagnostic: Diagnostic) {
     this.onDevice = this.platform.is('cordova');
   }
 
@@ -54,9 +54,9 @@ export class ConnectivityService {
     let title: string;
     let message: string;
     let close: string;
-    this.translateService.get('NET.TITLE').subscribe((res: string) => {title = res; });
-    this.translateService.get('NET.CONNECT').subscribe((res: string) => {message = res; });
-    this.translateService.get('NET.CLOSE').subscribe((res: string) => {close = res; });
+    this.translateService.get('NET.TITLE').subscribe((res: string) => { title = res; });
+    this.translateService.get('NET.CONNECT').subscribe((res: string) => { message = res; });
+    this.translateService.get('NET.CLOSE').subscribe((res: string) => { close = res; });
     const alert = await this.alertCtrl.create({
       header: title,
       subHeader: message,
@@ -65,14 +65,14 @@ export class ConnectivityService {
     return await alert.present();
   }
 
-    successCallback = (isAvailable) => {
-                      this.available = isAvailable;
-                      return isAvailable;
-                    }
+  successCallback = (isAvailable) => {
+    this.available = isAvailable;
+    return isAvailable;
+  }
 
-    errorCallback = (e) => console.error(e);
+  errorCallback = (e) => console.error(e);
 
-   async isLocationEnabled() {
+  async isLocationEnabled() {
 
     await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);
     return this.available;

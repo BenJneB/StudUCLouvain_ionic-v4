@@ -21,9 +21,9 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="news" secondary>
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-row>
       <ion-col>
         <ion-title>{{news.title}}</ion-title>
@@ -35,14 +35,14 @@
 <!--BODY-->
 <ion-content>
   <ion-card>
-    
-    <img style="width:75%; margin:auto;"  src="{{news.image}}"/>
+
+    <img style="width:75%; margin:auto;" src="{{news.image}}" />
 
     <ion-card-content>
       <ion-card-title>
         {{news.title}}
       </ion-card-title>
-    <br>
+      <br>
       <p [innerHTML]="news.description"></p>
     </ion-card-content>
 

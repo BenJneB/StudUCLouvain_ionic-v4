@@ -41,12 +41,12 @@ export class EventsDetailsPage {
     private router: Router,
     private route: ActivatedRoute,
     private alertService: AlertService
-    ) {
-      this.route.queryParams.subscribe(params => {
-        if (this.router.getCurrentNavigation().extras.state) {
-          this.event = this.router.getCurrentNavigation().extras.state.items;
-        }
-      });
+  ) {
+    this.route.queryParams.subscribe(params => {
+      if (this.router.getCurrentNavigation().extras.state) {
+        this.event = this.router.getCurrentNavigation().extras.state.items;
+      }
+    });
   }
 
   /*OPEN THE EXTERNAL PAGE OF THE EVENT*/
@@ -57,7 +57,7 @@ export class EventsDetailsPage {
   /*ADD EVENT TO FAVORITE*/
   public addFavorite(event: EventItem) {
     let message: string;
-    this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res: string) => {message = res; });
+    this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res: string) => { message = res; });
 
     if (!this.user.hasFavorite(event.guid)) {
       this.user.addFavorite(event.guid);

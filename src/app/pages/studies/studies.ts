@@ -94,45 +94,45 @@ export class StudiesPage {
     const year = parseInt(this.project.name.split('-')[0], 10);
     return new Promise(resolve => {
       this.studentService.checkCourse(sigle, year).then(
-      (data) => {
-        const res: any = data;
-        let exist: boolean;
-        let nameFR = '';
-        let nameEN = '';
-        if (data === 400) {
-          exist = false;
-        } else {
-          const names = res.intituleCompletMap.entry;
-          nameFR = names[1].value;
-          nameEN = names[0].value;
-          exist = true;
-        }
-        response = { exist: exist, nameFR: nameFR, nameEN: nameEN};
-        resolve(response);
-      });
+        (data) => {
+          const res: any = data;
+          let exist: boolean;
+          let nameFR = '';
+          let nameEN = '';
+          if (data === 400) {
+            exist = false;
+          } else {
+            const names = res.intituleCompletMap.entry;
+            nameFR = names[1].value;
+            nameEN = names[0].value;
+            exist = true;
+          }
+          response = { exist: exist, nameFR: nameFR, nameEN: nameEN };
+          resolve(response);
+        });
     });
   }
 
- /*Authenticate a student*/
+  /*Authenticate a student*/
   private login() {
     this.error = '';
     return new Promise(resolve => {
       this.wso2Service.login(this.username, this.password).pipe(
-      catchError(error => {
-        if (error.status === 400) {
-          this.error = this.transService.getTranslation('STUDY.BADLOG');
-        } else {
-          this.error = this.transService.getTranslation('STUDY.ERROR');
-        }
-        return error;
-      }))
-      .subscribe(
-        data => {
-          if (data !== null) {
-            this.status = data.toString();
-            resolve(data);
+        catchError(error => {
+          if (error.status === 400) {
+            this.error = this.transService.getTranslation('STUDY.BADLOG');
+          } else {
+            this.error = this.transService.getTranslation('STUDY.ERROR');
           }
-        });
+          return error;
+        }))
+        .subscribe(
+          data => {
+            if (data !== null) {
+              this.status = data.toString();
+              resolve(data);
+            }
+          });
     });
   }
 
@@ -147,9 +147,9 @@ export class StudiesPage {
             this.statusInsc = result[0].etatInscription;
             this.prog = result[0].intitOffreComplet;
           })
-          .catch((err) => {
-            console.log('Error during load of inscription status');
-          });
+            .catch((err) => {
+              console.log('Error during load of inscription status');
+            });
         }
       });
     } else {
@@ -173,9 +173,9 @@ export class StudiesPage {
 
   /*Open modalprojectpage to choose an ade project*/
   async openModalProject() {
-    const obj = {sessionId: this.sessionId};
+    const obj = { sessionId: this.sessionId };
 
-    const myModal = await this.modalCtrl.create({component: ModalProjectPage, componentProps: obj});
+    const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj });
     await myModal.present();
     await myModal.onDidDismiss().then(data => {
       this.project = data.data;
@@ -199,7 +199,7 @@ export class StudiesPage {
               }
             }
           );
-      });
+        });
     } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -282,13 +282,13 @@ export class StudiesPage {
   }
 
   async addCourse(sigle: string, name: string) {
-      this.saveCourse(name, sigle);
-      const toast = await this.toastCtrl.create({
-        message: 'Cours ajouté',
-        duration: 1000,
-        position: 'bottom'
-      });
-      return await toast.present();
+    this.saveCourse(name, sigle);
+    const toast = await this.toastCtrl.create({
+      message: 'Cours ajouté',
+      duration: 1000,
+      position: 'bottom'
+    });
+    return await toast.present();
   }
 
   /*Retrieve list of course added previously in the storage*/
@@ -297,7 +297,8 @@ export class StudiesPage {
       if (data === null) {
         this.listCourses = [];
       } else {
-        this.listCourses = data; }
+        this.listCourses = data;
+      }
     });
   }
 

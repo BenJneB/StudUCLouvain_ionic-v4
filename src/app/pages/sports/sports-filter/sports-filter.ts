@@ -28,14 +28,14 @@ import { NavParams } from '@ionic/angular';
   templateUrl: 'sports-filter.html'
 })
 export class SportsFilterPage {
-  categories: Array< {name: string, isChecked: boolean}> = [];
+  categories: Array<{ name: string, isChecked: boolean }> = [];
   dateRange: any;
 
   constructor(
     public navParams: NavParams,
     private alertService: AlertService
-    ) {
-   //  passed in array of categories names that should be excluded (unchecked)
+  ) {
+    //  passed in array of categories names that should be excluded (unchecked)
     const excludedFilters = this.navParams.get('excludedFilters');
     const filters = this.navParams.get('filters');
     this.dateRange = this.navParams.get('dateRange');

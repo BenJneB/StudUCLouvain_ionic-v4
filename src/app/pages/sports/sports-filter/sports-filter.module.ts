@@ -17,6 +17,6 @@ import { SportsFilterPage } from './sports-filter';
   ],
   entryComponents: [
     SportsFilterPage
-   ]
+  ]
 })
 export class SportsFilterPageModule { }

@@ -44,22 +44,22 @@ export class NewsService {
     let baseURL;
     this.news = [];
     switch (segment) {
-       case 'P2': {
-          baseURL = this.url2;
-          break;
-       }
-       case 'P3': {
-          baseURL = this.url3;
-          break;
-       }
-       case 'P1': {
-         baseURL = this.url1;
-         break;
-       }
-       default: {
-          baseURL = segment;
-          break;
-       }
+      case 'P2': {
+        baseURL = this.url2;
+        break;
+      }
+      case 'P3': {
+        baseURL = this.url3;
+        break;
+      }
+      case 'P1': {
+        baseURL = this.url1;
+        break;
+      }
+      default: {
+        baseURL = segment;
+        break;
+      }
     }
     return this.rssService.loadItems(segment, baseURL, this.extractNews.bind(this));
   }
@@ -120,8 +120,8 @@ export class NewsService {
 
   /*Return a date in good form by splitting for the new*/
   private createDateForNews(str: string): Date {
-   // str: 'Fri, 07 Jul 2017 08:51:52 +0200'
-   // new Date(Year: number, (month-1): number, day: number)
+    // str: 'Fri, 07 Jul 2017 08:51:52 +0200'
+    // new Date(Year: number, (month-1): number, day: number)
     const dateTimeSplit = str.split(' ');
     const timeSplit = dateTimeSplit[4].split(':');
 

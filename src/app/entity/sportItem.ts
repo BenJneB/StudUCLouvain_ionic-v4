@@ -36,34 +36,34 @@ export class SportItem {
   guid: string;
 
   constructor(
-  sport: string,
-  sexe: string,
-  lieu: string,
-  salle: string,
-  jour: string,
-  date: Date,
-  hidden: boolean,
-  favorite: boolean,
-  hfin: Date,
-  type: string,
-  online: string,
-  remarque: string,
-  active: boolean,
-  guid: string
+    sport: string,
+    sexe: string,
+    lieu: string,
+    salle: string,
+    jour: string,
+    date: Date,
+    hidden: boolean,
+    favorite: boolean,
+    hfin: Date,
+    type: string,
+    online: string,
+    remarque: string,
+    active: boolean,
+    guid: string
   ) {
-  this.sport = sport;
-  this.sexe = sexe;
-  this.lieu = lieu;
-  this.salle = salle;
-  this.jour = jour;
-  this.date = date;
-  this.hidden = hidden;
-  this.favorite = favorite;
-  this.hfin = hfin;
-  this.type = type;
-  this.online = online;
-  this.remarque = remarque;
-  this.active = active;
-  this.guid = guid;
+    this.sport = sport;
+    this.sexe = sexe;
+    this.lieu = lieu;
+    this.salle = salle;
+    this.jour = jour;
+    this.date = date;
+    this.hidden = hidden;
+    this.favorite = favorite;
+    this.hfin = hfin;
+    this.type = type;
+    this.online = online;
+    this.remarque = remarque;
+    this.active = active;
+    this.guid = guid;
   }
 }

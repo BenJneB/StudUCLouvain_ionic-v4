@@ -36,7 +36,7 @@ import { RepertoireService } from '../../services/wso2-services/repertoire-servi
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
+      state('false', style({ height: '0' })),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -54,13 +54,13 @@ export class SupportPage {
   shownHelp = null;
 
   constructor(public navCtrl: NavController,
-              public modalCtrl: ModalController,
-              private iab: InAppBrowser,
-              public platform: Platform,
-              public repService: RepertoireService,
-              public connService: ConnectivityService,
-              public loader: LoaderService,
-              private utilsServices: UtilsService
+    public modalCtrl: ModalController,
+    private iab: InAppBrowser,
+    public platform: Platform,
+    public repService: RepertoireService,
+    public connService: ConnectivityService,
+    public loader: LoaderService,
+    private utilsServices: UtilsService
   ) {
     this.title = 'Support';
   }
@@ -74,7 +74,7 @@ export class SupportPage {
       { field: this.lastname, text: 'lastname' },
       { field: this.firstname, text: 'firstname' }
     ];
-    for (const {field, text} of fields) {
+    for (const { field, text } of fields) {
       if (field.length > 0) {
         values.push(field);
         options.push(text);

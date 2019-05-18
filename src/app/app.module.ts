@@ -69,7 +69,7 @@ import { StudentService } from './services/wso2-services/student-service';
 import { Wso2Service } from './services/wso2-services/wso2-service';
 
 export function HttpLoaderFactory(http: HttpClient) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+  return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }
 
 @NgModule({
@@ -87,11 +87,11 @@ export function HttpLoaderFactory(http: HttpClient) {
     IonicStorageModule.forRoot(),
     HttpClientModule,
     TranslateModule.forRoot({
-        loader: {
-            provide: TranslateLoader,
-            useFactory: (HttpLoaderFactory),
-            deps: [HttpClient]
-        }
+      loader: {
+        provide: TranslateLoader,
+        useFactory: (HttpLoaderFactory),
+        deps: [HttpClient]
+      }
     })
   ],
   bootstrap: [AppComponent],
@@ -99,7 +99,7 @@ export function HttpLoaderFactory(http: HttpClient) {
 
   ],
   providers: [
-    { provide: ErrorHandler, useClass: ErrorHandler},
+    { provide: ErrorHandler, useClass: ErrorHandler },
     AppAvailability,
     ConnectivityService,
     CourseService,
@@ -141,4 +141,4 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ]
 })
-export class AppModule {}
+export class AppModule { }

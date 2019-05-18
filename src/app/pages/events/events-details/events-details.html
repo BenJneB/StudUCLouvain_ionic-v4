@@ -21,9 +21,9 @@
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="event" secondary>
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-title>{{event.title}}</ion-title>
   </ion-toolbar>
 </ion-header>
@@ -31,7 +31,7 @@
 <!--BODY-->
 <ion-content>
   <ion-card>
-    <img src="{{event.image}}"/>
+    <img src="{{event.image}}" />
     <ion-card-content>
       <ion-card-title>
         {{event.title}}
@@ -46,7 +46,7 @@
         </ion-button>
       </ion-col>
       <ion-col text-right>
-        <ion-button fill="clear" size="small"  (click)="openPage(event.link)">
+        <ion-button fill="clear" size="small" (click)="openPage(event.link)">
           <ion-icon slot="start" name='share-alt'></ion-icon>
           {{'EVENTS.SITE' | translate}}
         </ion-button>

@@ -140,19 +140,19 @@ export class AppComponent {
     this.platform.ready().then(() => {
       this.wso2Service.getAppToken();
       this.translateService.setDefaultLang('fr');
-     this.getLanguage();
+      this.getLanguage();
       this.cache.setDefaultTTL(60 * 60 * 2);
       this.cache.setOfflineInvalidate(false);
-    //  this.user.storage.set('first',null);
-     this.user.storage.get('first').then((data) => {
-       if (data === null) {
-         this.rootPage = 'TutoPage';
-         this.user.storage.set('first', false);
-       } else {
-         this.rootPage = 'HomePage';
-       }
-     });
-   });
+      //  this.user.storage.set('first',null);
+      this.user.storage.get('first').then((data) => {
+        if (data === null) {
+          this.rootPage = 'TutoPage';
+          this.user.storage.set('first', false);
+        } else {
+          this.rootPage = 'HomePage';
+        }
+      });
+    });
   }
 
   private getLanguage() {
@@ -169,8 +169,8 @@ export class AppComponent {
     try {
       const elem = await element.getTop();
       if (elem) {
-          elem.dismiss();
-          return;
+        elem.dismiss();
+        return;
       }
     } catch (error) {
       console.log(error);
@@ -179,37 +179,37 @@ export class AppComponent {
 
   backButtonEvent() {
     this.platform.backButton.subscribe(async () => {
-        this.getElementToClose(this.actionSheetCtrl);
-        this.getElementToClose(this.popoverCtrl);
-        this.getElementToClose(this.modalCtrl);
-        try {
-            const element = await this.menu.getOpen();
-            if (element) {
-                this.menu.close();
-                return;
-            }
-        } catch (error) {
-          console.log(error);
+      this.getElementToClose(this.actionSheetCtrl);
+      this.getElementToClose(this.popoverCtrl);
+      this.getElementToClose(this.modalCtrl);
+      try {
+        const element = await this.menu.getOpen();
+        if (element) {
+          this.menu.close();
+          return;
         }
-        this.confirmExitApp();
+      } catch (error) {
+        console.log(error);
+      }
+      this.confirmExitApp();
     });
-}
+  }
 
   private confirmExitApp() {
     this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
       if (outlet && outlet.canGoBack()) {
         outlet.pop();
       } else
-      if (this.router.url === 'home') {
-        if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
-          navigator['app'].exitApp(); //  work in ionic 4
-        } else {
-          this.toast.show(`Press back again to exit App.`, '2000', 'center')
-            .subscribe(toast => {
-            });
-          this.lastTimeBackPress = new Date().getTime();
+        if (this.router.url === 'home') {
+          if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
+            navigator['app'].exitApp(); //  work in ionic 4
+          } else {
+            this.toast.show(`Press back again to exit App.`, '2000', 'center')
+              .subscribe(toast => {
+              });
+            this.lastTimeBackPress = new Date().getTime();
+          }
         }
-      }
     });
   }
 
@@ -231,13 +231,13 @@ export class AppComponent {
       app = iosSchemaName;
       check = appUrl;
     } else
-    if (this.device.platform === 'Android') {
-      app = androidPackageName;
-      check = app;
-    } else {
-      const browser = this.iab.create(httpUrl, '_system');
-      browser.close();
-    }
+      if (this.device.platform === 'Android') {
+        app = androidPackageName;
+        check = app;
+      } else {
+        const browser = this.iab.create(httpUrl, '_system');
+        browser.close();
+      }
     this.appAvailability.check(check).then(
       () => {
         const browser = this.iab.create(appUrl, '_system');

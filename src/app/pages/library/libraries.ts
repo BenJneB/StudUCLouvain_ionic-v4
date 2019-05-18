@@ -46,13 +46,13 @@ export class LibrariesPage {
     private cache: CacheService,
     private router: Router,
     private utilsServices: UtilsService,
-    ) {
+  ) {
     this.cachedOrNot();
     this.title = 'Bibliothèques';
   }
 
   ngOnInit() {
-   // this.loadLibraries();
+    // this.loadLibraries();
   }
 
   /*Reload the libraries if we refresh the page*/
@@ -63,13 +63,13 @@ export class LibrariesPage {
   /*Load libraries*/
   loadLibraries(key?) {
     this.searching = true;
-   // Check the connexion, if it's ok => load the data else go back to the previous page and pop an alert
+    // Check the connexion, if it's ok => load the data else go back to the previous page and pop an alert
     if (this.connService.isOnline()) {
       this.libService.loadLibraries().then(
         res => {
           const result: any = res;
           this.libraries = result.libraries;
-          if (key) {this.cache.saveItem(key, this.libraries); }
+          if (key) { this.cache.saveItem(key, this.libraries); }
           this.searching = false;
         }
       );
@@ -87,15 +87,15 @@ export class LibrariesPage {
   }
 
   async cachedOrNot() {
-     //  this.cache.removeItem('cache-event');
-      const key = 'cache-libraries';
-      await this.cache.getItem(key)
-        .then((data) => {
-          this.libraries = data;
-          this.searching = false;
-        })
-        .catch(() => {
-          this.loadLibraries(key);
-        });
-    }
+    //  this.cache.removeItem('cache-event');
+    const key = 'cache-libraries';
+    await this.cache.getItem(key)
+      .then((data) => {
+        this.libraries = data;
+        this.searching = false;
+      })
+      .catch(() => {
+        this.loadLibraries(key);
+      });
+  }
 }

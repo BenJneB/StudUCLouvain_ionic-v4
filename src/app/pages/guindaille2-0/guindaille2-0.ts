@@ -29,7 +29,7 @@ import { TranslateService } from '@ngx-translate/core';
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
+      state('false', style({ height: '0' })),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -40,15 +40,15 @@ export class GuindaillePage {
   header: any;
   shownGroup = null;
   segment = 'pict';
-  numbersSlides =  Array.from({length: (6)}, (v, k) => k);
-  numberPictos =  Array.from({length: (10)}, (v, k) => k);
+  numbersSlides = Array.from({ length: (6) }, (v, k) => k);
+  numberPictos = Array.from({ length: (10) }, (v, k) => k);
   slides = [];
   pictos = [];
 
   constructor(public navCtrl: NavController,
-              public modalCtrl: ModalController,
-              public alertCtrl: AlertController,
-              public translateService: TranslateService) {
+    public modalCtrl: ModalController,
+    public alertCtrl: AlertController,
+    public translateService: TranslateService) {
     this.numbersSlides.map((numSlide) => {
       const title = 'GUINDAILLE.TITLEF' + (numSlide + 1);
       const subTitle = 'GUINDAILLE.EFFECT' + (numSlide + 1);
@@ -71,18 +71,18 @@ export class GuindaillePage {
       const title = 'GUINDAILLE.TITLE' + (numPicto + 1);
       const subTitle = 'GUINDAILLE.PIC' + (numPicto + 1);
       this.translateService.get([title, subTitle]).subscribe((res: string) => {
-      this.pictos[numPicto] = {
-        header: res[title],
-        subHeader: res[subTitle],
-        buttons: ['OK'],
-        image: 'assets/img/guindaille/' + pictoListImg[numPicto] + '.png'
-      };
+        this.pictos[numPicto] = {
+          header: res[title],
+          subHeader: res[subTitle],
+          buttons: ['OK'],
+          image: 'assets/img/guindaille/' + pictoListImg[numPicto] + '.png'
+        };
+      });
     });
-  });
-}
+  }
 
   async showAlert(page) {
-      const alert = await this.alertCtrl.create(page);
-      await alert.present();
+    const alert = await this.alertCtrl.create(page);
+    await alert.present();
   }
 }
