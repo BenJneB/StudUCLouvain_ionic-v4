@@ -20,6 +20,7 @@
 */
 import { catchError } from 'rxjs/operators';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 import { Component } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
@@ -28,7 +29,6 @@ import {
     AlertController, MenuController, ModalController, NavController, Platform, ToastController
 } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { TranslateService } from '@ngx-translate/core';
 
 import { AdeProject } from '../../entity/adeProject';
 import { Course } from '../../entity/course';
@@ -76,11 +76,11 @@ export class StudiesPage {
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
     public connService: ConnectivityService,
-    private translateService: TranslateService,
     private wso2Service: Wso2Service,
     private studentService: StudentService,
     private transService: TransService,
-    private alertService: AlertService
+    private alertService: AlertService,
+    private utilsServices: UtilsService
   ) {
     this.initializeSession();
     this.menu.enable(true, 'studiesMenu');
@@ -284,12 +284,7 @@ export class StudiesPage {
 
   openWeekPage() {
     this.studentService.weekSchedule().then((res) => {
-      const navigationExtras: NavigationExtras = {
-        state: {
-          schedule: res
-        }
-      };
-      this.navCtrl.navigateForward(['HebdoPage'], navigationExtras);
+      this.utilsServices.goToDetail(res, 'hebdo');
     });
   }
 
