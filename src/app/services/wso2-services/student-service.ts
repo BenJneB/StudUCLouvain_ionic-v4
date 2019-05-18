@@ -118,7 +118,10 @@ export class StudentService {
         let dayDate;
         let items;
         ({ dayDate, items, res } = this.extractSchedule(res, date));
-        const daySchedule = { date: dayDate, schedule: items, day?: day };
+        const daySchedule: { date: string, schedule, day?: string } = { date: dayDate, schedule: items };
+        if (day !== undefined) {
+          daySchedule.day = day;
+        }
         schedule.push(daySchedule);
         schedule.sort((a, b) => parseInt(a.date.substr(0, 2), 10) - parseInt(b.date.substr(0, 2), 10));
       }
@@ -126,33 +129,23 @@ export class StudentService {
   }
 
   getDay(i: number): string {
-    let day = '';
-    if (i === 0) { day = 'Lundi'; }
-    if (i === 1) { day = 'Mardi'; }
-    if (i === 2) { day = 'Mercredi'; }
-    if (i === 3) { day = 'Jeudi'; }
-    if (i === 4) { day = 'Vendredi'; }
-    if (i === 5) { day = 'Samedi'; }
-
-    return day;
+    const dayList = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    return dayList[i];
   }
 
   getDate(i: number): string {
     const today = new Date();
-   // let today = new Date('10/16/2017');
     today.setDate(today.getDate() + i);
-    const d = today.getDate();
-    let dd = d.toString();
-    const m = today.getMonth() + 1;
-    let mm = m.toString();
-    if (m < 10) {
-        mm = '0' + mm;
+    let day = today.getDate().toString();
+    let month = (today.getMonth() + 1).toString();
+    if (month.length < 2) {
+      month = '0' + month;
     }
-    if (d < 10) {
-      dd = '0' + dd;
+    if (day.length < 2) {
+      day = '0' + day;
     }
     const yyyy = today.getFullYear();
-    return yyyy + '-' + mm + '-' + dd;
+    return yyyy + '-' + month + '-' + day;
   }
 
   getStatus() {
