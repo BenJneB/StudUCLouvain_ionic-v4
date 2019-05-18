@@ -144,8 +144,8 @@ export class StudentService {
     if (day.length < 2) {
       day = '0' + day;
     }
-    const yyyy = today.getFullYear();
-    return yyyy + '-' + month + '-' + day;
+    const year = today.getFullYear();
+    return year + '-' + month + '-' + day;
   }
 
   getStatus() {
