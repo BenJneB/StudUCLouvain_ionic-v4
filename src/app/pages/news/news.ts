@@ -33,6 +33,7 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
 import { FacService } from '../../services/utils-services/fac-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
 import { UserService } from '../../services/utils-services/user-service';
+import { UtilsService } from '../../services/utils-services/utils-services';
 
 @Component({
   selector: 'page-news',
@@ -82,6 +83,7 @@ export class NewsPage {
     public facService: FacService,
     private cache: CacheService,
     private loader: LoaderService,
+    private utilsServices: UtilsService,
     private router: Router) {
       this.searchControl = new FormControl();
       this.facService.loadResources().then((data) => {
@@ -255,11 +257,6 @@ export class NewsPage {
 
   /*When click on a news, go to the page with more details*/
   public goToNewsDetail(news: NewsItem) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        news: news
-      }
-    };
-    this.router.navigate( ['news/details'], navigationExtras);
+    this.utilsServices.goToDetail(news, 'news/details');
   }
 }

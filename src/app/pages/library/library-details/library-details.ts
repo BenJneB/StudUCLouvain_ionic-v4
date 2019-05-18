@@ -56,7 +56,7 @@ export class LibraryDetailsPage {
     ) {
       this.route.queryParams.subscribe(params => {
         if (this.router.getCurrentNavigation().extras.state) {
-          this.libDetails = this.router.getCurrentNavigation().extras.state.lib;
+          this.libDetails = this.router.getCurrentNavigation().extras.state.items;
           this.searching = true;
           if (this.connService.isOnline()) {
             this.libService.loadLibDetails(this.libDetails).then(
