@@ -1,5 +1,5 @@
 {
-
+    "DELETE": "Delete",
     "MENU": {
         "HOME": "Home",
         "NEWS": "News",
@@ -61,7 +61,6 @@
         "CHANGEADE": "Change academic year",
         "ADE": "Academic year :",
         "CALENDAR": "Calendar",
-        "DEL": "Delete",
         "BADLOG": "Bad login/password",
         "ERROR": "There is a problem",
         "ADDCOURSE": "Adding a course",
@@ -256,7 +255,6 @@
         "MESSAGEFAV2": "Added to favorites",
         "MESSAGEFAV3": "Would you like to remove this event from favorites?",
         "CANCEL": "Cancel",
-        "DEL": "Delete",
         "SWIPE": "Swipe to the left to add an event to favorites or your calendar.",
 
         "SITE": "See on the website",
@@ -282,7 +280,6 @@
         "FAVADD": "Added to favorites",
         "MESSAGEFAV2": "Would you like to remove this sport from favorites?",
         "CANCEL": "Cancel",
-        "DEL": "Delete",
         "SWIPE": "Swipe to the left to add a sport to favorites or your calendar.",
 
         "FILTER": "Filter",
