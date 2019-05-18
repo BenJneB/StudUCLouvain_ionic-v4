@@ -2,7 +2,7 @@ import { map } from 'rxjs/operators';
 import * as xml2js from 'xml2js';
 
 import { HttpClient } from '@angular/common/http';
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -26,9 +26,8 @@ import { Injectable } from '@angular/core';
 
 import { UtilsService } from '../utils-services/utils-services';
 
-
 // import X2JS from 'x2js';
-/*
+/**
   Generated class for the AdeserviceProvider provider.
 
   See https://angular.io/docs/ts/latest/guide/dependency-injection.html

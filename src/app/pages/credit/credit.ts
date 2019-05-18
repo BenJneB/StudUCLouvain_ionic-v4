@@ -1,4 +1,4 @@
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -33,10 +33,10 @@ export class CreditPage {
   shownGroup = null;
   version;
 
-  constructor(public navCtrl: NavController, 
-              public modalCtrl: ModalController, 
+  constructor(public navCtrl: NavController,
+              public modalCtrl: ModalController,
               private iab: InAppBrowser,
-              private appVersion: AppVersion) 
+              private appVersion: AppVersion)
   {
     this.title = 'Crédits';
     this.appVersion.getVersionNumber().then(version => {

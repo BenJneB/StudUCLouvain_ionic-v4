@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -24,8 +24,8 @@ import { Injectable } from '@angular/core';
 import { Activity } from '../../entity/activity';
 import { AdeService } from './ade-service';
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class CourseService {
 
@@ -90,7 +90,7 @@ export class CourseService {
       let events = jsonActivity.events.event;
       if (events !== undefined) {
         events = this.handleSpecialCase(events);
-        
+
         for (let i = 0; i <events.length; i++) {
           let event = events[i];
           let endHour = event._endHour;

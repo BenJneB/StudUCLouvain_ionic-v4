@@ -1,4 +1,4 @@
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -27,8 +27,8 @@ import { NavController, NavParams } from '@ionic/angular';
 })
 export class RestaurantPage {
   public title: any;
-  constructor(public navCtrl: NavController, 
-              public navParams: NavParams) 
+  constructor(public navCtrl: NavController,
+              public navParams: NavParams)
   {
     this.title = this.navParams.get('title');
   }

@@ -1,14 +1,4 @@
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
-
-import { LibraryItem } from '../../../entity/libraryItem';
-import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
-import { UtilsService } from '../../../services/utils-services/utils-services';
-import { LibrariesService } from '../../../services/wso2-services/libraries-service';
-
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -28,9 +18,15 @@ import { LibrariesService } from '../../../services/wso2-services/libraries-serv
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { NavController } from '@ionic/angular';
 
-
-
+import { LibraryItem } from '../../../entity/libraryItem';
+import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
+import { UtilsService } from '../../../services/utils-services/utils-services';
+import { LibrariesService } from '../../../services/wso2-services/libraries-service';
 
 @Component({
   selector: 'page-library-details',

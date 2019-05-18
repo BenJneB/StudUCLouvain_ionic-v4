@@ -19,7 +19,7 @@ import { UserService } from './services/utils-services/user-service';
 import { UtilsService } from './services/utils-services/utils-services';
 import { Wso2Service } from './services/wso2-services/wso2-service';
 
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019

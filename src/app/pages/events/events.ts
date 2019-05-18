@@ -1,6 +1,6 @@
 import { CacheService } from 'ionic-cache';
 
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
     Date: 2018-2019

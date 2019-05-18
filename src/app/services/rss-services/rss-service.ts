@@ -1,7 +1,7 @@
 import { map, timeout } from 'rxjs/operators';
 
 import { HttpClient } from '@angular/common/http';
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019

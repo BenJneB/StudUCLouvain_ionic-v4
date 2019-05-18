@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -24,8 +24,8 @@ import { Injectable } from '@angular/core';
 import { AdeProject } from '../../entity/adeProject';
 import { AdeService } from './ade-service';
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class StudiesService {
   url: string;

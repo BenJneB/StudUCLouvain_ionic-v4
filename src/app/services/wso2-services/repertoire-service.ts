@@ -1,5 +1,5 @@
 import { HttpClient } from '@angular/common/http';
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -24,8 +24,8 @@ import { Injectable } from '@angular/core';
 import { EmployeeItem } from '../../entity/employeeItem';
 import { Wso2Service } from './wso2-service';
 
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class RepertoireService {
   employees: Array<EmployeeItem> = [];
