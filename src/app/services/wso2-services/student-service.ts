@@ -130,7 +130,7 @@ export class StudentService {
 
   getDay(i: number): string {
     const dayList = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
-    return dayList[i];;
+    return dayList[i];
   }
 
   getDate(i: number): string {
