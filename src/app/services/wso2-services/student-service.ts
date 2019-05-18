@@ -118,7 +118,10 @@ export class StudentService {
         let dayDate;
         let items;
         ({ dayDate, items, res } = this.extractSchedule(res, date));
-        const daySchedule = { date: dayDate, schedule: items, day?: day };
+        const daySchedule: { date: string, schedule, day?: string } = { date: dayDate, schedule: items };
+        if (day !== undefined) {
+          daySchedule.day = day;
+        }
         schedule.push(daySchedule);
         schedule.sort((a, b) => parseInt(a.date.substr(0, 2), 10) - parseInt(b.date.substr(0, 2), 10));
       }

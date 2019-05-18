@@ -37,34 +37,29 @@ export class CourseService {
 
     /*Get the course ID for the acronym of the course*/
     getCourseId(sessionId: string, acronym: string) {
-      return new Promise <string>( (resolve, reject) => {
-        this.ade.httpGetCourseId(sessionId, acronym).subscribe(
-          this.resolveData(resolve, this.extractCourseId)
-        );
-      });
+      this.getData(this.extractCourseId, this.ade.httpGetCourseId, sessionId, acronym);
     }
 
-  private resolveData(resolve: (value?) => void, extract: (data: any) => any)  {
-    return data => {
-      resolve(extract(data));
-    };
+  getData(extract: (data: any) => any, getInfo: (sessionId: string, field: string) => void, sessionId: string, field: string)  {
+    return new Promise <Activity[]>( (resolve, reject) => {
+      this.ade.httpGetActivity(sessionId, field).subscribe(
+        data => {
+          resolve(extract(data));
+        });
+      });
   }
 
-    /*Extract the course ID*/
-    extractCourseId(data) {
-      if (data.resources.resource !== undefined) {
-        return data.resources.resource._id;
-      }
+  /*Extract the course ID*/
+  extractCourseId(data) {
+    if (data.resources.resource !== undefined) {
+      return data.resources.resource._id;
     }
+  }
 
-    /*Get activity for a course ID obtained by getting this from a course selected by the user*/
-    getActivity(sessionId: string, courseId: string) {
-      return new Promise <Activity[]>( (resolve, reject) => {
-        this.ade.httpGetActivity(sessionId, courseId).subscribe(
-          this.resolveData(resolve, this.extractActivity)
-        );
-      });
-    }
+  /*Get activity for a course ID obtained by getting this from a course selected by the user*/
+  getActivity(sessionId: string, courseId: string) {
+    this.getData(this.extractActivity, this.ade.httpGetActivity, sessionId, courseId);
+  }
 
     /*Extract the activity*/
     extractActivity(data): Activity[] {
