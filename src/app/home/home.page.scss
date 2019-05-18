@@ -83,31 +83,28 @@ app-home {
         }
     }
 
-    /*     @media (all) and (orientation: landscape) {
-        ion-row.homeM{
-            display:none;
+    @media (all) and (orientation: landscape) {
+        ion-row.homeM {
+            display: none;
         }
 
-        ion-row.ucl{
+        ion-row.ucl {
             height: 18.75vh;
 
-            img{
-
-            }
+            img {}
         }
     }
+
     @media (all) and (orientation: portrait) {
-        ion-row.homeML{
-            display:none;
+        ion-row.homeML {
+            display: none;
         }
 
-        ion-row.ucl{
+        ion-row.ucl {
             height: 16vh;
 
-            img{
-
-            }
+            img {}
         }
-    } */
+    }
 
 }
