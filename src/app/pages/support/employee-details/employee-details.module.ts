@@ -10,10 +10,10 @@ import { EmployeeDetailsPage } from './employee-details';
 @NgModule({
   declarations: [EmployeeDetailsPage],
   imports: [
-  	IonicModule,
+    IonicModule,
     FormsModule,
     ReactiveFormsModule,
-  	CommonModule,
+    CommonModule,
     TranslateModule.forChild(),
     RouterModule.forChild([
       {

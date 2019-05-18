@@ -7,8 +7,8 @@ import { ExamPage } from './exam';
 @NgModule({
   declarations: [ExamPage],
   imports: [
-  	IonicModule,
-  	TranslateModule.forChild()
+    IonicModule,
+    TranslateModule.forChild()
   ]
 })
 export class ExamPageModule { }

@@ -11,7 +11,7 @@ import { EventsFilterModule } from './events-filter/events-filter.module';
 @NgModule({
   declarations: [EventsPage],
   imports: [
-  	IonicModule,
+    IonicModule,
     TranslateModule.forChild(),
     ReactiveFormsModule,
     CommonModule,

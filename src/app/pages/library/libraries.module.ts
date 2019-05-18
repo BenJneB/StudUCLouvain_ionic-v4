@@ -13,7 +13,7 @@ import { LibrariesPage } from './libraries';
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-  	CommonModule,
+    CommonModule,
     TranslateModule.forChild(),
     RouterModule.forChild([
       {

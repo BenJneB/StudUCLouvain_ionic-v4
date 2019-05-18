@@ -12,7 +12,7 @@ import { ModalInfoPage } from './modal-info';
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-  	CommonModule,
+    CommonModule,
     TranslateModule.forChild(),
   ]
 })

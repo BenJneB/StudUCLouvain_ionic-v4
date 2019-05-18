@@ -142,7 +142,7 @@ export class HomePage {
   }
 
   /*action when click on the floating urgency button, display the text to help the user in an alert*/
-  emergency() {
+  async emergency() {
     let close: string;
     this.translateService.get('HOME.CLOSE').subscribe((res: string) => {close = res; });
     let urg: string;
@@ -159,13 +159,16 @@ export class HomePage {
     this.translateService.get('GUINDAILLE.HELP9').subscribe((res: string) => {msg9 = res; });
     let out: string;
     this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {out = res; });
-    const alert = this.alertCtrl.create({
+    const alert = await this.alertCtrl.create({
       header: urg,
       message: '<p> <strong>'
       + msg1
       + '</strong>: <br><font size=\' +1\'><a href=\'tel:010 47 22 22\'>010 47 22 22</a></font> </p> <p><strong>'
       + msg2
-      + '</strong>: <br><font size=\' +1\'><a href=\'tel:010 47 24 24\'>010 47 24 24</a></font> <br>ou<br> <font size=\' +1\'><a href=\'tel:02 764 93 93\'>02 764 93 93</a></font> <br>(Woluwe - St Gilles - Tournai)<br> ou <br><font size=\' +1\'><a href=\'tel:065 32 35 55\'>065 32 35 55</a></font> (Mons)</p> <p><strong>Contact:</strong> <a href=\'mailto:security@uclouvain.be\'>security@uclouvain.be</a></p> <p><strong>'
+      + '</strong>: <br><font size=\' +1\'><a href=\'tel:010 47 24 24\'>010 47 24 24</a></font> <br>ou<br>'
+      + '<font size=\' +1\'><a href=\'tel:02 764 93 93\'>02 764 93 93</a></font> <br>(Woluwe - St Gilles - Tournai)<br>'
+      + 'ou <br><font size=\' +1\'><a href=\'tel:065 32 35 55\'>065 32 35 55</a></font> (Mons)</p> <p><strong>Contact:</strong> '
+      + '<a href=\'mailto:security@uclouvain.be\'>security@uclouvain.be</a></p> <p><strong>'
       + out + ':</strong> <font size=\' +1\'><a href=\'tel:112\'>112</a></font></p>  <p> <br>' + msg3
       + ' <br><br> <strong>' + msg4 + '</strong> ' + msg5 + '<br> <strong>' + msg6 + '</strong> ' + msg7
       + '<br> <strong>' + msg8 + '</strong> ' + msg9 + '<br>',
@@ -177,7 +180,7 @@ export class HomePage {
         handler: data => {
         }
       }]
-    }).then(alert => alert.present());
+    });
+    await alert.present();
   }
-
 }

@@ -12,7 +12,7 @@ import { ModalProjectPage } from './modal-project';
     IonicModule,
     FormsModule,
     ReactiveFormsModule,
-  	CommonModule,
+    CommonModule,
     TranslateModule.forChild(),
   ],
   entryComponents: [

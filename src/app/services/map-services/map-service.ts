@@ -236,9 +236,9 @@ export class MapService {
             console.log('Geolocation disabled');
               const campus = this.userS.campus;
               let latLng: LatLng;
-              if (campus === 'LLN') { latLng = new LatLng(50.66808100000001,4.611832400000026); }
-              if (campus === 'Woluwe') { latLng = new LatLng(50.8489094,4.432088300000032); }
-              if (campus === 'Mons') { latLng = new LatLng(50.45424080000001,3.956658999999945); }
+              if (campus === 'LLN') { latLng = new LatLng(50.66808100000001, 4.611832400000026); }
+              if (campus === 'Woluwe') { latLng = new LatLng(50.8489094, 4.432088300000032); }
+              if (campus === 'Mons') { latLng = new LatLng(50.45424080000001, 3.956658999999945); }
 
               this.userLocation = new MapLocation( 'Campus Position',
                                         '',
@@ -292,8 +292,7 @@ export class MapService {
      // console.log(location);
      // console.log(this.markers);
       let m;
-      if (this.onDevice) { m = this.markers; }
-      else { m = this.markersB; }
+      if (this.onDevice) { m = this.markers; } else { m = this.markersB; }
       for (let i = 0; i < m.length; i++) {
          if (m[i].getTitle() === location.title) {
          // console.log(this.markers[i]);

@@ -38,10 +38,8 @@ export class ModalInfoPage {
 
     public navParams: NavParams,
     public viewCtrl: ModalController,
-    public studentService: StudentService)
-  {
+    public studentService: StudentService) {
     this.getInfo().then(data => {
-      console.log(data);
       this.information = data;
       this.langue = data.langue;
     });
@@ -50,10 +48,10 @@ export class ModalInfoPage {
     getInfo(): Promise<any> {
       let response: any;
       return new Promise(resolve => {
-        this.studentService.checkCourse(this.course.acronym,this.year).then(
+        this.studentService.checkCourse(this.course.acronym, this.year).then(
         (data) => {
           console.log(data);
-          let res: any = data;
+          const res: any = data;
           console.log(res);
           if (data === 400) {
 
@@ -61,24 +59,24 @@ export class ModalInfoPage {
             resolve(400);
           } else {
             let cahier = '';
-            let campus = res.campus;
-            let teacher = res.fichesIntervenants;
-            let offres = res.fichesOffres;
-            let langue = res.langueEnseignement;
-            let loca = res.localisation;
-            let credit = res.ects;
-            let entite = res.entiteCharge
-            let progpre = res.programmesEtPrerequis;
-            let quadri = res.quadrimestre
-            let resume = res.resumeCoursMap.entry[1].value;
-            let vol = {'vol1':res.volTot1, 'vol2': res.volTot2, 'vol1Coef':res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef};
+            const campus = res.campus;
+            const teacher = res.fichesIntervenants;
+            const offres = res.fichesOffres;
+            const langue = res.langueEnseignement;
+            const loca = res.localisation;
+            const credit = res.ects;
+            const entite = res.entiteCharge;
+            const progpre = res.programmesEtPrerequis;
+            const quadri = res.quadrimestre;
+            const resume = res.resumeCoursMap.entry[1].value;
+            const vol = {'vol1': res.volTot1, 'vol2': res.volTot2, 'vol1Coef': res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef};
             if (res.cahierChargesExiste) {
               cahier = res.cahierChargesMap.entry[1].value;
             }
             response = {
               cahierCharges: cahier,
               offre: offres,
-              campus:campus,
+              campus: campus,
               entite: entite,
               prof: teacher,
               localisation: loca,
@@ -91,14 +89,11 @@ export class ModalInfoPage {
             };
             resolve(response);
           }
-        })
-      })
+        });
+      });
     }
 
    closeModal() {
-
      this.viewCtrl.dismiss();
    }
-
-
 }

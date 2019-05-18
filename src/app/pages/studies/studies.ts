@@ -116,15 +116,15 @@ export class StudiesPage {
  /*Authenticate a student*/
   private login() {
     this.error = '';
-  	return new Promise(resolve => {
+    return new Promise(resolve => {
       this.wso2Service.login(this.username, this.password).pipe(
       catchError(error => {
-      	if (error.status === 400) {
+        if (error.status === 400) {
           this.error = this.transService.getTranslation('STUDY.BADLOG');
         } else {
           this.error = this.transService.getTranslation('STUDY.ERROR');
         }
-      	return error;
+        return error;
       }))
       .subscribe(
         data => {

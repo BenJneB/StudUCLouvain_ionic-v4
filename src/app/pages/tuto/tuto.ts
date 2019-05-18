@@ -38,7 +38,7 @@ export class TutoPage {
   }
 
   goToHome() {
-  	this.navCtrl.navigateForward(['/home']);
+    this.navCtrl.navigateForward(['/home']);
   }
 
 }

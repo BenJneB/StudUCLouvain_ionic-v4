@@ -12,23 +12,23 @@ describe('Guindaille2-0', () => {
 	let component;
 	beforeEach(async(() => {
 		TestBed.configureTestingModule({
-			declarations:[GuindaillePage],
+			declarations: [GuindaillePage],
 			imports: [	IonicModule.forRoot(this),
 						TranslateModule.forRoot(this)],
-			providers:[
+			providers: [
 				NavController,
-				 {provide:NavParams, useClass:NavParamsMock},
+				 {provide: NavParams, useClass: NavParamsMock},
 				// {provide:TranslateService, useClass: TranslateServiceMock},
 				ModalController,
 				AlertController,
 			]
-		})
+		});
 	}));
 
 	beforeEach(() => {
 		fixture = TestBed.createComponent(GuindaillePage);
 		component = fixture.componentInstance;
-		//expect(component).toBeDefined();
+		// expect(component).toBeDefined();
 	});
 
 	  it('should be created', () => {

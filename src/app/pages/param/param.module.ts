@@ -10,8 +10,8 @@ import { ParamPage } from './param';
 @NgModule({
   declarations: [ParamPage],
   imports: [
-  	IonicModule,
-  	TranslateModule.forChild(),
+    IonicModule,
+    TranslateModule.forChild(),
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
