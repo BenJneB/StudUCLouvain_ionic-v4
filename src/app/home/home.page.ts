@@ -95,7 +95,7 @@ export class HomePage {
 
 
   constructor(
-              public userS:UserService,
+              public userS: UserService,
               public nav: NavController,
               private iab: InAppBrowser,
               private alertCtrl: AlertController,
@@ -105,8 +105,7 @@ export class HomePage {
               public studentService: StudentService,
               public splashscreen: SplashScreen,
               private utilsServices: UtilsService
-            )
-  {
+            ) {
       this.where = '';
       document.title = this.title;
      // this.userS.removeCampus('');
@@ -116,7 +115,7 @@ export class HomePage {
   ionViewDidEnter() {
     setTimeout(() => {
       this.splashscreen.hide();
-    },1000);
+    }, 1000);
   }
 
   /*Update the public variable campus for the user*/
@@ -160,7 +159,7 @@ export class HomePage {
     this.translateService.get('GUINDAILLE.HELP9').subscribe((res: string) => {msg9 = res; });
     let out: string;
     this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {out = res; });
-    let alert = this.alertCtrl.create({
+    const alert = this.alertCtrl.create({
       header: urg,
       message: '<p> <strong>'
       + msg1
@@ -174,8 +173,8 @@ export class HomePage {
       cssClass: 'emergency',
       buttons: [
       {
-        text:close,
-        handler:data => {
+        text: close,
+        handler: data => {
         }
       }]
     }).then(alert => alert.present());

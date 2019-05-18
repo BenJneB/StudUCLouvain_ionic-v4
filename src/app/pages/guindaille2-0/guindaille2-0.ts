@@ -48,8 +48,7 @@ export class GuindaillePage {
   constructor(public navCtrl: NavController,
               public modalCtrl: ModalController,
               public alertCtrl: AlertController,
-              public translateService: TranslateService)
-  {
+              public translateService: TranslateService) {
     this.numbersSlides.map((numSlide) => {
       const title = 'GUINDAILLE.TITLEF' + (numSlide + 1);
       const subTitle = 'GUINDAILLE.EFFECT' + (numSlide + 1);

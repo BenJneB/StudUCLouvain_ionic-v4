@@ -69,7 +69,7 @@ export class SportsPage {
     'FAV3': 'SPORTS.MESSAGEFAV2',
     'CANCEL': 'SPORTS.CANCEL',
     'DEL': 'SPORTS.DEL',
-  }
+  };
 
   constructor(
     public alertCtrl: AlertController,
@@ -81,8 +81,7 @@ export class SportsPage {
     public connService: ConnectivityService,
     private loader: LoaderService,
     public navCtrl: NavController,
-    private utilsServices: UtilsService)
-  {
+    private utilsServices: UtilsService) {
     this.searchControl = new FormControl();
   }
 
@@ -124,7 +123,7 @@ export class SportsPage {
             segment === 'team' ? true : false,
             result
           );
-      })
+      });
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -143,12 +142,12 @@ export class SportsPage {
 
   /*Sort sports BY DAY*/
   public changeArray(array) {
-    let groups = array.reduce(function(obj,item) {
+    const groups = array.reduce(function(obj, item) {
       obj[item.jour] = obj[item.jour] || [];
       obj[item.jour].push(item);
       return obj;
     }, {});
-    let sportsD = Object.keys(groups).map(function(key) {
+    const sportsD = Object.keys(groups).map(function(key) {
     return {jour: key, name: groups[key]};
     });
     return sportsD;
@@ -162,8 +161,7 @@ export class SportsPage {
     if (callFilter === true) {// List of sports for all students
       const sport = this.segment === 'all' ? this.sports : this.teams;
       this.displayedSports = this.filterDisplayedSports(sport, this.excludedFilters);
-    }
-    else if (this.segment === 'favorites') {// list of sports put in favorite
+    } else if (this.segment === 'favorites') {// list of sports put in favorite
       this.displayedSports = this.utilsServices.filterFavoriteItems(this.sports, this.searchTerm, 'sports');
     }
     this.shownSports = this.displayedSports.length;
@@ -185,38 +183,38 @@ export class SportsPage {
       return {
         filters: this.filtersT,
         exclude: this.excludedFiltersT
-      }
+      };
     } else {
       return {
         filters: this.filters,
         exclude: this.excludedFilters
-      }
+      };
     }
   }
   /*Display a modal to select as filter only the sports that the user want to see*/
   async presentFilter() {
-    const datas = this.getFiltersData(this.segment === 'team')
+    const datas = this.getFiltersData(this.segment === 'team');
     let filters = datas['filters'];
     const excluded = datas['exclude'];
     if (filters === undefined) {
       filters = [];
     }
-    let modal = await this.modalCtrl.create({
+    const modal = await this.modalCtrl.create({
         component: SportsFilterPage,
         componentProps: { excludedFilters: excluded, filters: filters, dateRange: this.dateRange}
-    })
+    });
     await modal.present();
     await modal.onDidDismiss().then((data) => {
       if (data) {
         data = data.data;
-        let tmpRange = data[1];
+        const tmpRange = data[1];
         if (tmpRange !== this.dateRange) {
           this.dateRange = tmpRange;
           this.updateDateLimit();
         }
-        let newExclude = data[0];
-        if (this.segment === 'all') this.excludedFilters = newExclude;
-        if (this.segment === 'team') this.excludedFiltersT = newExclude;
+        const newExclude = data[0];
+        if (this.segment === 'all') { this.excludedFilters = newExclude; }
+        if (this.segment === 'team') { this.excludedFiltersT = newExclude; }
         this.updateDisplayed();
       }
     });
@@ -224,18 +222,18 @@ export class SportsPage {
 
   /*Update the dateLimit when that is changed by the filter*/
   private updateDateLimit() {
-    let today = new Date();
-    this.dateLimit = new Date(today.getFullYear(), today.getMonth(), today.getUTCDate()+this.dateRange);
+    const today = new Date();
+    this.dateLimit = new Date(today.getFullYear(), today.getMonth(), today.getUTCDate() + this.dateRange);
   }
 
   /*Add a sport to calendar of the smartphone*/
   addToCalendar(slidingItem: IonItemSliding, itemData: SportItem) {
-    let options: any = {
-      firstReminderMinutes:30
+    const options: any = {
+      firstReminderMinutes: 30
     };
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
       itemData.salle, itemData.date, itemData.hfin, options).then(() => {
-        let toast = this.toastCtrl.create({
+        const toast = this.toastCtrl.create({
           message: 'Sport créé',
           duration: 3000
         }).then(toast => toast.present());

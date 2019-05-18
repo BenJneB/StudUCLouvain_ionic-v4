@@ -1,15 +1,7 @@
-/**
-import { animate, state, style, transition, trigger } from '@angular/animations';
-import { Component } from '@angular/core';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ModalController, NavController, Platform } from '@ionic/angular';
 import { LoaderService } from 'src/app/services/utils-services/loader-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
-import { EmployeeItem } from '../../entity/employeeItem';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { RepertoireService } from '../../services/wso2-services/repertoire-service';
-
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -29,6 +21,14 @@ import { RepertoireService } from '../../services/wso2-services/repertoire-servi
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
+import { animate, state, style, transition, trigger } from '@angular/animations';
+import { Component } from '@angular/core';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ModalController, NavController, Platform } from '@ionic/angular';
+
+import { EmployeeItem } from '../../entity/employeeItem';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { RepertoireService } from '../../services/wso2-services/repertoire-service';
 
 @Component({
   selector: 'page-support',
@@ -46,7 +46,7 @@ export class SupportPage {
   title: any;
   shownGroup = null;
   employees: EmployeeItem[];
-  searching: boolean = false;
+  searching = false;
   lastname = '';
   firstname = '';
   loading;
@@ -61,21 +61,20 @@ export class SupportPage {
               public connService: ConnectivityService,
               public loader: LoaderService,
               private utilsServices: UtilsService
-  )
-  {
+  ) {
     this.title = 'Support';
   }
 
   /*Take the name and lastname in the good field to do the search and display the result*/
   update() {
     this.loader.present('Please wait..');
-    let options: Array<string> = [];
-    let values: Array<string> = [];
-    if (this.lastname.length>0) {
+    const options: Array<string> = [];
+    const values: Array<string> = [];
+    if (this.lastname.length > 0) {
       values.push(this.lastname);
       options.push('lastname');
     }
-    if (this.firstname.length>0) {
+    if (this.firstname.length > 0) {
       values.push(this.firstname);
       options.push('firstname');
     }
@@ -91,7 +90,7 @@ export class SupportPage {
     if (this.connService.isOnline()) {
       this.repService.searchEmployees(options, values).then(
         res => {
-          let result: any = res;
+          const result: any = res;
           this.employees = result.employees;
           this.searching = true;
         }

@@ -16,8 +16,8 @@ import { HomePage } from './home.page';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-  	IonicModule,
-  	TranslateModule.forChild({
+    IonicModule,
+    TranslateModule.forChild({
         loader: {
             provide: TranslateLoader,
             useFactory: HttpLoaderFactory,

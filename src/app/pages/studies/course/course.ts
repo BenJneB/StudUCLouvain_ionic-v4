@@ -60,7 +60,7 @@ export class CoursePage {
     public courseService: CourseService,
     private calendar: Calendar,
     public toastCtrl: ToastController,
-    public userS:UserService,
+    public userS: UserService,
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
     private translateService: TranslateService,
@@ -68,16 +68,15 @@ export class CoursePage {
     private router: Router,
     private utilsServices: UtilsService,
     private alertService: AlertService
-  )
-  {
+  ) {
     this.route.queryParams.subscribe(params => {
 
       if (this.router.getCurrentNavigation().extras.state) {
         this.sessionId = this.router.getCurrentNavigation().extras.state.sessionId;
         this.course = this.router.getCurrentNavigation().extras.state.course;
         this.year = this.router.getCurrentNavigation().extras.state.year;
-        this.courseSorted = {cm: [], tp: [], ex:[]};
-        let acro = this.course.acronym;
+        this.courseSorted = {cm: [], tp: [], ex: []};
+        const acro = this.course.acronym;
         if (this.userS.hasSlot(acro, 'CM')) {
           this.slotCM = this.userS.getSlot(acro, 'CM');
         }
@@ -101,24 +100,24 @@ export class CoursePage {
   getCourse(sessionId: string, acronym: string) {
     this.courseService.getCourseId(sessionId, acronym).then(
       data => {
-        let courseId = data;
+        const courseId = data;
         this.courseService.getActivity(sessionId, courseId).then(
           data => {
             this.course.activities = data.sort(
-              (a1,a2) => a1.start.valueOf() - a2.start.valueOf()
+              (a1, a2) => a1.start.valueOf() - a2.start.valueOf()
             ).filter(
                 activitie => activitie.end.valueOf() > Date.now().valueOf()
               ); //  display only activities finished after now time
-              this.displayedActi =this.course.activities;
+              this.displayedActi = this.course.activities;
               this.courseSorted.cm = this.course.activities.filter(acti => acti.type === 'Cours magistral');
               this.courseSorted.tp = this.course.activities.filter(acti => (acti.type === 'TD' || acti.type === 'TP'));
               this.courseSorted.ex = this.course.activities.filter(acti => acti.isExam);
               this.updateDisplayed();
           }
 
-        )
+        );
       }
-    )
+    );
   }
 
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
@@ -130,14 +129,14 @@ export class CoursePage {
       location: activity.auditorium,
       start: activity.start,
       end: activity.end
-    }
+    };
     this.utilsServices.createEventInCalendar(datas, message, slidingItem);
     this.alertService.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
   }
 
   /*Filter TP if a slot is selectionned*/
   updateDisplayedTP() {
-      let toFilter = this.courseSorted.tp;
+      const toFilter = this.courseSorted.tp;
       this.noTP = toFilter.length === 0;
       let toPush;
       if (this.slotTP !== 'no') {
@@ -150,7 +149,7 @@ export class CoursePage {
 
   /*Filter CM if a slot is selectionned*/
   updateDisplayedCM() {
-      let toFilter = this.courseSorted.cm;
+      const toFilter = this.courseSorted.cm;
       this.noCM = toFilter.length === 0;
       let toPush: Array<Activity>;
       if (this.slotCM !== 'no') {
@@ -180,7 +179,7 @@ export class CoursePage {
     this.translateService.get('COURSE.MESSAGE2').subscribe((res: string) => {message = res; });
     this.translateService.get('COURSE.CANCEL').subscribe((res: string) => {cancel = res; });
     this.translateService.get('COURSE.APPLY').subscribe((res: string) => {apply = res; });
-    let options = {
+    const options = {
       title: title,
       message: message,
       inputs: [],
@@ -199,10 +198,10 @@ export class CoursePage {
           }
       }
     ]};
-    let aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
-    let array = this.getSlots(segment);
+    const aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
+    const array = this.getSlots(segment);
     for (let i = 0; i < array.length; i++) {
-       let slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
+       const slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
       options.inputs.push(
         {
           name: 'options',
@@ -216,7 +215,7 @@ export class CoursePage {
     if (options.inputs.length > 1) {
       options.inputs.push({name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun});
     }
-    let prompt = this.alertCtrl.create(options);
+    const prompt = this.alertCtrl.create(options);
     if (options.inputs.length > 1) {
       prompt.then(prompt => prompt.present());
     }
@@ -247,10 +246,10 @@ export class CoursePage {
     if (segment === 'Cours magistral') {
       slots = slots.filter(acti => acti.indexOf('-') !== -1);
     }
-    let newAct: Activity[] = [];
+    const newAct: Activity[] = [];
    // retrieve one activity of each slot
     for (let i = 0; i < slots.length; i++) {
-      let activity: Activity = act.find(acti => acti.name === slots[i]);
+      const activity: Activity = act.find(acti => acti.name === slots[i]);
       newAct.push(activity);
     }
     return newAct;
@@ -258,12 +257,12 @@ export class CoursePage {
 
   /*Add a course to the calendar*/
   addCourseToCalendar() {
-    let options: any = {
-      firstReminderMinutes:15
+    const options: any = {
+      firstReminderMinutes: 15
     };
-    for (let activity of this.displayedActi) {
+    for (const activity of this.displayedActi) {
       this.calendar.createEventWithOptions(this.course.name + ': ' + activity.type,
-        activity.auditorium, null, activity.start,activity.end, options);
+        activity.auditorium, null, activity.start, activity.end, options);
     }
     let message: string;
     this.translateService.get('STUDY.MESSAGE3').subscribe((res: string) => {message = res; });
@@ -272,7 +271,7 @@ export class CoursePage {
   }
 
    openModalInfo() {
-    let myModal = this.modalCtrl.create(
+    const myModal = this.modalCtrl.create(
       {
         component: ModalInfoPage,
         componentProps: {course: this.course, year: this.year},
