@@ -41,7 +41,7 @@ export class MapPage {
   userLocation: any = [];
   showLocationList = false;
   title: any;
-  searching: boolean = false;
+  searching = false;
   temp: any;
   temp2: any;
 
@@ -50,9 +50,8 @@ export class MapPage {
               public actionSheetCtrl: ActionSheetController,
               public mapService: MapService,
               public platform: Platform,
-              public poilocations: POIService)
-  {
-    console.log('map constr')
+              public poilocations: POIService) {
+    console.log('map constr');
       this.title = 'Carte';
   }
 
@@ -82,13 +81,13 @@ export class MapPage {
   } */
 
   ngAfterViewInit() {
-    console.log('aft vie in')
+    console.log('aft vie in');
 		this.platform.ready().then( () => {
 
       this.mapService.loadMap();
       console.log('after load');
     });
-    console.log('end')
+    console.log('end');
 	}
   /*Use to display or close the list of a type of positions (auditoires, parkings, bibliotheques, ...)*/
   toggleDetails(data) {
@@ -119,8 +118,8 @@ export class MapPage {
 
   /*remove a location displayed*/
   removeShowedLocations(rawLocation) {
-    let locToRemove = this.showedLocations.find(item => item.title === rawLocation.title);
-    this.showedLocations.splice(this.showedLocations.indexOf(locToRemove),1);
+    const locToRemove = this.showedLocations.find(item => item.title === rawLocation.title);
+    this.showedLocations.splice(this.showedLocations.indexOf(locToRemove), 1);
   }
 
   /*when select an location*/
