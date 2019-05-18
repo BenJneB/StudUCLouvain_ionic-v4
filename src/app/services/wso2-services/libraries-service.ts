@@ -114,20 +114,20 @@ export class LibrariesService {
 
   private assignInfosDatas(data: any, lib: LibraryItem) {
     const fieldsData = [
-      { datas: data.email, field: lib.email, nullData: false },
-      { datas: data.website, field: lib.website, nullData: '' }
+      { datas: data.email, field: lib.email, nameField: 'email' },
+      { datas: data.website, field: lib.website, nameField: 'website' },
+      { datas: data.phone, field: lib.phone, nameField: 'phone' }
     ];
     for (const field of fieldsData) {
-      if (field.datas === null) {
-        field.field = field.nullData;
-      } else {
-        field.field = field.datas;
-      }
+      this.assignDatas(field);
     }
-    if (data.phone === null) {
-      lib.phone = '';
+  }
+
+  private assignDatas(field: { datas: any; field: boolean; nameField: string; } | { datas: any; field: string; nameField: string; }) {
+    if (field.datas === null) {
+      field.field = field.nameField === 'email' ? false : true;
     } else {
-      lib.phone = data.phone.substr(3);
+      field.field = field.nameField === 'phone' ? field.datas.substr(3) : field.datas;
     }
   }
 
