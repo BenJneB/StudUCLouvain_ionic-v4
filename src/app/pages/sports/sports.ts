@@ -123,7 +123,7 @@ export class SportsPage {
             segment === 'team' ? true : false,
             result
           );
-      });
+        });
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -132,25 +132,22 @@ export class SportsPage {
   }
 
   private assignDatas(isTeam: boolean, result: any) {
-      isTeam ? this.teams = result.sports : this.sports = result.sports;
-      isTeam ? this.shownTeams = result.shownSports : this.shownSports = result.shownSports;
-      isTeam ? this.filtersT = result.categories : this.filters = result.categories;
-      isTeam ? this.noteams = result.sports.length === 0 : this.nosport = result.sports.length === 0;
+    isTeam ? this.teams = result.sports : this.sports = result.sports;
+    isTeam ? this.shownTeams = result.shownSports : this.shownSports = result.shownSports;
+    isTeam ? this.filtersT = result.categories : this.filters = result.categories;
+    isTeam ? this.noteams = result.sports.length === 0 : this.nosport = result.sports.length === 0;
     this.searching = false;
     this.updateDisplayed();
   }
 
   /*Sort sports BY DAY*/
   public changeArray(array) {
-    const groups = array.reduce(function(obj, item) {
+    const groups = array.reduce(function (obj, item) {
       obj[item.jour] = obj[item.jour] || [];
       obj[item.jour].push(item);
       return obj;
     }, {});
-    const sportsD = Object.keys(groups).map(function(key) {
-    return {jour: key, name: groups[key]};
-    });
-    return sportsD;
+    return this.utilsServices.getItemDisplay(groups);
   }
 
   /*Display the good list of sports according to the tab*/
@@ -200,8 +197,8 @@ export class SportsPage {
       filters = [];
     }
     const modal = await this.modalCtrl.create({
-        component: SportsFilterPage,
-        componentProps: { excludedFilters: excluded, filters: filters, dateRange: this.dateRange}
+      component: SportsFilterPage,
+      componentProps: { excludedFilters: excluded, filters: filters, dateRange: this.dateRange }
     });
     await modal.present();
     await modal.onDidDismiss().then((data) => {

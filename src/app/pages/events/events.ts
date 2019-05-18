@@ -91,8 +91,8 @@ export class EventsPage {
   /*Like the constructor, ngOnInit fires all his body*/
   ngOnInit() {
     this.updateDateLimit();
-      this.cachedOrNot();
-      this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
+    this.cachedOrNot();
+    this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
   }
 
   public goToEventDetail(event: EventItem) {
@@ -115,34 +115,34 @@ export class EventsPage {
     this.searching = true;
   }
 
-    /*Check if data are cached or not */
-    async cachedOrNot() {
-     // this.cache.removeItem('cache-event');
-        const key = 'cache-event';
-        await this.cache.getItem(key)
-        .then((data) => {
-          this.loader.present('Please wait...');
-          this.events = data.items;
-          this.events.forEach(function(element) {
-            element.startDate = new Date(element.startDate);
-            element.endDate = new Date(element.endDate);
-          });
-          this.shownEvents = data.showItems;
-          this.filters = data.categories;
-          this.searching = false;
-          this.updateDisplayed();
-        })
-        .catch(() => {
-          this.loadEvents(key);
+  /*Check if data are cached or not */
+  async cachedOrNot() {
+    // this.cache.removeItem('cache-event');
+    const key = 'cache-event';
+    await this.cache.getItem(key)
+      .then((data) => {
+        this.loader.present('Please wait...');
+        this.events = data.items;
+        this.events.forEach(function (element) {
+          element.startDate = new Date(element.startDate);
+          element.endDate = new Date(element.endDate);
         });
-    }
+        this.shownEvents = data.showItems;
+        this.filters = data.categories;
+        this.searching = false;
+        this.updateDisplayed();
+      })
+      .catch(() => {
+        this.loadEvents(key);
+      });
+  }
 
 
   /*Load the list of events to display*/
   public loadEvents(key?) {
     this.searching = true;
     this.eventsList && this.eventsList.closeSlidingItems();
-   // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
+    // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
     if (this.connService.isOnline()) {
       this.loader.present('Please wait...');
       this.eventsService.getEvents(this.segment).then(
@@ -157,7 +157,7 @@ export class EventsPage {
           this.searching = false;
           this.noevents = this.events.length === 0;
           this.updateDisplayed();
-      });
+        });
     } else {
       this.searching = false;
       this.navCtrl.pop();
@@ -165,10 +165,10 @@ export class EventsPage {
     }
   }
 
-   /*Make an array with events sorted by week*/
-   changeArray(array, weekUCL) {
-     const getWeek = this.getWeek;
-    const groups = array.reduce(function(obj, item) {
+  /*Make an array with events sorted by week*/
+  changeArray(array, weekUCL) {
+    const getWeek = this.getWeek;
+    const groups = array.reduce(function (obj, item) {
       const date = new Date(item.startDate.getTime());
       date.setHours(0, 0, 0, 0);
       date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
@@ -177,13 +177,7 @@ export class EventsPage {
       obj[week].push(item);
       return obj;
     }, {});
-    const eventsD = Object.keys(groups).map(function(key) {
-      return {
-        weeks: key,
-        event: groups[key]
-      };
-    });
-    return eventsD;
+    return this.utilsServices.getItemDisplay(groups);
   }
 
   private getWeek(date: Date) {
@@ -195,11 +189,11 @@ export class EventsPage {
   getISOWeek(d: Date) {
     const date = new Date(d.getTime());
     date.setHours(0, 0, 0, 0);
-   //  Thursday in current week decides the year.
+    //  Thursday in current week decides the year.
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-   //  January 4 is always in week 1.
+    //  January 4 is always in week 1.
     const week1 = new Date(date.getFullYear(), 0, 4);
-   //  Adjust to Thursday in week 1 and count number of weeks from date to week1.
+    //  Adjust to Thursday in week 1 and count number of weeks from date to week1.
     return this.getWeek(date);
   }
 
@@ -215,7 +209,7 @@ export class EventsPage {
     rangeIsTo = this.getFullDate(d1);
     rangeIsTo = rangeIsTo.replace(/-/g, '/');
     rangeIsFrom = rangeIsFrom.replace(/-/g, '/');
-    return {from: rangeIsFrom, to: rangeIsTo};
+    return { from: rangeIsFrom, to: rangeIsTo };
   }
 
   private getFullDate(d1: any): any {
@@ -246,11 +240,11 @@ export class EventsPage {
     const modal = await this.modalCtrl.create(
       {
         component: EventsFilterPage,
-        componentProps: { excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange}
+        componentProps: { excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange }
       }
-      );
-      await modal.present();
-     await modal.onDidDismiss().then((data: OverlayEventDetail) => {
+    );
+    await modal.present();
+    await modal.onDidDismiss().then((data: OverlayEventDetail) => {
       if (data) {
         data = data.data;
         const tmpRange = data[1];
@@ -261,8 +255,8 @@ export class EventsPage {
         this.excludedFilters = data[0];
         this.updateDisplayed();
       }
-  });
-}
+    });
+  }
 
   /*Update the date limit, take account if a change is done by filter with the dateRange value*/
   private updateDateLimit() {
@@ -277,7 +271,7 @@ export class EventsPage {
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: IonItemSliding, itemData: any): void {
     let message: string;
-    this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => {message = res; });
+    this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => { message = res; });
     const datas = {
       title: itemData.title,
       location: itemData.location,
