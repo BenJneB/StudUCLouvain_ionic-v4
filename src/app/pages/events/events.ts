@@ -69,7 +69,7 @@ export class EventsPage {
     'FAV2': 'EVENTS.MESSAGEFAV2',
     'FAV3': 'EVENTS.MESSAGEFAV3',
     'CANCEL': 'EVENTS.CANCEL',
-    'DEL': 'EVENTS.DEL',
+    'DEL': 'DELETE',
   };
   constructor(
     public alertCtrl: AlertController,

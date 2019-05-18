@@ -1,4 +1,5 @@
 {
+    "DELETE": "Supprimer",
     "MENU": {
         "HOME": "Accueil",
         "NEWS": "Actualités",
@@ -60,7 +61,6 @@
         "CHANGEADE": "Changer d'année académique",
         "ADE": "Année académique :",
         "CALENDAR": "Calendrier",
-        "DEL": "Supprimer",
         "BADLOG": "Mauvais login/password",
         "ERROR": "Il y a un problème",
         "ADDCOURSE": "Ajout d'un cours",
@@ -254,7 +254,6 @@
         "MESSAGEFAV2": "Ajouté aux favoris",
         "MESSAGEFAV3": "Souhaitez-vous retirer cet évènement des favoris ?",
         "CANCEL": "Annuler",
-        "DEL": "Supprimer",
         "SWIPE": "Swipe sur la gauche pour ajouter un évènement aux favoris ou dans ton agenda.",
 
         "SITE": "Voir sur le site",
@@ -280,7 +279,6 @@
         "FAVADD": "Ajouté aux favoris",
         "MESSAGEFAV2": "Souhaitez-vous retirer ce sport des favoris ?",
         "CANCEL": "Annuler",
-        "DEL": "Supprimer",
         "SWIPE": "Swipe sur la gauche pour ajouter un sport aux favoris ou dans ton agenda.",
 
         "FILTER": "Filtre",

@@ -68,7 +68,7 @@ export class SportsPage {
     'FAV2': 'SPORTS.FAVADD',
     'FAV3': 'SPORTS.MESSAGEFAV2',
     'CANCEL': 'SPORTS.CANCEL',
-    'DEL': 'SPORTS.DEL',
+    'DEL': 'DELETE',
   };
 
   constructor(
