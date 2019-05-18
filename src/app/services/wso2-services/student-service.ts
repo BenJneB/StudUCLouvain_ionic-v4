@@ -35,7 +35,6 @@ export class StudentService {
   constructor(public http: HttpClient, private wso2Service: Wso2Service) {
   }
 
-  /*Search activities (courses)*/
   public searchActivities() {
     this.activities = [];
     let newUrl = this.url ;
