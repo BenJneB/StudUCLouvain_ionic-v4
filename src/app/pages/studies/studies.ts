@@ -206,55 +206,6 @@ export class StudiesPage {
     }
   }
 
-  /*Add a course manually, show a prompt to the user for this where he can put the name and the acronym of the course*/
-  async showPrompt() {
-    const { addcourse, message, sigle, cancel, save }: {
-      addcourse: string; message: string; sigle: string; cancel: string; save: string;
-    } = this.getPromptTexts();
-    const prompt = await this.alertCtrl.create({
-      header: addcourse,
-      message: message,
-      inputs: [
-        {
-          name: 'acronym',
-          placeholder: sigle
-        }
-      ],
-      buttons: [
-        { text: cancel },
-        {
-          text: save,
-          cssClass: 'save',
-          handler: data => {
-            this.handleSavePrompt(data);
-          }
-        }
-      ]
-    });
-    await prompt.present();
-  }
-
-  private handleSavePrompt(data: any) {
-    const acro = data.acronym.toUpperCase();
-    let already = false;
-    for (const item of this.listCourses) {
-      if (item.acronym === acro) {
-        already = true;
-      }
-    }
-    this.checkCourseExisting(already, acro);
-  }
-
-  private getPromptTexts() {
-    let addcourse: string, message: string, sigle: string, cancel: string, save: string;
-    this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => { addcourse = res; });
-    this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => { message = res; });
-    this.translateService.get('STUDY.SIGLE').subscribe((res: string) => { sigle = res; });
-    this.translateService.get('STUDY.CANCEL').subscribe((res: string) => { cancel = res; });
-    this.translateService.get('STUDY.SAVE').subscribe((res: string) => { save = res; });
-    return { addcourse, message, sigle, cancel, save };
-  }
-
   addCourseFromProgram(acro: string) {
     let already = false;
     for (const item of this.listCourses) {
@@ -272,7 +223,7 @@ export class StudiesPage {
           this.addCourse(acro, check.nameFR);
         } else {
           this.alertService.toastCourse('STUDY.BADCOURSE');
-          this.showPrompt();
+          this.alertService.showPromptStudies(this.listCourses, this.checkCourseExisting.bind(this));
         }
       });
     } else {

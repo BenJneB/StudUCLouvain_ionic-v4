@@ -1,3 +1,5 @@
+import { Course } from 'src/app/entity/course';
+
 import { Injectable } from '@angular/core';
 import { AlertController, IonItemSliding, ModalController, ToastController } from '@ionic/angular';
 import { AlertInput } from '@ionic/core';
@@ -140,5 +142,53 @@ export class AlertService {
     let results: any = [];
     const excludedFilters = categories.filter(c => !c.isChecked).map(c => c.name);
     results = this.dismissFilterToast(results, dateRange, excludedFilters);
+  }
+
+  async showPromptStudies(listCourses: Course[], check: (already: boolean, acronym: string) => any) {
+    const { addcourse, message, sigle, cancel, save }: {
+      addcourse: string; message: string; sigle: string; cancel: string; save: string;
+    } = this.getPromptTexts();
+    const prompt = await this.alertCtrl.create({
+      header: addcourse,
+      message: message,
+      inputs: [
+        {
+          name: 'acronym',
+          placeholder: sigle
+        }
+      ],
+      buttons: [
+        { text: cancel },
+        {
+          text: save,
+          cssClass: 'save',
+          handler: data => {
+            this.handleSavePrompt(data, listCourses, check);
+          }
+        }
+      ]
+    });
+    return await prompt.present();
+  }
+
+  private handleSavePrompt(data: any, listCourses: Course[], check: (already: boolean, acronym: string) => any) {
+    const acro = data.acronym.toUpperCase();
+    let already = false;
+    for (const item of listCourses) {
+      if (item.acronym === acro) {
+        already = true;
+      }
+    }
+    check(already, acro);
+  }
+
+  private getPromptTexts() {
+    let addcourse: string, message: string, sigle: string, cancel: string, save: string;
+    this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => { addcourse = res; });
+    this.translateService.get('STUDY.MESSAGE').subscribe((res: string) => { message = res; });
+    this.translateService.get('STUDY.SIGLE').subscribe((res: string) => { sigle = res; });
+    this.translateService.get('STUDY.CANCEL').subscribe((res: string) => { cancel = res; });
+    this.translateService.get('STUDY.SAVE').subscribe((res: string) => { save = res; });
+    return { addcourse, message, sigle, cancel, save };
   }
 }
