@@ -70,13 +70,15 @@ export class SupportPage {
     this.loader.present('Please wait..');
     const options: Array<string> = [];
     const values: Array<string> = [];
-    if (this.lastname.length > 0) {
-      values.push(this.lastname);
-      options.push('lastname');
-    }
-    if (this.firstname.length > 0) {
-      values.push(this.firstname);
-      options.push('firstname');
+    const fields = [
+      { field: this.lastname, text: 'lastname' },
+      { field: this.firstname, text: 'firstname' }
+    ];
+    for (const {field, text} of fields) {
+      if (field.length > 0) {
+        values.push(field);
+        options.push(text);
+      }
     }
     this.searchEmployees(options, values);
   }

@@ -210,12 +210,16 @@ export class EventsPage {
     numOfdaysPastSinceLastMonday = d1.getDay() - 1;
     d1.setDate(d1.getDate() - numOfdaysPastSinceLastMonday);
     d1.setDate(d1.getDate() + (7 * (week - this.getISOWeek(d1))));
-    rangeIsFrom = (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear();
+    rangeIsFrom = this.getFullDate(d1);
     d1.setDate(d1.getDate() + 6);
-    rangeIsTo = (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear() ;
+    rangeIsTo = this.getFullDate(d1);
     rangeIsTo = rangeIsTo.replace(/-/g, '/');
     rangeIsFrom = rangeIsFrom.replace(/-/g, '/');
     return {from: rangeIsFrom, to: rangeIsTo};
+  }
+
+  private getFullDate(d1: any): any {
+    return (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear();
   }
 
   /*Update the displayed events and close the loading when it's finished*/
