@@ -113,20 +113,21 @@ export class LibrariesService {
   }
 
   private assignInfosDatas(data: any, lib: LibraryItem) {
+    const fieldsData = [
+      { datas: data.email, field: lib.email, nullData: false },
+      { datas: data.website, field: lib.website, nullData: '' }
+    ];
+    for (const field of fieldsData) {
+      if (field.datas === null) {
+        field.field = field.nullData;
+      } else {
+        field.field = field.datas;
+      }
+    }
     if (data.phone === null) {
       lib.phone = '';
     } else {
       lib.phone = data.phone.substr(3);
-    }
-    if (data.email === null) {
-      lib.email = false;
-    } else {
-      lib.email = data.email;
-    }
-    if (data.website === null) {
-      lib.website = '';
-    } else {
-      lib.website = data.website;
     }
   }
 
