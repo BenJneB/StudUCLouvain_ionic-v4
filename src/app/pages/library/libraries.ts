@@ -82,12 +82,8 @@ export class LibrariesPage {
 
   /*Open the page with the details for the selectionned library*/
   goToLibDetails(lib: LibraryItem) {
-    const navigationExtras: NavigationExtras = {
-      state: {
-        lib: lib
-      }
-    };
-    this.router.navigate(['/libraries/details'], navigationExtras);
+    this.utilsServices.goToDetail(lib, 'libraries/details');
+
   }
 
   async cachedOrNot() {

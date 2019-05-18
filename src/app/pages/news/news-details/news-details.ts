@@ -36,7 +36,7 @@ export class NewsDetailsPage {
     this.route.queryParams.subscribe(params => {
 
       if (this.router.getCurrentNavigation().extras.state) {
-        this.news = this.router.getCurrentNavigation().extras.state.news;
+        this.news = this.router.getCurrentNavigation().extras.state.items;
       }
     });
 
