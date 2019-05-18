@@ -17,7 +17,7 @@
 
 => Routes (Studies (= some sub pages))
 
-#### Map : remake from 'scratch'
+#### ==> + Map : remake from 'scratch' /!\
 
 => Render (Same + Guindaille&Tuto to fix)
 
