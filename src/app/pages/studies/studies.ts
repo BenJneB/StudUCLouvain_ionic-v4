@@ -140,8 +140,8 @@ export class StudiesPage {
   loadActivities() {
     if (this.connService.isOnline()) {
       this.login().then(() => {
-  	  	if (this.status) {
-  	  		this.searchActivities();
+        if (this.status) {
+          this.searchActivities();
           this.studentService.getStatus().then((res) => {
             const result: any = res;
             this.statusInsc = result[0].etatInscription;
@@ -150,9 +150,8 @@ export class StudiesPage {
           .catch((err) => {
             console.log('Error during load of inscription status');
           });
-  	  	}
-
-    	});
+        }
+      });
     } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -196,10 +195,7 @@ export class StudiesPage {
               if (this.project === null || this.project === undefined) {
                 this.openModalProject();
               } else {
-                this.studiesService.setProject(this.sessionId, this.project.id).then(
-                  data => {
-                  }
-                );
+                this.studiesService.setProject(this.sessionId, this.project.id).then();
               }
             }
           );
@@ -303,7 +299,7 @@ export class StudiesPage {
       if (data === null) {
         this.listCourses = [];
       } else {
-        this.listCourses = data;}
+        this.listCourses = data; }
     });
   }
 
