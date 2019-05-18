@@ -221,9 +221,7 @@ export class StudiesPage {
         }
       ],
       buttons: [
-        {
-          text: cancel,
-        },
+        { text: cancel },
         {
           text: save,
           cssClass: 'save',
