@@ -89,6 +89,30 @@ export class LibrariesService {
         ''
       ); // TODO update maplocation with lat lng code
     }
+    this.assignInfosDatas(data, lib);
+    this.assignHoursDaysDatas(data, lib);
+    return lib;
+  }
+
+  private assignHoursDaysDatas(data: any, lib: LibraryItem) {
+    if (data.openingHours) {
+      this.getOpeningHours(data.openingHours, lib.openingHours);
+    }
+    if (data.openingExaminationHours) {
+      this.getOpeningHours(data.openingExaminationHours, lib.openingExaminationHours);
+    }
+    if (data.openingSummerHours) {
+      this.getOpeningHours(data.openingSummerHours, lib.openingSummerHours);
+    }
+    lib.openingHoursNote = data.openingHoursNote;
+    if (data.closedDates.length === undefined) {
+      lib.closedDates = [data.closedDates];
+    } else {
+      lib.closedDates = data.closedDates;
+    }
+  }
+
+  private assignInfosDatas(data: any, lib: LibraryItem) {
     if (data.phone === null) {
       lib.phone = '';
     } else {
@@ -104,24 +128,6 @@ export class LibrariesService {
     } else {
       lib.website = data.website;
     }
-    if (data.openingHours) {
-      this.getOpeningHours(data.openingHours, lib.openingHours);
-    }
-    if (data.openingExaminationHours) {
-      this.getOpeningHours(data.openingExaminationHours, lib.openingExaminationHours);
-    }
-    if (data.openingSummerHours) {
-      this.getOpeningHours(data.openingSummerHours, lib.openingSummerHours);
-    }
-
-    lib.openingHoursNote = data.openingHoursNote;
-
-    if (data.closedDates.length === undefined) {
-      lib.closedDates = [data.closedDates];
-    } else {
-      lib.closedDates = data.closedDates;
-    }
-    return lib;
   }
 
   private getOpeningHours(data: any, lib: Array<TimeSlot>) {
