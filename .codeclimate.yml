@@ -13,7 +13,8 @@ plugins:
     config: tslint.json
   sass-lint:
     enabled: true
-    property-sort-order: false
+    rules:
+      property-sort-order: false
   duplication:
     enabled: true
     config:
