@@ -3,7 +3,7 @@
 ## Migration to ionic-v4
 
 
-## Pages have not all functionalities.
+## Studies and Map Pages have not all functionalities fixed.
 
 
 ### 95% Done :
