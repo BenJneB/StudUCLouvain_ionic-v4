@@ -1,9 +1,9 @@
 # StudUCLouvain_ionic-v4 (Map/Studies Not Fixed)
 ## WIP - Work In Progress
-### Migration to ionic-v4
+## Migration to ionic-v4
 
 
-### Pages have not all functionalities.
+## Pages have not all functionalities.
 
 
 ### 95% Done :
@@ -15,7 +15,9 @@
 
 ### To Do :
 
-=> Routes (Studies (= some sub pages), Map)
+=> Routes (Studies (= some sub pages))
+
+#### Map : remake from 'scratch'
 
 => Render (Same + Guindaille&Tuto to fix)
 
