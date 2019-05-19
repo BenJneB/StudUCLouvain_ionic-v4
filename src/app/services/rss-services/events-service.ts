@@ -51,22 +51,8 @@ export class EventsService {
     }
     for (let i = 0; i < data.length; i++) {
       const item = data[i];
-      const trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
-      let favorite = false;
-      const hidden = false;
-      let iconCategory = 'assets/icon/events-icon/other.png';
-      if (this.user.hasFavorite(item.guid)) {
-        favorite = true;
-      }
-      if (item.category) {
-        if (this.allCategories.indexOf(item.category) < 0) {
-          this.allCategories.push(item.category);
-        }
-        iconCategory = 'assets/icon/events-icon/' + this.getIconCategory(item.category) + '.png';
-      }
+      const { trimmedDescription, hidden, favorite, startDate, endDate, iconCategory } = this.getEventsData(item, maxDescLength);
       this.shownEvents++;
-      const startDate = this.createDateForEvent(item.date_begin);
-      const endDate = this.createDateForEvent(item.date_end);
       const newEventItem = new EventItem(item.description, item.link, item.title, item.photo, trimmedDescription, item.location,
         hidden, favorite, item.guid, startDate, endDate, item.category, iconCategory);
       this.events.push(newEventItem);
@@ -76,6 +62,25 @@ export class EventsService {
       shownItems: this.shownEvents,
       categories: this.allCategories
     };
+  }
+
+  private getEventsData(item: any, maxDescLength: number) {
+    const trimmedDescription = item.description.length > maxDescLength ? item.description.substring(0, 80) + '...' : item.description;
+    let favorite = false;
+    const hidden = false;
+    let iconCategory = 'assets/icon/events-icon/other.png';
+    if (this.user.hasFavorite(item.guid)) {
+      favorite = true;
+    }
+    if (item.category) {
+      if (this.allCategories.indexOf(item.category) < 0) {
+        this.allCategories.push(item.category);
+      }
+      iconCategory = 'assets/icon/events-icon/' + this.getIconCategory(item.category) + '.png';
+    }
+    const startDate = this.createDateForEvent(item.date_begin);
+    const endDate = this.createDateForEvent(item.date_end);
+    return { trimmedDescription, hidden, favorite, startDate, endDate, iconCategory };
   }
 
   /*Get the good icon for a catagory*/
