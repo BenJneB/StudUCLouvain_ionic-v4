@@ -22,6 +22,7 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 
 import { EmployeeItem } from '../../entity/employeeItem';
+import { ConnectivityService } from '../utils-services/connectivity-service';
 import { Wso2Service } from './wso2-service';
 
 @Injectable({
@@ -32,7 +33,11 @@ export class RepertoireService {
   url = 'directories/v1/employees/';
   options: any;
 
-  constructor(public http: HttpClient, private wso2Service: Wso2Service) {
+  constructor(
+    public http: HttpClient,
+    private wso2Service: Wso2Service,
+    private connService: ConnectivityService,
+  ) {
   }
 
   /*Search employees that match with the options & values*/
@@ -48,15 +53,18 @@ export class RepertoireService {
     }
     newUrl += '&page=1&pageSize=10';
     // newUrl += '&directory=E';
-    return new Promise(resolve => {
+    if (this.connService.isOnline()) {
       this.wso2Service.load(newUrl).subscribe(
         data => {
           if (data['persons'] !== null) {
             this.extractEmployees(data['persons'].person);
-            resolve({ employees: this.employees });
+            return this.employees;
           }
         });
-    });
+    } else {
+      this.connService.presentConnectionAlert();
+      return this.employees;
+    }
   }
 
   /*Load the details for a selected employee*/
