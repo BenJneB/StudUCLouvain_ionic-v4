@@ -7,7 +7,7 @@
 
 
 ### TO FIX
-#### ERROR Error: "Uncaught (in promise): overlay does not exist"
+#### ERROR Error: "Uncaught (in promise): overlay does not exist" (https://github.com/UCL-INGI/StudUCLouvain_ionic-v4/issues/22)
 
 
 ### To Do :
