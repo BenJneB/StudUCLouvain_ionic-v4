@@ -24,6 +24,7 @@ import { Injectable } from '@angular/core';
 import { LibraryItem } from '../../entity/libraryItem';
 import { MapLocation } from '../../entity/mapLocation';
 import { TimeSlot } from '../../entity/timeSlot';
+import { ConnectivityService } from '../utils-services/connectivity-service';
 import { Wso2Service } from './wso2-service';
 
 @Injectable({
@@ -34,7 +35,10 @@ export class LibrariesService {
   url = 'libraries/v1/list';
   options: any;
 
-  constructor(public http: HttpClient, private wso2Service: Wso2Service) {
+  constructor(
+    public http: HttpClient,
+    private wso2Service: Wso2Service,
+    public connService: ConnectivityService) {
   }
 
   /*Load the list of the libraries*/
@@ -51,14 +55,16 @@ export class LibrariesService {
 
   /*Load the details of a specific library, the library selected by the user*/
   public loadLibDetails(lib: LibraryItem) {
-    return new Promise(resolve => {
+    if (this.connService.isOnline()) {
       const url_details = this.url + '/' + lib.id;
       this.wso2Service.load(url_details).subscribe(
         data => {
-          lib = this.extractLibraryDetails(lib, data['return'].library);
-          resolve({ libDetails: lib });
+          return this.extractLibraryDetails(lib, data['return'].library);
         });
-    });
+    } else {
+      this.connService.presentConnectionAlert();
+      return lib;
+    }
   }
 
   /*Extract the list of the libraries*/

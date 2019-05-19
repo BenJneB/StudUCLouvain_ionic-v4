@@ -89,18 +89,9 @@ export class SupportPage {
 
   /*Search employees with the name and lastname in option, return the result and dismiss the loading pop up*/
   searchEmployees(options: Array<string>, values: Array<string>) {
-    if (this.connService.isOnline()) {
-      this.repService.searchEmployees(options, values).then(
-        res => {
-          const result: any = res;
-          this.employees = result.employees;
-          this.searching = true;
-        }
-      );
-    } else {
-      this.searching = false;
-      this.connService.presentConnectionAlert();
-    }
+    this.searching = true;
+    this.employees = this.repService.searchEmployees(options, values);
+    this.searching = false;
     this.loader.dismiss();
   }
 

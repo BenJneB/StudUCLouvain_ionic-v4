@@ -54,22 +54,12 @@ export class LibraryDetailsPage {
     public connService: ConnectivityService,
     private utilsServices: UtilsService
   ) {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(() => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.libDetails = this.router.getCurrentNavigation().extras.state.items;
         this.searching = true;
-        if (this.connService.isOnline()) {
-          this.libService.loadLibDetails(this.libDetails).then(
-            res => {
-              const result: any = res;
-              this.libDetails = result.libDetails;
-              this.searching = false;
-            }
-          );
-        } else {
-          this.searching = false;
-          this.connService.presentConnectionAlert();
-        }
+        this.libDetails = this.libService.loadLibDetails(this.libDetails);
+        this.searching = false;
       }
     });
   }
