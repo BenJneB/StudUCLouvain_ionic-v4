@@ -1,36 +1,40 @@
 <!--
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Daubry Benjamin & Marchesini Bruno
-    Date : July 2018
-    This file is part of UCLCampus
+    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date : 2018-2019
+    This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    UCLCampus is free software: you can redistribute it and/or modify
+    Stud.UCLouvain is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    UCLCampus is distributed in the hope that it will be useful,
+    Stud.UCLouvain is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
-      <ion-button (click)="dismiss()">{{'SPORTS.CANCEL' | translate}}</ion-button>
+      <ion-button (click)="alertService.applyFilters(categories, dateRange)">{{'SPORTS.CANCEL' | translate}}
+      </ion-button>
     </ion-buttons>
-    <ion-row><ion-col>
-    <ion-title>
-      {{'SPORTS.FILTER' | translate}}
-    </ion-title>
-</ion-col></ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-title>
+          {{'SPORTS.FILTER' | translate}}
+        </ion-title>
+      </ion-col>
+    </ion-row>
     <ion-buttons slot="end">
-      <ion-button (click)="applyFilters()" strong>{{'SPORTS.APPLY' | translate}}</ion-button>
+      <ion-button (click)="alertService.applyFilters(categories, dateRange)" strong>{{'SPORTS.APPLY' | translate}}
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
@@ -39,19 +43,19 @@
 <ion-content class="outer-content">
 
   <ion-toolbar color="uclouvain">
-  <ion-buttons slot="start">
-    <ion-button (click)="uncheckAll()" color="light">
-      <ion-label>{{'SPORTS.UNTOGGLE' | translate}}</ion-label>
-      <ion-icon slot="end" name="done-all"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-  <ion-buttons slot="end">
-    <ion-button (click)="resetFilters()" color="light">
-      <ion-label>{{'SPORTS.RESTORE' | translate}}</ion-label>
-      <ion-icon slot="end" name="refresh-circle"></ion-icon>
-    </ion-button>
-  </ion-buttons>
-</ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-button (click)="uncheckAll()" color="light">
+        <ion-label>{{'SPORTS.UNTOGGLE' | translate}}</ion-label>
+        <ion-icon slot="end" name="done-all"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+    <ion-buttons slot="end">
+      <ion-button (click)="resetFilters()" color="light">
+        <ion-label>{{'SPORTS.RESTORE' | translate}}</ion-label>
+        <ion-icon slot="end" name="refresh-circle"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
   <ion-list>
     <ion-list-header>{{'SPORTS.SPORTS' | translate}}</ion-list-header>
 

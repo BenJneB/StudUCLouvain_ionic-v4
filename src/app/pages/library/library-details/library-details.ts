@@ -1,33 +1,32 @@
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
-    This file is part of UCLCampus
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
+    This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    UCLCampus is free software: you can redistribute it and/or modify
+    Stud.UCLouvain is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    UCLCampus is distributed in the hope that it will be useful,
+    Stud.UCLouvain is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
-import { trigger, state, style, animate, transition } from '@angular/animations';
+import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NavController } from '@ionic/angular';
 
-import { LibrariesService } from '../../../services/wso2-services/libraries-service';
-import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
-
 import { LibraryItem } from '../../../entity/libraryItem';
-import { ActivatedRoute, Router } from '@angular/router';
+import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
+import { UtilsService } from '../../../services/utils-services/utils-services';
+import { LibrariesService } from '../../../services/wso2-services/libraries-service';
 
 @Component({
   selector: 'page-library-details',
@@ -35,7 +34,7 @@ import { ActivatedRoute, Router } from '@angular/router';
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),
-      state('false', style({ height: '0'})),
+      state('false', style({ height: '0' })),
       transition('void => *', animate('0s')),
       transition('* <=> *', animate('250ms ease-in-out'))
     ])
@@ -45,45 +44,28 @@ import { ActivatedRoute, Router } from '@angular/router';
 export class LibraryDetailsPage {
   libDetails: LibraryItem;
   shownGroup = null;
-  searching: boolean = false;
+  searching = false;
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute, private router: Router, public libService: LibrariesService, public connService: ConnectivityService) {
-    this.route.queryParams.subscribe(params => {
-
+  constructor(
+    public navCtrl: NavController,
+    private route: ActivatedRoute,
+    private router: Router,
+    public libService: LibrariesService,
+    public connService: ConnectivityService,
+    private utilsServices: UtilsService
+  ) {
+    this.route.queryParams.subscribe(() => {
       if (this.router.getCurrentNavigation().extras.state) {
-        console.log(this.router.getCurrentNavigation().extras.state);
-        this.libDetails = this.router.getCurrentNavigation().extras.state.lib;
-        console.log(this.libDetails);
+        this.libDetails = this.router.getCurrentNavigation().extras.state.items;
         this.searching = true;
-        if(this.connService.isOnline()) {
-          this.libService.loadLibDetails(this.libDetails).then(
-            res => {
-              let result:any = res;
-              this.libDetails = result.libDetails;
-              this.searching = false;
-            }
-          );
-        } else {
-          this.searching = false;
-          this.connService.presentConnectionAlert();
-        }
+        this.libDetails = this.libService.loadLibDetails(this.libDetails);
+        this.searching = false;
       }
     });
-
   }
 
-  /*Open or close the schedule*/
-  toggleGroup(group) {
-      if (this.isGroupShown(group)) {
-          this.shownGroup = null;
-      } else {
-          this.shownGroup = group;
-      }
-  }
-
-  /*The selectionned schedule is displayed?*/
-  isGroupShown(group) {
-      return this.shownGroup === group;
+  toggleGroup(hours: string) {
+    this.shownGroup = this.utilsServices.toggleGroup(hours, this.shownGroup);
   }
 
   /*Open the page of the library for more details*/

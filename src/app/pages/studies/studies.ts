@@ -1,7 +1,7 @@
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Daubry Benjamin & Marchesini Bruno
-    Date : July 2018
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -18,22 +18,25 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
+import { catchError } from 'rxjs/operators';
+import { AlertService } from 'src/app/services/utils-services/alert-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 import { Component } from '@angular/core';
+import { NavigationExtras } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { AlertController, MenuController, ModalController, ToastController } from '@ionic/angular';
-import { NavController, NavParams, Platform } from '@ionic/angular';
+import {
+    AlertController, MenuController, ModalController, NavController, Platform, ToastController
+} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
-import { TranslateService } from '@ngx-translate/core';
 
-import { StudiesService} from '../../services/studies-services/studies-service';
-import { StudentService} from '../../services/wso2-services/student-service';
-import { Wso2Service} from '../../services/wso2-services/wso2-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { map, catchError } from 'rxjs/operators';
-
-import { Course } from '../../entity/course';
 import { AdeProject } from '../../entity/adeProject';
+import { Course } from '../../entity/course';
+import { StudiesService } from '../../services/studies-services/studies-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { TransService } from '../../services/utils-services/trans-services';
+import { StudentService } from '../../services/wso2-services/student-service';
+import { Wso2Service } from '../../services/wso2-services/wso2-service';
 import { ModalProjectPage } from './modal-project/modal-project';
 
 @Component({
@@ -44,149 +47,135 @@ import { ModalProjectPage } from './modal-project/modal-project';
 
 export class StudiesPage {
   public people: any;
-  public data : any;
+  public data: any;
   segment = 'prog';
   public listCourses: Course[];
-  public course : Course;
-  public title: any;
+  public course: Course;
+  public title = 'Etudes';
   public sessionId: string;
-  public project : AdeProject = null;
-  private username:string = "";
-  private password: string = "";
-  public error:string = "";
-  status: string = "";
+  public project: AdeProject = null;
+  private username = '';
+  private password = '';
+  public error = '';
+  status = '';
   sigles: any;
-  activities:any = [];
-  response:any;
+  activities: any = [];
+  response: any;
   language;
-  private statusInsc:string = "";
-  private prog:string = "";
+  private statusInsc = '';
+  private prog = '';
 
   constructor(
     public studiesService: StudiesService,
     public navCtrl: NavController,
-    public navParams: NavParams,
     private alertCtrl: AlertController,
-    public storage:Storage,
+    public storage: Storage,
     public menu: MenuController,
     public toastCtrl: ToastController,
     public platform: Platform,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
-    public connService : ConnectivityService,
-    private translateService: TranslateService,
+    public connService: ConnectivityService,
     private wso2Service: Wso2Service,
-    private studentService: StudentService)
-  {
-    this.title = this.navParams.get('title');
-
+    private studentService: StudentService,
+    private transService: TransService,
+    private alertService: AlertService,
+    private utilsServices: UtilsService
+  ) {
     this.initializeSession();
-    this.menu.enable(true, "studiesMenu");
+    this.menu.enable(true, 'studiesMenu');
     this.getCourses();
 
 
   }
 
-  checkExist(sigle:string) : Promise<any>{
-    let response:any;
-    let year = parseInt(this.project.name.split("-")[0]);
+  checkExist(sigle: string): Promise<any> {
+    let response: any;
+    const year = parseInt(this.project.name.split('-')[0], 10);
     return new Promise(resolve => {
-      this.studentService.checkCourse(sigle,year).then(
-      (data) =>{
-        let res:any = data;
-        let exist:boolean;
-        let nameFR:string='';
-        let nameEN:string ='';
-        if(data === 400) exist=false;
-        else{
-          console.log(res);
-          let names = res.intituleCompletMap.entry;
-          nameFR = names[1].value;
-          nameEN = names[0].value;
-          exist=true;
-        }
-        response={'exist':exist,'nameFR':nameFR, 'nameEN':nameEN};
-        resolve(response);
-      })
-      })    
-  }
-
-  toastBadCourse() {
-    let msg;
-    this.translateService.get('STUDY.BADCOURSE').subscribe((res:string) => {msg=res;});
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 2000,
-      position: 'middle'
-    }).then(toast => toast.present());
-  }
-
- /*Authenticate a student*/
-  private login(){
-  	this.error = "";
-  	return new Promise(resolve => {
-      this.wso2Service.login(this.username,this.password).pipe(
-      catchError(error => {
-      	console.log(error);
-      	if(error.status == 400) this.translateService.get('STUDY.BADLOG').subscribe((res:string) => {this.error=res;});
-      	else this.translateService.get('STUDY.ERROR').subscribe((res:string) => {this.error=res;});
-      	return error;
-      }))
-      .subscribe(
-        data => {
-          if(data!=null){
-            this.status=data.toString();
-            resolve(data);
+      this.studentService.checkCourse(sigle, year).then(
+        (data) => {
+          const res: any = data;
+          let exist: boolean;
+          let nameFR = '';
+          let nameEN = '';
+          if (data === 400) {
+            exist = false;
+          } else {
+            const names = res.intituleCompletMap.entry;
+            nameFR = names[1].value;
+            nameEN = names[0].value;
+            exist = true;
           }
+          response = { exist: exist, nameFR: nameFR, nameEN: nameEN };
+          resolve(response);
         });
     });
   }
 
-  /*Get course program of student*/
-  loadActivities(){
-
-    if(this.connService.isOnline()) {
-      this.login().then((res) => {
-  	  	if(this.status){
-  	  		this.studentService.searchActivities().then((res) => {
-  	  			let result:any = res;
-  	  			this.sigles = result.activities.activity;
-            for(let sigle of this.sigles){
-              //let name;
-              //this.checkExist(sigle).then(data => {
-                //name=data;
-                //this.activities.push({'name':name.nameFR,'sigle':sigle});
-              //})
-              this.activities.push({'name':'', 'sigle':sigle});
+  /*Authenticate a student*/
+  private login() {
+    this.error = '';
+    return new Promise(resolve => {
+      this.wso2Service.login(this.username, this.password).pipe(
+        catchError(error => {
+          if (error.status === 400) {
+            this.error = this.transService.getTranslation('STUDY.BADLOG');
+          } else {
+            this.error = this.transService.getTranslation('STUDY.ERROR');
+          }
+          return error;
+        }))
+        .subscribe(
+          data => {
+            if (data !== null) {
+              this.status = data.toString();
+              resolve(data);
             }
-  	  		})
-          .catch((err) => {
-            console.log("Error during load of course program");
           });
+    });
+  }
 
+  /*Get course program of student*/
+  loadActivities() {
+    if (this.connService.isOnline()) {
+      this.login().then(() => {
+        if (this.status) {
+          this.searchActivities();
           this.studentService.getStatus().then((res) => {
-            let result:any = res;
+            const result: any = res;
             this.statusInsc = result[0].etatInscription;
             this.prog = result[0].intitOffreComplet;
           })
-          .catch((err) => {
-            console.log("Error during load of inscription status");
-          })
-  	  	}
-        
-    	});
-    }
-    else{
+            .catch((err) => {
+              console.log('Error during load of inscription status');
+            });
+        }
+      });
+    } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }
 
-  /*Open modalprojectpage to choose an ade project*/
-  async openModalProject(){
-    let obj = {sessionId : this.sessionId};
+  private searchActivities() {
+    this.studentService.searchActivities().then((res) => {
+      const result: any = res;
+      this.sigles = result.activities.activity;
+      for (const sigle of this.sigles) {
+        this.activities.push({ 'name': '', 'sigle': sigle });
+      }
+    })
+      .catch((err) => {
+        console.log('Error during load of course program');
+      });
+  }
 
-    let myModal = await this.modalCtrl.create({component: ModalProjectPage, componentProps: obj});
+  /*Open modalprojectpage to choose an ade project*/
+  async openModalProject() {
+    const obj = { sessionId: this.sessionId };
+
+    const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj });
     await myModal.present();
     await myModal.onDidDismiss().then(data => {
       this.project = data.data;
@@ -195,257 +184,121 @@ export class StudiesPage {
   }
 
   /*Set project and connect to ADE*/
-  initializeSession(){
-    if(this.connService.isOnline()) {
+  initializeSession() {
+    if (this.connService.isOnline()) {
       this.studiesService.openSession().then(
         data => {
           this.sessionId = data;
           this.storage.get('adeProject').then(
-            (data) => {
-              this.project=data;
-              if (this.project === null) {
+            (dataProject) => {
+              this.project = dataProject;
+              if (this.project === null || this.project === undefined) {
                 this.openModalProject();
               } else {
-                this.studiesService.setProject(this.sessionId,this.project.id).then(
-                  data => {
-                    console.log("setProject");
-                  }
-                );
+                this.studiesService.setProject(this.sessionId, this.project.id).then();
               }
             }
-          )
-      });
-    }
-     else {
+          );
+        });
+    } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }
 
-  /*Add a course manually, show a prompt to the user for this where he can put the name and the acronym of the course*/
-  showPrompt() {
-    let addcourse:string;
-    let message:string;
-    let sigle: string;
-    let cancel:string;
-    let save:string;
-    this.translateService.get('STUDY.ADDCOURSE').subscribe((res:string) => {addcourse=res;});
-    this.translateService.get('STUDY.MESSAGE').subscribe((res:string) => {message=res;});
-    this.translateService.get('STUDY.SIGLE').subscribe((res:string) => {sigle=res;});
-    this.translateService.get('STUDY.CANCEL').subscribe((res:string) => {cancel=res;});
-    this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
-    let prompt = this.alertCtrl.create({
-      header: addcourse,
-      message: message,
-      inputs: [
-        {
-          name: 'acronym',
-          placeholder: sigle
-        }/*,
-        {
-          name:'name',
-          placeholder:'Nom du cours'
-        }*/
-      ],
-      buttons: [
-        {
-          text: cancel,
-          handler: data => {
-          }
-        },
-        {
-          text: save,
-          cssClass: 'save',
-          handler: data => {
-            let check; 
-            //console.log(data);
-            let acro = data.acronym.toUpperCase();
-            //console.log(acro);
-            let already = false;
-            for(let item of this.listCourses){
-              if(item.acronym === acro) already = true;
-            }
-            if(!already){
-              this.checkExist(acro).then(data2 => {
-                check = data2;
-                if(check.exist){
-                  this.addCourse(acro, check.nameFR);
-                  //this.addCourse(acro,data.name);
-                }
-                else{
-                  this.toastBadCourse();
-                  this.showPrompt();
-                }
-              })
-            }
-            else{
-              this.toastAlreadyCourse();
-            }
-          }
-        }
-      ]
-    }).then(alert => alert.present());
+  addCourseFromProgram(acro: string) {
+    let already = false;
+    for (const item of this.listCourses) {
+      if (item.acronym === acro) { already = true; }
+    }
+    this.checkCourseExisting(already, acro);
   }
 
-  toastAlreadyCourse() {
-    let msg;
-    this.translateService.get('STUDY.ALCOURSE').subscribe((res:string) => {msg=res;});
-    let toast = this.toastCtrl.create({
-      message: msg,
-      duration: 2000,
-      position: 'middle'
-    }).then(toast => toast.present());
-
+  private checkCourseExisting(already: boolean, acro: string) {
+    let check;
+    if (!already) {
+      this.checkExist(acro).then(data2 => {
+        check = data2;
+        if (check.exist) {
+          this.addCourse(acro, check.nameFR);
+        } else {
+          this.alertService.toastCourse('STUDY.BADCOURSE');
+          this.alertService.showPromptStudies(this.listCourses, this.checkCourseExisting.bind(this));
+        }
+      });
+    } else {
+      this.alertService.toastCourse('STUDY.ALCOURSE');
+    }
+    return check;
   }
 
-
-  /*Add a course from course program, a prompt is shown for this and the user can add a name*/
-  /*showPromptAddCourse(sigle : string) {
-    let addcourse:string;
-    let message:string;
-    let name:string;
-    let cancel:string;
-    let save:string;
-    this.translateService.get('STUDY.ADDCOURSE2').subscribe((res:string) => {addcourse=res;});
-    this.translateService.get('STUDY.MESSAGE2').subscribe((res:string) => {message=res;});
-    this.translateService.get('STUDY.NAME').subscribe((res:string) => {name=res;});
-    this.translateService.get('STUDY.CANCEL').subscribe((res:string) => {cancel=res;});
-    this.translateService.get('STUDY.SAVE').subscribe((res:string) => {save=res;});
-    let prompt = this.alertCtrl.create({
-      title: addcourse,
-      cssClass: "alert",
-      message: message,
-      inputs: [
-        {
-          name: 'name',
-          placeholder: name
-        }
-      ],
-      buttons: [
-        {
-          text: cancel,
-          handler: data => {
-          }
-        },
-        {
-          text: save,
-          handler: data => {
-            console.log(data);
-            //this.getNameToAddCourse(data)
-            //let check;
-
-            this.addCourse(sigle, data.name);
-          }
-        }
-      ]
+  async addCourse(sigle: string, name: string) {
+    this.saveCourse(name, sigle);
+    const toast = await this.toastCtrl.create({
+      message: 'Cours ajouté',
+      duration: 1000,
+      position: 'bottom'
     });
-    prompt.present();
-  }*/
-
-  addCourseFromProgram(acro:string){
-                let check; 
-            //console.log(data);
-            //console.log(acro);
-            let already = false;
-            for(let item of this.listCourses){
-              if(item.acronym === acro) already = true;
-            }
-            if(!already){
-              this.checkExist(acro).then(data2 => {
-                check = data2;
-                if(check.exist){
-                  this.addCourse(acro, check.nameFR);
-                  //this.addCourse(acro,data.name);
-                }
-                else{
-                  this.toastBadCourse();
-                  this.showPrompt();
-                }
-              })
-            }
-            else{
-              this.toastAlreadyCourse();
-            }
-  }
-
-  addCourse(sigle:string, name:string){
-    //console.log(sigle);
-   // let check; 
-    //this.checkExist(sigle).then(data => {
-      //check = data;
-      console.log(this.listCourses);
-      this.saveCourse(name, sigle);
-      let toast = this.toastCtrl.create({
-        message: 'Cours ajouté',
-        duration: 1000,
-        position: 'bottom'
-      }).then(toast => toast.present());
-   // })
+    return await toast.present();
   }
 
   /*Retrieve list of course added previously in the storage*/
-  getCourses(){
-    this.storage.get('listCourses').then((data) =>
-    {
-      if(data==null){
-        this.listCourses=[]
+  getCourses() {
+    this.storage.get('listCourses').then((data) => {
+      if (data === null) {
+        this.listCourses = [];
       } else {
-        this.listCourses=data}
+        this.listCourses = data;
+      }
     });
   }
 
   /*Save course into storage*/
-  saveCourse(name: string, tag: string){
-    let course = new Course(name,tag, null);
+  saveCourse(name: string, tag: string) {
+    const course = new Course(name, tag, null);
     this.listCourses.push(course);
-    this.storage.set('listCourses',this.listCourses);
+    this.storage.set('listCourses', this.listCourses);
   }
 
   /*Remove course from storage*/
-  removeCourse(course: Course){
-    let index= this.listCourses.indexOf(course);
-    if(index>= 0){
-      this.listCourses.splice(index,1);
+  removeCourse(course: Course) {
+    const index = this.listCourses.indexOf(course);
+    if (index >= 0) {
+      this.listCourses.splice(index, 1);
     }
-    this.storage.set('listCourses',this.listCourses);
+    this.storage.set('listCourses', this.listCourses);
   }
 
   /*Open CoursePage of a course to have the schedule*/
-  openCoursePage(course: Course){
-    let year = parseInt(this.project.name.split("-")[0]);
-    this.navCtrl.navigateForward([
-      'CoursePage',
-      {course : course, sessionId : this.sessionId, year: year}
-    ]);
+  openCoursePage(course: Course) {
+    const year = parseInt(this.project.name.split('-')[0], 10);
+    const navigationExtras: NavigationExtras = {
+      state: {
+        course: course,
+        sessionId: this.sessionId,
+        year: year
+      }
+    };
+    this.navCtrl.navigateForward(['/course'], navigationExtras);
   }
 
-  openWeekPage(){
+  openWeekPage() {
     this.studentService.weekSchedule().then((res) => {
-      let result:any = res;
-      console.log(result);
-      
-      //result.sort((a, b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
-      this.navCtrl.navigateForward(['HebdoPage', {schedule:result}]);
+      this.utilsServices.goToDetail(res, 'hebdo');
     });
   }
 
-  unavailableAlert(){
-
-    let alert = this.alertCtrl.create({
+  async openExamPage() {
+    const alert = await this.alertCtrl.create({
       header: 'Indisponible',
       subHeader: 'Cette fonctionnalité n\'est pas encore disponible',
       buttons: ['OK']
-    }).then(alert => alert.present());
-
-  }
-
-  openExamPage(){
-    this.unavailableAlert();
-      //this.navCtrl.push('ExamPage');
+    });
+    await alert.present();
   }
 
   /*Launch moodle or ucl portal*/
   launch(url) {
-    this.iab.create(url,'_system');
+    this.iab.create(url, '_system');
   }
 }

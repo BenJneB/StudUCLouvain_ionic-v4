@@ -1,21 +1,23 @@
-# StudUCLouvain_ionic-v4
+# StudUCLouvain_ionic-v4 (Map/Studies Not Fixed)
 ## WIP - Work In Progress
-### Migration to ionic-v4
+## Migration to ionic-v4
 
 
-### Pages have not all functionalities.
+## Studies and Map Pages have not all functionalities fixed.
 
 
+### TO FIX
+#### ERROR Error: "Uncaught (in promise): overlay does not exist"
+(https://github.com/UCL-INGI/StudUCLouvain_ionic-v4/issues/22) ==> Easy to pop on NewsPage, EventsPage, SportsPage
 
-#### ToDo:
 
-=> Routes (Main : Studies, Map)
+### To Do :
+
+=> Routes (Studies (= some sub pages))
+
+#### ==> + Map : remake from 'scratch' /!\
 
 => Render (Same + Guindaille&Tuto to fix)
-
-=> Refactor ? (Rss +- done)
-
-=> Satisfy codeclimate. Maybe after fix all pages ?
 
 => Re integrate travis/pr and diff/total-coverage
 

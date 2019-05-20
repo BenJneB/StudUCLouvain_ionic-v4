@@ -1,10 +1,10 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { EventsFilterPage } from './events-filter';
-import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { CommonModule } from '@angular/common';
 
 @NgModule({
   declarations: [EventsFilterPage],
@@ -13,10 +13,10 @@ import { CommonModule } from '@angular/common';
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-  	TranslateModule.forChild(),
+    TranslateModule.forChild(),
   ],
-    entryComponents: [
-      EventsFilterPage
-     ]
+  entryComponents: [
+    EventsFilterPage
+  ]
 })
 export class EventsFilterModule { }

@@ -1,7 +1,6 @@
 {
   "return": {
-    "library": [
-      {
+    "library": [{
         "id": 33,
         "name": "UCL - BDRT: Bibliothèque de droit"
       },

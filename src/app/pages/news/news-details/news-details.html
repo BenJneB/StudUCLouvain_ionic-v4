@@ -1,29 +1,29 @@
 <!--
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
-    This file is part of UCLCampus
+    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date : 2018-2019
+    This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    UCLCampus is free software: you can redistribute it and/or modify
+    Stud.UCLouvain is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    UCLCampus is distributed in the hope that it will be useful,
+    Stud.UCLouvain is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <!--EN-TETE-->
 <ion-header>
   <ion-toolbar color="news" secondary>
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-row>
       <ion-col>
         <ion-title>{{news.title}}</ion-title>
@@ -35,14 +35,14 @@
 <!--BODY-->
 <ion-content>
   <ion-card>
-    
-    <img style="width:75%; margin:auto;"  src="{{news.image}}"/>
+
+    <img style="width:75%; margin:auto;" src="{{news.image}}" />
 
     <ion-card-content>
       <ion-card-title>
         {{news.title}}
       </ion-card-title>
-    <br>
+      <br>
       <p [innerHTML]="news.description"></p>
     </ion-card-content>
 

@@ -1,7 +1,7 @@
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Daubry Benjamin & Marchesini Bruno
-    Date : July 2018
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of StudUCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -18,13 +18,10 @@
     You should have received a copy of the GNU General Public License
     along with StudUCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Component } from '@angular/core';
-import { NavController, NavParams, ToastController, ModalController  } from '@ionic/angular';
+import { ModalController, NavController, NavParams, ToastController } from '@ionic/angular';
 
 import { UserService } from '../../../services/utils-services/user-service';
-
-
 
 @Component({
   selector: 'page-exam',
@@ -35,18 +32,10 @@ export class ExamPage {
 
 
   constructor(public navCtrl: NavController,
-              public toastCtrl: ToastController,
-              public userS:UserService,
-              public modalCtrl: ModalController,
-              public navParams:NavParams)
-  {
+    public toastCtrl: ToastController,
+    public userS: UserService,
+    public modalCtrl: ModalController,
+    public navParams: NavParams) {
 
   }
-
-
-  ngOnInit() {
-
-  }
-
-
 }

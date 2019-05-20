@@ -1,8 +1,8 @@
 <!--
 
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
+    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date : 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -22,13 +22,13 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar color="bibli" >
-      <ion-buttons slot="start">
-          <ion-back-button></ion-back-button>
-        </ion-buttons>
+  <ion-toolbar color="bibli">
+    <ion-buttons slot="start">
+      <ion-back-button></ion-back-button>
+    </ion-buttons>
     <ion-row>
       <ion-col>
-        <ion-title >{{libDetails.name}}</ion-title>
+        <ion-title>{{libDetails.name}}</ion-title>
       </ion-col>
     </ion-row>
   </ion-toolbar>
@@ -67,52 +67,52 @@
       {{libDetails.openingHoursNote}}
     </ion-row>
 
-    <ion-item-divider  (click)="toggleGroup('opening_hours')">
+    <ion-item-divider (click)="toggleGroup('opening_hours')">
       {{'LIBRARY.HOUR' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('opening_hours')">
+    <ion-item [hidden]="!utilsServices.isGroupShown('opening_hours', shownGroup)">
       <ion-label>
-      <p *ngFor="let timeSlot of libDetails.openingHours">
-        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
-      </p>
+        <p *ngFor="let timeSlot of libDetails.openingHours">
+          {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
+        </p>
       </ion-label>
     </ion-item>
 
-    <ion-item-divider  (click)="toggleGroup('opening_examination_hours')">
+    <ion-item-divider (click)="toggleGroup('opening_examination_hours')">
       {{'LIBRARY.EXAMHOUR' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('opening_examination_hours')">
-        <ion-label>
-      <p *ngFor="let timeSlot of libDetails.openingExaminationHours">
-        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
-      </p>
-    </ion-label>
+    <ion-item [hidden]="!utilsServices.isGroupShown('opening_examination_hours', shownGroup)">
+      <ion-label>
+        <p *ngFor="let timeSlot of libDetails.openingExaminationHours">
+          {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
+        </p>
+      </ion-label>
     </ion-item>
 
-    <ion-item-divider  (click)="toggleGroup('opening_summer_hours')">
+    <ion-item-divider (click)="toggleGroup('opening_summer_hours')">
       {{'LIBRARY.SUMMERHOUR' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('opening_summer_hours')">
-        <ion-label>
-      <p *ngFor="let timeSlot of libDetails.openingSummerHours">
-        {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
-      </p>
-    </ion-label>
+    <ion-item [hidden]="!utilsServices.isGroupShown('opening_summer_hours', shownGroup)">
+      <ion-label>
+        <p *ngFor="let timeSlot of libDetails.openingSummerHours">
+          {{timeSlot.day}} - {{timeSlot.startHour}} : {{timeSlot.endHour}}
+        </p>
+      </ion-label>
     </ion-item>
 
-    <ion-item-divider  (click)="toggleGroup('closed_dates')">
+    <ion-item-divider (click)="toggleGroup('closed_dates')">
       {{'LIBRARY.CLOSED' | translate}}
     </ion-item-divider>
 
-    <ion-item [hidden]="!isGroupShown('closed_dates')" text-wrap>
-        <ion-label>
-      <p *ngFor="let cd of libDetails.closedDates">
-        {{cd.from}} - {{cd.to}} : {{cd.description}}
-      </p>
-    </ion-label>
+    <ion-item [hidden]="!utilsServices.isGroupShown('closed_dates', shownGroup)" text-wrap>
+      <ion-label>
+        <p *ngFor="let cd of libDetails.closedDates">
+          {{cd.from}} - {{cd.to}} : {{cd.description}}
+        </p>
+      </ion-label>
     </ion-item>
   </ion-card>
 </ion-content>
