@@ -111,9 +111,6 @@ $customColors: ('guindaille', 'navbarColor', 'news', 'event', 'sport', 'g2', 'cr
   }
 }
 
-ion-toolbar ion-buttons ion-back-button ion-icon {
-  --color: light !important;
-}
 
 .ion-color-uclouvain {
   --ion-color-base: var(--ion-color-ucouvain) !important;
@@ -124,9 +121,15 @@ ion-toolbar ion-buttons ion-back-button ion-icon {
   --ion-color-tint: var(--ion-color-uclouvain-tint) !important;
 }
 
+
+ion-toolbar ion-buttons ion-back-button {
+  --color: white !important;
+}
+
 ion-segment-button ion-label {
   color: white;
 }
+
 
 ion-title {
   color: white;
