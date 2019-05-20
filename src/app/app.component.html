@@ -1,7 +1,12 @@
 <ion-app>
   <ion-split-pane>
-    <ion-menu-toggle id="mainMenu">
-      <ion-content>
+    <ion-menu menuId="mainMenu">
+      <ion-header>
+        <ion-toolbar padding color="home">
+          <img src="./assets/img/s.png" height="28"/>
+          <ion-title class="menu-title">Stud.UCLouvain</ion-title>
+        </ion-toolbar>
+      </ion-header>      <ion-content>
         <ion-list scroll=true>
           <ion-item button *ngFor="let p of campusPages" (click)="openRootPage(p)">
             <div class="box"><img src={{p.icon}} width="35" height="35" /> <span>&nbsp; {{p.title | translate}}</span>
@@ -17,7 +22,7 @@
           </ion-item>
         </ion-list>
       </ion-content>
-    </ion-menu-toggle>
+    </ion-menu>
     <ion-router-outlet main></ion-router-outlet>
   </ion-split-pane>
 </ion-app>

@@ -111,8 +111,17 @@ $customColors: ('guindaille', 'navbarColor', 'news', 'event', 'sport', 'g2', 'cr
   }
 }
 
-ion-toolbar ion-buttons ion-back-button {
-  color: light !important;
+ion-toolbar ion-buttons ion-back-button ion-icon {
+  --color: light !important;
+}
+
+.ion-color-uclouvain {
+  --ion-color-base: var(--ion-color-ucouvain) !important;
+  --ion-color-base-rgb: var(--ion-color-uclouvain-rgb) !important;
+  --ion-color-contrast: var(--ion-color-uclouvain-contrast) !important;
+  --ion-color-contrast-rgb: var(--ion-color-uclouvain-contrast-rgb) !important;
+  --ion-color-shade: var(--ion-color-uclouvain-shade) !important;
+  --ion-color-tint: var(--ion-color-uclouvain-tint) !important;
 }
 
 ion-segment-button ion-label {
@@ -170,4 +179,12 @@ ion-tab-button {
 .segment-button,
 ion-tab-button {
   color: white !important;
+}
+
+.menu-title{
+  display: inline-block;
+}
+.menu-title.ios.title-ios{
+  padding: 0 !important;
+  line-height: 3.5;
 }
