@@ -14,6 +14,7 @@ before_script:
       - ./cc-test-reporter before-build
 script:
       - ng build --prod
+      - ng test
 deploy:
       provider: app
       skip-cleanup: true
