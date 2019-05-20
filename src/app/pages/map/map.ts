@@ -21,8 +21,7 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionSheetController, ModalController, NavController, Platform } from '@ionic/angular';
 
-import { MapLocation } from '../../entity/mapLocation';
-import { MapService } from '../../services/map-services/map-service';
+import { Map, latLng, tileLayer, Layer, marker } from 'leaflet';
 import { POIService } from '../../services/map-services/poi-service';
 
 @Component({
@@ -31,102 +30,34 @@ import { POIService } from '../../services/map-services/poi-service';
 })
 export class MapPage {
 
-  @ViewChild('map') mapElement: ElementRef;
-  @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
-  showedLocations: MapLocation[] = [];
-  zones: any;
-  filters: any;
-  excludedFilters: any = [];
-  selectedLocation: any = [];
-  userLocation: any = [];
-  showLocationList = false;
   title: any;
-  searching = false;
-  temp: any;
-  temp2: any;
+  map: Map;
+  zones: any;
 
   constructor(public navCtrl: NavController,
     public modalCtrl: ModalController,
     public actionSheetCtrl: ActionSheetController,
-    public mapService: MapService,
     public platform: Platform,
     public poilocations: POIService) {
-    console.log('map constr');
     this.title = 'Carte';
   }
 
-  /*ngAfterViewInit() is called after the view is initially rendered, load map and list of positions*/
-  /*  ngAfterViewInit() {
-     let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
-     console.log(mapLoaded);
-     let zones = this.poilocations.loadResources();
-     this.searching = true;
-
-     Promise.all([
-       mapLoaded,
-       zones
-     ]).then((result) => {
-       this.searching = false;
-       this.zones = result[1];
-       this.filters = this.zones;
-       this.userLocation = this.mapService.getUserLocation();
-       console.log(this.userLocation);
-       this.selectedLocation = this.userLocation;
-       this.showedLocations.push(this.selectedLocation);
-       if (result[0]) {
-         this.mapService.addMarker(this.selectedLocation);
-       }
-     }, (error) => {
-     });
-   } */
-
   ngAfterViewInit() {
-    console.log('aft vie in');
     this.platform.ready().then(() => {
-
-      this.mapService.loadMap();
-      console.log('after load');
+      this.loadmap();
+      this.poilocations.loadResources().then(results => {
+        this.zones = results;
+      })
     });
-    console.log('end');
-  }
-  /*Use to display or close the list of a type of positions (auditoires, parkings, bibliotheques, ...)*/
-  toggleDetails(data) {
-    if (data.showDetails) {
-      data.showDetails = false;
-      data.icon = 'arrow-dropdown';
-    } else {
-      data.showDetails = true;
-      data.icon = 'arrow-dropup';
-    }
   }
 
-  /*select or unselect a specific location*/
-  toggleLocation(data, checkList, index) {
-    if (checkList[index] === true) {
-      this.addShowedLocations(data);
-      this.onSelect(data);
-    } else {
-      this.removeShowedLocations(data);
-      this.mapService.removeMarker(data);
-    }
-  }
-
-  /*push a location to display*/
-  addShowedLocations(rawLocation) {
-    this.showedLocations.push(rawLocation);
-  }
-
-  /*remove a location displayed*/
-  removeShowedLocations(rawLocation) {
-    const locToRemove = this.showedLocations.find(item => item.title === rawLocation.title);
-    this.showedLocations.splice(this.showedLocations.indexOf(locToRemove), 1);
-  }
-
-  /*when select an location*/
-  onSelect(data: any) {
-    if (this.selectedLocation !== data) {
-      this.selectedLocation = data;
-    }
-    this.mapService.addMarker(this.selectedLocation);
+  loadmap() {
+    setTimeout(() => {
+      this.map = new Map('map').setView([50.668867, 4.610416], 14);
+      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+        maxZoom: 18
+      }).addTo(this.map);
+    }, 50);
   }
 }

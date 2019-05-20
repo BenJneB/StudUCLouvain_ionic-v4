@@ -44,6 +44,7 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "core-js": "^2.5.4",
     "ionic-cache": "^4.0.1",
+    "leaflet": "^1.5.1",
     "rxjs": "~6.3.3",
     "tar": "^4.4.8",
     "timers": "^0.1.1",
