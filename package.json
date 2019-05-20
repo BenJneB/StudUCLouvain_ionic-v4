@@ -1,5 +1,5 @@
 {
-  "name": "Stud.UCLouvain",
+  "name": "StudUCLouvain",
   "version": "0.0.1",
   "author": "Ionic Framework",
   "homepage": "https://ionicframework.com/",
@@ -44,6 +44,7 @@
     "@ngx-translate/http-loader": "^4.0.0",
     "core-js": "^2.5.4",
     "ionic-cache": "^4.0.1",
+    "ionicons": "^4.5.8",
     "rxjs": "~6.3.3",
     "tar": "^4.4.8",
     "timers": "^0.1.1",
