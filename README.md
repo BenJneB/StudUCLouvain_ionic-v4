@@ -8,7 +8,7 @@
 
 ### TO FIX
 #### ERROR Error: "Uncaught (in promise): overlay does not exist"
-(https://github.com/UCL-INGI/StudUCLouvain_ionic-v4/issues/22) ==> 
+(https://github.com/UCL-INGI/StudUCLouvain_ionic-v4/issues/22) ==> Easy to pop on NewsPage, EventsPage, SportsPage
 
 
 ### To Do :
