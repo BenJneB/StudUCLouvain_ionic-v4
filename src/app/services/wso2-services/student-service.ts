@@ -1,7 +1,8 @@
-/*
+import { HttpClient } from '@angular/common/http';
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Daubry Benjamin & Marchesini Bruno
-    Date : July 2018
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
@@ -18,16 +19,12 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Wso2Service} from './wso2-service';
 
+import { Wso2Service } from './wso2-service';
 
-
-
-@Injectable({ 
-  providedIn: 'root' 
+@Injectable({
+  providedIn: 'root'
 })
 export class StudentService {
   activities: Array<String> = [];
@@ -38,30 +35,27 @@ export class StudentService {
   constructor(public http: HttpClient, private wso2Service: Wso2Service) {
   }
 
-  /*Search activities (courses)*/
-  public searchActivities(){
+  public searchActivities() {
     this.activities = [];
-    let newUrl = this.url ;
-    newUrl += "activities";
+    let newUrl = this.url;
+    newUrl += 'activities';
     return new Promise(resolve => {
       this.wso2Service.loadStudent(newUrl).subscribe(
         data => {
-          console.log(data);
-          if(data['activities']!=null){
-            console.log(data);
-            resolve({activities : data['activities']});
+          if (data['activities'] !== null) {
+            resolve({ activities: data['activities'] });
           }
         });
     });
   }
 
-  public checkCourse(sigle:string, year){
-    let newUrl = this.courseUrl  + year + '/' +  sigle + '/fullInformation';
+  public checkCourse(sigle: string, year) {
+    const newUrl = this.courseUrl + year + '/' + sigle + '/fullInformation';
     return new Promise(resolve => {
       this.wso2Service.load(newUrl).subscribe(
         (data) => {
-          let res:any;
-          res=data;
+          let res: any;
+          res = data;
           resolve(res.ficheActivite);
         },
         (err) => {
@@ -69,138 +63,95 @@ export class StudentService {
           console.log(err.error);
           resolve(err.status);
         });
-    })
+    });
   }
 
-  public weekSchedule(){
-    let newUrl = this.url +"courseSchedules?date=";
-    var C =  7 - new Date().getDay();
-      //var C = 7 - new Date("10/16/2017").getDay();
-    if(C==7) C=C-1;
-    //console.log(C);
-    let schedule:Array<any> = [];
+  public weekSchedule() {
+    const newUrl = this.url + 'courseSchedules?date= ';
+    let C = 7 - new Date().getDay();
+    if (C === 7) { C = C - 1; }
+    const schedule: Array<any> = [];
     return new Promise(resolve => {
-      for(var _i = 0; _i < C; _i++){
-          let date = this.getDate(_i);
-          let day = this.getDay(_i);
-
-          let url= newUrl+date;
-          this.wso2Service.loadStudent(url).subscribe(
-            data => {
-              let res:any;
-              res = data;
-              //console.log(res);
-              if(res.items != null){
-                let items = res.items.item;
-                //console.log(date);
-                let dayDate = date.substr(5);
-                dayDate = dayDate.substr(3)+"/"+dayDate.substr(0,2);
-                for(let cours of items){
-                  let name:any;
-                  let res:any;
-                  this.checkCourse(cours.cours,new Date().getFullYear()).then(data =>{
-                    res=data;
-                    name = res.intituleCompletMap.entry[1].value;
-                    cours['name'] = name;
-                  })
-                }
-                let daySchedule = {'date':dayDate, 'schedule': items, 'day':day};
-                //console.log(daySchedule);
-                schedule.push(daySchedule);
-                schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
-              }
-            });
+      for (let _i = 0; _i < C; _i++) {
+        const date = this.getDate(_i);
+        const day = this.getDay(_i);
+        this.getSchedule(newUrl, date, schedule, day);
       }
-        console.log(schedule);
-        //schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
-        resolve(schedule);
-    })
-
-    /*var today = new Date();
-    console.log(today)
-    today.setDate(today.getDate() +1)
-    console.log( today)*/
-    
-
+      resolve(schedule);
+    });
   }
 
-    public todaySchedule(){
-    let newUrl = this.url +"courseSchedules?date=";
+  private extractSchedule(res: any, date: string) {
+    const items = res.items.item;
+    let dayDate = date.substr(5);
+    dayDate = dayDate.substr(3) + '/' + dayDate.substr(0, 2);
+    for (const cours of items) {
+      let name: any;
+      this.checkCourse(cours.cours, new Date().getFullYear()).then((data: any) => {
+        name = data.intituleCompletMap.entry[1].value;
+        cours['name'] = name;
+      });
+    }
+    return { dayDate, items, res };
+  }
 
-    let schedule:Array<any> = [];
+  public todaySchedule() {
+    const newUrl = this.url + 'courseSchedules?date= ';
+
+    const schedule: Array<any> = [];
     return new Promise(resolve => {
-          let date = this.getDate(0);
-
-          let url= newUrl+date;
-          this.wso2Service.loadStudent(url).subscribe(
-            data => {
-              let res:any;
-              res = data;
-              //console.log(res);
-              if(res.items != null){
-                let items = res.items.item;
-                //console.log(date);
-                let dayDate = date.substr(5);
-                dayDate = dayDate.substr(3)+"/"+dayDate.substr(0,2);
-                for(let cours of items){
-                  let name:any;
-                  let res:any;
-                  this.checkCourse(cours.cours,new Date().getFullYear()).then(data =>{
-                    res=data;
-                    name = res.intituleCompletMap.entry[1].value;
-                    cours['name'] = name;
-                  })
-                }
-                let daySchedule = {'date':dayDate, 'schedule': items};
-                console.log(daySchedule);
-                schedule.push(daySchedule);
-                schedule.sort((a,b) => parseInt(a.date.substr(0,2)) - parseInt(b.date.substr(0,2)));
-              }
-            });
-
-        resolve(schedule);
-    })
-
+      const date = this.getDate(0);
+      this.getSchedule(newUrl, date, schedule);
+      resolve(schedule);
+    });
   }
 
-  getDay(i:number):string{
-    let day:string = '';
-    if(i===0) day = 'Lundi';
-    if(i===1) day = 'Mardi';
-    if(i===2) day = 'Mercredi';
-    if(i===3) day = 'Jeudi';
-    if(i===4) day = 'Vendredi';
-    if(i===5) day = 'Samedi';
-
-    return day;
+  private getSchedule(newUrl: string, date: string, schedule: any[], day?: string) {
+    const url = newUrl + date;
+    this.wso2Service.loadStudent(url).subscribe(data => {
+      let res: any;
+      res = data;
+      if (res.items !== null) {
+        let dayDate;
+        let items;
+        ({ dayDate, items, res } = this.extractSchedule(res, date));
+        const daySchedule: { date: string, schedule, day?: string } = { date: dayDate, schedule: items };
+        if (day !== undefined) {
+          daySchedule.day = day;
+        }
+        schedule.push(daySchedule);
+        schedule.sort((a, b) => parseInt(a.date.substr(0, 2), 10) - parseInt(b.date.substr(0, 2), 10));
+      }
+    });
   }
 
-  getDate(i:number):string{
-    var today = new Date();
-    //var today = new Date("10/16/2017");
+  getDay(i: number): string {
+    const dayList = ['Lundi', 'Mardi', 'Mercredi', 'Jeudi', 'Vendredi', 'Samedi'];
+    return dayList[i];
+  }
+
+  getDate(i: number): string {
+    const today = new Date();
     today.setDate(today.getDate() + i);
-    var d = today.getDate();
-    var dd = d.toString();
-    var m = today.getMonth()+1;
-    var mm = m.toString();
-    if(m < 10) {
-        mm="0"+mm;
+    let day = today.getDate().toString();
+    let month = (today.getMonth() + 1).toString();
+    if (month.length < 2) {
+      month = '0' + month;
     }
-    if(d<10){
-      dd="0"+dd;
+    if (day.length < 2) {
+      day = '0' + day;
     }
-    var yyyy= today.getFullYear();
-    return yyyy+"-"+mm+"-"+dd;
+    const year = today.getFullYear();
+    return year + '-' + month + '-' + day;
   }
 
-  getStatus(){
-    let newUrl = this.url + "inscriptions";
+  getStatus() {
+    const newUrl = this.url + 'inscriptions';
     return new Promise(resolve => {
       this.wso2Service.loadStudent(newUrl).subscribe(
         (data) => {
-          let res:any;
-          res=data;
-          console.log(res.lireInscriptionAnacResponse.return);
+          let res: any;
+          res = data;
           resolve(res.lireInscriptionAnacResponse.return);
         },
         (err) => {
@@ -208,8 +159,6 @@ export class StudentService {
           console.log(err.error);
           resolve(err.status);
         });
-    })
+    });
   }
-
-
 }

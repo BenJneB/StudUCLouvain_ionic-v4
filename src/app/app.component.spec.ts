@@ -1,48 +1,47 @@
-/*
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors :  Jérôme Lemaire and Corentin Lamy
-    Date : July 2017
-    This file is part of UCLCampus
+    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date: 2018-2019
+    This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    UCLCampus is free software: you can redistribute it and/or modify
+    Stud.UCLouvain is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
 
-    UCLCampus is distributed in the hope that it will be useful,
+    Stud.UCLouvain is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
 
     You should have received a copy of the GNU General Public License
-    along with UCLCampus.  If not, see <http://www.gnu.org/licenses/>.
+    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-
 import { async, TestBed } from '@angular/core/testing';
-import { IonicModule, MenuController, Platform, AlertController,LoadingController } from '@ionic/angular';
-import { StatusBar } from '@ionic-native/status-bar';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-import { Market } from '@ionic-native/market';
 import { AppAvailability } from '@ionic-native/app-availability';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
+import { InAppBrowser } from '@ionic-native/in-app-browser';
+import { Market } from '@ionic-native/market';
+import { SplashScreen } from '@ionic-native/splash-screen';
+import { StatusBar } from '@ionic-native/status-bar';
+import {
+    AlertController, IonicModule, LoadingController, MenuController, Platform
+} from '@ionic/angular';
+import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+
 /*import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
 import { Device } from '@ionic-native/device';
 import { IonicStorageModule  } from '@ionic/storage';*/
-
-//import { UserService } from '../providers/utils-services/user-service';
-
-
+// import { UserService } from '../providers/utils-services/user-service';
 import { AppComponent } from './app.component';
 import { UserService } from './services/utils-services/user-service';
 import { Wso2Service } from './services/wso2-services/wso2-service';
 
 /*export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http,'./assets/i18n/', '.json');
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
 }*/
 
 describe('MyApp Component', () => {
@@ -77,7 +76,7 @@ describe('MyApp Component', () => {
         Device,
         UserService*/
       ]
-    })
+    });
   }));
 
   beforeEach(() => {
@@ -85,7 +84,7 @@ describe('MyApp Component', () => {
     component = fixture.componentInstance;
   });
 
-  it ('should be created', () => {
+  it('should be created', () => {
     expect(component instanceof AppComponent).toBe(true);
   });
 

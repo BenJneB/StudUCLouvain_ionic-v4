@@ -1,23 +1,27 @@
+import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
-import { TranslateModule, TranslateLoader } from '@ngx-translate/core';
-//import { Http } from '@angular/http';
-import { HttpLoaderFactory } from '../../app.module'
-import { HttpClient } from '@angular/common/http';
-import { ParamPage } from './param';
+import { TranslateModule } from '@ngx-translate/core';
 
+import { ParamPage } from './param';
 
 @NgModule({
   declarations: [ParamPage],
   imports: [
-  	IonicModule,
-  	TranslateModule.forChild({
-            loader: {
-                provide: TranslateLoader,
-                useFactory: HttpLoaderFactory,
-                deps: [HttpClient]
-            }
-        })
+    IonicModule,
+    TranslateModule.forChild(),
+    ReactiveFormsModule,
+    CommonModule,
+    FormsModule,
+    RouterModule.forChild([
+      {
+        path: '',
+        component: ParamPage
+      }
+    ])
   ]
+
 })
 export class ParamPageModule { }
