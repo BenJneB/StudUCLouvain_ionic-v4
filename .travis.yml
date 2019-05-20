@@ -7,7 +7,6 @@ branches:
       only:
       - master
 before_script:
-      - npm install -g npm
       - npm install -g ionic
       - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
       - chmod +x ./cc-test-reporter
@@ -21,6 +20,6 @@ deploy:
       keep-history: true
       on:
             branch: master
-            local_dir: www
+      local_dir: www
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
