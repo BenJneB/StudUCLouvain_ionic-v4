@@ -13,7 +13,6 @@ before_script:
       - chmod +x ./cc-test-reporter
       - ./cc-test-reporter before-build
 script:
-      - ng build --prod
       - ng test
 deploy:
       provider: app
