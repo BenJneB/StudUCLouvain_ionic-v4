@@ -36,7 +36,7 @@ export class EventsFilterPage {
   constructor(
     private eventService: EventsService,
     private navParams: NavParams,
-    private alertService: AlertService
+    public alertService: AlertService
   ) {
     // passed in array of categories names that should be excluded (unchecked)
     const excludedFilters = this.navParams.get('excludedFilters');
