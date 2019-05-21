@@ -56,6 +56,7 @@ describe('MyApp Component', () => {
         IonicStorageModule.forRoot(),
       ],
       providers: [
+        Market,
       ]
     });
   }));
