@@ -28,21 +28,20 @@ import { StatusBar } from '@ionic-native/status-bar';
 import {
     AlertController, IonicModule, LoadingController, MenuController, Platform
 } from '@ionic/angular';
+/*export function HttpLoaderFactory(http: Http) {
+    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
+}*/
+import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 /*import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 import { AppAvailability } from '@ionic-native/app-availability';
 import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Device } from '@ionic-native/device';
-import { IonicStorageModule  } from '@ionic/storage';*/
+import { Device } from '@ionic-native/device';*/
 // import { UserService } from '../providers/utils-services/user-service';
 import { AppComponent } from './app.component';
 import { UserService } from './services/utils-services/user-service';
 import { Wso2Service } from './services/wso2-services/wso2-service';
-
-/*export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}*/
 
 describe('MyApp Component', () => {
   let fixture;
@@ -53,16 +52,8 @@ describe('MyApp Component', () => {
       declarations: [AppComponent],
       imports: [
         IonicModule.forRoot(),
-        TranslateModule.forRoot()
-        /*TranslateModule.forRoot({
-                    loader: {
-                        provide: TranslateLoader,
-                        useFactory: HttpLoaderFactory,
-                        deps: [Http]
-                    }
-                }),
+        TranslateModule.forRoot(),
         IonicStorageModule.forRoot(),
-       */
       ],
       providers: [
         AlertController,
