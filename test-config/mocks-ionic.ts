@@ -298,54 +298,20 @@ export class CalendarMock extends Calendar {
         });
     }
 
-    createCalendar(nameOrOptions: string | any): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    deleteCalendar(name: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    getCalendarOptions(): CalendarOptions {
-        let calendarOptions: CalendarOptions;
-        return calendarOptions;
-    }
-
     createEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
         return new Promise((resolve, reject) => {
             resolve();
         });
     }
 
-    createEventWithOptions(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, options?: CalendarOptions): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    createEventInteractively(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    createEventInteractivelyWithOptions(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, options?: CalendarOptions): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    findEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    findEventWithOptions(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, options?: CalendarOptions): Promise<any> {
+    createEventWithOptions(
+        title?: string,
+        location?: string,
+        notes?: string,
+        startDate?: Date,
+        endDate?: Date,
+        options?: CalendarOptions
+    ): Promise<any> {
         return new Promise((resolve, reject) => {
             resolve();
         });
@@ -357,43 +323,7 @@ export class CalendarMock extends Calendar {
         });
     }
 
-    listCalendars(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    findAllEventsInNamedCalendar(calendarName: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    modifyEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, newTitle?: string, newLocation?: string, newNotes?: string, newStartDate?: Date, newEndDate?: Date): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    modifyEventWithOptions(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, newTitle?: string, newLocation?: string, newNotes?: string, newStartDate?: Date, newEndDate?: Date, filterOptions?: CalendarOptions, newOptions?: CalendarOptions): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
     deleteEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    deleteEventFromNamedCalendar(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, calendarName?: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
-    }
-
-    openCalendar(date: Date): Promise<any> {
         return new Promise((resolve, reject) => {
             resolve();
         });
