@@ -15,11 +15,11 @@
 
 => Routes (Studies (= some sub pages))
 
-#### ==> + Map : remake from 'scratch' /!\
+#### ==> + Map : remake from 'scratch' /!\ (WIP)
 
 => Render (Same + Guindaille&Tuto to fix)
 
-=> Re integrate travis/pr and diff/total-coverage
+=> Re integrate diff/total-coverage
 
 ==> Write unit tests
 
