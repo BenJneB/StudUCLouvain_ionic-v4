@@ -25,6 +25,7 @@ import {
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { async, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -48,6 +49,7 @@ describe('MyApp Component', () => {
         IonicModule.forRoot(),
         TranslateModule.forRoot(),
         IonicStorageModule.forRoot(),
+        RouterTestingModule,
       ],
       providers: [
         { provide: Market, useClass: MarketMock },
