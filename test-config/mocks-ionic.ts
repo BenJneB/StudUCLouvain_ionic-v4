@@ -100,7 +100,15 @@ export class DeviceMock extends Device {
 export class StatusBarMock extends StatusBar {
     isVisible: boolean;
 
-    overlaysWebView(doesOverlay: boolean): void { };
+    overlaysWebView(doesOverlay: boolean): void { }
 
-    styleDefault(): void { };
+    styleDefault(): void { }
+}
+
+export class MockCacheStorageService {
+    constructor(a, b) { }
+
+    public ready() {
+        return true;
+    }
 }

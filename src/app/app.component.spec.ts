@@ -1,6 +1,8 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { AppAvailabilityMock, MarketMock, StatusBarMock } from 'test-config/mocks-ionic';
+import {
+    AppAvailabilityMock, MarketMock, MockCacheStorageService, StatusBarMock
+} from 'test-config/mocks-ionic';
 
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -54,7 +56,11 @@ describe('MyApp Component', () => {
         { provide: Device, useClass: DeviceMock },
         { provide: StatusBar, useClass: StatusBarMock },
         CacheService,
-        CacheStorageService
+        {
+          provide: CacheStorageService, useFactory: () => {
+            return new MockCacheStorageService(null, null);
+          }
+        }
       ]
     });
   }));
