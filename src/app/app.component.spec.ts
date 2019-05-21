@@ -28,6 +28,7 @@ import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Device } from '@ionic-native/device/ngx';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
@@ -66,7 +67,8 @@ describe('MyApp Component', () => {
           }
         },
         { provide: Toast, useClass: ToastMock },
-        { provide: Network, useClass: NetworkMock }
+        { provide: Network, useClass: NetworkMock },
+        Diagnostic
       ]
     });
   }));
