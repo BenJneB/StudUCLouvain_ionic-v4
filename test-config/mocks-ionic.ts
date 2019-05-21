@@ -23,7 +23,6 @@ export class AppAvailabilityMock extends AppAvailability {
     }
 }
 
-
 export interface InAppBrowserEvent extends Event {
     /** the eventname, either loadstart, loadstop, loaderror, or exit. */
     type: string;
