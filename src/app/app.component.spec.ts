@@ -1,4 +1,4 @@
-import { AppAvailabilityMock, MarketMock } from 'test-config/mocks-ionic';
+import { AppAvailabilityMock, MarketMock, StatusBarMock } from 'test-config/mocks-ionic';
 
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -49,6 +49,7 @@ describe('MyApp Component', () => {
         { provide: AppAvailability, useClass: AppAvailabilityMock },
         { provide: InAppBrowser, useClass: InAppBrowserMock },
         { provide: Device, useClass: DeviceMock },
+        { provide: StatusBar, useClass: StatusBarMock },
       ]
     });
   }));
