@@ -21,6 +21,7 @@ describe('HomePage', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [HomePage, TranslatePipeMock],
+      providers: [Storage],
       schemas: [CUSTOM_ELEMENTS_SCHEMA],
     })
       .compileComponents();
