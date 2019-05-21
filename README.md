@@ -3,7 +3,8 @@
 ## Migration to ionic-v4
 
 
-## Studies and Map Pages have not all functionalities fixed.
+## Studies and Map Pages have not all functionalities fixed
+## Studies, Map, Guindaille and Tuto Pages to render/fix
 
 
 ### TO FIX
