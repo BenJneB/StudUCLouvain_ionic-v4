@@ -1,3 +1,4 @@
+import { CacheService } from 'ionic-cache';
 import { AppAvailabilityMock, MarketMock, StatusBarMock } from 'test-config/mocks-ionic';
 
 /**
@@ -51,6 +52,7 @@ describe('MyApp Component', () => {
         { provide: InAppBrowser, useClass: InAppBrowserMock },
         { provide: Device, useClass: DeviceMock },
         { provide: StatusBar, useClass: StatusBarMock },
+        CacheService,
       ]
     });
   }));
