@@ -1,3 +1,5 @@
+import { AppAvailabilityMock, MarketMock } from 'test-config/mocks-ionic';
+
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,22 +21,13 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { async, TestBed } from '@angular/core/testing';
+import { AppAvailability } from '@ionic-native/app-availability';
 import { Market } from '@ionic-native/market/ngx';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { AppComponent } from './app.component';
-
-export class MarketMock extends Market {
-  public name = 'translate';
-
-  open(appId: string): Promise<any> {
-    return new Promise((resolve, reject) => {
-      resolve();
-    });
-  }
-}
 
 describe('MyApp Component', () => {
   let fixture;
@@ -49,7 +42,8 @@ describe('MyApp Component', () => {
         IonicStorageModule.forRoot(),
       ],
       providers: [
-        { provide: Market, useClass: MarketMock }
+        { provide: Market, useClass: MarketMock },
+        { provide: AppAvailability, useClass: AppAvailabilityMock }
       ]
     });
   }));
