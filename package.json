@@ -21,7 +21,6 @@
     "@angular/platform-browser": "^7.2.2",
     "@angular/platform-browser-dynamic": "^7.2.2",
     "@angular/router": "^7.2.2",
-    "@ionic-native-mocks/market": "^2.0.12",
     "@ionic-native/app-availability": "^5.5.0",
     "@ionic-native/app-version": "^5.5.0",
     "@ionic-native/calendar": "^5.5.0",
