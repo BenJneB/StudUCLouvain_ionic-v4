@@ -21,7 +21,7 @@ import { AppAvailabilityMock, MarketMock } from 'test-config/mocks-ionic';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { async, TestBed } from '@angular/core/testing';
-import { AppAvailability } from '@ionic-native/app-availability';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
