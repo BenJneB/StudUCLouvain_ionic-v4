@@ -220,3 +220,181 @@ export class PlatformMock {
         return document['activeElement'];
     }
 }
+
+export interface CalendarOptions {
+    /**
+     * Id
+     */
+    id?: string;
+    /**
+     *
+     */
+    firstReminderMinutes?: number;
+    /**
+     *
+     */
+    secondReminderMinutes?: number;
+    /**
+     * Recurrence. Can be set to `daily`, `weekly`, `monthly` or `yearly`
+     */
+    recurrence?: string;
+    /**
+     * Recurrence interval. Valid only when `recurrence` option is set.
+     */
+    recurrenceInterval?: number;
+    /**
+     * Recurrence end date. Valid only when `recurrence` option is set.
+     */
+    recurrenceEndDate?: Date;
+    /**
+     * Calendar name. Ths is supported by `iOS` only.
+     */
+    calendarName?: string;
+    /**
+     * Calendar id
+     */
+    calendarId?: number;
+    /**
+     * URL
+     */
+    url?: string;
+}
+
+export class CalendarMock extends Calendar {
+    hasReadWritePermission(): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            resolve(true);
+        });
+    }
+
+    hasReadPermission(): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            resolve(true);
+        });
+    }
+
+    hasWritePermission(): Promise<boolean> {
+        return new Promise((resolve, reject) => {
+            resolve(true);
+        });
+    }
+
+    requestWritePermission(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    requestReadPermission(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    requestReadWritePermission(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    createCalendar(nameOrOptions: string | any): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    deleteCalendar(name: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    getCalendarOptions(): CalendarOptions {
+        let calendarOptions: CalendarOptions;
+        return calendarOptions;
+    }
+
+    createEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    createEventWithOptions(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, options?: CalendarOptions): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    createEventInteractively(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    createEventInteractivelyWithOptions(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, options?: CalendarOptions): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    findEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    findEventWithOptions(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, options?: CalendarOptions): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    listEventsInRange(startDate: Date, endDate: Date): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    listCalendars(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    findAllEventsInNamedCalendar(calendarName: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    modifyEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, newTitle?: string, newLocation?: string, newNotes?: string, newStartDate?: Date, newEndDate?: Date): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    modifyEventWithOptions(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, newTitle?: string, newLocation?: string, newNotes?: string, newStartDate?: Date, newEndDate?: Date, filterOptions?: CalendarOptions, newOptions?: CalendarOptions): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    deleteEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    deleteEventFromNamedCalendar(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date, calendarName?: string): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    openCalendar(date: Date): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+}

@@ -40,6 +40,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { DeviceMock, InAppBrowserMock } from '../../test-config/mocks-ionic';
 import { AppComponent } from './app.component';
+import { Calendar } from '@ionic-native/calendar/ngx';
 
 describe('MyApp Component', () => {
   let fixture;
@@ -68,7 +69,8 @@ describe('MyApp Component', () => {
         },
         { provide: Toast, useClass: ToastMock },
         { provide: Network, useClass: NetworkMock },
-        Diagnostic
+        Diagnostic,
+        Calendar
       ]
     });
   }));
