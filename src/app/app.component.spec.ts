@@ -57,7 +57,6 @@ describe('MyApp Component', () => {
         IonicStorageModule.forRoot(),
       ],
       providers: [
-        { provide: Market, useClass: MarketMock }
       ]
     });
   }));
