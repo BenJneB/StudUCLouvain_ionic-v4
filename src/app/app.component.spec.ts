@@ -22,13 +22,14 @@ import { AppAvailabilityMock, MarketMock } from 'test-config/mocks-ionic';
 */
 import { async, TestBed } from '@angular/core/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InAppBrowserMock } from '../../test-config/mocks-ionic';
+import { DeviceMock, InAppBrowserMock } from '../../test-config/mocks-ionic';
 import { AppComponent } from './app.component';
 
 describe('MyApp Component', () => {
@@ -47,6 +48,7 @@ describe('MyApp Component', () => {
         { provide: Market, useClass: MarketMock },
         { provide: AppAvailability, useClass: AppAvailabilityMock },
         { provide: InAppBrowser, useClass: InAppBrowserMock },
+        { provide: Device, useClass: DeviceMock },
       ]
     });
   }));
