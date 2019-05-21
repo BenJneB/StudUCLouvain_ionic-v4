@@ -1,7 +1,7 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import {
-    AppAvailabilityMock, MarketMock, MockCacheStorageService, StatusBarMock, ToastMock
+    AppAvailabilityMock, MarketMock, MockCacheStorageService, NetworkMock, StatusBarMock, ToastMock
 } from 'test-config/mocks-ionic';
 
 /**
@@ -30,6 +30,7 @@ import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
+import { Network } from '@ionic-native/network/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { IonicModule } from '@ionic/angular';
@@ -65,6 +66,7 @@ describe('MyApp Component', () => {
           }
         },
         { provide: Toast, useClass: ToastMock },
+        { provide: Network, useClass: NetworkMock }
       ]
     });
   }));
