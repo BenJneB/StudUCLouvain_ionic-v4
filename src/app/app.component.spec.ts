@@ -52,7 +52,7 @@ describe('MyApp Component', () => {
         { provide: InAppBrowser, useClass: InAppBrowserMock },
         { provide: Device, useClass: DeviceMock },
         { provide: StatusBar, useClass: StatusBarMock },
-        CacheService,
+        { provide: CacheService, useClass: CacheService },
       ]
     });
   }));
