@@ -21,7 +21,7 @@ before_script:
       - ./cc-test-reporter before-build
 
 script:
-      - npm test
+      - npm test --watch=false
 
 deploy:
       provider: app
