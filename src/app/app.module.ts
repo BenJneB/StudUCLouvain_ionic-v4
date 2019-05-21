@@ -26,7 +26,6 @@ import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { RouteReuseStrategy } from '@angular/router';
-import { MarketMock } from '@ionic-native-mocks/market';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -109,7 +108,7 @@ export function HttpLoaderFactory(http: HttpClient) {
     AlertService,
     TransService,
     InAppBrowser,
-    { provide: Market, useClass: MarketMock },
+    Market,
     POIService,
     UserService,
     Device,

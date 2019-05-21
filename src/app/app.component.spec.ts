@@ -19,30 +19,11 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { async, TestBed } from '@angular/core/testing';
-import { MarketMock } from '@ionic-native-mocks/market';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { Device } from '@ionic-native/device';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Market } from '@ionic-native/market';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import {
-    AlertController, IonicModule, LoadingController, MenuController, Platform
-} from '@ionic/angular';
-/*export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}*/
+import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
-/*import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Device } from '@ionic-native/device';*/
-// import { UserService } from '../providers/utils-services/user-service';
 import { AppComponent } from './app.component';
-import { UserService } from './services/utils-services/user-service';
-import { Wso2Service } from './services/wso2-services/wso2-service';
 
 describe('MyApp Component', () => {
   let fixture;
@@ -57,6 +38,7 @@ describe('MyApp Component', () => {
         IonicStorageModule.forRoot(),
       ],
       providers: [
+
       ]
     });
   }));
