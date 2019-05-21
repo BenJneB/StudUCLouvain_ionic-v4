@@ -21,7 +21,7 @@ before_script:
       - ./cc-test-reporter before-build
 
 script:
-      - ionic test
+      - npm test
 
 deploy:
       provider: app
