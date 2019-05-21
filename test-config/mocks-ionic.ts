@@ -6,6 +6,7 @@ import {
     InAppBrowser, InAppBrowserObject, InAppBrowserOptions
 } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
 
 export class MarketMock extends Market {
     open(appId: string): Promise<any> {
@@ -94,4 +95,12 @@ export class DeviceMock extends Device {
     isVirtual: boolean;
     /** Get the device hardware serial number. */
     serial: string;
+}
+
+export class StatusBarMock extends StatusBar {
+    isVisible: boolean;
+
+    overlaysWebView(doesOverlay: boolean): void { };
+
+    styleDefault(): void { };
 }
