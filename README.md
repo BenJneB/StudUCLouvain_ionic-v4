@@ -11,7 +11,7 @@
 (https://github.com/UCL-INGI/StudUCLouvain_ionic-v4/issues/22) ==> Easy to pop on NewsPage, EventsPage, SportsPage
 
 
-### To Do :
+### TO DO :
 
 => Routes (Studies (= some sub pages))
 
