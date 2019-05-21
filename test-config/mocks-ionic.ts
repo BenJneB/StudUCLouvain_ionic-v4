@@ -7,6 +7,7 @@ import {
 } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Toast } from '@ionic-native/toast/ngx';
 
 export class MarketMock extends Market {
     open(appId: string): Promise<any> {
@@ -110,5 +111,21 @@ export class MockCacheStorageService {
 
     public ready() {
         return true;
+    }
+}
+
+export class ToastMock extends Toast {
+
+    show(message: string, duration: string, position: string): Observable<any> {
+        return Observable.create((observer: Observer<any>) => {
+            observer.next('');
+            observer.complete();
+        });
+    }
+
+    hide(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
     }
 }

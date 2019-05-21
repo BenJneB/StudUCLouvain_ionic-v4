@@ -1,7 +1,7 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import {
-    AppAvailabilityMock, MarketMock, MockCacheStorageService, StatusBarMock
+    AppAvailabilityMock, MarketMock, MockCacheStorageService, StatusBarMock, ToastMock
 } from 'test-config/mocks-ionic';
 
 /**
@@ -31,6 +31,7 @@ import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Toast } from '@ionic-native/toast/ngx';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
@@ -62,7 +63,8 @@ describe('MyApp Component', () => {
           provide: CacheStorageService, useFactory: () => {
             return new MockCacheStorageService(null, null);
           }
-        }
+        },
+        { provide: Toast, useClass: ToastMock },
       ]
     });
   }));
