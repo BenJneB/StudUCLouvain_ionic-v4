@@ -1,6 +1,7 @@
 import { Observable, Observer } from 'rxjs';
 
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import {
     InAppBrowser, InAppBrowserObject, InAppBrowserOptions
