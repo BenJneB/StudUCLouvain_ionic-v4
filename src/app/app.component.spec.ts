@@ -56,16 +56,6 @@ describe('MyApp Component', () => {
         IonicStorageModule.forRoot(),
       ],
       providers: [
-        AlertController,
-        LoadingController,
-        Market,
-        AppAvailability,
-        InAppBrowser,
-        Device,
-        /*AppAvailability,
-        InAppBrowser,
-        Device,
-        UserService*/
       ]
     });
   }));
