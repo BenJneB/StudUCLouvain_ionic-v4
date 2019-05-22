@@ -75,8 +75,7 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
 
 export class InAppBrowserMock extends InAppBrowser {
     create(url: string, target?: string, options?: string | InAppBrowserOptions): InAppBrowserObjectMock {
-        const response = new InAppBrowserObjectMock(url);
-        return response;
+        return new InAppBrowserObjectMock(url);
     }
 }
 
