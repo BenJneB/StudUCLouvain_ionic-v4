@@ -8,6 +8,7 @@ import {
 } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 
@@ -303,5 +304,11 @@ export class CalendarMock extends Calendar {
 
     deleteEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
         return getPromise(true);
+    }
+}
+
+export class SplashScreenMock extends SplashScreen {
+    hide() {
+        return;
     }
 }

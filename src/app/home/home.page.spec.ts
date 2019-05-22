@@ -1,9 +1,12 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import {
-    AppAvailabilityMock, MarketMock, MockCacheStorageService, NetworkMock, StatusBarMock, ToastMock
+    AppAvailabilityMock, DeviceMock, MarketMock, MockCacheStorageService, NetworkMock,
+    SplashScreenMock
 } from 'test-config/mocks-ionic';
 
+import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -33,55 +36,55 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Toast } from '@ionic-native/toast/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { DeviceMock, InAppBrowserMock } from '../../test-config/mocks-ionic';
-import { AppComponent } from './app.component';
+import { InAppBrowserMock } from '../../../test-config/mocks-ionic';
+import { HomePage } from './home.page';
 
 describe('MyApp Component', () => {
-  let fixture;
-  let component;
+    let fixture;
+    let component;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [AppComponent],
-      imports: [
-        IonicModule.forRoot(),
-        TranslateModule.forRoot(),
-        IonicStorageModule.forRoot(),
-        RouterTestingModule,
-      ],
-      providers: [
-        { provide: Market, useClass: MarketMock },
-        { provide: AppAvailability, useClass: AppAvailabilityMock },
-        { provide: InAppBrowser, useClass: InAppBrowserMock },
-        { provide: Device, useClass: DeviceMock },
-        { provide: StatusBar, useClass: StatusBarMock },
-        CacheService,
-        {
-          provide: CacheStorageService, useFactory: () => {
-            return new MockCacheStorageService(null, null);
-          }
-        },
-        { provide: Toast, useClass: ToastMock },
-        { provide: Network, useClass: NetworkMock },
-        Diagnostic,
-        Calendar
-      ]
+    beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [HomePage],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [
+                IonicModule.forRoot(),
+                TranslateModule.forRoot(),
+                IonicStorageModule.forRoot(),
+                RouterTestingModule,
+                HttpClientModule,
+            ],
+            providers: [
+                { provide: Market, useClass: MarketMock },
+                { provide: AppAvailability, useClass: AppAvailabilityMock },
+                { provide: InAppBrowser, useClass: InAppBrowserMock },
+                { provide: SplashScreen, useClass: SplashScreenMock },
+                { provide: Device, useClass: DeviceMock },
+                CacheService,
+                {
+                    provide: CacheStorageService, useFactory: () => {
+                        return new MockCacheStorageService(null, null);
+                    }
+                },
+                { provide: Network, useClass: NetworkMock },
+                Diagnostic,
+                Calendar
+            ]
+        });
+    }));
+
+    beforeEach(() => {
+        fixture = TestBed.createComponent(HomePage);
+        component = fixture.componentInstance;
     });
-  }));
 
-  beforeEach(() => {
-    fixture = TestBed.createComponent(AppComponent);
-    component = fixture.componentInstance;
-  });
-
-  it('should be created', () => {
-    expect(component instanceof AppComponent).toBe(true);
-  });
+    it('should be created', () => {
+        expect(component instanceof HomePage).toBe(true);
+    });
 
 });
