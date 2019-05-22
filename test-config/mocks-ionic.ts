@@ -21,7 +21,7 @@ export class MarketMock extends Market {
 
 export class AppAvailabilityMock extends AppAvailability {
     check(app: string): Promise<boolean> {
-        let response: boolean;
+        const response = true;
         return new Promise((resolve, reject) => {
             resolve(response);
         });
