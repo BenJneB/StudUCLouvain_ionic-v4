@@ -21,6 +21,13 @@ function getPromise(item?: any): Promise<any> {
     });
 }
 
+function getObservable(response: any = ''): Observable<any> {
+    return Observable.create((observer: Observer<any>) => {
+        observer.next(response);
+        observer.complete();
+    });
+}
+
 export class MarketMock extends Market {
     open(appId: string): Promise<any> {
         return getPromise();
@@ -67,10 +74,7 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
 
     on(event: string): Observable<InAppBrowserEvent> {
         let response: InAppBrowserEvent;
-        return Observable.create((observer: Observer<any>) => {
-            observer.next(response);
-            observer.complete();
-        });
+        return getObservable(response);
     }
 }
 
@@ -120,10 +124,7 @@ export class MockCacheStorageService {
 export class ToastMock extends Toast {
 
     show(message: string, duration: string, position: string): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            observer.next('');
-            observer.complete();
-        });
+        return getObservable();
     }
 
     hide(): Promise<any> {
@@ -135,24 +136,15 @@ export class NetworkMock extends Network {
     type = 'cellular';
     downlinkMax: string;
     onchange(): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            observer.next('');
-            observer.complete();
-        });
+        return getObservable();
     }
 
     onDisconnect(): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            observer.next('');
-            observer.complete();
-        });
+        return getObservable();
     }
 
     onConnect(): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            observer.next('');
-            observer.complete();
-        });
+        return getObservable();
     }
 }
 
