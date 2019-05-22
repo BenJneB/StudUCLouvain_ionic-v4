@@ -11,20 +11,25 @@ import { Network } from '@ionic-native/network/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 
+function getPromise(item?: any): Promise<any> {
+    return new Promise((resolve, reject) => {
+        if (item === undefined) {
+            resolve();
+        }
+        resolve(item);
+    });
+}
+
 export class MarketMock extends Market {
     open(appId: string): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise();
     }
 }
 
 export class AppAvailabilityMock extends AppAvailability {
     check(app: string): Promise<boolean> {
         let response: boolean;
-        return new Promise((resolve, reject) => {
-            resolve(response);
-        });
+        return getPromise(response);
     }
 }
 
@@ -52,15 +57,11 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
     hide(): void { }
 
     executeScript(script: { file?: string; code?: string; }): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise();
     }
 
     insertCSS(css: { file?: string; code?: string; }): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise();
     }
 
     on(event: string): Observable<InAppBrowserEvent> {
@@ -126,9 +127,7 @@ export class ToastMock extends Toast {
     }
 
     hide(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise();
     }
 }
 
@@ -159,9 +158,7 @@ export class NetworkMock extends Network {
 
 export class PlatformMock {
     public ready(): Promise<string> {
-        return new Promise((resolve) => {
-            resolve('READY');
-        });
+        return getPromise('READY');
     }
 
     public getQueryParam() {
@@ -263,45 +260,31 @@ export interface CalendarOptions {
 
 export class CalendarMock extends Calendar {
     hasReadWritePermission(): Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            resolve(true);
-        });
+        return getPromise(true);
     }
 
     hasReadPermission(): Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            resolve(true);
-        });
+        return getPromise(true);
     }
 
     hasWritePermission(): Promise<boolean> {
-        return new Promise((resolve, reject) => {
-            resolve(true);
-        });
+        return getPromise(true);
     }
 
     requestWritePermission(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise(true);
     }
 
     requestReadPermission(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise(true);
     }
 
     requestReadWritePermission(): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise(true);
     }
 
     createEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise(true);
     }
 
     createEventWithOptions(
@@ -312,20 +295,14 @@ export class CalendarMock extends Calendar {
         endDate?: Date,
         options?: CalendarOptions
     ): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise(true);
     }
 
     listEventsInRange(startDate: Date, endDate: Date): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise(true);
     }
 
     deleteEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
-        return new Promise((resolve, reject) => {
-            resolve();
-        });
+        return getPromise(true);
     }
 }
