@@ -19,9 +19,7 @@
 
 => Render (Same + Guindaille&Tuto to fix)
 
-=> Re integrate diff/total-coverage
-
-==> Write unit tests
+=> Write unit tests (WIP)
 
 => Functional tests ?
 
