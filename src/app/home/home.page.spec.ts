@@ -126,7 +126,6 @@ describe('MyApp Component', () => {
                 .then(() => {
                     component.changePage({ iosSchemaName: 'name' });
                     expect(spyLaunch.calls.count()).toEqual(1);
-                    // expect(spyFinally.calls.first().args[0]).toEqual(null);
                 });
         });
 
@@ -137,7 +136,30 @@ describe('MyApp Component', () => {
                 .then(() => {
                     component.changePage({ iosSchemaName: null, component: [] });
                     expect(spyNavigate.calls.count()).toEqual(1);
-                    // expect(spyFinally.calls.first().args[0]).toEqual(null);
+                });
+        });
+    });
+
+    describe('updateCampus method', () => {
+
+        beforeEach(() => {
+        });
+
+        it('should call addCampus of UserService', () => {
+            function add(item: string) {
+                return {
+                    subscribe: (success: Function, error: Function) => {
+                        success();
+                    }
+                };
+            }
+            const spyAdd = spyOn(component.userS, 'addCampus').and.callFake(add).and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.updateCampus();
+                    expect(spyAdd.calls.count()).toEqual(1);
+                    expect(spyAdd.calls.first().args[0]).toEqual('');
                 });
         });
     });
