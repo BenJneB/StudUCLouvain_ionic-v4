@@ -20,7 +20,6 @@
 */
 import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Market } from '@ionic-native/market/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { AlertController, IonContent, LoadingController, NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
@@ -122,7 +121,6 @@ export class HomePage {
     private iab: InAppBrowser,
     private alertCtrl: AlertController,
     private translateService: TranslateService,
-    public market: Market,
     public loadingCtrl: LoadingController,
     public studentService: StudentService,
     public splashscreen: SplashScreen,

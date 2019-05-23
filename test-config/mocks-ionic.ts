@@ -8,6 +8,7 @@ import {
 } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 
@@ -17,6 +18,13 @@ function getPromise(item?: any): Promise<any> {
             resolve();
         }
         resolve(item);
+    });
+}
+
+function getObservable(response: any = ''): Observable<any> {
+    return Observable.create((observer: Observer<any>) => {
+        observer.next(response);
+        observer.complete();
     });
 }
 
@@ -66,10 +74,7 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
 
     on(event: string): Observable<InAppBrowserEvent> {
         let response: InAppBrowserEvent;
-        return Observable.create((observer: Observer<any>) => {
-            observer.next(response);
-            observer.complete();
-        });
+        return getObservable(response);
     }
 }
 
@@ -119,10 +124,7 @@ export class MockCacheStorageService {
 export class ToastMock extends Toast {
 
     show(message: string, duration: string, position: string): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            observer.next('');
-            observer.complete();
-        });
+        return getObservable();
     }
 
     hide(): Promise<any> {
@@ -134,24 +136,15 @@ export class NetworkMock extends Network {
     type = 'cellular';
     downlinkMax: string;
     onchange(): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            observer.next('');
-            observer.complete();
-        });
+        return getObservable();
     }
 
     onDisconnect(): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            observer.next('');
-            observer.complete();
-        });
+        return getObservable();
     }
 
     onConnect(): Observable<any> {
-        return Observable.create((observer: Observer<any>) => {
-            observer.next('');
-            observer.complete();
-        });
+        return getObservable();
     }
 }
 
@@ -303,5 +296,11 @@ export class CalendarMock extends Calendar {
 
     deleteEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
         return getPromise(true);
+    }
+}
+
+export class SplashScreenMock extends SplashScreen {
+    hide() {
+        return;
     }
 }

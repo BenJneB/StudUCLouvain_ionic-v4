@@ -23,4 +23,5 @@ exclude_patterns:
 - platforms/
 - plugins/
 - www/
+- src/assets/*
 - resources/*
