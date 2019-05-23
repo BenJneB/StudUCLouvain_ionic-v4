@@ -1,5 +1,12 @@
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppVersion } from '@ionic-native/app-version/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { ModalController } from '@ionic/angular';
+import { TranslateModule } from '@ngx-translate/core';
 
+import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/mocks-ionic';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -22,13 +29,34 @@ import { async, TestBed } from '@angular/core/testing';
 */
 import { CreditPage } from './credit';
 
-describe('MyApp Component', () => {
+describe('Credit Component', () => {
     let fixture;
     let component;
 
     beforeEach(async(() => {
+        TestBed.configureTestingModule({
+            declarations: [CreditPage],
+            schemas: [CUSTOM_ELEMENTS_SCHEMA],
+            imports: [
+                TranslateModule.forRoot(),
+                RouterTestingModule,
+            ],
+            providers: [
+                { provide: ModalController, useClass: ModalControllerMock },
+                { provide: InAppBrowser, useClass: InAppBrowserMock },
+                AppVersion,
+            ]
+        }).compileComponents();
     }));
 
     beforeEach(() => {
+        fixture = TestBed.createComponent(CreditPage);
+        component = fixture.componentInstance;
+        fixture.detectChanges();
+    });
+
+    it('should be created', () => {
+        expect(component).toBeTruthy();
+        expect(component instanceof CreditPage).toBe(true);
     });
 });

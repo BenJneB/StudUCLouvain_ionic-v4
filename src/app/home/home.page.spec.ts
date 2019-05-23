@@ -41,7 +41,7 @@ import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InAppBrowserMock } from '../../../test-config/mocks-ionic';
+import { CalendarMock, InAppBrowserMock } from '../../../test-config/mocks-ionic';
 import { HomePage } from './home.page';
 
 describe('Home Component', () => {
@@ -73,7 +73,7 @@ describe('Home Component', () => {
                 },
                 { provide: Network, useClass: NetworkMock },
                 Diagnostic,
-                Calendar
+                { provide: Calendar, useClass: CalendarMock },
             ]
         }).compileComponents();
     }));

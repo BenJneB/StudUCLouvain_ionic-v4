@@ -39,7 +39,7 @@ import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { DeviceMock, InAppBrowserMock } from '../../test-config/mocks-ionic';
+import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/mocks-ionic';
 import { AppComponent } from './app.component';
 
 describe('MyApp Component', () => {
@@ -70,7 +70,7 @@ describe('MyApp Component', () => {
         { provide: Toast, useClass: ToastMock },
         { provide: Network, useClass: NetworkMock },
         Diagnostic,
-        Calendar
+        { provide: Calendar, useClass: CalendarMock },
       ]
     }).compileComponents();
   }));
@@ -83,7 +83,7 @@ describe('MyApp Component', () => {
 
   it('should be created', () => {
     expect(component).toBeTruthy();
-    expect(component instanceof AppComponent).toBe(true);
+    expect(component instanceof AppComponent).toBeTruthy();
   });
 
 });
