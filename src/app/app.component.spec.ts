@@ -72,15 +72,17 @@ describe('MyApp Component', () => {
         Diagnostic,
         Calendar
       ]
-    });
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should be created', () => {
+    expect(component).toBeTruthy();
     expect(component instanceof AppComponent).toBe(true);
   });
 

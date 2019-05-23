@@ -75,16 +75,28 @@ describe('MyApp Component', () => {
                 Diagnostic,
                 Calendar
             ]
-        });
+        }).compileComponents();
     }));
 
     beforeEach(() => {
         fixture = TestBed.createComponent(HomePage);
         component = fixture.componentInstance;
+        fixture.detectChanges();
     });
 
     it('should be created', () => {
+        expect(component).toBeTruthy();
         expect(component instanceof HomePage).toBe(true);
+    });
+
+    it('should initialize component variables', () => {
+        TestBed.compileComponents().then(() => {
+            expect(component.libraryPage).toEqual({
+                title: 'MENU.LIBRARY', component: '/libraries',
+                iosSchemaName: null, androidPackageName: null,
+                appUrl: null, httpUrl: null
+            });
+        });
     });
 
 });
