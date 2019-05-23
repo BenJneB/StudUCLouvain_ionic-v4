@@ -114,4 +114,31 @@ describe('MyApp Component', () => {
         });
     });
 
+    describe('changePage method', () => {
+
+        beforeEach(() => {
+        });
+
+        it('should call launchExternalApp of UtilsService if external application', () => {
+            const spyLaunch = spyOn(component.utilsServices, 'launchExternalApp').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.changePage({ iosSchemaName: 'name' });
+                    expect(spyLaunch.calls.count()).toEqual(1);
+                    // expect(spyFinally.calls.first().args[0]).toEqual(null);
+                });
+        });
+
+        it('should call navigateForward of NavController otherwhise', () => {
+            const spyNavigate = spyOn(component.nav, 'navigateForward').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.changePage({ iosSchemaName: null, component: [] });
+                    expect(spyNavigate.calls.count()).toEqual(1);
+                    // expect(spyFinally.calls.first().args[0]).toEqual(null);
+                });
+        });
+    });
 });
