@@ -7,7 +7,7 @@ import {
 
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-/**
+/*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -93,6 +93,21 @@ describe('MyApp Component', () => {
         TestBed.compileComponents().then(() => {
             expect(component.libraryPage).toEqual({
                 title: 'MENU.LIBRARY', component: '/libraries',
+                iosSchemaName: null, androidPackageName: null,
+                appUrl: null, httpUrl: null
+            });
+            expect(component.newsPage).toEqual({
+                title: 'MENU.NEWS', component: '/news',
+                iosSchemaName: null, androidPackageName: null,
+                appUrl: null, httpUrl: null
+            });
+            expect(component.eventPage).toEqual({
+                title: 'MENU.EVENTS', component: '/events',
+                iosSchemaName: null, androidPackageName: null,
+                appUrl: null, httpUrl: null
+            });
+            expect(component.sportPage).toEqual({
+                title: 'MENU.SPORTS', component: '/sports',
                 iosSchemaName: null, androidPackageName: null,
                 appUrl: null, httpUrl: null
             });
