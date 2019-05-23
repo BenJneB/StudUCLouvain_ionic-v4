@@ -44,7 +44,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { InAppBrowserMock } from '../../../test-config/mocks-ionic';
 import { HomePage } from './home.page';
 
-describe('MyApp Component', () => {
+describe('Home Component', () => {
     let fixture;
     let component;
 
