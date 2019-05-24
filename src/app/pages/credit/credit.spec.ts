@@ -1,3 +1,5 @@
+import { testInstanceCreation } from 'src/app/app.component.spec';
+
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -56,7 +58,6 @@ describe('Credit Component', () => {
     });
 
     it('should be created', () => {
-        expect(component).toBeTruthy();
-        expect(component instanceof CreditPage).toBe(true);
+        testInstanceCreation(component, CreditPage);
     });
 });

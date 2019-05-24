@@ -82,8 +82,13 @@ describe('MyApp Component', () => {
   });
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
-    expect(component instanceof AppComponent).toBeTruthy();
+    testInstanceCreation(component, AppComponent);
   });
 
 });
+
+export function testInstanceCreation(component: any, typeComp: any) {
+  expect(component).toBeTruthy();
+  expect(component instanceof typeComp).toBeTruthy();
+}
+

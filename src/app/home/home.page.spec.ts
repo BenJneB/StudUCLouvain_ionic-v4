@@ -42,6 +42,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CalendarMock, InAppBrowserMock } from '../../../test-config/mocks-ionic';
+import { testInstanceCreation } from '../app.component.spec';
 import { HomePage } from './home.page';
 
 describe('Home Component', () => {
@@ -85,8 +86,7 @@ describe('Home Component', () => {
     });
 
     it('should be created', () => {
-        expect(component).toBeTruthy();
-        expect(component instanceof HomePage).toBe(true);
+        testInstanceCreation(component, HomePage);
     });
 
     it('should initialize component variables', () => {
