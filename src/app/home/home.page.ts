@@ -21,13 +21,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { AlertController, IonContent, LoadingController, NavController } from '@ionic/angular';
+import { AlertController, IonContent, NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { AppComponent } from '../app.component';
 import { UserService } from '../services/utils-services/user-service';
 import { UtilsService } from '../services/utils-services/utils-services';
-import { StudentService } from '../services/wso2-services/student-service';
 
 @Component({
   selector: 'app-home',
@@ -42,7 +40,6 @@ export class HomePage {
   title = 'Stud.UCLouvain';
   shownGroup = null;
   where = '';
-  myApp: AppComponent;
 
   /*Create an object Page for each feature of our application display in the home page*/
 
@@ -121,8 +118,6 @@ export class HomePage {
     private iab: InAppBrowser,
     private alertCtrl: AlertController,
     private translateService: TranslateService,
-    public loadingCtrl: LoadingController,
-    public studentService: StudentService,
     public splashscreen: SplashScreen,
     private utilsServices: UtilsService
   ) {

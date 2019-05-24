@@ -22,9 +22,7 @@ import { CacheService } from 'ionic-cache';
 */
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import {
-    AlertController, IonItemSliding, IonList, ModalController, NavController, ToastController
-} from '@ionic/angular';
+import { IonItemSliding, IonList, ModalController, NavController } from '@ionic/angular';
 import { OverlayEventDetail } from '@ionic/core';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -33,7 +31,6 @@ import { EventsFilterPage } from '../../pages/events/events-filter/events-filter
 import { EventsService } from '../../services/rss-services/events-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
-import { UserService } from '../../services/utils-services/user-service';
 import { EVENT_TEXTS, UtilsService } from '../../services/utils-services/utils-services';
 
 @Component({
@@ -72,12 +69,9 @@ export class EventsPage {
     'DEL': 'DELETE',
   };
   constructor(
-    public alertCtrl: AlertController,
     private navCtrl: NavController,
     public modalCtrl: ModalController,
     private eventsService: EventsService,
-    public user: UserService,
-    public toastCtrl: ToastController,
     public connService: ConnectivityService,
     private translateService: TranslateService,
     private cache: CacheService,
@@ -121,7 +115,7 @@ export class EventsPage {
     const key = 'cache-event';
     await this.cache.getItem(key)
       .then((data) => {
-        this.loader.present('Please wait...');
+        this.loader.present('Please wait...').then();
         this.events = data.items;
         this.events.forEach(function (element) {
           element.startDate = new Date(element.startDate);
@@ -144,7 +138,7 @@ export class EventsPage {
     this.eventsList && this.eventsList.closeSlidingItems();
     // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
     if (this.connService.isOnline()) {
-      this.loader.present('Please wait...');
+      this.loader.present('Please wait...').then();
       this.eventsService.getEvents(this.segment).then(
         res => {
           const result: any = res;
