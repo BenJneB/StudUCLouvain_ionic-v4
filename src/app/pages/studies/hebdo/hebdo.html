@@ -47,7 +47,7 @@
           <p text-center *ngIf="course.entitycode"> {{'COURSE.AUDIT' | translate}} : {{course.entitycode}}</p>
           <p text-center *ngIf="course.enseignants"> {{'COURSE.TEACHER' | translate}} : {{course.enseignants}}</p>
         </ion-item>
-        <ion-item-options side="right">
+        <ion-item-options side="end">
           <ion-button (click)="addToCalendar(slidingItem, course)">
             <ion-icon name="calendar"></ion-icon>
             {{'COURSE.CALENDAR' | translate}}

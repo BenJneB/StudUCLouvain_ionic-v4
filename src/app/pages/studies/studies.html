@@ -118,7 +118,7 @@
       <!--<ion-button full (click)="openWeekPage()">{{'STUDY.WEEK' | translate}}</ion-button>-->
       <h4 text-center *ngIf="prog">{{prog}}</h4>
       <p text-center> {{'STUDY.STATUS' | translate}} : {{statusInsc}}</p>
-      <ion-button full (click)="openExamPage()" color="uclouvain">{{'STUDY.EXAM' | translate}}</ion-button>
+      <ion-button expand="full" (click)="openExamPage()" color="uclouvain">{{'STUDY.EXAM' | translate}}</ion-button>
       <ion-list *ngFor="let activity of activities">
         <ion-item-sliding #slidingItem>
           <ion-item>
@@ -146,7 +146,7 @@
   <p>{{'STUDY.SWIPE2' | translate}}</p>
 </ion-footer>
 <ion-footer text-center *ngIf="segment=='cours'">
-  <ion-fab fab fab-bottom horizontal="end" style="margin-bottom:65px;">
+  <ion-fab slot="fixed" fab fab-bottom horizontal="end" style="margin-bottom:65px;">
     <ion-fab-button id="prompt" fab-fixed (click)="showPrompt()">
       <ion-icon name="add"> </ion-icon>
     </ion-fab-button>

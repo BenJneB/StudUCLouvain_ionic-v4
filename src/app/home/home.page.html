@@ -11,29 +11,29 @@
       <ion-radio-group [(ngModel)]="where">
         <ion-item class="other" id="LLN">
           <ion-label>Louvain-la-Neuve</ion-label>
-          <ion-radio value="LLN" checked></ion-radio>
+          <ion-radio slot="start" value="LLN" checked></ion-radio>
         </ion-item>
         <ion-item class="other">
           <ion-label>Woluwe</ion-label>
-          <ion-radio value="Woluwe"></ion-radio>
+          <ion-radio slot="start" value="Woluwe"></ion-radio>
         </ion-item>
         <ion-item class="other">
           <ion-label>Mons</ion-label>
-          <ion-radio value="Mons"></ion-radio>
+          <ion-radio slot="start" value="Mons"></ion-radio>
         </ion-item>
         <ion-item class="other">
           <ion-label>Tournai</ion-label>
-          <ion-radio value="Tournai" disabled></ion-radio>
+          <ion-radio slot="start" value="Tournai" disabled></ion-radio>
         </ion-item>
         <ion-item class="other">
           <ion-label>St-Gilles</ion-label>
-          <ion-radio value="StGilles" disabled></ion-radio>
+          <ion-radio slot="start" value="StGilles" disabled></ion-radio>
         </ion-item>
       </ion-radio-group>
     </ion-list>
     <ion-row center>
       <ion-col text-center>
-        <ion-button round (click)="updateCampus()" id="okbutton">{{'HOME.OK' | translate}}</ion-button>
+        <ion-button shape="round" (click)="updateCampus()" id="okbutton">{{'HOME.OK' | translate}}</ion-button>
       </ion-col>
     </ion-row>
   </ng-container>
@@ -214,7 +214,7 @@
   </ng-container>
 </ion-content>
 
-<ion-fab vertical="bottom" horizontal="start" #fab *ngIf="(userS.hasCampus() === true)">
+<ion-fab slot="fixed" vertical="bottom" horizontal="start" #fab *ngIf="(userS.hasCampus() === true)">
   <ion-fab-button mini>
     <ion-icon name="arrow-dropup"></ion-icon>
   </ion-fab-button>

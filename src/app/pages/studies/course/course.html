@@ -66,7 +66,7 @@
         <p> {{activity.name}} </p>
       </ion-item>
 
-      <ion-item-options side="right">
+      <ion-item-options side="end">
         <ion-button (click)="addToCalendar(slidingItem, activity)">
           <ion-icon name="calendar"></ion-icon>
           {{'COURSE.CALENDAR' | translate}}
@@ -80,16 +80,16 @@
     {{'COURSE.NO' | translate}}
   </ion-list-header>
 
-  <ion-fab right bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
+  <ion-fab slot="fixed" right vertical="bottom" *ngIf="segment === 'Cours magistral' || segment === 'TD'">
     <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
-    <ion-button ion-fab (click)="showPrompt(segment)">
+    <ion-fab-button (click)="showPrompt(segment)">
       <ion-icon name="cut"> </ion-icon>
-    </ion-button>
+    </ion-fab-button>
   </ion-fab>
-  <ion-fab left bottom *ngIf="segment === 'Cours magistral' || segment === 'TD'">
+  <ion-fab slot="fixed" left vertical="bottom" *ngIf="segment === 'Cours magistral' || segment === 'TD'">
     <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
-    <ion-button ion-fab (click)="addCourseToCalendar()">
+    <ion-fab-button (click)="addCourseToCalendar()">
       <ion-icon name="calendar"> </ion-icon>
-    </ion-button>
+    </ion-fab-button>
   </ion-fab>
 </ion-content>

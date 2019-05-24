@@ -75,14 +75,14 @@
         <ion-item-divider><strong>{{sector.name}}</strong></ion-item-divider>
         <ion-item *ngFor="let facs of sector.facs">
           <ion-label>{{facs.acro}} : {{facs.name}}</ion-label>
-          <ion-radio (click)="updateFac(facs.acro)"></ion-radio>
+          <ion-radio slot="start" (click)="updateFac(facs.acro)"></ion-radio>
         </ion-item>
       </ion-item-group>
     </ion-list>
 
     <!--------------------------------------- ACTUALITES VALVES ? ---------------------------------->
     <ion-item *ngIf="facsegment==='valve'" no-lines>
-      <ion-button center clear small icon-left text-center
+      <ion-button center fill="clear" size="small" slot="start" text-center
         (click)="openURL('https://sites.uclouvain.be/sgsi-apps/shib-mesvalves/prod/')">
         <ion-icon name='share-alt'></ion-icon>
         {{'NEWS.MESVALVES' | translate}}
@@ -98,7 +98,7 @@
           <h2 *ngIf="facsegment === 'news'"><strong>Faculté : {{userS.fac}}</strong></h2>
         </ion-col>
       </ion-row>
-      <ion-button center clear small icon-left (click)="openURL(site)" *ngIf="site.length > 0 && facsegment ==='news'">
+      <ion-button center fill="clear" size="small" slot="start" (click)="openURL(site)" *ngIf="site.length > 0 && facsegment ==='news'">
         <ion-icon name='share-alt'></ion-icon>
         {{'NEWS.WEB' | translate}}
       </ion-button>
@@ -131,7 +131,7 @@
 </ion-content>
 
 <!----------------- BUTTON TO CHANGE FAC ------------------------->
-<ion-fab vertical="bottom" horizontal="end" *ngIf="segment==='fac' && facsegment === 'news' && userS.hasFac()">
+<ion-fab slot="fixed" vertical="bottom" horizontal="end" *ngIf="segment==='fac' && facsegment === 'news' && userS.hasFac()">
   <ion-fab-button (click)="removeFac(fac)">
     <ion-icon name="swap"></ion-icon>
   </ion-fab-button>
