@@ -49,6 +49,7 @@
     <ion-label *ngIf="dateRange == 1" center>
       {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS4' | translate}}
     </ion-label>
+    <ion-label *ngIf="dateRange < 1"></ion-label>
     <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
     </ion-range>
   </ion-item>
@@ -67,7 +68,9 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-list>
-    <ion-list-header>{{'EVENTS.CATEGORIES' | translate}}</ion-list-header>
+    <ion-list-header>
+      <ion-label>{{'EVENTS.CATEGORIES' | translate}}</ion-label>
+    </ion-list-header>
     <ion-item *ngFor="let category of categories">
       <ion-thumbnail item-left>
         <img [src]="category.iconCategory">

@@ -92,7 +92,7 @@ export class SportsPage {
       this.loadSports(this.segment);
       this.loadSports('team');
       this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
-      this.loader.present('Please wait..');
+      this.loader.present('Please wait..').then();
     } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
