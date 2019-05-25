@@ -11,7 +11,7 @@ import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
-import { AlertController, IonItemSliding, ToastController } from '@ionic/angular';
+import { AlertController, IonItemSliding } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ConnectivityService } from './connectivity-service';
@@ -30,7 +30,6 @@ export const EVENT_TEXTS = {
 })
 export class UtilsService {
   constructor(
-    public toastCtrl: ToastController,
     public user: UserService,
     private translateService: TranslateService,
     public alertCtrl: AlertController,

@@ -62,7 +62,6 @@ export class Wso2Service {
   }
 
   getAppToken() {
-    console.log('APP T !!!!');
     const body = new HttpParams().set('grant_type', 'client_credentials');
     return this.getToken(body);
   }

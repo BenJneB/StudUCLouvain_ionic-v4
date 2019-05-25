@@ -52,7 +52,7 @@ export class LibraryDetailsPage {
     private router: Router,
     public libService: LibrariesService,
     public connService: ConnectivityService,
-    private utilsServices: UtilsService
+    public utilsServices: UtilsService
   ) {
     this.route.queryParams.subscribe(() => {
       if (this.router.getCurrentNavigation().extras.state) {

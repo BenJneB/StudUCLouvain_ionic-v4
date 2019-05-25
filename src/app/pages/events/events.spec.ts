@@ -20,9 +20,9 @@ import { async, TestBed } from '@angular/core/testing';
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { GuindaillePage } from './guindaille2-0';
+import { EventsPage } from './events';
 
-describe('Guindaille Component', () => {
+describe('MyApp Component', () => {
     let fixture;
     let component;
 

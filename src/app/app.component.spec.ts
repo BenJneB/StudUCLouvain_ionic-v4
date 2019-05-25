@@ -1,3 +1,9 @@
+import { CacheService } from 'ionic-cache';
+import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import {
+    AppAvailabilityMock, MarketMock, MockCacheStorageService, NetworkMock, StatusBarMock, ToastMock
+} from 'test-config/mocks-ionic';
+
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,30 +25,22 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { async, TestBed } from '@angular/core/testing';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { Device } from '@ionic-native/device';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Market } from '@ionic-native/market';
-import { SplashScreen } from '@ionic-native/splash-screen';
-import { StatusBar } from '@ionic-native/status-bar';
-import {
-    AlertController, IonicModule, LoadingController, MenuController, Platform
-} from '@ionic/angular';
-import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { Calendar } from '@ionic-native/calendar/ngx';
+import { Device } from '@ionic-native/device/ngx';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
+import { Market } from '@ionic-native/market/ngx';
+import { Network } from '@ionic-native/network/ngx';
+import { StatusBar } from '@ionic-native/status-bar/ngx';
+import { Toast } from '@ionic-native/toast/ngx';
+import { IonicModule } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage';
+import { TranslateModule } from '@ngx-translate/core';
 
-/*import { TranslateHttpLoader } from '@ngx-translate/http-loader';
-import { AppAvailability } from '@ionic-native/app-availability';
-import { InAppBrowser } from '@ionic-native/in-app-browser';
-import { Device } from '@ionic-native/device';
-import { IonicStorageModule  } from '@ionic/storage';*/
-// import { UserService } from '../providers/utils-services/user-service';
+import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/mocks-ionic';
 import { AppComponent } from './app.component';
-import { UserService } from './services/utils-services/user-service';
-import { Wso2Service } from './services/wso2-services/wso2-service';
-
-/*export function HttpLoaderFactory(http: Http) {
-    return new TranslateHttpLoader(http, './assets/i18n/', '.json');
-}*/
 
 describe('MyApp Component', () => {
   let fixture;
@@ -53,39 +51,39 @@ describe('MyApp Component', () => {
       declarations: [AppComponent],
       imports: [
         IonicModule.forRoot(),
-        TranslateModule.forRoot()
-        /*TranslateModule.forRoot({
-                    loader: {
-                        provide: TranslateLoader,
-                        useFactory: HttpLoaderFactory,
-                        deps: [Http]
-                    }
-                }),
+        TranslateModule.forRoot(),
         IonicStorageModule.forRoot(),
-       */
+        RouterTestingModule,
       ],
       providers: [
-        AlertController,
-        LoadingController,
-        Market,
-        AppAvailability,
-        InAppBrowser,
-        Device,
-        /*AppAvailability,
-        InAppBrowser,
-        Device,
-        UserService*/
+        { provide: Market, useClass: MarketMock },
+        { provide: AppAvailability, useClass: AppAvailabilityMock },
+        { provide: InAppBrowser, useClass: InAppBrowserMock },
+        { provide: Device, useClass: DeviceMock },
+        { provide: StatusBar, useClass: StatusBarMock },
+        CacheService,
+        {
+          provide: CacheStorageService, useFactory: () => {
+            return new MockCacheStorageService(null, null);
+          }
+        },
+        { provide: Toast, useClass: ToastMock },
+        { provide: Network, useClass: NetworkMock },
+        Diagnostic,
+        { provide: Calendar, useClass: CalendarMock },
       ]
-    });
+    }).compileComponents();
   }));
 
   beforeEach(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
+    fixture.detectChanges();
   });
 
   it('should be created', () => {
-    expect(component instanceof AppComponent).toBe(true);
+    expect(component).toBeTruthy();
+    expect(component instanceof AppComponent).toBeTruthy();
   });
 
 });

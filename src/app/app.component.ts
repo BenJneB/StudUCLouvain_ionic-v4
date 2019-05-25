@@ -37,7 +37,6 @@ import { TranslateService } from '@ngx-translate/core';
 import { Page } from './entity/page';
 import { UserService } from './services/utils-services/user-service';
 import { UtilsService } from './services/utils-services/utils-services';
-import { Wso2Service } from './services/wso2-services/wso2-service';
 
 @Component({
   selector: 'app-root',
@@ -73,7 +72,6 @@ export class AppComponent {
     private actionSheetCtrl: ActionSheetController,
     public translateService: TranslateService,
     public loadingCtrl: LoadingController,
-    private wso2Service: Wso2Service,
     public cache: CacheService,
     private router: Router,
     private toast: Toast,

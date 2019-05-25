@@ -55,12 +55,6 @@ export class MapService {
     private platform: Platform,
     public menuCtrl: MenuController,
     public userS: UserService) {
-    console.log('test yolo');
-    console.log('yolo');
-    // Check the platform used
-    // this.onDevice = this.platform.is('cordova');
-    console.log('yolo2');
-
     this.apiKey = jsApiKey;
   }
   loadMap() {
