@@ -135,7 +135,7 @@ export class EventsPage {
   /*Load the list of events to display*/
   public loadEvents(key?) {
     this.searching = true;
-    this.eventsList && this.eventsList.closeSlidingItems();
+    this.eventsList.closeSlidingItems();
     // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
     if (this.connService.isOnline()) {
       this.loader.present('Please wait...').then();
