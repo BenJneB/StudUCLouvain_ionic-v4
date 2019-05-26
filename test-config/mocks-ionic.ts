@@ -122,6 +122,25 @@ export class MockCacheStorageService {
     }
 }
 
+export class StorageMock {
+    public saveItem() {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
+
+    public getItem() {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
+
+    public removeItem() {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
+}
 export class ToastMock extends Toast {
 
     show(message: string, duration: string, position: string): Observable<any> {

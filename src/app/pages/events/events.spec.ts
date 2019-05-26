@@ -1,5 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { EventItem } from 'src/app/entity/eventItem';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -19,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    MockCacheStorageService, ModalControllerMock, NetworkMock
+    MockCacheStorageService, ModalControllerMock, NetworkMock, StorageMock
 } from '../../../../test-config/mocks-ionic';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -85,7 +86,7 @@ describe('Events Component', () => {
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 // AppVersion,
                 //     { provide: SplashScreen, useClass: SplashScreenMock },
-                CacheService,
+                { provide: CacheService, useClass: StorageMock },
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
@@ -107,5 +108,36 @@ describe('Events Component', () => {
     it('should be created', () => {
         expect(component).toBeTruthy();
         expect(component instanceof EventsPage).toBeTruthy();
+    });
+
+    describe('goToEventDetail method', () => {
+        it('should call goToDetail of UtilsService', () => {
+            const spyGoDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            const spySaveItem = spyOn(component.cache, 'saveItem').and.callThrough();
+            const spyGetItem = spyOn(component.cache, 'getItem').and.callThrough();
+            const eventItem = new EventItem(
+                'description',
+                'link',
+                'title',
+                'image',
+                'trimmedD',
+                'location',
+                false,
+                false,
+                'guid',
+                (d => new Date(d.setDate(d.getDate() - 1)))(new Date),
+                (d => new Date(d.setDate(d.getDate() + 1)))(new Date),
+                'cat',
+                'iconCat'
+            );
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.goToEventDetail(eventItem);
+                    expect(spyGoDetail.calls.count()).toEqual(1);
+                    expect(spyGoDetail.calls.first().args[0]).toEqual(eventItem);
+                    expect(spyGoDetail.calls.first().args[1]).toEqual('events/details');
+                });
+        });
     });
 });
