@@ -46,7 +46,7 @@ import { EventsPage } from './events';
 describe('Events Component', () => {
     let fixture;
     let component;
-
+    const dateLimit = '2018-01-26';
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [EventsPage],
