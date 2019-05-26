@@ -177,9 +177,21 @@ describe('Home Component', () => {
             TestBed
                 .compileComponents()
                 .then(() => {
-                    component.openURL('url');
+                    component.openUCL('url');
                     expect(spyCreate.calls.count()).toEqual(1);
                     expect(spyCreate.calls.first().args[0]).toEqual('url');
+                });
+        });
+    });
+
+    describe('ionViewDidEnter method', () => {
+        it('should call setTimeout of NodeJS', () => {
+            const spySetTimeout = spyOn(window, 'setTimeout').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.ionViewDidEnter();
+                    expect(spySetTimeout.calls.count()).toEqual(1);
                 });
         });
     });
