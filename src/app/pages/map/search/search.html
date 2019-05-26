@@ -20,35 +20,35 @@
 -->
 <ion-header>
   <ion-toolbar>
-      <ion-searchbar (ionChange)="search($event)" placeholder="search"></ion-searchbar>
-      <ion-buttons slot="end">
-        <ion-button fill="clear" icon-only (click)="close()">
-            <ion-icon item-right name="close"></ion-icon>
-        </ion-button>
+    <ion-searchbar (ionChange)="search($event)" placeholder="search"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button fill="clear" icon-only (click)="close()">
+        <ion-icon item-right name="close"></ion-icon>
+      </ion-button>
     </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
 <ion-segment (ionChange)="segmentChanged($event)" disabled value="halls">
-    <ion-segment-button value="halls" checked>
-      <ion-label>Halls</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="rainy">
-      <ion-label>...</ion-label>
-    </ion-segment-button>
+  <ion-segment-button value="halls" checked>
+    <ion-label>Halls</ion-label>
+  </ion-segment-button>
+  <ion-segment-button value="rainy">
+    <ion-label>...</ion-label>
+  </ion-segment-button>
 </ion-segment>
 
 <ion-content>
-    <ion-list>
-        <ion-item *ngFor="let item of displayItems" (click)="select(item)">
-            <span padding *ngIf="item.id">
-              <div class="info">
-                  <ion-label class="id">{{item.id}}</ion-label>
-                  <ion-label class="name">{{item.name}}</ion-label>
-                  <ion-note class="address">{{item.address}}</ion-note>
-              </div>
-              <ion-img class="miniature" [src]="getImgSource(item.id)"></ion-img>
-            </span>
-        </ion-item>
-    </ion-list>
+  <ion-list>
+    <ion-item *ngFor="let item of displayItems" (click)="select(item)">
+      <span padding *ngIf="item.id">
+        <div class="info">
+          <ion-label class="id">{{item.id}}</ion-label>
+          <ion-label class="name">{{item.name}}</ion-label>
+          <ion-note class="address">{{item.address}}</ion-note>
+        </div>
+        <ion-img class="miniature" [src]="getImgSource(item.id)"></ion-img>
+      </span>
+    </ion-item>
+  </ion-list>
 </ion-content>

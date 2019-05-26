@@ -179,7 +179,7 @@ ion-tab-button {
   background-color: rgb(0, 33, 78);
 }
 
-.ion-page{
+.ion-page {
   background-color: white !important;
 }
 
@@ -188,23 +188,25 @@ ion-tab-button {
   color: white !important;
 }
 
-.menu-title{
+.menu-title {
   display: inline-block;
 }
-.menu-title.ios.title-ios{
+
+.menu-title.ios.title-ios {
   padding: 0 !important;
   line-height: 3.5;
 }
 
-.search-modal{
+.search-modal {
 
-  ion-item span{
+  ion-item span {
     width: 100%;
   }
-  
-  ion-segment-button{
+
+  ion-segment-button {
     color: white !important;
   }
+
   .name {
     overflow: hidden;
     text-overflow: ellipsis;
@@ -252,14 +254,14 @@ ion-tab-button {
   .toolbar ion-searchbar .searchbar-input {
     background: rgba(255, 255, 255, 1);
   }
-  
+
 }
 
 .leaflet-popup-content-wrapper {
   border-radius: 0 !important;
 }
 
-.leaflet-popup-content-wrapper{
+.leaflet-popup-content-wrapper {
   background: linear-gradient(#4aaa9d 50px, white 50px) !important;
 }
 

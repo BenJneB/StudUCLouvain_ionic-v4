@@ -1,3 +1,5 @@
+import { featureGroup, icon, latLng, Layer, Map, marker, tileLayer } from 'leaflet';
+
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -21,7 +23,6 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionSheetController, ModalController, NavController, Platform } from '@ionic/angular';
 
-import { Map, icon, latLng, tileLayer, Layer, marker, featureGroup } from 'leaflet';
 import { POIService } from '../../services/map-services/poi-service';
 import { SearchModal } from './search/search';
 
@@ -56,7 +57,7 @@ export class MapPage {
       this.loadmap();
       this.poilocations.loadResources().then(results => {
         this.zones = results;
-      })
+      });
     });
   }
 
@@ -75,34 +76,34 @@ export class MapPage {
       componentProps: {},
       cssClass: 'search-modal'
     });
-    modal.onDidDismiss().then(data =>{
+    modal.onDidDismiss().then(data => {
       const item = data.data;
       this.showBuilding(item);
     });
     await modal.present();
   }
 
-  showUserPosition(){
-    this.userPosition = marker([50.668867, 4.610416], {icon: this.userIcon}).addTo(this.map);
+  showUserPosition() {
+    this.userPosition = marker([50.668867, 4.610416], { icon: this.userIcon }).addTo(this.map);
   }
 
-  showBuilding(item){
-    //update or create building marker
-    if(this.building){
+  showBuilding(item) {
+    // update or create building marker
+    if (this.building) {
       this.building.setLatLng([item.pos.lat, item.pos.lng]).bindPopup(this.generatePopupContent(item)).openPopup();
     } else {
       this.building = marker([item.pos.lat, item.pos.lng]).addTo(this.map).bindPopup(this.generatePopupContent(item)).openPopup();
-      this.building._icon.style.filter = "hue-rotate(300deg)";
+      this.building._icon.style.filter = 'hue-rotate(300deg)';
     }
     this.fitMap();
   }
 
-  fitMap(){
-    this.map.fitBounds(featureGroup([this.userPosition, this.building, this.building.popup]).getBounds(), {padding: [50, 50]});
+  fitMap() {
+    this.map.fitBounds(featureGroup([this.userPosition, this.building, this.building.popup]).getBounds(), { padding: [50, 50] });
   }
 
-  generatePopupContent(item){
-      return `<div>
+  generatePopupContent(item) {
+    return `<div>
                 <p class="popup-title">${item.id}</p>
                 <p style="width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.name}</p>
                 <img style="width:150px; height: auto;" src="${item.img}">
