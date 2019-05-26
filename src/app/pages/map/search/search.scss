@@ -1,0 +1,58 @@
+search-modal{
+
+  span{
+    width: 100%;
+  }
+  
+  ion-segment-button{
+    color: white !important;
+  }
+  .name {
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .id {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-weight: bold;
+  }
+
+  .miniature {
+    float: right;
+    object-fit: scale-down;
+    /* Do not scale the image */
+    object-position: center;
+    /* Center the image within the element */
+    height: 60px;
+    width: 80px
+  }
+
+  .info {
+    float: left;
+    width: 140px;
+  }
+
+  .streetInfo {
+    float: left;
+  }
+
+  #search .toolbar-content {
+    min-width: 90%;
+  }
+
+  .segment-button {
+    border-color: lightgray;
+    opacity: 0.75;
+  }
+
+  .segment-button.activated,
+  .segment-button.segment-activated {
+    border-color: white;
+  }
+
+  .toolbar ion-searchbar .searchbar-input {
+    background: rgba(255, 255, 255, 1);
+  }
+
+}

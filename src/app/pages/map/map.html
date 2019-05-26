@@ -26,6 +26,11 @@
       <img src="./assets/img/s.png" height="28" />
     </ion-buttons>
     <ion-title horizontal="center">{{title | translate}}</ion-title>
+    <ion-buttons slot="end">
+      <ion-button (click)="showSearch()" color="light">
+        <ion-icon slot="icon-only" name="search"></ion-icon>
+      </ion-button>
+  </ion-buttons>
   </ion-toolbar>
 </ion-header>
 
@@ -34,7 +39,7 @@
   <div id="map" style="width:100%; height:100%;"></div>
 </ion-content>
 
-<ion-card *ngFor="let zone of zones" overflow-scroll=false>
+<!-- <ion-card *ngFor="let zone of zones" overflow-scroll=false>
 
   <ion-item-divider (click)="toggleDetails(zone.auditoires)">
     {{'MAP.AUDIT' | translate}}
@@ -125,4 +130,4 @@
     <ion-toggle [(ngModel)]="zone.parkings.listChecked[i]" color="secondary"
       (ionChange)="toggleLocation(parking, zone.parkings.listChecked, i)"></ion-toggle>
   </ion-item>
-</ion-card>
+</ion-card> -->

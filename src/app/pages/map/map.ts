@@ -21,8 +21,9 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionSheetController, ModalController, NavController, Platform } from '@ionic/angular';
 
-import { Map, latLng, tileLayer, Layer, marker } from 'leaflet';
+import { Map, icon, latLng, tileLayer, Layer, marker, featureGroup } from 'leaflet';
 import { POIService } from '../../services/map-services/poi-service';
+import { SearchModal } from './search/search';
 
 @Component({
   selector: 'page-map',
@@ -33,6 +34,9 @@ export class MapPage {
   title: any;
   map: Map;
   zones: any;
+  userPosition: marker;
+  userIcon: icon;
+  building: marker;
 
   constructor(public navCtrl: NavController,
     public modalCtrl: ModalController,
@@ -40,9 +44,14 @@ export class MapPage {
     public platform: Platform,
     public poilocations: POIService) {
     this.title = 'Carte';
+    this.userIcon = icon({
+      iconUrl: 'assets/img/user-icon.png',
+      iconSize: [60, 60],
+      iconAnchor: [30, 30],
+    });
   }
 
-  ngAfterViewInit() {
+  ionViewDidEnter() {
     this.platform.ready().then(() => {
       this.loadmap();
       this.poilocations.loadResources().then(results => {
@@ -52,12 +61,54 @@ export class MapPage {
   }
 
   loadmap() {
-    setTimeout(() => {
-      this.map = new Map('map').setView([50.668867, 4.610416], 14);
-      tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-        attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-        maxZoom: 18
-      }).addTo(this.map);
-    }, 50);
+    this.map = new Map('map').setView([50.668867, 4.610416], 14);
+    tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 18
+    }).addTo(this.map);
+    this.showUserPosition();
   }
+
+  async showSearch() {
+    const modal = await this.modalCtrl.create({
+      component: SearchModal,
+      componentProps: {},
+      cssClass: 'search-modal'
+    });
+    modal.onDidDismiss().then(data =>{
+      const item = data.data;
+      this.showBuilding(item);
+    });
+    await modal.present();
+  }
+
+  showUserPosition(){
+    this.userPosition = marker([50.668867, 4.610416], {icon: this.userIcon}).addTo(this.map);
+  }
+
+  showBuilding(item){
+    //update or create building marker
+    if(this.building){
+      this.building.setLatLng([item.pos.lat, item.pos.lng]).bindPopup(this.generatePopupContent(item)).openPopup();
+    } else {
+      this.building = marker([item.pos.lat, item.pos.lng]).addTo(this.map).bindPopup(this.generatePopupContent(item)).openPopup();
+      this.building._icon.style.filter = "hue-rotate(300deg)";
+    }
+    this.fitMap();
+  }
+
+  fitMap(){
+    this.map.fitBounds(featureGroup([this.userPosition, this.building, this.building.popup]).getBounds(), {padding: [50, 50]});
+  }
+
+  generatePopupContent(item){
+      return `<div>
+                <p class="popup-title">${item.id}</p>
+                <p style="width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.name}</p>
+                <img style="width:150px; height: auto;" src="${item.img}">
+                <p style="width: 150px; word-wrap: break-word;">${item.address}</p>
+              </div>`;
+  }
+
+
 }
