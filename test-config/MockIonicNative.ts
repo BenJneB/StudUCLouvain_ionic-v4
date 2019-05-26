@@ -114,33 +114,6 @@ export class StatusBarMock extends StatusBar {
     styleDefault(): void { }
 }
 
-export class MockCacheStorageService {
-    constructor(a, b) { }
-
-    public ready() {
-        return true;
-    }
-}
-
-export class StorageMock {
-    public saveItem() {
-        return new Promise((resolve, reject) => {
-
-        });
-    }
-
-    public getItem() {
-        return new Promise((resolve, reject) => {
-
-        });
-    }
-
-    public removeItem() {
-        return new Promise((resolve, reject) => {
-
-        });
-    }
-}
 export class ToastMock extends Toast {
 
     show(message: string, duration: string, position: string): Observable<any> {
@@ -349,46 +322,3 @@ export class AppVersionMock extends AppVersion {
     }
 }
 
-export class MockAlert {
-    public visible: boolean;
-    public header: string;
-    public message: string;
-
-    constructor(props: any) {
-        Object.assign(this, props);
-        this.visible = false;
-    }
-
-    present() {
-        this.visible = true;
-        return Promise.resolve();
-    }
-
-    dismiss() {
-        this.visible = false;
-        return Promise.resolve();
-    }
-
-}
-
-export class MockAlertController {
-
-    public created: MockAlert[];
-
-    constructor() {
-        this.created = [];
-    }
-
-    create(props: any): Promise<any> {
-        const toRet = new MockAlert(props);
-        this.created.push(toRet);
-        return Promise.resolve(toRet);
-    }
-
-    getLast() {
-        if (!this.created.length) {
-            return null;
-        }
-        return this.created[this.created.length - 1];
-    }
-}

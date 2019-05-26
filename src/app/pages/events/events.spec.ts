@@ -19,9 +19,12 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
+    MockCacheStorageService, StorageMock
+} from '../../../../test-config/MockCacheStorageService';
+import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    MockCacheStorageService, ModalControllerMock, NetworkMock, StorageMock
-} from '../../../../test-config/mocks-ionic';
+    ModalControllerMock, NetworkMock
+} from '../../../../test-config/MockIonicNative';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy

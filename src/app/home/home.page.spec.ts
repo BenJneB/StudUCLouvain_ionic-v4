@@ -1,9 +1,9 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 import {
-    AppAvailabilityMock, DeviceMock, MarketMock, MockCacheStorageService, NetworkMock,
-    SplashScreenMock
-} from 'test-config/mocks-ionic';
+    AppAvailabilityMock, DeviceMock, MarketMock, NetworkMock, SplashScreenMock
+} from 'test-config/MockIonicNative';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -41,9 +41,8 @@ import { AlertController, IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import {
-    CalendarMock, InAppBrowserMock, MockAlertController
-} from '../../../test-config/mocks-ionic';
+import { MockAlertController } from '../../../test-config/MockAlert';
+import { CalendarMock, InAppBrowserMock } from '../../../test-config/MockIonicNative';
 import { testInstanceCreation } from '../app.component.spec';
 import { HomePage } from './home.page';
 
@@ -210,7 +209,6 @@ describe('Home Component', () => {
                 .compileComponents()
                 .then(() => {
                     component.emergency();
-                    const mockAlertController = component.alertController as any as MockAlertController;
                     expect(spyCreate.calls.count()).toEqual(1);
                 });
         });
