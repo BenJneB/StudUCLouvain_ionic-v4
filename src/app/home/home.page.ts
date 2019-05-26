@@ -184,7 +184,18 @@ export class HomePage {
     await alert.present();
   }
 
-  private getEmergencyMsg(msg1: any, msg2: any, out: string, msg3: any, msg4: any, msg5: any, msg6: any, msg7: any, msg8: any, msg9: string) {
+  private getEmergencyMsg(
+    msg1: any,
+    msg2: any,
+    out: string,
+    msg3: any,
+    msg4: any,
+    msg5: any,
+    msg6: any,
+    msg7: any,
+    msg8: any,
+    msg9: string
+  ) {
     return '<p> <strong>'
       + msg1
       + '</strong>: <br><font size=\' +1\'><a href=\'tel:010 47 22 22\'>010 47 22 22</a></font> </p> <p><strong>'

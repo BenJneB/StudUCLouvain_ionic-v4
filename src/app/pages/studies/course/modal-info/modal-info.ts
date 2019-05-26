@@ -46,7 +46,6 @@ export class ModalInfoPage {
   }
 
   getInfo(): Promise<any> {
-    let response: any;
     return new Promise(resolve => {
       this.studentService.checkCourse(this.course.acronym, this.year).then(
         (data) => {
@@ -58,19 +57,19 @@ export class ModalInfoPage {
             this.closeModal();
             resolve(400);
           } else {
-            resolve(this.resolveResponse(res, response, resolve));
+            resolve(this.resolveResponse(res, resolve));
           }
         });
     });
   }
 
-  private resolveResponse(res: any, response: any, resolve: (value?: any) => void) {
+  private resolveResponse(res: any, resolve: (value?: any) => void) {
     let cahier = '';
     const { offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, vol, langue } = this.getDatas(res);
     if (res.cahierChargesExiste) {
       cahier = res.cahierChargesMap.entry[1].value;
     }
-    response = {
+    return {
       cahierCharges: cahier,
       offre: offres,
       campus: campus,
@@ -84,7 +83,6 @@ export class ModalInfoPage {
       volume: vol,
       langue: langue
     };
-    return response;
   }
 
   private getDatas(res: any) {
