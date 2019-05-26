@@ -18,6 +18,7 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { displayedEventsDFactory } from '../../../../test-config/factories/displayedEventsDFactory';
 import {
     MockCacheStorageService, StorageMock
 } from '../../../../test-config/MockCacheStorageService';
@@ -52,23 +53,7 @@ describe('Events Component', () => {
     let component;
     const dateLimit = '2018-01-26';
     const year = new Date().getFullYear();
-    const displayedEventsD = [
-        {
-            label: 'label',
-            items: [
-                {
-                    itemCategory: '',
-                    location: '',
-                    trimmedDescription: '',
-                    startDate: dateLimit,
-                    endDate: dateLimit,
-                    title: '',
-                    guid: '',
-                    hidden: false
-                }
-            ]
-        }
-    ];
+    const displayedEventsD = displayedEventsDFactory(dateLimit);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -144,3 +129,4 @@ describe('Events Component', () => {
         });
     });
 });
+
