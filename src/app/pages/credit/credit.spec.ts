@@ -63,8 +63,6 @@ describe('Credit Component', () => {
         }); */
 
     it('should be created', () => {
-        console.log('OYOOOOOOOOOOOOOOOOOO\n');
-        console.log(this);
         testInstanceCreation(component, CreditPage);
     });
 });

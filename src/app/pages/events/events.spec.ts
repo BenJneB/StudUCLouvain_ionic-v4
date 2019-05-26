@@ -104,8 +104,8 @@ describe('Events Component', () => {
         fixture.detectChanges();
     });
 
-    /*     it('should be created', () => {
-            expect(component).toBeTruthy();
-            expect(component instanceof EventsPage).toBeTruthy();
-        }); */
+    it('should be created', () => {
+        expect(component).toBeTruthy();
+        expect(component instanceof EventsPage).toBeTruthy();
+    });
 });
