@@ -47,7 +47,7 @@ describe('Events Component', () => {
     let fixture;
     let component;
     const dateLimit = '2018-01-26';
-    const year = this.now.getFullYear();
+    const year = new Date().getFullYear();
     const displayedEventsD = [
         {
             label: 'label',
