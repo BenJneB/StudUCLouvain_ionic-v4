@@ -58,29 +58,33 @@ export class ModalInfoPage {
             this.closeModal();
             resolve(400);
           } else {
-            let cahier = '';
-            const { offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, vol, langue } = this.getDatas(res);
-            if (res.cahierChargesExiste) {
-              cahier = res.cahierChargesMap.entry[1].value;
-            }
-            response = {
-              cahierCharges: cahier,
-              offre: offres,
-              campus: campus,
-              entite: entite,
-              prof: teacher,
-              localisation: loca,
-              credit: credit,
-              programmeprerequis: progpre,
-              quadri: quadri,
-              resume: resume,
-              volume: vol,
-              langue: langue
-            };
-            resolve(response);
+            resolve(this.resolveResponse(res, response, resolve));
           }
         });
     });
+  }
+
+  private resolveResponse(res: any, response: any, resolve: (value?: any) => void) {
+    let cahier = '';
+    const { offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, vol, langue } = this.getDatas(res);
+    if (res.cahierChargesExiste) {
+      cahier = res.cahierChargesMap.entry[1].value;
+    }
+    response = {
+      cahierCharges: cahier,
+      offre: offres,
+      campus: campus,
+      entite: entite,
+      prof: teacher,
+      localisation: loca,
+      credit: credit,
+      programmeprerequis: progpre,
+      quadri: quadri,
+      resume: resume,
+      volume: vol,
+      langue: langue
+    };
+    return response;
   }
 
   private getDatas(res: any) {
