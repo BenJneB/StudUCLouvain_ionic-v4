@@ -51,18 +51,28 @@ describe('Credit Component', () => {
                 { provide: AppVersion, useClass: AppVersionMock },
             ]
         }).compileComponents();
+    }));
+
+    beforeEach(() => {
         fixture = TestBed.createComponent(CreditPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
-    }));
-
-    /*     beforeEach(() => {
-            fixture = TestBed.createComponent(CreditPage);
-            component = fixture.componentInstance;
-            fixture.detectChanges();
-        }); */
+    });
 
     it('should be created', () => {
         testInstanceCreation(component, CreditPage);
+    });
+
+    describe('openURL method', () => {
+        it('should call create of InAppBrowser', () => {
+            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.openURL('url');
+                    expect(spyCreate.calls.count()).toEqual(1);
+                    expect(spyCreate.calls.first().args[0]).toEqual('url');
+                });
+        });
     });
 });
