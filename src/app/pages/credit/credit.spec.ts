@@ -8,8 +8,10 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ModalController } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/mocks-ionic';
-/*
+import {
+    AppVersionMock, InAppBrowserMock, ModalControllerMock
+} from '../../../../test-config/mocks-ionic';
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -46,18 +48,23 @@ describe('Credit Component', () => {
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
-                AppVersion,
+                { provide: AppVersion, useClass: AppVersionMock },
             ]
         }).compileComponents();
-    }));
-
-    beforeEach(() => {
         fixture = TestBed.createComponent(CreditPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
-    });
+    }));
+
+    /*     beforeEach(() => {
+            fixture = TestBed.createComponent(CreditPage);
+            component = fixture.componentInstance;
+            fixture.detectChanges();
+        }); */
 
     it('should be created', () => {
+        console.log('OYOOOOOOOOOOOOOOOOOO\n');
+        console.log(this);
         testInstanceCreation(component, CreditPage);
     });
 });
