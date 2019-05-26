@@ -170,10 +170,6 @@ describe('Home Component', () => {
     });
 
     describe('openUCL method', () => {
-
-        beforeEach(() => {
-        });
-
         it('should call create of InAppBrowser', () => {
             const spyCreate = spyOn(component.iab, 'create').and.callThrough();
             TestBed
