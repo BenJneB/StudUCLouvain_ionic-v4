@@ -10,7 +10,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import {
     AppVersionMock, InAppBrowserMock, ModalControllerMock
-} from '../../../../test-config/mocks-ionic';
+} from '../../../../test-config/MockIonicNative';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy

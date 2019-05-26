@@ -1,9 +1,9 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 import {
-    AppAvailabilityMock, AppVersionMock, MarketMock, MockCacheStorageService, NetworkMock,
-    StatusBarMock, ToastMock
-} from 'test-config/mocks-ionic';
+    AppAvailabilityMock, AppVersionMock, MarketMock, NetworkMock, StatusBarMock, ToastMock
+} from 'test-config/MockIonicNative';
 
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -41,7 +41,7 @@ import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/mocks-ionic';
+import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
 import { AppComponent } from './app.component';
 
 describe('MyApp Component', () => {

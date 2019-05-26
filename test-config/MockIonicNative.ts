@@ -37,8 +37,7 @@ export class MarketMock extends Market {
 
 export class AppAvailabilityMock extends AppAvailability {
     check(app: string): Promise<boolean> {
-        let response: boolean;
-        return getPromise(response);
+        return getPromise(true);
     }
 }
 
@@ -74,7 +73,12 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
     }
 
     on(event: string): Observable<InAppBrowserEvent> {
-        let response: InAppBrowserEvent;
+        const response = {
+            type: '',
+            url: '',
+            code: 0,
+            message: ''
+        };
         return getObservable(response);
     }
 }
@@ -114,33 +118,6 @@ export class StatusBarMock extends StatusBar {
     styleDefault(): void { }
 }
 
-export class MockCacheStorageService {
-    constructor(a, b) { }
-
-    public ready() {
-        return true;
-    }
-}
-
-export class StorageMock {
-    public saveItem() {
-        return new Promise((resolve, reject) => {
-
-        });
-    }
-
-    public getItem() {
-        return new Promise((resolve, reject) => {
-
-        });
-    }
-
-    public removeItem() {
-        return new Promise((resolve, reject) => {
-
-        });
-    }
-}
 export class ToastMock extends Toast {
 
     show(message: string, duration: string, position: string): Observable<any> {
@@ -271,6 +248,8 @@ export interface CalendarOptions {
 }
 
 export class CalendarMock extends Calendar {
+
+    deleteEvent = this.createEvent;
     hasReadWritePermission(): Promise<boolean> {
         return getPromise(true);
     }
@@ -313,10 +292,6 @@ export class CalendarMock extends Calendar {
     listEventsInRange(startDate: Date, endDate: Date): Promise<any> {
         return getPromise(true);
     }
-
-    deleteEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
-        return getPromise(true);
-    }
 }
 
 export class SplashScreenMock extends SplashScreen {
@@ -348,3 +323,4 @@ export class AppVersionMock extends AppVersion {
         });
     }
 }
+

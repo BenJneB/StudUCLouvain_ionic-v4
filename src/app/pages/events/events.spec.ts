@@ -18,10 +18,14 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { displayedEventsDFactory } from '../../../../test-config/factories/displayedEventsDFactory';
+import {
+    MockCacheStorageService, StorageMock
+} from '../../../../test-config/MockCacheStorageService';
 import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    MockCacheStorageService, ModalControllerMock, NetworkMock, StorageMock
-} from '../../../../test-config/mocks-ionic';
+    ModalControllerMock, NetworkMock
+} from '../../../../test-config/MockIonicNative';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -49,23 +53,7 @@ describe('Events Component', () => {
     let component;
     const dateLimit = '2018-01-26';
     const year = new Date().getFullYear();
-    const displayedEventsD = [
-        {
-            label: 'label',
-            items: [
-                {
-                    itemCategory: '',
-                    location: '',
-                    trimmedDescription: '',
-                    startDate: dateLimit,
-                    endDate: dateLimit,
-                    title: '',
-                    guid: '',
-                    hidden: false
-                }
-            ]
-        }
-    ];
+    const displayedEventsD = displayedEventsDFactory(dateLimit);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -141,3 +129,4 @@ describe('Events Component', () => {
         });
     });
 });
+

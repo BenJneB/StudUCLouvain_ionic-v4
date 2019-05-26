@@ -1,9 +1,9 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 import {
-    AppAvailabilityMock, DeviceMock, MarketMock, MockCacheStorageService, NetworkMock,
-    SplashScreenMock
-} from 'test-config/mocks-ionic';
+    AppAvailabilityMock, DeviceMock, MarketMock, NetworkMock, SplashScreenMock
+} from 'test-config/MockIonicNative';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -37,11 +37,12 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { CalendarMock, InAppBrowserMock } from '../../../test-config/mocks-ionic';
+import { MockAlertController } from '../../../test-config/MockAlert';
+import { CalendarMock, InAppBrowserMock } from '../../../test-config/MockIonicNative';
 import { testInstanceCreation } from '../app.component.spec';
 import { HomePage } from './home.page';
 
@@ -65,6 +66,7 @@ describe('Home Component', () => {
                 { provide: AppAvailability, useClass: AppAvailabilityMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 { provide: SplashScreen, useClass: SplashScreenMock },
+                { provide: AlertController, useClass: MockAlertController },
                 { provide: Device, useClass: DeviceMock },
                 CacheService,
                 {
@@ -178,6 +180,36 @@ describe('Home Component', () => {
                     component.openURL('url');
                     expect(spyCreate.calls.count()).toEqual(1);
                     expect(spyCreate.calls.first().args[0]).toEqual('url');
+                });
+        });
+    });
+
+    describe('emergency method', () => {
+        it('should call getEmergencyTexts', () => {
+            const spyGetEmergencyTexts = spyOn(component, 'getEmergencyTexts').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.emergency();
+                    expect(spyGetEmergencyTexts.calls.count()).toEqual(1);
+                });
+        });
+        it('should call getEmergencyMsg', () => {
+            const spyGetEmergencyMsg = spyOn(component, 'getEmergencyMsg').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.emergency();
+                    expect(spyGetEmergencyMsg.calls.count()).toEqual(1);
+                });
+        });
+        it('should call create and present of AlertController', () => {
+            const spyCreate = spyOn(component.alertCtrl, 'create').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.emergency();
+                    expect(spyCreate.calls.count()).toEqual(1);
                 });
         });
     });
