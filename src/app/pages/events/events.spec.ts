@@ -98,11 +98,11 @@ describe('Events Component', () => {
         });
     }));
 
-    beforeEach(() => {
+    /*beforeEach(() => {
         fixture = TestBed.createComponent(EventsPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
-    });
+    });*/
 
     /*     it('should be created', () => {
             expect(component).toBeTruthy();
