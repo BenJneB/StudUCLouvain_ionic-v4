@@ -67,7 +67,7 @@ export class SupportPage {
 
   /*Take the name and lastname in the good field to do the search and display the result*/
   update() {
-    this.loader.present('Please wait..');
+    this.loader.present('Please wait..').then();
     const options: Array<string> = [];
     const values: Array<string> = [];
     const fields = [

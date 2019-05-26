@@ -29,8 +29,8 @@ import { Market } from '@ionic-native/market/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import {
-    ActionSheetController, IonRouterOutlet, LoadingController, MenuController, ModalController,
-    NavController, Platform, PopoverController
+    ActionSheetController, IonRouterOutlet, MenuController, ModalController, NavController,
+    Platform, PopoverController
 } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -71,7 +71,6 @@ export class AppComponent {
     public modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
     public translateService: TranslateService,
-    public loadingCtrl: LoadingController,
     public cache: CacheService,
     private router: Router,
     private toast: Toast,

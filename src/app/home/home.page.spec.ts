@@ -42,6 +42,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CalendarMock, InAppBrowserMock } from '../../../test-config/mocks-ionic';
+import { testInstanceCreation } from '../app.component.spec';
 import { HomePage } from './home.page';
 
 describe('Home Component', () => {
@@ -85,8 +86,7 @@ describe('Home Component', () => {
     });
 
     it('should be created', () => {
-        expect(component).toBeTruthy();
-        expect(component instanceof HomePage).toBe(true);
+        testInstanceCreation(component, HomePage);
     });
 
     it('should initialize component variables', () => {
@@ -115,10 +115,6 @@ describe('Home Component', () => {
     });
 
     describe('changePage method', () => {
-
-        beforeEach(() => {
-        });
-
         it('should call launchExternalApp of UtilsService if external application', () => {
             const spyLaunch = spyOn(component.utilsServices, 'launchExternalApp').and.callThrough();
             TestBed
@@ -141,10 +137,6 @@ describe('Home Component', () => {
     });
 
     describe('updateCampus method', () => {
-
-        beforeEach(() => {
-        });
-
         it('should call addCampus of UserService', () => {
             function add(item: string) {
                 return {
@@ -160,6 +152,32 @@ describe('Home Component', () => {
                     component.updateCampus();
                     expect(spyAdd.calls.count()).toEqual(1);
                     expect(spyAdd.calls.first().args[0]).toEqual('');
+                });
+        });
+    });
+
+    describe('openURL method', () => {
+        it('should call create of InAppBrowser', () => {
+            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.openURL('url');
+                    expect(spyCreate.calls.count()).toEqual(1);
+                    expect(spyCreate.calls.first().args[0]).toEqual('url');
+                });
+        });
+    });
+
+    describe('openUCL method', () => {
+        it('should call create of InAppBrowser', () => {
+            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.openURL('url');
+                    expect(spyCreate.calls.count()).toEqual(1);
+                    expect(spyCreate.calls.first().args[0]).toEqual('url');
                 });
         });
     });

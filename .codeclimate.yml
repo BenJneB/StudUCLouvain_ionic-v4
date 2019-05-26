@@ -25,3 +25,4 @@ exclude_patterns:
 - www/
 - src/assets/*
 - resources/*
+- "**/*.spec.ts"

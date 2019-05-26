@@ -68,7 +68,7 @@
     </ion-row>
 
     <ion-item-divider (click)="toggleGroup('opening_hours')">
-      {{'LIBRARY.HOUR' | translate}}
+      <ion-label>{{'LIBRARY.HOUR' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsServices.isGroupShown('opening_hours', shownGroup)">
@@ -80,7 +80,7 @@
     </ion-item>
 
     <ion-item-divider (click)="toggleGroup('opening_examination_hours')">
-      {{'LIBRARY.EXAMHOUR' | translate}}
+      <ion-label>{{'LIBRARY.EXAMHOUR' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsServices.isGroupShown('opening_examination_hours', shownGroup)">
@@ -92,7 +92,7 @@
     </ion-item>
 
     <ion-item-divider (click)="toggleGroup('opening_summer_hours')">
-      {{'LIBRARY.SUMMERHOUR' | translate}}
+      <ion-label>{{'LIBRARY.SUMMERHOUR' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsServices.isGroupShown('opening_summer_hours', shownGroup)">
@@ -104,7 +104,7 @@
     </ion-item>
 
     <ion-item-divider (click)="toggleGroup('closed_dates')">
-      {{'LIBRARY.CLOSED' | translate}}
+      <ion-label>{{'LIBRARY.CLOSED' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsServices.isGroupShown('closed_dates', shownGroup)" text-wrap>

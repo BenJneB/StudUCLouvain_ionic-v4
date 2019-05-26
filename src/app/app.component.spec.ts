@@ -1,7 +1,8 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import {
-    AppAvailabilityMock, MarketMock, MockCacheStorageService, NetworkMock, StatusBarMock, ToastMock
+    AppAvailabilityMock, AppVersionMock, MarketMock, MockCacheStorageService, NetworkMock,
+    StatusBarMock, ToastMock
 } from 'test-config/mocks-ionic';
 
 /**
@@ -27,6 +28,7 @@ import {
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
@@ -82,8 +84,13 @@ describe('MyApp Component', () => {
   });
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
-    expect(component instanceof AppComponent).toBeTruthy();
+    testInstanceCreation(component, AppComponent);
   });
 
 });
+
+export function testInstanceCreation(component: any, typeComp: any) {
+  expect(component).toBeTruthy();
+  expect(component instanceof typeComp).toBeTruthy();
+}
+

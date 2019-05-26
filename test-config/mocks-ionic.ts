@@ -1,6 +1,7 @@
 import { Observable, Observer } from 'rxjs';
 
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import {
@@ -121,6 +122,25 @@ export class MockCacheStorageService {
     }
 }
 
+export class StorageMock {
+    public saveItem() {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
+
+    public getItem() {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
+
+    public removeItem() {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
+}
 export class ToastMock extends Toast {
 
     show(message: string, duration: string, position: string): Observable<any> {
@@ -313,4 +333,18 @@ export class ModalControllerMock {
         })
     );
     public dismiss = jasmine.createSpy('dismiss').and.returnValue(Promise.resolve());
+}
+
+export class AppVersionMock extends AppVersion {
+    getVersionCode(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    getVersionNumber(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
 }
