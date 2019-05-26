@@ -47,6 +47,16 @@ describe('Events Component', () => {
     let fixture;
     let component;
     const dateLimit = '2018-01-26';
+    const year = this.now.getFullYear();
+    const displayedEventsD = [
+        {
+            label: 'label',
+            items: [
+
+            ]
+        }
+    ];
+
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [EventsPage],
