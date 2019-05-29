@@ -28,7 +28,6 @@ import {
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
@@ -48,7 +47,7 @@ describe('MyApp Component', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeAll(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [
@@ -77,7 +76,7 @@ describe('MyApp Component', () => {
     }).compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeAll(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
@@ -87,7 +86,40 @@ describe('MyApp Component', () => {
     testInstanceCreation(component, AppComponent);
   });
 
+  describe('initializeApp method', () => {
+
+    it('should call get of Storage (UserService) and go to TutoPage on first launch (and set first to false)', () => {
+      const spySet = spyOn(component.storage, 'set');
+      const spyNav = testInitializeRedirectToPage(null);
+      expect(spyNav.calls.first().args[0]).toEqual('/tutos');
+      expect(spySet.calls.count()).toEqual(1);
+    });
+    it('should call get of Storage (UserService) and go to HomePage otherwhise', () => {
+      const spyNav = testInitializeRedirectToPage('not null');
+      expect(spyNav.calls.first().args[0]).toEqual('/');
+    });
+  });
+
+  function testInitializeRedirectToPage(storageKey: string) {
+    const spyReady = spyFunctionWithCallBack(component.platform, 'ready', undefined);
+    const spyGet = spyFunctionWithCallBack(component.storage, 'get', storageKey);
+    const spyNav = spyOn(component.nav, 'navigateForward');
+    component.initializeApp();
+    expect(spyReady.calls.count()).toEqual(1);
+    expect(spyGet).toHaveBeenCalledWith('first');
+    expect(spyNav.calls.count()).toEqual(1);
+    return spyNav;
+  }
 });
+
+
+function spyFunctionWithCallBack(usedService: any, method: string, callbackReturn: any) {
+  return spyOn(usedService, method).and.callFake(function () {
+    return {
+      then: function (callback) { return callback(callbackReturn); }
+    };
+  });
+}
 
 export function testInstanceCreation(component: any, typeComp: any) {
   expect(component).toBeTruthy();

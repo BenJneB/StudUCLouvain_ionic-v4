@@ -35,20 +35,16 @@ export class Wso2Service {
 
   /*Load wso2 service*/
   load(url: string) {
-    // TODO: MAX RETRY
     const finalUrl = this.wso2ServiceBaseUrl + url;
-    console.log('IMPORTANT', finalUrl, this.headers);
     return this.http.get(finalUrl, { headers: this.headers }).pipe(
       map(res => {
         this.nbCalls = 0;
-        console.log('map', res);
         return res;
       }),
       catchError((error) => {
         this.nbCalls++;
         if (this.nbCalls >= 10) {
           this.nbCalls = 0;
-          console.log('TOO MUCH CALL TO WSO !');
           return;
         }
         if (error.status === 401) {

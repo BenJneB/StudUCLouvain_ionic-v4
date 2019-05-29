@@ -213,7 +213,7 @@ export class EventsPage {
   /*Update the displayed events and close the loading when it's finished*/
   public updateDisplayed() {
     this.searching = true;
-    this.eventsList && this.eventsList.closeSlidingItems();
+    this.eventsList.closeSlidingItems();
     if (this.segment === 'all') {
       this.displayedEvents = this.utilsServices.filterItems('events', this.events, this.excludedFilters, this.dateLimit, this.searchTerm);
     } else if (this.segment === 'favorites') {

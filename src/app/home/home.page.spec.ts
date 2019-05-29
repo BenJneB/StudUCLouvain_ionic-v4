@@ -91,50 +91,17 @@ describe('Home Component', () => {
         testInstanceCreation(component, HomePage);
     });
 
-    it('should initialize component variables', () => {
-        TestBed.compileComponents().then(() => {
-            expect(component.libraryPage).toEqual({
-                title: 'MENU.LIBRARY', component: '/libraries',
-                iosSchemaName: null, androidPackageName: null,
-                appUrl: null, httpUrl: null
-            });
-            expect(component.newsPage).toEqual({
-                title: 'MENU.NEWS', component: '/news',
-                iosSchemaName: null, androidPackageName: null,
-                appUrl: null, httpUrl: null
-            });
-            expect(component.eventPage).toEqual({
-                title: 'MENU.EVENTS', component: '/events',
-                iosSchemaName: null, androidPackageName: null,
-                appUrl: null, httpUrl: null
-            });
-            expect(component.sportPage).toEqual({
-                title: 'MENU.SPORTS', component: '/sports',
-                iosSchemaName: null, androidPackageName: null,
-                appUrl: null, httpUrl: null
-            });
-        });
-    });
-
     describe('changePage method', () => {
         it('should call launchExternalApp of UtilsService if external application', () => {
             const spyLaunch = spyOn(component.utilsServices, 'launchExternalApp').and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.changePage({ iosSchemaName: 'name' });
-                    expect(spyLaunch.calls.count()).toEqual(1);
-                });
+            component.changePage({ iosSchemaName: 'name' });
+            expect(spyLaunch.calls.count()).toEqual(1);
         });
 
         it('should call navigateForward of NavController otherwhise', () => {
             const spyNavigate = spyOn(component.nav, 'navigateForward').and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.changePage({ iosSchemaName: null, component: [] });
-                    expect(spyNavigate.calls.count()).toEqual(1);
-                });
+            component.changePage({ iosSchemaName: null, component: '/' });
+            expect(spyNavigate.calls.count()).toEqual(1);
         });
     });
 
@@ -148,81 +115,53 @@ describe('Home Component', () => {
                 };
             }
             const spyAdd = spyOn(component.userS, 'addCampus').and.callFake(add).and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.updateCampus();
-                    expect(spyAdd.calls.count()).toEqual(1);
-                    expect(spyAdd.calls.first().args[0]).toEqual('');
-                });
+            component.updateCampus();
+            expect(spyAdd.calls.count()).toEqual(1);
+            expect(spyAdd.calls.first().args[0]).toEqual('');
         });
     });
 
     describe('openURL method', () => {
         it('should call create of InAppBrowser', () => {
             const spyCreate = spyOn(component.iab, 'create').and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.openURL('url');
-                    expect(spyCreate.calls.count()).toEqual(1);
-                    expect(spyCreate.calls.first().args[0]).toEqual('url');
-                });
+            component.openURL('url');
+            expect(spyCreate.calls.count()).toEqual(1);
+            expect(spyCreate.calls.first().args[0]).toEqual('url');
         });
     });
 
     describe('openUCL method', () => {
         it('should call create of InAppBrowser', () => {
             const spyCreate = spyOn(component.iab, 'create').and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.openUCL('url');
-                    expect(spyCreate.calls.count()).toEqual(1);
-                    expect(spyCreate.calls.first().args[0]).toEqual('url');
-                });
+            component.openUCL('url');
+            expect(spyCreate.calls.count()).toEqual(1);
+            expect(spyCreate.calls.first().args[0]).toEqual('url');
         });
     });
 
     describe('ionViewDidEnter method', () => {
         it('should call setTimeout of NodeJS', () => {
             const spySetTimeout = spyOn(window, 'setTimeout').and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.ionViewDidEnter();
-                    expect(spySetTimeout.calls.count()).toEqual(1);
-                });
+            component.ionViewDidEnter();
+            expect(spySetTimeout.calls.count()).toEqual(1);
         });
     });
 
     describe('emergency method', () => {
         it('should call getEmergencyTexts', () => {
             const spyGetEmergencyTexts = spyOn(component, 'getEmergencyTexts').and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.emergency();
-                    expect(spyGetEmergencyTexts.calls.count()).toEqual(1);
-                });
+            component.emergency();
+            expect(spyGetEmergencyTexts.calls.count()).toEqual(1);
         });
         it('should call getEmergencyMsg', () => {
             const spyGetEmergencyMsg = spyOn(component, 'getEmergencyMsg').and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.emergency();
-                    expect(spyGetEmergencyMsg.calls.count()).toEqual(1);
-                });
+            component.emergency();
+            expect(spyGetEmergencyMsg.calls.count()).toEqual(1);
         });
         it('should call create and present of AlertController', () => {
             const spyCreate = spyOn(component.alertCtrl, 'create').and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.emergency();
-                    expect(spyCreate.calls.count()).toEqual(1);
-                });
+            component.emergency();
+            expect(spyCreate.calls.count()).toEqual(1);
         });
     });
 });

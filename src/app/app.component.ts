@@ -32,6 +32,7 @@ import {
     ActionSheetController, IonRouterOutlet, MenuController, ModalController, NavController,
     Platform, PopoverController
 } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Page } from './entity/page';
@@ -75,7 +76,8 @@ export class AppComponent {
     private router: Router,
     private toast: Toast,
     private nav: NavController,
-    private utilsServices: UtilsService
+    private utilsServices: UtilsService,
+    private storage: Storage
   ) {
     this.initializeApp();
   }
@@ -130,23 +132,21 @@ export class AppComponent {
   initializeApp() {
     this.user.getFavorites();
     this.alertPresented = false;
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-    });
     this.getAllPages();
     this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
       // this.wso2Service.getAppToken();
       this.translateService.setDefaultLang('fr');
       this.getLanguage();
       this.cache.setDefaultTTL(60 * 60 * 2);
       this.cache.setOfflineInvalidate(false);
-      //  this.user.storage.set('first',null);
-      this.user.storage.get('first').then((data) => {
+      // this.storage.set('first', null);
+      this.storage.get('first').then((data) => {
         if (data === null) {
-          this.rootPage = 'TutoPage';
+          this.nav.navigateForward('/tutos');
           this.user.storage.set('first', false);
         } else {
-          this.rootPage = 'HomePage';
+          this.nav.navigateForward('/');
         }
       });
     });
