@@ -223,7 +223,7 @@ export class AppComponent {
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
     let app: string;
-    let check: string;
+    let check = '';
     if (this.device.platform === 'iOS') {
       app = iosSchemaName;
       check = appUrl;

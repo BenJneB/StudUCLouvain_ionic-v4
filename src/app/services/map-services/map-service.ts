@@ -78,7 +78,7 @@ export class MapService {
         title: 'Hello California'
       };
 
-      const marker = this.map.addMarker(markerOptions)
+      this.map.addMarker(markerOptions)
         .then((marker: Marker) => {
           marker.showInfoWindow();
         });

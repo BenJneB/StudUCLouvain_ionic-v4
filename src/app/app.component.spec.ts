@@ -87,36 +87,69 @@ describe('MyApp Component', () => {
   });
 
   describe('initializeApp method', () => {
+    let spyNav;
+    let spyReady;
+    let spyGet;
+
+    beforeEach(() => {
+      spyReady = spyFunctionWithCallBackThen(component.platform, 'ready', undefined);
+      spyNav = spyOn(component.nav, 'navigateForward');
+    });
+    afterEach(() => {
+      expect(spyReady.calls.count()).toEqual(1);
+      expect(spyNav.calls.count()).toEqual(1);
+      expect(spyGet).toHaveBeenCalledWith('first');
+    });
 
     it('should call get of Storage (UserService) and go to TutoPage on first launch (and set first to false)', () => {
       const spySet = spyOn(component.storage, 'set');
-      const spyNav = testInitializeRedirectToPage(null);
+      spyGet = spyFunctionWithCallBackThen(component.storage, 'get', null);
+      component.initializeApp();
       expect(spyNav.calls.first().args[0]).toEqual('/tutos');
       expect(spySet.calls.count()).toEqual(1);
     });
     it('should call get of Storage (UserService) and go to HomePage otherwhise', () => {
-      const spyNav = testInitializeRedirectToPage('not null');
+      spyGet = spyFunctionWithCallBackThen(component.storage, 'get', 'not null');
+      component.initializeApp();
       expect(spyNav.calls.first().args[0]).toEqual('/');
     });
   });
 
-  function testInitializeRedirectToPage(storageKey: string) {
-    const spyReady = spyFunctionWithCallBack(component.platform, 'ready', undefined);
-    const spyGet = spyFunctionWithCallBack(component.storage, 'get', storageKey);
-    const spyNav = spyOn(component.nav, 'navigateForward');
-    component.initializeApp();
-    expect(spyReady.calls.count()).toEqual(1);
-    expect(spyGet).toHaveBeenCalledWith('first');
-    expect(spyNav.calls.count()).toEqual(1);
-    return spyNav;
-  }
+  describe('launchExternalApp method', () => {
+    beforeEach(() => {
+      // spyPlatform = spyOn(component.device, 'platform');
+    });
+
+    it('should call open from Market if app not installed', () => {
+      const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check', '');
+      const spyOpen = spyOn(component.market, 'open');
+      component.launchExternalApp('ios', 'android', 'app', 'http');
+      expect(spyCheck.calls.count()).toEqual(1);
+      expect(spyOpen.calls.count()).toEqual(1);
+    });
+    it('should call open from Market if app not installed', () => {
+      const spyCheck = spyFunctionWithCallBackThen(component.appAvailability, 'check', '');
+      const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+      component.launchExternalApp('ios', 'android', 'app', 'http');
+      expect(spyCheck.calls.count()).toEqual(1);
+      expect(spyCreate.calls.count() >= 1).toBeTruthy();
+    });
+  });
 });
 
 
-function spyFunctionWithCallBack(usedService: any, method: string, callbackReturn: any) {
+function spyFunctionWithCallBackThen(usedService: any, method: string, callbackReturn: any) {
   return spyOn(usedService, method).and.callFake(function () {
     return {
-      then: function (callback) { return callback(callbackReturn); }
+      then: function (callback) { return callback(callbackReturn); },
+    };
+  });
+}
+
+function spyFunctionWithCallBackReject(usedService: any, method: string, callbackReturn: any) {
+  return spyOn(usedService, method).and.callFake(function () {
+    return {
+      then: function (s, error) { return error(); },
     };
   });
 }
