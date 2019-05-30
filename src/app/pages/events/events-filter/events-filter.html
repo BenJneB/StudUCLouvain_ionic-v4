@@ -42,12 +42,14 @@
 <!--BODY-->
 <ion-content class="outer-content">
   <ion-item>
-    <ion-label *ngIf="dateRange > 1" center>
-      {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}}
-      {{'EVENTS.TIMEEVENTS3' | translate}}
-    </ion-label>
-    <ion-label *ngIf="dateRange == 1" center>
-      {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS4' | translate}}
+    <ion-label center>
+      <div *ngIf="dateRange > 1">
+        {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}}
+        {{'EVENTS.TIMEEVENTS3' | translate}}
+      </div>
+      <div *ngIf="dateRange == 1">
+        {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS4' | translate}}
+      </div>
     </ion-label>
     <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
     </ion-range>
