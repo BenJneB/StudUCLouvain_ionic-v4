@@ -116,27 +116,46 @@ describe('MyApp Component', () => {
   });
 
   describe('launchExternalApp method', () => {
-    beforeEach(() => {
+    it('should call open from Market if app not installed (Android)', () => {
       spyOnProperty(component.device, 'platform', 'get').and.returnValue('Android');
-    });
-
-    it('should call open from Market if app not installed', () => {
       const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check', '');
       const spyOpen = spyOn(component.market, 'open');
       component.launchExternalApp('ios', 'android', 'app', 'http');
       expect(spyCheck.calls.count()).toEqual(1);
       expect(spyOpen.calls.count()).toEqual(1);
+      expect(spyOpen.calls.first().args[0]).toEqual('android');
     });
-    it('should call open from Market if app not installed', () => {
+    it('should call create from InAppBrowser if app not installed (iOS)', () => {
+      spyOnProperty(component.device, 'platform', 'get').and.returnValue('iOS');
       const spyCheck = spyFunctionWithCallBackThen(component.appAvailability, 'check', '');
       const spyCreate = spyOn(component.iab, 'create').and.callThrough();
       component.launchExternalApp('ios', 'android', 'app', 'http');
       expect(spyCheck.calls.count()).toEqual(1);
-      expect(spyCreate.calls.count() >= 1).toBeTruthy();
+      expect(spyCreate.calls.count()).toEqual(1);
+      expect(spyCreate.calls.first().args[0]).toEqual('app');
+    });
+    it('should call create from InAppBrowser if on browser', () => {
+      spyOnProperty(component.device, 'platform', 'get').and.returnValue('');
+      const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+      component.launchExternalApp('ios', 'android', 'app', 'http');
+      expect(spyCreate.calls.count()).toEqual(1);
+      expect(spyCreate.calls.first().args[0]).toEqual('http');
+    });
+  });
+
+  describe('openRootPage method', () => {
+    it('should call launchExternalApp if external app', () => {
+      const spyLaunch = spyOn(component, 'launchExternalApp').and.callThrough();
+      component.openRootPage({ iosSchemaName: 'notNull', component: '/', title: 'Title' });
+      expect(spyLaunch.calls.count()).toEqual(1);
+    });
+    it('should call navigateForward of NavController otherwhise', () => {
+      const spyNavigate = spyOn(component.nav, 'navigateForward').and.callThrough();
+      component.openRootPage({ iosSchemaName: null, component: '/', title: 'Title' });
+      expect(spyNavigate.calls.count()).toEqual(1);
     });
   });
 });
-
 
 function spyFunctionWithCallBackThen(usedService: any, method: string, callbackReturn: any) {
   return spyOn(usedService, method).and.callFake(function () {
