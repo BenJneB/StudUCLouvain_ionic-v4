@@ -233,7 +233,7 @@ export class AppComponent {
         check = app;
       } else {
         const browser = this.iab.create(httpUrl, '_system');
-        browser.close();
+        return browser.close(); // return not present initially, TEST
       }
     this.appAvailability.check(check).then(
       () => {

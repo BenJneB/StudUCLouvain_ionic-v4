@@ -117,7 +117,7 @@ describe('MyApp Component', () => {
 
   describe('launchExternalApp method', () => {
     beforeEach(() => {
-      // spyPlatform = spyOn(component.device, 'platform');
+      spyOnProperty(component.device, 'platform', 'get').and.returnValue('Android');
     });
 
     it('should call open from Market if app not installed', () => {
