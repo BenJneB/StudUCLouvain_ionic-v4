@@ -70,26 +70,7 @@ export class POIService {
       return new Promise(resolve => {
         this.http.get(this.url).pipe(
           map(res => res)).subscribe(data => {
-            const tmpZones = data['zones'];
-            const auditoiresLength = tmpZones.auditoires.length;
-            const locauxLength = tmpZones.locaux.length;
-            const bibliothequesLength = tmpZones.bibliotheques.length;
-            const sportsLength = tmpZones.sports.length;
-            const restauULength = tmpZones.restaurants_universitaires.length;
-            const servicesLength = tmpZones.services.length;
-            const parkingsLength = tmpZones.parkings.length;
-
-            const newZone = {
-              auditoires: this.getCategoryZones(tmpZones.auditoires, auditoiresLength),
-              locaux: this.getCategoryZones(tmpZones.locaux, locauxLength),
-              bibliotheques: this.getCategoryZones(tmpZones.bibliotheques, bibliothequesLength),
-              sports: this.getCategoryZones(tmpZones.sports, sportsLength),
-              restaurants_universitaires: this.getCategoryZones(tmpZones.restaurants_universitaires, restauULength),
-              services: this.getCategoryZones(tmpZones.services, servicesLength),
-              parkings: this.getCategoryZones(tmpZones.parkings, parkingsLength),
-
-              icon: 'arrow-dropdown',
-            };
+            const newZone = this.getZones(data);
             this.zones.push(newZone);
             resolve(this.zones);
           });
@@ -100,6 +81,28 @@ export class POIService {
       });
     }
   }
+  private getZones(data: Object) {
+    const tmpZones = data['zones'];
+    const auditoiresLength = tmpZones.auditoires.length;
+    const locauxLength = tmpZones.locaux.length;
+    const bibliothequesLength = tmpZones.bibliotheques.length;
+    const sportsLength = tmpZones.sports.length;
+    const restauULength = tmpZones.restaurants_universitaires.length;
+    const servicesLength = tmpZones.services.length;
+    const parkingsLength = tmpZones.parkings.length;
+    const newZone = {
+      auditoires: this.getCategoryZones(tmpZones.auditoires, auditoiresLength),
+      locaux: this.getCategoryZones(tmpZones.locaux, locauxLength),
+      bibliotheques: this.getCategoryZones(tmpZones.bibliotheques, bibliothequesLength),
+      sports: this.getCategoryZones(tmpZones.sports, sportsLength),
+      restaurants_universitaires: this.getCategoryZones(tmpZones.restaurants_universitaires, restauULength),
+      services: this.getCategoryZones(tmpZones.services, servicesLength),
+      parkings: this.getCategoryZones(tmpZones.parkings, parkingsLength),
+      icon: 'arrow-dropdown',
+    };
+    return newZone;
+  }
+
   private compare(a, b) {
     if (a.nom < b.nom) {
       return -1;

@@ -92,7 +92,7 @@ export class SportsPage {
       this.loadSports(this.segment);
       this.loadSports('team');
       this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
-      this.loader.present('Please wait..');
+      this.loader.present('Please wait..').then();
     } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -114,7 +114,7 @@ export class SportsPage {
 
   public loadSports(segment: string) {
     this.searching = true;
-    this.sportsList && this.sportsList.closeSlidingItems();
+    this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
     if (this.connService.isOnline()) {
       this.sportsService.getSports(segment).then(
@@ -153,7 +153,7 @@ export class SportsPage {
   /*Display the good list of sports according to the tab*/
   public updateDisplayed() {
     this.searching = true;
-    this.sportsList && this.sportsList.closeSlidingItems();
+    this.sportsList.closeSlidingItems();
     const callFilter = this.isNotFavorite();
     if (callFilter === true) {// List of sports for all students
       const sport = this.segment === 'all' ? this.sports : this.teams;

@@ -1,9 +1,9 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 import {
-    AppAvailabilityMock, DeviceMock, MarketMock, MockCacheStorageService, NetworkMock,
-    SplashScreenMock
-} from 'test-config/mocks-ionic';
+    AppAvailabilityMock, DeviceMock, MarketMock, NetworkMock, SplashScreenMock
+} from 'test-config/MockIonicNative';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -37,11 +37,13 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { IonicModule } from '@ionic/angular';
+import { AlertController, IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { CalendarMock, InAppBrowserMock } from '../../../test-config/mocks-ionic';
+import { MockAlertController } from '../../../test-config/MockAlert';
+import { CalendarMock, InAppBrowserMock } from '../../../test-config/MockIonicNative';
+import { testInstanceCreation } from '../app.component.spec';
 import { HomePage } from './home.page';
 
 describe('Home Component', () => {
@@ -64,6 +66,7 @@ describe('Home Component', () => {
                 { provide: AppAvailability, useClass: AppAvailabilityMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 { provide: SplashScreen, useClass: SplashScreenMock },
+                { provide: AlertController, useClass: MockAlertController },
                 { provide: Device, useClass: DeviceMock },
                 CacheService,
                 {
@@ -85,66 +88,24 @@ describe('Home Component', () => {
     });
 
     it('should be created', () => {
-        expect(component).toBeTruthy();
-        expect(component instanceof HomePage).toBe(true);
-    });
-
-    it('should initialize component variables', () => {
-        TestBed.compileComponents().then(() => {
-            expect(component.libraryPage).toEqual({
-                title: 'MENU.LIBRARY', component: '/libraries',
-                iosSchemaName: null, androidPackageName: null,
-                appUrl: null, httpUrl: null
-            });
-            expect(component.newsPage).toEqual({
-                title: 'MENU.NEWS', component: '/news',
-                iosSchemaName: null, androidPackageName: null,
-                appUrl: null, httpUrl: null
-            });
-            expect(component.eventPage).toEqual({
-                title: 'MENU.EVENTS', component: '/events',
-                iosSchemaName: null, androidPackageName: null,
-                appUrl: null, httpUrl: null
-            });
-            expect(component.sportPage).toEqual({
-                title: 'MENU.SPORTS', component: '/sports',
-                iosSchemaName: null, androidPackageName: null,
-                appUrl: null, httpUrl: null
-            });
-        });
+        testInstanceCreation(component, HomePage);
     });
 
     describe('changePage method', () => {
-
-        beforeEach(() => {
-        });
-
         it('should call launchExternalApp of UtilsService if external application', () => {
             const spyLaunch = spyOn(component.utilsServices, 'launchExternalApp').and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.changePage({ iosSchemaName: 'name' });
-                    expect(spyLaunch.calls.count()).toEqual(1);
-                });
+            component.changePage({ iosSchemaName: 'name' });
+            expect(spyLaunch.calls.count()).toEqual(1);
         });
 
         it('should call navigateForward of NavController otherwhise', () => {
             const spyNavigate = spyOn(component.nav, 'navigateForward').and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.changePage({ iosSchemaName: null, component: [] });
-                    expect(spyNavigate.calls.count()).toEqual(1);
-                });
+            component.changePage({ iosSchemaName: null, component: '/' });
+            expect(spyNavigate.calls.count()).toEqual(1);
         });
     });
 
     describe('updateCampus method', () => {
-
-        beforeEach(() => {
-        });
-
         it('should call addCampus of UserService', () => {
             function add(item: string) {
                 return {
@@ -154,13 +115,53 @@ describe('Home Component', () => {
                 };
             }
             const spyAdd = spyOn(component.userS, 'addCampus').and.callFake(add).and.callThrough();
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.updateCampus();
-                    expect(spyAdd.calls.count()).toEqual(1);
-                    expect(spyAdd.calls.first().args[0]).toEqual('');
-                });
+            component.updateCampus();
+            expect(spyAdd.calls.count()).toEqual(1);
+            expect(spyAdd.calls.first().args[0]).toEqual('');
+        });
+    });
+
+    describe('openURL method', () => {
+        it('should call create of InAppBrowser', () => {
+            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            component.openURL('url');
+            expect(spyCreate.calls.count()).toEqual(1);
+            expect(spyCreate.calls.first().args[0]).toEqual('url');
+        });
+    });
+
+    describe('openUCL method', () => {
+        it('should call create of InAppBrowser', () => {
+            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            component.openUCL('url');
+            expect(spyCreate.calls.count()).toEqual(1);
+            expect(spyCreate.calls.first().args[0]).toEqual('url');
+        });
+    });
+
+    describe('ionViewDidEnter method', () => {
+        it('should call setTimeout of NodeJS', () => {
+            const spySetTimeout = spyOn(window, 'setTimeout').and.callThrough();
+            component.ionViewDidEnter();
+            expect(spySetTimeout.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('emergency method', () => {
+        it('should call getEmergencyTexts', () => {
+            const spyGetEmergencyTexts = spyOn(component, 'getEmergencyTexts').and.callThrough();
+            component.emergency();
+            expect(spyGetEmergencyTexts.calls.count()).toEqual(1);
+        });
+        it('should call getEmergencyMsg', () => {
+            const spyGetEmergencyMsg = spyOn(component, 'getEmergencyMsg').and.callThrough();
+            component.emergency();
+            expect(spyGetEmergencyMsg.calls.count()).toEqual(1);
+        });
+        it('should call create and present of AlertController', () => {
+            const spyCreate = spyOn(component.alertCtrl, 'create').and.callThrough();
+            component.emergency();
+            expect(spyCreate.calls.count()).toEqual(1);
         });
     });
 });

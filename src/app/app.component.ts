@@ -29,9 +29,10 @@ import { Market } from '@ionic-native/market/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import {
-    ActionSheetController, IonRouterOutlet, LoadingController, MenuController, ModalController,
-    NavController, Platform, PopoverController
+    ActionSheetController, IonRouterOutlet, MenuController, ModalController, NavController,
+    Platform, PopoverController
 } from '@ionic/angular';
+import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Page } from './entity/page';
@@ -71,12 +72,12 @@ export class AppComponent {
     public modalCtrl: ModalController,
     private actionSheetCtrl: ActionSheetController,
     public translateService: TranslateService,
-    public loadingCtrl: LoadingController,
     public cache: CacheService,
     private router: Router,
     private toast: Toast,
     private nav: NavController,
-    private utilsServices: UtilsService
+    private utilsServices: UtilsService,
+    private storage: Storage
   ) {
     this.initializeApp();
   }
@@ -131,23 +132,21 @@ export class AppComponent {
   initializeApp() {
     this.user.getFavorites();
     this.alertPresented = false;
-    this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
-    });
     this.getAllPages();
     this.platform.ready().then(() => {
+      this.statusBar.styleDefault();
       // this.wso2Service.getAppToken();
       this.translateService.setDefaultLang('fr');
       this.getLanguage();
       this.cache.setDefaultTTL(60 * 60 * 2);
       this.cache.setOfflineInvalidate(false);
-      //  this.user.storage.set('first',null);
-      this.user.storage.get('first').then((data) => {
+      // this.storage.set('first', null);
+      this.storage.get('first').then((data) => {
         if (data === null) {
-          this.rootPage = 'TutoPage';
+          this.nav.navigateForward('/tutos');
           this.user.storage.set('first', false);
         } else {
-          this.rootPage = 'HomePage';
+          this.nav.navigateForward('/');
         }
       });
     });
@@ -224,7 +223,7 @@ export class AppComponent {
 
   launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
     let app: string;
-    let check: string;
+    let check = '';
     if (this.device.platform === 'iOS') {
       app = iosSchemaName;
       check = appUrl;
@@ -234,7 +233,7 @@ export class AppComponent {
         check = app;
       } else {
         const browser = this.iab.create(httpUrl, '_system');
-        browser.close();
+        return browser.close(); // return not present initially, TEST
       }
     this.appAvailability.check(check).then(
       () => {

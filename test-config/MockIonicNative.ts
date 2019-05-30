@@ -1,6 +1,7 @@
 import { Observable, Observer } from 'rxjs';
 
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import {
@@ -36,8 +37,7 @@ export class MarketMock extends Market {
 
 export class AppAvailabilityMock extends AppAvailability {
     check(app: string): Promise<boolean> {
-        let response: boolean;
-        return getPromise(response);
+        return getPromise(true);
     }
 }
 
@@ -73,7 +73,12 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
     }
 
     on(event: string): Observable<InAppBrowserEvent> {
-        let response: InAppBrowserEvent;
+        const response = {
+            type: '',
+            url: '',
+            code: 0,
+            message: ''
+        };
         return getObservable(response);
     }
 }
@@ -111,14 +116,6 @@ export class StatusBarMock extends StatusBar {
     overlaysWebView(doesOverlay: boolean): void { }
 
     styleDefault(): void { }
-}
-
-export class MockCacheStorageService {
-    constructor(a, b) { }
-
-    public ready() {
-        return true;
-    }
 }
 
 export class ToastMock extends Toast {
@@ -251,6 +248,8 @@ export interface CalendarOptions {
 }
 
 export class CalendarMock extends Calendar {
+
+    deleteEvent = this.createEvent;
     hasReadWritePermission(): Promise<boolean> {
         return getPromise(true);
     }
@@ -293,10 +292,6 @@ export class CalendarMock extends Calendar {
     listEventsInRange(startDate: Date, endDate: Date): Promise<any> {
         return getPromise(true);
     }
-
-    deleteEvent(title?: string, location?: string, notes?: string, startDate?: Date, endDate?: Date): Promise<any> {
-        return getPromise(true);
-    }
 }
 
 export class SplashScreenMock extends SplashScreen {
@@ -314,3 +309,18 @@ export class ModalControllerMock {
     );
     public dismiss = jasmine.createSpy('dismiss').and.returnValue(Promise.resolve());
 }
+
+export class AppVersionMock extends AppVersion {
+    getVersionCode(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+
+    getVersionNumber(): Promise<any> {
+        return new Promise((resolve, reject) => {
+            resolve();
+        });
+    }
+}
+

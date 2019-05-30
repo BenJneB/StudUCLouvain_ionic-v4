@@ -1,8 +1,9 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 import {
-    AppAvailabilityMock, MarketMock, MockCacheStorageService, NetworkMock, StatusBarMock, ToastMock
-} from 'test-config/mocks-ionic';
+    AppAvailabilityMock, AppVersionMock, MarketMock, NetworkMock, StatusBarMock, ToastMock
+} from 'test-config/MockIonicNative';
 
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -39,14 +40,14 @@ import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/mocks-ionic';
+import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
 import { AppComponent } from './app.component';
 
 describe('MyApp Component', () => {
   let fixture;
   let component;
 
-  beforeEach(async(() => {
+  beforeAll(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
       imports: [
@@ -75,15 +76,86 @@ describe('MyApp Component', () => {
     }).compileComponents();
   }));
 
-  beforeEach(() => {
+  beforeAll(() => {
     fixture = TestBed.createComponent(AppComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });
 
   it('should be created', () => {
-    expect(component).toBeTruthy();
-    expect(component instanceof AppComponent).toBeTruthy();
+    testInstanceCreation(component, AppComponent);
   });
 
+  describe('initializeApp method', () => {
+    let spyNav;
+    let spyReady;
+    let spyGet;
+
+    beforeEach(() => {
+      spyReady = spyFunctionWithCallBackThen(component.platform, 'ready', undefined);
+      spyNav = spyOn(component.nav, 'navigateForward');
+    });
+    afterEach(() => {
+      expect(spyReady.calls.count()).toEqual(1);
+      expect(spyNav.calls.count()).toEqual(1);
+      expect(spyGet).toHaveBeenCalledWith('first');
+    });
+
+    it('should call get of Storage (UserService) and go to TutoPage on first launch (and set first to false)', () => {
+      const spySet = spyOn(component.storage, 'set');
+      spyGet = spyFunctionWithCallBackThen(component.storage, 'get', null);
+      component.initializeApp();
+      expect(spyNav.calls.first().args[0]).toEqual('/tutos');
+      expect(spySet.calls.count()).toEqual(1);
+    });
+    it('should call get of Storage (UserService) and go to HomePage otherwhise', () => {
+      spyGet = spyFunctionWithCallBackThen(component.storage, 'get', 'not null');
+      component.initializeApp();
+      expect(spyNav.calls.first().args[0]).toEqual('/');
+    });
+  });
+
+  describe('launchExternalApp method', () => {
+    beforeEach(() => {
+      spyOnProperty(component.device, 'platform', 'get').and.returnValue('Android');
+    });
+
+    it('should call open from Market if app not installed', () => {
+      const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check', '');
+      const spyOpen = spyOn(component.market, 'open');
+      component.launchExternalApp('ios', 'android', 'app', 'http');
+      expect(spyCheck.calls.count()).toEqual(1);
+      expect(spyOpen.calls.count()).toEqual(1);
+    });
+    it('should call open from Market if app not installed', () => {
+      const spyCheck = spyFunctionWithCallBackThen(component.appAvailability, 'check', '');
+      const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+      component.launchExternalApp('ios', 'android', 'app', 'http');
+      expect(spyCheck.calls.count()).toEqual(1);
+      expect(spyCreate.calls.count() >= 1).toBeTruthy();
+    });
+  });
 });
+
+
+function spyFunctionWithCallBackThen(usedService: any, method: string, callbackReturn: any) {
+  return spyOn(usedService, method).and.callFake(function () {
+    return {
+      then: function (callback) { return callback(callbackReturn); },
+    };
+  });
+}
+
+function spyFunctionWithCallBackReject(usedService: any, method: string, callbackReturn: any) {
+  return spyOn(usedService, method).and.callFake(function () {
+    return {
+      then: function (s, error) { return error(); },
+    };
+  });
+}
+
+export function testInstanceCreation(component: any, typeComp: any) {
+  expect(component).toBeTruthy();
+  expect(component instanceof typeComp).toBeTruthy();
+}
+

@@ -1,3 +1,5 @@
+import { testInstanceCreation } from 'src/app/app.component.spec';
+
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -6,8 +8,10 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ModalController } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/mocks-ionic';
-/*
+import {
+    AppVersionMock, InAppBrowserMock, ModalControllerMock
+} from '../../../../test-config/MockIonicNative';
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -44,7 +48,7 @@ describe('Credit Component', () => {
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
-                AppVersion,
+                { provide: AppVersion, useClass: AppVersionMock },
             ]
         }).compileComponents();
     }));
@@ -56,7 +60,19 @@ describe('Credit Component', () => {
     });
 
     it('should be created', () => {
-        expect(component).toBeTruthy();
-        expect(component instanceof CreditPage).toBe(true);
+        testInstanceCreation(component, CreditPage);
+    });
+
+    describe('openURL method', () => {
+        it('should call create of InAppBrowser', () => {
+            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.openURL('url');
+                    expect(spyCreate.calls.count()).toEqual(1);
+                    expect(spyCreate.calls.first().args[0]).toEqual('url');
+                });
+        });
     });
 });

@@ -208,7 +208,7 @@ export class NewsPage {
       const key = this.getKey();
       await this.cache.getItem(key)
         .then((data) => {
-          this.loader.present('Please wait...');
+          this.loader.present('Please wait...').then();
           this.news = data.items;
           this.shownNews = data.showItems;
           this.searching = false;
@@ -228,7 +228,7 @@ export class NewsPage {
     this.news = [];
     // Check connexion before load news
     if (this.connService.isOnline()) {
-      this.loader.present('Please wait...');
+      this.loader.present('Please wait...').then();
       let actu = this.subsegment;
       if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
       this.newsService.getNews(actu)

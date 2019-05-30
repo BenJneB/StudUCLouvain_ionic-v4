@@ -26,3 +26,8 @@ FIND : npx tslint -c ionic-migration.Json -p tsconfig.json --fix
 
 
 Find collaborators ?
+
+
+# Testing
+
+### To launch only one test page : replace first describe by fdescribe ;)

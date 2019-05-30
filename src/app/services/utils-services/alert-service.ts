@@ -65,7 +65,7 @@ export class AlertService {
           handler: data => { this.languageChanged(data); }
         }
       ]
-    });
+    }).then();
   }
 
   private languageChanged(event: string) {
