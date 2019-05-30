@@ -21,7 +21,7 @@
 import { CacheService } from 'ionic-cache';
 
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -217,7 +217,12 @@ export class AppComponent {
     if (page.iosSchemaName !== null && page.androidPackageName !== null) {
       this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
     } else {
-      this.nav.navigateForward([page.component, { title: page.title }]);
+      const navigationExtras: NavigationExtras = {
+        state: {
+          title: page.title,
+        }
+      };
+      this.nav.navigateForward([page.component], navigationExtras);
     }
   }
 
