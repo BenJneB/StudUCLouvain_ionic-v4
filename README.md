@@ -29,6 +29,6 @@ FIND : npx tslint -c ionic-migration.Json -p tsconfig.json --fix
 Find collaborators ?
 
 
-# Testing
+# Testing : Current displayed coverage cover only files that have .spec.ts and dependencies
 
 ### To launch only one test page : replace first describe by fdescribe ;)
