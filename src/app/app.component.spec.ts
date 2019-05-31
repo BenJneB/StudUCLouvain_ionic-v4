@@ -44,7 +44,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
 import { AppComponent } from './app.component';
 
-fdescribe('MyApp Component', () => {
+describe('MyApp Component', () => {
   let fixture;
   let component;
 
