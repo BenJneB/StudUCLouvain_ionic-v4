@@ -174,14 +174,29 @@ describe('MyApp Component', () => {
   });
 
   describe('backButtonEvent method', () => {
+    let spyGetClose;
     beforeEach(() => {
       component.platform.backButton = of([]);
+      spyGetClose = spyOn(component, 'getElementToClose').and.callThrough();
+    });
+    afterEach(() => {
+      expect(spyGetClose.calls.count()).toEqual(3);
     });
 
-    it('should call getElementToClose', () => {
-      const spyGetClose = spyOn(component, 'getElementToClose').and.callThrough();
+    it('should call getElementToClose(x3) and close from MenuController', async function () {
+      spyOn(component.menu, 'getOpen').and.returnValue('returned');
+      const spyClose = spyOn(component.menu, 'close').and.callThrough();
+      const spyConfirmExit = spyOn(component, 'confirmExitApp').and.callThrough();
       component.backButtonEvent();
-      expect(spyGetClose.calls.count()).toEqual(3);
+      await spyClose.and.callThrough();
+      expect(spyClose.calls.count()).toEqual(1);
+      expect(spyConfirmExit.calls.count()).toEqual(1);
+    });
+    it('should call confirmExitApp if error', () => {
+      spyFunctionWithCallBackReject(component.menu, 'getOpen', '');
+      const spyConfirmExit = spyOn(component, 'confirmExitApp').and.callThrough();
+      component.backButtonEvent();
+      // SADELY NO TEST
     });
   });
 });
@@ -190,14 +205,6 @@ function spyFunctionWithCallBackThen(usedService: any, method: string, callbackR
   return spyOn(usedService, method).and.callFake(function () {
     return {
       then: function (callback) { return callback(callbackReturn); },
-    };
-  });
-}
-
-function spyFunctionWithCallBackSubscribe(usedService: any, method: string, callbackReturn: any) {
-  return spyOnProperty(usedService, method).and.callFake(function () {
-    return {
-      subscri: function (callback) { return callback(callbackReturn); },
     };
   });
 }
