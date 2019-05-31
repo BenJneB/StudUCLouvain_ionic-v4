@@ -196,7 +196,7 @@ export class AppComponent {
     this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
       if (outlet && outlet.canGoBack()) {
         outlet.pop();
-      } else
+      } else {
         if (this.router.url === 'home') {
           if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
             navigator['app'].exitApp(); //  work in ionic 4
@@ -207,6 +207,7 @@ export class AppComponent {
             this.lastTimeBackPress = new Date().getTime();
           }
         }
+      }
     });
   }
 

@@ -1,5 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { of } from 'rxjs';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 import {
     AppAvailabilityMock, AppVersionMock, MarketMock, NetworkMock, StatusBarMock, ToastMock
@@ -36,14 +37,14 @@ import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonRouterOutlet } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
 import { AppComponent } from './app.component';
 
-describe('MyApp Component', () => {
+fdescribe('MyApp Component', () => {
   let fixture;
   let component;
 
@@ -72,6 +73,7 @@ describe('MyApp Component', () => {
         { provide: Network, useClass: NetworkMock },
         Diagnostic,
         { provide: Calendar, useClass: CalendarMock },
+        Navigator
       ]
     }).compileComponents();
   }));
@@ -155,12 +157,47 @@ describe('MyApp Component', () => {
       expect(spyNavigate.calls.count()).toEqual(1);
     });
   });
+
+  describe('confirmExitApp method', () => {
+    it('should call pop from IonRouterOutlet (if can go back)', () => {
+      const spyPop = spyOn(IonRouterOutlet.prototype, 'pop').and.callThrough();
+      spyOn(IonRouterOutlet.prototype, 'canGoBack').and.returnValue(true);
+      component.confirmExitApp();
+      expect(spyPop.calls.count()).toEqual(1);
+    });
+    it('should call show from Toast (otherwhise and not threshold)', () => {
+      const spyShow = spyOn(component.toast, 'show').and.callThrough();
+      spyOnProperty(component.router, 'url', 'get').and.returnValue('home');
+      component.confirmExitApp();
+      expect(spyShow.calls.count()).toEqual(1);
+    });
+  });
+
+  describe('backButtonEvent method', () => {
+    beforeEach(() => {
+      component.platform.backButton = of([]);
+    });
+
+    it('should call getElementToClose', () => {
+      const spyGetClose = spyOn(component, 'getElementToClose').and.callThrough();
+      component.backButtonEvent();
+      expect(spyGetClose.calls.count()).toEqual(3);
+    });
+  });
 });
 
 function spyFunctionWithCallBackThen(usedService: any, method: string, callbackReturn: any) {
   return spyOn(usedService, method).and.callFake(function () {
     return {
       then: function (callback) { return callback(callbackReturn); },
+    };
+  });
+}
+
+function spyFunctionWithCallBackSubscribe(usedService: any, method: string, callbackReturn: any) {
+  return spyOnProperty(usedService, method).and.callFake(function () {
+    return {
+      subscri: function (callback) { return callback(callbackReturn); },
     };
   });
 }
