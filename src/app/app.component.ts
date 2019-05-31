@@ -181,9 +181,9 @@ export class AppComponent {
       this.getElementToClose(this.modalCtrl);
       try {
         const element = await this.menu.getOpen();
+        console.log(element);
         if (element) {
           this.menu.close();
-          return;
         }
       } catch (error) {
         console.log(error);
