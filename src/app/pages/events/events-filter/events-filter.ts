@@ -42,6 +42,7 @@ export class EventsFilterPage {
     const excludedFilters = this.navParams.get('excludedFilters');
     const filters = this.navParams.get('filters');
     this.dateRange = this.navParams.get('dateRange');
+    console.log('FILTERS', filters);
     for (const filterName of filters) {
       this.categories.push({
         name: filterName,

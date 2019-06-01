@@ -3,7 +3,7 @@ import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { of } from 'rxjs';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 import {
-    AppAvailabilityMock, AppVersionMock, MarketMock, NetworkMock, StatusBarMock, ToastMock
+    AppAvailabilityMock, MarketMock, NetworkMock, StatusBarMock, ToastMock
 } from 'test-config/MockIonicNative';
 
 /**
@@ -173,7 +173,7 @@ describe('MyApp Component', () => {
     });
   });
 
-  describe('backButtonEvent method', () => {
+  describe('backButtonEvent method (should call getElementToClose(x3))', () => {
     let spyGetClose;
     beforeEach(() => {
       component.platform.backButton = of([]);
@@ -183,7 +183,7 @@ describe('MyApp Component', () => {
       expect(spyGetClose.calls.count()).toEqual(3);
     });
 
-    it('should call getElementToClose(x3) and close from MenuController', async function () {
+    it('should call close from MenuController and confirmExitApp', async function () {
       spyOn(component.menu, 'getOpen').and.returnValue('returned');
       const spyClose = spyOn(component.menu, 'close').and.callThrough();
       const spyConfirmExit = spyOn(component, 'confirmExitApp').and.callThrough();
@@ -194,7 +194,6 @@ describe('MyApp Component', () => {
     });
     it('should call confirmExitApp if error', () => {
       spyFunctionWithCallBackReject(component.menu, 'getOpen', '');
-      const spyConfirmExit = spyOn(component, 'confirmExitApp').and.callThrough();
       component.backButtonEvent();
       // SADELY NO TEST
     });
