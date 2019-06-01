@@ -55,7 +55,9 @@ export class LibraryDetailsPage {
     public utilsServices: UtilsService
   ) {
     this.route.queryParams.subscribe(() => {
+      console.log('BEFORE', this.router.getCurrentNavigation());
       if (this.router.getCurrentNavigation().extras.state) {
+        console.log('INIFROUTER');
         this.libDetails = this.router.getCurrentNavigation().extras.state.items;
         this.searching = true;
         this.libDetails = this.libService.loadLibDetails(this.libDetails);
