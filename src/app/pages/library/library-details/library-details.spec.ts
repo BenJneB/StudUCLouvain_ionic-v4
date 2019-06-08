@@ -75,7 +75,9 @@ describe('LibraryDetails Component', () => {
             ]
         }).compileComponents();
     }));
+
     let spyGetCurrentNavigation;
+
     beforeEach(() => {
         spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
             .and.returnValue({ extras: { state: {} } });
@@ -88,5 +90,14 @@ describe('LibraryDetails Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, LibraryDetailsPage);
         expect(spyGetCurrentNavigation.calls.count() >= 1).toBeTruthy();
+    });
+
+    describe('openPage method', () => {
+        it('should call ', () => {
+            const spyOpen = spyOn(window, 'open').and.callThrough();
+            component.openPage('url');
+            expect(spyOpen.calls.count()).toEqual(1);
+            expect(spyOpen).toHaveBeenCalledWith('url', '_blank');
+        });
     });
 });
