@@ -1,7 +1,7 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { testInstanceCreation } from 'src/app/app.component.spec';
-import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
+import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { MockCacheStorageService, StorageMock } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -14,7 +14,7 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { ModalController } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -41,7 +41,7 @@ import {
 */
 import { LibrariesPage } from './libraries';
 
-describe('Libraries Component', () => {
+fdescribe('Libraries Component', () => {
     let fixture;
     let component;
 
@@ -50,6 +50,7 @@ describe('Libraries Component', () => {
             declarations: [LibrariesPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
+                IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
                 HttpClientTestingModule,
@@ -61,7 +62,7 @@ describe('Libraries Component', () => {
                 { provide: AppAvailability, useClass: AppAvailabilityMock },
                 { provide: Market, useClass: MarketMock },
                 { provide: Device, useClass: DeviceMock },
-                CacheService,
+                { provide: CacheService, useClass: StorageMock },
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
@@ -85,11 +86,49 @@ describe('Libraries Component', () => {
     });
 
     describe('goToLibDetails method', () => {
-        it('should call goToDetail with libItem and libraries/details from utilsServices', () => {
+        it('should call goToDetail with libItem and libraries/details from UtilsService', () => {
             const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
             component.goToLibDetails('libItem');
             expect(spyGoToDetail.calls.count()).toEqual(1);
             expect(spyGoToDetail).toHaveBeenCalledWith('libItem', 'libraries/details');
+        });
+    });
+
+    describe('loadLibraries method', () => {
+        let spyOnline;
+        let spySaveItem;
+        let spyLoad;
+        beforeEach(() => {
+            spySaveItem = spyOn(component.cache, 'saveItem').and.callThrough();
+        });
+
+        it('should call isOnline from ConnectivityService, if online, should loadLibraries', () => {
+            spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
+            spyLoad = spyFunctionWithCallBackThen(component.libService, 'loadLibraries', {});
+            component.loadLibraries();
+            expect(spyOnline.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
+            expect(spyLoad.calls.count()).toEqual(1);
+            expect(spySaveItem.calls.count()).toEqual(0);
+        });
+
+        it('and should call saveItem from Cache if key in parameter', () => {
+            spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
+            spyLoad = spyFunctionWithCallBackThen(component.libService, 'loadLibraries', {});
+            component.loadLibraries('key');
+            expect(spyOnline.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
+            expect(spyLoad.calls.count()).toEqual(1);
+            expect(spySaveItem.calls.count()).toEqual(1);
+        });
+
+        it('if not online, should call presentConnectionAlert', () => {
+            spyOnline = spyOn(component.connService, 'isOnline').and.returnValue(false);
+            const spyPresentAlert = spyOn(component.connService, 'presentConnectionAlert').and.callThrough();
+            component.loadLibraries();
+            expect(spyOnline.calls.count()).toEqual(1);
+            expect(spyPresentAlert.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
         });
     });
 });
