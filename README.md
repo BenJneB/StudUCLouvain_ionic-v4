@@ -12,10 +12,6 @@
 FIND : npx tslint -c ionic-migration.Json -p tsconfig.json --fix
 ==> Add .then() to modal etc. (TO MANAGE)
 
-#### ERROR An error was thrown in afterAll
-  Uncaught TypeError: Cannot read property 'id' of undefined thrown
-  #### RANDOM !? FIX IT !
-
 
 ### TO DO :
 
