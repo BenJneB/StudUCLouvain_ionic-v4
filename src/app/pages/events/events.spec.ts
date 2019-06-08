@@ -84,7 +84,7 @@ describe('Events Component', () => {
                 Diagnostic,
                 { provide: Calendar, useClass: CalendarMock },
             ]
-        });
+        }).compileComponents();
     }));
 
     beforeEach(() => {
@@ -118,15 +118,20 @@ describe('Events Component', () => {
                 'cat',
                 'iconCat'
             );
-            TestBed
-                .compileComponents()
-                .then(() => {
-                    component.goToEventDetail(eventItem);
-                    expect(spyGoDetail.calls.count()).toEqual(1);
-                    expect(spyGoDetail.calls.first().args[0]).toEqual(eventItem);
-                    expect(spyGoDetail.calls.first().args[1]).toEqual('events/details');
-                });
+            component.goToEventDetail(eventItem);
+            expect(spyGoDetail.calls.count()).toEqual(1);
+            expect(spyGoDetail.calls.first().args[0]).toEqual(eventItem);
+            expect(spyGoDetail.calls.first().args[1]).toEqual('events/details');
         });
     });
+
+    // describe('goToLibDetails method', () => {
+    //     it('should call goToDetail with libItem and libraries/details from utilsServices', () => {
+    //         const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+    //         component.goToLibDetails('libItem');
+    //         expect(spyGoToDetail.calls.count()).toEqual(1);
+    //         expect(spyGoToDetail).toHaveBeenCalledWith('libItem', 'libraries/details');
+    //     });
+    // });
 });
 

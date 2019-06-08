@@ -45,10 +45,10 @@
     "core-js": "^2.6.9",
     "ionic-cache": "^4.0.1",
     "ionicons": "^4.5.8",
-    "rxjs": "~6.3.3",
+    "rxjs": "^6.5.2",
     "tar": "^4.4.10",
     "timers": "^0.1.1",
-    "zone.js": "~0.8.29"
+    "zone.js": "^0.9.1"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.12.3",
@@ -59,7 +59,7 @@
     "@angular/compiler": "~7.2.2",
     "@angular/compiler-cli": "~7.2.2",
     "@angular/language-service": "~7.2.2",
-    "@ionic/angular-toolkit": "~1.4.0",
+    "@ionic/angular-toolkit": "^1.5.1",
     "@ionic/lab": "1.0.24",
     "@types/jasmine": "^2.8.16",
     "@types/jasminewd2": "~2.0.3",
@@ -73,8 +73,8 @@
     "karma-jasmine": "^1.1.2",
     "karma-jasmine-html-reporter": "^0.2.2",
     "protractor": "~5.4.0",
-    "ts-node": "~8.0.0",
-    "tslint": "~5.12.0",
+    "ts-node": "^8.2.0",
+    "tslint": "^5.17.0",
     "typescript": "~3.1.6"
   },
   "description": "An Ionic project"
