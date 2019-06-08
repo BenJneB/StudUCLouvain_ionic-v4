@@ -46,7 +46,6 @@ export class SportsPage {
   segment = 'all';
   shownSports = 0;
   shownTeams = 0;
-  title: any;
   searchTerm = '';
   searchControl: FormControl;
   filters: any = [];
@@ -59,7 +58,6 @@ export class SportsPage {
   dateLimit: Date = new Date();
   campus: string;
   shownGroup = null;
-  loading;
   nosport: any = false;
   noteams: any = false;
   texts = {
