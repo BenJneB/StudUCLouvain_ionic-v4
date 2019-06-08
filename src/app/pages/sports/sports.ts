@@ -27,6 +27,7 @@ import {
 
 import { SportItem } from '../../entity/sportItem';
 import { SportsService } from '../../services/rss-services/sports-service';
+import { AlertService } from '../../services/utils-services/alert-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
 import { UserService } from '../../services/utils-services/user-service';
@@ -73,6 +74,7 @@ export class SportsPage {
 
   constructor(
     public alertCtrl: AlertController,
+    private alertService: AlertService,
     public modalCtrl: ModalController,
     private sportsService: SportsService,
     public user: UserService,
@@ -230,11 +232,7 @@ export class SportsPage {
     };
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
       itemData.salle, itemData.date, itemData.hfin, options).then(() => {
-        const toast = this.toastCtrl.create({
-          message: 'Sport créé',
-          duration: 3000
-        }).then(t => t.present());
-        slidingItem.close();
+        this.alertService.presentToast('Sport créé', slidingItem);
       });
   }
 
