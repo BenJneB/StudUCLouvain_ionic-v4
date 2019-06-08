@@ -41,7 +41,7 @@ import {
 */
 import { EventsFilterPage } from './events-filter';
 
-fdescribe('EventsFilter Component', () => {
+describe('EventsFilter Component', () => {
     let fixture;
     let component;
 
