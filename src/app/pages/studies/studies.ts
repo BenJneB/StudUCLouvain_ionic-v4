@@ -167,21 +167,15 @@ export class StudiesPage {
         this.activities.push({ 'name': '', 'sigle': sigle });
       }
     })
-      .catch((err) => {
-        console.log('Error during load of course program');
-      });
+      .catch((err) => { console.log('Error during load of course program'); });
   }
 
   /*Open modalprojectpage to choose an ade project*/
   async openModalProject() {
     const obj = { sessionId: this.sessionId };
-
     const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj });
     await myModal.present();
-    await myModal.onDidDismiss().then(data => {
-      this.project = data.data;
-
-    });
+    await myModal.onDidDismiss().then(data => { this.project = data.data; });
   }
 
   /*Set project and connect to ADE*/
@@ -247,7 +241,6 @@ export class StudiesPage {
     return await toast.present();
   }
 
-  /*Retrieve list of course added previously in the storage*/
   getCourses() {
     this.storage.get('listCourses').then((data) => {
       if (data === null) {
@@ -258,14 +251,12 @@ export class StudiesPage {
     });
   }
 
-  /*Save course into storage*/
   saveCourse(name: string, tag: string) {
     const course = new Course(name, tag, null);
     this.listCourses.push(course);
     this.storage.set('listCourses', this.listCourses);
   }
 
-  /*Remove course from storage*/
   removeCourse(course: Course) {
     const index = this.listCourses.indexOf(course);
     if (index >= 0) {
@@ -274,7 +265,6 @@ export class StudiesPage {
     this.storage.set('listCourses', this.listCourses);
   }
 
-  /*Open CoursePage of a course to have the schedule*/
   openCoursePage(course: Course) {
     const year = parseInt(this.project.name.split('-')[0], 10);
     const navigationExtras: NavigationExtras = {
@@ -302,7 +292,6 @@ export class StudiesPage {
     await alert.present();
   }
 
-  /*Launch moodle or ucl portal*/
   launch(url) {
     this.iab.create(url, '_system');
   }

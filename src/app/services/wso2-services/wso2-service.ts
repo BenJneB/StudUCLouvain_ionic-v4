@@ -80,7 +80,7 @@ export class Wso2Service {
         if (login) {
           this.tokenStudent = 'Bearer ' + res['access_token'];
         } else {
-          this.token = 'Bearer ' + res['access_token'];;
+          this.token = 'Bearer ' + res['access_token'];
         }
         return 'OK';
       }),
