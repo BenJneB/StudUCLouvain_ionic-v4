@@ -47,12 +47,8 @@ import { ModalProjectPage } from './modal-project/modal-project';
 })
 
 export class StudiesPage {
-  public people: any;
-  public data: any;
   private segment = 'prog';
   public listCourses: Course[];
-  public course: Course;
-  public title = 'Etudes';
   public sessionId: string;
   public project: AdeProject = null;
   private username = '';
@@ -61,243 +57,241 @@ export class StudiesPage {
   status = '';
   sigles: any;
   activities: any = [];
-  response: any;
-  language;
   private statusInsc = '';
   private prog = '';
 
   constructor(
-    // public studiesService: StudiesService,
-    // public navCtrl: NavController,
-    // private alertCtrl: AlertController,
-    // public storage: Storage,
-    // public menu: MenuController,
-    // public toastCtrl: ToastController,
-    // public platform: Platform,
-    // private iab: InAppBrowser,
-    // public modalCtrl: ModalController,
-    // public connService: ConnectivityService,
-    // private wso2Service: Wso2Service,
-    // private studentService: StudentService,
-    // private transService: TransService,
-    // private alertService: AlertService,
-    // private utilsServices: UtilsService
+    public studiesService: StudiesService,
+    public navCtrl: NavController,
+    private alertCtrl: AlertController,
+    public storage: Storage,
+    public menu: MenuController,
+    public toastCtrl: ToastController,
+    public platform: Platform,
+    private iab: InAppBrowser,
+    public modalCtrl: ModalController,
+    public connService: ConnectivityService,
+    private wso2Service: Wso2Service,
+    private studentService: StudentService,
+    private transService: TransService,
+    private alertService: AlertService,
+    private utilsServices: UtilsService
   ) {
-    // this.initializeSession();
-    // this.menu.enable(true, 'studiesMenu');
-    // console.log('BEFORE GET COURSE');
-    // this.getCourses();
+    this.initializeSession();
+    this.menu.enable(true, 'studiesMenu');
+    console.log('BEFORE GET COURSE');
+    this.getCourses();
   }
 
-  // checkExist(sigle: string): Promise<any> {
-  //   let response: any;
-  //   const year = parseInt(this.project.name.split('-')[0], 10);
-  //   return new Promise(resolve => {
-  //     this.studentService.checkCourse(sigle, year).then(
-  //       (data) => {
-  //         const res: any = data;
-  //         let exist: boolean;
-  //         let nameFR = '';
-  //         let nameEN = '';
-  //         if (res === undefined) {
-  //           exist = false;
-  //         } else {
-  //           const names = res.intituleCompletMap.entry;
-  //           nameFR = names[1].value;
-  //           nameEN = names[0].value;
-  //           exist = true;
-  //         }
-  //         response = { exist: exist, nameFR: nameFR, nameEN: nameEN };
-  //         resolve(response);
-  //       });
-  //   });
-  // }
+  checkExist(sigle: string): Promise<any> {
+    let response: any;
+    const year = parseInt(this.project.name.split('-')[0], 10);
+    return new Promise(resolve => {
+      this.studentService.checkCourse(sigle, year).then(
+        (data) => {
+          const res: any = data;
+          let exist: boolean;
+          let nameFR = '';
+          let nameEN = '';
+          if (res === undefined) {
+            exist = false;
+          } else {
+            const names = res.intituleCompletMap.entry;
+            nameFR = names[1].value;
+            nameEN = names[0].value;
+            exist = true;
+          }
+          response = { exist: exist, nameFR: nameFR, nameEN: nameEN };
+          resolve(response);
+        });
+    });
+  }
 
-  // /*Authenticate a student*/
-  // private login() {
-  //   this.error = '';
-  //   return new Promise(resolve => {
-  //     this.wso2Service.login(this.username, this.password).pipe(
-  //       catchError(error => {
-  //         if (error.status === 400) {
-  //           this.error = this.transService.getTranslation('STUDY.BADLOG');
-  //         } else {
-  //           this.error = this.transService.getTranslation('STUDY.ERROR');
-  //         }
-  //         return error;
-  //       }))
-  //       .subscribe(
-  //         data => {
-  //           if (data !== null) {
-  //             this.status = data.toString();
-  //             resolve(data);
-  //           }
-  //         });
-  //   });
-  // }
+  /*Authenticate a student*/
+  private login() {
+    this.error = '';
+    return new Promise(resolve => {
+      this.wso2Service.login(this.username, this.password).pipe(
+        catchError(error => {
+          if (error.status === 400) {
+            this.error = this.transService.getTranslation('STUDY.BADLOG');
+          } else {
+            this.error = this.transService.getTranslation('STUDY.ERROR');
+          }
+          return error;
+        }))
+        .subscribe(
+          data => {
+            if (data !== null) {
+              this.status = data.toString();
+              resolve(data);
+            }
+          });
+    });
+  }
 
-  // /*Get course program of student*/
-  // loadActivities() {
-  //   if (this.connService.isOnline()) {
-  //     this.login().then(() => {
-  //       if (this.status) {
-  //         this.searchActivities();
-  //         this.studentService.getStatus().then((res) => {
-  //           const result: any = res;
-  //           this.statusInsc = result[0].etatInscription;
-  //           this.prog = result[0].intitOffreComplet;
-  //         })
-  //           .catch((err) => {
-  //             console.log('Error during load of inscription status');
-  //           });
-  //       }
-  //     });
-  //   } else {
-  //     this.navCtrl.pop();
-  //     this.connService.presentConnectionAlert();
-  //   }
-  // }
+  /*Get course program of student*/
+  loadActivities() {
+    if (this.connService.isOnline()) {
+      this.login().then(() => {
+        if (this.status) {
+          this.searchActivities();
+          this.studentService.getStatus().then((res) => {
+            const result: any = res;
+            this.statusInsc = result[0].etatInscription;
+            this.prog = result[0].intitOffreComplet;
+          })
+            .catch((err) => {
+              console.log('Error during load of inscription status');
+            });
+        }
+      });
+    } else {
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
+  }
 
-  // private searchActivities() {
-  //   this.studentService.searchActivities().then((res) => {
-  //     const result: any = res;
-  //     this.sigles = result.activities.activity;
-  //     for (const sigle of this.sigles) {
-  //       this.activities.push({ 'name': '', 'sigle': sigle });
-  //     }
-  //   })
-  //     .catch((err) => { console.log('Error during load of course program'); });
-  // }
+  private searchActivities() {
+    this.studentService.searchActivities().then((res) => {
+      const result: any = res;
+      this.sigles = result.activities.activity;
+      for (const sigle of this.sigles) {
+        this.activities.push({ 'name': '', 'sigle': sigle });
+      }
+    })
+      .catch((err) => { console.log('Error during load of course program'); });
+  }
 
-  // /*Open modalprojectpage to choose an ade project*/
-  // async openModalProject() {
-  //   const obj = { sessionId: this.sessionId };
-  //   const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj });
-  //   await myModal.present();
-  //   await myModal.onDidDismiss().then(data => { this.project = data.data; });
-  // }
+  /*Open modalprojectpage to choose an ade project*/
+  async openModalProject() {
+    const obj = { sessionId: this.sessionId };
+    const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj });
+    await myModal.present();
+    await myModal.onDidDismiss().then(data => { this.project = data.data; });
+  }
 
-  // /*Set project and connect to ADE*/
-  // initializeSession() {
-  //   console.log('INIT');
-  //   if (this.connService.isOnline()) {
-  //     console.log('ONLINE');
-  //     this.studiesService.openSession().then(
-  //       data => {
-  //         console.log('OPEN SESSION', data);
-  //         this.sessionId = data;
-  //         this.storage.get('adeProject').then(
-  //           (dataProject) => {
-  //             console.log('adeProject Got', dataProject);
-  //             this.project = dataProject;
-  //             if (this.project === null || this.project === undefined) {
-  //               this.openModalProject();
-  //             } else {
-  //               this.studiesService.setProject(this.sessionId, this.project.id).then();
-  //             }
-  //           }
-  //         );
-  //       });
-  //   } else {
-  //     this.navCtrl.pop();
-  //     this.connService.presentConnectionAlert();
-  //   }
-  // }
+  /*Set project and connect to ADE*/
+  initializeSession() {
+    console.log('INIT');
+    if (this.connService.isOnline()) {
+      console.log('ONLINE');
+      this.studiesService.openSession().then(
+        data => {
+          console.log('OPEN SESSION', data);
+          this.sessionId = data;
+          this.storage.get('adeProject').then(
+            (dataProject) => {
+              console.log('adeProject Got', dataProject);
+              this.project = dataProject;
+              if (this.project === null || this.project === undefined) {
+                this.openModalProject();
+              } else {
+                this.studiesService.setProject(this.sessionId, this.project.id).then();
+              }
+            }
+          );
+        });
+    } else {
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
+  }
 
-  // addCourseFromProgram(acro?: string) {
-  //   let already = false;
-  //   for (const item of this.listCourses) {
-  //     if (item.acronym === acro) { already = true; }
-  //   }
-  //   this.checkCourseExisting(already, acro);
-  // }
+  addCourseFromProgram(acro?: string) {
+    let already = false;
+    for (const item of this.listCourses) {
+      if (item.acronym === acro) { already = true; }
+    }
+    this.checkCourseExisting(already, acro);
+  }
 
-  // private checkCourseExisting(already: boolean, acro: string) {
-  //   let check;
-  //   if (!already) {
-  //     this.checkExist(acro).then(data2 => {
-  //       check = data2;
-  //       if (check.exist) {
-  //         this.addCourse(acro, check.nameFR);
-  //       } else {
-  //         this.alertService.toastCourse('STUDY.BADCOURSE');
-  //         this.showPrompt();
-  //       }
-  //     });
-  //   } else {
-  //     this.alertService.toastCourse('STUDY.ALCOURSE');
-  //   }
-  //   return check;
-  // }
+  private checkCourseExisting(already: boolean, acro: string) {
+    let check;
+    if (!already) {
+      this.checkExist(acro).then(data2 => {
+        check = data2;
+        if (check.exist) {
+          this.addCourse(acro, check.nameFR);
+        } else {
+          this.alertService.toastCourse('STUDY.BADCOURSE');
+          this.showPrompt();
+        }
+      });
+    } else {
+      this.alertService.toastCourse('STUDY.ALCOURSE');
+    }
+    return check;
+  }
 
-  // private showPrompt() {
-  //   this.alertService.showPromptStudies(this.listCourses, this.checkCourseExisting.bind(this));
-  // }
+  private showPrompt() {
+    this.alertService.showPromptStudies(this.listCourses, this.checkCourseExisting.bind(this));
+  }
 
-  // async addCourse(sigle: string, name: string) {
-  //   this.saveCourse(name, sigle);
-  //   const toast = await this.toastCtrl.create({
-  //     message: 'Cours ajouté',
-  //     duration: 1000,
-  //     position: 'bottom'
-  //   });
-  //   return await toast.present();
-  // }
+  async addCourse(sigle: string, name: string) {
+    this.saveCourse(name, sigle);
+    const toast = await this.toastCtrl.create({
+      message: 'Cours ajouté',
+      duration: 1000,
+      position: 'bottom'
+    });
+    return await toast.present();
+  }
 
-  // getCourses() {
-  //   console.log('BEFORE GET COURSES ETCCCCé)');
-  //   this.storage.get('listCourses').then((data) => {
-  //     console.log('IN GET STORAGE GETCOURSES');
-  //     if (data === null) {
-  //       this.listCourses = [];
-  //     } else {
-  //       this.listCourses = data;
-  //     }
-  //   });
-  // }
+  getCourses() {
+    console.log('BEFORE GET COURSES ETCCCCé)');
+    this.storage.get('listCourses').then((data) => {
+      console.log('IN GET STORAGE GETCOURSES');
+      if (data === null) {
+        this.listCourses = [];
+      } else {
+        this.listCourses = data;
+      }
+    });
+  }
 
-  // saveCourse(name: string, tag: string) {
-  //   const course = new Course(name, tag, null);
-  //   this.listCourses.push(course);
-  //   this.storage.set('listCourses', this.listCourses);
-  // }
+  saveCourse(name: string, tag: string) {
+    const course = new Course(name, tag, null);
+    this.listCourses.push(course);
+    this.storage.set('listCourses', this.listCourses);
+  }
 
-  // removeCourse(course: Course) {
-  //   const index = this.listCourses.indexOf(course);
-  //   if (index >= 0) {
-  //     this.listCourses.splice(index, 1);
-  //   }
-  //   this.storage.set('listCourses', this.listCourses);
-  // }
+  removeCourse(course: Course) {
+    const index = this.listCourses.indexOf(course);
+    if (index >= 0) {
+      this.listCourses.splice(index, 1);
+    }
+    this.storage.set('listCourses', this.listCourses);
+  }
 
-  // openCoursePage(course: Course) {
-  //   const year = parseInt(this.project.name.split('-')[0], 10);
-  //   const navigationExtras: NavigationExtras = {
-  //     state: {
-  //       course: course,
-  //       sessionId: this.sessionId,
-  //       year: year
-  //     }
-  //   };
-  //   this.navCtrl.navigateForward(['/course'], navigationExtras);
-  // }
+  openCoursePage(course: Course) {
+    const year = parseInt(this.project.name.split('-')[0], 10);
+    const navigationExtras: NavigationExtras = {
+      state: {
+        course: course,
+        sessionId: this.sessionId,
+        year: year
+      }
+    };
+    this.navCtrl.navigateForward(['/course'], navigationExtras);
+  }
 
-  // openWeekPage() {
-  //   this.studentService.weekSchedule().then((res) => {
-  //     this.utilsServices.goToDetail(res, 'hebdo');
-  //   });
-  // }
+  openWeekPage() {
+    this.studentService.weekSchedule().then((res) => {
+      this.utilsServices.goToDetail(res, 'hebdo');
+    });
+  }
 
-  // async openExamPage() {
-  //   const alert = await this.alertCtrl.create({
-  //     header: 'Indisponible',
-  //     subHeader: 'Cette fonctionnalité n\'est pas encore disponible',
-  //     buttons: ['OK']
-  //   });
-  //   await alert.present();
-  // }
+  async openExamPage() {
+    const alert = await this.alertCtrl.create({
+      header: 'Indisponible',
+      subHeader: 'Cette fonctionnalité n\'est pas encore disponible',
+      buttons: ['OK']
+    });
+    await alert.present();
+  }
 
-  // launch(url) {
-  //   this.iab.create(url, '_system');
-  // }
+  launch(url) {
+    this.iab.create(url, '_system');
+  }
 }

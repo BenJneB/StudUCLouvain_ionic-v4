@@ -85,7 +85,7 @@ describe('Studies Component', () => {
         fixture.detectChanges();
     });
 
-    // it('should be created', () => {
-    //     testInstanceCreation(component, StudiesPage);
-    // });
+    it('should be created', () => {
+        testInstanceCreation(component, StudiesPage);
+    });
 });
