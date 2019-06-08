@@ -44,7 +44,7 @@ import { EventsFilterPage } from './events-filter';
 describe('EventsFilter Component', () => {
     let fixture;
     let component;
-
+    let categories = [undefined, undefined, undefined];
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [EventsFilterPage],
