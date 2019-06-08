@@ -3,7 +3,7 @@ import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
@@ -15,11 +15,10 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { IonicModule, MenuController, ModalController } from '@ionic/angular';
+import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MenuControllerMock } from '../../../../test-config/MockAngular';
 import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
     ModalControllerMock, NetworkMock
@@ -55,7 +54,7 @@ describe('Studies Component', () => {
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientModule,
+                HttpClientTestingModule,
                 IonicStorageModule.forRoot(),
                 FormsModule
             ],
@@ -81,6 +80,7 @@ describe('Studies Component', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(StudiesPage);
         component = fixture.componentInstance;
+        const spyGet = spyOn(component.storage, 'get').and.returnValue({ studies: { $: { id: 'id' } } }).and.callThrough();
         fixture.detectChanges();
     });
 

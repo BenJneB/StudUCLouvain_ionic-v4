@@ -178,9 +178,12 @@ export class StudiesPage {
 
   /*Set project and connect to ADE*/
   initializeSession() {
+    console.log('INIT');
     if (this.connService.isOnline()) {
+      console.log('ONLINE');
       this.studiesService.openSession().then(
         data => {
+          console.log('OPEN SESSION');
           this.sessionId = data;
           this.storage.get('adeProject').then(
             (dataProject) => {

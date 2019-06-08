@@ -3,7 +3,7 @@ import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
@@ -53,7 +53,7 @@ describe('LibraryDetails Component', () => {
             imports: [
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientModule,
+                HttpClientTestingModule,
                 IonicStorageModule.forRoot(),
             ],
             providers: [

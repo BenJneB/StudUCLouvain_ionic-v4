@@ -31,7 +31,6 @@ import { AdeService } from './ade-service';
 })
 export class CourseService {
 
-  space = '<br>&nbsp;&nbsp;&nbsp;&nbsp;';
   constructor(
     public http: HttpClient,
     public ade: AdeService) {
@@ -39,7 +38,7 @@ export class CourseService {
 
   /*Get the course ID for the acronym of the course*/
   getCourseId(sessionId: string, acronym: string) {
-    return this.getData(this.extractCourseId, this.ade.httpGetCourseId.bind(this.ade), sessionId, acronym);
+    return this.getData(this.extractCourseId, this.ade.getCourseId.bind(this.ade), sessionId, acronym);
   }
 
   getData(extract: (data: any) => any, getInfo: (sessionId: string, field: string) => Observable<any>, sessionId: string, field: string) {
@@ -60,7 +59,7 @@ export class CourseService {
 
   /*Get activity for a course ID obtained by getting this from a course selected by the user*/
   getActivity(sessionId: string, courseId: any) {
-    return this.getData(this.extractActivity.bind(this), this.ade.httpGetActivity.bind(this.ade), sessionId, courseId);
+    return this.getData(this.extractActivity.bind(this), this.ade.getActivity.bind(this.ade), sessionId, courseId);
   }
 
   /*Extract the activity*/
@@ -142,7 +141,7 @@ export class CourseService {
   private fillItems(participants: any, i: number, itemsData: any) {
     switch (participants[i].$.category) {
       case 'trainee': {
-        itemsData.students = itemsData.students + participants[i].$.name + this.space;
+        itemsData.students = itemsData.students + participants[i].$.name + '<br>&nbsp;&nbsp;&nbsp;&nbsp;';
         break;
       }
       case 'classroom': {

@@ -2,7 +2,7 @@ import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { EventItem } from 'src/app/entity/eventItem';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -64,7 +64,7 @@ describe('Events Component', () => {
                 TranslateModule.forRoot(),
                 IonicStorageModule.forRoot(),
                 RouterTestingModule,
-                HttpClientModule,
+                HttpClientTestingModule,
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
