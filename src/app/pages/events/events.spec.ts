@@ -123,13 +123,28 @@ describe('Events Component', () => {
         });
     });
 
-    // describe('goToLibDetails method', () => {
-    //     it('should call goToDetail with libItem and libraries/details from utilsServices', () => {
-    //         const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
-    //         component.goToLibDetails('libItem');
-    //         expect(spyGoToDetail.calls.count()).toEqual(1);
-    //         expect(spyGoToDetail).toHaveBeenCalledWith('libItem', 'libraries/details');
-    //     });
-    // });
-});
+    describe('goToEventDetail method', () => {
+        it('should call goToDetail with eventItem and events/details from UtilsService', () => {
+            const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            component.goToEventDetail('eventItem');
+            expect(spyGoToDetail.calls.count()).toEqual(1);
+            expect(spyGoToDetail).toHaveBeenCalledWith('eventItem', 'events/details');
+        });
+    });
 
+    describe('removeFavorite method', () => {
+        it('should call removeFavorite from UtilsService', () => {
+            const spyRemove = spyOn(component.utilsServices, 'removeFavorite').and.callThrough();
+            component.removeFavorite();
+            expect(spyRemove.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('addFavorite method', () => {
+        it('should call addFavorite from UtilsService', () => {
+            const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
+            component.addFavorite();
+            expect(spyAdd.calls.count()).toEqual(1);
+        });
+    });
+});
