@@ -47,12 +47,8 @@ import { ModalProjectPage } from './modal-project/modal-project';
 })
 
 export class StudiesPage {
-  public people: any;
-  public data: any;
   private segment = 'prog';
   public listCourses: Course[];
-  public course: Course;
-  public title = 'Etudes';
   public sessionId: string;
   public project: AdeProject = null;
   private username = '';
@@ -61,8 +57,6 @@ export class StudiesPage {
   status = '';
   sigles: any;
   activities: any = [];
-  response: any;
-  language;
   private statusInsc = '';
   private prog = '';
 
