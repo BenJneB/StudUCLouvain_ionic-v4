@@ -21,9 +21,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Calendar } from '@ionic-native/calendar/ngx';
-import {
-    AlertController, IonItemSliding, IonList, ModalController, NavController, ToastController
-} from '@ionic/angular';
+import { IonItemSliding, IonList, ModalController, NavController } from '@ionic/angular';
 
 import { SportItem } from '../../entity/sportItem';
 import { SportsService } from '../../services/rss-services/sports-service';
@@ -73,12 +71,10 @@ export class SportsPage {
   };
 
   constructor(
-    public alertCtrl: AlertController,
     private alertService: AlertService,
     public modalCtrl: ModalController,
     private sportsService: SportsService,
     public user: UserService,
-    public toastCtrl: ToastController,
     private calendar: Calendar,
     public connService: ConnectivityService,
     private loader: LoaderService,
