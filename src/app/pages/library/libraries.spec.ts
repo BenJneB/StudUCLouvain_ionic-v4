@@ -41,7 +41,7 @@ import {
 */
 import { LibrariesPage } from './libraries';
 
-fdescribe('Libraries Component', () => {
+describe('Libraries Component', () => {
     let fixture;
     let component;
 
