@@ -54,7 +54,7 @@ export class AdeService {
     if (sessionId !== undefined) {
       encodedURL = this.getBasicSessionUrl(sessionId) + encodedURL;
     }
-    console.log('BEFORE FIRST RETURN DATAFROMADE');
+    console.log('BEFORE FIRST RETURN DATAFROMADE', encodedURL);
     return this.http.get(encodedURL, { responseType: 'text' }).pipe(map(res => {
       console.log('BEFORE SECOND RETURN DATAFROMADE');
       return this.utilsServices.convertToJson(res);
