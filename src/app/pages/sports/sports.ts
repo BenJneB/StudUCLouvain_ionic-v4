@@ -21,12 +21,11 @@
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Calendar } from '@ionic-native/calendar/ngx';
-import {
-    AlertController, IonItemSliding, IonList, ModalController, NavController, ToastController
-} from '@ionic/angular';
+import { IonItemSliding, IonList, ModalController, NavController } from '@ionic/angular';
 
 import { SportItem } from '../../entity/sportItem';
 import { SportsService } from '../../services/rss-services/sports-service';
+import { AlertService } from '../../services/utils-services/alert-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
 import { UserService } from '../../services/utils-services/user-service';
@@ -47,7 +46,6 @@ export class SportsPage {
   segment = 'all';
   shownSports = 0;
   shownTeams = 0;
-  title: any;
   searchTerm = '';
   searchControl: FormControl;
   filters: any = [];
@@ -60,7 +58,6 @@ export class SportsPage {
   dateLimit: Date = new Date();
   campus: string;
   shownGroup = null;
-  loading;
   nosport: any = false;
   noteams: any = false;
   texts = {
@@ -72,11 +69,10 @@ export class SportsPage {
   };
 
   constructor(
-    public alertCtrl: AlertController,
+    private alertService: AlertService,
     public modalCtrl: ModalController,
     private sportsService: SportsService,
     public user: UserService,
-    public toastCtrl: ToastController,
     private calendar: Calendar,
     public connService: ConnectivityService,
     private loader: LoaderService,
@@ -230,11 +226,7 @@ export class SportsPage {
     };
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
       itemData.salle, itemData.date, itemData.hfin, options).then(() => {
-        const toast = this.toastCtrl.create({
-          message: 'Sport créé',
-          duration: 3000
-        }).then(t => t.present());
-        slidingItem.close();
+        this.alertService.presentToast('Sport créé', slidingItem);
       });
   }
 

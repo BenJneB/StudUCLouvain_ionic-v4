@@ -170,7 +170,7 @@ export class CoursePage {
   }
 
   /*Display a prompt to proprose to the students the slots available for the TP or the CM*/
-  showPrompt(segment: string) {
+  async showPrompt(segment: string) {
     let title: string;
     let message: string;
     let cancel: string;
@@ -183,9 +183,9 @@ export class CoursePage {
     const aucun = ((this.slotTP === 'no' && segment === 'TD') || (this.slotCM === 'no' && segment === 'Cours magistral'));
     const array = this.getSlots(segment);
     this.fillInputs(array, options, aucun);
-    const prompt = this.alertCtrl.create(options);
+    const prompt = await this.alertCtrl.create(options);
     if (options.inputs.length > 1) {
-      prompt.then(p => p.present());
+      await prompt.present();
     }
   }
 
