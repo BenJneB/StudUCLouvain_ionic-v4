@@ -60,8 +60,6 @@ export class StudiesService {
   /*Extract the projects ADE*/
   extractAdeProjects(data): AdeProject[] {
     const projects: AdeProject[] = [];
-    console.log(data.projects);
-    console.log(data.projects.project.length);
     if (data.projects.project.length === undefined) {
       const name = data.projects.project.$.name.toString();
       const id = data.projects.project.$.id.toString();

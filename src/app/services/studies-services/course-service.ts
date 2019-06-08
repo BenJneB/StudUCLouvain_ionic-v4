@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/internal/Observable';
+
 import { HttpClient } from '@angular/common/http';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -37,12 +39,12 @@ export class CourseService {
 
   /*Get the course ID for the acronym of the course*/
   getCourseId(sessionId: string, acronym: string) {
-    return this.getData(this.extractCourseId, this.ade.httpGetCourseId, sessionId, acronym);
+    return this.getData(this.extractCourseId, this.ade.httpGetCourseId.bind(this.ade), sessionId, acronym);
   }
 
-  getData(extract: (data: any) => any, getInfo: (sessionId: string, field: string) => void, sessionId: string, field: string) {
+  getData(extract: (data: any) => any, getInfo: (sessionId: string, field: string) => Observable<any>, sessionId: string, field: string) {
     return new Promise<Activity[]>((resolve, reject) => {
-      this.ade.httpGetActivity(sessionId, field).subscribe(
+      getInfo(sessionId, field).subscribe(
         data => {
           resolve(extract(data));
         });
@@ -52,13 +54,13 @@ export class CourseService {
   /*Extract the course ID*/
   extractCourseId(data) {
     if (data.resources.resource !== undefined) {
-      return data.resources.resource._id;
+      return data.resources.resource.$.id;
     }
   }
 
   /*Get activity for a course ID obtained by getting this from a course selected by the user*/
   getActivity(sessionId: string, courseId: any) {
-    return this.getData(this.extractActivity, this.ade.httpGetActivity, sessionId, courseId);
+    return this.getData(this.extractActivity.bind(this), this.ade.httpGetActivity.bind(this.ade), sessionId, courseId);
   }
 
   /*Extract the activity*/
@@ -82,17 +84,16 @@ export class CourseService {
   /*For each activity collect the right variables to be able to display them*/
   createNewActivities(jsonActivity): Activity[] {
     const activities: Activity[] = [];
-    const type = jsonActivity._type;
+    const type = jsonActivity.$.type;
     const isExam = type.indexOf('Examen') !== -1;
     let events = jsonActivity.events.event;
     if (events !== undefined) {
       events = this.handleSpecialCase(events);
-
       for (let i = 0; i < events.length; i++) {
         const event = events[i];
-        const endHour = event._endHour;
-        const startHour = event._startHour;
-        const date = event._date;
+        const endHour = event.$.endHour;
+        const startHour = event.$.startHour;
+        const date = event.$.date;
         const participants = event.eventParticipants.eventParticipant;
         const { teachers, students, auditorium } = this.getItems(participants);
         const start = this.createDate(date, startHour);
@@ -129,27 +130,30 @@ export class CourseService {
   }
 
   getItems(participants) {
-    let students = '';
-    let teachers = '';
-    let auditorium = '';
+    let itemsData = { students: '&nbsp;&nbsp;&nbsp;&nbsp;', teachers: '', auditorium: '' };
     for (let i = 0; i < participants.length; i++) {
-      ({ students, auditorium, teachers } = this.fillItems(participants, i, students, auditorium, teachers));
+      itemsData = this.fillItems(participants, i, itemsData);
     }
-    students = students.substr(0, students.length - 28);
-    return { teachers, students, auditorium };
+    itemsData.students = itemsData.students.substr(0, itemsData.students.length - 28);
+    return itemsData;
   }
 
 
-  private fillItems(participants: any, i: number, students: string, auditorium: string, teachers: string) {
-    if (participants[i]._category === 'trainee') {
-      students = students + participants[i]._name + this.space;
+  private fillItems(participants: any, i: number, itemsData: any) {
+    switch (participants[i].$.category) {
+      case 'trainee': {
+        itemsData.students = itemsData.students + participants[i].$.name + this.space;
+        break;
+      }
+      case 'classroom': {
+        itemsData.auditorium = itemsData.auditorium + participants[i].$.name + ' ';
+        break;
+      }
+      case 'instructor': {
+        itemsData.teachers = itemsData.teachers + participants[i].$.name + '/';
+        break;
+      }
     }
-    if (participants[i]._category === 'classroom') {
-      auditorium = auditorium + participants[i]._name + ' ';
-    }
-    if (participants[i]._category === 'instructor') {
-      teachers = teachers + participants[i]._name + '/';
-    }
-    return { students, auditorium, teachers };
+    return itemsData;
   }
 }

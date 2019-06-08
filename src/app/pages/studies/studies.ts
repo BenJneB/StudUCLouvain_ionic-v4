@@ -21,6 +21,7 @@
 import { catchError } from 'rxjs/operators';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { isString } from 'util';
 
 import { Component } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
@@ -93,13 +94,15 @@ export class StudiesPage {
     let response: any;
     const year = parseInt(this.project.name.split('-')[0], 10);
     return new Promise(resolve => {
+      console.log('FIRST', sigle, year);
       this.studentService.checkCourse(sigle, year).then(
         (data) => {
+          console.log('DEEEEE', data);
           const res: any = data;
           let exist: boolean;
           let nameFR = '';
           let nameEN = '';
-          if (data === 400) {
+          if (res === undefined) {
             exist = false;
           } else {
             const names = res.intituleCompletMap.entry;
@@ -206,7 +209,7 @@ export class StudiesPage {
     }
   }
 
-  addCourseFromProgram(acro: string) {
+  addCourseFromProgram(acro?: string) {
     let already = false;
     for (const item of this.listCourses) {
       if (item.acronym === acro) { already = true; }
@@ -217,19 +220,25 @@ export class StudiesPage {
   private checkCourseExisting(already: boolean, acro: string) {
     let check;
     if (!already) {
+      console.log('ACRO', acro);
       this.checkExist(acro).then(data2 => {
         check = data2;
+        console.log(data2);
         if (check.exist) {
           this.addCourse(acro, check.nameFR);
         } else {
           this.alertService.toastCourse('STUDY.BADCOURSE');
-          this.alertService.showPromptStudies(this.listCourses, this.checkCourseExisting.bind(this));
+          this.showPrompt();
         }
       });
     } else {
       this.alertService.toastCourse('STUDY.ALCOURSE');
     }
     return check;
+  }
+
+  private showPrompt() {
+    this.alertService.showPromptStudies(this.listCourses, this.checkCourseExisting.bind(this));
   }
 
   async addCourse(sigle: string, name: string) {
