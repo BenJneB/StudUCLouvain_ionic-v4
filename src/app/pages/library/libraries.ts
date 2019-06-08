@@ -78,7 +78,6 @@ export class LibrariesPage {
   /*Open the page with the details for the selectionned library*/
   goToLibDetails(lib: LibraryItem) {
     this.utilsServices.goToDetail(lib, 'libraries/details');
-
   }
 
   async cachedOrNot() {

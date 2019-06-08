@@ -83,4 +83,13 @@ describe('Libraries Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, LibrariesPage);
     });
+
+    describe('goToLibDetails method', () => {
+        it('should call goToDetail with libItem and libraries/details from utilsServices', () => {
+            const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            component.goToLibDetails('libItem');
+            expect(spyGoToDetail.calls.count()).toEqual(1);
+            expect(spyGoToDetail).toHaveBeenCalledWith('libItem', 'libraries/details');
+        });
+    });
 });

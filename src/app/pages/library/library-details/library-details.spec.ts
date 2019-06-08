@@ -93,7 +93,7 @@ describe('LibraryDetails Component', () => {
     });
 
     describe('openPage method', () => {
-        it('should call ', () => {
+        it('should call open from window', () => {
             const spyOpen = spyOn(window, 'open').and.callThrough();
             component.openPage('url');
             expect(spyOpen.calls.count()).toEqual(1);
