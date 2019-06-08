@@ -41,8 +41,8 @@ export class AlertService {
     return await disclaimerAlert.present();
   }
 
-  languageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
-    return this.alertCtrl.create({
+  async languageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
+    return await this.alertCtrl.create({
       header: settings,
       message: message2,
       inputs: [
