@@ -94,10 +94,8 @@ export class StudiesPage {
     let response: any;
     const year = parseInt(this.project.name.split('-')[0], 10);
     return new Promise(resolve => {
-      console.log('FIRST', sigle, year);
       this.studentService.checkCourse(sigle, year).then(
         (data) => {
-          console.log('DEEEEE', data);
           const res: any = data;
           let exist: boolean;
           let nameFR = '';
@@ -220,10 +218,8 @@ export class StudiesPage {
   private checkCourseExisting(already: boolean, acro: string) {
     let check;
     if (!already) {
-      console.log('ACRO', acro);
       this.checkExist(acro).then(data2 => {
         check = data2;
-        console.log(data2);
         if (check.exist) {
           this.addCourse(acro, check.nameFR);
         } else {
