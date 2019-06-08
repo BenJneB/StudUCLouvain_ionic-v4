@@ -147,4 +147,19 @@ describe('Events Component', () => {
             expect(spyAdd.calls.count()).toEqual(1);
         });
     });
+
+    describe('doRefresh method', () => {
+        it('should call doRefresh from UtilsService', () => {
+            const spyRefresh = spyOn(component.utilsServices, 'doRefresh').and.callThrough();
+            component.doRefresh({ target: { complete: () => { return; } } });
+            expect(spyRefresh.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('onSearchInput method', () => {
+        it('should set searching on TRUE', () => {
+            component.onSearchInput();
+            expect(component.searching).toBeTruthy();
+        });
+    });
 });
