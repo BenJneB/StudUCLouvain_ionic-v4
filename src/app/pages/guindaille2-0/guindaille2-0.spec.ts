@@ -1,7 +1,7 @@
 import { testInstanceCreation } from 'src/app/app.component.spec';
 import { InAppBrowserMock, ModalControllerMock } from 'test-config/MockIonicNative';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -43,7 +43,7 @@ describe('Guindaille Component', () => {
             imports: [
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientModule,
+                HttpClientTestingModule,
                 IonicStorageModule.forRoot(),
             ],
             providers: [

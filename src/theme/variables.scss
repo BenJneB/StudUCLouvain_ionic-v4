@@ -94,7 +94,7 @@
   --ion-color-mobilite: #006837;
   --ion-color-urg: #ec1c24;
   --ion-color-fun: #93278f;
-  --ion-color-uclouvain: rgb(0, 33, 78);
+  --ion-color-uclouvain: #00214E;
   --ion-color-home: #002A6A;
 }
 
@@ -110,17 +110,6 @@ $customColors: ('guindaille', 'navbarColor', 'news', 'event', 'sport', 'g2', 'cr
     --ion-color-tint: var(--ion-color-#{$color}-tint) !important;
   }
 }
-
-
-.ion-color-uclouvain {
-  --ion-color-base: var(--ion-color-ucouvain) !important;
-  --ion-color-base-rgb: var(--ion-color-uclouvain-rgb) !important;
-  --ion-color-contrast: var(--ion-color-uclouvain-contrast) !important;
-  --ion-color-contrast-rgb: var(--ion-color-uclouvain-contrast-rgb) !important;
-  --ion-color-shade: var(--ion-color-uclouvain-shade) !important;
-  --ion-color-tint: var(--ion-color-uclouvain-tint) !important;
-}
-
 
 ion-toolbar ion-buttons ion-back-button {
   --color: white !important;
@@ -184,10 +173,11 @@ ion-tab-button {
   color: white !important;
 }
 
-.menu-title{
+.menu-title {
   display: inline-block;
 }
-.menu-title.ios.title-ios{
+
+.menu-title.ios.title-ios {
   padding: 0 !important;
   line-height: 3.5;
 }

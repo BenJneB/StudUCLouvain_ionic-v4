@@ -288,4 +288,5 @@ export class CoursePage {
       });
     return await myModal.present();
   }
+
 }

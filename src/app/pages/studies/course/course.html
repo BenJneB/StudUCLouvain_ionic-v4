@@ -27,13 +27,14 @@
       <ion-back-button></ion-back-button>
       <img src="./assets/img/s.png" height="28" />
     </ion-buttons>
-    <ion-title horizontal="center">{{course.name}}-{{course.acronym}}</ion-title>
+    <ion-title horizontal="center">{{course.name}} - {{course.acronym}}</ion-title>
     <ion-buttons slot="end" (click)="openModalInfo()">
       <ion-button color="light">
         <ion-icon slot="icon-only" name="information-circle"></ion-icon>
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
+
   <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayed()">
     <ion-segment-button value="Cours magistral">
       <ion-label>{{'COURSE.CM' | translate}}</ion-label>
@@ -55,17 +56,30 @@
         *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD') || (activity.isExam && segment === 'Examen')">
         <ion-label>
           <h2 text-center> {{'COURSE.ACTIVITY' | translate}} : {{activity.type}} </h2>
-          <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
-            &mdash; {{activity.end | date: 'H:mm' }} </p>
-          <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
-          <p>{{'COURSE.STUDENT' | translate}} :
-            <ion-button (click)="toggleGroup(activity.start)"> {{'COURSE.SHOW' | translate }} </ion-button>
+          <p>
+            <ion-icon slot="start" name="calendar"></ion-icon>
+            {{activity.start | date: 'dd/MM/yyyy H:mm' }}
+            &mdash; {{activity.end | date: 'H:mm' }}
           </p>
+          <p>
+            <ion-icon slot="start" name="locate"></ion-icon>
+            {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}
+          </p>
+          <ion-row style="align-items: center; color: var(--ion-color-step-600,#666)">
+            {{'COURSE.STUDENT' | translate}} :
+            <ion-button size="small" fill="clear" (click)="toggleGroup(activity.start)">
+              <ion-label *ngIf="!utilsServices.isGroupShown(activity.start, shownGroup)">{{'COURSE.SHOW' | translate }}
+              </ion-label>
+              <ion-label *ngIf="utilsServices.isGroupShown(activity.start, shownGroup)">{{'COURSE.HIDE' | translate }}
+              </ion-label>
+            </ion-button>
+
+          </ion-row>
           <p [hidden]="!utilsServices.isGroupShown(activity.start, shownGroup)" style="display:inline"
             [innerHTML]="activity.students"></p>
           <p *ngIf="activity.teachers.length>0"> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
           <p> {{activity.name}} </p>
-          <ion-label>
+        </ion-label>
       </ion-item>
 
       <ion-item-options side="end">
@@ -81,17 +95,17 @@
     *ngIf="(segment === 'TD' && noTP) || (segment === 'Cours magistral' && noCM) || (segment === 'Examen' && noEx)">
     <ion-label>{{'COURSE.NO' | translate}}</ion-label>
   </ion-list-header>
-
-  <ion-fab slot="fixed" right vertical="bottom" *ngIf="segment === 'Cours magistral' || segment === 'TD'">
-    <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
-    <ion-fab-button (click)="showPrompt(segment)">
-      <ion-icon name="cut"> </ion-icon>
-    </ion-fab-button>
-  </ion-fab>
-  <ion-fab slot="fixed" left vertical="bottom" *ngIf="segment === 'Cours magistral' || segment === 'TD'">
-    <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
-    <ion-fab-button (click)="addCourseToCalendar()">
-      <ion-icon name="calendar"> </ion-icon>
-    </ion-fab-button>
-  </ion-fab>
 </ion-content>
+
+<ion-fab slot="fixed" horizontal="end" vertical="bottom" *ngIf="segment === 'Cours magistral' || segment === 'TD'">
+  <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
+  <ion-fab-button (click)="showPrompt(segment)">
+    <ion-icon name="cut"> </ion-icon>
+  </ion-fab-button>
+</ion-fab>
+<ion-fab slot="fixed" horizontal="start" vertical="bottom" *ngIf="segment === 'Cours magistral' || segment === 'TD'">
+  <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
+  <ion-fab-button (click)="addCourseToCalendar()">
+    <ion-icon name="calendar"> </ion-icon>
+  </ion-fab-button>
+</ion-fab>

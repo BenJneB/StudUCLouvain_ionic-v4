@@ -200,7 +200,7 @@ describe('MyApp Component', () => {
   });
 });
 
-function spyFunctionWithCallBackThen(usedService: any, method: string, callbackReturn: any) {
+export function spyFunctionWithCallBackThen(usedService: any, method: string, callbackReturn: any) {
   return spyOn(usedService, method).and.callFake(function () {
     return {
       then: function (callback) { return callback(callbackReturn); },
