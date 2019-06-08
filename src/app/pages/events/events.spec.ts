@@ -52,8 +52,6 @@ describe('Events Component', () => {
     let fixture;
     let component;
     const dateLimit = '2018-01-26';
-    const year = new Date().getFullYear();
-    const displayedEventsD = displayedEventsDFactory(dateLimit);
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
