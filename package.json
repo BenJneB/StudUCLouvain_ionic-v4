@@ -48,7 +48,7 @@
     "rxjs": "^6.5.2",
     "tar": "^4.4.10",
     "timers": "^0.1.1",
-    "zone.js": "^0.9.1"
+    "zone.js": "^0.8.29"
   },
   "devDependencies": {
     "@angular-devkit/architect": "~0.12.3",
