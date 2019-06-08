@@ -49,7 +49,7 @@ import { ModalProjectPage } from './modal-project/modal-project';
 export class StudiesPage {
   public people: any;
   public data: any;
-  segment = 'prog';
+  private segment = 'prog';
   public listCourses: Course[];
   public course: Course;
   public title = 'Etudes';
@@ -86,8 +86,6 @@ export class StudiesPage {
     this.initializeSession();
     this.menu.enable(true, 'studiesMenu');
     this.getCourses();
-
-
   }
 
   checkExist(sigle: string): Promise<any> {
