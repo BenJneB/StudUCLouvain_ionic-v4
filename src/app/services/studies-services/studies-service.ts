@@ -37,12 +37,9 @@ export class StudiesService {
 
   /*Open session for the user*/
   openSession() {
-    console.log('OPEN SESSION IN SERVICE');
     return new Promise<string>((resolve, reject) => {
-      console.log('PROMISE SERVICE');
       this.ade.httpOpenSession().subscribe(
         data => {
-          console.log('DATAAAAAAAAAA', data);
           resolve(data['session'].$.id);
         }
       );
