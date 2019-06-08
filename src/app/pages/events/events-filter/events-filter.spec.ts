@@ -84,4 +84,22 @@ describe('EventsFilter Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, EventsFilterPage);
     });
+
+    describe('resetFilters method', () => {
+        it('should set all categories to True', () => {
+            component.resetFilters();
+            component.categories.forEach(categories => {
+                expect(categories.isChecked).toBeTruthy();
+            });
+        });
+    });
+
+    describe('uncheckAll method', () => {
+        it('should set all categories to True', () => {
+            component.uncheckAll();
+            component.categories.forEach(categories => {
+                expect(categories.isChecked).toBeFalsy();
+            });
+        });
+    });
 });
