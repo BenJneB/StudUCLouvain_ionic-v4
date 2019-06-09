@@ -1,5 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { spyFunctionWithCallBackReject } from 'src/app/app.component.spec';
 import { EventItem } from 'src/app/entity/eventItem';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -72,7 +73,7 @@ describe('Events Component', () => {
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 // AppVersion,
                 //     { provide: SplashScreen, useClass: SplashScreenMock },
-                { provide: CacheService, useClass: StorageMock },
+                CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
@@ -123,15 +124,6 @@ describe('Events Component', () => {
         });
     });
 
-    describe('goToEventDetail method', () => {
-        it('should call goToDetail with eventItem and events/details from UtilsService', () => {
-            const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
-            component.goToEventDetail('eventItem');
-            expect(spyGoToDetail.calls.count()).toEqual(1);
-            expect(spyGoToDetail).toHaveBeenCalledWith('eventItem', 'events/details');
-        });
-    });
-
     describe('removeFavorite method', () => {
         it('should call removeFavorite from UtilsService', () => {
             const spyRemove = spyOn(component.utilsServices, 'removeFavorite').and.callThrough();
@@ -151,6 +143,9 @@ describe('Events Component', () => {
     describe('doRefresh method', () => {
         it('should call doRefresh from UtilsService', () => {
             const spyRefresh = spyOn(component.utilsServices, 'doRefresh').and.callThrough();
+            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
+                new Promise((resolve, reject) => { })
+            );
             component.doRefresh({ target: { complete: () => { return; } } });
             expect(spyRefresh.calls.count()).toEqual(1);
         });
@@ -160,6 +155,21 @@ describe('Events Component', () => {
         it('should set searching on TRUE', () => {
             component.onSearchInput();
             expect(component.searching).toBeTruthy();
+        });
+    });
+
+    describe('cachedOrNot method', () => {
+        it('should call getItem from Cache', () => {
+            const spyGetItem = spyOn(component.cache, 'getItem').and.callThrough();
+            component.cachedOrNot();
+            expect(spyGetItem.calls.count()).toEqual(1);
+        });
+        it('should call loadEvents on reject', () => {
+            const spyLoad = spyOn(component, 'loadEvents');
+            const spyReject = spyFunctionWithCallBackReject(component.cache, 'getItem', '');
+            component.cachedOrNot();
+            expect(spyReject.calls.count()).toEqual(1);
+            // expect(spyLoad.calls.count()).toEqual(1);
         });
     });
 });
