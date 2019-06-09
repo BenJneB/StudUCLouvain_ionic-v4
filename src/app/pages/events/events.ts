@@ -127,6 +127,7 @@ export class EventsPage {
         this.updateDisplayed();
       })
       .catch(() => {
+        console.log('CATCHING');
         this.loadEvents(key);
       });
   }
