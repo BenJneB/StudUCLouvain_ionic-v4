@@ -61,7 +61,6 @@ export class LibrariesService {
         this.wso2Service.load(url_details).subscribe(
           data => {
             const value = this.extractLibraryDetails(lib, data['return'].library);
-            console.log('VALUE', value);
             resolve(value);
           });
       } else {
