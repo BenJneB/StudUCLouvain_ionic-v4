@@ -9,7 +9,7 @@
 ### TO FIX
 #### ERROR Error: "Uncaught (in promise): overlay does not exist"
 (https://github.com/UCL-INGI/StudUCLouvain_ionic-v4/issues/22) ==> Easy to pop on NewsPage, EventsPage, SportsPage
-FIND : npx tslint -c ionic-migration.Json -p tsconfig.json --fix
+FIND : npx tslint -c ionic-migration.json -p tsconfig.json --fix
 ==> Add .then() to modal etc. (TO MANAGE)
 
 
