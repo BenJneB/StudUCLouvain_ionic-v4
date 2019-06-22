@@ -21,6 +21,7 @@ FIX : npx tslint -c ionic-migration.json -p tsconfig.json --fix
 => Write unit tests (WIP)
 
 => Functional tests ?
+==> Make some scenarios for each page
 
 
 ## Testing : Current displayed coverage covers only files that have .spec.ts and their dependencies lines
