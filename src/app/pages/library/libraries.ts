@@ -63,7 +63,6 @@ export class LibrariesPage {
         res => {
           const result: any = res;
           this.libraries = result.libraries;
-          console.log(key, 'KEEEEEEEEEEEEEEY');
           if (key !== undefined) { this.cache.saveItem(key, this.libraries); }
           this.searching = false;
         }

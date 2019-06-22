@@ -46,25 +46,27 @@ export class RepertoireService {
     let newUrl = this.url;
     newUrl += 'search?';
     for (let i = 0; i < options.length; i++) {
-      newUrl += options[i] + ' = ' + values[i];
+      newUrl += options[i] + '=' + values[i];
       if (i !== options.length - 1) {
         newUrl += '&';
       }
     }
     newUrl += '&page=1&pageSize=10';
     // newUrl += '&directory=E';
-    if (this.connService.isOnline()) {
-      this.wso2Service.load(newUrl).subscribe(
-        data => {
-          if (data['persons'] !== null) {
-            this.extractEmployees(data['persons'].person);
-            return this.employees;
-          }
-        });
-    } else {
-      this.connService.presentConnectionAlert();
-      return this.employees;
-    }
+    return new Promise(resolve => {
+      if (this.connService.isOnline()) {
+        this.wso2Service.load(newUrl).subscribe(
+          data => {
+            if (data['persons'] !== null) {
+              this.extractEmployees(data['persons'].person);
+            }
+            resolve(this.employees);
+          });
+      } else {
+        this.connService.presentConnectionAlert();
+        resolve(this.employees);
+      }
+    });
   }
 
   /*Load the details for a selected employee*/
@@ -94,7 +96,6 @@ export class RepertoireService {
 
   /*Extract the details for a selected employee*/
   private extractEmployeeDetails(emp: EmployeeItem, data: any): EmployeeItem {
-    console.log(data);
     emp.address = data.address;
     emp.contracts = data.contracts;
     emp.businessContacts = data.businessContacts;

@@ -88,9 +88,11 @@ export class SupportPage {
   }
 
   /*Search employees with the name and lastname in option, return the result and dismiss the loading pop up*/
-  searchEmployees(options: Array<string>, values: Array<string>) {
+  async searchEmployees(options: Array<string>, values: Array<string>) {
     this.searching = true;
-    this.employees = this.repService.searchEmployees(options, values);
+    await this.repService.searchEmployees(options, values).then((res: EmployeeItem[]) => {
+      this.employees = res;
+    });
     this.searching = false;
     this.loader.dismiss();
   }
