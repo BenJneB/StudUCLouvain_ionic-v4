@@ -23,6 +23,6 @@ FIX : npx tslint -c ionic-migration.json -p tsconfig.json --fix
 => Functional tests ?
 
 
-# Testing : Current displayed coverage covers only files that have .spec.ts and their dependencies lines
+## Testing : Current displayed coverage covers only files that have .spec.ts and their dependencies lines
 
 ### To launch only one test page : replace first describe by fdescribe ;)
