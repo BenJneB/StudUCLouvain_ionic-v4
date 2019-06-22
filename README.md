@@ -1,4 +1,4 @@
-# StudUCLouvain_ionic-v4 (Map/Studies Not Fixed)
+# StudUCLouvain_ionic-v4 (Map Not Fixed)
 ## WIP - Work In Progress
 ## Migration to ionic-v4
 
