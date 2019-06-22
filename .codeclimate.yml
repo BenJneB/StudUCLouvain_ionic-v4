@@ -26,4 +26,5 @@ exclude_patterns:
 - src/assets/*
 - resources/*
 - "**/*.spec.ts"
-- "*/polyfills.ts"
+- polyfills.ts
+- src/app/entity/*
