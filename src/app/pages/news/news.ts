@@ -120,22 +120,28 @@ export class NewsPage {
     this.userS.addFac(this.fac);
     // this.resize();
     const links = this.findSite();
-    this.site = links.site;
-    this.rss = links.rss;
+    console.log(links);
     this.loadNews();
   }
 
   /*If there is a site for a fac, return the good site*/
   findSite() {
+    console.log('BEFORE FOR', this.fac);
+    console.log(this.listFac);
     for (const sector of this.listFac) {
-      return this.getAvailableSites(sector);
+      console.log(sector);
+      this.getAvailableSites(sector);
     }
   }
 
   private getAvailableSites(sector: any) {
+    console.log('START GET', sector);
     for (const facs of sector.facs) {
+      console.log(facs);
       if (facs.acro === this.fac) {
-        return { 'site': facs.site, 'rss': facs.rss };
+        console.log('RETURN');
+        this.site = facs.site;
+        this.rss = facs.rss;
       }
     }
   }
@@ -191,10 +197,7 @@ export class NewsPage {
     if (this.segment === 'fac') {
       this.fac = this.userS.fac;
       if (this.facsegment === 'news' && this.userS.hasFac()) {
-        const links = this.findSite();
-        this.site = links.site;
-        this.rss = links.rss;
-
+        this.findSite();
         this.loadNews();
       }
 
