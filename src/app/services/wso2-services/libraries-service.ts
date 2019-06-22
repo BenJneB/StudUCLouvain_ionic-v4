@@ -55,16 +55,20 @@ export class LibrariesService {
 
   /*Load the details of a specific library, the library selected by the user*/
   public loadLibDetails(lib: LibraryItem) {
-    if (this.connService.isOnline()) {
-      const url_details = this.url + '/' + lib.id;
-      this.wso2Service.load(url_details).subscribe(
-        data => {
-          return this.extractLibraryDetails(lib, data['return'].library);
-        });
-    } else {
-      this.connService.presentConnectionAlert();
-      return lib;
-    }
+    return new Promise(resolve => {
+      if (this.connService.isOnline()) {
+        const url_details = this.url + '/' + lib.id;
+        this.wso2Service.load(url_details).subscribe(
+          data => {
+            const value = this.extractLibraryDetails(lib, data['return'].library);
+            console.log('VALUE', value);
+            resolve(value);
+          });
+      } else {
+        this.connService.presentConnectionAlert();
+        resolve(lib);
+      }
+    });
   }
 
   /*Extract the list of the libraries*/
@@ -119,22 +123,22 @@ export class LibrariesService {
   }
 
   private assignInfosDatas(data: any, lib: LibraryItem) {
-    const fieldsData = [
-      { datas: data.email, field: lib.email, nameField: 'email' },
-      { datas: data.website, field: lib.website, nameField: 'website' },
-      { datas: data.phone, field: lib.phone, nameField: 'phone' }
-    ];
-    for (const fieldItem of fieldsData) {
-      if (fieldItem.datas === null) {
-        fieldItem.field = this.assignField(fieldItem.nameField === 'email', false, true);
-      } else {
-        fieldItem.field = this.assignField(fieldItem.nameField === 'phone', fieldItem.datas.substr(3), fieldItem.datas);
+    for (const fieldItem of ['email', 'website', 'phone']) {
+      switch (fieldItem) {
+        case 'email': {
+          lib.email = data[fieldItem];
+          break;
+        }
+        case 'phone': {
+          lib.phone = data[fieldItem];
+          break;
+        }
+        case 'website': {
+          lib.website = data[fieldItem];
+          break;
+        }
       }
     }
-  }
-
-  private assignField(condition: boolean, yes: boolean | string, no: boolean | string) {
-    return condition ? yes : no;
   }
 
   private getOpeningHours(data: any, lib: Array<TimeSlot>) {
