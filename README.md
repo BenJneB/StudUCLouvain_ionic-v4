@@ -15,11 +15,9 @@ FIND : npx tslint -c ionic-migration.Json -p tsconfig.json --fix
 
 ### TO DO :
 
-=> Routes (Studies (= some sub pages))
+=> Map : remake from 'scratch' /!\ (WIP)
 
-#### ==> + Map : remake from 'scratch' /!\ (WIP)
-
-=> Render (Same + Guindaille&Tuto to fix)
+=> Render (Guindaille&Tuto to fix)
 
 => Write unit tests (WIP)
 
