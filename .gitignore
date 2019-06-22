@@ -33,3 +33,4 @@ $RECYCLE.BIN/
 Thumbs.db
 UserInterfaceState.xcuserstate
 src/app/variables-config.ts
+ionic-migration.json

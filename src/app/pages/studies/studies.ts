@@ -21,13 +21,12 @@
 import { catchError } from 'rxjs/operators';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
-import { isString } from 'util';
 
 import { Component } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import {
-    AlertController, MenuController, ModalController, NavController, Platform, ToastController
+    AlertController, MenuController, ModalController, NavController, ToastController
 } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
@@ -47,7 +46,7 @@ import { ModalProjectPage } from './modal-project/modal-project';
 })
 
 export class StudiesPage {
-  private segment = 'prog';
+  segment = 'prog';
   public listCourses: Course[];
   public sessionId: string;
   public project: AdeProject = null;
@@ -55,6 +54,7 @@ export class StudiesPage {
   private password = '';
   public error = '';
   status = '';
+  title = 'Etudes';
   sigles: any;
   activities: any = [];
   private statusInsc = '';
@@ -67,7 +67,6 @@ export class StudiesPage {
     public storage: Storage,
     public menu: MenuController,
     public toastCtrl: ToastController,
-    public platform: Platform,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
     public connService: ConnectivityService,
