@@ -110,7 +110,7 @@ export class SportsPage {
 
   public loadSports(segment: string) {
     this.searching = true;
-    this.sportsList.closeSlidingItems();
+    // this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
     if (this.connService.isOnline()) {
       this.sportsService.getSports(segment).then(
@@ -149,7 +149,7 @@ export class SportsPage {
   /*Display the good list of sports according to the tab*/
   public updateDisplayed() {
     this.searching = true;
-    this.sportsList.closeSlidingItems();
+    // this.sportsList.closeSlidingItems();
     const callFilter = this.isNotFavorite();
     if (callFilter === true) {// List of sports for all students
       const sport = this.segment === 'all' ? this.sports : this.teams;
@@ -196,7 +196,7 @@ export class SportsPage {
       component: SportsFilterPage,
       componentProps: { excludedFilters: excluded, filters: filters, dateRange: this.dateRange }
     });
-    await modal.present();
+    await modal.present().then();
     await modal.onDidDismiss().then((data) => {
       if (data) {
         data = data.data;
@@ -226,7 +226,7 @@ export class SportsPage {
     };
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
       itemData.salle, itemData.date, itemData.hfin, options).then(() => {
-        this.alertService.presentToast('Sport créé', slidingItem);
+        this.alertService.presentToast('Sport créé', slidingItem).then();
       });
   }
 
