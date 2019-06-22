@@ -23,7 +23,7 @@ import { debounceTime } from 'rxjs/operators';
 */
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { NavigationExtras, Router } from '@angular/router';
+import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertController, IonContent, IonList, NavController, Platform } from '@ionic/angular';
 
@@ -43,16 +43,6 @@ export class NewsPage {
 
   @ViewChild('newsList', { read: IonList }) newsList: IonList;
   @ViewChild('news') content: IonContent;
-
-  /*  //  USEFUL TO RESIZE WHEN SUBHEADER HIDED OR SHOWED
-    resize()
-    {
-      if (this.content)
-      {
-        this.content.resize();
-        console.debug('content resize', this.content)
-      }
-    } */
 
   news: Array<NewsItem> = [];
   segment = 'univ';
@@ -83,8 +73,7 @@ export class NewsPage {
     public facService: FacService,
     private cache: CacheService,
     private loader: LoaderService,
-    private utilsServices: UtilsService,
-    private router: Router) {
+    private utilsServices: UtilsService) {
     this.searchControl = new FormControl();
     this.facService.loadResources().then((data) => {
       this.listFac = data;
@@ -93,20 +82,11 @@ export class NewsPage {
 
   /*load the view, Call function to load news, display them*/
   ngOnInit() {
-    // Check the connexion, if it's ok, load the news
-    // if (this.connService.isOnline()) {
     this.cachedOrNot();
     this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
       this.searching = false;
       this.updateDisplayed();
     });
-    // this.presentLoading();
-    // }
-    // If no connexion, go back to the previous page and pop an alert
-    /*else {
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
-    }*/
   }
 
   /*Open a page with the details of a news*/
@@ -118,28 +98,20 @@ export class NewsPage {
   updateFac(fac: string) {
     this.fac = fac;
     this.userS.addFac(this.fac);
-    // this.resize();
     const links = this.findSite();
-    console.log(links);
     this.loadNews();
   }
 
   /*If there is a site for a fac, return the good site*/
   findSite() {
-    console.log('BEFORE FOR', this.fac);
-    console.log(this.listFac);
     for (const sector of this.listFac) {
-      console.log(sector);
       this.getAvailableSites(sector);
     }
   }
 
   private getAvailableSites(sector: any) {
-    console.log('START GET', sector);
     for (const facs of sector.facs) {
-      console.log(facs);
       if (facs.acro === this.fac) {
-        console.log('RETURN');
         this.site = facs.site;
         this.rss = facs.rss;
       }
@@ -148,7 +120,6 @@ export class NewsPage {
   /*Remove a fac for a user*/
   removeFac(fac: string) {
     this.userS.removeFac();
-    // this.resize();
   }
 
   /*Reload news if pull bellow the view*/
@@ -192,7 +163,6 @@ export class NewsPage {
 
   /*Tab change*/
   tabChanged() {
-    // this.resize();
     if (this.segment === 'univ') { this.cachedOrNot(); }
     if (this.segment === 'fac') {
       this.fac = this.userS.fac;
@@ -246,11 +216,9 @@ export class NewsPage {
           });
       // If no connexion pop an alert and go back to previous page
     } else {
-      // return [];
       this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
-
     }
   }
 
