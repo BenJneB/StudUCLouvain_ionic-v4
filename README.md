@@ -1,7 +1,7 @@
 # StudUCLouvain_ionic-v4
 ## Migration to ionic-v4 : WIP - Work In Progress (Map Not Fixed)
 ## Feel free to collaborate. 
-### Anyone wishing to participate and/or propose new features should not hesitate to contact Stud.UCLouvain@uclouvain.be or directly make ### a pull-request on the repo concerned.
+### Anyone wishing to participate and/or propose new features should not hesitate to contact Stud.UCLouvain@uclouvain.be or directly make a pull-request on the repo concerned.
 
 ## Map in progress ~ 90%<br>Map, Guindaille and Tuto Pages to render/fix
 
