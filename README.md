@@ -3,7 +3,7 @@
 ## Migration to ionic-v4
 
 
-## Map in progress - Studies ~ 90%<br>Studies, Map, Guindaille and Tuto Pages to render/fix
+## Map in progress ~ 90%<br>Map, Guindaille and Tuto Pages to render/fix
 
 
 ### TO FIX
