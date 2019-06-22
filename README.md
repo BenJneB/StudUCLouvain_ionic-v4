@@ -1,5 +1,5 @@
 # StudUCLouvain_ionic-v4
-## Migration to ionic-v4 : WIP - Work In Progress ((Map Not Fixed)
+## Migration to ionic-v4 : WIP - Work In Progress (Map Not Fixed)
 
 
 ## Map in progress ~ 90%<br>Map, Guindaille and Tuto Pages to render/fix
