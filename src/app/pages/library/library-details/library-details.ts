@@ -58,7 +58,7 @@ export class LibraryDetailsPage {
       if (this.router.getCurrentNavigation().extras.state) {
         this.libDetails = this.router.getCurrentNavigation().extras.state.items;
         this.searching = true;
-        this.libDetails = this.libService.loadLibDetails(this.libDetails);
+        this.libService.loadLibDetails(this.libDetails);
         this.searching = false;
       }
     });
