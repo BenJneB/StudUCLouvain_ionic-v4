@@ -127,6 +127,7 @@ export class EventsPage {
         this.updateDisplayed();
       })
       .catch(() => {
+        console.log('CATCHING');
         this.loadEvents(key);
       });
   }
@@ -135,7 +136,6 @@ export class EventsPage {
   /*Load the list of events to display*/
   public loadEvents(key?) {
     this.searching = true;
-    // this.eventsList.closeSlidingItems();
     // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
     if (this.connService.isOnline()) {
       this.loader.present('Please wait...').then();
@@ -213,7 +213,6 @@ export class EventsPage {
   /*Update the displayed events and close the loading when it's finished*/
   public updateDisplayed() {
     this.searching = true;
-    this.eventsList.closeSlidingItems();
     if (this.segment === 'all') {
       this.displayedEvents = this.utilsServices.filterItems('events', this.events, this.excludedFilters, this.dateLimit, this.searchTerm);
     } else if (this.segment === 'favorites') {

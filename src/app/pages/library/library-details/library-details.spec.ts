@@ -1,11 +1,12 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
-import { MockCacheStorageService, StorageMock } from 'test-config/MockCacheStorageService';
+import { testInstanceCreation } from 'src/app/app.component.spec';
+import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -14,14 +15,14 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    ModalControllerMock, NetworkMock
-} from '../../../../test-config/MockIonicNative';
+    ModalControllerMock, NavParamsMock, NetworkMock
+} from '../../../../../test-config/MockIonicNative';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -39,18 +40,17 @@ import {
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { LibrariesPage } from './libraries';
+import { LibraryDetailsPage } from './library-details';
 
-describe('Libraries Component', () => {
+describe('LibraryDetails Component', () => {
     let fixture;
     let component;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LibrariesPage],
+            declarations: [LibraryDetailsPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
-                IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
                 HttpClientTestingModule,
@@ -62,7 +62,7 @@ describe('Libraries Component', () => {
                 { provide: AppAvailability, useClass: AppAvailabilityMock },
                 { provide: Market, useClass: MarketMock },
                 { provide: Device, useClass: DeviceMock },
-                { provide: CacheService, useClass: StorageMock },
+                CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
@@ -71,64 +71,33 @@ describe('Libraries Component', () => {
                 { provide: Network, useClass: NetworkMock },
                 Diagnostic,
                 { provide: Calendar, useClass: CalendarMock },
+                { provide: NavParams, useClass: NavParamsMock }
             ]
         }).compileComponents();
     }));
 
+    let spyGetCurrentNavigation;
+
     beforeEach(() => {
-        fixture = TestBed.createComponent(LibrariesPage);
+        spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
+            .and.returnValue({ extras: { state: { items: {} } } });
+        fixture = TestBed.createComponent(LibraryDetailsPage);
         component = fixture.componentInstance;
+        component.libDetails = { website: '' };
         fixture.detectChanges();
     });
 
     it('should be created', () => {
-        testInstanceCreation(component, LibrariesPage);
+        testInstanceCreation(component, LibraryDetailsPage);
+        expect(spyGetCurrentNavigation.calls.count() >= 1).toBeTruthy();
     });
 
-    describe('goToLibDetails method', () => {
-        it('should call goToDetail with libItem and libraries/details from UtilsService', () => {
-            const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
-            component.goToLibDetails('libItem');
-            expect(spyGoToDetail.calls.count()).toEqual(1);
-            expect(spyGoToDetail).toHaveBeenCalledWith('libItem', 'libraries/details');
-        });
-    });
-
-    describe('loadLibraries method', () => {
-        let spyOnline;
-        let spySaveItem;
-        let spyLoad;
-        beforeEach(() => {
-            spySaveItem = spyOn(component.cache, 'saveItem').and.callThrough();
-        });
-
-        it('should call isOnline from ConnectivityService, if online, should loadLibraries', () => {
-            spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
-            spyLoad = spyFunctionWithCallBackThen(component.libService, 'loadLibraries', {});
-            component.loadLibraries();
-            expect(spyOnline.calls.count()).toEqual(1);
-            expect(component.searching).toBeFalsy();
-            expect(spyLoad.calls.count()).toEqual(1);
-            expect(spySaveItem.calls.count()).toEqual(0);
-        });
-
-        it('and should call saveItem from Cache if key in parameter', () => {
-            spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
-            spyLoad = spyFunctionWithCallBackThen(component.libService, 'loadLibraries', {});
-            component.loadLibraries('key');
-            expect(spyOnline.calls.count()).toEqual(1);
-            expect(component.searching).toBeFalsy();
-            expect(spyLoad.calls.count()).toEqual(1);
-            expect(spySaveItem.calls.count()).toEqual(1);
-        });
-
-        it('if not online, should call presentConnectionAlert', () => {
-            spyOnline = spyOn(component.connService, 'isOnline').and.returnValue(false);
-            const spyPresentAlert = spyOn(component.connService, 'presentConnectionAlert').and.callThrough();
-            component.loadLibraries();
-            expect(spyOnline.calls.count()).toEqual(1);
-            expect(spyPresentAlert.calls.count()).toEqual(1);
-            expect(component.searching).toBeFalsy();
+    describe('openPage method', () => {
+        it('should call open from window', () => {
+            const spyOpen = spyOn(window, 'open').and.callThrough();
+            component.openPage('url');
+            expect(spyOpen.calls.count()).toEqual(1);
+            expect(spyOpen).toHaveBeenCalledWith('url', '_blank');
         });
     });
 });

@@ -22,7 +22,6 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component } from '@angular/core';
-import { Router } from '@angular/router';
 import { NavController, Platform } from '@ionic/angular';
 
 import { LibraryItem } from '../../entity/libraryItem';
@@ -56,7 +55,7 @@ export class LibrariesPage {
   }
 
   /*Load libraries*/
-  loadLibraries(key?) {
+  loadLibraries(key?: any) {
     this.searching = true;
     // Check the connexion, if it's ok => load the data else go back to the previous page and pop an alert
     if (this.connService.isOnline()) {
@@ -64,7 +63,7 @@ export class LibrariesPage {
         res => {
           const result: any = res;
           this.libraries = result.libraries;
-          if (key) { this.cache.saveItem(key, this.libraries); }
+          if (key !== undefined) { this.cache.saveItem(key, this.libraries); }
           this.searching = false;
         }
       );
@@ -78,7 +77,6 @@ export class LibrariesPage {
   /*Open the page with the details for the selectionned library*/
   goToLibDetails(lib: LibraryItem) {
     this.utilsServices.goToDetail(lib, 'libraries/details');
-
   }
 
   async cachedOrNot() {

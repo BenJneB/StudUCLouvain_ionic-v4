@@ -64,10 +64,10 @@ export class Wso2Service {
 
   login(user: string, pass: string) {
     const body = new HttpParams().set('grant_type', 'password').set('username', user).set('password', pass);
-    return this.getToken(body);
+    return this.getToken(body, true);
   }
 
-  private getToken(body: HttpParams) {
+  private getToken(body: HttpParams, login?: boolean) {
     const headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent });
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     const finalUrl = this.wso2ServiceBaseUrl + 'token';
@@ -77,7 +77,11 @@ export class Wso2Service {
       { headers: headers }
     ).pipe(
       map(res => {
-        this.tokenStudent = 'Bearer ' + res['access_token'];
+        if (login) {
+          this.tokenStudent = 'Bearer ' + res['access_token'];
+        } else {
+          this.token = 'Bearer ' + res['access_token'];
+        }
         return 'OK';
       }),
       catchError((error: any) => observableThrowError(error)));

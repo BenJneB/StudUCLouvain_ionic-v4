@@ -21,7 +21,7 @@
 import { CacheService } from 'ionic-cache';
 
 import { Component, QueryList, ViewChildren } from '@angular/core';
-import { Router } from '@angular/router';
+import { NavigationExtras, Router } from '@angular/router';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
@@ -181,9 +181,9 @@ export class AppComponent {
       this.getElementToClose(this.modalCtrl);
       try {
         const element = await this.menu.getOpen();
+        console.log(element);
         if (element) {
           this.menu.close();
-          return;
         }
       } catch (error) {
         console.log(error);
@@ -196,7 +196,7 @@ export class AppComponent {
     this.routerOutlets.forEach((outlet: IonRouterOutlet) => {
       if (outlet && outlet.canGoBack()) {
         outlet.pop();
-      } else
+      } else {
         if (this.router.url === 'home') {
           if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
             navigator['app'].exitApp(); //  work in ionic 4
@@ -207,6 +207,7 @@ export class AppComponent {
             this.lastTimeBackPress = new Date().getTime();
           }
         }
+      }
     });
   }
 
@@ -217,7 +218,12 @@ export class AppComponent {
     if (page.iosSchemaName !== null && page.androidPackageName !== null) {
       this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
     } else {
-      this.nav.navigateForward([page.component, { title: page.title }]);
+      const navigationExtras: NavigationExtras = {
+        state: {
+          title: page.title,
+        }
+      };
+      this.nav.navigateForward([page.component], navigationExtras);
     }
   }
 

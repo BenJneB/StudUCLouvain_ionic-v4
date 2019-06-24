@@ -1,8 +1,9 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { of } from 'rxjs';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 import {
-    AppAvailabilityMock, AppVersionMock, MarketMock, NetworkMock, StatusBarMock, ToastMock
+    AppAvailabilityMock, MarketMock, NetworkMock, StatusBarMock, ToastMock
 } from 'test-config/MockIonicNative';
 
 /**
@@ -36,7 +37,7 @@ import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
-import { IonicModule } from '@ionic/angular';
+import { IonicModule, IonRouterOutlet } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -72,6 +73,7 @@ describe('MyApp Component', () => {
         { provide: Network, useClass: NetworkMock },
         Diagnostic,
         { provide: Calendar, useClass: CalendarMock },
+        Navigator
       ]
     }).compileComponents();
   }));
@@ -116,29 +118,89 @@ describe('MyApp Component', () => {
   });
 
   describe('launchExternalApp method', () => {
-    beforeEach(() => {
+    it('should call open from Market if app not installed (Android)', () => {
       spyOnProperty(component.device, 'platform', 'get').and.returnValue('Android');
-    });
-
-    it('should call open from Market if app not installed', () => {
       const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check', '');
       const spyOpen = spyOn(component.market, 'open');
       component.launchExternalApp('ios', 'android', 'app', 'http');
       expect(spyCheck.calls.count()).toEqual(1);
       expect(spyOpen.calls.count()).toEqual(1);
+      expect(spyOpen.calls.first().args[0]).toEqual('android');
     });
-    it('should call open from Market if app not installed', () => {
+    it('should call create from InAppBrowser if app not installed (iOS)', () => {
+      spyOnProperty(component.device, 'platform', 'get').and.returnValue('iOS');
       const spyCheck = spyFunctionWithCallBackThen(component.appAvailability, 'check', '');
       const spyCreate = spyOn(component.iab, 'create').and.callThrough();
       component.launchExternalApp('ios', 'android', 'app', 'http');
       expect(spyCheck.calls.count()).toEqual(1);
-      expect(spyCreate.calls.count() >= 1).toBeTruthy();
+      expect(spyCreate.calls.count()).toEqual(1);
+      expect(spyCreate.calls.first().args[0]).toEqual('app');
+    });
+    it('should call create from InAppBrowser if on browser', () => {
+      spyOnProperty(component.device, 'platform', 'get').and.returnValue('');
+      const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+      component.launchExternalApp('ios', 'android', 'app', 'http');
+      expect(spyCreate.calls.count()).toEqual(1);
+      expect(spyCreate.calls.first().args[0]).toEqual('http');
+    });
+  });
+
+  describe('openRootPage method', () => {
+    it('should call launchExternalApp if external app', () => {
+      const spyLaunch = spyOn(component, 'launchExternalApp').and.callThrough();
+      component.openRootPage({ iosSchemaName: 'notNull', component: '/', title: 'Title' });
+      expect(spyLaunch.calls.count()).toEqual(1);
+    });
+    it('should call navigateForward of NavController otherwhise', () => {
+      const spyNavigate = spyOn(component.nav, 'navigateForward').and.callThrough();
+      component.openRootPage({ iosSchemaName: null, component: '/', title: 'Title' });
+      expect(spyNavigate.calls.count()).toEqual(1);
+    });
+  });
+
+  describe('confirmExitApp method', () => {
+    it('should call pop from IonRouterOutlet (if can go back)', () => {
+      const spyPop = spyOn(IonRouterOutlet.prototype, 'pop').and.callThrough();
+      spyOn(IonRouterOutlet.prototype, 'canGoBack').and.returnValue(true);
+      component.confirmExitApp();
+      expect(spyPop.calls.count()).toEqual(1);
+    });
+    it('should call show from Toast (otherwhise and not threshold)', () => {
+      const spyShow = spyOn(component.toast, 'show').and.callThrough();
+      spyOnProperty(component.router, 'url', 'get').and.returnValue('home');
+      component.confirmExitApp();
+      expect(spyShow.calls.count()).toEqual(1);
+    });
+  });
+
+  describe('backButtonEvent method (should call getElementToClose(x3))', () => {
+    let spyGetClose;
+    beforeEach(() => {
+      component.platform.backButton = of([]);
+      spyGetClose = spyOn(component, 'getElementToClose').and.callThrough();
+    });
+    afterEach(() => {
+      expect(spyGetClose.calls.count()).toEqual(3);
+    });
+
+    it('should call close from MenuController and confirmExitApp', async function () {
+      spyOn(component.menu, 'getOpen').and.returnValue('returned');
+      const spyClose = spyOn(component.menu, 'close').and.callThrough();
+      const spyConfirmExit = spyOn(component, 'confirmExitApp').and.callThrough();
+      component.backButtonEvent();
+      await spyClose.and.callThrough();
+      expect(spyClose.calls.count()).toEqual(1);
+      expect(spyConfirmExit.calls.count()).toEqual(1);
+    });
+    it('should call confirmExitApp if error', () => {
+      spyFunctionWithCallBackReject(component.menu, 'getOpen', '');
+      component.backButtonEvent();
+      // SADELY NO TEST
     });
   });
 });
 
-
-function spyFunctionWithCallBackThen(usedService: any, method: string, callbackReturn: any) {
+export function spyFunctionWithCallBackThen(usedService: any, method: string, callbackReturn: any) {
   return spyOn(usedService, method).and.callFake(function () {
     return {
       then: function (callback) { return callback(callbackReturn); },
@@ -146,7 +208,7 @@ function spyFunctionWithCallBackThen(usedService: any, method: string, callbackR
   });
 }
 
-function spyFunctionWithCallBackReject(usedService: any, method: string, callbackReturn: any) {
+export function spyFunctionWithCallBackReject(usedService: any, method: string, callbackReturn: any) {
   return spyOn(usedService, method).and.callFake(function () {
     return {
       then: function (s, error) { return error(); },

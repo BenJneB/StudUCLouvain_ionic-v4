@@ -5,7 +5,7 @@ import {
     AppAvailabilityMock, DeviceMock, MarketMock, NetworkMock, SplashScreenMock
 } from 'test-config/MockIonicNative';
 
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -59,7 +59,7 @@ describe('Home Component', () => {
                 TranslateModule.forRoot(),
                 IonicStorageModule.forRoot(),
                 RouterTestingModule,
-                HttpClientModule,
+                HttpClientTestingModule,
             ],
             providers: [
                 { provide: Market, useClass: MarketMock },

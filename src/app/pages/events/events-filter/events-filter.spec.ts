@@ -1,7 +1,7 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
-import { MockCacheStorageService, StorageMock } from 'test-config/MockCacheStorageService';
+import { testInstanceCreation } from 'src/app/app.component.spec';
+import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -14,14 +14,14 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    ModalControllerMock, NetworkMock
-} from '../../../../test-config/MockIonicNative';
+    ModalControllerMock, NavParamsMock, NetworkMock
+} from '../../../../../test-config/MockIonicNative';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -39,18 +39,17 @@ import {
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { LibrariesPage } from './libraries';
+import { EventsFilterPage } from './events-filter';
 
-describe('Libraries Component', () => {
+describe('EventsFilter Component', () => {
     let fixture;
     let component;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [LibrariesPage],
+            declarations: [EventsFilterPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
-                IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
                 HttpClientTestingModule,
@@ -62,7 +61,7 @@ describe('Libraries Component', () => {
                 { provide: AppAvailability, useClass: AppAvailabilityMock },
                 { provide: Market, useClass: MarketMock },
                 { provide: Device, useClass: DeviceMock },
-                { provide: CacheService, useClass: StorageMock },
+                CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
@@ -71,64 +70,37 @@ describe('Libraries Component', () => {
                 { provide: Network, useClass: NetworkMock },
                 Diagnostic,
                 { provide: Calendar, useClass: CalendarMock },
+                { provide: NavParams, useClass: NavParamsMock }
             ]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(LibrariesPage);
+        fixture = TestBed.createComponent(EventsFilterPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        component.categories = [{}, {}, {}];
     });
 
     it('should be created', () => {
-        testInstanceCreation(component, LibrariesPage);
+        testInstanceCreation(component, EventsFilterPage);
     });
 
-    describe('goToLibDetails method', () => {
-        it('should call goToDetail with libItem and libraries/details from UtilsService', () => {
-            const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
-            component.goToLibDetails('libItem');
-            expect(spyGoToDetail.calls.count()).toEqual(1);
-            expect(spyGoToDetail).toHaveBeenCalledWith('libItem', 'libraries/details');
+    describe('resetFilters method', () => {
+        it('should set all categories to True', () => {
+            component.resetFilters();
+            component.categories.forEach(category => {
+                expect(category).toBeTruthy();
+            });
         });
     });
 
-    describe('loadLibraries method', () => {
-        let spyOnline;
-        let spySaveItem;
-        let spyLoad;
-        beforeEach(() => {
-            spySaveItem = spyOn(component.cache, 'saveItem').and.callThrough();
-        });
-
-        it('should call isOnline from ConnectivityService, if online, should loadLibraries', () => {
-            spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
-            spyLoad = spyFunctionWithCallBackThen(component.libService, 'loadLibraries', {});
-            component.loadLibraries();
-            expect(spyOnline.calls.count()).toEqual(1);
-            expect(component.searching).toBeFalsy();
-            expect(spyLoad.calls.count()).toEqual(1);
-            expect(spySaveItem.calls.count()).toEqual(0);
-        });
-
-        it('and should call saveItem from Cache if key in parameter', () => {
-            spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
-            spyLoad = spyFunctionWithCallBackThen(component.libService, 'loadLibraries', {});
-            component.loadLibraries('key');
-            expect(spyOnline.calls.count()).toEqual(1);
-            expect(component.searching).toBeFalsy();
-            expect(spyLoad.calls.count()).toEqual(1);
-            expect(spySaveItem.calls.count()).toEqual(1);
-        });
-
-        it('if not online, should call presentConnectionAlert', () => {
-            spyOnline = spyOn(component.connService, 'isOnline').and.returnValue(false);
-            const spyPresentAlert = spyOn(component.connService, 'presentConnectionAlert').and.callThrough();
-            component.loadLibraries();
-            expect(spyOnline.calls.count()).toEqual(1);
-            expect(spyPresentAlert.calls.count()).toEqual(1);
-            expect(component.searching).toBeFalsy();
+    describe('uncheckAll method', () => {
+        it('should set all categories to True', () => {
+            component.uncheckAll();
+            component.categories.forEach(categories => {
+                expect(categories.isChecked).toBeFalsy();
+            });
         });
     });
 });

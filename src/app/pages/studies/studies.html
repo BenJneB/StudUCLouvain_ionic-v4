@@ -36,7 +36,7 @@
       </ion-menu-toggle>
     </ion-buttons>
   </ion-toolbar>
-  <ion-segment [(ngModel)]="segment">
+  <ion-segment [(ngModel)]="segment" name="segment">
     <ion-segment-button value="prog" name="prog">
       <ion-label> {{'STUDY.PROGRAM' | translate}} </ion-label>
     </ion-segment-button>
@@ -102,10 +102,12 @@
         <ion-col>
           <ion-list inset>
             <ion-item class="inputField">
+              <ion-label></ion-label>
               <ion-input id="userField" placeholder="Username" name="username" type="text" required
                 [(ngModel)]="username" #userName autocapitalize="none"></ion-input>
             </ion-item>
             <ion-item>
+              <ion-label></ion-label>
               <ion-input placeholder="Password" name="password" id="passwordField" type="password" required
                 [(ngModel)]="password"></ion-input>
             </ion-item>

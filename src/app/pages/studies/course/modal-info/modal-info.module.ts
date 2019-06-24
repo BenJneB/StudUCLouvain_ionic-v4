@@ -14,6 +14,9 @@ import { ModalInfoPage } from './modal-info';
     ReactiveFormsModule,
     CommonModule,
     TranslateModule.forChild(),
+  ],
+  entryComponents: [
+    ModalInfoPage
   ]
 })
 export class ModalInfoPageModule { }

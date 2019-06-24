@@ -49,7 +49,7 @@ export class StudiesService {
   /*Get the projects ADE*/
   getProjects(sessionId: string) {
     return new Promise((resolve, reject) => {
-      this.ade.httpGetProjects(sessionId).subscribe(
+      this.ade.getProjects(sessionId).subscribe(
         data => {
           resolve(this.extractAdeProjects(data));
         }
@@ -60,8 +60,6 @@ export class StudiesService {
   /*Extract the projects ADE*/
   extractAdeProjects(data): AdeProject[] {
     const projects: AdeProject[] = [];
-    console.log(data.projects);
-    console.log(data.projects.project.length);
     if (data.projects.project.length === undefined) {
       const name = data.projects.project.$.name.toString();
       const id = data.projects.project.$.id.toString();
@@ -81,7 +79,7 @@ export class StudiesService {
   /*Set the project selected by the user*/
   setProject(sessionId: string, projectId: string) {
     return new Promise((resolve, reject) => {
-      this.ade.httpSetProject(sessionId, projectId).subscribe(
+      this.ade.setProject(sessionId, projectId).subscribe(
         data => { resolve(data); }
       );
     });
