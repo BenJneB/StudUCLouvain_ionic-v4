@@ -123,7 +123,7 @@ export class HomePage {
   ) {
     this.where = '';
     document.title = this.title;
-    // this.userS.removeCampus('');
+    // this.userS.removeCampus();
   }
 
   /*Set the title*/
