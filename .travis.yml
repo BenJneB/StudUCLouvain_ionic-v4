@@ -19,13 +19,12 @@ before_script:
       - chmod +x ./cc-test-reporter
       - ./cc-test-reporter before-build
 
-jobs:
-  include:
-    - stage: "Tests"                # naming the Tests stage
-      name: "Unit Tests"            # names the first Tests stage job
-      script: npm run test:onceAndCoverage
-    - script: npm run e2e
-      name: "Integration Tests"     # names the second Tests stage job
+env:
+  - e2e=false
+  - e2e=true
+
+script:
+  - if $e2e ; then npm run e2e ; else npm run test:onceAndCoverage fi
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
