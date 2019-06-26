@@ -14,16 +14,12 @@ FIX : npx tslint -c ionic-migration.json -p tsconfig.json --fix
 
 ### TO DO :
 
-=> Map : remake from 'scratch' /!\ (WIP)
-
 => Render (Guindaille&Tuto to fix)
 
 => Write unit tests (WIP)
 
-=> Functional tests ?
+=> Functional tests ? (Started)
 ==> Make some scenarios for each page
 
-
-## Testing : Current displayed coverage covers only files that have .spec.ts and their dependencies lines
 
 ### To launch only one test page : replace first describe by fdescribe ;)
