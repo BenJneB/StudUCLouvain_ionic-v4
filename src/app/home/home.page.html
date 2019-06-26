@@ -5,7 +5,7 @@
 </ion-header>
 
 <ion-content>
-  <ng-container *ngIf="(userS.hasCampus() === false)">
+  <ion-content *ngIf="(userS.hasCampus() === false)">
     <p horizontal="center" style="font-size:20px;">{{'HOME.WHICH' | translate}}</p>
     <ion-list ngDefaultControl class="other">
       <ion-radio-group [(ngModel)]="where">
@@ -36,27 +36,27 @@
         <ion-button shape="round" (click)="updateCampus()" id="okbutton">{{'HOME.OK' | translate}}</ion-button>
       </ion-col>
     </ion-row>
-  </ng-container>
+  </ion-content>
 
   <!--------------------- CAMPUS CHOSEN : HOME MENU ------------------------------------------------------------>
-  <ng-container *ngIf="userS.hasCampus()" class="menuHome" class="has-header has-subheader">
-    <ion-grid class="menuHome" #menuHome>
+  <ion-content *ngIf="userS.hasCampus()" class="hM">
+    <ion-grid *ngIf="platform.isPortrait()">
       <!----------------------------------------------------------GRID FOR PORTRAIT------------------------------------------------------------------------------->
       <ion-row class="homeM">
         <ion-col size="4" text-center id="study">
-          <img alt="etudes" src="./assets/img/studies.png" horizontal="middle" (click)="changePage(studiesPage)" />
+          <img alt="etudes" src="./assets/img/studies.png" horizontal="center" (click)="changePage(studiesPage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'HOME.ETUDES' | translate}}</font>
             </b></p>
         </ion-col>
         <ion-col size="4" text-center>
-          <img alt="biblio" src="./assets/img/libraries.png" horizontal="middle" (click)="changePage(libraryPage)" />
+          <img alt="biblio" src="./assets/img/libraries.png" horizontal="center" (click)="changePage(libraryPage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'HOME.LIBRARY' | translate}}</font>
             </b></p>
         </ion-col>
         <ion-col size="4" text-center>
-          <img alt="aide" src="./assets/img/support.png" horizontal="middle" (click)="changePage(helpDeskPage)" />
+          <img alt="aide" src="./assets/img/support.png" horizontal="center" (click)="changePage(helpDeskPage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'HOME.HELP' | translate}}</font>
             </b></p>
@@ -64,19 +64,19 @@
       </ion-row>
       <ion-row class="homeM">
         <ion-col size="4" text-center>
-          <img alt="logo" src="./assets/img/news.png" horizontal="middle" (click)="changePage(newsPage)" />
+          <img alt="logo" src="./assets/img/news.png" horizontal="center" (click)="changePage(newsPage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'HOME.NEWS' | translate}}</font>
             </b></p>
         </ion-col>
         <ion-col size="4" text-center>
-          <img alt="louvinfo" src="./assets/img/events.png" horizontal="middle" (click)="changePage(eventPage)" />
+          <img alt="louvinfo" src="./assets/img/events.png" horizontal="center" (click)="changePage(eventPage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'HOME.EVENTS' | translate}}</font>
             </b></p>
         </ion-col>
         <ion-col size="4" text-center>
-          <img alt="sport" src="./assets/img/sports.png" horizontal="middle" (click)="changePage(sportPage)" />
+          <img alt="sport" src="./assets/img/sports.png" horizontal="center" (click)="changePage(sportPage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'HOME.SPORTS' | translate}}</font>
             </b></p>
@@ -84,19 +84,19 @@
       </ion-row>
       <ion-row class="homeM">
         <ion-col size="4" text-center>
-          <img alt="carte" src="./assets/img/map.png" horizontal="middle" (click)="changePage(mapPage)" />
+          <img alt="carte" src="./assets/img/map.png" horizontal="center" (click)="changePage(mapPage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'HOME.MAP' | translate}}</font>
             </b></p>
         </ion-col>
         <ion-col size="4" text-center>
-          <img alt="resto" src="./assets/img/resto.png" horizontal="middle" (click)="changePage(restoPage)" />
+          <img alt="resto" src="./assets/img/resto.png" horizontal="center" (click)="changePage(restoPage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'HOME.REST' | translate}}</font>
             </b></p>
         </ion-col>
         <ion-col size="4" text-center>
-          <img alt="voiture" src="./assets/img/mobility.png" horizontal="middle" (click)="changePage(mobilityPage)" />
+          <img alt="voiture" src="./assets/img/mobility.png" horizontal="center" (click)="changePage(mobilityPage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'HOME.MOBILITY' | translate}}</font>
             </b></p>
@@ -104,114 +104,121 @@
       </ion-row>
       <ion-row class="homeM">
         <ion-col size="4" text-center>
-          <img alt="param" src="./assets/img/settings.png" horizontal="middle" (click)="changePage(paramPage)" />
+          <img alt="param" src="./assets/img/settings.png" horizontal="center" (click)="changePage(paramPage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'MENU.SETTINGS' | translate}}</font>
             </b></p>
         </ion-col>
         <ion-col size="4" text-center>
-          <img alt="guindaille" src="./assets/img/guindaille.png" horizontal="middle"
+          <img alt="guindaille" src="./assets/img/guindaille.png" horizontal="center"
             (click)="changePage(guindaillePage)" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'MENU.GUINDAILLE' | translate}}</font>
             </b></p>
         </ion-col>
         <ion-col size="4" text-center>
-          <img alt="urgence" src="./assets/img/urgence.png" horizontal="middle" (click)="emergency()" />
+          <img alt="urgence" src="./assets/img/urgence.png" horizontal="center" (click)="emergency()" />
           <p horizontal="center"><b>
               <font color="#002D62">{{'MENU.URG' | translate}}</font>
             </b></p>
         </ion-col>
       </ion-row>
-
-      <!----------------------------------------------------------GRID FOR LANDSCAPE------------------------------------------------------------------------------->
-      <ion-row class="homeML">
-        <ion-col size="3" text-center id="study">
-          <img alt="etudes" src="./assets/img/studies.png" horizontal="middle" (click)="changePage(studiesPage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'HOME.ETUDES' | translate}}</font>
-            </b></p>
-        </ion-col>
-        <ion-col size="3" text-center>
-          <img alt="biblio" src="./assets/img/libraries.png" horizontal="middle" (click)="changePage(libraryPage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'HOME.LIBRARY' | translate}}</font>
-            </b></p>
-        </ion-col>
-        <ion-col size="3" text-center>
-          <img alt="aide" src="./assets/img/support.png" horizontal="middle" (click)="changePage(helpDeskPage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'HOME.HELP' | translate}}</font>
-            </b></p>
-        </ion-col>
-        <ion-col size="3" text-center>
-          <img alt="logo" src="./assets/img/news.png" horizontal="middle" (click)="changePage(newsPage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'HOME.NEWS' | translate}}</font>
-            </b></p>
-        </ion-col>
-      </ion-row>
-      <ion-row class="homeML">
-        <ion-col size="3" text-center>
-          <img alt="louvinfo" src="./assets/img/events.png" horizontal="middle" (click)="changePage(eventPage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'HOME.EVENTS' | translate}}</font>
-            </b></p>
-        </ion-col>
-        <ion-col size="3" text-center>
-          <img alt="sport" src="./assets/img/sports.png" horizontal="middle" (click)="changePage(sportPage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'HOME.SPORTS' | translate}}</font>
-            </b></p>
-        </ion-col>
-        <ion-col size="3" text-center>
-          <img alt="carte" src="./assets/img/map.png" horizontal="middle" (click)="changePage(mapPage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'HOME.MAP' | translate}}</font>
-            </b></p>
-        </ion-col>
-        <ion-col size="3" text-center>
-          <img alt="resto" src="./assets/img/resto.png" horizontal="middle" (click)="changePage(restoPage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'HOME.REST' | translate}}</font>
-            </b></p>
-        </ion-col>
-      </ion-row>
-      <ion-row class="homeML">
-        <ion-col size="3" text-center>
-          <img alt="voiture" src="./assets/img/mobility.png" horizontal="middle" (click)="changePage(mobilityPage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'HOME.MOBILITY' | translate}}</font>
-            </b></p>
-        </ion-col>
-        <ion-col size="3" text-center>
-          <img alt="param" src="./assets/img/settings.png" horizontal="middle" (click)="changePage(paramPage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'MENU.SETTINGS' | translate}}</font>
-            </b></p>
-        </ion-col>
-        <ion-col size="3" text-center>
-          <img alt="guindaille" src="./assets/img/guindaille.png" horizontal="middle"
-            (click)="changePage(guindaillePage)" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'MENU.GUINDAILLE' | translate}}</font>
-            </b></p>
-        </ion-col>
-        <ion-col size="3" text-center>
-          <img alt="urgence" src="./assets/img/urgence.png" horizontal="middle" (click)="emergency()" />
-          <p horizontal="center"><b>
-              <font color="#002D62">{{'MENU.URG' | translate}}</font>
-            </b></p>
-        </ion-col>
-      </ion-row>
-      <ion-row class="ucl">
-        <ion-col size="6" offset="3" size-md offset-md align-self-center text-center>
-          <img class="five" alt="uclouvain" align="top" src="./assets/img/uclouvain.png"
+      <ion-row class="homeM">
+        <ion-col size="6" offset="3">
+          <img alt="uclouvain" vertical="center" src="./assets/img/uclouvain.png"
             (click)="openUCL('http://www.uclouvain.be')" />
         </ion-col>
       </ion-row>
     </ion-grid>
-  </ng-container>
+    <!----------------------------------------------------------GRID FOR LANDSCAPE------------------------------------------------------------------------------->
+    <ion-grid *ngIf="platform.isLandscape()">
+      <ion-row class="homeML">
+        <ion-col size="3" text-center id="study">
+          <img alt="etudes" src="./assets/img/studies.png" horizontal="center" (click)="changePage(studiesPage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'HOME.ETUDES' | translate}}</font>
+            </b></p>
+        </ion-col>
+        <ion-col size="3" text-center>
+          <img alt="biblio" src="./assets/img/libraries.png" horizontal="center" (click)="changePage(libraryPage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'HOME.LIBRARY' | translate}}</font>
+            </b></p>
+        </ion-col>
+        <ion-col size="3" text-center>
+          <img alt="aide" src="./assets/img/support.png" horizontal="center" (click)="changePage(helpDeskPage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'HOME.HELP' | translate}}</font>
+            </b></p>
+        </ion-col>
+        <ion-col size="3" text-center>
+          <img alt="logo" src="./assets/img/news.png" horizontal="center" (click)="changePage(newsPage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'HOME.NEWS' | translate}}</font>
+            </b></p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="homeML">
+        <ion-col size="3" text-center>
+          <img alt="louvinfo" src="./assets/img/events.png" horizontal="center" (click)="changePage(eventPage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'HOME.EVENTS' | translate}}</font>
+            </b></p>
+        </ion-col>
+        <ion-col size="3" text-center>
+          <img alt="sport" src="./assets/img/sports.png" horizontal="center" (click)="changePage(sportPage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'HOME.SPORTS' | translate}}</font>
+            </b></p>
+        </ion-col>
+        <ion-col size="3" text-center>
+          <img alt="carte" src="./assets/img/map.png" horizontal="center" (click)="changePage(mapPage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'HOME.MAP' | translate}}</font>
+            </b></p>
+        </ion-col>
+        <ion-col size="3" text-center>
+          <img alt="resto" src="./assets/img/resto.png" horizontal="center" (click)="changePage(restoPage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'HOME.REST' | translate}}</font>
+            </b></p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="homeML">
+        <ion-col size="3" text-center>
+          <img alt="voiture" src="./assets/img/mobility.png" horizontal="center" (click)="changePage(mobilityPage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'HOME.MOBILITY' | translate}}</font>
+            </b></p>
+        </ion-col>
+        <ion-col size="3" text-center>
+          <img alt="param" src="./assets/img/settings.png" horizontal="center" (click)="changePage(paramPage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'MENU.SETTINGS' | translate}}</font>
+            </b></p>
+        </ion-col>
+        <ion-col size="3" text-center>
+          <img alt="guindaille" src="./assets/img/guindaille.png" horizontal="center"
+            (click)="changePage(guindaillePage)" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'MENU.GUINDAILLE' | translate}}</font>
+            </b></p>
+        </ion-col>
+        <ion-col size="3" text-center>
+          <img alt="urgence" src="./assets/img/urgence.png" horizontal="center" (click)="emergency()" />
+          <p horizontal="center"><b>
+              <font color="#002D62">{{'MENU.URG' | translate}}</font>
+            </b></p>
+        </ion-col>
+      </ion-row>
+      <ion-row class="homeML">
+        <ion-col size="6" offset="3">
+          <img class="five" alt="uclouvain" vertical="center" src="./assets/img/uclouvain.png"
+            (click)="openUCL('http://www.uclouvain.be')" />
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </ion-content>
 </ion-content>
 
 <ion-fab slot="fixed" vertical="bottom" horizontal="start" #fab *ngIf="(userS.hasCampus() === true)">

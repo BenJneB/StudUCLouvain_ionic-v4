@@ -9,21 +9,19 @@ describe('new App', () => {
     page = new HomePage();
   });
 
-  it('should be blank', () => {
+  it('should launch TutoPage. The user could slide n slides before be redirected to HomePage and choose its campus and ', () => {
     page.navigateTo();
-    const elem = element(by.id('slides'));
-    slideElemToLeft(elem);
-    browser.sleep(5000);
-    // expect(page.getParagraphText()).toContain('');
+    const slides = element(by.css('.tutoSlides'));
+    element.all(by.className('tutoSlide')).count().then(numSlides => {
+      expect(browser.getCurrentUrl()).toContain('tuto');
+      for (let i = 0; i < numSlides - 1; i++) {
+        page.slideElemToLeft(slides);
+      }
+      page.clickOnButton('#goHome');
+      expect(browser.getCurrentUrl()).toContain('home');
+      page.clickOnButton('#LLN');
+      page.clickOnButton('#okbutton');
+    });
+    browser.sleep(1000);
   });
 });
-function slideElemToLeft(elem) {
-  browser.actions()
-    .mouseDown(elem)
-    .mouseMove({ x: -50, y: 0 }) // yes, few times by 50 pixels, with single mouseMove ionic can't catch swipe event
-    .mouseMove({ x: -50, y: 0 })
-    .mouseMove({ x: -50, y: 0 })
-    .mouseUp()
-    .perform();
-}
-
