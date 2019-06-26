@@ -50,7 +50,7 @@
     <ion-grid class="gelem" no-lines>
       <ion-row>
         <ion-col size="4" *ngFor="let pict of pictos; let l = last" [offset]="l ? 4 : 0">
-          <img [src]="pict.image" align="middle" height="auto" (click)="showAlert(pict)" />
+          <img [src]="pict.image" vertical="center" height="auto" (click)="showAlert(pict)" />
         </ion-col>
       </ion-row>
     </ion-grid>

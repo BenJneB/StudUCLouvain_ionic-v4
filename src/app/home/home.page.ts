@@ -21,7 +21,7 @@
 import { Component, ViewChild } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { AlertController, IonContent, NavController } from '@ionic/angular';
+import { AlertController, IonContent, NavController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from '../services/utils-services/user-service';
@@ -110,7 +110,7 @@ export class HomePage {
     iosSchemaName: null, androidPackageName: null,
     appUrl: null, httpUrl: null
   };
-
+  public platform: any;
 
   constructor(
     public userS: UserService,
@@ -119,8 +119,10 @@ export class HomePage {
     private alertCtrl: AlertController,
     private translateService: TranslateService,
     public splashscreen: SplashScreen,
-    private utilsServices: UtilsService
+    private utilsServices: UtilsService,
+    private _platform: Platform
   ) {
+    this.platform = this._platform;
     this.where = '';
     document.title = this.title;
     // this.userS.removeCampus();
