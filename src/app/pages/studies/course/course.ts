@@ -37,7 +37,8 @@ import { ModalInfoPage } from './modal-info/modal-info';
 
 @Component({
   selector: 'page-course',
-  templateUrl: 'course.html'
+  templateUrl: 'course.html',
+	styleUrls: ['./course.scss'],
 })
 
 export class CoursePage {

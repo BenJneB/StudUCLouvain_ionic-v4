@@ -27,7 +27,8 @@ import { UtilsService } from '../../services/utils-services/utils-services';
 
 @Component({
   selector: 'page-mobility',
-  templateUrl: 'mobility.html'
+  templateUrl: 'mobility.html',
+	styleUrls: ['./mobility.scss'],
 })
 
 export class MobilityPage {

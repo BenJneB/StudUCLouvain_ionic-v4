@@ -34,7 +34,8 @@ import { SportsFilterPage } from './sports-filter/sports-filter';
 
 @Component({
   selector: 'page-sports',
-  templateUrl: 'sports.html'
+  templateUrl: 'sports.html',
+	styleUrls: ['./sports.scss'],
 })
 
 export class SportsPage {

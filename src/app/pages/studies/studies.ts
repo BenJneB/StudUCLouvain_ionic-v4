@@ -42,6 +42,7 @@ import { ModalProjectPage } from './modal-project/modal-project';
 @Component({
   selector: 'page-studies',
   templateUrl: 'studies.html',
+  styleUrls: ['./studies.scss'],
 
 })
 

@@ -26,7 +26,8 @@ import { NewsItem } from '../../../entity/newsItem';
 
 @Component({
   selector: 'page-news-details',
-  templateUrl: 'news-details.html'
+  templateUrl: 'news-details.html',
+	styleUrls: ['./news-details.scss'],
 })
 
 export class NewsDetailsPage {
