@@ -62,7 +62,7 @@ export class MapPage {
   }
 
   loadmap() {
-    this.map = new Map('map').setView([50.668867, 4.610416], 14);
+    this.map = new Map('map').setView(['50.452763', '3.981192'], 14);
     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18
@@ -84,7 +84,7 @@ export class MapPage {
   }
 
   showUserPosition() {
-    this.userPosition = marker([50.668867, 4.610416], { icon: this.userIcon }).addTo(this.map);
+    this.userPosition = marker(['50.452763', '3.981192'], { icon: this.userIcon }).addTo(this.map);
   }
 
   showBuilding(item) {
@@ -111,5 +111,18 @@ export class MapPage {
               </div>`;
   }
 
+  
+  // if(platform.is('android')){
+  //     if("geo" in this.item){
+  //       this.url = "geo:0,0?q="+this.item.geo.label;
+  //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
+  //     }
+  // }
+  // if(platform.is('ios')){
+  //     if("geo" in this.item){
+  //       this.url = "http://maps.apple.com/?q="+this.item.geo.label;
+  //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
+  //     }
+  // }
 
 }
