@@ -35,20 +35,16 @@ export class Wso2Service {
 
   /*Load wso2 service*/
   load(url: string) {
-    // TODO: MAX RETRY
     const finalUrl = this.wso2ServiceBaseUrl + url;
-    console.log('IMPORTANT', finalUrl, this.headers);
     return this.http.get(finalUrl, { headers: this.headers }).pipe(
       map(res => {
         this.nbCalls = 0;
-        console.log('map', res);
         return res;
       }),
       catchError((error) => {
         this.nbCalls++;
         if (this.nbCalls >= 10) {
           this.nbCalls = 0;
-          console.log('TOO MUCH CALL TO WSO !');
           return;
         }
         if (error.status === 401) {
@@ -62,17 +58,16 @@ export class Wso2Service {
   }
 
   getAppToken() {
-    console.log('APP T !!!!');
     const body = new HttpParams().set('grant_type', 'client_credentials');
     return this.getToken(body);
   }
 
   login(user: string, pass: string) {
     const body = new HttpParams().set('grant_type', 'password').set('username', user).set('password', pass);
-    return this.getToken(body);
+    return this.getToken(body, true);
   }
 
-  private getToken(body: HttpParams) {
+  private getToken(body: HttpParams, login?: boolean) {
     const headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent });
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     const finalUrl = this.wso2ServiceBaseUrl + 'token';
@@ -82,7 +77,11 @@ export class Wso2Service {
       { headers: headers }
     ).pipe(
       map(res => {
-        this.tokenStudent = 'Bearer ' + res['access_token'];
+        if (login) {
+          this.tokenStudent = 'Bearer ' + res['access_token'];
+        } else {
+          this.token = 'Bearer ' + res['access_token'];
+        }
         return 'OK';
       }),
       catchError((error: any) => observableThrowError(error)));

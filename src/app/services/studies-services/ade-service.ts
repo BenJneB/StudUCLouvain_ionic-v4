@@ -47,40 +47,42 @@ export class AdeService {
   /*Open a session*/
   httpOpenSession() {
     const encodedURL = this.AdeserviceBaseUrl + this.AdeserviceConnection;
-    return this.getDataFromADE(encodedURL);
+    return this.getOrSetDataFromADE(encodedURL);
   }
 
-  private getDataFromADE(encodedURL: string, sessionId?: string) {
+  private getOrSetDataFromADE(encodedURL: string, sessionId?: string) {
     if (sessionId !== undefined) {
       encodedURL = this.getBasicSessionUrl(sessionId) + encodedURL;
     }
+    console.log('BEFORE FIRST RETURN DATAFROMADE', encodedURL);
     return this.http.get(encodedURL, { responseType: 'text' }).pipe(map(res => {
+      console.log('BEFORE SECOND RETURN DATAFROMADE');
       return this.utilsServices.convertToJson(res);
     }, err => {
+      console.log(err);
     }));
   }
 
   getBasicSessionUrl(sessionId: string) {
-    return this.AdeserviceBaseUrl + 'sessionId= ' + sessionId;
+    return this.AdeserviceBaseUrl + 'sessionId=' + sessionId;
   }
   /*Get the projects from ADE*/
-  httpGetProjects(sessionId: string) {
-    return this.getDataFromADE(this.AdeServiceGetProjects, sessionId);
+  getProjects(sessionId: string) {
+    return this.getOrSetDataFromADE(this.AdeServiceGetProjects, sessionId);
   }
 
   /*Set the project selected by the user*/
-  httpSetProject(sessionId: string, projectId: string) {
-    return this.getDataFromADE('&function=setProject&projectId= ' + projectId, sessionId);
+  setProject(sessionId: string, projectId: string) {
+    return this.getOrSetDataFromADE('&function=setProject&projectId=' + projectId, sessionId);
   }
 
   /*For a course selected and its acronym get the course id*/
-  httpGetCourseId(sessionId: string, acronym: string) {
-    return this.getDataFromADE('&function=getResources&code= ' + acronym, sessionId);
+  getCourseId(sessionId: string, acronym: string) {
+    return this.getOrSetDataFromADE('&function=getResources&code=' + acronym, sessionId);
   }
 
   /*For a course selected get the activities*/
-  httpGetActivity(sessionId: string, courseId: string) {
-    return this.getDataFromADE('&function=getActivities&resources = ' + courseId + '&detail=17', sessionId);
+  getActivity(sessionId: string, courseId: string) {
+    return this.getOrSetDataFromADE('&function=getActivities&resources=' + courseId + '&detail=17', sessionId);
   }
-
 }

@@ -101,7 +101,8 @@
         "WARNING": "Warning",
         "MESSAGE3": "In the event of a change or problem, this reminder will not be modified.<br> Any changes will be visible the next time the application is launched.",
         "NO": "No course",
-        "SHOW": "Show programs"
+        "SHOW": "Show programs",
+        "HIDE": "Hide programs"
     },
 
     "MODAL": {

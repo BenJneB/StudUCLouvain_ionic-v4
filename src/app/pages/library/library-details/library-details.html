@@ -52,9 +52,12 @@
     </ion-row>
 
     <ion-row text-wrap>
-      <ion-col text-wrap>
-        <a href="tel:{{libDetails.phone}}">{{libDetails.phone}}</a>
-      </ion-col>
+      <ion-item text-wrap>
+        <ion-label>
+          <ion-icon slot="start" name="call"></ion-icon> &nbsp;
+          <a href="tel:{{libDetails.phone}}">{{libDetails.phone}}</a>
+        </ion-label>
+      </ion-item>
       <ion-col text-right>
         <ion-button *ngIf="libDetails.website" fill="clear" size="small" (click)="openPage(libDetails.website)">
           <ion-icon name='share-alt' slot="start"></ion-icon>
@@ -62,13 +65,21 @@
         </ion-button>
       </ion-col>
     </ion-row>
+    <ion-row>
+      <ion-item>
+        <ion-label>
+          <ion-icon slot="start" name="mail"></ion-icon> &nbsp;
+          <a href="mailto:{{libDetails.email}}">{{libDetails.email}}</a>
+        </ion-label>
+      </ion-item>
+    </ion-row>
 
     <ion-row padding text-wrap>
       {{libDetails.openingHoursNote}}
     </ion-row>
 
     <ion-item-divider (click)="toggleGroup('opening_hours')">
-      {{'LIBRARY.HOUR' | translate}}
+      <ion-label>{{'LIBRARY.HOUR' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsServices.isGroupShown('opening_hours', shownGroup)">
@@ -80,7 +91,7 @@
     </ion-item>
 
     <ion-item-divider (click)="toggleGroup('opening_examination_hours')">
-      {{'LIBRARY.EXAMHOUR' | translate}}
+      <ion-label>{{'LIBRARY.EXAMHOUR' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsServices.isGroupShown('opening_examination_hours', shownGroup)">
@@ -92,7 +103,7 @@
     </ion-item>
 
     <ion-item-divider (click)="toggleGroup('opening_summer_hours')">
-      {{'LIBRARY.SUMMERHOUR' | translate}}
+      <ion-label>{{'LIBRARY.SUMMERHOUR' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsServices.isGroupShown('opening_summer_hours', shownGroup)">
@@ -104,7 +115,7 @@
     </ion-item>
 
     <ion-item-divider (click)="toggleGroup('closed_dates')">
-      {{'LIBRARY.CLOSED' | translate}}
+      <ion-label>{{'LIBRARY.CLOSED' | translate}}</ion-label>
     </ion-item-divider>
 
     <ion-item [hidden]="!utilsServices.isGroupShown('closed_dates', shownGroup)" text-wrap>

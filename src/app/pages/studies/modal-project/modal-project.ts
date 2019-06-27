@@ -62,5 +62,4 @@ export class ModalProjectPage {
   ngOnInit() {
     this.getProjects(this.sessionId);
   }
-
 }

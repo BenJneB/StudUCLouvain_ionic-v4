@@ -94,7 +94,7 @@
   --ion-color-mobilite: #006837;
   --ion-color-urg: #ec1c24;
   --ion-color-fun: #93278f;
-  --ion-color-uclouvain: rgb(0, 33, 78);
+  --ion-color-uclouvain: #00214E;
   --ion-color-home: #002A6A;
 }
 
@@ -112,12 +112,13 @@ $customColors: ('guindaille', 'navbarColor', 'news', 'event', 'sport', 'g2', 'cr
 }
 
 ion-toolbar ion-buttons ion-back-button {
-  color: light !important;
+  --color: white !important;
 }
 
 ion-segment-button ion-label {
   color: white;
 }
+
 
 ion-title {
   color: white;
@@ -170,4 +171,13 @@ ion-tab-button {
 .segment-button,
 ion-tab-button {
   color: white !important;
+}
+
+.menu-title {
+  display: inline-block;
+}
+
+.menu-title.ios.title-ios {
+  padding: 0 !important;
+  line-height: 3.5;
 }

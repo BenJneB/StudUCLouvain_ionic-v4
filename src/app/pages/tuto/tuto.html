@@ -19,9 +19,9 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 *-->
 <ion-content>
-  <ion-slides id="slides" pager="true">
+  <ion-slides id="slides" pager="true" class="tutoSlides">
 
-    <ion-slide>
+    <ion-slide id="tutoSlide" class="tutoSlide">
       <ion-row justify-content-center align-items-center class="title">
         <p>{{'TUTO.SIDE' | translate}}</p>
       </ion-row>
@@ -33,7 +33,7 @@
       </ion-row>
     </ion-slide>
 
-    <ion-slide>
+    <ion-slide id="tutoSlide" class="tutoSlide">
       <ion-row justify-content-center align-items-center class="title">
         <p>{{'TUTO.SIDEB' | translate}}</p>
       </ion-row>
@@ -45,7 +45,7 @@
       </ion-row>
     </ion-slide>
 
-    <ion-slide>
+    <ion-slide id="tutoSlide" class="tutoSlide">
       <ion-row justify-content-center align-items-center class="title">
         <p>{{'TUTO.SIDEC' | translate}}</p>
       </ion-row>
@@ -57,7 +57,7 @@
       </ion-row>
     </ion-slide>
 
-    <ion-slide>
+    <ion-slide id="tutoSlide" class="tutoSlide">
       <ion-row justify-content-center align-items-center class="title">
         <p>{{'TUTO.SIDED' | translate}}</p>
       </ion-row>
@@ -69,7 +69,7 @@
       </ion-row>
     </ion-slide>
 
-    <ion-slide>
+    <ion-slide id="tutoSlide" class="tutoSlide">
       <ion-row justify-content-center align-items-center class="title">
         <p>{{'TUTO.SIDED' | translate}}</p>
       </ion-row>
@@ -81,7 +81,7 @@
       </ion-row>
     </ion-slide>
 
-    <ion-slide>
+    <ion-slide id="tutoSlide" class="tutoSlide">
       <ion-row justify-content-center align-items-center class="title">
         <p>{{'TUTO.SIDEE' | translate}}</p>
       </ion-row>
@@ -93,7 +93,7 @@
       </ion-row>
     </ion-slide>
 
-    <ion-slide>
+    <ion-slide id="tutoSlide" class="tutoSlide">
       <ion-row justify-content-center align-items-center class="title">
         <p>{{'TUTO.SIDEF' | translate}}</p>
       </ion-row>
@@ -105,15 +105,7 @@
       </ion-row>
     </ion-slide>
 
-    <!--<ion-slide>
-
-  </ion-slide>
-
-  <ion-slide>
-
-  </ion-slide>-->
-
-    <ion-slide>
+    <ion-slide id="tutoSlide" class="tutoSlide">
       <ion-row>
         <ion-col>
 
@@ -124,7 +116,7 @@
           <ion-row justify-content-center align-items-center>
             <p>{{'TUTO.SIDE8' | translate}}</p>
           </ion-row>
-          <ion-button color="light" (click)="goToHome()">Go to HomeScreen</ion-button>
+          <ion-button id="goHome" color="light" (click)="goToHome()">Go to HomeScreen</ion-button>
         </ion-col>
       </ion-row>
     </ion-slide>

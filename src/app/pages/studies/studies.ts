@@ -26,7 +26,7 @@ import { Component } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import {
-    AlertController, MenuController, ModalController, NavController, Platform, ToastController
+    AlertController, MenuController, ModalController, NavController, ToastController
 } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
@@ -46,22 +46,17 @@ import { ModalProjectPage } from './modal-project/modal-project';
 })
 
 export class StudiesPage {
-  public people: any;
-  public data: any;
   segment = 'prog';
   public listCourses: Course[];
-  public course: Course;
-  public title = 'Etudes';
   public sessionId: string;
   public project: AdeProject = null;
   private username = '';
   private password = '';
   public error = '';
   status = '';
+  title = 'Etudes';
   sigles: any;
   activities: any = [];
-  response: any;
-  language;
   private statusInsc = '';
   private prog = '';
 
@@ -72,7 +67,6 @@ export class StudiesPage {
     public storage: Storage,
     public menu: MenuController,
     public toastCtrl: ToastController,
-    public platform: Platform,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
     public connService: ConnectivityService,
@@ -84,9 +78,8 @@ export class StudiesPage {
   ) {
     this.initializeSession();
     this.menu.enable(true, 'studiesMenu');
+    console.log('BEFORE GET COURSE');
     this.getCourses();
-
-
   }
 
   checkExist(sigle: string): Promise<any> {
@@ -99,7 +92,7 @@ export class StudiesPage {
           let exist: boolean;
           let nameFR = '';
           let nameEN = '';
-          if (data === 400) {
+          if (res === undefined) {
             exist = false;
           } else {
             const names = res.intituleCompletMap.entry;
@@ -166,31 +159,29 @@ export class StudiesPage {
         this.activities.push({ 'name': '', 'sigle': sigle });
       }
     })
-      .catch((err) => {
-        console.log('Error during load of course program');
-      });
+      .catch((err) => { console.log('Error during load of course program'); });
   }
 
   /*Open modalprojectpage to choose an ade project*/
   async openModalProject() {
     const obj = { sessionId: this.sessionId };
-
     const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj });
     await myModal.present();
-    await myModal.onDidDismiss().then(data => {
-      this.project = data.data;
-
-    });
+    await myModal.onDidDismiss().then(data => { this.project = data.data; });
   }
 
   /*Set project and connect to ADE*/
   initializeSession() {
+    console.log('INIT');
     if (this.connService.isOnline()) {
+      console.log('ONLINE');
       this.studiesService.openSession().then(
         data => {
+          console.log('OPEN SESSION', data);
           this.sessionId = data;
           this.storage.get('adeProject').then(
             (dataProject) => {
+              console.log('adeProject Got', dataProject);
               this.project = dataProject;
               if (this.project === null || this.project === undefined) {
                 this.openModalProject();
@@ -206,7 +197,7 @@ export class StudiesPage {
     }
   }
 
-  addCourseFromProgram(acro: string) {
+  addCourseFromProgram(acro?: string) {
     let already = false;
     for (const item of this.listCourses) {
       if (item.acronym === acro) { already = true; }
@@ -223,13 +214,17 @@ export class StudiesPage {
           this.addCourse(acro, check.nameFR);
         } else {
           this.alertService.toastCourse('STUDY.BADCOURSE');
-          this.alertService.showPromptStudies(this.listCourses, this.checkCourseExisting.bind(this));
+          this.showPrompt();
         }
       });
     } else {
       this.alertService.toastCourse('STUDY.ALCOURSE');
     }
     return check;
+  }
+
+  private showPrompt() {
+    this.alertService.showPromptStudies(this.listCourses, this.checkCourseExisting.bind(this));
   }
 
   async addCourse(sigle: string, name: string) {
@@ -242,9 +237,10 @@ export class StudiesPage {
     return await toast.present();
   }
 
-  /*Retrieve list of course added previously in the storage*/
   getCourses() {
+    console.log('BEFORE GET COURSES ETCCCCé)');
     this.storage.get('listCourses').then((data) => {
+      console.log('IN GET STORAGE GETCOURSES');
       if (data === null) {
         this.listCourses = [];
       } else {
@@ -253,14 +249,12 @@ export class StudiesPage {
     });
   }
 
-  /*Save course into storage*/
   saveCourse(name: string, tag: string) {
     const course = new Course(name, tag, null);
     this.listCourses.push(course);
     this.storage.set('listCourses', this.listCourses);
   }
 
-  /*Remove course from storage*/
   removeCourse(course: Course) {
     const index = this.listCourses.indexOf(course);
     if (index >= 0) {
@@ -269,7 +263,6 @@ export class StudiesPage {
     this.storage.set('listCourses', this.listCourses);
   }
 
-  /*Open CoursePage of a course to have the schedule*/
   openCoursePage(course: Course) {
     const year = parseInt(this.project.name.split('-')[0], 10);
     const navigationExtras: NavigationExtras = {
@@ -297,7 +290,6 @@ export class StudiesPage {
     await alert.present();
   }
 
-  /*Launch moodle or ucl portal*/
   launch(url) {
     this.iab.create(url, '_system');
   }

@@ -67,7 +67,7 @@ export class SupportPage {
 
   /*Take the name and lastname in the good field to do the search and display the result*/
   update() {
-    this.loader.present('Please wait..');
+    this.loader.present('Please wait..').then();
     const options: Array<string> = [];
     const values: Array<string> = [];
     const fields = [
@@ -88,9 +88,11 @@ export class SupportPage {
   }
 
   /*Search employees with the name and lastname in option, return the result and dismiss the loading pop up*/
-  searchEmployees(options: Array<string>, values: Array<string>) {
+  async searchEmployees(options: Array<string>, values: Array<string>) {
     this.searching = true;
-    this.employees = this.repService.searchEmployees(options, values);
+    await this.repService.searchEmployees(options, values).then((res: EmployeeItem[]) => {
+      this.employees = res;
+    });
     this.searching = false;
     this.loader.dismiss();
   }

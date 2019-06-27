@@ -1,16 +1,17 @@
 import { testInstanceCreation } from 'src/app/app.component.spec';
-import { InAppBrowserMock, ModalControllerMock } from 'test-config/MockIonicNative';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { ModalController } from '@ionic/angular';
-import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-/*
+import {
+    AppVersionMock, InAppBrowserMock, ModalControllerMock
+} from '../../../../test-config/MockIonicNative';
+/**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
     Date: 2018-2019
@@ -30,36 +31,48 @@ import { TranslateModule } from '@ngx-translate/core';
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { GuindaillePage } from './guindaille2-0';
+import { CreditPage } from './credit';
 
-describe('Guindaille Component', () => {
+describe('Credit Component', () => {
     let fixture;
     let component;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [GuindaillePage],
+            declarations: [CreditPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientTestingModule,
-                IonicStorageModule.forRoot(),
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
+                { provide: AppVersion, useClass: AppVersionMock },
             ]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(GuindaillePage);
+        fixture = TestBed.createComponent(CreditPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should be created', () => {
-        testInstanceCreation(component, GuindaillePage);
+        testInstanceCreation(component, CreditPage);
+    });
+
+    describe('openURL method', () => {
+        it('should call create of InAppBrowser', () => {
+            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            TestBed
+                .compileComponents()
+                .then(() => {
+                    component.openURL('url');
+                    expect(spyCreate.calls.count()).toEqual(1);
+                    expect(spyCreate.calls.first().args[0]).toEqual('url');
+                });
+        });
     });
 });

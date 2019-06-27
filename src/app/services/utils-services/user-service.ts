@@ -19,7 +19,6 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Injectable } from '@angular/core';
-import { Events } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 @Injectable({
@@ -33,7 +32,6 @@ export class UserService {
   fac = '';
 
   constructor(
-    public eventss: Events,
     public storage: Storage
   ) {
     //  USE THIS LINE TO CLEAR THE STORAGE

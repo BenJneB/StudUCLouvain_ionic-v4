@@ -52,13 +52,13 @@ export class LibraryDetailsPage {
     private router: Router,
     public libService: LibrariesService,
     public connService: ConnectivityService,
-    private utilsServices: UtilsService
+    public utilsServices: UtilsService
   ) {
     this.route.queryParams.subscribe(() => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.libDetails = this.router.getCurrentNavigation().extras.state.items;
         this.searching = true;
-        this.libDetails = this.libService.loadLibDetails(this.libDetails);
+        this.libService.loadLibDetails(this.libDetails);
         this.searching = false;
       }
     });

@@ -39,7 +39,7 @@ export class MobilityPage {
     public nav: NavController,
     public market: Market,
     private translateService: TranslateService,
-    private utilsServices: UtilsService
+    public utilsServices: UtilsService
   ) {
     this.title = 'Mobilité';
     let titlecar: string;

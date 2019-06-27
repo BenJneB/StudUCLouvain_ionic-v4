@@ -54,9 +54,8 @@ app-home {
         }
     }
 
-
-    ion-grid {
-        height: 100%;
+    ion-content.hM {
+        height: 100% !important;
 
         ion-row.homeM {
             height: 20vh;
@@ -82,29 +81,4 @@ app-home {
             }
         }
     }
-
-    @media (all) and (orientation: landscape) {
-        ion-row.homeM {
-            display: none;
-        }
-
-        ion-row.ucl {
-            height: 18.75vh;
-
-            img {}
-        }
-    }
-
-    @media (all) and (orientation: portrait) {
-        ion-row.homeML {
-            display: none;
-        }
-
-        ion-row.ucl {
-            height: 16vh;
-
-            img {}
-        }
-    }
-
 }
