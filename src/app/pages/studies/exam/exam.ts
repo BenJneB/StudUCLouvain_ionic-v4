@@ -26,7 +26,7 @@ import { UserService } from '../../../services/utils-services/user-service';
 @Component({
   selector: 'page-exam',
   templateUrl: 'exam.html',
-	styleUrls: ['./exam.scss'],
+  styleUrls: ['./exam.scss'],
 })
 
 export class ExamPage {

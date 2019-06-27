@@ -28,7 +28,7 @@ import { POIService } from '../../services/map-services/poi-service';
 @Component({
   selector: 'page-map',
   templateUrl: 'map.html',
-	styleUrls: ['./map.scss'],
+  styleUrls: ['./map.scss'],
 })
 export class MapPage {
 

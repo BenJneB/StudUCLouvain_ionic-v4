@@ -36,7 +36,7 @@ import { EVENT_TEXTS, UtilsService } from '../../services/utils-services/utils-s
 @Component({
   selector: 'page-events',
   templateUrl: 'events.html',
-	styleUrls: ['./events.scss'],
+  styleUrls: ['./events.scss'],
 })
 export class EventsPage {
   @ViewChild('eventsList', { read: IonList }) eventsList: IonList;

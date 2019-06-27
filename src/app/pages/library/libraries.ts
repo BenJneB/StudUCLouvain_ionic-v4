@@ -31,7 +31,7 @@ import { LibrariesService } from '../../services/wso2-services/libraries-service
 @Component({
   selector: 'page-libraries',
   templateUrl: 'libraries.html',
-	styleUrls: ['./libraries.scss'],
+  styleUrls: ['./libraries.scss'],
 })
 export class LibrariesPage {
   title: any;

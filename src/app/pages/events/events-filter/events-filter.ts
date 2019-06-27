@@ -28,7 +28,7 @@ import { EventsService } from '../../../services/rss-services/events-service';
 @Component({
   selector: 'page-events-filter',
   templateUrl: 'events-filter.html',
-	styleUrls: ['./events-filter.scss'],
+  styleUrls: ['./events-filter.scss'],
 })
 export class EventsFilterPage {
   categories: Array<{ name: string, iconCategory: string, isChecked: boolean }> = [];

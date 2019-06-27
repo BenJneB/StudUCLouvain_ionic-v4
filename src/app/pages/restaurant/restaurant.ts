@@ -24,7 +24,7 @@ import { NavController, NavParams } from '@ionic/angular';
 @Component({
   selector: 'page-restaurant',
   templateUrl: 'restaurant.html',
-	styleUrls: ['./restaurant.scss'],
+  styleUrls: ['./restaurant.scss'],
 })
 export class RestaurantPage {
   public title: any;

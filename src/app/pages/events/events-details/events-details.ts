@@ -30,7 +30,7 @@ import { UserService } from '../../../services/utils-services/user-service';
 @Component({
   selector: 'page-events-details',
   templateUrl: 'events-details.html',
-	styleUrls: ['./events-details.scss'],
+  styleUrls: ['./events-details.scss'],
 })
 export class EventsDetailsPage {
   event: EventItem;

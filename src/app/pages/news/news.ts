@@ -38,7 +38,7 @@ import { UtilsService } from '../../services/utils-services/utils-services';
 @Component({
   selector: 'page-news',
   templateUrl: 'news.html',
-	styleUrls: ['./news.scss'],
+  styleUrls: ['./news.scss'],
 })
 export class NewsPage {
 

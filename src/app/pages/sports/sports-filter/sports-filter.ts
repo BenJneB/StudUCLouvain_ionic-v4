@@ -26,7 +26,7 @@ import { NavParams } from '@ionic/angular';
 @Component({
   selector: 'page-sports-filter',
   templateUrl: 'sports-filter.html',
-	styleUrls: ['./sports-filter.scss'],
+  styleUrls: ['./sports-filter.scss'],
 })
 export class SportsFilterPage {
   categories: Array<{ name: string, isChecked: boolean }> = [];
