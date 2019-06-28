@@ -20,11 +20,8 @@
 */
 
 #slides {
-
-    background: map-get($colors, uclouvain) !important;
+    background: var(--ion-color-uclouvain) !important;
 }
-
-
 
 ion-slide p {
     color: white;
