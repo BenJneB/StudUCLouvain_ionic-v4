@@ -1,6 +1,8 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { spyFunctionWithCallBackReject } from 'src/app/app.component.spec';
+import {
+    spyFunctionWithCallBackReject, spyFunctionWithCallBackThen
+} from 'src/app/app.component.spec';
 import { EventItem } from 'src/app/entity/eventItem';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -49,7 +51,7 @@ import {
 */
 import { EventsPage } from './events';
 
-describe('Events Component', () => {
+fdescribe('Events Component', () => {
     let fixture;
     let component;
     const dateLimit = '2018-01-26';
@@ -71,9 +73,7 @@ describe('Events Component', () => {
                 { provide: Market, useClass: MarketMock },
                 { provide: AppAvailability, useClass: AppAvailabilityMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
-                // AppVersion,
-                //     { provide: SplashScreen, useClass: SplashScreenMock },
-                CacheService,
+                { provide: CacheService, useClass: StorageMock },
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
@@ -170,6 +170,16 @@ describe('Events Component', () => {
             component.cachedOrNot();
             expect(spyReject.calls.count()).toEqual(1);
             // expect(spyLoad.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('loadEvents method', () => {
+        it('should call getEvents from EventService and updateDisplayed', () => {
+            const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', { items: [] });
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            component.loadEvents();
+            expect(spyGetEvents.calls.count()).toEqual(1);
+            expect(spyUpdate.calls.count()).toEqual(1);
         });
     });
 });
