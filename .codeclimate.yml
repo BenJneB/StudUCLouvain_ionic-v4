@@ -16,7 +16,7 @@ plugins:
         count_threshold: 2
   similar-code:
     config:
-      threshold: 15
+      threshold: 50
 
 exclude_patterns:
 - config/**/*
