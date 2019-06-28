@@ -14,9 +14,8 @@ plugins:
     enabled: true
     config:
         count_threshold: 2
-  similar-code:
-    config:
-      threshold: 50
+        dump_ast: true
+        debug: true
 
 exclude_patterns:
 - config/**/*
