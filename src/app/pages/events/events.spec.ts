@@ -51,7 +51,7 @@ import {
 */
 import { EventsPage } from './events';
 
-fdescribe('Events Component', () => {
+describe('Events Component', () => {
     let fixture;
     let component;
     const dateLimit = '2018-01-26';
