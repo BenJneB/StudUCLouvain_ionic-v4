@@ -14,8 +14,6 @@ plugins:
     enabled: true
     config:
         count_threshold: 2
-        dump_ast: true
-        debug: true
 
 exclude_patterns:
 - config/**/*
