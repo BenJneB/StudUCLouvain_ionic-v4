@@ -156,7 +156,7 @@ export class EventsPage {
     } else {
       this.searching = false;
       this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
+      this.connService.presentConnectionAlert().then();
     }
   }
 
@@ -237,7 +237,7 @@ export class EventsPage {
         componentProps: { excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange }
       }
     );
-    await modal.present();
+    await modal.present().then();
     await modal.onDidDismiss().then((data: OverlayEventDetail) => {
       if (data) {
         data = data.data;

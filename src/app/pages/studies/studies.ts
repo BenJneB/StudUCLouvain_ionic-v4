@@ -47,7 +47,7 @@ import { ModalProjectPage } from './modal-project/modal-project';
 })
 
 export class StudiesPage {
-  segment = 'prog';
+  segment = 'cours';
   public listCourses: Course[];
   public sessionId: string;
   public project: AdeProject = null;

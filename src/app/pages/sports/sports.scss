@@ -30,18 +30,26 @@
 }
 
 .team {
-  //#90c53e
   background-color: #90c53e;
-  color: white;
+
+  ion-label {
+    background-color: #90c53e;
+    color: white;
+  }
 }
 
-.all {
-  background-color: #0f1d41;
-  color: white;
-  //#0f1d41
+ion-content.all {
+  --ion-background-color: #0f1d41 !important;
+
+  ion-searchbar {
+    --ion-background-color: white;
+  }
 }
 
-.text {
+ion-label * {
+  color: var(--ion-color-sport);
+}
 
-  color: white;
+ion-label {
+  color: var(--ion-color-sport) !important;
 }

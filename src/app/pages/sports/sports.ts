@@ -92,7 +92,7 @@ export class SportsPage {
       this.loader.present('Please wait..').then();
     } else {
       this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
+      this.connService.presentConnectionAlert().then();
     }
   }
 
@@ -124,7 +124,7 @@ export class SportsPage {
     } else {
       this.searching = false;
       this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
+      this.connService.presentConnectionAlert().then();
     }
   }
 
