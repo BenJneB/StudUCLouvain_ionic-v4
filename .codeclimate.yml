@@ -14,7 +14,7 @@ plugins:
     enabled: true
     config:
         count_threshold: 2
-        mass_threshold: 50
+        mass_threshold: 65
 
 exclude_patterns:
 - config/**/*
