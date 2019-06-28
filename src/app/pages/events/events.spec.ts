@@ -174,12 +174,25 @@ describe('Events Component', () => {
     });
 
     describe('loadEvents method', () => {
+        let spyOnline;
         it('should call getEvents from EventService and updateDisplayed', () => {
+            spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
             const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', { items: [] });
             const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
             component.loadEvents();
+            expect(spyOnline.calls.count()).toEqual(1);
             expect(spyGetEvents.calls.count()).toEqual(1);
             expect(spyUpdate.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
+        });
+
+        it('if not online, should call presentConnectionAlert', () => {
+            spyOnline = spyOn(component.connService, 'isOnline').and.returnValue(false);
+            const spyPresentAlert = spyOn(component.connService, 'presentConnectionAlert').and.callThrough();
+            component.loadEvents();
+            expect(spyOnline.calls.count()).toEqual(1);
+            expect(spyPresentAlert.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
         });
     });
 });
