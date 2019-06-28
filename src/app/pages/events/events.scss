@@ -19,22 +19,20 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-events {
-  .spinner-container {
-    width: 100%;
-    text-align: center;
-    padding: 10px;
-  }
+.spinner-container {
+  width: 100%;
+  text-align: center;
+  padding: 10px;
+}
 
-  .large-icon {
-    font-size: 40px;
-  }
+.large-icon {
+  font-size: 40px;
+}
 
-  .weekview-allday-table {
-    display: none;
-  }
+.weekview-allday-table {
+  display: none;
+}
 
-  .weekview-normal-event-container {
-    margin-top: 37px;
-  }
+.weekview-normal-event-container {
+  margin-top: 37px;
 }
