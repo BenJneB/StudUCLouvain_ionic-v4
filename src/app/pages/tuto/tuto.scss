@@ -19,10 +19,25 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-#slides {
+ion-slides {
     background: var(--ion-color-uclouvain) !important;
-}
-
-ion-slide p {
-    color: white;
+    height: 100%;
+    ion-slide {
+        height: 100%;
+        ion-row {
+            justify-content: center;
+            p {
+                color: white;
+            }
+            .title p {
+                height: 10vh;
+            }
+            img {
+                height: 70vh;
+            }
+            .descr p {
+                height: 20vh;
+            }
+        }
+    }
 }
