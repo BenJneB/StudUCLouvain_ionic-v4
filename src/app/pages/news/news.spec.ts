@@ -58,7 +58,6 @@ describe('News Component', () => {
                 RouterTestingModule,
                 HttpClientTestingModule,
                 IonicStorageModule.forRoot(),
-                FormsModule,
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
