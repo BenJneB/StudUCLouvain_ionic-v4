@@ -19,20 +19,22 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-tuto {
-
-    #slides {
-
-        background: map-get($colors, uclouvain) !important;
+ion-slides {
+    background: var(--ion-color-uclouvain) !important;
+    height: 100%;
+    ion-slide {
+        height: 100%;
+        ion-row {
+            justify-content: center;
+            p {
+                color: white;
+            }
+            img {
+                height: 70vh;
+            }
+            .descr p {
+                height: 20vh;
+            }
+        }
     }
-
-
-
-    ion-slide p {
-        color: white;
-    }
-
-
-
-
 }

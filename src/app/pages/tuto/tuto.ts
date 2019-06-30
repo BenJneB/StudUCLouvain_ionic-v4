@@ -25,6 +25,7 @@ import { NavController } from '@ionic/angular';
 @Component({
   selector: 'page-tuto',
   templateUrl: 'tuto.html',
+  styleUrls: ['./tuto.scss'],
 })
 export class TutoPage {
 
