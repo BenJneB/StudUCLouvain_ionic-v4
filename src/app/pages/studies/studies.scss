@@ -19,23 +19,20 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-studies {
-  ion-toolbar[hidebackbutton] button[menutoggle] {
-    display: block !important;
-  }
+ion-toolbar[hidebackbutton] button[menutoggle] {
+  display: block !important;
+}
 
-  ion-content>.scroll-content {
+ion-content>.scroll-content {
 
-    margin-bottom: 60px !important;
+  margin-bottom: 60px !important;
 
-  }
+}
 
-  .fixed-div {
-    align-items: center;
-  }
+.fixed-div {
+  align-items: center;
+}
 
-  ion-content.cours>.scroll-content {
-    margin-top: 190px !important;
-  }
-
+ion-content.cours>.scroll-content {
+  margin-top: 190px !important;
 }
