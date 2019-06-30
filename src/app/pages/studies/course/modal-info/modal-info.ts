@@ -26,6 +26,7 @@ import { StudentService } from '../../../../services/wso2-services/student-servi
 @Component({
   selector: 'page-modal-info',
   templateUrl: 'modal-info.html',
+  styleUrls: ['./modal-info.scss'],
 })
 export class ModalInfoPage {
   course = this.navParams.get('course');

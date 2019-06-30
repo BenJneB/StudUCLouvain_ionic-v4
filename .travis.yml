@@ -25,7 +25,7 @@ jobs:
       name: "Unit Tests"            # names the first Tests stage job
       script: npm run test:onceAndCoverage
     - script: npm run e2e
-      name: "Integration Tests"     # names the second Tests stage job
+      name: "E2E Tests"     # names the second Tests stage job
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
