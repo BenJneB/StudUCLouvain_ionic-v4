@@ -26,6 +26,7 @@ import { ModalController, NavController } from '@ionic/angular';
 @Component({
   selector: 'page-credit',
   templateUrl: 'credit.html',
+  styleUrls: ['./credit.scss'],
 })
 
 export class CreditPage {
