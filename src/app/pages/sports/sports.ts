@@ -34,7 +34,8 @@ import { SportsFilterPage } from './sports-filter/sports-filter';
 
 @Component({
   selector: 'page-sports',
-  templateUrl: 'sports.html'
+  templateUrl: 'sports.html',
+  styleUrls: ['./sports.scss'],
 })
 
 export class SportsPage {
@@ -91,7 +92,7 @@ export class SportsPage {
       this.loader.present('Please wait..').then();
     } else {
       this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
+      this.connService.presentConnectionAlert().then();
     }
   }
 
@@ -123,7 +124,7 @@ export class SportsPage {
     } else {
       this.searching = false;
       this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
+      this.connService.presentConnectionAlert().then();
     }
   }
 

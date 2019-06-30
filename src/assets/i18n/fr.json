@@ -435,12 +435,6 @@
     },
 
     "TUTO": {
-        "SIDE": "Side menu",
-        "SIDEB": "Etudes",
-        "SIDEC": "Etudes",
-        "SIDED": "Etudes (onglet \"horaires\")",
-        "SIDEE": "Répertoire",
-        "SIDEF": "Actualités (onglet \"facultaires\")",
         "SIDE1": "Vous pouvez glisser chaque page vers la droite pour faire apparaitre le menu latéral.",
         "SIDE2": "Vous pouvez glisser la page \"Etudes\" vers la gauche afin d'avoir accès au menu latéral droit.",
         "SIDE3": "Pour l'onglet \"horaires\", si vous voulez ajouter un cours manuellement, vous pouvez cliquer sur le bouton plus.",

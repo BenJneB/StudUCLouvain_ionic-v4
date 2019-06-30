@@ -28,6 +28,7 @@ import { StudiesService } from '../../../services/studies-services/studies-servi
 @Component({
   selector: 'page-modal-project',
   templateUrl: 'modal-project.html',
+  styleUrls: ['./modal-project.scss'],
 })
 export class ModalProjectPage {
   sessionId: string;

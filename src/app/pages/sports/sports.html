@@ -25,7 +25,9 @@
       <ion-back-button></ion-back-button>
       <img src="./assets/img/s.png" height="28" />
     </ion-buttons>
-    <ion-title horizontal="center"><img alt="logo" height="40" src="./assets/img/logoSport.png"></ion-title>
+    <ion-title>
+      <img alt="logo" height="40" src="./assets/img/logoSport.png">
+    </ion-title>
     <ion-buttons slot="end">
       <ion-button (click)="presentFilter()">
         <ion-icon name="options"></ion-icon>
@@ -33,13 +35,13 @@
     </ion-buttons>
   </ion-toolbar>
   <ion-segment [(ngModel)]="segment" name="segment" (ionChange)="updateDisplayed()">
-    <ion-segment-button value="all" style="color: white;">
+    <ion-segment-button value="all">
       <ion-label>{{'SPORTS.ALL' | translate}}</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="team" style="color: white;">
+    <ion-segment-button value="team">
       <ion-label>{{'SPORTS.TEAM' | translate}}</ion-label>
     </ion-segment-button>
-    <ion-segment-button value="favorites" style="color: white;">
+    <ion-segment-button value="favorites">
       <ion-label>{{'SPORTS.FAV' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
@@ -55,26 +57,26 @@
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
   <ion-list #sportsList *ngFor="let jour of displayedSportsD" [hidden]="shownSports === 0">
-    <ion-item-divider *ngIf="jour.items.length > 0" (click)="toggleGroup(jour.label)" text-center class="all"
-      [ngClass]="{'team' : segment == 'team'}">
+    <ion-item-divider *ngIf="jour.items.length > 0" (click)="toggleGroup(jour.label)">
       <ion-label style="width: 100%;" text-center> {{jour.label}} {{jour.items[0].date | date: 'dd/MM'}}
         ({{jour.items.length}}) </ion-label>
     </ion-item-divider>
 
     <ion-item-sliding #slidingItem *ngFor="let sport of jour.items"
       [hidden]="!utilsServices.isGroupShown(jour.label, shownGroup) || sport.hidden">
-      <ion-item text-center class="all" [ngClass]="{'team' : segment == 'team'}">
+      <ion-item text-center>
         <ion-label>
           <h3>{{sport.sport}} {{sport.sexe}} {{sport.type}}</h3>
-          <p class="text">{{sport.lieu}} - Salle : {{sport.salle}}</p>
-          <p class="text">
+          <p>{{sport.lieu}} - Salle : {{sport.salle}}</p>
+          <p>
             <ion-icon slot="start" name="calendar"></ion-icon>
-            {{sport.jour}} {{sport.date | date: 'dd/MM/yyyy' }} {{sport.date | date : 'H:mm' }} &mdash;
+            {{sport.jour}} {{sport.date | date: 'dd/MM/yyyy H:mm' }} &mdash;
             {{sport.hfin | date : 'H:mm'}}
           </p>
-          <p style="color:red;" *ngIf="sport.online==1">{{'SPORTS.ONLINE' | translate}}</p>
-          <p style="color:red;" *ngIf="sport.remarque.length > 2">{{'SPORTS.NOTE' | translate}} : {{sport.remarque}}</p>
-          <p style="color:red;" *ngIf="sport.active==0">{{'SPORTS.ANNULE' | translate}}</p>
+          <p style="color:red !important;" *ngIf="sport.online==1">{{'SPORTS.ONLINE' | translate}}</p>
+          <p style="color:red !important;" *ngIf="sport.remarque.length > 2">{{'SPORTS.NOTE' | translate}} :
+            {{sport.remarque}}</p>
+          <p style="color:red !important;" *ngIf="sport.active==0">{{'SPORTS.ANNULE' | translate}}</p>
         </ion-label>
       </ion-item>
 
@@ -104,6 +106,6 @@
 <ion-footer style="opacity: 0.5" text-center *ngIf="segment=='all' || segment=='team'">
   <ion-toolbar color="sport">
     <ion-icon name='help-circle'></ion-icon>
-    <ion-title>{{'SPORTS.SWIPE' | translate}}</ion-title>
+    <ion-label>{{'SPORTS.SWIPE' | translate}}</ion-label>
   </ion-toolbar>
 </ion-footer>

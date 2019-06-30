@@ -28,7 +28,8 @@ import { SearchModal } from './search/search';
 
 @Component({
   selector: 'page-map',
-  templateUrl: 'map.html'
+  templateUrl: 'map.html',
+  styleUrls: ['./map.scss'],
 })
 export class MapPage {
 

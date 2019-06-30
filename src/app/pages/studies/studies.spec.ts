@@ -87,5 +87,6 @@ describe('Studies Component', () => {
 
     it('should be created', () => {
         testInstanceCreation(component, StudiesPage);
+        expect(component.segment).toEqual('cours');
     });
 });

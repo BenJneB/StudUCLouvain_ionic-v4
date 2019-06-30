@@ -31,6 +31,7 @@ import { LibrariesService } from '../../../services/wso2-services/libraries-serv
 @Component({
   selector: 'page-library-details',
   templateUrl: 'library-details.html',
+  styleUrls: ['./library-details.scss'],
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),

@@ -32,7 +32,8 @@ import { UtilsService } from '../../../services/utils-services/utils-services';
 
 @Component({
   selector: 'page-hebdo',
-  templateUrl: 'hebdo.html'
+  templateUrl: 'hebdo.html',
+  styleUrls: ['./hebdo.scss'],
 })
 
 export class HebdoPage {
