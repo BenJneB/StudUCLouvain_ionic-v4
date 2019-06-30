@@ -42,11 +42,12 @@ import { ModalProjectPage } from './modal-project/modal-project';
 @Component({
   selector: 'page-studies',
   templateUrl: 'studies.html',
+  styleUrls: ['./studies.scss'],
 
 })
 
 export class StudiesPage {
-  segment = 'prog';
+  segment = 'cours';
   public listCourses: Course[];
   public sessionId: string;
   public project: AdeProject = null;

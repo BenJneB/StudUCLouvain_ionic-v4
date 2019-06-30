@@ -437,12 +437,6 @@
     },
 
     "TUTO": {
-        "SIDE": "Side menu",
-        "SIDEB": "Studies",
-        "SIDEC": "Studies",
-        "SIDED": "Studies (tab \"schedules\")",
-        "SIDEE": "Repertory",
-        "SIDEF": "News (tab \"faculty\")",
         "SIDE1": "You can swipe on the right on each page to display the side menu.",
         "SIDE2": "You can swipe on the left on the study page to display the side menu.",
         "SIDE3": "For the tab \"schedules\", if you want to add a course manually you can click on the plus button.",
