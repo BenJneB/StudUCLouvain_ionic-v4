@@ -1,0 +1,24 @@
+[run]
+branch = True
+source = .
+omit =
+    node_modules/*
+    venv/*
+    */tests/*
+    features/*
+    config/**/*
+    node_modules/**/*
+    webpack.*.js
+    karma.conf.js
+    platforms/
+    plugins/
+    www/
+    src/assets/*
+    resources/*
+    **/*.spec.ts
+    src/polyfills.ts
+
+[report]
+fail_under = 100
+precision = 2
+sort = Cover
