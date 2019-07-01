@@ -142,11 +142,11 @@ describe('Libraries Component', () => {
 
     describe('cachedOrNot method', () => {
         it('should call getItem from Cache', () => {
-            const spyGetItem = spyOn(component.cache, 'getItem').and.callThrough();
-            component.cachedOrNot().then(() => {
-                expect(component.searching).toBeFalsy();
-            });
+            const spyGetItem = spyFunctionWithCallBackThen(component.cache, 'getItem', { items: [] });
+            component.cachedOrNot();
             expect(spyGetItem.calls.count()).toEqual(1);
+            expect(spyGetItem.calls.first().args[0]).toEqual('cache-libraries');
+            expect(component.searching).toBeFalsy();
         });
         it('should call loadLibraries on reject', () => {
             const spyReject = spyOn(component.cache, 'getItem').and.returnValue(Promise.reject('ERROR'));
