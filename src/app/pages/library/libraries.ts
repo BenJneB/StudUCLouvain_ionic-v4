@@ -81,6 +81,7 @@ export class LibrariesPage {
   }
 
   async cachedOrNot() {
+    //  this.cache.removeItem('cache-event');
     const key = 'cache-libraries';
     await this.cache.getItem(key)
       .then((data) => {
