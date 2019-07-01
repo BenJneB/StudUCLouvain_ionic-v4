@@ -90,4 +90,21 @@ describe('Tuto Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, TutoPage);
     });
+
+    describe('ionViewDidEnter method', () => {
+        it('should call setTimeout of NodeJS', () => {
+            const spySetTimeout = spyOn(window, 'setTimeout').and.callThrough();
+            component.ionViewDidEnter();
+            expect(spySetTimeout.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('goToHome method', () => {
+        it('should call navigateForward of NavController', () => {
+            const spyNav = spyOn(component.navCtrl, 'navigateForward').and.callThrough();
+            component.goToHome();
+            expect(spyNav.calls.count()).toEqual(1);
+            expect(spyNav.calls.first().args[0]).toEqual(['/home']);
+        });
+    });
 });
