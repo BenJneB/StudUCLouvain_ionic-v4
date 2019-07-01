@@ -1,6 +1,8 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import {
+    spyFunctionWithCallBackReject, spyFunctionWithCallBackThen, testInstanceCreation
+} from 'src/app/app.component.spec';
 import { MockCacheStorageService, StorageMock } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -129,6 +131,30 @@ describe('Libraries Component', () => {
             expect(spyOnline.calls.count()).toEqual(1);
             expect(spyPresentAlert.calls.count()).toEqual(1);
             expect(component.searching).toBeFalsy();
+        });
+    });
+
+    describe('doRefresh method', () => {
+        it('should call doRefresh from UtilsService', () => {
+            const spyRefresh = spyOn(component.utilsServices, 'doRefresh').and.callThrough();
+            component.doRefresh({ target: { complete: () => { return; } } });
+            expect(spyRefresh.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('cachedOrNot method', () => {
+        it('should call getItem from Cache', () => {
+            const spyGetItem = spyOn(component.cache, 'getItem').and.callThrough();
+            component.cachedOrNot();
+            expect(spyGetItem.calls.count()).toEqual(1);
+        });
+        it('should call loadLibraries on reject', () => {
+            const spyReject = spyOn(component.cache, 'getItem').and.returnValue(Promise.reject('ERROR'));
+            const spyLoad = spyOn(component, 'loadLibraries').and.callThrough();
+            component.cachedOrNot().then(() => {
+                expect(spyLoad.calls.count()).toEqual(1);
+            });
+            expect(spyReject.calls.count()).toEqual(1);
         });
     });
 });
