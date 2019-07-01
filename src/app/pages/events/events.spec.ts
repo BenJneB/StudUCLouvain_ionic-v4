@@ -127,6 +127,24 @@ describe('Events Component', () => {
         });
     });
 
+    describe('changeArray method', () => {
+        it('should call getItemDisplay from UtilsServices', () => {
+            const spyGetItemD = spyOn(component.utilsServices, 'getItemDisplay').and.returnValue('').and.callThrough();
+            component.changeArray([{ startDate: new Date() }]);
+            expect(spyGetItemD.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('getWeek method', () => {
+        it('should return the week number', () => {
+            // NUUL => A AMELIORER
+            const temp = new Date(new Date().getFullYear(), 0, 4);
+            expect(component.getWeek(new Date())).toEqual(
+                1 + Math.round(((new Date().getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7)
+            );
+        });
+    });
+
     describe('addFavorite method', () => {
         it('should call addFavorite from UtilsService', () => {
             const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
@@ -155,9 +173,13 @@ describe('Events Component', () => {
 
     describe('cachedOrNot method', () => {
         it('should call getItem from Cache and present loader during update the displayed events', () => {
-            const spyGetItem = spyFunctionWithCallBackThen(component.cache, 'getItem', { items: [] });
+            const spyGetItem = spyFunctionWithCallBackThen(
+                component.cache,
+                'getItem',
+                { items: [{ startDate: new Date(), endDate: new Date() }] }
+            );
             const spyLoad = spyOn(component.loader, 'present').and.callThrough();
-            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callFake(() => { });
             component.cachedOrNot();
             expect(spyGetItem.calls.count()).toEqual(1);
             expect(spyGetItem.calls.first().args[0]).toEqual('cache-event');
