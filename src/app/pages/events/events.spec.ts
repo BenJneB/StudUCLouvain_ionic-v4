@@ -49,7 +49,7 @@ import {
 */
 import { EventsPage } from './events';
 
-fdescribe('Events Component', () => {
+describe('Events Component', () => {
     let fixture;
     let component;
 
@@ -162,11 +162,12 @@ fdescribe('Events Component', () => {
             expect(spyGetItem.calls.count()).toEqual(1);
         });
         it('should call loadEvents on reject', () => {
-            spyOn(component, 'loadEvents');
-            const spyReject = spyFunctionWithCallBackReject(component.cache, 'getItem', '');
-            component.cachedOrNot();
+            const spyReject = spyOn(component.cache, 'getItem').and.returnValue(Promise.reject('ERROR'));
+            const spyLoad = spyOn(component, 'loadEvents').and.callThrough();
+            component.cachedOrNot().then(() => {
+                expect(spyLoad.calls.count()).toEqual(1);
+            });
             expect(spyReject.calls.count()).toEqual(1);
-            // expect(spyLoad.calls.count()).toEqual(1);
         });
     });
 
