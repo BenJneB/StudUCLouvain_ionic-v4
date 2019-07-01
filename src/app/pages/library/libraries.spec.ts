@@ -1,8 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import {
-    spyFunctionWithCallBackReject, spyFunctionWithCallBackThen, testInstanceCreation
-} from 'src/app/app.component.spec';
+import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService, StorageMock } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -145,7 +143,9 @@ describe('Libraries Component', () => {
     describe('cachedOrNot method', () => {
         it('should call getItem from Cache', () => {
             const spyGetItem = spyOn(component.cache, 'getItem').and.callThrough();
-            component.cachedOrNot();
+            component.cachedOrNot().then(() => {
+                expect(component.searching).toBeFalsy();
+            });
             expect(spyGetItem.calls.count()).toEqual(1);
         });
         it('should call loadLibraries on reject', () => {
