@@ -7,9 +7,10 @@
 
 
 ### TO FIX
-#### ERROR Error: "Uncaught (in promise): overlay does not exist"
-FIX : npx tslint -c ionic-migration.json -p tsconfig.json --fix
-==> Add .then(...) to modal etc. (TO MANAGE)
+#### - ERROR Error: "Uncaught (in promise): overlay does not exist"
+       - FIX : npx tslint -c ionic-migration.json -p tsconfig.json --fix
+
+       ==> Add .then(...) to modal etc. (TO MANAGE)
 
 
 ### TO DO :
