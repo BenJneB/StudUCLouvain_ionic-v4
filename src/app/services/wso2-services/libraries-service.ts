@@ -88,11 +88,12 @@ export class LibrariesService {
       lib.locationId = data.locationId;
     }
     if (data.mapLocation === null) {
-      lib.mapLocation = new MapLocation(lib.name, '', '', '', '');
+      lib.mapLocation = new MapLocation(lib.name, '', '', '', '', '');
     } else {
       lib.mapLocation = new MapLocation(
         lib.name,
         data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality,
+        '',
         '',
         '',
         ''

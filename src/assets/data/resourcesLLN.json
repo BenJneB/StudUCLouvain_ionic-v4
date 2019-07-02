@@ -10,7 +10,7 @@
                    "cnt_places": 1289,
                    "cnt_auditoires" : 9,
                    "adresse" : "Place Agora, 19 - 1348 Louvain-la-Neuve",
-                   "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolagor.gif",
+                   "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolagor.gif",
                    "coord": {
                        "lat" : "50.6691041",
                        "lng": "4.6124464"
@@ -22,7 +22,7 @@
                    "cnt_places": 839,
                    "cnt_auditoires" : 12,
                    "adresse" : "Place Pierre de Coubertin, 2 - 1348 Louvain-la-Neuve",
-                   "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolcoub.gif",
+                   "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolcoub.gif",
                    "coord": {
                        "lat" : "50.6705452",
                        "lng": "4.606818"
@@ -34,7 +34,7 @@
                      "cnt_places": 1888,
                      "cnt_auditoires" : 18,
                      "adresse" : "Place Croix du Sud - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolsud.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolsud.gif",
                      "coord": {
                          "lat" : "50.6662282",
                          "lng": "4.6195734"
@@ -47,7 +47,7 @@
                      "cnt_places": 392,
                      "cnt_auditoires" : 10,
                      "adresse" : "Chemin du Cyclotron, 2 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolcycl.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolcycl.gif",
                      "coord": {
                          "lat" : "50.6660998",
                          "lng": "4.6239607"
@@ -59,7 +59,7 @@
                      "cnt_places": 64,
                      "cnt_auditoires" : 2,
                      "adresse" : "Grand-Place, 45 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_pooldesc.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/pooldesc.gif",
                      "coord": {
                          "lat" : "50.6692785",
                          "lng": "4.6122516"
@@ -71,7 +71,7 @@
                      "cnt_places": 620,
                      "cnt_auditoires" : 4,
                      "adresse" : "Place des Doyens, 1 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_pooldoye.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/pooldoye.gif",
                      "coord": {
                          "lat" : "50.6680562",
                          "lng": "4.6126268"
@@ -83,7 +83,7 @@
                      "cnt_places": 2,
                      "cnt_auditoires" : 50,
                      "adresse" : "Place Montesquieu, 3 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_pooldupr.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/pooldupr.gif",
                      "coord": {
                          "lat" : "50.6679106",
                          "lng": "4.611555"
@@ -95,7 +95,7 @@
                      "cnt_places": 591,
                      "cnt_auditoires" : 18,
                      "adresse" : "Place Blaise Pascal, 1 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_pooleras.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/pooleras.gif",
                      "coord": {
                          "lat" : "50.6692205",
                          "lng": "4.6115995"
@@ -107,7 +107,7 @@
                      "cnt_places": 573,
                      "cnt_auditoires" : 2,
                      "adresse" : "Traverse d'Esope - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolstud.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolstud.gif",
                      "coord": {
                          "lat" : "50.669002",
                          "lng": "4.614822"
@@ -119,7 +119,7 @@
                      "cnt_places": 148,
                      "cnt_auditoires" : 3,
                      "adresse" : "Place Louis Pasteur, 1 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poollavo.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poollavo.gif",
                      "coord": {
                          "lat" : "50.6694534",
                          "lng": "4.619427"
@@ -131,7 +131,7 @@
                      "cnt_places": 722,
                      "cnt_auditoires" : 19,
                      "adresse" : "Place Montesquieu, 1 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poollecl.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poollecl.gif",
                      "coord": {
                          "lat" : "50.6675738",
                          "lng": "4.6119188"
@@ -143,7 +143,7 @@
                      "cnt_places": 96,
                      "cnt_auditoires" : 4,
                      "adresse" : "Rue du Compas, 3 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmcur.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolmcur.gif",
                      "coord": {
                          "lat" : "50.6675361",
                          "lng": "4.6200231"
@@ -155,7 +155,7 @@
                      "cnt_places": 530,
                      "cnt_auditoires" : 15,
                      "adresse" : "Place Louis Pasteur, 3 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmerc.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolmerc.gif",
                      "coord": {
                          "lat" : "50.6694534",
                          "lng": "4.619427"
@@ -167,7 +167,7 @@
                      "cnt_places": 1423,
                      "cnt_auditoires" : 6,
                      "adresse" : "Rue Montesquieu, 32 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmont.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolmont.gif",
                      "coord": {
                          "lat" : "50.6687754",
                          "lng": "4.6117253"
@@ -179,7 +179,7 @@
                      "cnt_places": 306,
                      "cnt_auditoires" : 7,
                      "adresse" : "Rue du Compas, 1 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolpcur.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolpcur.gif",
                      "coord": {
                          "lat" : "50.6675361",
                          "lng": "4.6200231"
@@ -191,7 +191,7 @@
                      "cnt_places": 36,
                      "cnt_auditoires" : 1,
                      "adresse" : "Rue du Compas, 2 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolpyth.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolpyth.gif",
                      "coord": {
                          "lat" : "50.6675361",
                          "lng": "4.6200231"
@@ -203,7 +203,7 @@
                      "cnt_places": 1941,
                      "cnt_auditoires" : 35,
                      "adresse" : "Place Sainte Barbe, 1 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolbarb.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolbarb.gif",
                      "coord": {
                          "lat" : "50.6684749",
                          "lng": "4.621661"
@@ -215,7 +215,7 @@
                      "cnt_places": 1334,
                      "cnt_auditoires" : 5,
                      "adresse" : "Place des Sciences, 2 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolsces.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolsces.gif",
                      "coord": {
                          "lat" : "50.6681746",
                          "lng": "4.6196733"
@@ -227,7 +227,7 @@
                      "cnt_places": 1588,
                      "cnt_auditoires" : 16,
                      "adresse" : "Place du Cardinal Mercier, 10-12 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolsocr.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolsocr.gif",
                      "coord": {
                          "lat" : "50.7095263",
                          "lng": "4.5098737"
@@ -239,7 +239,7 @@
                      "cnt_places": 573,
                      "cnt_auditoires" : 2,
                      "adresse" : "Place Agora, 19 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolstud.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolstud.gif",
                      "coord": {
                          "lat" : "50.6691951",
                          "lng": "4.6126047"
@@ -251,7 +251,7 @@
                      "cnt_places": 830,
                      "cnt_auditoires" : 18,
                      "adresse" : "Place Montesquieu, 2 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolmore.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolmore.gif",
                      "coord": {
                          "lat" : "50.6677424",
                          "lng": "4.6113916"
@@ -263,7 +263,7 @@
                      "cnt_places": 236,
                      "cnt_auditoires" : 6,
                      "adresse" : "Place Louis Pasteur, 2 - 1348 Louvain-la-Neuve",
-                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/mini_poolvhel.gif",
+                     "vignette" : "http://www.uclouvain.be/cps/ucl/doc/audi/images/poolvhel.gif",
                      "coord": {
                          "lat" : "50.6693175",
                          "lng": "4.6192258"
