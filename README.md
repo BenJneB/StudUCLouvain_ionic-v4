@@ -18,7 +18,7 @@ FIX : npx tslint -c ionic-migration.json -p tsconfig.json --fix
 
 * Functional tests ? (WIP)
 
-** Make some scenarios for each page (1/?)
+  * Make some scenarios for each page (1/?)
 
 
 ### TIPS
