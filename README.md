@@ -16,6 +16,9 @@ FIX : npx tslint -c ionic-migration.json -p tsconfig.json --fix
 
 * Write unit tests (WIP)
 
+  * Create \*.spec.ts for all pages (main pages : OK - subpages : toDo)
+  * Cover important parts with tests
+
 * Functional tests ? (WIP)
 
   * Make some scenarios for each page (1/?)
