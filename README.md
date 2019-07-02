@@ -14,12 +14,10 @@ FIX : npx tslint -c ionic-migration.json -p tsconfig.json --fix
 
 ### TO DO :
 
-=> Render (Guindaille&Tuto to fix)
-
 => Write unit tests (WIP)
 
-=> Functional tests ? (Started)
-==> Make some scenarios for each page
+=> Functional tests ? (WIP)
+==> Make some scenarios for each page (1/?)
 
 
 ### To launch only one test page : replace first describe by fdescribe ;)
