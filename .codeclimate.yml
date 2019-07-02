@@ -23,8 +23,6 @@ exclude_patterns:
 - platforms/
 - plugins/
 - www/
-- src/app/entity/*
 - src/assets/*
 - resources/*
 - "**/*.spec.ts"
-- "src/polyfills.ts"

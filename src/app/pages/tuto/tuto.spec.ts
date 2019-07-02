@@ -17,13 +17,14 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    ModalControllerMock, NetworkMock
+    ModalControllerMock, NetworkMock, SplashScreenMock
 } from '../../../../test-config/MockIonicNative';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -42,15 +43,15 @@ import {
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { StudiesPage } from './studies';
+import { TutoPage } from './tuto';
 
-describe('Studies Component', () => {
+describe('Tuto Component', () => {
     let fixture;
     let component;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [StudiesPage],
+            declarations: [TutoPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
                 IonicModule.forRoot(),
@@ -66,6 +67,7 @@ describe('Studies Component', () => {
                 { provide: AppAvailability, useClass: AppAvailabilityMock },
                 { provide: Market, useClass: MarketMock },
                 { provide: Device, useClass: DeviceMock },
+                { provide: SplashScreen, useClass: SplashScreenMock },
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
@@ -80,13 +82,29 @@ describe('Studies Component', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(StudiesPage);
+        fixture = TestBed.createComponent(TutoPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should be created', () => {
-        testInstanceCreation(component, StudiesPage);
-        expect(component.segment).toEqual('cours');
+        testInstanceCreation(component, TutoPage);
+    });
+
+    describe('ionViewDidEnter method', () => {
+        it('should call setTimeout of NodeJS', () => {
+            const spySetTimeout = spyOn(window, 'setTimeout').and.callThrough();
+            component.ionViewDidEnter();
+            expect(spySetTimeout.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('goToHome method', () => {
+        it('should call navigateForward of NavController', () => {
+            const spyNav = spyOn(component.navCtrl, 'navigateForward').and.callThrough();
+            component.goToHome();
+            expect(spyNav.calls.count()).toEqual(1);
+            expect(spyNav.calls.first().args[0]).toEqual(['/home']);
+        });
     });
 });

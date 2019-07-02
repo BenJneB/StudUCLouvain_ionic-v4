@@ -4,6 +4,7 @@ import { ModalController } from '@ionic/angular';
 @Component({
   selector: 'search-modal',
   templateUrl: 'search.html',
+  styleUrls: ['./search.scss'],
 })
 export class SearchModal {
 

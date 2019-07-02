@@ -108,7 +108,7 @@ export class SportsService {
   public getSports(segment: string) {
     const datas = this.getSportsDatas(segment);
     return this.rssService.load(datas['url'], true).then(result => {
-      this.extractSports(result, segment === 'team' ? false : true);
+      this.extractSports(result, segment !== 'team');
       return {
         sports: datas['sports'],
         shownSports: datas['shownSports'],

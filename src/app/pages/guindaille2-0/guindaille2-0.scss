@@ -4,107 +4,91 @@
     Date : 2018-2019
     This file is part of Stud.UCLouvain
     Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-
     Stud.UCLouvain is free software: you can redistribute it and/or modify
     it under the terms of the GNU General Public License as published by
     the Free Software Foundation, either version 3 of the License, or
     (at your option) any later version.
-
     Stud.UCLouvain is distributed in the hope that it will be useful,
     but WITHOUT ANY WARRANTY; without even the implied warranty of
     MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
     GNU General Public License for more details.
-
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-page-guindaille2-0 {
+.guindaille {
+    background-color: var(--ion-color-guindaille) !important;
+}
 
-    @font-face {
-        font-family: 'Museo';
-        src: url("assets/fonts/Museoregular/Museo.eot");
-        src: url("assets/fonts/Museoregular/Museo.eot") format("embedded-opentype"),
-            url("assets/fonts/Museoregular/Museo.woff2") format("woff2"),
-            url("assets/fonts/Museoregular/Museo.woff") format("woff"),
-            url("assets/fonts/Museoregular/Museo.ttf") format("truetype"),
-            url("assets/fonts/Museoregular/Museo.svg#Museo") format("svg");
-    }
+ion-label {
+    font-family: 'Guindaille-Font' !important;
+}
 
-    .guindaille {
-        font-family: 'Museo' !important;
+.gtext {
+    font-family: 'Museo' !important;
+    font-size: 24px;
+    color: white;
+    padding: 5px;
+}
 
-        background-color: map-get($colors, guindaille) !important;
-    }
+.gbutton {
+    background-color: var(--ion-color-guindaille) !important;
+    border: 1px solid white;
+    text-transform: none;
+}
 
-    .gtext {
-        font-family: 'Museo' !important;
-        font-size: 24px;
-        color: white;
-        padding: 5px;
-    }
+.gelem {
+    background-color: var(--ion-color-guindaille) !important;
+    text-align: center;
+}
 
-    .gbutton {
-        background-color: map-get($colors, guindaille) !important;
-        border: 1px solid white;
-        text-transform: none;
-    }
+.gfoot {
+    background-color: var(--ion-color-guindaille) !important;
+}
 
-    .gelem {
-        background-color: map-get($colors, guindaille) !important;
-        text-align: center;
-    }
+.gtextf {
+    color: white;
+    font-family: 'Museo' !important;
+    text-align: center;
+}
 
-    .gfoot {
-        background-color: map-get($colors, guindaille) !important;
-    }
+.gtexth {
+    color: white;
+    font-family: 'Museo' !important;
+    text-align: center;
+}
 
-    .gtextf {
-        color: white;
-        font-family: 'Museo' !important;
-        text-align: center;
-    }
+ion-grid {
+    height: 100%;
+    width: 100%;
 
-    .gtexth {
-        color: white;
-        font-family: 'Museo' !important;
-        text-align: center;
-    }
-
-    ion-grid {
-        height: 100%;
+    ion-row {
+        height: 25%;
         width: 100%;
 
-        ion-row {
-            height: 25%;
-            width: 100%;
+        ion-col {
+            height: 100%;
+            width: 33%;
 
-            ion-col {
-                height: 100%;
-                width: 33%;
-
-                img {
-                    max-height: 100%;
-                    max-width: 100%;
-                }
+            img {
+                max-height: 100%;
+                max-width: 100%;
             }
         }
     }
+}
 
-    .guindailleHelp>.scroll-content {
-        background-color: map-get($colors, guindaille);
-        padding-bottom: 0px !important;
-        margin-bottom: 0px !important;
-    }
+.guindailleHelp>.scroll-content {
+    background-color: var(--ion-color-guindaille);
+    padding-bottom: 0px !important;
+    margin-bottom: 0px !important;
+}
 
-    .guindaille>.scroll-content {
-        background-color: map-get($colors, guindaille);
-        padding-bottom: 61px !important;
-    }
+.guindaille>.scroll-content {
+    background-color: var(--ion-color-guindaille);
+    padding-bottom: 61px !important;
+}
 
-    .guindaille>.fixed-content {
-        background-color: map-get($colors, guindaille);
-    }
-
-
+.guindaille>.fixed-content {
+    background-color: var(--ion-color-guindaille);
 }

@@ -19,66 +19,64 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-app-home {
+.scroll-content {
+    margin-top: 56px;
+}
 
-    .scroll-content {
-        margin-top: 56px;
-    }
+.other {
+    background-color: transparent;
+}
 
-    .other {
-        background-color: transparent;
-    }
+b {
+    color: black;
+}
 
-    b {
+.fab {
+    contain: layout;
+}
+
+button[ion-fab] {
+    overflow: visible;
+    position: relative;
+    ion-label {
+        position: absolute;
+        top: -37px;
+        right: -24px;
         color: black;
+        //background-color: rgba(0,0,0,0.7);
+        line-height: 24px;
+        padding: 4px 8px;
+        border-radius: 4px;
     }
+}
 
-    .fab {
-        contain: layout;
-    }
-
-    button[ion-fab] {
-        overflow: visible;
-        position: relative;
-
-        ion-label {
-            position: absolute;
-            top: -37px;
-            right: -24px;
-
-            color: black;
-            //background-color: rgba(0,0,0,0.7);
-            line-height: 24px;
-            padding: 4px 8px;
-            border-radius: 4px;
-        }
-    }
-
-    ion-content.hM {
+ion-content.hM {
+    height: 100% !important;
+    ion-grid.portrait {
         height: 100% !important;
-
-        ion-row.homeM {
-            height: 20vh;
-
-            img {
-                height: 16vh;
+        ion-row {
+            height: calc(20vh - 11.2px);
+            img:not(.uclouvain) {
+                height: calc(16vh - 8.96px);
             }
-
             p {
                 margin-top: 0px;
             }
         }
-
-        ion-row.homeML {
-            height: 25vh;
-
-            img {
-                height: 18.75vh;
+    }
+    ion-grid.landscape {
+        height: 100% !important;
+        ion-row {
+            height: calc(25vh - 14px);
+            img:not(.uclouvain) {
+                height: calc(18.75vh - 10.5px);
             }
-
             p {
                 margin-top: 0px;
             }
         }
+    }
+    ion-text {
+        color: var(--ion-color-home) !important;
     }
 }

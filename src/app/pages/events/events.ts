@@ -35,7 +35,8 @@ import { EVENT_TEXTS, UtilsService } from '../../services/utils-services/utils-s
 
 @Component({
   selector: 'page-events',
-  templateUrl: 'events.html'
+  templateUrl: 'events.html',
+  styleUrls: ['./events.scss'],
 })
 export class EventsPage {
   @ViewChild('eventsList', { read: IonList }) eventsList: IonList;
@@ -134,7 +135,7 @@ export class EventsPage {
 
 
   /*Load the list of events to display*/
-  public loadEvents(key?) {
+  public loadEvents(key?: string) {
     this.searching = true;
     // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
     if (this.connService.isOnline()) {
@@ -155,7 +156,7 @@ export class EventsPage {
     } else {
       this.searching = false;
       this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
+      this.connService.presentConnectionAlert().then();
     }
   }
 
@@ -236,7 +237,7 @@ export class EventsPage {
         componentProps: { excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange }
       }
     );
-    await modal.present();
+    await modal.present().then();
     await modal.onDidDismiss().then((data: OverlayEventDetail) => {
       if (data) {
         data = data.data;

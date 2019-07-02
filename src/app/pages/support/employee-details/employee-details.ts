@@ -30,6 +30,7 @@ import { RepertoireService } from '../../../services/wso2-services/repertoire-se
 @Component({
   selector: 'page-employee-details',
   templateUrl: 'employee-details.html',
+  styleUrls: ['./employee-details.scss'],
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),

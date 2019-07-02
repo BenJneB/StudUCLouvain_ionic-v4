@@ -42,15 +42,15 @@ import {
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { StudiesPage } from './studies';
+import { SportsPage } from './sports';
 
-describe('Studies Component', () => {
+describe('Sports Component', () => {
     let fixture;
     let component;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [StudiesPage],
+            declarations: [SportsPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
                 IonicModule.forRoot(),
@@ -58,7 +58,6 @@ describe('Studies Component', () => {
                 RouterTestingModule,
                 HttpClientTestingModule,
                 IonicStorageModule.forRoot(),
-                FormsModule,
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
@@ -80,13 +79,12 @@ describe('Studies Component', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(StudiesPage);
+        fixture = TestBed.createComponent(SportsPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should be created', () => {
-        testInstanceCreation(component, StudiesPage);
-        expect(component.segment).toEqual('cours');
+        testInstanceCreation(component, SportsPage);
     });
 });

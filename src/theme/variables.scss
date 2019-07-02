@@ -111,6 +111,11 @@ $customColors: ('guindaille', 'navbarColor', 'news', 'event', 'sport', 'g2', 'cr
   }
 }
 
+@font-face {
+  font-family: 'Guindaille-Font';
+  src: url("/assets/fonts/Museoregular/Museo700-Regular.otf");
+}
+
 ion-toolbar ion-buttons ion-back-button {
   --color: white !important;
 }
