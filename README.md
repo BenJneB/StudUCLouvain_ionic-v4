@@ -3,7 +3,7 @@
 ## Feel free to collaborate. 
 ### Anyone wishing to participate and/or propose new fixtures/ideas to improve the app should not hesitate to contact StudUCLouvain@uclouvain.be or directly make a pull-request on the repo concerned.
 
-## Map in progress ~ 90%<br>+ Guindaille and Tuto Pages to render
+## Map in progress ~ 90%
 
 
 ### TO FIX
