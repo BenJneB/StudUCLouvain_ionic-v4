@@ -29,4 +29,4 @@ FIX : npx tslint -c ionic-migration.json -p tsconfig.json --fix
 
 
 ### TIPS
-#### To launch only one test page : replace first describe by fdescribe in <page_name>.spec.ts
+#### - To launch only one test page : replace first describe by fdescribe in <page_name>.spec.ts
