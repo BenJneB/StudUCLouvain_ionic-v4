@@ -32,6 +32,7 @@ import { UserService } from '../../services/utils-services/user-service';
 @Component({
   selector: 'page-param',
   templateUrl: 'param.html',
+  styleUrls: ['./param.scss'],
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),

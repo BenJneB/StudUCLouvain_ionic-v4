@@ -26,6 +26,7 @@ import { TranslateService } from '@ngx-translate/core';
 @Component({
   selector: 'page-guindaille2-0',
   templateUrl: 'guindaille2-0.html',
+  styleUrls: ['./guindaille2-0.scss'],
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),

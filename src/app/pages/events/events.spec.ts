@@ -1,14 +1,13 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { spyFunctionWithCallBackReject } from 'src/app/app.component.spec';
+import { spyFunctionWithCallBackThen } from 'src/app/app.component.spec';
 import { EventItem } from 'src/app/entity/eventItem';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { async, fakeAsync, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
@@ -19,7 +18,6 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { displayedEventsDFactory } from '../../../../test-config/factories/displayedEventsDFactory';
 import {
     MockCacheStorageService, StorageMock
 } from '../../../../test-config/MockCacheStorageService';
@@ -52,7 +50,6 @@ import { EventsPage } from './events';
 describe('Events Component', () => {
     let fixture;
     let component;
-    const dateLimit = '2018-01-26';
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
@@ -71,9 +68,7 @@ describe('Events Component', () => {
                 { provide: Market, useClass: MarketMock },
                 { provide: AppAvailability, useClass: AppAvailabilityMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
-                // AppVersion,
-                //     { provide: SplashScreen, useClass: SplashScreenMock },
-                CacheService,
+                { provide: CacheService, useClass: StorageMock },
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
@@ -100,8 +95,8 @@ describe('Events Component', () => {
     describe('goToEventDetail method', () => {
         it('should call goToDetail of UtilsService', () => {
             const spyGoDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
-            const spySaveItem = spyOn(component.cache, 'saveItem').and.callThrough();
-            const spyGetItem = spyOn(component.cache, 'getItem').and.callThrough();
+            spyOn(component.cache, 'saveItem').and.callThrough();
+            spyOn(component.cache, 'getItem').and.callThrough();
             const eventItem = new EventItem(
                 'description',
                 'link',
@@ -132,6 +127,24 @@ describe('Events Component', () => {
         });
     });
 
+    describe('changeArray method', () => {
+        it('should call getItemDisplay from UtilsServices', () => {
+            const spyGetItemD = spyOn(component.utilsServices, 'getItemDisplay').and.returnValue('').and.callThrough();
+            component.changeArray([{ startDate: new Date() }]);
+            expect(spyGetItemD.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('getWeek method', () => {
+        it('should return the week number', () => {
+            // NUUL => A AMELIORER
+            const temp = new Date(new Date().getFullYear(), 0, 4);
+            expect(component.getWeek(new Date())).toEqual(
+                1 + Math.round(((new Date().getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7)
+            );
+        });
+    });
+
     describe('addFavorite method', () => {
         it('should call addFavorite from UtilsService', () => {
             const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
@@ -159,17 +172,61 @@ describe('Events Component', () => {
     });
 
     describe('cachedOrNot method', () => {
-        it('should call getItem from Cache', () => {
-            const spyGetItem = spyOn(component.cache, 'getItem').and.callThrough();
+        it('should call getItem from Cache and present loader during update the displayed events', () => {
+            const spyGetItem = spyFunctionWithCallBackThen(
+                component.cache,
+                'getItem',
+                { items: [{ startDate: new Date(), endDate: new Date() }] }
+            );
+            const spyLoad = spyOn(component.loader, 'present').and.callThrough();
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callFake(() => { });
             component.cachedOrNot();
             expect(spyGetItem.calls.count()).toEqual(1);
+            expect(spyGetItem.calls.first().args[0]).toEqual('cache-event');
+            expect(spyLoad.calls.count()).toEqual(1);
+            expect(spyUpdate.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
         });
         it('should call loadEvents on reject', () => {
-            const spyLoad = spyOn(component, 'loadEvents');
-            const spyReject = spyFunctionWithCallBackReject(component.cache, 'getItem', '');
-            component.cachedOrNot();
+            const spyReject = spyOn(component.cache, 'getItem').and.returnValue(Promise.reject('ERROR'));
+            const spyLoad = spyOn(component, 'loadEvents').and.callThrough();
+            component.cachedOrNot().then(() => {
+                expect(spyLoad.calls.count()).toEqual(1);
+            });
             expect(spyReject.calls.count()).toEqual(1);
-            // expect(spyLoad.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('loadEvents method', () => {
+        let spyOnline;
+        it('should call getEvents from EventService and updateDisplayed', () => {
+            spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
+            const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', { items: [] });
+            const spySave = spyOn(component.cache, 'saveItem').and.callThrough();
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            component.loadEvents('key');
+            expect(spyOnline.calls.count()).toEqual(1);
+            expect(spyGetEvents.calls.count()).toEqual(1);
+            expect(spyUpdate.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
+            expect(spySave.calls.count()).toEqual(1);
+            expect(spySave.calls.first().args[0]).toEqual('key');
+        });
+
+        it('if not online, should call presentConnectionAlert', () => {
+            spyOnline = spyOn(component.connService, 'isOnline').and.returnValue(false);
+            const spyPresentAlert = spyOn(component.connService, 'presentConnectionAlert').and.callThrough();
+            component.loadEvents();
+            expect(spyOnline.calls.count()).toEqual(1);
+            expect(spyPresentAlert.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
+        });
+    });
+
+    describe('presentFilter method', () => {
+        it('should call create from ModalController', () => {
+            component.presentFilter();
+            expect(component.modalCtrl.create.calls.count()).toEqual(1);
         });
     });
 });

@@ -33,6 +33,7 @@ import { RepertoireService } from '../../services/wso2-services/repertoire-servi
 @Component({
   selector: 'page-support',
   templateUrl: 'support.html',
+  styleUrls: ['./support.scss'],
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),

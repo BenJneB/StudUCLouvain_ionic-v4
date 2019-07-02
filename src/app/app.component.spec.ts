@@ -192,7 +192,7 @@ describe('MyApp Component', () => {
       expect(spyClose.calls.count()).toEqual(1);
       expect(spyConfirmExit.calls.count()).toEqual(1);
     });
-    it('should call confirmExitApp if error', () => {
+    it('should only call confirmExitApp if error', () => {
       spyFunctionWithCallBackReject(component.menu, 'getOpen', '');
       component.backButtonEvent();
       // SADELY NO TEST

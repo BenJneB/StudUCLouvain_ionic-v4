@@ -131,4 +131,30 @@ describe('Libraries Component', () => {
             expect(component.searching).toBeFalsy();
         });
     });
+
+    describe('doRefresh method', () => {
+        it('should call doRefresh from UtilsService', () => {
+            const spyRefresh = spyOn(component.utilsServices, 'doRefresh').and.callThrough();
+            component.doRefresh({ target: { complete: () => { return; } } });
+            expect(spyRefresh.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('cachedOrNot method', () => {
+        it('should call getItem from Cache', () => {
+            const spyGetItem = spyFunctionWithCallBackThen(component.cache, 'getItem', { items: [] });
+            component.cachedOrNot();
+            expect(spyGetItem.calls.count()).toEqual(1);
+            expect(spyGetItem.calls.first().args[0]).toEqual('cache-libraries');
+            expect(component.searching).toBeFalsy();
+        });
+        it('should call loadLibraries on reject', () => {
+            const spyReject = spyOn(component.cache, 'getItem').and.returnValue(Promise.reject('ERROR'));
+            const spyLoad = spyOn(component, 'loadLibraries').and.callThrough();
+            component.cachedOrNot().then(() => {
+                expect(spyLoad.calls.count()).toEqual(1);
+            });
+            expect(spyReject.calls.count()).toEqual(1);
+        });
+    });
 });
