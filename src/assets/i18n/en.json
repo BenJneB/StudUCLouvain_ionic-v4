@@ -357,7 +357,7 @@
     "GUINDAILLE": {
         "PICTO": "Pictograms",
         "EFFECT": "Effectomètre",
-        "SLIDE": "Swipe to the right to continue",
+        "SLIDE": "Swipe to the left to continue",
 
         "HELP": "Emergency",
         "HELP1": "Emergency UCLouvain",

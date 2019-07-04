@@ -16,51 +16,59 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 
-.guindaille {
-    background-color: var(--ion-color-guindaille) !important;
-}
-
 ion-label {
     font-family: 'Guindaille-Font' !important;
 }
 
-.gtext {
-    font-family: 'Museo' !important;
-    font-size: 24px;
-    color: white;
-    padding: 5px;
-}
-
-.gbutton {
+ion-content {
     background-color: var(--ion-color-guindaille) !important;
-    border: 1px solid white;
-    text-transform: none;
 }
 
 .gelem {
-    background-color: var(--ion-color-guindaille) !important;
     text-align: center;
+    background-color: var(--ion-color-guindaille) !important;
+    height: 100% !important;
+    width: 100% !important;
+}
+
+ion-card.gelem {
+    //background-color: var(--ion-color-guindaille) !important;
+    border: solid var(--ion-color-guindaille) !important;
+    background-color: #c5ddf6 !important;
+    width: auto !important;
+    height: auto !important;
+
+    ion-item {
+        height: 100% !important;
+        overflow: hidden;
+
+        ion-label {
+            height: 100% !important;
+
+            ion-card {
+                border: solid red !important;
+            }
+        }
+    }
+}
+
+div.gelem {
+    ion-slides {
+        height: 90%;
+    }
 }
 
 .gfoot {
     background-color: var(--ion-color-guindaille) !important;
 }
 
-.gtextf {
+.gtext {
     color: white;
-    font-family: 'Museo' !important;
+    font-family: 'Guindaille-Font' !important;
     text-align: center;
 }
 
-.gtexth {
-    color: white;
-    font-family: 'Museo' !important;
-    text-align: center;
-}
-
-ion-grid {
-    height: 100%;
-    width: 100%;
+ion-grid.gelem {
 
     ion-row {
         height: 25%;
@@ -76,19 +84,4 @@ ion-grid {
             }
         }
     }
-}
-
-.guindailleHelp>.scroll-content {
-    background-color: var(--ion-color-guindaille);
-    padding-bottom: 0px !important;
-    margin-bottom: 0px !important;
-}
-
-.guindaille>.scroll-content {
-    background-color: var(--ion-color-guindaille);
-    padding-bottom: 61px !important;
-}
-
-.guindaille>.fixed-content {
-    background-color: var(--ion-color-guindaille);
 }

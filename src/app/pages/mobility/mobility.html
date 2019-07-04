@@ -30,23 +30,25 @@
 </ion-header>
 
 <!--BODY-->
-<ion-grid padding>
-  <ion-row>
-    <ion-col align-self-end text-center><img (click)="utilsServices.launchExternalApp(carpoolingPage)" alt="voiture"
-        src="./assets/img/commuty.png" vertical="center" />
-      <p horizontal="center"><b>{{'MOBI.COVOIT' | translate}}</b></p>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col align-self-end text-center><img (click)="utilsServices.launchExternalApp(busPage)" alt="bus"
-        src="./assets/img/nextride.png" vertical="center" />
-      <p horizontal="center"><b>{{'MOBI.BUS' | translate}}</b></p>
-    </ion-col>
-  </ion-row>
-  <ion-row>
-    <ion-col align-self-end text-center><img (click)="utilsServices.launchExternalApp(trainPage)" alt="train"
-        src="./assets/img/sncb.png" vertical="center" />
-      <p horizontal="center"><b>{{'MOBI.SNCB' | translate}}</b></p>
-    </ion-col>
-  </ion-row>
-</ion-grid>
+<ion-content>
+  <ion-grid padding>
+    <ion-row>
+      <ion-col align-self-end text-center><img (click)="utilsServices.launchExternalApp(carpoolingPage)" alt="voiture"
+          src="./assets/img/commuty.png" vertical="center" />
+        <p horizontal="center"><b>{{'MOBI.COVOIT' | translate}}</b></p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align-self-end text-center><img (click)="utilsServices.launchExternalApp(busPage)" alt="bus"
+          src="./assets/img/nextride.png" vertical="center" />
+        <p horizontal="center"><b>{{'MOBI.BUS' | translate}}</b></p>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col align-self-end text-center><img (click)="utilsServices.launchExternalApp(trainPage)" alt="train"
+          src="./assets/img/sncb.png" vertical="center" />
+        <p horizontal="center"><b>{{'MOBI.SNCB' | translate}}</b></p>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
