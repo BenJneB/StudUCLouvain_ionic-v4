@@ -1,6 +1,5 @@
 # StudUCLouvain : Migration to ionic-v4
-## For documentation on project, installation, features, etc. : 
-see on https://github.com/UCL-INGI/StudUCLouvain
+## README :  https://github.com/UCL-INGI/StudUCLouvain
 ## WIP - Work In Progress
 ## Feel free to collaborate. 
 ### Anyone wishing to participate and/or propose new fixtures/ideas to improve the app should not hesitate to contact StudUCLouvain@uclouvain.be or directly make a pull-request on the repo concerned.
