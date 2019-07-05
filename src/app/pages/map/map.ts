@@ -72,12 +72,18 @@ export class MapPage {
       attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18
     }).addTo(this.map);
-    this.map.on('popupopen', function(e) {
+    this.centerMapOnPopupOpen();
+    this.showUserPosition();
+  }
+
+  centerMapOnPopupOpen() {
+    this.map.on('popupopen', (e) => {
+      this.map.closePopup();
+      e.openPopup();
       const px = this.map.project(e.popup._latlng);
       px.y -= e.popup._container.clientHeight / 2;
       this.map.panTo(this.map.unproject(px), {animate: true});
     });
-    this.showUserPosition();
   }
 
   async showSearch() {
