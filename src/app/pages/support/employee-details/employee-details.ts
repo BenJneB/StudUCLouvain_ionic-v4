@@ -64,7 +64,6 @@ export class EmployeeDetailsPage {
           res => {
             const result: any = res;
             this.empDetails = result.empDetails;
-            console.log(this.empDetails);
             this.searching = false;
           }
         );
