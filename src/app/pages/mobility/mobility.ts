@@ -20,7 +20,7 @@
 */
 import { Component } from '@angular/core';
 import { Market } from '@ionic-native/market/ngx';
-import { NavController } from '@ionic/angular';
+import { NavController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UtilsService } from '../../services/utils-services/utils-services';
@@ -36,12 +36,17 @@ export class MobilityPage {
   carpoolingPage;
   busPage;
   trainPage;
+  public platform: any;
+
   constructor(
     public nav: NavController,
     public market: Market,
     private translateService: TranslateService,
-    public utilsServices: UtilsService
+    public utilsServices: UtilsService,
+    private _platform: Platform
   ) {
+    this.platform = this._platform;
+
     this.title = 'Mobilité';
     let titlecar: string;
     this.translateService.get('MOBI.COVOIT').subscribe((res: string) => { titlecar = res; });
