@@ -79,7 +79,6 @@ export class StudiesPage {
   ) {
     this.initializeSession();
     this.menu.enable(true, 'studiesMenu');
-    console.log('BEFORE GET COURSE');
     this.getCourses();
   }
 
@@ -173,16 +172,12 @@ export class StudiesPage {
 
   /*Set project and connect to ADE*/
   initializeSession() {
-    console.log('INIT');
     if (this.connService.isOnline()) {
-      console.log('ONLINE');
       this.studiesService.openSession().then(
         data => {
-          console.log('OPEN SESSION', data);
           this.sessionId = data;
           this.storage.get('adeProject').then(
             (dataProject) => {
-              console.log('adeProject Got', dataProject);
               this.project = dataProject;
               if (this.project === null || this.project === undefined) {
                 this.openModalProject();
@@ -239,9 +234,7 @@ export class StudiesPage {
   }
 
   getCourses() {
-    console.log('BEFORE GET COURSES ETCCCCé)');
     this.storage.get('listCourses').then((data) => {
-      console.log('IN GET STORAGE GETCOURSES');
       if (data === null) {
         this.listCourses = [];
       } else {
