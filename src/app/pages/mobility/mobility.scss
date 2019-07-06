@@ -26,7 +26,7 @@
 ion-content {
     height: 100% !important;
 
-    ion-grid {
+    ion-grid.portrait {
         height: 100% !important;
 
         ion-row {
@@ -37,6 +37,26 @@ ion-content {
 
                 img {
                     max-height: 100%;
+                }
+
+                p {
+                    margin-top: 0px;
+                }
+            }
+        }
+    }
+
+    ion-grid.landscape {
+        height: 100% !important;
+
+        ion-row {
+            height: 33% !important;
+
+            ion-col {
+                height: 100% !important;
+
+                img {
+                    height: 80% !important;
                 }
 
                 p {
