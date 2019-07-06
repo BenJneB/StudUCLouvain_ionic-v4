@@ -25,6 +25,8 @@ import { ActionSheetController, ModalController, NavController, Platform } from 
 
 import { POIService } from '../../services/map-services/poi-service';
 import { SearchModal } from './search/search';
+import { MapService } from 'src/app/services/map-services/map-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
 
 @Component({
   selector: 'page-map',
@@ -44,7 +46,9 @@ export class MapPage {
     public modalCtrl: ModalController,
     public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
-    public poilocations: POIService) {
+    public poilocations: POIService,
+    public mapService: MapService,
+    public userService: UserService) {
     this.title = 'Carte';
     this.userIcon = icon({
       iconUrl: 'assets/img/user-icon.png',
@@ -63,11 +67,16 @@ export class MapPage {
   }
 
   loadmap() {
-    this.map = new Map('map').setView([50.668867, 4.610416], 14);
+    this.map = new Map('map').setView(this.mapService.getCampusLocation(this.userService.campus), 14);
     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18
     }).addTo(this.map);
+    this.map.on('popupopen', function(e) {
+      const px = this.map.project(e.popup._latlng);
+      px.y -= e.popup._container.clientHeight / 2;
+      this.map.panTo(this.map.unproject(px), {animate: true});
+    });
     this.showUserPosition();
   }
 
@@ -85,7 +94,9 @@ export class MapPage {
   }
 
   showUserPosition() {
-    this.userPosition = marker([50.668867, 4.610416], { icon: this.userIcon }).addTo(this.map);
+    this.mapService.getUserLocation().then(coord => {
+      this.userPosition = marker(coord, { icon: this.userIcon }).addTo(this.map);
+    });
   }
 
   showBuilding(item) {
@@ -112,5 +123,20 @@ export class MapPage {
               </div>`;
   }
 
+  
+
+  
+  // if(platform.is('android')){
+  //     if("geo" in this.item){
+  //       this.url = "geo:0,0?q="+this.item.geo.label;
+  //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
+  //     }
+  // }
+  // if(platform.is('ios')){
+  //     if("geo" in this.item){
+  //       this.url = "http://maps.apple.com/?q="+this.item.geo.label;
+  //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
+  //     }
+  // }
 
 }

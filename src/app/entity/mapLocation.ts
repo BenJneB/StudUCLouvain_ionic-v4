@@ -25,12 +25,14 @@ export class MapLocation {
   public address: string;
   public lat: string;
   public lng: string;
+  public vignette: string;
 
-  constructor(title: string, address: string, lat: string, lng: string, code: string) {
+  constructor(title: string, address: string, lat: string, lng: string, code: string, vignette: string) {
     this.title = title;
     this.address = address;
     this.lat = lat;
     this.lng = lng;
     this.code = code;
+    this.vignette = vignette;
   }
 }
