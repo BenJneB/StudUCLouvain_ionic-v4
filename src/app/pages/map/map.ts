@@ -1,4 +1,6 @@
 import { featureGroup, icon, latLng, Layer, Map, marker, tileLayer } from 'leaflet';
+import { MapService } from 'src/app/services/map-services/map-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
 
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -25,8 +27,6 @@ import { ActionSheetController, ModalController, NavController, Platform } from 
 
 import { POIService } from '../../services/map-services/poi-service';
 import { SearchModal } from './search/search';
-import { MapService } from 'src/app/services/map-services/map-service';
-import { UserService } from 'src/app/services/utils-services/user-service';
 
 @Component({
   selector: 'page-map',
@@ -72,10 +72,10 @@ export class MapPage {
       attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18
     }).addTo(this.map);
-    this.map.on('popupopen', function(e) {
+    this.map.on('popupopen', function (e) {
       const px = this.map.project(e.popup._latlng);
       px.y -= e.popup._container.clientHeight / 2;
-      this.map.panTo(this.map.unproject(px), {animate: true});
+      this.map.panTo(this.map.unproject(px), { animate: true });
     });
     this.showUserPosition();
   }
@@ -123,9 +123,9 @@ export class MapPage {
               </div>`;
   }
 
-  
 
-  
+
+
   // if(platform.is('android')){
   //     if("geo" in this.item){
   //       this.url = "geo:0,0?q="+this.item.geo.label;

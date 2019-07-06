@@ -63,7 +63,7 @@ export class MapService {
       lat: 50.45424080000001,
       lng: 3.956658999999945
     }
-  }
+  };
 
   constructor(public connectivityService: ConnectivityService,
     private geolocation: Geolocation,
@@ -73,8 +73,8 @@ export class MapService {
     this.apiKey = jsApiKey;
   }
 
-  getCampusLocation(campus): LatLng{
-    let coord = this.campusLocations[campus];
+  getCampusLocation(campus): LatLng {
+    const coord = this.campusLocations[campus];
     return new LatLng(coord.lat, coord.lng);
   }
 
