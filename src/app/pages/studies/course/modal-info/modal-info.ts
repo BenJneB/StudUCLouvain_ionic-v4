@@ -50,11 +50,8 @@ export class ModalInfoPage {
     return new Promise(resolve => {
       this.studentService.checkCourse(this.course.acronym, this.year).then(
         (data) => {
-          console.log(data);
           const res: any = data;
-          console.log(res);
           if (data === 400) {
-
             this.closeModal();
             resolve(400);
           } else {
