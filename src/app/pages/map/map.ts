@@ -1,3 +1,7 @@
+import { featureGroup, icon, latLng, Layer, Map, marker, tileLayer } from 'leaflet';
+import { MapService } from 'src/app/services/map-services/map-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
+
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -21,9 +25,8 @@
 import { Component, ElementRef, ViewChild } from '@angular/core';
 import { ActionSheetController, ModalController, NavController, Platform } from '@ionic/angular';
 
-import { MapLocation } from '../../entity/mapLocation';
-import { MapService } from '../../services/map-services/map-service';
 import { POIService } from '../../services/map-services/poi-service';
+import { SearchModal } from './search/search';
 
 @Component({
   selector: 'page-map',
@@ -32,102 +35,108 @@ import { POIService } from '../../services/map-services/poi-service';
 })
 export class MapPage {
 
-  @ViewChild('map') mapElement: ElementRef;
-  @ViewChild('pleaseConnect') pleaseConnect: ElementRef;
-  showedLocations: MapLocation[] = [];
-  zones: any;
-  filters: any;
-  excludedFilters: any = [];
-  selectedLocation: any = [];
-  userLocation: any = [];
-  showLocationList = false;
   title: any;
-  searching = false;
-  temp: any;
-  temp2: any;
+  map: Map;
+  zones: any;
+  userPosition: marker;
+  userIcon: icon;
+  building: marker;
 
   constructor(public navCtrl: NavController,
     public modalCtrl: ModalController,
     public actionSheetCtrl: ActionSheetController,
-    public mapService: MapService,
     public platform: Platform,
-    public poilocations: POIService) {
-    console.log('map constr');
+    public poilocations: POIService,
+    public mapService: MapService,
+    public userService: UserService) {
     this.title = 'Carte';
-  }
-
-  /*ngAfterViewInit() is called after the view is initially rendered, load map and list of positions*/
-  /*  ngAfterViewInit() {
-     let mapLoaded = this.mapService.init(this.mapElement.nativeElement, this.pleaseConnect.nativeElement);
-     console.log(mapLoaded);
-     let zones = this.poilocations.loadResources();
-     this.searching = true;
-
-     Promise.all([
-       mapLoaded,
-       zones
-     ]).then((result) => {
-       this.searching = false;
-       this.zones = result[1];
-       this.filters = this.zones;
-       this.userLocation = this.mapService.getUserLocation();
-       console.log(this.userLocation);
-       this.selectedLocation = this.userLocation;
-       this.showedLocations.push(this.selectedLocation);
-       if (result[0]) {
-         this.mapService.addMarker(this.selectedLocation);
-       }
-     }, (error) => {
-     });
-   } */
-
-  ngAfterViewInit() {
-    console.log('aft vie in');
-    this.platform.ready().then(() => {
-
-      this.mapService.loadMap();
-      console.log('after load');
+    this.userIcon = icon({
+      iconUrl: 'assets/img/user-icon.png',
+      iconSize: [60, 60],
+      iconAnchor: [30, 30],
     });
-    console.log('end');
   }
-  /*Use to display or close the list of a type of positions (auditoires, parkings, bibliotheques, ...)*/
-  toggleDetails(data) {
-    if (data.showDetails) {
-      data.showDetails = false;
-      data.icon = 'arrow-dropdown';
+
+  ionViewDidEnter() {
+    this.platform.ready().then(() => {
+      this.loadmap();
+      this.poilocations.loadResources().then(results => {
+        this.zones = results;
+      });
+    });
+  }
+
+  loadmap() {
+    this.map = new Map('map').setView(this.mapService.getCampusLocation(this.userService.campus), 14);
+    tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+      attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+      maxZoom: 18
+    }).addTo(this.map);
+    this.map.on('popupopen', function (e) {
+      const px = this.map.project(e.popup._latlng);
+      px.y -= e.popup._container.clientHeight / 2;
+      this.map.panTo(this.map.unproject(px), { animate: true });
+    });
+    this.showUserPosition();
+  }
+
+  async showSearch() {
+    const modal = await this.modalCtrl.create({
+      component: SearchModal,
+      componentProps: {},
+      cssClass: 'search-modal'
+    });
+    modal.onDidDismiss().then(data => {
+      const item = data.data;
+      this.showBuilding(item);
+    });
+    await modal.present();
+  }
+
+  showUserPosition() {
+    this.mapService.getUserLocation().then(coord => {
+      this.userPosition = marker(coord, { icon: this.userIcon }).addTo(this.map);
+    });
+  }
+
+  showBuilding(item) {
+    // update or create building marker
+    if (this.building) {
+      this.building.setLatLng([item.pos.lat, item.pos.lng]).bindPopup(this.generatePopupContent(item)).openPopup();
     } else {
-      data.showDetails = true;
-      data.icon = 'arrow-dropup';
+      this.building = marker([item.pos.lat, item.pos.lng]).addTo(this.map).bindPopup(this.generatePopupContent(item)).openPopup();
+      this.building._icon.style.filter = 'hue-rotate(300deg)';
     }
+    this.fitMap();
   }
 
-  /*select or unselect a specific location*/
-  toggleLocation(data, checkList, index) {
-    if (checkList[index] === true) {
-      this.addShowedLocations(data);
-      this.onSelect(data);
-    } else {
-      this.removeShowedLocations(data);
-      this.mapService.removeMarker(data);
-    }
+  fitMap() {
+    this.map.fitBounds(featureGroup([this.userPosition, this.building, this.building.popup]).getBounds(), { padding: [50, 50] });
   }
 
-  /*push a location to display*/
-  addShowedLocations(rawLocation) {
-    this.showedLocations.push(rawLocation);
+  generatePopupContent(item) {
+    return `<div>
+                <p class="popup-title">${item.id}</p>
+                <p style="width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.name}</p>
+                <img style="width:150px; height: auto;" src="${item.img}">
+                <p style="width: 150px; word-wrap: break-word;">${item.address}</p>
+              </div>`;
   }
 
-  /*remove a location displayed*/
-  removeShowedLocations(rawLocation) {
-    const locToRemove = this.showedLocations.find(item => item.title === rawLocation.title);
-    this.showedLocations.splice(this.showedLocations.indexOf(locToRemove), 1);
-  }
 
-  /*when select an location*/
-  onSelect(data: any) {
-    if (this.selectedLocation !== data) {
-      this.selectedLocation = data;
-    }
-    this.mapService.addMarker(this.selectedLocation);
-  }
+
+
+  // if(platform.is('android')){
+  //     if("geo" in this.item){
+  //       this.url = "geo:0,0?q="+this.item.geo.label;
+  //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
+  //     }
+  // }
+  // if(platform.is('ios')){
+  //     if("geo" in this.item){
+  //       this.url = "http://maps.apple.com/?q="+this.item.geo.label;
+  //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
+  //     }
+  // }
+
 }

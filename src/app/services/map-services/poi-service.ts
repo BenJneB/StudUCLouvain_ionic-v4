@@ -129,7 +129,8 @@ export class POIService {
         elem.adresse,
         elem.coord.lat,
         elem.coord.lng,
-        elem.sigle);
+        elem.sigle,
+        elem.vignette);
       locationsList.push(newLocation);
     }
     return locationsList;
