@@ -125,4 +125,28 @@ describe('Sports Component', () => {
             expect(component.searching).toBeFalsy();
         });
     });
+
+    describe('removeFavorite method', () => {
+        it('should call removeFavorite from UtilsService', () => {
+            const spyRemove = spyOn(component.utilsServices, 'removeFavorite').and.callThrough();
+            component.removeFavorite();
+            expect(spyRemove.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('addFavorite method', () => {
+        it('should call addFavorite from UtilsService', () => {
+            const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
+            component.addFavorite();
+            expect(spyAdd.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('addToCalendar method', () => {
+        it('should call createEventWithOptions from Calendar', () => {
+            const spyCreate = spyOn(component.calendar, 'createEventWithOptions').and.callThrough();
+            component.addToCalendar('', {});
+            expect(spyCreate.calls.count()).toEqual(1);
+        });
+    });
 });
