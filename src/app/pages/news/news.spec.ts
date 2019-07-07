@@ -87,4 +87,41 @@ describe('News Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, NewsPage);
     });
+
+    describe('openURL method', () => {
+        it('should call create from InAppBrowser', () => {
+            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            component.openURL('');
+            expect(spyCreate.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('updateFac method', () => {
+        it('should add selected Fac and find existing site before loadNews', () => {
+            const spyAdd = spyOn(component.userS, 'addFac').and.callThrough();
+            const spyFind = spyOn(component, 'findSite').and.callThrough();
+            const spyLoad = spyOn(component, 'loadNews').and.callThrough();
+            component.updateFac('');
+            expect(spyAdd.calls.count()).toEqual(1);
+            expect(spyFind.calls.count()).toEqual(1);
+            expect(spyLoad.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('findSite method', () => {
+        it('should call getAvailableSites', () => {
+            const spyGet = spyOn(component, 'getAvailableSites').and.callThrough();
+            component.listFac = [{ facs: {} }];
+            component.findSite();
+            expect(spyGet.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('removeFac method', () => {
+        it('should call removeFac from UserService', () => {
+            const spyRemove = spyOn(component.userS, 'removeFac').and.callThrough();
+            component.removeFac('');
+            expect(spyRemove.calls.count()).toEqual(1);
+        });
+    });
 });
