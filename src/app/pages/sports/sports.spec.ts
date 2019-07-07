@@ -87,4 +87,42 @@ describe('Sports Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, SportsPage);
     });
+
+    describe('doRefresh method', () => {
+        it('should call loadSports', () => {
+            const spyLoad = spyOn(component, 'loadSports').and.callThrough();
+            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
+                new Promise((resolve, reject) => { })
+            );
+            component.doRefresh({ target: { complete: () => { return; } } });
+            expect(spyLoad.calls.count()).toBeGreaterThan(0);
+        });
+    });
+
+    describe('onSearchInput method', () => {
+        it('should set searching to True', () => {
+            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
+                new Promise((resolve, reject) => { })
+            );
+            component.onSearchInput();
+            expect(component.searching).toBeTruthy();
+        });
+    });
+
+    describe('toggleGroup method', () => {
+        it('should call toggleGroup from UtilsService', () => {
+            const spyToggle = spyOn(component.utilsServices, 'toggleGroup').and.callThrough();
+            component.toggleGroup('');
+            expect(spyToggle.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('assignDatas method', () => {
+        it('should call updateDisplayed', () => {
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            component.assignDatas(false, '');
+            expect(spyUpdate.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
+        });
+    });
 });
