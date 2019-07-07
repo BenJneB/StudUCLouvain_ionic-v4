@@ -1,14 +1,12 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { HttpClient } from 'selenium-webdriver/http';
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
-import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -44,7 +42,7 @@ import {
 */
 import { StudiesPage } from './studies';
 
-describe('Studies Component', () => {
+fdescribe('Studies Component', () => {
     let fixture;
     let component;
 
@@ -82,11 +80,52 @@ describe('Studies Component', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(StudiesPage);
         component = fixture.componentInstance;
+        const spyMenu = spyOn(component.menu, 'enable').and.returnValue('').and.callThrough();
         fixture.detectChanges();
+        expect(spyMenu.calls.count()).toEqual(1);
     });
 
     it('should be created', () => {
         testInstanceCreation(component, StudiesPage);
-        expect(component.segment).toEqual('cours');
+    });
+
+    describe('removeCourse method', () => {
+        it('should call set from Storage', () => {
+            const spySet = spyOn(component.storage, 'removeCourse').and.callThrough();
+            component.removeCourse();
+            expect(spySet.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('saveCourse method', () => {
+        it('should call addFavorite from UtilsService', () => {
+            const spySet = spyOn(component.storage, 'removeCourse').and.callThrough();
+            component.saveCourse();
+            expect(spySet.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('showPrompt method', () => {
+        it('should call showPromptStudies from AlertService', () => {
+            const spyShow = spyOn(component.alertService, 'showPromptStudies').and.callThrough();
+            component.showPrompt();
+            expect(spyShow.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('checkCourseExisting method', () => {
+        it('should call checkExist', () => {
+            const spyCheck = spyOn(component, 'checkExist').and.callThrough();
+            component.checkCourseExisting(true);
+            expect(spyCheck.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('addCourseFromProgram method', () => {
+        it('should call checkCourseExisting', () => {
+            const spyCheck = spyOn(component, 'checkCourseExisting').and.callThrough();
+            component.addCourseFromProgram();
+            expect(spyCheck.calls.count()).toEqual(1);
+        });
     });
 });
