@@ -111,11 +111,8 @@ export class NewsPage {
   }
 
   private getAvailableSites(sector: any) {
-    console.log('SECTOR', sector);
     for (const facs of sector.facs) {
-      console.log('FORLOOP');
       if (facs.acro === this.fac) {
-        console.log('INSIDE IF');
         this.site = facs.site;
         this.rss = facs.rss;
       }
