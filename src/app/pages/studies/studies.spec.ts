@@ -118,6 +118,7 @@ describe('Studies Component', () => {
         // TO TEST !!
         it('should call checkExist', () => {
             const spyCheck = spyOn(component, 'checkExist').and.callThrough();
+            component.project = '';
             component.checkCourseExisting(false);
             expect(spyCheck.calls.count()).toEqual(1);
         });
