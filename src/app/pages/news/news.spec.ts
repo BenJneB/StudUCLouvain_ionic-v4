@@ -124,4 +124,95 @@ describe('News Component', () => {
             expect(spyRemove.calls.count()).toEqual(1);
         });
     });
+
+    describe('getAvailableSites method', () => {
+        it('should set sites and rss\'s', () => {
+            component.fac = 'TEST';
+            expect(component.site).toEqual('');
+            expect(component.rss).toEqual('');
+            component.getAvailableSites({ facs: [{ acro: 'TEST', site: 'site', rss: 'rss' }] });
+            expect(component.site).toEqual('site');
+            expect(component.rss).toEqual('rss');
+        });
+
+        it('should left site/rss empty if not corresponding acronym', () => {
+            component.fac = 'FAIL';
+            expect(component.site).toEqual('');
+            expect(component.rss).toEqual('');
+            component.getAvailableSites({ facs: [{ acro: 'TEST', site: 'site', rss: 'rss' }] });
+            expect(component.site).toEqual('');
+            expect(component.rss).toEqual('');
+        });
+    });
+
+    describe('doRefresh method', () => {
+        it('should call isOnline from ConnectivityService', () => {
+            const spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
+            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
+                new Promise((resolve, reject) => { })
+            );
+            component.doRefresh({ target: { complete: () => { return; } } });
+            expect(spyOnline.calls.count()).toBeGreaterThan(0);
+        });
+    });
+
+    describe('handleOnlineRefresh method', () => {
+        it('should call removeFac from UserService', () => {
+            const spyLoad = spyOn(component, 'loadNews').and.callThrough();
+            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
+                new Promise((resolve, reject) => { })
+            );
+            component.handleOnlineRefresh(true, { target: { complete: () => { return; } } });
+            expect(spyLoad.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('getKey method', () => {
+        it('should return cache-P1 if first segment', () => {
+            component.subsegment = 'P1';
+            const result = component.getKey();
+            expect(result).toEqual('cache-P1');
+        });
+        it('should return cache-P2 if second segment', () => {
+            component.subsegment = 'P2';
+            const result = component.getKey();
+            expect(result).toEqual('cache-P2');
+        });
+        it('should return cache-P3 if third segment', () => {
+            component.subsegment = 'P3';
+            const result = component.getKey();
+            expect(result).toEqual('cache-P3');
+        });
+    });
+
+    describe('tabChanged method', () => {
+        it('should call cachedOrNot if Univ Segment', () => {
+            component.segment = 'univ';
+            const spyCachedOrNot = spyOn(component, 'cachedOrNot').and.callThrough();
+            component.tabChanged();
+            expect(spyCachedOrNot.calls.count()).toEqual(1);
+        });
+
+        it('should call cachedOrNot if Fac Segment', () => {
+            component.segment = 'univ';
+            // TEST TO WRITE
+        });
+    });
+
+    describe('updateDisplayed method', () => {
+        it('should call removeFac from UserService', () => {
+            const spyDismiss = spyOn(component.loader, 'dismiss').and.callThrough();
+            component.updateDisplayed();
+            expect(spyDismiss.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();;
+        });
+    });
+
+    describe('goToNewsDetail method', () => {
+        it('should call goToDetail from UtilsService', () => {
+            const spyGo = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            component.goToNewsDetail();
+            expect(spyGo.calls.count()).toEqual(1);
+        });
+    });
 });
