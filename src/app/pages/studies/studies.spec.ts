@@ -90,15 +90,17 @@ describe('Studies Component', () => {
 
     describe('removeCourse method', () => {
         it('should call set from Storage', () => {
-            const spySet = spyOn(component.storage, 'removeCourse').and.callThrough();
-            component.removeCourse();
+            const spySet = spyOn(component.storage, 'set').and.callThrough();
+            component.listCourses = [''];
+            component.removeCourse('');
             expect(spySet.calls.count()).toEqual(1);
         });
     });
 
     describe('saveCourse method', () => {
-        it('should call addFavorite from UtilsService', () => {
-            const spySet = spyOn(component.storage, 'removeCourse').and.callThrough();
+        it('should call set from Storage', () => {
+            const spySet = spyOn(component.storage, 'set').and.callThrough();
+            component.listCourses = [''];
             component.saveCourse();
             expect(spySet.calls.count()).toEqual(1);
         });
@@ -113,9 +115,10 @@ describe('Studies Component', () => {
     });
 
     describe('checkCourseExisting method', () => {
+        // TO TEST !!
         it('should call checkExist', () => {
             const spyCheck = spyOn(component, 'checkExist').and.callThrough();
-            component.checkCourseExisting(true);
+            component.checkCourseExisting(false);
             expect(spyCheck.calls.count()).toEqual(1);
         });
     });
@@ -123,6 +126,7 @@ describe('Studies Component', () => {
     describe('addCourseFromProgram method', () => {
         it('should call checkCourseExisting', () => {
             const spyCheck = spyOn(component, 'checkCourseExisting').and.callThrough();
+            component.listCourses = [''];
             component.addCourseFromProgram();
             expect(spyCheck.calls.count()).toEqual(1);
         });
