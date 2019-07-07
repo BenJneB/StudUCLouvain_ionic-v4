@@ -149,4 +149,11 @@ describe('Sports Component', () => {
             expect(spyCreate.calls.count()).toEqual(1);
         });
     });
+
+    describe('presentFilter method', () => {
+        it('should call create from ModalController', () => {
+            component.presentFilter();
+            expect(component.modalCtrl.create.calls.count()).toEqual(1);
+        });
+    });
 });
