@@ -42,7 +42,7 @@ import {
 */
 import { StudiesPage } from './studies';
 
-fdescribe('Studies Component', () => {
+describe('Studies Component', () => {
     let fixture;
     let component;
 
