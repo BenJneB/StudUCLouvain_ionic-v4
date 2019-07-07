@@ -119,8 +119,8 @@ describe('Sports Component', () => {
 
     describe('assignDatas method', () => {
         it('should call updateDisplayed', () => {
-            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
-            component.assignDatas(false, '');
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.returnValue(() => { }).and.callThrough();
+            component.assignDatas(false, { sports: [] });
             expect(spyUpdate.calls.count()).toEqual(1);
             expect(component.searching).toBeFalsy();
         });
