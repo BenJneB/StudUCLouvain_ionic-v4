@@ -80,9 +80,8 @@ describe('Studies Component', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(StudiesPage);
         component = fixture.componentInstance;
-        const spyMenu = spyOn(component.menu, 'enable').and.returnValue('').and.callThrough();
+        spyOn(component.menu, 'enable').and.returnValue('').and.callThrough();
         fixture.detectChanges();
-        expect(spyMenu.calls.count()).toEqual(1);
     });
 
     it('should be created', () => {
