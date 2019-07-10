@@ -10,6 +10,7 @@ export class HomePage {
     }
 
     clickOnButton(cssSelector) {
+        // browser.actions().mouseMove(elem).click().perform();
         element(by.css(cssSelector)).click();
     }
 

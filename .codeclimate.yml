@@ -26,3 +26,5 @@ exclude_patterns:
 - src/assets/*
 - resources/*
 - "**/*.spec.ts"
+- "*.spec.ts"
+- "*/*.spec.ts"

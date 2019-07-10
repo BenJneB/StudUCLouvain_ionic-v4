@@ -36,9 +36,9 @@ export class EventsService {
   constructor(public user: UserService, public rssService: RssService) { }
 
   /*Get the events*/
-  public getEvents(segment: string) {
+  public getEvents(segment: string, searching: boolean) {
     this.events = [];
-    return this.rssService.loadItems(segment, this.url, this.extractEvents.bind(this));
+    return this.rssService.loadItems(segment, this.url, this.extractEvents.bind(this), searching);
   }
 
   /*Extraction of events*/

@@ -1,4 +1,4 @@
-import { browser, by, element } from 'protractor';
+import { browser, by, element, ExpectedConditions } from 'protractor';
 
 import { HomePage } from '../../../src/app/home/home.po';
 
@@ -15,18 +15,10 @@ describe('HomePage', () => {
     for (const p of pages) {
         it('should access ' + p + 'Page from menu', () => {
             page.clickOnButton('#' + p);
-            browser.sleep(1000);
+            // browser.sleep(1000);
             expect(browser.getCurrentUrl()).toContain(p);
             page.navigateTo();
-            browser.sleep(1000);
+            // browser.sleep(1000);
         });
     }
-
-    it('should access ' + p + 'Page from menu', () => {
-        page.clickOnButton('#' + p);
-        browser.sleep(1000);
-        expect(browser.getCurrentUrl()).toContain(p);
-        page.navigateTo();
-        browser.sleep(1000);
-    });
 });
