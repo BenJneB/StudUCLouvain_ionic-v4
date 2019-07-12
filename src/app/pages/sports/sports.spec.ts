@@ -87,4 +87,73 @@ describe('Sports Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, SportsPage);
     });
+
+    describe('doRefresh method', () => {
+        it('should call loadSports', () => {
+            const spyLoad = spyOn(component, 'loadSports').and.callThrough();
+            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
+                new Promise((resolve, reject) => { })
+            );
+            component.doRefresh({ target: { complete: () => { return; } } });
+            expect(spyLoad.calls.count()).toBeGreaterThan(0);
+        });
+    });
+
+    describe('onSearchInput method', () => {
+        it('should set searching to True', () => {
+            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
+                new Promise((resolve, reject) => { })
+            );
+            component.onSearchInput();
+            expect(component.searching).toBeTruthy();
+        });
+    });
+
+    describe('toggleGroup method', () => {
+        it('should call toggleGroup from UtilsService', () => {
+            const spyToggle = spyOn(component.utilsServices, 'toggleGroup').and.callThrough();
+            component.toggleGroup('');
+            expect(spyToggle.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('assignDatas method', () => {
+        it('should call updateDisplayed', () => {
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.returnValue(() => { }).and.callThrough();
+            component.assignDatas(false, { sports: [] });
+            expect(spyUpdate.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
+        });
+    });
+
+    describe('removeFavorite method', () => {
+        it('should call removeFavorite from UtilsService', () => {
+            const spyRemove = spyOn(component.utilsServices, 'removeFavorite').and.callThrough();
+            component.removeFavorite();
+            expect(spyRemove.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('addFavorite method', () => {
+        it('should call addFavorite from UtilsService', () => {
+            const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
+            component.addFavorite();
+            expect(spyAdd.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('addToCalendar method', () => {
+        it('should call createEventWithOptions from Calendar', () => {
+            const spyCreate = spyOn(component.calendar, 'createEventWithOptions').and.callThrough();
+            component.addToCalendar('', {});
+            expect(spyCreate.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('presentFilter method', () => {
+        it('should call create from ModalController', () => {
+            component.presentFilter();
+            expect(component.modalCtrl.create.calls.count()).toEqual(1);
+        });
+    });
 });

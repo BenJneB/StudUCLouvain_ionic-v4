@@ -88,4 +88,38 @@ describe('Support Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, SupportPage);
     });
+
+    describe('update method', () => {
+        it('should present loader before searchEmployees', () => {
+            const spyRemove = spyOn(component.loader, 'present').and.callThrough();
+            const spySearch = spyOn(component, 'searchEmployees').and.callThrough();
+            component.update();
+            expect(spyRemove.calls.count()).toEqual(1);
+            expect(spySearch.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('toggleGroup method', () => {
+        it('should call toggleGroup from UtilsService', () => {
+            const spyToggle = spyOn(component.utilsServices, 'toggleGroup').and.callThrough();
+            component.toggleGroup('');
+            expect(spyToggle.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('goToEmpDetails method', () => {
+        it('should call goToDetail from UtilsService', () => {
+            const spyGo = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            component.goToEmpDetails();
+            expect(spyGo.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('openURL method', () => {
+        it('should call create from InAppBrowser', () => {
+            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            component.openURL('');
+            expect(spyCreate.calls.count()).toEqual(1);
+        });
+    });
 });

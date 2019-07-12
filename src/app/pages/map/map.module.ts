@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { MapPage } from './map';
+import { SearchModalModule } from './search/search.module';
 
 @NgModule({
   declarations: [MapPage],
@@ -14,6 +15,7 @@ import { MapPage } from './map';
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
+    SearchModalModule,
     TranslateModule.forChild(),
     RouterModule.forChild([
       {

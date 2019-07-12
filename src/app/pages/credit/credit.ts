@@ -41,9 +41,7 @@ export class CreditPage {
     this.title = 'Crédits';
     this.appVersion.getVersionNumber().then(version => {
       this.version = version;
-      console.log(this.version);
     });
-    console.log(this.version);
   }
 
   public openURL(url: string) {
