@@ -34,7 +34,7 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-segment [(ngModel)]="segment" (ionChange)="cachedOrNot()">
+  <ion-segment [(ngModel)]="segment" (ionChange)="tabChanged($newTab)">
     <ion-segment-button value="all">
       <ion-label>{{'EVENTS.ALL' | translate}}</ion-label>
     </ion-segment-button>
@@ -45,12 +45,12 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content class="feed-list">
+<ion-content class="feed-list" #events>
   <ion-refresher *ngIf="segment !== 'favorites'" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
-  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
+  <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" (ionChange)="updateDisplayed()"></ion-searchbar>
 
   <ion-list #eventsList *ngFor="let week of displayedEventsD" [hidden]="shownEvents === 0">
 
@@ -67,7 +67,7 @@
         </ion-thumbnail>
         &nbsp;
         <ion-label>
-          <h3>{{event.title}}</h3>{{event.guid}}
+          <h3>{{event.title}}</h3>
           <p [innerHtml]="event.trimmedDescription"></p>
           <p [innerHtml]="event.location"></p>
           <p>

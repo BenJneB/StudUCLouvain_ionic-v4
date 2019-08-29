@@ -1,5 +1,4 @@
 import { CacheService } from 'ionic-cache';
-import { debounceTime } from 'rxjs/operators';
 
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -23,9 +22,8 @@ import { debounceTime } from 'rxjs/operators';
 */
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { AlertController, IonContent, IonList, NavController, Platform } from '@ionic/angular';
+import { IonContent, IonList } from '@ionic/angular';
 
 import { NewsItem } from '../../entity/newsItem';
 import { NewsService } from '../../services/rss-services/news-service';
@@ -64,17 +62,15 @@ export class NewsPage {
   // url = 'assets/data/fac.json';
 
   constructor(
-    public platform: Platform,
-    public navCtrl: NavController,
     public userS: UserService,
     public newsService: NewsService,
     public connService: ConnectivityService,
     private iab: InAppBrowser,
-    public alertCtrl: AlertController,
     public facService: FacService,
     private cache: CacheService,
     private loader: LoaderService,
-    private utilsServices: UtilsService) {
+    private utilsServices: UtilsService
+  ) {
     this.searchControl = new FormControl();
     this.facService.loadResources().then((data) => {
       this.listFac = data;
@@ -84,10 +80,7 @@ export class NewsPage {
   /*load the view, Call function to load news, display them*/
   ngOnInit() {
     this.cachedOrNot();
-    this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
-      this.searching = false;
-      this.updateDisplayed();
-    });
+    this.utilsServices.initSearchControl(this.searchControl, this.searching);
   }
 
   /*Open a page with the details of a news*/
@@ -99,7 +92,7 @@ export class NewsPage {
   updateFac(fac: string) {
     this.fac = fac;
     this.userS.addFac(this.fac);
-    const links = this.findSite();
+    this.findSite();
     this.loadNews();
   }
 
@@ -119,7 +112,7 @@ export class NewsPage {
     }
   }
   /*Remove a fac for a user*/
-  removeFac(fac: string) {
+  removeFac() {
     this.userS.removeFac();
   }
 
@@ -163,26 +156,33 @@ export class NewsPage {
   }
 
   /*Tab change*/
-  tabChanged() {
-    if (this.segment === 'univ') { this.cachedOrNot(); }
-    if (this.segment === 'fac') {
-      this.fac = this.userS.fac;
-      if (this.facsegment === 'news' && this.userS.hasFac()) {
-        this.findSite();
-        this.loadNews();
-      }
+  tabChanged(newTab: any) {
+    if (newTab !== undefined) {
+      if (this.segment === 'univ') {
+        this.cachedOrNot();
+      } else
+        if (this.segment === 'fac') {
+          this.manageMainTabFac();
+        }
+    }
+  }
 
+  private manageMainTabFac() {
+    this.fac = this.userS.fac;
+    if (this.facsegment === 'news' && this.userS.hasFac()) {
+      this.findSite();
+      this.loadNews();
     }
   }
 
   /*Check if data are cached or not */
-  async cachedOrNot() {
+  cachedOrNot() {
     // this.cache.removeItem('cache-P1');
     if (this.segment === 'univ') {
       const key = this.getKey();
-      await this.cache.getItem(key)
-        .then((data) => {
-          this.loader.present('Please wait...').then();
+      this.cache.getItem(key)
+        .then(async (data) => {
+          await this.loader.present('Please wait...');
           this.news = data.items;
           this.shownNews = data.showItems;
           this.searching = false;
@@ -197,43 +197,39 @@ export class NewsPage {
   }
 
   /*Load news to display*/
-  public loadNews(key?) {
+  public async loadNews(key?: string) {
     this.searching = true;
     this.news = [];
     // Check connexion before load news
-    if (this.connService.isOnline()) {
-      this.loader.present('Please wait...').then();
-      let actu = this.subsegment;
-      if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
-      this.newsService.getNews(actu)
-        .then(
-          result => {
-            this.news = result.items;
-            if (key) { this.cache.saveItem(key, result); }
-            this.shownNews = result.showItems;
-            this.searching = false;
-            this.nonews = this.news.length === 0;
-            this.updateDisplayed();
-          });
-      // If no connexion pop an alert and go back to previous page
-    } else {
-      this.searching = false;
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
-    }
+
+    let actu = this.subsegment;
+    if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
+    this.newsService.getNews(actu, this.searching).then(
+      result => {
+        this.news = result.items;
+        if (key) { this.cache.saveItem(key, result); }
+        this.shownNews = result.showItems;
+        this.nonews = this.news.length === 0;
+        this.updateDisplayed();
+      });
+    this.updateDisplayed();
   }
 
   /*Update display news*/
   public updateDisplayed() {
     this.searching = true;
     this.displayedNews = this.news;
-    this.displayedNews = this.news.filter((item) => {
-      return (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
-    });
+    this.filterUpdatedNews();
     this.shownNews = this.displayedNews.length;
     this.nonews = this.shownNews === 0;
     this.searching = false;
     this.loader.dismiss();
+  }
+
+  private filterUpdatedNews() {
+    this.displayedNews = this.news.filter((item) => {
+      return item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+    });
   }
 
   /*When click on a news, go to the page with more details*/

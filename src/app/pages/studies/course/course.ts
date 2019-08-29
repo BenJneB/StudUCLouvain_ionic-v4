@@ -186,7 +186,7 @@ export class CoursePage {
     this.fillInputs(array, options, aucun);
     const prompt = await this.alertCtrl.create(options);
     if (options.inputs.length > 1) {
-      await prompt.present();
+      return await prompt.present();
     }
   }
 

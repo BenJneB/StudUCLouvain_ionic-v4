@@ -43,20 +43,23 @@
   <ion-grid *ngIf="platform.isPortrait()" class="portrait">
     <!----------------------------------------------------------GRID FOR PORTRAIT------------------------------------------------------------------------------->
     <ion-row>
-      <ion-col size="4" text-center id="study">
-        <img alt="etudes" src="./assets/img/studies.png" horizontal="center" (click)="changePage(studiesPage)" />
+      <ion-col size="4" text-center>
+        <img alt="etudes" src="./assets/img/studies.png" horizontal="center" (click)="changePage(studiesPage)"
+          id="studies" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.ETUDES' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="4" text-center>
-        <img alt="biblio" src="./assets/img/libraries.png" horizontal="center" (click)="changePage(libraryPage)" />
+        <img alt="biblio" src="./assets/img/libraries.png" horizontal="center" (click)="changePage(libraryPage)"
+          id="lib" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.LIBRARY' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="4" text-center>
-        <img alt="aide" src="./assets/img/support.png" horizontal="center" (click)="changePage(helpDeskPage)" />
+        <img alt="aide" src="./assets/img/support.png" horizontal="center" (click)="changePage(helpDeskPage)"
+          id="support" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.HELP' | translate}}</ion-text>
           </b></p>
@@ -64,19 +67,20 @@
     </ion-row>
     <ion-row>
       <ion-col size="4" text-center>
-        <img alt="logo" src="./assets/img/news.png" horizontal="center" (click)="changePage(newsPage)" />
+        <img alt="logo" src="./assets/img/news.png" horizontal="center" (click)="changePage(newsPage)" id="news" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.NEWS' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="4" text-center>
-        <img alt="louvinfo" src="./assets/img/events.png" horizontal="center" (click)="changePage(eventPage)" />
+        <img alt="louvinfo" src="./assets/img/events.png" horizontal="center" (click)="changePage(eventPage)"
+          id="event" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.EVENTS' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="4" text-center>
-        <img alt="sport" src="./assets/img/sports.png" horizontal="center" (click)="changePage(sportPage)" />
+        <img alt="sport" src="./assets/img/sports.png" horizontal="center" (click)="changePage(sportPage)" id="sport" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.SPORTS' | translate}}</ion-text>
           </b></p>
@@ -84,19 +88,20 @@
     </ion-row>
     <ion-row>
       <ion-col size="4" text-center>
-        <img alt="carte" src="./assets/img/map.png" horizontal="center" (click)="changePage(mapPage)" />
+        <img alt="carte" src="./assets/img/map.png" horizontal="center" (click)="changePage(mapPage)" id="map" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.MAP' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="4" text-center>
-        <img alt="resto" src="./assets/img/resto.png" horizontal="center" (click)="changePage(restoPage)" />
+        <img alt="resto" src="./assets/img/resto.png" horizontal="center" (click)="changePage(restoPage)" id="food" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.REST' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="4" text-center>
-        <img alt="voiture" src="./assets/img/mobility.png" horizontal="center" (click)="changePage(mobilityPage)" />
+        <img alt="voiture" src="./assets/img/mobility.png" horizontal="center" (click)="changePage(mobilityPage)"
+          id="mobility" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.MOBILITY' | translate}}</ion-text>
           </b></p>
@@ -104,20 +109,21 @@
     </ion-row>
     <ion-row>
       <ion-col size="4" text-center>
-        <img alt="param" src="./assets/img/settings.png" horizontal="center" (click)="changePage(paramPage)" />
+        <img alt="param" src="./assets/img/settings.png" horizontal="center" (click)="changePage(paramPage)"
+          id="settings" />
         <p horizontal="center"><b>
             <ion-text>{{'MENU.SETTINGS' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="4" text-center>
-        <img alt="guindaille" src="./assets/img/guindaille.png" horizontal="center"
-          (click)="changePage(guindaillePage)" />
+        <img alt="guindaille" src="./assets/img/guindaille.png" horizontal="center" (click)="changePage(guindaillePage)"
+          id="guindaille" />
         <p horizontal="center"><b>
             <ion-text>{{'MENU.GUINDAILLE' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="4" text-center>
-        <img alt="urgence" src="./assets/img/urgence.png" horizontal="center" (click)="emergency()" />
+        <img alt="urgence" src="./assets/img/urgence.png" horizontal="center" (click)="emergency()" id="emergency" />
         <p horizontal="center"><b>
             <ion-text>{{'MENU.URG' | translate}}</ion-text>
           </b></p>
@@ -126,33 +132,36 @@
     <ion-row align-items-center>
       <ion-col size="8" offset="2">
         <img alt="uclouvain" class="uclouvain" vertical="center" src="./assets/img/uclouvain.png"
-          (click)="openUCL('http://www.uclouvain.be')" />
+          (click)="openUCL('http://www.uclouvain.be')" id="ucl" />
       </ion-col>
     </ion-row>
   </ion-grid>
   <!----------------------------------------------------------GRID FOR LANDSCAPE------------------------------------------------------------------------------->
   <ion-grid *ngIf="platform.isLandscape()" class="landscape">
     <ion-row>
-      <ion-col size="3" text-center id="study">
-        <img alt="etudes" src="./assets/img/studies.png" horizontal="center" (click)="changePage(studiesPage)" />
+      <ion-col size="3" text-center>
+        <img alt="etudes" src="./assets/img/studies.png" horizontal="center" (click)="changePage(studiesPage)"
+          id="studies" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.ETUDES' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="3" text-center>
-        <img alt="biblio" src="./assets/img/libraries.png" horizontal="center" (click)="changePage(libraryPage)" />
+        <img alt="biblio" src="./assets/img/libraries.png" horizontal="center" (click)="changePage(libraryPage)"
+          id="lib" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.LIBRARY' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="3" text-center>
-        <img alt="aide" src="./assets/img/support.png" horizontal="center" (click)="changePage(helpDeskPage)" />
+        <img alt="aide" src="./assets/img/support.png" horizontal="center" (click)="changePage(helpDeskPage)"
+          id="support" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.HELP' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="3" text-center>
-        <img alt="logo" src="./assets/img/news.png" horizontal="center" (click)="changePage(newsPage)" />
+        <img alt="logo" src="./assets/img/news.png" horizontal="center" (click)="changePage(newsPage)" id="news" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.NEWS' | translate}}</ion-text>
           </b></p>
@@ -160,25 +169,26 @@
     </ion-row>
     <ion-row>
       <ion-col size="3" text-center>
-        <img alt="louvinfo" src="./assets/img/events.png" horizontal="center" (click)="changePage(eventPage)" />
+        <img alt="louvinfo" src="./assets/img/events.png" horizontal="center" (click)="changePage(eventPage)"
+          id="event" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.EVENTS' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="3" text-center>
-        <img alt="sport" src="./assets/img/sports.png" horizontal="center" (click)="changePage(sportPage)" />
+        <img alt="sport" src="./assets/img/sports.png" horizontal="center" (click)="changePage(sportPage)" id="sport" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.SPORTS' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="3" text-center>
-        <img alt="carte" src="./assets/img/map.png" horizontal="center" (click)="changePage(mapPage)" />
+        <img alt="carte" src="./assets/img/map.png" horizontal="center" (click)="changePage(mapPage)" id="map" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.MAP' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="3" text-center>
-        <img alt="resto" src="./assets/img/resto.png" horizontal="center" (click)="changePage(restoPage)" />
+        <img alt="resto" src="./assets/img/resto.png" horizontal="center" (click)="changePage(restoPage)" id="food" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.REST' | translate}}</ion-text>
           </b></p>
@@ -186,26 +196,28 @@
     </ion-row>
     <ion-row>
       <ion-col size="3" text-center>
-        <img alt="voiture" src="./assets/img/mobility.png" horizontal="center" (click)="changePage(mobilityPage)" />
+        <img alt="voiture" src="./assets/img/mobility.png" horizontal="center" (click)="changePage(mobilityPage)"
+          id="mobility" />
         <p horizontal="center"><b>
             <ion-text>{{'HOME.MOBILITY' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="3" text-center>
-        <img alt="param" src="./assets/img/settings.png" horizontal="center" (click)="changePage(paramPage)" />
+        <img alt="param" src="./assets/img/settings.png" horizontal="center" (click)="changePage(paramPage)"
+          id="settings" />
         <p horizontal="center"><b>
             <ion-text>{{'MENU.SETTINGS' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="3" text-center>
-        <img alt="guindaille" src="./assets/img/guindaille.png" horizontal="center"
-          (click)="changePage(guindaillePage)" />
+        <img alt="guindaille" src="./assets/img/guindaille.png" horizontal="center" (click)="changePage(guindaillePage)"
+          id="guindaille" />
         <p horizontal="center"><b>
             <ion-text>{{'MENU.GUINDAILLE' | translate}}</ion-text>
           </b></p>
       </ion-col>
       <ion-col size="3" text-center>
-        <img alt="urgence" src="./assets/img/urgence.png" horizontal="center" (click)="emergency()" />
+        <img alt="urgence" src="./assets/img/urgence.png" horizontal="center" (click)="emergency()" id="emergency" />
         <p horizontal="center"><b>
             <ion-text>{{'MENU.URG' | translate}}</ion-text>
           </b></p>
@@ -214,7 +226,7 @@
     <ion-row align-items-center>
       <ion-col size="6" offset="3">
         <img class="five" alt="uclouvain" class="uclouvain" vertical="center" src="./assets/img/uclouvain.png"
-          (click)="openUCL('http://www.uclouvain.be')" />
+          (click)="openUCL('http://www.uclouvain.be')" id="ucl" />
       </ion-col>
     </ion-row>
   </ion-grid>
