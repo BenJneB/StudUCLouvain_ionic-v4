@@ -48,7 +48,7 @@
       <ion-label>{{'NEWS.SERVICE' | translate}}</ion-label>
     </ion-segment-button>
   </ion-segment>
-  <ion-segment [(ngModel)]="facsegment" *ngIf="segment==='fac'" name="facsegment">
+  <ion-segment [(ngModel)]="facsegment" *ngIf="segment==='fac'">
     <ion-segment-button value="news">
       <ion-label>{{'HOME.NEWS' |translate}} <strong *ngIf="userS.hasFac()">({{userS.fac}})</strong></ion-label>
     </ion-segment-button>
@@ -58,7 +58,6 @@
   </ion-segment>
   <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" *ngIf="segment === 'univ'"
     (ionChange)="filterUpdatedNews()"></ion-searchbar>
-
 </ion-header>
 
 <!--BODY-->

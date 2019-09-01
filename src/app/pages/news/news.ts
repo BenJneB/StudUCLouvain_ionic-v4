@@ -157,6 +157,7 @@ export class NewsPage {
 
   /*Tab change*/
   public tabChanged(newTab: any) {
+    newTab = newTab.detail.value;
     if (newTab !== undefined) {
       if (this.segment === 'univ') {
         this.cachedOrNot();
@@ -188,8 +189,8 @@ export class NewsPage {
           this.searching = false;
           this.updateDisplayed();
         })
-        .catch(() => {
-          this.loadNews(key);
+        .catch(async () => {
+          await this.loadNews(key);
         });
     } else {
       this.loadNews();
@@ -212,7 +213,7 @@ export class NewsPage {
         this.nonews = this.news.length === 0;
         this.updateDisplayed();
       });
-    this.updateDisplayed();
+    // this.updateDisplayed();
   }
 
   /*Update display news*/
