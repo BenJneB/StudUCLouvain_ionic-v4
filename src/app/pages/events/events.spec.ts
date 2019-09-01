@@ -47,7 +47,7 @@ import {
 */
 import { EventsPage } from './events';
 
-fdescribe('Events Component', () => {
+describe('Events Component', () => {
     let fixture;
     let component;
 
@@ -176,10 +176,16 @@ fdescribe('Events Component', () => {
     });
 
     describe('tabChanged method', () => {
-        it('should call cachedOrNot if newTab', () => {
+        it('should call cachedOrNot if all segment', () => {
             const spyCachedOrNot = spyOn(component, 'cachedOrNot').and.callThrough();
-            component.tabChanged('test');
+            component.tabChanged({ 'detail': { 'value': 'all' } });
             expect(spyCachedOrNot.calls.count()).toEqual(1);
+        });
+
+        it('should call updateDisplayed if favorites segment', () => {
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            component.tabChanged({ 'detail': { 'value': 'fav' } });
+            expect(spyUpdate.calls.count()).toEqual(1);
         });
     });
 
