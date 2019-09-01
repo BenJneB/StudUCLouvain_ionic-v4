@@ -34,7 +34,7 @@
       </ion-button>
     </ion-buttons>
   </ion-toolbar>
-  <ion-segment [(ngModel)]="segment" (ionChange)="tabChanged($newTab)">
+  <ion-segment [(ngModel)]="segment" (ionChange)="tabChanged($event)">
     <ion-segment-button value="all">
       <ion-label>{{'EVENTS.ALL' | translate}}</ion-label>
     </ion-segment-button>

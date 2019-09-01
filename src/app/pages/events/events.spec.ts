@@ -47,7 +47,7 @@ import {
 */
 import { EventsPage } from './events';
 
-describe('Events Component', () => {
+fdescribe('Events Component', () => {
     let fixture;
     let component;
 

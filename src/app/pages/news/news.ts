@@ -156,7 +156,7 @@ export class NewsPage {
   }
 
   /*Tab change*/
-  tabChanged(newTab: any) {
+  public tabChanged(newTab: any) {
     if (newTab !== undefined) {
       if (this.segment === 'univ') {
         this.cachedOrNot();

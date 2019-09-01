@@ -80,8 +80,13 @@ export class EventsPage {
   }
 
   tabChanged(newTab: any) {
+    newTab = newTab.detail.value;
     if (newTab !== undefined) {
-      this.cachedOrNot();
+      if (newTab === 'all') {
+        this.cachedOrNot();
+      } else {
+        this.updateDisplayed();
+      }
     }
   }
   /*Like the constructor, ngOnInit fires all his body*/

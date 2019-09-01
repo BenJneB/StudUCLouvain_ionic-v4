@@ -29,7 +29,7 @@
     </ion-buttons>
     <ion-title horizontal="center">{{title | translate}}</ion-title>
   </ion-toolbar>
-  <ion-segment [(ngModel)]="segment" name="segment" (ionChange)="tabChanged($newTab)">
+  <ion-segment [(ngModel)]="segment" (ionChange)="tabChanged($event)">
     <ion-segment-button value="univ">
       <ion-label>{{'NEWS.UNIF' | translate}}</ion-label>
     </ion-segment-button>
