@@ -186,7 +186,11 @@ describe('Sports Component', () => {
 
     describe('removeFavorite method', () => {
         it('should call removeFavorite from UtilsService', async () => {
-            const spyRemove = spyOn(component.utilsServices, 'removeFavorite').and.callThrough();
+            const spyRemove = spyFunctionWithCallBackThen( // TODO: not function with then. async method, have to spy on await call
+                component.utilsServices,
+                'removeFavorite',
+                {}
+            );
             const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
             await component.removeFavorite();
             expect(spyRemove.calls.count()).toEqual(1);
