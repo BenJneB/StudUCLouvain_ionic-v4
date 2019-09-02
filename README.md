@@ -13,6 +13,8 @@
        2. npx tslint -c ionic-migration.json -p tsconfig.json --fix
        3. Add .then(...) to modal etc.
 
+#### TEST FAIL RANDOM : MobilityComponent should be created
+
 
 ### TO DO :
 
