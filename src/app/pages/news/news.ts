@@ -111,7 +111,7 @@ export class NewsPage {
       }
     }
   }
-  /*Remove a fac for a user*/
+
   removeFac() {
     this.userS.removeFac();
   }
