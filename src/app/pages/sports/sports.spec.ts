@@ -185,7 +185,7 @@ describe('Sports Component', () => {
     });
 
     describe('removeFavorite method', () => {
-        it('should call removeFavorite from UtilsService', async () => {
+        it('should call removeFavorite from UtilsService and updateDisplayed', async () => {
             const spyRemove = spyFunctionWithCallBackThen( // TODO: not function with then. async method, have to spy on await call
                 component.utilsServices,
                 'removeFavorite',

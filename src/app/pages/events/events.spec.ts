@@ -120,14 +120,16 @@ describe('Events Component', () => {
     });
 
     describe('removeFavorite method', () => {
-        it('should call removeFavorite from UtilsService and then, updateDisplayed', function () {
-            // jasmine.DEFAULT_TIMEOUT_INTERVAL = 100000;
-            const spyRemove = spyOn(component.utilsServices, 'removeFavorite').and.callThrough();
-            // const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
-            component.removeFavorite(IonItemSliding, {}, 'title');
+        it('should call removeFavorite from UtilsService and then, updateDisplayed', async () => {
+            const spyRemove = spyFunctionWithCallBackThen( // TODO: not function with then. async method, have to spy on await call
+                component.utilsServices,
+                'removeFavorite',
+                {}
+            );
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            await component.removeFavorite();
             expect(spyRemove.calls.count()).toEqual(1);
-            // TODO: Should test that
-            // expect(spyUpdate.calls.count()).toEqual(1);
+            expect(spyUpdate.calls.count()).toEqual(1);
         });
     });
 
@@ -236,6 +238,14 @@ describe('Events Component', () => {
         it('should call create from ModalController', () => {
             component.presentFilter('tab');
             expect(component.modalCtrl.create.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('toggleGroup method', () => {
+        it('should call toggleGroup from UtilsService', () => {
+            const spyToggle = spyOn(component.utilsServices, 'toggleGroup').and.callThrough();
+            component.toggleGroup('');
+            expect(spyToggle.calls.count()).toEqual(1);
         });
     });
 });
