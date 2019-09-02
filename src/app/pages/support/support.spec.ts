@@ -91,10 +91,10 @@ describe('Support Component', () => {
 
     describe('update method', () => {
         it('should present loader before searchEmployees', () => {
-            const spyRemove = spyOn(component.loader, 'present').and.callThrough();
+            const spyPresent = spyOn(component.loader, 'present').and.callThrough();
             const spySearch = spyOn(component, 'searchEmployees').and.callThrough();
             component.update();
-            expect(spyRemove.calls.count()).toEqual(1);
+            expect(spyPresent.calls.count()).toEqual(1);
             expect(spySearch.calls.count()).toEqual(1);
         });
     });

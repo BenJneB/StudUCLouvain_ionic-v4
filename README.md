@@ -1,7 +1,7 @@
 # StudUCLouvain : Migration to ionic-v4
 ## README :  https://github.com/UCL-INGI/StudUCLouvain
 ## WIP - Work In Progress
-## Feel free to collaborate. 
+## Feel free to collaborate.
 ### Anyone wishing to participate and/or propose new fixtures/ideas to improve the app should not hesitate to contact StudUCLouvain@uclouvain.be or directly make a pull-request on the repo concerned.
 
 ## Map in progress ~ 90%
@@ -20,7 +20,7 @@
 
   1. Create \*.spec.ts for all pages
      - subpages
-     - services 
+     - services
   2. Cover important parts with tests
      - main pages WIP
      - subpages
@@ -31,4 +31,4 @@
 
 
 ### TIPS
-#### - To launch only one test page : replace first describe by fdescribe in <page_name>.spec.ts
+#### - To launch only one test page : replace the 'describe' with the wanted scope by fdescribe in <page_name>.spec.ts

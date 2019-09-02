@@ -5,7 +5,7 @@ import { EventItem } from 'src/app/entity/eventItem';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
+import { async, fakeAsync, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -190,19 +190,26 @@ describe('Events Component', () => {
     });
 
     describe('cachedOrNot method', () => {
-        // TODO: IMPROVE
         it('should call getItem from Cache and present loader during update the displayed events', async () => {
             const spyGetItem = spyFunctionWithCallBackThen(
                 component.cache,
                 'getItem',
                 { items: [{ startDate: new Date(), endDate: new Date() }] }
             );
-            const spyLoad = spyOn(component.loader, 'present').and.callThrough();
+            const spyLoad = spyFunctionWithCallBackThen( // TODO: not function with then. async method, have to spy on await call
+                component.loader,
+                'present',
+                {}
+            );
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+
             await component.cachedOrNot();
-            await expect(spyLoad.calls.count()).toEqual(1);
+
             expect(spyGetItem.calls.count()).toEqual(1);
             expect(spyGetItem.calls.first().args[0]).toEqual('cache-event');
-            expect(component.searching).toBeFalsy();
+            expect(spyLoad.calls.count()).toEqual(1);
+            expect(spyUpdate.calls.count()).toEqual(1);
+            expect(component.searching).toBeTruthy();
         });
         it('should call loadEvents on reject', async () => {
             const spyReject = spyOn(component.cache, 'getItem').and.returnValue(Promise.reject('ERROR'));
