@@ -40,7 +40,7 @@ export class NewsService {
 
 
   /*Get the appropriate news in function of the tab in which the user is*/
-  public getNews(segment: string) {
+  public getNews(segment: string, searching: boolean) {
     let baseURL;
     this.news = [];
     switch (segment) {
@@ -61,7 +61,7 @@ export class NewsService {
         break;
       }
     }
-    return this.rssService.loadItems(segment, baseURL, this.extractNews.bind(this));
+    return this.rssService.loadItems(segment, baseURL, this.extractNews.bind(this), searching);
   }
 
   /*Extract news*/
@@ -73,33 +73,33 @@ export class NewsService {
     }
     this.shownNews = 0;
     const maxDescLength = 20;
-    for (let i = 0; i < data.length; i++) {
-      this.fillNews(data, i, maxDescLength);
-    }
+    this.fillNews(data, maxDescLength);
     return {
       items: this.news,
       shownItems: this.shownNews
     };
   }
 
-  private fillNews(data: any, i: number, maxDescLength: number) {
-    const item = data[i];
-    const trimmedDescription = this.getTrimmedDescription(item, maxDescLength);
-    const hidden = false;
-    this.shownNews++;
-    const pubDate = this.createDateForNews(item.pubDate);
-    const img = this.getImg(item);
-    const newNewsItem = new NewsItem(
-      item.description || 'No description...',
-      item.link || 'No link',
-      item.title || 'No title',
-      img,
-      trimmedDescription,
-      hidden,
-      item.guid,
-      pubDate
-    );
-    this.news.push(newNewsItem);
+  private fillNews(data: any, maxDescLength: number) {
+    for (let i = 0; i < data.length; i++) {
+      const item = data[i];
+      const trimmedDescription = this.getTrimmedDescription(item, maxDescLength);
+      const hidden = false;
+      this.shownNews++;
+      const pubDate = this.createDateForNews(item.pubDate);
+      const img = item.enclosure ? this.getImg(item) : '';
+      const newNewsItem = new NewsItem(
+        item.description || 'No description...',
+        item.link || 'No link',
+        item.title || 'No title',
+        img,
+        trimmedDescription,
+        hidden,
+        item.guid,
+        pubDate
+      );
+      this.news.push(newNewsItem);
+    }
   }
 
   private getImg(item: any) {

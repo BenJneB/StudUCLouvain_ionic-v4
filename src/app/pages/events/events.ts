@@ -22,14 +22,12 @@ import { CacheService } from 'ionic-cache';
 */
 import { Component, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IonItemSliding, IonList, ModalController, NavController } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core';
+import { IonItemSliding, IonList, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EventItem } from '../../entity/eventItem';
 import { EventsFilterPage } from '../../pages/events/events-filter/events-filter';
 import { EventsService } from '../../services/rss-services/events-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
 import { EVENT_TEXTS, UtilsService } from '../../services/utils-services/utils-services';
 
@@ -70,10 +68,8 @@ export class EventsPage {
     'DEL': 'DELETE',
   };
   constructor(
-    private navCtrl: NavController,
     public modalCtrl: ModalController,
     private eventsService: EventsService,
-    public connService: ConnectivityService,
     private translateService: TranslateService,
     private cache: CacheService,
     private loader: LoaderService,
@@ -83,23 +79,41 @@ export class EventsPage {
     this.searchControl = new FormControl();
   }
 
+  tabChanged(newTab: any) {
+    newTab = newTab.detail.value;
+    if (newTab !== undefined) {
+      this.segment = newTab;
+      if (newTab === 'all') {
+        this.cachedOrNot();
+      } else {
+        this.updateDisplayed();
+      }
+    }
+  }
   /*Like the constructor, ngOnInit fires all his body*/
   ngOnInit() {
     this.updateDateLimit();
     this.cachedOrNot();
-    this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
+    this.utilsServices.initSearchControl(this.searchControl, this.searching);
   }
+
+  // private initSearchControl() {
+  //   this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(() => {
+  //     this.searching = false;
+  //   });
+  // }
 
   public goToEventDetail(event: EventItem) {
     this.utilsServices.goToDetail(event, 'events/details');
   }
 
-  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string) {
-    this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts, this.updateDisplayed.bind(this));
+  async removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string) {
+    await this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts);
+    this.updateDisplayed();
   }
 
-  addFavorite(slidingItem: IonItemSliding, itemData: any) {
-    this.utilsServices.addFavorite(itemData, EVENT_TEXTS, slidingItem, this.updateDisplayed.bind(this));
+  async addFavorite(slidingItem: IonItemSliding, itemData: any) {
+    this.utilsServices.addFavorite(itemData, EVENT_TEXTS, slidingItem);
   }
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
@@ -111,12 +125,12 @@ export class EventsPage {
   }
 
   /*Check if data are cached or not */
-  async cachedOrNot() {
+  cachedOrNot() {
     // this.cache.removeItem('cache-event');
     const key = 'cache-event';
-    await this.cache.getItem(key)
-      .then((data) => {
-        this.loader.present('Please wait...').then();
+    this.cache.getItem(key)
+      .then(async (data) => {
+        await this.loader.present('Please wait...');
         this.events = data.items;
         this.events.forEach(function (element) {
           element.startDate = new Date(element.startDate);
@@ -127,36 +141,27 @@ export class EventsPage {
         this.searching = false;
         this.updateDisplayed();
       })
-      .catch(() => {
-        this.loadEvents(key);
+      .catch(async () => {
+        await this.loadEvents(key);
       });
   }
 
 
   /*Load the list of events to display*/
-  public loadEvents(key?: string) {
+  public async loadEvents(key?: string) {
     this.searching = true;
     // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
-    if (this.connService.isOnline()) {
-      this.loader.present('Please wait...').then();
-      this.eventsService.getEvents(this.segment).then(
-        res => {
-          const result: any = res;
-          this.events = result.items;
-          if (key) {
-            this.cache.saveItem(key, result);
-          }
-          this.shownEvents = result.shownEvents;
-          this.filters = result.categories;
-          this.searching = false;
-          this.noevents = this.events.length === 0;
-          this.updateDisplayed();
-        });
-    } else {
-      this.searching = false;
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert().then();
-    }
+
+    this.eventsService.getEvents(this.segment, this.searching).then(
+      res => {
+        const result: any = res;
+        this.events = result.items;
+        if (key) { this.cache.saveItem(key, result); }
+        this.shownEvents = result.shownItems;
+        this.filters = result.categories;
+        this.noevents = this.events.length === 0;
+        this.updateDisplayed();
+      });
   }
 
   /*Make an array with events sorted by week*/
@@ -236,8 +241,7 @@ export class EventsPage {
         componentProps: { excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange }
       }
     );
-    await modal.present().then();
-    await modal.onDidDismiss().then((data: OverlayEventDetail) => {
+    modal.onDidDismiss().then((data: any) => {
       if (data) {
         data = data.data;
         const tmpRange = data[1];
@@ -249,6 +253,7 @@ export class EventsPage {
         this.updateDisplayed();
       }
     });
+    return await modal.present();
   }
 
   /*Update the date limit, take account if a change is done by filter with the dateRange value*/

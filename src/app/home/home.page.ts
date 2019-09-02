@@ -184,7 +184,7 @@ export class HomePage {
           }
         }]
     });
-    await alert.present();
+    return await alert.present();
   }
 
   private getEmergencyMsg(

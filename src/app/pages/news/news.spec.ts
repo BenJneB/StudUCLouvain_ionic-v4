@@ -1,14 +1,11 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { HttpClient } from 'selenium-webdriver/http';
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
-import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -187,15 +184,15 @@ describe('News Component', () => {
 
     describe('tabChanged method', () => {
         it('should call cachedOrNot if Univ Segment', () => {
-            component.segment = 'univ';
             const spyCachedOrNot = spyOn(component, 'cachedOrNot').and.callThrough();
-            component.tabChanged();
+            component.tabChanged({ 'detail': { 'value': 'univ' } });
             expect(spyCachedOrNot.calls.count()).toEqual(1);
         });
 
-        it('should call cachedOrNot if Fac Segment', () => {
-            component.segment = 'univ';
-            // TEST TO WRITE
+        it('should call manageMainTabFac if Fac Segment', () => {
+            const spyManage = spyOn(component, 'manageMainTabFac').and.callThrough();
+            component.tabChanged({ 'detail': { 'value': 'fac' } });
+            expect(spyManage.calls.count()).toEqual(1);
         });
     });
 
