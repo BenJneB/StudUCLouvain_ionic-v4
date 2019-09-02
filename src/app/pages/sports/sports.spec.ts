@@ -44,7 +44,7 @@ import {
 */
 import { SportsPage } from './sports';
 
-describe('Sports Component', () => {
+fdescribe('Sports Component', () => {
     let fixture;
     let component;
 
@@ -96,6 +96,18 @@ describe('Sports Component', () => {
             );
             component.doRefresh({ target: { complete: () => { return; } } });
             expect(spyLoad.calls.count()).toBeGreaterThan(0);
+        });
+    });
+
+    describe('loadSports method', () => {
+        it('OFFLINE : should call pop from NavCtrl and present alert', () => {
+            const spyOnline = spyOn(component.connService, 'isOnline').and.returnValue(false);
+            const spyPop = spyOn(component.navCtrl, 'pop').and.callThrough();
+            const spyPresent = spyOn(component.connService, 'presentConnectionAlert').and.callThrough();
+            component.loadSports('segment');
+            expect(spyOnline.calls.count()).toEqual(1);
+            expect(spyPop.calls.count()).toEqual(1);
+            expect(spyPresent.calls.count()).toEqual(1);
         });
     });
 
