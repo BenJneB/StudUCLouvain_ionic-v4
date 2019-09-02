@@ -159,16 +159,17 @@ export class NewsPage {
   public tabChanged(newTab: any) {
     newTab = newTab.detail.value;
     if (newTab !== undefined) {
-      if (this.segment === 'univ') {
+      this.segment = newTab;
+      if (newTab === 'univ') {
         this.cachedOrNot();
       } else
-        if (this.segment === 'fac') {
+        if (newTab === 'fac') {
           this.manageMainTabFac();
         }
     }
   }
 
-  private manageMainTabFac() {
+  public manageMainTabFac() {
     this.fac = this.userS.fac;
     if (this.facsegment === 'news' && this.userS.hasFac()) {
       this.findSite();

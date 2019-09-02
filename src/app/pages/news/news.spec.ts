@@ -184,15 +184,15 @@ describe('News Component', () => {
 
     describe('tabChanged method', () => {
         it('should call cachedOrNot if Univ Segment', () => {
-            component.segment = 'univ';
             const spyCachedOrNot = spyOn(component, 'cachedOrNot').and.callThrough();
-            component.tabChanged('ok');
+            component.tabChanged({ 'detail': { 'value': 'univ' } });
             expect(spyCachedOrNot.calls.count()).toEqual(1);
         });
 
-        it('should call cachedOrNot if Fac Segment', () => {
-            component.segment = 'univ';
-            // TEST TO WRITE
+        it('should call manageMainTabFac if Fac Segment', () => {
+            const spyManage = spyOn(component, 'manageMainTabFac').and.callThrough();
+            component.tabChanged({ 'detail': { 'value': 'fac' } });
+            expect(spyManage.calls.count()).toEqual(1);
         });
     });
 

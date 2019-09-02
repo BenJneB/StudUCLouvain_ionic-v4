@@ -82,6 +82,7 @@ export class EventsPage {
   tabChanged(newTab: any) {
     newTab = newTab.detail.value;
     if (newTab !== undefined) {
+      this.segment = newTab;
       if (newTab === 'all') {
         this.cachedOrNot();
       } else {
