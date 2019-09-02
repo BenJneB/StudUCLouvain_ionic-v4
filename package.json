@@ -9,7 +9,7 @@
     "build": "ng build",
     "test": "ng test",
     "test:once": "ng test --watch=false",
-    "test:onceAndCoverage": "ng test --watch=false --codeCoverage=true --source-map=false",
+    "test:onceAndCoverage": "ng test --watch=false --codeCoverage=true",
     "lint": "ng lint",
     "e2e": "ng e2e",
     "ci": "npm run test:onceAndCoverage && npm run e2e"

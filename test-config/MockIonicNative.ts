@@ -73,18 +73,13 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
     }
 
     on(event: string): Observable<InAppBrowserEvent> {
-        // const response = {
-        //     type: '',
-        //     url: '',
-        //     code: 0,
-        //     message: ''
-        // };
-        // return getObservable(response);
-        let response: InAppBrowserEvent;
-        return Observable.create((observer: Observer<any>) => {
-            observer.next(response);
-            observer.complete();
-        });
+        const response = {
+            type: '',
+            url: '',
+            code: 0,
+            message: ''
+        };
+        return getObservable(response);
     }
 }
 
