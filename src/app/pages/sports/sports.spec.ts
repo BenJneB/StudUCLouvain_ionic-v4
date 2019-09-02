@@ -44,7 +44,7 @@ import {
 */
 import { SportsPage } from './sports';
 
-fdescribe('Sports Component', () => {
+describe('Sports Component', () => {
     let fixture;
     let component;
 
