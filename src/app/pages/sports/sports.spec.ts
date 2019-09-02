@@ -99,6 +99,58 @@ describe('Sports Component', () => {
         });
     });
 
+    describe('isNotFavorite method', () => {
+        it('should return true if segment is all or team', () => {
+            component.segment = 'all';
+            let result = component.isNotFavorite();
+            expect(result).toBeTruthy();
+
+            component.segment = 'team';
+            result = component.isNotFavorite();
+            expect(result).toBeTruthy();
+        });
+
+        it('should return false otherwise', () => {
+            component.segment = 'XXX';
+            const result = component.isNotFavorite();
+            expect(result).toBeFalsy();
+        });
+    });
+
+    describe('getFiltersData method', () => {
+        it('should return teams data if arg=true', () => {
+            const result = component.getFiltersData(true);
+            expect(result).toEqual(
+                {
+                    filters: component.filtersT,
+                    exclude: component.excludedFiltersT
+                }
+            );
+        });
+
+        it('should return sports data if arg=false', () => {
+            const result = component.getFiltersData(false);
+            expect(result).toEqual(
+                {
+                    filters: component.filters,
+                    exclude: component.excludedFilters
+                }
+            );
+        });
+    });
+
+    describe('loadSports method', () => {
+        it('OFFLINE : should call pop from NavCtrl and present alert', () => {
+            const spyOnline = spyOn(component.connService, 'isOnline').and.returnValue(false);
+            const spyPop = spyOn(component.navCtrl, 'pop').and.callThrough();
+            const spyPresent = spyOn(component.connService, 'presentConnectionAlert').and.callThrough();
+            component.loadSports('segment');
+            expect(spyOnline.calls.count()).toEqual(1);
+            expect(spyPop.calls.count()).toEqual(1);
+            expect(spyPresent.calls.count()).toEqual(1);
+        });
+    });
+
     describe('onSearchInput method', () => {
         it('should set searching to True', () => {
             spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
@@ -117,6 +169,14 @@ describe('Sports Component', () => {
         });
     });
 
+    describe('filterDisplayedSports method', () => {
+        it('should call filterItems from UtilsService', () => {
+            const spyFilter = spyOn(component.utilsServices, 'filterItems').and.callThrough();
+            component.filterDisplayedSports([], '');
+            expect(spyFilter.calls.count()).toEqual(1);
+        });
+    });
+
     describe('assignDatas method', () => {
         it('should set searching to False', () => {
             component.assignDatas(false, { sports: [] });
@@ -125,10 +185,16 @@ describe('Sports Component', () => {
     });
 
     describe('removeFavorite method', () => {
-        it('should call removeFavorite from UtilsService', () => {
-            const spyRemove = spyOn(component.utilsServices, 'removeFavorite').and.callThrough();
-            component.removeFavorite();
+        it('should call removeFavorite from UtilsService', async () => {
+            const spyRemove = spyFunctionWithCallBackThen( // TODO: not function with then. async method, have to spy on await call
+                component.utilsServices,
+                'removeFavorite',
+                {}
+            );
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            await component.removeFavorite();
             expect(spyRemove.calls.count()).toEqual(1);
+            expect(spyUpdate.calls.count()).toEqual(1);
         });
     });
 
