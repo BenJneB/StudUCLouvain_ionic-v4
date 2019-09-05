@@ -90,11 +90,15 @@ describe('Support Component', () => {
     });
 
     describe('update method', () => {
-        it('should present loader before searchEmployees', () => {
-            const spyPresent = spyOn(component.loader, 'present').and.callThrough();
+        it('should present loader before searchEmployees', async () => {
+            const spyLoad = spyFunctionWithCallBackThen( // TODO: not function with then. async method, have to spy on await call
+                component.loader,
+                'present',
+                {}
+            );
             const spySearch = spyOn(component, 'searchEmployees').and.callThrough();
-            component.update();
-            expect(spyPresent.calls.count()).toEqual(1);
+            await component.update();
+            expect(spyLoad.calls.count()).toEqual(1);
             expect(spySearch.calls.count()).toEqual(1);
         });
     });
