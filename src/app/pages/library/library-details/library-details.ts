@@ -21,10 +21,8 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 
 import { LibraryItem } from '../../../entity/libraryItem';
-import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
 import { UtilsService } from '../../../services/utils-services/utils-services';
 import { LibrariesService } from '../../../services/wso2-services/libraries-service';
 
@@ -48,11 +46,9 @@ export class LibraryDetailsPage {
   searching = false;
 
   constructor(
-    public navCtrl: NavController,
     private route: ActivatedRoute,
     private router: Router,
     public libService: LibrariesService,
-    public connService: ConnectivityService,
     public utilsServices: UtilsService
   ) {
     this.route.queryParams.subscribe(() => {
