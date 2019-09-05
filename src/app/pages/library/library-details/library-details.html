@@ -65,7 +65,7 @@
         </ion-button>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="libDetails.email">
       <ion-item>
         <ion-label>
           <ion-icon slot="start" name="mail"></ion-icon> &nbsp;
