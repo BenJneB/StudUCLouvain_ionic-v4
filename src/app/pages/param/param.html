@@ -31,10 +31,17 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content padding>
-  <ion-button expand="block" shape="round" color="setting" (click)="language_choice()">{{'SETTING.LANGUE' | translate }}
-  </ion-button>
-  <ion-button expand="block" shape="round" color="setting" (click)="campus_choice()">Campus</ion-button>
-  <ion-button expand="block" shape="round" color="setting" (click)="openTuto()">{{'SETTING.TUTO' | translate }}
-  </ion-button>
+<ion-content>
+  <div class="settings" style="height: 100%; display: flex; align-items: center; justify-content: center;">
+
+    <ion-button expand="block" shape="round" (click)="language_choice()">
+      {{'SETTING.LANGUE' | translate }}
+    </ion-button>
+
+    <ion-button expand="block" shape="round" (click)="campus_choice()">Campus</ion-button>
+
+    <ion-button expand="block" shape="round" (click)="openTuto()">{{'SETTING.TUTO' | translate }}
+    </ion-button>
+
+  </div>
 </ion-content>
