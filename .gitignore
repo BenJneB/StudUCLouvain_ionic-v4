@@ -35,4 +35,4 @@ UserInterfaceState.xcuserstate
 
 ionic-migration.json
 package-lock.json
-src/app/variables-config.ts
+src/app/variables.ts
