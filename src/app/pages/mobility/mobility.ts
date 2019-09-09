@@ -19,8 +19,7 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component } from '@angular/core';
-import { Market } from '@ionic-native/market/ngx';
-import { NavController, Platform } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UtilsService } from '../../services/utils-services/utils-services';
@@ -39,8 +38,6 @@ export class MobilityPage {
   public platform: any;
 
   constructor(
-    public nav: NavController,
-    public market: Market,
     private translateService: TranslateService,
     public utilsServices: UtilsService,
     private _platform: Platform
@@ -50,7 +47,7 @@ export class MobilityPage {
     this.title = 'Mobilité';
     let titlecar: string;
     this.translateService.get('MOBI.COVOIT').subscribe((res: string) => { titlecar = res; });
-
+    console.log('After translate in constructor ! First !');
     // Information to launch external app
     this.carpoolingPage = {
       title: titlecar, component: 'CarpoolingPage',
