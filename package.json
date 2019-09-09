@@ -41,7 +41,7 @@
     "@ionic-native/sqlite": "^5.13.0",
     "@ionic-native/status-bar": "^5.13.0",
     "@ionic-native/toast": "^5.13.0",
-    "@ionic/angular": "^4.8.1",
+    "@ionic/angular": "~4.8.1",
     "@ionic/storage": "^2.2.0",
     "@ngx-translate/core": "^11.0.1",
     "@ngx-translate/http-loader": "^4.0.0",
@@ -60,10 +60,10 @@
     "zone.js": "^0.8.29"
   },
   "devDependencies": {
-    "@angular-devkit/architect": "~0.12.3",
+    "@angular-devkit/architect": "^0.12.3",
     "@angular-devkit/build-angular": "^0.13.9",
-    "@angular-devkit/core": "~7.2.3",
-    "@angular-devkit/schematics": "~7.2.3",
+    "@angular-devkit/core": "^7.3.9",
+    "@angular-devkit/schematics": "^7.3.9",
     "@angular/cli": "~7.3.1",
     "@angular/compiler": "~7.2.2",
     "@angular/compiler-cli": "~7.2.2",
