@@ -49,13 +49,13 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content padding #courseContent>
+<ion-content class="ion-padding" #courseContent>
   <ion-list>
     <ion-item-sliding *ngFor="let activity of displayedActi" #slidingItem>
       <ion-item
         *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD') || (activity.isExam && segment === 'Examen')">
         <ion-label>
-          <h2 text-center> {{'COURSE.ACTIVITY' | translate}} : {{activity.type}} </h2>
+          <h2 class="ion-text-center"> {{'COURSE.ACTIVITY' | translate}} : {{activity.type}} </h2>
           <p>
             <ion-icon slot="start" name="calendar"></ion-icon>
             {{activity.start | date: 'dd/MM/yyyy H:mm' }}

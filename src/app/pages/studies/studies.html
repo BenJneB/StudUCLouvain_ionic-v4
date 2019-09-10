@@ -44,7 +44,9 @@
       <ion-label> {{'STUDY.HORAIRE' | translate}} </ion-label>
     </ion-segment-button>
   </ion-segment>
-  <h4 text-center padding *ngIf="project!==null && segment === 'cours'"> {{'STUDY.ADE' | translate}} {{project.name}}
+  <h4 class="ion-text-center ion-padding" *ngIf="project!==null && segment === 'cours'">
+    {{'STUDY.ADE' | translate}}
+    {{project.name}}
   </h4>
 </ion-header>
 
@@ -65,11 +67,11 @@
   </ion-content>
 </ion-menu>
 <ion-router-outlet id="studiesContent" main></ion-router-outlet>
-<ion-content padding id="studiesContent" [ngClass]="{'cours' : segment === 'cours'}">
+<ion-content class="ion-padding" id="studiesContent" [ngClass]="{'cours' : segment === 'cours'}">
 
   <!------------------------------------------ LISTE DES COURS ------------------------------------------------>
 
-  <ng-container padding *ngIf="segment==='cours'" id="cours">
+  <ng-container class="ion-padding" *ngIf="segment==='cours'" id="cours">
 
     <ion-list class="cours">
       <ion-item-sliding *ngFor="let course of listCourses" #slidingItem>
@@ -94,7 +96,7 @@
   </ng-container>
 
   <!------------------------------------ PROGRAMME DE COURS --------------------------------------------------------->
-  <ng-container padding *ngIf="segment==='prog'">
+  <ng-container class="ion-padding" *ngIf="segment==='prog'">
 
     <!----------------------------------------------- LOGIN ----------------------------------------------------------->
     <form #loginForm="ngForm" (ngSubmit)="loadActivities()" autocomplete="off" *ngIf="!status">
@@ -116,7 +118,8 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <div id="error" text-center *ngIf="error" class="alert alert-danger" style="color: red"><b>{{error}}</b></div>
+          <div id="error" class="ion-text-center alert alert-danger" *ngIf="error" style="color: red">
+            <b>{{error}}</b></div>
           <ion-button id="login" class="submit-btn" expand="full" type="submit" [disabled]="!loginForm.form.valid">Login
           </ion-button>
         </ion-col>
@@ -126,8 +129,8 @@
     <!------------------------------------------------- LISTE DU PROGRAMME DE COURS ------------------------------------------->
     <ion-list *ngIf="status">
       <!--<ion-button full (click)="openWeekPage()">{{'STUDY.WEEK' | translate}}</ion-button>-->
-      <h4 text-center *ngIf="prog">{{prog}}</h4>
-      <p text-center> {{'STUDY.STATUS' | translate}} : {{statusInsc}}</p>
+      <h4 class="ion-text-center" *ngIf="prog">{{prog}}</h4>
+      <p class="ion-text-center"> {{'STUDY.STATUS' | translate}} : {{statusInsc}}</p>
       <ion-button expand="full" (click)="openExamPage()" color="uclouvain">{{'STUDY.EXAM' | translate}}</ion-button>
       <ion-list *ngFor="let activity of activities">
         <ion-item-sliding #slidingItem>
@@ -151,11 +154,11 @@
 </ion-content>
 
 <!-------------------------------- BUTTON TO ADD COURSE ---------------------------------------------------->
-<ion-footer text-center *ngIf="segment == 'prog' && status">
+<ion-footer class="ion-text-center" *ngIf="segment == 'prog' && status">
   <ion-icon name='help-circle'></ion-icon>
   <p>{{'STUDY.SWIPE2' | translate}}</p>
 </ion-footer>
-<ion-footer text-center *ngIf="segment=='cours'">
+<ion-footer class="ion-text-center" *ngIf="segment=='cours'">
   <ion-fab slot="fixed" fab fab-bottom horizontal="end" style="margin-bottom:65px;">
     <ion-fab-button id="prompt" fab-fixed (click)="showPrompt()">
       <ion-icon name="add"> </ion-icon>

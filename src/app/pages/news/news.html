@@ -62,7 +62,7 @@
 
 <!--BODY-->
 <ion-content class="feed-list" #news>
-  <ion-refresher (ionRefresh)="doRefresh($event)">
+  <ion-refresher slot="fixed"(ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
@@ -84,17 +84,17 @@
 
   <!--------------------------------------- ACTUALITES VALVES ? ---------------------------------->
   <ion-grid *ngIf="segment === 'fac' && facsegment==='valve'" id="valve">
-    <ion-row align-items-center justify-content-center>
+    <ion-row class="ion-align-items-center ion-justify-content-center">
       <ion-button fill="solid" size="large" color="news"
         (click)="openURL('https://sites.uclouvain.be/sgsi-apps/shib-mesvalves/prod/')">
         <ion-icon name='share-alt'></ion-icon>
-        <ion-label text-center>{{'NEWS.MESVALVES' | translate}}</ion-label>
+        <ion-label class="ion-text-center">{{'NEWS.MESVALVES' | translate}}</ion-label>
       </ion-button>
     </ion-row>
   </ion-grid>
   <!--------------------------- ACTUALITES FAC ----------------------------------------->
 
-  <ion-row justify-content-center *ngIf="segment === 'fac' && userS.hasFac() && facsegment==='news'">
+  <ion-row class="ion-justify-content-center" *ngIf="segment === 'fac' && userS.hasFac() && facsegment==='news'">
     <!---------------------------------------------------------------------->
     <ion-item>
       <ion-label>
@@ -107,7 +107,7 @@
     <ion-icon name='share-alt'></ion-icon>
     {{'NEWS.WEB' | translate}}
   </ion-button>
-  <p text-center
+  <p class="ion-text-center"
     *ngIf="segment === 'fac' && site.length == 0 && rss.length == 0 && shownNews == 0 && facsegment ==='news'">
     <strong>Indisponible pour le moment</strong>
   </p>
