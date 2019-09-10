@@ -94,7 +94,7 @@ describe('Events Component', () => {
 
     describe('goToEventDetail method', () => {
         it('should call goToDetail of UtilsService', () => {
-            const spyGoDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            const spyGoDetail = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => { });
             spyOn(component.cache, 'saveItem').and.callThrough();
             spyOn(component.cache, 'getItem').and.callThrough();
             const eventItem = new EventItem(
@@ -154,7 +154,8 @@ describe('Events Component', () => {
     describe('addFavorite method', () => {
         it('should call addFavorite from UtilsService', () => {
             const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
-            component.addFavorite();
+            let ionItemSliding: IonItemSliding;
+            component.addFavorite(ionItemSliding, { 'guid': 0 });
             expect(spyAdd.calls.count()).toEqual(1);
         });
     });

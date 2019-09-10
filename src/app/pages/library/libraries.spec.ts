@@ -87,7 +87,7 @@ describe('Libraries Component', () => {
 
     describe('goToLibDetails method', () => {
         it('should call goToDetail with libItem and libraries/details from UtilsService', () => {
-            const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => { });
             component.goToLibDetails('libItem');
             expect(spyGoToDetail.calls.count()).toEqual(1);
             expect(spyGoToDetail).toHaveBeenCalledWith('libItem', 'libraries/details');
