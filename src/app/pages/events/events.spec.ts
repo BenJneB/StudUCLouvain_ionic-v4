@@ -214,6 +214,7 @@ describe('Events Component', () => {
             expect(component.searching).toBeTruthy();
         });
         it('should call loadEvents on reject', async () => {
+            // TOFIX: TO TEST
             const spyReject = spyOn(component.cache, 'getItem').and.returnValue(Promise.reject('ERROR'));
             await component.cachedOrNot();
             expect(spyReject.calls.count()).toEqual(1);

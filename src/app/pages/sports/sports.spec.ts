@@ -17,7 +17,7 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, IonItemSliding, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -201,7 +201,8 @@ describe('Sports Component', () => {
     describe('addFavorite method', () => {
         it('should call addFavorite from UtilsService', () => {
             const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
-            component.addFavorite();
+            let ionItemSliding: IonItemSliding;
+            component.addFavorite(ionItemSliding, { 'guid': 0 });
             expect(spyAdd.calls.count()).toEqual(1);
         });
     });
@@ -209,7 +210,10 @@ describe('Sports Component', () => {
     describe('addToCalendar method', () => {
         it('should call createEventWithOptions from Calendar', () => {
             const spyCreate = spyOn(component.calendar, 'createEventWithOptions').and.callThrough();
-            component.addToCalendar('', {});
+            component.addToCalendar(
+                { 'close': () => { } },
+                '',
+            );
             expect(spyCreate.calls.count()).toEqual(1);
         });
     });

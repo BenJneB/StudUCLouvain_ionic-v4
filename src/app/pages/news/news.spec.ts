@@ -201,13 +201,13 @@ describe('News Component', () => {
             const spyDismiss = spyOn(component.loader, 'dismiss').and.callThrough();
             component.updateDisplayed();
             expect(spyDismiss.calls.count()).toEqual(1);
-            expect(component.searching).toBeFalsy();;
+            expect(component.searching).toBeFalsy();
         });
     });
 
     describe('goToNewsDetail method', () => {
         it('should call goToDetail from UtilsService', () => {
-            const spyGo = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            const spyGo = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => { });
             component.goToNewsDetail();
             expect(spyGo.calls.count()).toEqual(1);
         });

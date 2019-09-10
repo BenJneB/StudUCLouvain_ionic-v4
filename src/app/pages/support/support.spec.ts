@@ -113,7 +113,7 @@ describe('Support Component', () => {
 
     describe('goToEmpDetails method', () => {
         it('should call goToDetail from UtilsService', () => {
-            const spyGo = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            const spyGo = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => { });
             component.goToEmpDetails();
             expect(spyGo.calls.count()).toEqual(1);
         });
