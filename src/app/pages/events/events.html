@@ -46,7 +46,7 @@
 
 <!--BODY-->
 <ion-content class="feed-list" #events>
-  <ion-refresher *ngIf="segment !== 'favorites'" (ionRefresh)="doRefresh($event)">
+  <ion-refresher slot="fixed"*ngIf="segment !== 'favorites'" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
@@ -55,7 +55,8 @@
   <ion-list #eventsList *ngFor="let week of displayedEventsD" [hidden]="shownEvents === 0">
 
     <ion-item-divider *ngIf="week.items.length > 0" (click)="toggleGroup(week.label)">
-      <ion-label style="width: 100%;" text-center> [{{getRangeWeek(week.label,year).from | date: 'dd/MM'}} &mdash;
+      <ion-label style="width: 100%;" class="ion-text-center"> [{{getRangeWeek(week.label,year).from | date: 'dd/MM'}}
+        &mdash;
         {{getRangeWeek(week.label,year).to | date: 'dd/MM'}}] ({{week.items.length}}) </ion-label>
     </ion-item-divider>
 
@@ -99,7 +100,7 @@
   </ion-list-header>
 </ion-content>
 
-<ion-footer text-center *ngIf="segment=='all'">
+<ion-footer class="ion-text-center" *ngIf="segment=='all'">
   <ion-icon name='help-circle'></ion-icon>
   <p>{{'EVENTS.SWIPE' | translate}}</p>
 </ion-footer>

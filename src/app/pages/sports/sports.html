@@ -50,7 +50,7 @@
 <!--BODY-->
 <!--class="feed-list" -->
 <ion-content class="all" [ngClass]="{'team' : segment == 'team'}">
-  <ion-refresher *ngIf="segment !== 'favorites'" (ionRefresh)="doRefresh($event)">
+  <ion-refresher slot="fixed"*ngIf="segment !== 'favorites'" (ionRefresh)="doRefresh($event)">
     <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
     </ion-refresher-content>
   </ion-refresher>
@@ -58,13 +58,13 @@
 
   <ion-list #sportsList *ngFor="let jour of displayedSportsD" [hidden]="shownSports === 0">
     <ion-item-divider *ngIf="jour.items.length > 0" (click)="toggleGroup(jour.label)">
-      <ion-label style="width: 100%;" text-center> {{jour.label}} {{jour.items[0].date | date: 'dd/MM'}}
+      <ion-label style="width: 100%;" class="ion-text-center"> {{jour.label}} {{jour.items[0].date | date: 'dd/MM'}}
         ({{jour.items.length}}) </ion-label>
     </ion-item-divider>
 
     <ion-item-sliding #slidingItem *ngFor="let sport of jour.items"
       [hidden]="!utilsServices.isGroupShown(jour.label, shownGroup) || sport.hidden">
-      <ion-item text-center>
+      <ion-item class="ion-text-center">
         <ion-label>
           <h3>{{sport.sport}} {{sport.sexe}} {{sport.type}}</h3>
           <p>{{sport.lieu}} - Salle : {{sport.salle}}</p>
@@ -103,7 +103,7 @@
   </ion-list-header>
 </ion-content>
 
-<ion-footer style="opacity: 0.5" text-center *ngIf="segment=='all' || segment=='team'">
+<ion-footer style="opacity: 0.5" class="ion-text-center" *ngIf="segment=='all' || segment=='team'">
   <ion-toolbar color="sport">
     <ion-icon name='help-circle'></ion-icon>
     <ion-label>{{'SPORTS.SWIPE' | translate}}</ion-label>

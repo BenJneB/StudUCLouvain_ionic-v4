@@ -94,7 +94,7 @@ describe('Events Component', () => {
 
     describe('goToEventDetail method', () => {
         it('should call goToDetail of UtilsService', () => {
-            const spyGoDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            const spyGoDetail = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => { });
             spyOn(component.cache, 'saveItem').and.callThrough();
             spyOn(component.cache, 'getItem').and.callThrough();
             const eventItem = new EventItem(
@@ -154,7 +154,8 @@ describe('Events Component', () => {
     describe('addFavorite method', () => {
         it('should call addFavorite from UtilsService', () => {
             const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
-            component.addFavorite();
+            let ionItemSliding: IonItemSliding;
+            component.addFavorite(ionItemSliding, { 'guid': 0 });
             expect(spyAdd.calls.count()).toEqual(1);
         });
     });
@@ -186,7 +187,7 @@ describe('Events Component', () => {
 
         it('should call updateDisplayed if favorites segment', () => {
             const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
-            component.tabChanged({ 'detail': { 'value': 'fav' } });
+            component.tabChanged({ 'detail': { 'value': 'favorites' } });
             expect(spyUpdate.calls.count()).toEqual(1);
         });
     });
@@ -214,6 +215,7 @@ describe('Events Component', () => {
             expect(component.searching).toBeTruthy();
         });
         it('should call loadEvents on reject', async () => {
+            // TOFIX: TO TEST
             const spyReject = spyOn(component.cache, 'getItem').and.returnValue(Promise.reject('ERROR'));
             await component.cachedOrNot();
             expect(spyReject.calls.count()).toEqual(1);
@@ -236,8 +238,9 @@ describe('Events Component', () => {
 
     describe('presentFilter method', () => {
         it('should call create from ModalController', () => {
-            component.presentFilter('tab');
-            expect(component.modalCtrl.create.calls.count()).toEqual(1);
+            component.presentFilter();
+            const create = component.modalCtrl.create;
+            expect(create.calls.count()).toEqual(1);
         });
     });
 
@@ -246,6 +249,39 @@ describe('Events Component', () => {
             const spyToggle = spyOn(component.utilsServices, 'toggleGroup').and.callThrough();
             component.toggleGroup('');
             expect(spyToggle.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('createEvent method', () => {
+        it('should call createEventInCalendar from utilsServices', () => {
+            const spyCreate = spyOn(component.utilsServices, 'createEventInCalendar').and.callThrough();
+            let ionItemSliding: IonItemSliding;
+            const data = {
+                title: 'title',
+                location: 'location',
+                start: 'start',
+                end: 'end'
+            };
+            component.createEvent(
+                ionItemSliding,
+                {
+                    title: 'title',
+                    location: 'location',
+                    startDate: 'start',
+                    endDate: 'end'
+                }
+            );
+            expect(spyCreate.calls.count()).toEqual(1);
+            expect(spyCreate.calls.first().args[0]).toEqual(data);
+            expect(spyCreate.calls.first().args[2]).toEqual(ionItemSliding);
+        });
+    });
+
+    describe('getRangeWeek method', () => {
+        it('should call getFullDate', () => {
+            const spyGetFullDate = spyOn(component, 'getFullDate').and.callThrough();
+            component.getRangeWeek(25, 2019);
+            expect(spyGetFullDate.calls.count()).toEqual(2);
         });
     });
 });

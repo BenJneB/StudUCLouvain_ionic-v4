@@ -101,7 +101,7 @@ describe('Tuto Component', () => {
 
     describe('goToHome method', () => {
         it('should call navigateForward of NavController', () => {
-            const spyNav = spyOn(component.navCtrl, 'navigateForward').and.callThrough();
+            const spyNav = spyOn(component.navCtrl, 'navigateForward').and.callFake(() => { });
             component.goToHome();
             expect(spyNav.calls.count()).toEqual(1);
             expect(spyNav.calls.first().args[0]).toEqual(['/home']);

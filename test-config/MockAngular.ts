@@ -8,3 +8,8 @@ export class MenuControllerMock {
         });
     }
 }
+
+export class RouterStub {
+    url = '';
+    navigateForward(commands: any[], extras?: any) { }
+}

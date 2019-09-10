@@ -1,14 +1,12 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { HttpClient } from 'selenium-webdriver/http';
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
-import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -22,8 +20,7 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
-    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    ModalControllerMock, NetworkMock
+    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock
 } from '../../../../test-config/MockIonicNative';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -58,10 +55,8 @@ describe('Mobility Component', () => {
                 RouterTestingModule,
                 HttpClientTestingModule,
                 IonicStorageModule.forRoot(),
-                FormsModule,
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 { provide: AppAvailability, useClass: AppAvailabilityMock },
                 { provide: Market, useClass: MarketMock },
