@@ -79,7 +79,7 @@ export class AlertService {
       duration: 3000
     });
     if (slidingItem !== undefined) {
-      await slidingItem.close().then();
+      await slidingItem.close();
     }
     return await toast.present().then();
 

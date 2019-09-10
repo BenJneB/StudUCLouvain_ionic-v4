@@ -236,7 +236,7 @@ export class SportsPage {
     };
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
       itemData.salle, itemData.date, itemData.hfin, options).then(() => {
-        this.alertService.presentToast('Sport créé', slidingItem).then();
+        this.alertService.presentToast('Sport créé', slidingItem);
       });
   }
 
