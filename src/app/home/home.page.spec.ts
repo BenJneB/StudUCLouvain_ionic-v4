@@ -123,7 +123,7 @@ describe('Home Component', () => {
 
     describe('openURL method', () => {
         it('should call create of InAppBrowser', () => {
-            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            const spyCreate = spyOn(component.iab, 'create').and.callFake(url => { });
             component.openURL('url');
             expect(spyCreate.calls.count()).toEqual(1);
             expect(spyCreate.calls.first().args[0]).toEqual('url');
@@ -132,7 +132,7 @@ describe('Home Component', () => {
 
     describe('openUCL method', () => {
         it('should call create of InAppBrowser', () => {
-            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            const spyCreate = spyOn(component.iab, 'create').and.callFake(url => { });
             component.openUCL('url');
             expect(spyCreate.calls.count()).toEqual(1);
             expect(spyCreate.calls.first().args[0]).toEqual('url');

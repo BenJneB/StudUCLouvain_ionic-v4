@@ -121,7 +121,7 @@ describe('MyApp Component', () => {
     it('should call open from Market if app not installed (Android)', () => {
       spyOnProperty(component.device, 'platform', 'get').and.returnValue('Android');
       const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check', '');
-      const spyOpen = spyOn(component.market, 'open');
+      const spyOpen = spyOn(component.market, 'open').and.callFake(os => { });
       component.launchExternalApp('ios', 'android', 'app', 'http');
       expect(spyCheck.calls.count()).toEqual(1);
       expect(spyOpen.calls.count()).toEqual(1);

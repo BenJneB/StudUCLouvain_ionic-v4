@@ -22,7 +22,7 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component } from '@angular/core';
-import { NavController, Platform } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 
 import { LibraryItem } from '../../entity/libraryItem';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
@@ -40,7 +40,6 @@ export class LibrariesPage {
 
   constructor(
     public navCtrl: NavController,
-    public platform: Platform,
     public libService: LibrariesService,
     public connService: ConnectivityService,
     private cache: CacheService,

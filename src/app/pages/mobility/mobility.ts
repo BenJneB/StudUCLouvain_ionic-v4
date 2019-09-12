@@ -24,6 +24,10 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UtilsService } from '../../services/utils-services/utils-services';
 
+export class StructPage {
+  title: string; component: string; iosSchemaName: string; androidPackageName: string; appUrl: string; httpUrl: string;
+}
+
 @Component({
   selector: 'page-mobility',
   templateUrl: 'mobility.html',
@@ -32,9 +36,12 @@ import { UtilsService } from '../../services/utils-services/utils-services';
 
 export class MobilityPage {
   public title: any;
-  carpoolingPage;
-  busPage;
-  trainPage;
+  structPage: {
+    title: string, component: string, iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string
+  };
+  carpoolingPage: StructPage;
+  busPage: StructPage;
+  trainPage: StructPage;
   public platform: any;
 
   constructor(
@@ -43,7 +50,6 @@ export class MobilityPage {
     private _platform: Platform
   ) {
     this.platform = this._platform;
-
     this.title = 'Mobilité';
     let titlecar: string;
     this.translateService.get('MOBI.COVOIT').subscribe((res: string) => { titlecar = res; });
