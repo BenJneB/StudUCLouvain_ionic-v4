@@ -119,12 +119,20 @@ describe('Sports Component', () => {
 
     describe('getFiltersData method', () => {
         it('should return teams data if arg=true', () => {
-            _shouldReturnCorrectData(component, true);
+            _shouldReturnCorrectData(true);
         });
 
         it('should return sports data if arg=false', () => {
-            _shouldReturnCorrectData(component, false);
+            _shouldReturnCorrectData(false);
         });
+
+        function _shouldReturnCorrectData(teams: boolean) {
+            const result = component.getFiltersData(teams);
+            expect(result).toEqual({
+                filters: teams ? component.filtersT : component.filter,
+                exclude: teams ? component.excludedFiltersT : component.excludedFilters
+            });
+        }
     });
 
     describe('loadSports method', () => {
@@ -213,11 +221,3 @@ describe('Sports Component', () => {
         });
     });
 });
-function _shouldReturnCorrectData(component: any, teams: boolean) {
-    const result = component.getFiltersData(teams);
-    expect(result).toEqual({
-        filters: teams ? component.filtersT : component.filter,
-        exclude: teams ? component.excludedFiltersT : component.excludedFilters
-    });
-}
-
