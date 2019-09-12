@@ -36,9 +36,6 @@ export class StructPage {
 
 export class MobilityPage {
   public title: any;
-  structPage: {
-    title: string, component: string, iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string
-  };
   carpoolingPage: StructPage;
   busPage: StructPage;
   trainPage: StructPage;
