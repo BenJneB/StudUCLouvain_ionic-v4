@@ -73,7 +73,7 @@
     "@ionic/v4-migration-tslint": "^1.7.1",
     "@types/jasmine": "^2.8.16",
     "@types/jasminewd2": "~2.0.3",
-    "@types/node": "^12.7.4",
+    "@types/node": "^12.7.5",
     "codelyzer": "^4.5.0",
     "cordova-plugin-device": "^2.0.2",
     "cordova-plugin-ionic-keyboard": "^2.2.0",
