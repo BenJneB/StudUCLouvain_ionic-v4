@@ -125,20 +125,12 @@ describe('News Component', () => {
     describe('getAvailableSites method', () => {
         it('should set sites and rss\'s', () => {
             component.fac = 'TEST';
-            expect(component.site).toEqual('');
-            expect(component.rss).toEqual('');
-            component.getAvailableSites({ facs: [{ acro: 'TEST', site: 'site', rss: 'rss' }] });
-            expect(component.site).toEqual('site');
-            expect(component.rss).toEqual('rss');
+            _testGetAvailableSites(component, 'site', 'rss');
         });
 
         it('should left site/rss empty if not corresponding acronym', () => {
             component.fac = 'FAIL';
-            expect(component.site).toEqual('');
-            expect(component.rss).toEqual('');
-            component.getAvailableSites({ facs: [{ acro: 'TEST', site: 'site', rss: 'rss' }] });
-            expect(component.site).toEqual('');
-            expect(component.rss).toEqual('');
+            _testGetAvailableSites(component, '', '');
         });
     });
 
@@ -213,3 +205,11 @@ describe('News Component', () => {
         });
     });
 });
+function _testGetAvailableSites(component: any, site: string, rss: string) {
+    expect(component.site).toEqual('');
+    expect(component.rss).toEqual('');
+    component.getAvailableSites({ facs: [{ acro: 'TEST', site: 'site', rss: 'rss' }] });
+    expect(component.site).toEqual(site);
+    expect(component.rss).toEqual(rss);
+}
+
