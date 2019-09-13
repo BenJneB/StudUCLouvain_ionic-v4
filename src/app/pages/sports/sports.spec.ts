@@ -129,7 +129,7 @@ describe('Sports Component', () => {
         function _shouldReturnCorrectData(teams: boolean) {
             const result = component.getFiltersData(teams);
             expect(result).toEqual({
-                filters: teams ? component.filtersT : component.filter,
+                filters: teams ? component.filtersT : component.filters,
                 exclude: teams ? component.excludedFiltersT : component.excludedFilters
             });
         }

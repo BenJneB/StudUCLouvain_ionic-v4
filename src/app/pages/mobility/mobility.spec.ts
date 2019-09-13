@@ -39,7 +39,7 @@ import {
 */
 import { MobilityPage } from './mobility';
 
-xdescribe('Mobility Component', () => {
+describe('Mobility Component', () => {
     let fixture;
     let component;
 
