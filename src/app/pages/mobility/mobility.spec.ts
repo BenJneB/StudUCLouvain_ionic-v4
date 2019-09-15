@@ -78,8 +78,7 @@ describe('Mobility Component', () => {
         fixture.detectChanges();
     });
 
-    it('should be created', (done) => {
+    it('should be created', () => {
         testInstanceCreation(component, MobilityPage);
-        done();
     });
 });
