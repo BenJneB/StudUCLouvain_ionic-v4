@@ -14,7 +14,7 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule, IonItemSliding, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -94,7 +94,7 @@ describe('Events Component', () => {
 
     describe('goToEventDetail method', () => {
         it('should call goToDetail of UtilsService', () => {
-            const spyGoDetail = spyOn(component.utilsServices, 'goToDetail').and.callThrough();
+            const spyGoDetail = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => { });
             spyOn(component.cache, 'saveItem').and.callThrough();
             spyOn(component.cache, 'getItem').and.callThrough();
             const eventItem = new EventItem(
@@ -120,10 +120,16 @@ describe('Events Component', () => {
     });
 
     describe('removeFavorite method', () => {
-        it('should call removeFavorite from UtilsService', () => {
-            const spyRemove = spyOn(component.utilsServices, 'removeFavorite').and.callThrough();
-            component.removeFavorite();
+        it('should call removeFavorite from UtilsService and then, updateDisplayed', async () => {
+            const spyRemove = spyFunctionWithCallBackThen( // TODO: not function with then. async method, have to spy on await call
+                component.utilsServices,
+                'removeFavorite',
+                {}
+            );
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            await component.removeFavorite();
             expect(spyRemove.calls.count()).toEqual(1);
+            expect(spyUpdate.calls.count()).toEqual(1);
         });
     });
 
@@ -148,7 +154,8 @@ describe('Events Component', () => {
     describe('addFavorite method', () => {
         it('should call addFavorite from UtilsService', () => {
             const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
-            component.addFavorite();
+            let ionItemSliding: IonItemSliding;
+            component.addFavorite(ionItemSliding, { 'guid': 0 });
             expect(spyAdd.calls.count()).toEqual(1);
         });
     });
@@ -171,62 +178,110 @@ describe('Events Component', () => {
         });
     });
 
+    describe('tabChanged method', () => {
+        it('should call cachedOrNot if all segment', () => {
+            const spyCachedOrNot = spyOn(component, 'cachedOrNot').and.callThrough();
+            component.tabChanged({ 'detail': { 'value': 'all' } });
+            expect(spyCachedOrNot.calls.count()).toEqual(1);
+        });
+
+        it('should call updateDisplayed if favorites segment', () => {
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            component.tabChanged({ 'detail': { 'value': 'favorites' } });
+            expect(spyUpdate.calls.count()).toEqual(1);
+        });
+    });
+
     describe('cachedOrNot method', () => {
-        it('should call getItem from Cache and present loader during update the displayed events', () => {
+        it('should call getItem from Cache and present loader during update the displayed events', async () => {
             const spyGetItem = spyFunctionWithCallBackThen(
                 component.cache,
                 'getItem',
                 { items: [{ startDate: new Date(), endDate: new Date() }] }
             );
-            const spyLoad = spyOn(component.loader, 'present').and.callThrough();
-            const spyUpdate = spyOn(component, 'updateDisplayed').and.callFake(() => { });
-            component.cachedOrNot();
+            const spyLoad = spyFunctionWithCallBackThen( // TODO: not function with then. async method, have to spy on await call
+                component.loader,
+                'present',
+                {}
+            );
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+
+            await component.cachedOrNot();
+
             expect(spyGetItem.calls.count()).toEqual(1);
             expect(spyGetItem.calls.first().args[0]).toEqual('cache-event');
             expect(spyLoad.calls.count()).toEqual(1);
             expect(spyUpdate.calls.count()).toEqual(1);
-            expect(component.searching).toBeFalsy();
+            expect(component.searching).toBeTruthy();
         });
-        it('should call loadEvents on reject', () => {
+        it('should call loadEvents on reject', async () => {
+            // TOFIX: TO TEST
             const spyReject = spyOn(component.cache, 'getItem').and.returnValue(Promise.reject('ERROR'));
-            const spyLoad = spyOn(component, 'loadEvents').and.callThrough();
-            component.cachedOrNot().then(() => {
-                expect(spyLoad.calls.count()).toEqual(1);
-            });
+            await component.cachedOrNot();
             expect(spyReject.calls.count()).toEqual(1);
         });
     });
 
     describe('loadEvents method', () => {
-        let spyOnline;
-        it('should call getEvents from EventService and updateDisplayed', () => {
-            spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
+        it('should call getEvents from EventService and updateDisplayed', async () => {
             const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', { items: [] });
             const spySave = spyOn(component.cache, 'saveItem').and.callThrough();
             const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
-            component.loadEvents('key');
-            expect(spyOnline.calls.count()).toEqual(1);
+            await component.loadEvents('key');
             expect(spyGetEvents.calls.count()).toEqual(1);
             expect(spyUpdate.calls.count()).toEqual(1);
             expect(component.searching).toBeFalsy();
             expect(spySave.calls.count()).toEqual(1);
             expect(spySave.calls.first().args[0]).toEqual('key');
         });
-
-        it('if not online, should call presentConnectionAlert', () => {
-            spyOnline = spyOn(component.connService, 'isOnline').and.returnValue(false);
-            const spyPresentAlert = spyOn(component.connService, 'presentConnectionAlert').and.callThrough();
-            component.loadEvents();
-            expect(spyOnline.calls.count()).toEqual(1);
-            expect(spyPresentAlert.calls.count()).toEqual(1);
-            expect(component.searching).toBeFalsy();
-        });
     });
 
     describe('presentFilter method', () => {
         it('should call create from ModalController', () => {
             component.presentFilter();
-            expect(component.modalCtrl.create.calls.count()).toEqual(1);
+            const create = component.modalCtrl.create;
+            expect(create.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('toggleGroup method', () => {
+        it('should call toggleGroup from UtilsService', () => {
+            const spyToggle = spyOn(component.utilsServices, 'toggleGroup').and.callThrough();
+            component.toggleGroup('');
+            expect(spyToggle.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('createEvent method', () => {
+        it('should call createEventInCalendar from utilsServices', () => {
+            const spyCreate = spyOn(component.utilsServices, 'createEventInCalendar').and.callThrough();
+            let ionItemSliding: IonItemSliding;
+            const data = {
+                title: 'title',
+                location: 'location',
+                start: 'start',
+                end: 'end'
+            };
+            component.createEvent(
+                ionItemSliding,
+                {
+                    title: 'title',
+                    location: 'location',
+                    startDate: 'start',
+                    endDate: 'end'
+                }
+            );
+            expect(spyCreate.calls.count()).toEqual(1);
+            expect(spyCreate.calls.first().args[0]).toEqual(data);
+            expect(spyCreate.calls.first().args[2]).toEqual(ionItemSliding);
+        });
+    });
+
+    describe('getRangeWeek method', () => {
+        it('should call getFullDate', () => {
+            const spyGetFullDate = spyOn(component, 'getFullDate').and.callThrough();
+            component.getRangeWeek(25, 2019);
+            expect(spyGetFullDate.calls.count()).toEqual(2);
         });
     });
 });

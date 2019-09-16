@@ -83,7 +83,7 @@ export class GuindaillePage {
   }
 
   async showAlert(page) {
-    const alert = await this.alertCtrl.create(page);
-    await alert.present();
+    const alert = await this.alertCtrl.create(page).then();
+    return await alert.present();
   }
 }

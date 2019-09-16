@@ -24,10 +24,8 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ModalController, NavController, Platform } from '@ionic/angular';
 
 import { EmployeeItem } from '../../entity/employeeItem';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { RepertoireService } from '../../services/wso2-services/repertoire-service';
 
 @Component({
@@ -54,12 +52,9 @@ export class SupportPage {
   segment = 'aide';
   shownHelp = null;
 
-  constructor(public navCtrl: NavController,
-    public modalCtrl: ModalController,
+  constructor(
     private iab: InAppBrowser,
-    public platform: Platform,
     public repService: RepertoireService,
-    public connService: ConnectivityService,
     public loader: LoaderService,
     private utilsServices: UtilsService
   ) {
@@ -67,8 +62,8 @@ export class SupportPage {
   }
 
   /*Take the name and lastname in the good field to do the search and display the result*/
-  update() {
-    this.loader.present('Please wait..').then();
+  async update() {
+    await this.loader.present('Please wait..');
     const options: Array<string> = [];
     const values: Array<string> = [];
     const fields = [

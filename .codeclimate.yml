@@ -10,10 +10,6 @@ plugins:
   tslint:
     enabled: true
     config: tslint.json
-  duplication:
-    enabled: true
-    config:
-        count_threshold: 2
 
 exclude_patterns:
 - config/**/*
@@ -26,3 +22,5 @@ exclude_patterns:
 - src/assets/*
 - resources/*
 - "**/*.spec.ts"
+- "*.spec.ts"
+- "*/*.spec.ts"

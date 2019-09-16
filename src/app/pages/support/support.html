@@ -43,7 +43,7 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content padding class="has-header">
+<ion-content class="ion-padding has-header">
   <!----------------INFORMATIONS ---------------------->
   <ng-container *ngIf="segment==='info'">
     <ion-item-divider (click)="toggleGroup('prob_app')">
@@ -187,7 +187,7 @@
           </ion-item>
         </ion-list>
         <ion-row center>
-          <ion-col text-center>
+          <ion-col class="ion-text-center">
             <ion-button shape="round" (click)="update()">{{'HELP.SEARCH' | translate}}</ion-button>
           </ion-col>
         </ion-row>
@@ -203,7 +203,7 @@
 
   <!----------------SERVICES D AIDES ---------------------->
   <ng-container *ngIf="segment==='aide'">
-    <h1><strong> {{'HELP.AIDE1' | translate}} </strong></h1>
+    <h1 style="text-align:center"><strong> {{'HELP.AIDE1' | translate}} </strong></h1>
     <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide')">
       <ion-icon slot="start" name='share-alt'></ion-icon>
       {{'HELP.WEB' | translate}}
@@ -251,7 +251,7 @@
       </ion-label>
     </ion-item-divider>
 
-    <ion-item [hidden]="!utilsServices.isGroupShown('socfi', shownGroup)" text-wrap>
+    <ion-item [hidden]="!utilsServices.isGroupShown('socfi', shownGroup)" class="ion-text-wrap">
       <ion-label>
         <ion-button fill="clear" size="small"
           (click)="openURL('https://uclouvain.be/fr/etudier/aide/aidesociale.html')">
@@ -283,7 +283,7 @@
       </ion-label>
     </ion-item-divider>
 
-    <ion-item [hidden]="!utilsServices.isGroupShown('sante', shownGroup)" text-wrap>
+    <ion-item [hidden]="!utilsServices.isGroupShown('sante', shownGroup)" class="ion-text-wrap">
       <ion-label>
         <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide/aide-sante.html')">
           <ion-icon slot="start" name='share-alt'></ion-icon>
@@ -313,7 +313,7 @@
       </ion-label>
     </ion-item-divider>
 
-    <ion-item [hidden]="!utilsServices.isGroupShown('psyped', shownGroup)" text-wrap>
+    <ion-item [hidden]="!utilsServices.isGroupShown('psyped', shownGroup)" class="ion-text-wrap">
       <ion-label>
         <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide/planning.html')">
           <ion-icon slot="start" name='share-alt'></ion-icon>
@@ -335,7 +335,7 @@
       <ion-button (click)="openURL('https://www.youtube.com/watch?v=Mfy2y7mZ7-Y')">{{'HELP.TUTO3' | translate }}
       </ion-button>
     </p>
-    <h2 text-center><strong>{{'HELP.TUTOTITLE' | translate }}</strong></h2>
+    <h2 class="ion-text-center"><strong>{{'HELP.TUTOTITLE' | translate }}</strong></h2>
     <p style="text-align:center">
       <ion-button (click)="openURL('https://www.youtube.com/watch?v=UVXpEP_0vnc')">{{'HELP.TUTO1' | translate }}
       </ion-button>

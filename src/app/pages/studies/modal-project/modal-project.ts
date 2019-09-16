@@ -45,7 +45,7 @@ export class ModalProjectPage {
   /*Set the project and close de view of the modal*/
   closeModal(project: AdeProject) {
     this.studiesService.setProject(this.sessionId, project.id).then(
-      data => {
+      () => {
         this.storage.set('adeProject', project);
         this.viewCtrl.dismiss(project);
       }

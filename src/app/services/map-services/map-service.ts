@@ -29,7 +29,7 @@ import {
 import { MenuController, Platform } from '@ionic/angular';
 
 import { MapLocation } from '../../entity/mapLocation';
-import { jsApiKey } from '../../variables-config';
+import { jsApiKey } from '../../variables';
 import { ConnectivityService } from '../utils-services/connectivity-service';
 import { UserService } from '../utils-services/user-service';
 

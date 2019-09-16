@@ -32,13 +32,13 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content padding>
+<ion-content class="ion-padding">
   <ion-card>
-    <ion-card-header text-wrap>
+    <ion-card-header class="ion-text-wrap">
       <h1><b>{{empDetails.firstname}} {{empDetails.lastname}}</b></h1>
     </ion-card-header>
 
-    <ion-row text-wrap>
+    <ion-row class="ion-text-wrap">
       <ion-list>
         <ion-item style="text-transform:uppercase" *ngIf="empDetails.contracts">
           <ion-label>

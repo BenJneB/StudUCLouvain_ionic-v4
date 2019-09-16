@@ -41,7 +41,7 @@
 <ion-content>
   <ion-list>
     <ion-item *ngFor="let item of displayItems" (click)="select(item)">
-      <span padding *ngIf="item.code">
+      <span class="ion-padding" *ngIf="item.code">
         <div class="info">
           <ion-label class="id">{{item.code}}</ion-label>
           <ion-label class="name">{{item.title}}</ion-label>

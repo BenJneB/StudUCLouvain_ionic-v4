@@ -80,10 +80,10 @@ export class LibrariesPage {
     this.utilsServices.goToDetail(lib, 'libraries/details');
   }
 
-  async cachedOrNot() {
+  cachedOrNot() {
     //  this.cache.removeItem('cache-event');
     const key = 'cache-libraries';
-    await this.cache.getItem(key)
+    this.cache.getItem(key)
       .then((data) => {
         this.libraries = data;
         this.searching = false;

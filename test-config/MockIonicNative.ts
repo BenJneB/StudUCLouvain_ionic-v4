@@ -5,7 +5,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import {
-    InAppBrowser, InAppBrowserObject, InAppBrowserOptions
+    InAppBrowser, InAppBrowserEventType, InAppBrowserObject, InAppBrowserOptions
 } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
@@ -43,7 +43,7 @@ export class AppAvailabilityMock extends AppAvailability {
 
 export interface InAppBrowserEvent extends Event {
     /** the eventname, either loadstart, loadstop, loaderror, or exit. */
-    type: string;
+    type: InAppBrowserEventType;
     /** the URL that was loaded. */
     url: string;
     /** the error code, only in the case of loaderror. */
@@ -72,7 +72,7 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
         return getPromise();
     }
 
-    on(event: string): Observable<InAppBrowserEvent> {
+    on(event: InAppBrowserEventType): Observable<InAppBrowserEvent> {
         const response = {
             type: '',
             url: '',

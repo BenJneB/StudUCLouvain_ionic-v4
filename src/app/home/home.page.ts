@@ -176,7 +176,7 @@ export class HomePage {
     const alert = await this.alertCtrl.create({
       header: urg,
       message: msg,
-      cssClass: 'emergency',
+      cssClass: 'emergency_alert',
       buttons: [
         {
           text: close,
@@ -184,7 +184,7 @@ export class HomePage {
           }
         }]
     });
-    await alert.present();
+    return await alert.present();
   }
 
   private getEmergencyMsg(
@@ -199,17 +199,30 @@ export class HomePage {
     msg8: any,
     msg9: string
   ) {
-    return '<p> <strong>'
-      + msg1
-      + '</strong>: <br><font size=\' +1\'><a href=\'tel:010 47 22 22\'>010 47 22 22</a></font> </p> <p><strong>'
-      + msg2
-      + '</strong>: <br><font size=\' +1\'><a href=\'tel:010 47 24 24\'>010 47 24 24</a></font> <br>ou<br>'
-      + '<font size=\' +1\'><a href=\'tel:02 764 93 93\'>02 764 93 93</a></font> <br>(Woluwe - St Gilles - Tournai)<br>'
-      + 'ou <br><font size=\' +1\'><a href=\'tel:065 32 35 55\'>065 32 35 55</a></font> (Mons)</p> <p><strong>Contact:</strong> '
-      + '<a href=\'mailto:security@uclouvain.be\'>security@uclouvain.be</a></p> <p><strong>'
-      + out + ':</strong> <font size=\' +1\'><a href=\'tel:112\'>112</a></font></p>  <p> <br>' + msg3
-      + ' <br><br> <strong>' + msg4 + '</strong> ' + msg5 + '<br> <strong>' + msg6 + '</strong> ' + msg7
-      + '<br> <strong>' + msg8 + '</strong> ' + msg9 + '<br>';
+    return '<p> <strong>' + msg1 + '</strong>: <br>'
+      + '<ion-icon slot="start" name="call"></ion-icon>'
+      + '<font size=\' +1\'><a href=\'tel:010 47 22 22\'>010 47 22 22</a></font> </p>'
+      + '<p><strong>' + msg2 + '</strong>: <br>'
+      + '<ion-icon slot="start" name="call"></ion-icon>'
+      + '<font size=\' +1\'><a href=\'tel:010 47 24 24\'>010 47 24 24</a></font><br>ou<br>'
+      + '<ion-icon slot="start" name="call"></ion-icon>'
+      + '<font size=\' +1\'><a href=\'tel:02 764 93 93\'>02 764 93 93</a></font><br>'
+      + '(Woluwe - St Gilles - Tournai)<br>ou<br>'
+      + '<ion-icon slot="start" name="call"></ion-icon>'
+      + '<font size=\' +1\'><a href=\'tel:065 32 35 55\'>065 32 35 55</a></font>(Mons)</p>'
+      + '<p><strong>Contact:</strong><br>'
+      + '<ion-icon slot="start" name="mail"></ion-icon>'
+      + '<a href=\'mailto:security@uclouvain.be\'>security@uclouvain.be</a></p>'
+      + '<p><strong>' + out + ':</strong><br>'
+      + '<ion-icon slot="start" name="call"></ion-icon>'
+      + '<font size=\' +1\'><a href=\'tel:112\'>112</a></font></p><br>'
+      + '<p> ' + msg3 + '<br><br>'
+      + '<strong>' + msg4 + '</strong><br>'
+      + msg5 + '<br><br>'
+      + '<strong>' + msg6 + '</strong><br>'
+      + msg7 + '<br><br>'
+      + '<strong>' + msg8 + '</strong><br>'
+      + msg9 + '<br> </p>';
   }
 
   private getEmergencyTexts() {

@@ -54,7 +54,7 @@
   </ion-grid>
 
   <div *ngIf="segment==='effect'" class="gelem">
-    <ion-slides pager align-items-center>
+    <ion-slides pager class="ion-align-items-center">
       <ion-slide *ngFor="let slide of slides">
         <img [src]="slide.image" class="slide-image" (click)="showAlert(slide)" />
       </ion-slide>
@@ -63,8 +63,8 @@
   </div>
 
   <ion-card class="gelem" *ngIf="segment==='help'">
-    <ion-item text-center>
-      <ion-label text-wrap>
+    <ion-item class="ion-text-center">
+      <ion-label class="ion-text-wrap">
         <h2> <strong>{{'GUINDAILLE.HELP11' | translate}} </strong></h2>
         <p [innerHTML]="'GUINDAILLE.HELP12' | translate"></p><br>
         <p [innerHTML]="'GUINDAILLE.HELP13' | translate"></p>
@@ -122,7 +122,8 @@
   </ion-card>
 </ion-content>
 
-<ion-footer class="gfoot" text-center *ngIf="segment === 'effect' || segment === 'pict'" [hidden]="segment === 'help'">
+<ion-footer class="gfoot ion-text-center" *ngIf="segment === 'effect' || segment === 'pict'"
+  [hidden]="segment === 'help'">
   <ion-icon name='help-circle'></ion-icon>
   <p class="gtext">{{'GUINDAILLE.CLICK' | translate}}</p>
 </ion-footer>

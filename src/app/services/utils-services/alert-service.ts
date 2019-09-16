@@ -38,7 +38,7 @@ export class AlertService {
         }
       ]
     });
-    return await disclaimerAlert.present();
+    return await disclaimerAlert.present().then();
   }
 
   async languageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
@@ -65,7 +65,7 @@ export class AlertService {
           handler: data => { this.languageChanged(data); }
         }
       ]
-    }).then();
+    });
   }
 
   private languageChanged(event: string) {
@@ -78,10 +78,11 @@ export class AlertService {
       message: message,
       duration: 3000
     });
-    await toast.present();
     if (slidingItem !== undefined) {
       await slidingItem.close();
     }
+    return await toast.present().then();
+
   }
 
   async campusChoiceAlert(setting: string, message: string, check: string, save: string) {
@@ -104,7 +105,7 @@ export class AlertService {
         }
       ]
     });
-    await settingsAlert.present();
+    return await settingsAlert.present();
   }
 
   private getRadioCampus(label: string, value: string, check?: string): AlertInput {
@@ -125,7 +126,7 @@ export class AlertService {
       duration: 2000,
       position: 'middle'
     });
-    return await toast.present();
+    return await toast.present().then();
   }
 
   private dismissFilterToast(results: any, dateRange: any, data?: any) {
@@ -134,7 +135,7 @@ export class AlertService {
     }
     results.push(data);
     results.push(dateRange);
-    this.viewCtrl.dismiss(results);
+    this.viewCtrl.dismiss(results).then();
     return results;
   }
 
@@ -168,7 +169,7 @@ export class AlertService {
         }
       ]
     });
-    return await prompt.present();
+    return await prompt.present().then();
   }
 
   private handleSavePrompt(data: any, listCourses: Course[], check: (already: boolean, acronym: string) => any) {

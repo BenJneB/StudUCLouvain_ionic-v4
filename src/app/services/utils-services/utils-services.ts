@@ -59,7 +59,7 @@ export class UtilsService {
     return res;
   }
 
-  async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding, update?: () => void) {
+  async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding) {
     if (this.user.hasFavorite(itemData.guid)) {
       let message: string;
       this.translateService.get(texts['FAV']).subscribe((res: string) => {
@@ -74,7 +74,6 @@ export class UtilsService {
           'CANCEL': texts['CANCEL'],
           'DEL': texts['DEL']
         },
-        update
       );
     } else {
       this.user.addFavorite(itemData.guid);
@@ -82,11 +81,11 @@ export class UtilsService {
       this.translateService.get(texts['FAV2']).subscribe((res: string) => {
         message = res;
       });
-      await this.alertService.presentToast(message, slidingItem);
+      return await this.alertService.presentToast(message, slidingItem);
     }
   }
 
-  async  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any, update?: () => void) {
+  async removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any) {
     let message: string, cancel: string, del: string;
     this.translateService.get(texts['FAV3']).subscribe((res: string) => {
       message = res;
@@ -98,10 +97,10 @@ export class UtilsService {
       del = res;
     });
     const alertTexts = { 'title': title, 'message': message, 'cancel': cancel, 'del': del };
-    return await this.presentAlert(alertTexts, slidingItem, itemData, update);
+    return await this.presentAlert(alertTexts, slidingItem, itemData);
   }
 
-  private async presentAlert(texts: {}, slidingItem: IonItemSliding, itemData: any, update: () => void) {
+  private async presentAlert(texts: {}, slidingItem: IonItemSliding, itemData: any) {
     const alert = await this.alertCtrl.create({
       header: texts['title'],
       message: texts['message'],
@@ -117,9 +116,6 @@ export class UtilsService {
           handler: () => {
             this.user.removeFavorite(itemData.guid);
             slidingItem.close();
-            if (update !== undefined) {
-              update();
-            }
           }
         }
       ]
@@ -137,6 +133,7 @@ export class UtilsService {
   }
 
   launchExternalApp(page: any) {
+    console.log('LAUNCH EXTEEEEEEERNAL');
     let app: string;
     let check: string;
     if (this.device.platform === 'iOS') {
@@ -225,10 +222,12 @@ export class UtilsService {
     });
   }
 
-  updateSearchControl(searchControl: FormControl, searching: boolean, update: () => void) {
+  initSearchControl(searchControl: FormControl, searching: boolean, update?: () => void) {
     searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
       searching = false;
-      update();
+      if (update !== undefined) {
+        update();
+      }
     });
   }
 

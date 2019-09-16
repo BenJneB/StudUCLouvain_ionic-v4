@@ -165,9 +165,9 @@ export class StudiesPage {
   /*Open modalprojectpage to choose an ade project*/
   async openModalProject() {
     const obj = { sessionId: this.sessionId };
-    const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj });
-    await myModal.present();
-    await myModal.onDidDismiss().then(data => { this.project = data.data; });
+    const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj }).then();
+    myModal.onDidDismiss().then(data => { this.project = data.data; });
+    return await myModal.present();
   }
 
   /*Set project and connect to ADE*/
@@ -281,7 +281,7 @@ export class StudiesPage {
       subHeader: 'Cette fonctionnalité n\'est pas encore disponible',
       buttons: ['OK']
     });
-    await alert.present();
+    return await alert.present();
   }
 
   launch(url) {
