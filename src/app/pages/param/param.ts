@@ -76,7 +76,7 @@ export class ParamPage {
     const save = this.transService.getTranslation('HOME.SAVE');
     const fr = this.transService.getTranslation('HOME.FR');
     const en = this.transService.getTranslation('HOME.EN');
-    const languageAlert = await this.alertService.languageAlert(setting, message, fr, check2, en, save).then();
+    const languageAlert = await this.alertService.languageAlert(setting, message, fr, check2, en, save);
     return await languageAlert.present();
   }
 

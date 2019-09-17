@@ -156,6 +156,7 @@ describe('Home Component', () => {
             const spyCreate = spyOn(component.alertCtrl, 'create').and.callThrough();
             component.emergency();
             expect(spyCreate.calls.count()).toEqual(1);
+            // TODO: Test present
         });
     });
 });
