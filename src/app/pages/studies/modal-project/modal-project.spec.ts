@@ -1,14 +1,11 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { Observable } from 'rxjs';
 import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
-import { AdeProject } from 'src/app/entity/adeProject';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
