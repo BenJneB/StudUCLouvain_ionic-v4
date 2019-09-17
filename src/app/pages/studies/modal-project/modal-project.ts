@@ -34,7 +34,8 @@ export class ModalProjectPage {
   sessionId: string;
   public projects;
 
-  constructor(public navCtrl: NavController,
+  constructor(
+    public navCtrl: NavController,
     public storage: Storage,
     public navParams: NavParams,
     public viewCtrl: ModalController,
