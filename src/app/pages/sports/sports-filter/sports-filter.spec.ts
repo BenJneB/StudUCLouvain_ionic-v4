@@ -14,14 +14,14 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    ModalControllerMock, NetworkMock
-} from '../../../../test-config/MockIonicNative';
+    ModalControllerMock, NavParamsMock, NetworkMock
+} from '../../../../../test-config/MockIonicNative';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -39,18 +39,17 @@ import {
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { ParamPage } from './param';
+import { SportsFilterPage } from './sports-filter';
 
-describe('Param Component', () => {
+describe('SportsFilter Component', () => {
     let fixture;
     let component;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ParamPage],
+            declarations: [SportsFilterPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
-                IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
                 HttpClientTestingModule,
@@ -71,41 +70,37 @@ describe('Param Component', () => {
                 { provide: Network, useClass: NetworkMock },
                 Diagnostic,
                 { provide: Calendar, useClass: CalendarMock },
+                { provide: NavParams, useClass: NavParamsMock }
             ]
         }).compileComponents();
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ParamPage);
+        fixture = TestBed.createComponent(SportsFilterPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        component.categories = [{}, {}, {}];
     });
 
     it('should be created', () => {
-        testInstanceCreation(component, ParamPage);
+        testInstanceCreation(component, SportsFilterPage);
     });
 
-    describe('campus_choice method', () => {
-        it('should call campusChoiceAlert from AlertService', () => {
-            const spyCampusAlert = spyOn(component.alertService, 'campusChoiceAlert').and.callThrough();
-            component.campus_choice();
-            expect(spyCampusAlert.calls.count()).toEqual(1);
+    describe('resetFilters method', () => {
+        it('should set all categories to True', () => {
+            component.resetFilters();
+            component.categories.forEach(category => {
+                expect(category).toBeTruthy();
+            });
         });
     });
 
-    describe('language_choice method', () => {
-        it('should call languageAlert from AlertService', () => {
-            const spyLangAlert = spyOn(component.alertService, 'languageAlert').and.callThrough();
-            component.language_choice();
-            expect(spyLangAlert.calls.count()).toEqual(1);
-        });
-    });
-
-    describe('openTuto method', () => {
-        it('should call navigateForward from NavController', () => {
-            const spyNavigate = spyOn(component.navCtrl, 'navigateForward').and.callFake(() => { });
-            component.openTuto();
-            expect(spyNavigate.calls.count()).toEqual(1);
+    describe('uncheckAll method', () => {
+        it('should set all categories to True', () => {
+            component.uncheckAll();
+            component.categories.forEach(categories => {
+                expect(categories.isChecked).toBeFalsy();
+            });
         });
     });
 });
