@@ -222,10 +222,15 @@ describe('Sports Component', () => {
         });
     });
 
-    describe('presentFilter method', () => {
+    fdescribe('presentFilter method', () => {
         it('should call create from ModalController', () => {
+            const spyGetFilters = spyOn(component, 'getFiltersData').and.callThrough().and.returnValue({
+                'filters': undefined,
+                'exclude': []
+            });
             component.presentFilter();
             expect(component.modalCtrl.create.calls.count()).toEqual(1);
+            expect(spyGetFilters.calls.count()).toEqual(1);
         });
     });
 });
