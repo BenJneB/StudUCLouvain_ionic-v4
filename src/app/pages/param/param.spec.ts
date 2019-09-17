@@ -44,7 +44,7 @@ import {
 */
 import { ParamPage } from './param';
 
-describe('News Component', () => {
+describe('Param Component', () => {
     let fixture;
     let component;
 
@@ -58,7 +58,6 @@ describe('News Component', () => {
                 RouterTestingModule,
                 HttpClientTestingModule,
                 IonicStorageModule.forRoot(),
-                FormsModule,
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
@@ -87,5 +86,29 @@ describe('News Component', () => {
 
     it('should be created', () => {
         testInstanceCreation(component, ParamPage);
+    });
+
+    describe('campus_choice method', async () => {
+        it('should call campusChoiceAlert from AlertService', () => {
+            const spyCampusAlert = spyOn(component.alertService, 'campusChoiceAlert').and.callThrough();
+            component.campus_choice();
+            expect(spyCampusAlert.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('language_choice method', async () => {
+        it('should call languageAlert from AlertService', () => {
+            const spyLangAlert = spyOn(component.alertService, 'languageAlert').and.callThrough();
+            component.language_choice();
+            expect(spyLangAlert.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('openTuto method', () => {
+        it('should call navigateForward from NavController', () => {
+            const spyNavigate = spyOn(component.navCtrl, 'navigateForward').and.callFake(() => { });
+            component.openTuto();
+            expect(spyNavigate.calls.count()).toEqual(1);
+        });
     });
 });
