@@ -222,7 +222,7 @@ describe('Sports Component', () => {
         });
     });
 
-    fdescribe('presentFilter method', () => {
+    describe('presentFilter method', () => {
         it('should call create from ModalController', () => {
             const spyGetFilters = spyOn(component, 'getFiltersData').and.callThrough().and.returnValue({
                 'filters': undefined,
@@ -231,6 +231,14 @@ describe('Sports Component', () => {
             component.presentFilter();
             expect(component.modalCtrl.create.calls.count()).toEqual(1);
             expect(spyGetFilters.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('tabChanged method', () => {
+        it('should call updateDisplayed if segment defined', () => {
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            component.tabChanged({});
+            expect(spyUpdate.calls.count()).toEqual(1);
         });
     });
 });
