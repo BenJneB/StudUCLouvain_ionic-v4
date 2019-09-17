@@ -165,6 +165,14 @@ describe('Sports Component', () => {
         });
     });
 
+    describe('changeArray method', () => {
+        it('should call getItemDisplay from UtilsService', () => {
+            const spyGetItem = spyOn(component.utilsServices, 'getItemDisplay').and.callThrough();
+            component.changeArray([{ 'jour': 'DAY' }]);
+            expect(spyGetItem.calls.count()).toEqual(1);
+        });
+    });
+
     describe('filterDisplayedSports method', () => {
         it('should call filterItems from UtilsService', () => {
             const spyFilter = spyOn(component.utilsServices, 'filterItems').and.callThrough();
@@ -216,8 +224,21 @@ describe('Sports Component', () => {
 
     describe('presentFilter method', () => {
         it('should call create from ModalController', () => {
+            const spyGetFilters = spyOn(component, 'getFiltersData').and.callThrough().and.returnValue({
+                'filters': undefined,
+                'exclude': []
+            });
             component.presentFilter();
             expect(component.modalCtrl.create.calls.count()).toEqual(1);
+            expect(spyGetFilters.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('tabChanged method', () => {
+        it('should call updateDisplayed if segment defined', () => {
+            const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
+            component.tabChanged({});
+            expect(spyUpdate.calls.count()).toEqual(1);
         });
     });
 });
