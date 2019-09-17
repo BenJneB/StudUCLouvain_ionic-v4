@@ -44,7 +44,7 @@ import {
 */
 import { SportsPage } from './sports';
 
-describe('Sports Component', () => {
+fdescribe('Sports Component', () => {
     let fixture;
     let component;
 
@@ -162,6 +162,14 @@ describe('Sports Component', () => {
             const spyToggle = spyOn(component.utilsServices, 'toggleGroup').and.callThrough();
             component.toggleGroup('');
             expect(spyToggle.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('changeArray method', () => {
+        it('should call getItemDisplay from UtilsService', () => {
+            const spyGetItem = spyOn(component.utilsServices, 'getItemDisplay').and.callThrough();
+            component.changeArray([{ 'jour': 'DAY' }]);
+            expect(spyGetItem.calls.count()).toEqual(1);
         });
     });
 
