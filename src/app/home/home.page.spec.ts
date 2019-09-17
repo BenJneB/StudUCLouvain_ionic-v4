@@ -123,19 +123,13 @@ describe('Home Component', () => {
 
     describe('openURL method', () => {
         it('should call create of InAppBrowser', () => {
-            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
-            component.openURL('url');
-            expect(spyCreate.calls.count()).toEqual(1);
-            expect(spyCreate.calls.first().args[0]).toEqual('url');
+            _testCreateInAppBrowser(component);
         });
     });
 
     describe('openUCL method', () => {
         it('should call create of InAppBrowser', () => {
-            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
-            component.openUCL('url');
-            expect(spyCreate.calls.count()).toEqual(1);
-            expect(spyCreate.calls.first().args[0]).toEqual('url');
+            _testCreateInAppBrowser(component);
         });
     });
 
@@ -165,3 +159,10 @@ describe('Home Component', () => {
         });
     });
 });
+function _testCreateInAppBrowser(component: any) {
+    const spyCreate = spyOn(component.iab, 'create').and.callFake(url => { });
+    component.openUCL('url');
+    expect(spyCreate.calls.count()).toEqual(1);
+    expect(spyCreate.calls.first().args[0]).toEqual('url');
+}
+

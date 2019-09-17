@@ -65,7 +65,7 @@ describe('Credit Component', () => {
 
     describe('openURL method', () => {
         it('should call create of InAppBrowser', () => {
-            const spyCreate = spyOn(component.iab, 'create').and.callThrough();
+            const spyCreate = spyOn(component.iab, 'create').and.callFake(url => { });
             TestBed
                 .compileComponents()
                 .then(() => {

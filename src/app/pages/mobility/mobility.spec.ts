@@ -3,10 +3,8 @@ import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -15,7 +13,7 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { IonicModule, ModalController } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -53,7 +51,6 @@ describe('Mobility Component', () => {
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientTestingModule,
                 IonicStorageModule.forRoot(),
             ],
             providers: [
@@ -61,6 +58,7 @@ describe('Mobility Component', () => {
                 { provide: AppAvailability, useClass: AppAvailabilityMock },
                 { provide: Market, useClass: MarketMock },
                 { provide: Device, useClass: DeviceMock },
+                // Comment two next elements and error.. wtf
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {

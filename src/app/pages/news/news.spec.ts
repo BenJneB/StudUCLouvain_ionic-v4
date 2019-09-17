@@ -125,20 +125,12 @@ describe('News Component', () => {
     describe('getAvailableSites method', () => {
         it('should set sites and rss\'s', () => {
             component.fac = 'TEST';
-            expect(component.site).toEqual('');
-            expect(component.rss).toEqual('');
-            component.getAvailableSites({ facs: [{ acro: 'TEST', site: 'site', rss: 'rss' }] });
-            expect(component.site).toEqual('site');
-            expect(component.rss).toEqual('rss');
+            _testGetAvailableSites(component, 'site', 'rss');
         });
 
         it('should left site/rss empty if not corresponding acronym', () => {
             component.fac = 'FAIL';
-            expect(component.site).toEqual('');
-            expect(component.rss).toEqual('');
-            component.getAvailableSites({ facs: [{ acro: 'TEST', site: 'site', rss: 'rss' }] });
-            expect(component.site).toEqual('');
-            expect(component.rss).toEqual('');
+            _testGetAvailableSites(component, '', '');
         });
     });
 
@@ -166,19 +158,13 @@ describe('News Component', () => {
 
     describe('getKey method', () => {
         it('should return cache-P1 if first segment', () => {
-            component.subsegment = 'P1';
-            const result = component.getKey();
-            expect(result).toEqual('cache-P1');
+            _checkGetKeySegment(component, 'P1');
         });
         it('should return cache-P2 if second segment', () => {
-            component.subsegment = 'P2';
-            const result = component.getKey();
-            expect(result).toEqual('cache-P2');
+            _checkGetKeySegment(component, 'P2');
         });
         it('should return cache-P3 if third segment', () => {
-            component.subsegment = 'P3';
-            const result = component.getKey();
-            expect(result).toEqual('cache-P3');
+            _checkGetKeySegment(component, 'P3');
         });
     });
 
@@ -213,3 +199,17 @@ describe('News Component', () => {
         });
     });
 });
+function _checkGetKeySegment(component: any, subsegment: string) {
+    component.subsegment = subsegment;
+    const result = component.getKey();
+    expect(result).toEqual('cache-' + subsegment);
+}
+
+function _testGetAvailableSites(component: any, site: string, rss: string) {
+    expect(component.site).toEqual('');
+    expect(component.rss).toEqual('');
+    component.getAvailableSites({ facs: [{ acro: 'TEST', site: 'site', rss: 'rss' }] });
+    expect(component.site).toEqual(site);
+    expect(component.rss).toEqual(rss);
+}
+
