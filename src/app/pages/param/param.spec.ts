@@ -88,7 +88,7 @@ describe('Param Component', () => {
         testInstanceCreation(component, ParamPage);
     });
 
-    describe('campus_choice method', async () => {
+    describe('campus_choice method', () => {
         it('should call campusChoiceAlert from AlertService', () => {
             const spyCampusAlert = spyOn(component.alertService, 'campusChoiceAlert').and.callThrough();
             component.campus_choice();
@@ -96,7 +96,7 @@ describe('Param Component', () => {
         });
     });
 
-    describe('language_choice method', async () => {
+    describe('language_choice method', () => {
         it('should call languageAlert from AlertService', () => {
             const spyLangAlert = spyOn(component.alertService, 'languageAlert').and.callThrough();
             component.language_choice();
