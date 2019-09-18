@@ -16,7 +16,8 @@ omit =
     src/assets/*
     resources/*
     **/*.spec.ts
-    src/polyfills.ts
+    /src/polyfills.ts
+    /src/test.ts
 
 [report]
 fail_under = 100

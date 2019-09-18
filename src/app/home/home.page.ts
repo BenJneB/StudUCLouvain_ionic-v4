@@ -129,7 +129,6 @@ export class HomePage {
     // this.userS.removeCampus();
   }
 
-  /*Set the title*/
   ionViewDidEnter() {
     setTimeout(() => {
       this.splashscreen.hide();
