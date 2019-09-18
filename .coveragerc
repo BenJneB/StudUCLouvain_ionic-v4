@@ -15,13 +15,13 @@ omit =
     www/
     src/assets/*
     resources/*
-    **/*.spec.ts
-    src/polyfills.ts
-    src/test.ts
+    "**/*.spec.ts"
+    "src/polyfills.ts"
+    "src/test.ts"
     e2e/*
-    **/*.js
-    **/*.json
-    **/*.po.ts
+    "**/*.js"
+    "**/*.json"
+    "**/*.po.ts"
 
 [report]
 fail_under = 100
