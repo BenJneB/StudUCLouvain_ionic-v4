@@ -28,5 +28,6 @@ exclude_patterns:
 - "**/*.js"
 - "**/*.json"
 - "**/*.po.ts"
-- src/polyfills.ts
-- src/test.ts
+- "src/polyfills.ts"
+- "src/test.ts"
+- test-config/
