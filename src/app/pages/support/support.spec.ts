@@ -2,6 +2,7 @@ import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { HttpClient } from 'selenium-webdriver/http';
 import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { EmployeeItem } from 'src/app/entity/employeeItem';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
 import { CommonModule } from '@angular/common';
@@ -97,6 +98,8 @@ describe('Support Component', () => {
                 {}
             );
             const spySearch = spyOn(component, 'searchEmployees').and.callThrough();
+            component.firstname = 'first';
+            component.lastname = 'last';
             await component.update();
             expect(spyLoad.calls.count()).toEqual(1);
             expect(spySearch.calls.count()).toEqual(1);
@@ -124,6 +127,21 @@ describe('Support Component', () => {
             const spyCreate = spyOn(component.iab, 'create').and.callThrough();
             component.openURL('');
             expect(spyCreate.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('searchEmployees method', () => {
+        it('should call searchEmployees from RepertoireService and dismiss loader', async () => {
+            const spySearch = spyFunctionWithCallBackThen( // TODO: not function with then. async method, have to spy on await call
+                component.repService,
+                'searchEmployees',
+                {}
+            );
+            const spyDismiss = spyOn(component.loader, 'dismiss').and.callThrough();
+            await component.searchEmployees([], []);
+            expect(spySearch.calls.count()).toEqual(1);
+            expect(component.searching).toBeFalsy();
+            expect(spyDismiss.calls.count()).toEqual(1);
         });
     });
 });
