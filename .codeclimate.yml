@@ -24,3 +24,9 @@ exclude_patterns:
 - "**/*.spec.ts"
 - "**/*.html"
 - "**/*.scss"
+- e2e/*
+- "**/*.js"
+- "**/*.json"
+- "**/*.po.ts"
+- src/polyfills.ts
+- src/test.ts
