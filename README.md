@@ -48,21 +48,21 @@ npm -v
 #### Unit Tests : Karma
 To run the unit tests
 ```bash
-$ ng test
-$ ng test:once # single run
-$ ng test:onceAndCoverage
+$ npm run test
+$ npm run test:once # single run
+$ npm run test:onceAndCoverage
 ```
        
 #### E2E Tests : Protractor
 To run the E2E tests
 ```bash
-$ ng e2e
+$ npm run e2e
 ```
 
        
 #### Both
 To run both (single run) and coverage
 ```bash
-$ ng ci
+$ npm run ci
 ```
 </div>
