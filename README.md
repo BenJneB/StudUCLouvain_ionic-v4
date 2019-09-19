@@ -38,3 +38,24 @@ node -v
 npm -v
  - should be >= 6.0.0
 ```
+
+## Tests
+
+### Unit Tests : Karma
+To run the unit tests
+```bash
+$ ng test
+$ ng test:once #for no live-reload
+$ ng test:onceAndCoverage
+```
+### E2E Tests : Protractor
+To run the E2E tests
+```bash
+$ ng e2e
+```
+
+### Both
+To run both (single run) and coverage
+```bash
+$ ng ci
+```
