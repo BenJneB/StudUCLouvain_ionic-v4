@@ -29,11 +29,11 @@
 
 &nbsp;
        
-# README (for sections not in this README) :
-# https://github.com/UCL-INGI/StudUCLouvain
+## README (for sections not in this README) :
+### https://github.com/UCL-INGI/StudUCLouvain
 
 
-## Prerequisites
+### Prerequisites
 Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
 node -v
@@ -43,9 +43,9 @@ npm -v
 ```
 
        
-## Tests
+### Tests
 
-### Unit Tests : Karma
+#### Unit Tests : Karma
 To run the unit tests
 ```bash
 $ ng test
@@ -53,14 +53,14 @@ $ ng test:once # single run
 $ ng test:onceAndCoverage
 ```
        
-### E2E Tests : Protractor
+#### E2E Tests : Protractor
 To run the E2E tests
 ```bash
 $ ng e2e
 ```
 
        
-### Both
+#### Both
 To run both (single run) and coverage
 ```bash
 $ ng ci
