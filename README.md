@@ -34,7 +34,6 @@
 
 
 ## Prerequisites
-</div>
 - Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
 node -v
@@ -43,28 +42,23 @@ npm -v
  - should be >= 6.0.0
 ```
 
-<div align="center">
        
 ## Tests
 
 ### Unit Tests : Karma
-</div>
 To run the unit tests
 ```bash
 $ ng test
 $ ng test:once # single run
 $ ng test:onceAndCoverage
 ```
-<div align="center">
        
 ### E2E Tests : Protractor
-</div>
 To run the E2E tests
 ```bash
 $ ng e2e
 ```
 
-<div align="center">
        
 ### Both
 </div>
