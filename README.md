@@ -4,20 +4,12 @@
 
 ## WIP - Work In Progress
 ## Feel free to collaborate.
-</div>
 
 ### Anyone wishing to participate and/or propose new fixtures/ideas to improve the app should not hesitate to contact StudUCLouvain@uclouvain.be or directly make a pull-request on the repo concerned.
 
-### TO FIX
-#### ERROR Error: "Uncaught (in promise): overlay does not exist" : FIXED ?
-       1. https://github.com/ionic-team/v4-migration-tslint
-       2. npx tslint -c ionic-migration.json -p tsconfig.json --fix
-       3. Add .then(...) to modal etc.
-
-#### TEST FAIL RANDOM : MobilityComponent should be created
-
 
 ### TO DO :
+</div>
 
 - Write unit tests (WIP)
 
@@ -31,18 +23,19 @@
 
   * Make user stories (1/?)
 
+<div align="center">
+       
 ### TIPS
 #### - To launch only one test page : replace the 'describe' with the wanted scope by fdescribe in <page_name>.spec.ts
 
 &nbsp;
-<div align="center">
        
 # README (for sections not in this README) :
 # https://github.com/UCL-INGI/StudUCLouvain
 
-</div>
 
 ## Prerequisites
+</div>
 - Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
 node -v
@@ -51,22 +44,31 @@ npm -v
  - should be >= 6.0.0
 ```
 
+<div align="center">
+       
 ## Tests
 
 ### Unit Tests : Karma
+</div>
 To run the unit tests
 ```bash
 $ ng test
 $ ng test:once # single run
 $ ng test:onceAndCoverage
 ```
+<div align="center">
+       
 ### E2E Tests : Protractor
+</div>
 To run the E2E tests
 ```bash
 $ ng e2e
 ```
 
+<div align="center">
+       
 ### Both
+</div>
 To run both (single run) and coverage
 ```bash
 $ ng ci
