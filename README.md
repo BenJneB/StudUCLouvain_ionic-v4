@@ -45,7 +45,7 @@ npm -v
 To run the unit tests
 ```bash
 $ ng test
-$ ng test:once #for no live-reload
+$ ng test:once # single run
 $ ng test:onceAndCoverage
 ```
 ### E2E Tests : Protractor
