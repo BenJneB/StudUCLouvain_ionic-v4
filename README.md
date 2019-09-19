@@ -27,6 +27,14 @@
 
   * Make user stories (1/?)
 
-
 ### TIPS
 #### - To launch only one test page : replace the 'describe' with the wanted scope by fdescribe in <page_name>.spec.ts
+
+## Prerequisites
+- Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
+```bash
+node -v
+ - should be >= 10.0.0
+npm -v
+ - should be >= 6.0.0
+```
