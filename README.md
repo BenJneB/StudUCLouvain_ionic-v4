@@ -1,7 +1,11 @@
+<div align="center">
+       
 # StudUCLouvain : Migration to ionic-v4
 
 ## WIP - Work In Progress
 ## Feel free to collaborate.
+</div>
+
 ### Anyone wishing to participate and/or propose new fixtures/ideas to improve the app should not hesitate to contact StudUCLouvain@uclouvain.be or directly make a pull-request on the repo concerned.
 
 ### TO FIX
