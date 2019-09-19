@@ -1,5 +1,5 @@
 <div align="center">
-       
+
 # StudUCLouvain : Migration to ionic-v4
 
 ## WIP - Work In Progress
@@ -33,6 +33,7 @@
 
 ### TIPS
 #### - To launch only one test page : replace the 'describe' with the wanted scope by fdescribe in <page_name>.spec.ts
+
 
 <div align="center">
        
