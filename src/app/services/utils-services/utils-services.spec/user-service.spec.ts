@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { UserService } from '../user-service';
 
-fdescribe('UserService', () => {
+describe('UserService', () => {
     let userService: UserService;
 
     beforeEach(async(() => {

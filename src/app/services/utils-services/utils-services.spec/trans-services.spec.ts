@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { TransService } from '../trans-services';
 
-fdescribe('TransService', () => {
+describe('TransService', () => {
     let transService: TransService;
 
     beforeEach(async(() => {

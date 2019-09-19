@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { LoaderService } from '../loader-service';
 
-fdescribe('LoaderService', () => {
+describe('LoaderService', () => {
     let loaderService: LoaderService;
 
     beforeEach(async(() => {

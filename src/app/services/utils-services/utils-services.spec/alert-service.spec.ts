@@ -19,7 +19,7 @@ import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-fdescribe('AlertService', () => {
+describe('AlertService', () => {
     let alertService: AlertService;
 
     beforeEach(async(() => {

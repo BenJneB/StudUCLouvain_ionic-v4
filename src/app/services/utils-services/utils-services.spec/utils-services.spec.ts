@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { UtilsService } from '../utils-services';
 
-fdescribe('UtilsService', () => {
+describe('UtilsService', () => {
     let utilsService: UtilsService;
 
     beforeEach(async(() => {

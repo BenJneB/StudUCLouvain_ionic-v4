@@ -21,7 +21,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { FacService } from '../fac-service';
 
-fdescribe('FacService', () => {
+describe('FacService', () => {
     let facService: FacService;
 
     beforeEach(async(() => {

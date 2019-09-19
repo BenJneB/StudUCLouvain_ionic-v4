@@ -20,7 +20,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ConnectivityService } from '../connectivity-service';
 
-fdescribe('ConnectivityService', () => {
+describe('ConnectivityService', () => {
     let connService: ConnectivityService;
 
     beforeEach(async(() => {
