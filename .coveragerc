@@ -16,12 +16,15 @@ omit =
     src/assets/*
     resources/*
     "**/*.spec.ts"
-    "src/polyfills.ts"
-    "src/test.ts"
+    "/src/polyfills.ts"
+    "/src/test.ts"
     e2e/*
     "**/*.js"
     "**/*.json"
     "**/*.po.ts"
+    README.md
+    LICENSE
+    "/src/app/variables.ts"
 
 [report]
 fail_under = 100
