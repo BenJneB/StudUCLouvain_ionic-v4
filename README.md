@@ -1,5 +1,5 @@
 # StudUCLouvain : Migration to ionic-v4
-## README :  https://github.com/UCL-INGI/StudUCLouvain
+
 ## WIP - Work In Progress
 ## Feel free to collaborate.
 ### Anyone wishing to participate and/or propose new fixtures/ideas to improve the app should not hesitate to contact StudUCLouvain@uclouvain.be or directly make a pull-request on the repo concerned.
@@ -30,6 +30,7 @@
 ### TIPS
 #### - To launch only one test page : replace the 'describe' with the wanted scope by fdescribe in <page_name>.spec.ts
 
+# README (for sections not in this README) :  https://github.com/UCL-INGI/StudUCLouvain
 ## Prerequisites
 - Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
