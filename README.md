@@ -34,7 +34,7 @@
 
 
 ## Prerequisites
-- Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
+Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
 node -v
  - should be >= 10.0.0
@@ -61,8 +61,8 @@ $ ng e2e
 
        
 ### Both
-</div>
 To run both (single run) and coverage
 ```bash
 $ ng ci
 ```
+</div>
