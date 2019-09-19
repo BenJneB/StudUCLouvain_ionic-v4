@@ -19,10 +19,9 @@
 
   1. Create \*.spec.ts for all pages
      - subpages
-     - services
   2. Cover important parts with tests
-     - main pages WIP
      - subpages
+     - services
 
 - Functional tests ? (WIP)
 
