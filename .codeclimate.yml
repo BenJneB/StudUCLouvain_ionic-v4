@@ -31,3 +31,6 @@ exclude_patterns:
 - "src/polyfills.ts"
 - "src/test.ts"
 - test-config/
+- README.md
+- LICENSE
+- "src/app/variables.ts"

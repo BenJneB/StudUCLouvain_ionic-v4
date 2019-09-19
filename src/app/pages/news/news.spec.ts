@@ -146,11 +146,18 @@ describe('News Component', () => {
     });
 
     describe('handleOnlineRefresh method', () => {
-        it('should call removeFac from UserService', () => {
+        it('should call removeItem from Cache and load Events', () => {
             const spyLoad = spyOn(component, 'loadNews').and.callThrough();
             spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
                 new Promise((resolve, reject) => { })
             );
+            component.handleOnlineRefresh(true, { target: { complete: () => { return; } } });
+            expect(spyLoad.calls.count()).toEqual(1);
+        });
+
+        it('should load Events if segment is not univ', () => {
+            component.segment = 'favorites';
+            const spyLoad = spyOn(component, 'loadNews').and.callThrough();
             component.handleOnlineRefresh(true, { target: { complete: () => { return; } } });
             expect(spyLoad.calls.count()).toEqual(1);
         });
@@ -176,6 +183,7 @@ describe('News Component', () => {
         });
 
         it('should call manageMainTabFac if Fac Segment', () => {
+            this.facsegment = 'news';
             const spyManage = spyOn(component, 'manageMainTabFac').and.callThrough();
             component.tabChanged({ 'detail': { 'value': 'fac' } });
             expect(spyManage.calls.count()).toEqual(1);
