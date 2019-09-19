@@ -30,7 +30,13 @@
 ### TIPS
 #### - To launch only one test page : replace the 'describe' with the wanted scope by fdescribe in <page_name>.spec.ts
 
-# README (for sections not in this README) :  https://github.com/UCL-INGI/StudUCLouvain
+<div align="center">
+       
+# README (for sections not in this README) :
+# https://github.com/UCL-INGI/StudUCLouvain
+
+</div>
+
 ## Prerequisites
 - Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
