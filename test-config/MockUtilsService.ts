@@ -6,13 +6,12 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { Calendar } from '@ionic-native/calendar/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { AlertController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import {
-    AppAvailabilityMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock
+    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock
 } from './MockIonicNative';
 
 export class MockUtilsService extends UtilsService {
@@ -27,7 +26,7 @@ export class MockUtilsService extends UtilsService {
         cache: CacheService,
         connService: MockConnectivityService,
         router: Router,
-        calendar: Calendar,
+        calendar: CalendarMock,
         alertService: AlertService
     ) {
         super(
@@ -47,6 +46,8 @@ export class MockUtilsService extends UtilsService {
     }
 
     launchExternalApp() { }
+    createEventInCalendar() { }
+    doRefresh() { }
 }
 
 export function newMockUtilsService() {
@@ -60,7 +61,7 @@ export function newMockUtilsService() {
     let cache: CacheService;
     let connService: MockConnectivityService;
     let router: Router;
-    let calendar: Calendar;
+    let calendar: CalendarMock;
     let alertService: AlertService;
     return new MockUtilsService(
         user,

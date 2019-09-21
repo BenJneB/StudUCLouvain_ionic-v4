@@ -2,17 +2,14 @@ import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { spyFunctionWithCallBackThen } from 'src/app/app.component.spec';
 import { EventItem } from 'src/app/entity/eventItem';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { newMockUtilsService } from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { Calendar } from '@ionic-native/calendar/ngx';
-import { Device } from '@ionic-native/device/ngx';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { IonicModule, IonItemSliding, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
@@ -21,10 +18,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import {
     MockCacheStorageService, StorageMock
 } from '../../../../test-config/MockCacheStorageService';
-import {
-    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    ModalControllerMock, NetworkMock
-} from '../../../../test-config/MockIonicNative';
+import { ModalControllerMock, NetworkMock } from '../../../../test-config/MockIonicNative';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -63,11 +57,12 @@ describe('Events Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
+                {
+                    provide: UtilsService, useFactory: () => {
+                        return newMockUtilsService();
+                    }
+                },
                 { provide: ModalController, useClass: ModalControllerMock },
-                { provide: Device, useClass: DeviceMock },
-                { provide: Market, useClass: MarketMock },
-                { provide: AppAvailability, useClass: AppAvailabilityMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
                 { provide: CacheService, useClass: StorageMock },
                 {
                     provide: CacheStorageService, useFactory: () => {
@@ -75,8 +70,7 @@ describe('Events Component', () => {
                     }
                 },
                 { provide: Network, useClass: NetworkMock },
-                Diagnostic,
-                { provide: Calendar, useClass: CalendarMock },
+                Diagnostic
             ]
         }).compileComponents();
     }));
@@ -163,9 +157,6 @@ describe('Events Component', () => {
     describe('doRefresh method', () => {
         it('should call doRefresh from UtilsService', () => {
             const spyRefresh = spyOn(component.utilsServices, 'doRefresh').and.callThrough();
-            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
-                new Promise((resolve, reject) => { })
-            );
             component.doRefresh({ target: { complete: () => { return; } } });
             expect(spyRefresh.calls.count()).toEqual(1);
         });

@@ -1,6 +1,5 @@
 import { Observable, Observer } from 'rxjs';
 
-import { NgZone } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -13,7 +12,6 @@ import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
-import { Platform } from '@ionic/angular';
 
 function getPromise(item?: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -144,73 +142,6 @@ export class NetworkMock extends Network {
 
     onConnect(): Observable<any> {
         return getObservable();
-    }
-}
-
-export class PlatformMock extends Platform {
-    public ready(): Promise<string> {
-        return getPromise('READY');
-    }
-
-    public registerBackButtonAction(fn: Function, priority?: number): Function {
-        return (() => true);
-    }
-
-    public hasFocus(ele: HTMLElement): boolean {
-        return true;
-    }
-
-    public is(): boolean {
-        return true;
-    }
-
-    public getElementComputedStyle(container: any): any {
-        return {
-            paddingLeft: '10',
-            paddingTop: '10',
-            paddingRight: '10',
-            paddingBottom: '10',
-        };
-    }
-
-    public onResize(callback: any) {
-        return callback;
-    }
-
-    public registerListener(ele: any, eventName: string, callback: any): Function {
-        return (() => true);
-    }
-
-    public raf(callback: any): number {
-        return 1;
-    }
-
-    public timeout(callback: any, timer: number): any {
-        return setTimeout(callback, timer);
-    }
-
-    public cancelTimeout(id: any) {
-        // do nothing
-    }
-
-    public getActiveElement(): any {
-        return document['activeElement'];
-    }
-}
-
-export function newPlatformMock() {
-    let ng: NgZone;
-    return new PlatformMock('', ng);
-}
-
-export class PlatformMock2 extends Platform {
-
-    public _platforms = ['core'];
-
-    public ready(): Promise<string> {
-        return new Promise((resolve) => {
-            resolve();
-        });
     }
 }
 
