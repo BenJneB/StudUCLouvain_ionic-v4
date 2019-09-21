@@ -1,5 +1,6 @@
 import { Observable, Observer } from 'rxjs';
 
+import { NgZone } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -12,6 +13,7 @@ import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
+import { Platform } from '@ionic/angular';
 
 function getPromise(item?: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -145,13 +147,9 @@ export class NetworkMock extends Network {
     }
 }
 
-export class PlatformMock {
+export class PlatformMock extends Platform {
     public ready(): Promise<string> {
         return getPromise('READY');
-    }
-
-    public getQueryParam() {
-        return true;
     }
 
     public registerBackButtonAction(fn: Function, priority?: number): Function {
@@ -160,10 +158,6 @@ export class PlatformMock {
 
     public hasFocus(ele: HTMLElement): boolean {
         return true;
-    }
-
-    public doc(): HTMLDocument {
-        return document;
     }
 
     public is(): boolean {
@@ -187,10 +181,6 @@ export class PlatformMock {
         return (() => true);
     }
 
-    public win(): Window {
-        return window;
-    }
-
     public raf(callback: any): number {
         return 1;
     }
@@ -205,6 +195,22 @@ export class PlatformMock {
 
     public getActiveElement(): any {
         return document['activeElement'];
+    }
+}
+
+export function newPlatformMock() {
+    let ng: NgZone;
+    return new PlatformMock('', ng);
+}
+
+export class PlatformMock2 extends Platform {
+
+    public _platforms = ['core'];
+
+    public ready(): Promise<string> {
+        return new Promise((resolve) => {
+            resolve();
+        });
     }
 }
 
@@ -304,7 +310,7 @@ export class ModalControllerMock {
     public create = jasmine.createSpy('create').and.returnValue(
         Promise.resolve({
             present: jasmine.createSpy('present').and.returnValue(Promise.resolve()),
-            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve('data'))
+            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve({ 'data': [0, 1] }))
         })
     );
     public dismiss = jasmine.createSpy('dismiss').and.returnValue(Promise.resolve());

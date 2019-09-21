@@ -1,9 +1,5 @@
-import { CacheService } from 'ionic-cache';
-import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
-import {
-    AppAvailabilityMock, DeviceMock, MarketMock, NetworkMock, SplashScreenMock
-} from 'test-config/MockIonicNative';
+import { SplashScreenMock } from 'test-config/MockIonicNative';
+import { newMockUtilsService } from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -29,21 +25,16 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 */
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { Calendar } from '@ionic-native/calendar/ngx';
-import { Device } from '@ionic-native/device/ngx';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Market } from '@ionic-native/market/ngx';
-import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { AlertController, IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { MockAlertController } from '../../../test-config/MockAlert';
-import { CalendarMock, InAppBrowserMock } from '../../../test-config/MockIonicNative';
+import { InAppBrowserMock } from '../../../test-config/MockIonicNative';
 import { testInstanceCreation } from '../app.component.spec';
+import { UtilsService } from '../services/utils-services/utils-services';
 import { HomePage } from './home.page';
 
 describe('Home Component', () => {
@@ -62,21 +53,14 @@ describe('Home Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                { provide: Market, useClass: MarketMock },
-                { provide: AppAvailability, useClass: AppAvailabilityMock },
+                {
+                    provide: UtilsService, useFactory: () => {
+                        return newMockUtilsService();
+                    }
+                },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 { provide: SplashScreen, useClass: SplashScreenMock },
                 { provide: AlertController, useClass: MockAlertController },
-                { provide: Device, useClass: DeviceMock },
-                CacheService,
-                {
-                    provide: CacheStorageService, useFactory: () => {
-                        return new MockCacheStorageService(null, null);
-                    }
-                },
-                { provide: Network, useClass: NetworkMock },
-                Diagnostic,
-                { provide: Calendar, useClass: CalendarMock },
             ]
         }).compileComponents();
     }));
@@ -94,6 +78,7 @@ describe('Home Component', () => {
     describe('changePage method', () => {
         it('should call launchExternalApp of UtilsService if external application', () => {
             const spyLaunch = spyOn(component.utilsServices, 'launchExternalApp').and.callThrough();
+            component.utilsServices.device = { 'platform': 'iOS' };
             component.changePage({ iosSchemaName: 'name' });
             expect(spyLaunch.calls.count()).toEqual(1);
         });
