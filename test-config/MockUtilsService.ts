@@ -12,7 +12,6 @@ import { AlertController, Platform } from '@ionic/angular';
 import { Storage, StorageConfig } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { StorageMock } from './MockCacheStorageService';
 import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock
 } from './MockIonicNative';

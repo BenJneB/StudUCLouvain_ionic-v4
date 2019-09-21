@@ -15,9 +15,7 @@ import { IonicModule, IonItemSliding, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import {
-    MockCacheStorageService, StorageMock
-} from '../../../../test-config/MockCacheStorageService';
+import { MockCacheStorageService } from '../../../../test-config/MockCacheStorageService';
 import { ModalControllerMock, NetworkMock } from '../../../../test-config/MockIonicNative';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
