@@ -1,6 +1,7 @@
 import { CacheService } from 'ionic-cache';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { FacService } from 'src/app/services/utils-services/fac-service';
 import { UserService } from 'src/app/services/utils-services/user-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
@@ -8,11 +9,14 @@ import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
 import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { AlertController, Platform } from '@ionic/angular';
+import { Storage, StorageConfig } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
+import { StorageMock } from './MockCacheStorageService';
 import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock
 } from './MockIonicNative';
+import { HttpClientMock } from './MockWso2Services';
 
 export class MockUtilsService extends UtilsService {
     constructor(
@@ -90,6 +94,12 @@ export class MockConnectivityService extends ConnectivityService {
     ) {
         super(platform, network, translateService, alertCtrl, diagnostic);
     }
+
+    presentConnectionAlert() {
+        return new Promise<void>((resolve, reject) => {
+
+        });
+    }
 }
 
 export function newMockConnectivityService() {
@@ -99,4 +109,27 @@ export function newMockConnectivityService() {
     let alertCtrl: AlertController;
     let diagnostic: Diagnostic;
     return new MockConnectivityService(platform, network, translateService, alertCtrl, diagnostic);
+}
+
+export class MockFacService extends FacService {
+    constructor(http: HttpClientMock) {
+        super(http);
+    }
+
+    loadResources() {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
+}
+
+export function newMockFacService() {
+    let http: HttpClientMock;
+    return new MockFacService(http);
+}
+
+export class MockUserService extends UserService {
+    constructor(storage: Storage) {
+        super(storage);
+    }
 }

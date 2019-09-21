@@ -63,7 +63,7 @@ describe('Events Component', () => {
                     }
                 },
                 { provide: ModalController, useClass: ModalControllerMock },
-                { provide: CacheService, useClass: StorageMock },
+                CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
@@ -216,14 +216,18 @@ describe('Events Component', () => {
     describe('loadEvents method', () => {
         it('should call getEvents from EventService and updateDisplayed', async () => {
             const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', { items: [] });
-            const spySave = spyOn(component.cache, 'saveItem').and.callThrough();
+            const spySaveItem = spyOn(component.cache, 'saveItem').and.callFake(() => {
+                return new Promise((resolve, reject) => {
+                    resolve();
+                });
+            });
             const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
             await component.loadEvents('key');
             expect(spyGetEvents.calls.count()).toEqual(1);
             expect(spyUpdate.calls.count()).toEqual(1);
             expect(component.searching).toBeFalsy();
-            expect(spySave.calls.count()).toEqual(1);
-            expect(spySave.calls.first().args[0]).toEqual('key');
+            expect(spySaveItem.calls.count()).toEqual(1);
+            expect(spySaveItem.calls.first().args[0]).toEqual('key');
         });
     });
 

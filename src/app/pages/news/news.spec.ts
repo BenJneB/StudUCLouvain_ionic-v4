@@ -1,7 +1,12 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { testInstanceCreation } from 'src/app/app.component.spec';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
+import {
+    newMockConnectivityService, newMockFacService, newMockUtilsService
+} from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -18,10 +23,12 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
+import { StorageMock } from '../../../../test-config/MockCacheStorageService';
 import {
     AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
     ModalControllerMock, NetworkMock
 } from '../../../../test-config/MockIonicNative';
+import { FacService } from '../../services/utils-services/fac-service';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -57,20 +64,29 @@ describe('News Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
+                {
+                    provide: UtilsService, useFactory: () => {
+                        return newMockUtilsService();
+                    }
+                },
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: AppAvailability, useClass: AppAvailabilityMock },
-                { provide: Market, useClass: MarketMock },
-                { provide: Device, useClass: DeviceMock },
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                { provide: Network, useClass: NetworkMock },
-                Diagnostic,
-                { provide: Calendar, useClass: CalendarMock },
+                {
+                    provide: ConnectivityService, useFactory: () => {
+                        return newMockConnectivityService();
+                    }
+                },
+                {
+                    provide: FacService, useFactory: () => {
+                        return newMockFacService();
+                    }
+                },
             ]
         }).compileComponents();
     }));
@@ -137,9 +153,11 @@ describe('News Component', () => {
     describe('doRefresh method', () => {
         it('should call isOnline from ConnectivityService', () => {
             const spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
-            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
-                new Promise((resolve, reject) => { })
-            );
+            spyOn(component.cache, 'removeItem').and.callFake(() => {
+                return new Promise((resolve, reject) => {
+                    resolve();
+                });
+            });
             component.doRefresh({ target: { complete: () => { return; } } });
             expect(spyOnline.calls.count()).toBeGreaterThan(0);
         });
@@ -148,11 +166,14 @@ describe('News Component', () => {
     describe('handleOnlineRefresh method', () => {
         it('should call removeItem from Cache and load News', () => {
             const spyLoad = spyOn(component, 'loadNews').and.callThrough();
-            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
-                new Promise((resolve, reject) => { })
-            );
+            const spyRemove = spyOn(component.cache, 'removeItem').and.callFake(() => {
+                return new Promise((resolve, reject) => {
+                    resolve();
+                });
+            });
             component.handleOnlineRefresh(true, { target: { complete: () => { return; } } });
             expect(spyLoad.calls.count()).toEqual(1);
+            expect(spyRemove.calls.count()).toEqual(1);
         });
 
         it('should load News if segment is not univ', () => {

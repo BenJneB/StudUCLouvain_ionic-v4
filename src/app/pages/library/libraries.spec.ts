@@ -1,7 +1,10 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { MockCacheStorageService, StorageMock } from 'test-config/MockCacheStorageService';
+import { newMockConnectivityService, newMockUtilsService } from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -57,20 +60,24 @@ describe('Libraries Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
+                {
+                    provide: UtilsService, useFactory: () => {
+                        return newMockUtilsService();
+                    }
+                },
+                {
+                    provide: ConnectivityService, useFactory: () => {
+                        return newMockConnectivityService();
+                    }
+                },
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: AppAvailability, useClass: AppAvailabilityMock },
-                { provide: Market, useClass: MarketMock },
-                { provide: Device, useClass: DeviceMock },
-                { provide: CacheService, useClass: StorageMock },
+                CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                { provide: Network, useClass: NetworkMock },
-                Diagnostic,
-                { provide: Calendar, useClass: CalendarMock },
             ]
         }).compileComponents();
     }));
@@ -99,7 +106,11 @@ describe('Libraries Component', () => {
         let spySaveItem;
         let spyLoad;
         beforeEach(() => {
-            spySaveItem = spyOn(component.cache, 'saveItem').and.callThrough();
+            spySaveItem = spyOn(component.cache, 'saveItem').and.callFake(() => {
+                return new Promise((resolve, reject) => {
+                    resolve();
+                });
+            });
         });
 
         it('should call isOnline from ConnectivityService, if online, should loadLibraries', () => {
@@ -135,6 +146,11 @@ describe('Libraries Component', () => {
     describe('doRefresh method', () => {
         it('should call doRefresh from UtilsService', () => {
             const spyRefresh = spyOn(component.utilsServices, 'doRefresh').and.callThrough();
+            spyOn(component.cache, 'removeItem').and.callFake(() => {
+                return new Promise((resolve, reject) => {
+                    resolve();
+                });
+            });
             component.doRefresh({ target: { complete: () => { return; } } });
             expect(spyRefresh.calls.count()).toEqual(1);
         });
