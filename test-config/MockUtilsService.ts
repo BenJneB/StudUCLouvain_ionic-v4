@@ -132,3 +132,9 @@ export class MockUserService extends UserService {
         super(storage);
     }
 }
+
+export function newMockUserService() {
+    let config: StorageConfig;
+    const storage = new Storage(config);
+    return new MockUserService(storage);
+}

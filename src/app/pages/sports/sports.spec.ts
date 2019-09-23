@@ -1,6 +1,8 @@
 import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { SportsService } from 'src/app/services/rss-services/sports-service';
 import { UserService } from 'src/app/services/utils-services/user-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { newMockSportsService } from 'test-config/MockRssService';
 import { newMockConnectivityService, newMockUtilsService } from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -36,7 +38,6 @@ import { SportsPage } from './sports';
 describe('Sports Component', () => {
     let fixture;
     let component;
-    const platform = {};
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [SportsPage],
@@ -58,6 +59,11 @@ describe('Sports Component', () => {
                 {
                     provide: ConnectivityService, useFactory: () => {
                         return newMockConnectivityService();
+                    }
+                },
+                {
+                    provide: SportsService, useFactory: () => {
+                        return newMockSportsService();
                     }
                 },
                 UserService,

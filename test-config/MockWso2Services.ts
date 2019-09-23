@@ -39,5 +39,3 @@ export function newMockRepertoireService() {
     let conn: MockConnectivityService;
     return new MockRepertoireService(http, wso2, conn);
 }
-
-export class MockUserService extends UserService { }

@@ -109,7 +109,6 @@ export class SportsPage {
 
   public loadSports(segment: string) {
     this.searching = true;
-    // this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
     if (this.connService.isOnline()) {
       this.sportsService.getSports(segment).then(
