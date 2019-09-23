@@ -24,9 +24,7 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Calendar } from '@ionic-native/calendar/ngx';
-import {
-    AlertController, IonItemSliding, ModalController, NavController, ToastController
-} from '@ionic/angular';
+import { AlertController, IonItemSliding, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Activity } from '../../../entity/activity';
@@ -57,10 +55,8 @@ export class CoursePage {
 
 
   constructor(
-    public navCtrl: NavController,
     public courseService: CourseService,
     private calendar: Calendar,
-    public toastCtrl: ToastController,
     public userS: UserService,
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,

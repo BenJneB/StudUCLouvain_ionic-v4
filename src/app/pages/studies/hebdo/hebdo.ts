@@ -22,12 +22,9 @@ import { AlertService } from 'src/app/services/utils-services/alert-service';
 */
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import {
-    IonItemSliding, ModalController, NavController, NavParams, ToastController
-} from '@ionic/angular';
+import { IonItemSliding } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { UserService } from '../../../services/utils-services/user-service';
 import { UtilsService } from '../../../services/utils-services/utils-services';
 
 @Component({
@@ -40,12 +37,7 @@ export class HebdoPage {
   shownGroup = null;
   schedule: Array<any>;
   constructor(
-    public navCtrl: NavController,
-    public toastCtrl: ToastController,
-    public userS: UserService,
-    public modalCtrl: ModalController,
     private translateService: TranslateService,
-    public navParams: NavParams,
     private utilsServices: UtilsService,
     private alertService: AlertService,
     private route: ActivatedRoute,

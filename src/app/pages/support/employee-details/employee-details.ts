@@ -21,7 +21,6 @@
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 
 import { EmployeeItem } from '../../../entity/employeeItem';
 import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
@@ -47,11 +46,11 @@ export class EmployeeDetailsPage {
   searching = false;
 
   constructor(
-    public navCtrl: NavController,
     private route: ActivatedRoute,
     private router: Router,
     public repService: RepertoireService,
-    public connService: ConnectivityService) {
+    public connService: ConnectivityService
+  ) {
     this.route.queryParams.subscribe(params => {
 
       if (this.router.getCurrentNavigation().extras.state) {

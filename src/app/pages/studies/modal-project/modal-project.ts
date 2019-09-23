@@ -19,7 +19,7 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { AdeProject } from '../../../entity/adeProject';
@@ -35,11 +35,11 @@ export class ModalProjectPage {
   public projects;
 
   constructor(
-    public navCtrl: NavController,
     public storage: Storage,
     public navParams: NavParams,
     public viewCtrl: ModalController,
-    public studiesService: StudiesService) {
+    public studiesService: StudiesService
+  ) {
     this.sessionId = this.navParams.get('sessionId');
   }
 
