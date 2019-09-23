@@ -51,10 +51,13 @@ export class MockUtilsService extends UtilsService {
     launchExternalApp() { }
     createEventInCalendar() { }
     doRefresh() { }
+    addFavorite() {
+        return new Promise<void>((resolve, reject) => { });
+    }
 }
 
 export function newMockUtilsService() {
-    let user: UserService;
+    const user = newMockUserService();
     let translateService: TranslateService;
     let alertCtrl: AlertController;
     let appAvailability: AppAvailabilityMock;
@@ -131,6 +134,8 @@ export class MockUserService extends UserService {
     constructor(storage: Storage) {
         super(storage);
     }
+
+    addFac() { }
 }
 
 export function newMockUserService() {
