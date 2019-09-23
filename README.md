@@ -60,7 +60,7 @@ $ npm run e2e
 
        
 #### Both
-To run both (single run) and coverage
+To run both : single run with coverage and e2e
 ```bash
 $ npm run ci
 ```
