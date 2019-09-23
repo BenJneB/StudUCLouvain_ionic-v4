@@ -22,7 +22,6 @@
 
   * Make user stories (1/?)
 
-<div align="center">
        
 ### TIPS
 #### - To launch only one test page : replace the 'describe' with the wanted scope by fdescribe in <page_name>.spec.ts
@@ -65,4 +64,3 @@ To run both (single run) and coverage
 ```bash
 $ npm run ci
 ```
-</div>
