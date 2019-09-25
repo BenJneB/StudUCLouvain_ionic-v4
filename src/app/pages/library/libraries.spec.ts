@@ -1,9 +1,12 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
+import { reject } from 'q';
 import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
-import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
+import {
+    MockCacheService, MockCacheStorageService, newMockCacheService
+} from 'test-config/MockCacheStorageService';
 import { newMockConnectivityService, newMockUtilsService } from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -37,7 +40,7 @@ import {
 */
 import { LibrariesPage } from './libraries';
 
-describe('Libraries Component', () => {
+fdescribe('Libraries Component', () => {
     let fixture;
     let component;
 
@@ -65,10 +68,9 @@ describe('Libraries Component', () => {
                 },
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
-                CacheService,
                 {
-                    provide: CacheStorageService, useFactory: () => {
-                        return new MockCacheStorageService(null, null);
+                    provide: CacheService, useFactory: () => {
+                        return newMockCacheService();
                     }
                 },
             ]
@@ -157,12 +159,16 @@ describe('Libraries Component', () => {
             expect(spyGetItem.calls.first().args[0]).toEqual('cache-libraries');
             expect(component.searching).toBeFalsy();
         });
-        it('should call loadLibraries on reject', async () => {
-            // TODO: COMMENT TO TEST
-            const spyReject = spyOn(component.cache, 'getItem').and.returnValue(Promise.reject('ERROR'));
+        it('should call loadLibraries on reject', () => {
+            const spyGetItem = spyOn(component.cache, 'getItem').and.callFake(() => {
+                return new Promise<any>((resolve, reject) => {
+                    reject();
+                });
+            });
             // const spyLoad = spyOn(component, 'loadLibraries').and.callThrough();
-            await component.cachedOrNot();
-            expect(spyReject.calls.count()).toEqual(1);
+            component.cachedOrNot();
+            expect(spyGetItem.calls.count()).toEqual(1);
+            expect(spyGetItem.calls.first().args[0]).toEqual('cache-libraries');
             // expect(spyLoad.calls.count()).toEqual(1);
         });
     });
