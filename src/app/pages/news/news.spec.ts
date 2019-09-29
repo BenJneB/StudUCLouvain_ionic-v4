@@ -1,9 +1,11 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { testInstanceCreation } from 'src/app/app.component.spec';
+import { NewsService } from 'src/app/services/rss-services/news-service';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
+import { newMockNewsService } from 'test-config/MockRssService';
 import {
     newMockConnectivityService, newMockFacService, newMockUtilsService
 } from 'test-config/MockUtilsService';
@@ -17,9 +19,7 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import {
-    InAppBrowserMock, ModalControllerMock, NetworkMock
-} from '../../../../test-config/MockIonicNative';
+import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/MockIonicNative';
 import { FacService } from '../../services/utils-services/fac-service';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -77,6 +77,11 @@ describe('News Component', () => {
                 {
                     provide: FacService, useFactory: () => {
                         return newMockFacService();
+                    }
+                },
+                {
+                    provide: NewsService, useFactory: () => {
+                        return newMockNewsService();
                     }
                 },
             ]
@@ -157,7 +162,7 @@ describe('News Component', () => {
         it('should call presentConnectionAlert from ConnectivityService if offline', () => {
             const spyPresent = spyOn(component.connService, 'isOnline').and.returnValue(false);
             component.doRefresh({ target: { complete: () => { return; } } });
-            expect(spyPresent.calls.count()).toBeGreaterThan(0);
+            expect(spyPresent.calls.count()).toEqual(1);
         });
     });
 
@@ -203,11 +208,10 @@ describe('News Component', () => {
 
         it('should call manageMainTabFac if Fac Segment', () => {
             component.facsegment = 'news';
-            const spyHasFac = spyOn(component.userS, 'hasFac').and.returnValue(true);
+            component.userS.fac = 'FAC';
             const spyManage = spyOn(component, 'manageMainTabFac').and.callThrough();
             component.tabChanged({ 'detail': { 'value': 'fac' } });
             expect(spyManage.calls.count()).toEqual(1);
-            expect(spyHasFac.calls.count()).toEqual(1);
         });
     });
 
