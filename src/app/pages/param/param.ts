@@ -1,5 +1,4 @@
 import { AlertService } from 'src/app/services/utils-services/alert-service';
-import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -23,7 +22,7 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 */
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
-import { ModalController, NavController } from '@ionic/angular';
+import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { TransService } from '../../services/utils-services/trans-services';
@@ -50,7 +49,6 @@ export class ParamPage {
 
   constructor(
     public navCtrl: NavController,
-    public modalCtrl: ModalController,
     public userS: UserService,
     private translateService: TranslateService,
     private alertService: AlertService,
