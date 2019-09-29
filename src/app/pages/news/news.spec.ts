@@ -153,6 +153,12 @@ describe('News Component', () => {
             component.doRefresh({ target: { complete: () => { return; } } });
             expect(spyOnline.calls.count()).toBeGreaterThan(0);
         });
+
+        it('should call presentConnectionAlert from ConnectivityService if offline', () => {
+            const spyPresent = spyOn(component.connService, 'isOnline').and.returnValue(false);
+            component.doRefresh({ target: { complete: () => { return; } } });
+            expect(spyPresent.calls.count()).toBeGreaterThan(0);
+        });
     });
 
     describe('handleOnlineRefresh method', () => {
@@ -197,9 +203,11 @@ describe('News Component', () => {
 
         it('should call manageMainTabFac if Fac Segment', () => {
             component.facsegment = 'news';
+            const spyHasFac = spyOn(component.userS, 'hasFac').and.returnValue(true);
             const spyManage = spyOn(component, 'manageMainTabFac').and.callThrough();
             component.tabChanged({ 'detail': { 'value': 'fac' } });
             expect(spyManage.calls.count()).toEqual(1);
+            expect(spyHasFac.calls.count()).toEqual(1);
         });
     });
 
