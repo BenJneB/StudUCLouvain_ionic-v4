@@ -1,30 +1,21 @@
-import { CacheService } from 'ionic-cache';
-import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { HttpClient } from 'selenium-webdriver/http';
 import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
-import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
+import { SportsService } from 'src/app/services/rss-services/sports-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { newMockSportsService } from 'test-config/MockRssService';
+import { newMockConnectivityService, newMockUtilsService } from 'test-config/MockUtilsService';
 
-import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
-import { Device } from '@ionic-native/device/ngx';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Market } from '@ionic-native/market/ngx';
-import { Network } from '@ionic-native/network/ngx';
 import { IonicModule, IonItemSliding, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import {
-    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    ModalControllerMock, NetworkMock
-} from '../../../../test-config/MockIonicNative';
+import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -47,7 +38,6 @@ import { SportsPage } from './sports';
 describe('Sports Component', () => {
     let fixture;
     let component;
-
     beforeEach(async(() => {
         TestBed.configureTestingModule({
             declarations: [SportsPage],
@@ -61,19 +51,23 @@ describe('Sports Component', () => {
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: AppAvailability, useClass: AppAvailabilityMock },
-                { provide: Market, useClass: MarketMock },
-                { provide: Device, useClass: DeviceMock },
-                CacheService,
                 {
-                    provide: CacheStorageService, useFactory: () => {
-                        return new MockCacheStorageService(null, null);
+                    provide: UtilsService, useFactory: () => {
+                        return newMockUtilsService();
                     }
                 },
-                { provide: Network, useClass: NetworkMock },
-                Diagnostic,
-                { provide: Calendar, useClass: CalendarMock },
+                {
+                    provide: ConnectivityService, useFactory: () => {
+                        return newMockConnectivityService();
+                    }
+                },
+                {
+                    provide: SportsService, useFactory: () => {
+                        return newMockSportsService();
+                    }
+                },
+                UserService,
+                Calendar
             ]
         }).compileComponents();
     }));
@@ -91,9 +85,6 @@ describe('Sports Component', () => {
     describe('doRefresh method', () => {
         it('should call loadSports', () => {
             const spyLoad = spyOn(component, 'loadSports').and.callThrough();
-            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
-                new Promise((resolve, reject) => { })
-            );
             component.doRefresh({ target: { complete: () => { return; } } });
             expect(spyLoad.calls.count()).toBeGreaterThan(0);
         });
@@ -149,9 +140,6 @@ describe('Sports Component', () => {
 
     describe('onSearchInput method', () => {
         it('should set searching to True', () => {
-            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
-                new Promise((resolve, reject) => { })
-            );
             component.onSearchInput();
             expect(component.searching).toBeTruthy();
         });

@@ -1,16 +1,19 @@
+import { CacheService } from 'ionic-cache';
+import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { testInstanceCreation } from 'src/app/app.component.spec';
-import { SportsService } from 'src/app/services/rss-services/sports-service';
-import { newMockSportsService } from 'test-config/MockRssService';
+import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
+import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { ModalController, NavParams } from '@ionic/angular';
+import { Diagnostic } from '@ionic-native/diagnostic/ngx';
+import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModalControllerMock, NavParamsMock } from '../../../../../test-config/MockIonicNative';
+import { ModalControllerMock } from '../../../../../test-config/MockIonicNative';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -28,15 +31,15 @@ import { ModalControllerMock, NavParamsMock } from '../../../../../test-config/M
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { SportsFilterPage } from './sports-filter';
+import { EventsDetailsPage } from './events-details';
 
-describe('SportsFilter Component', () => {
+describe('EventsDetails Component', () => {
     let fixture;
     let component;
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [SportsFilterPage],
+            declarations: [EventsDetailsPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
                 TranslateModule.forRoot(),
@@ -46,42 +49,29 @@ describe('SportsFilter Component', () => {
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
-                { provide: NavParams, useClass: NavParamsMock },
+                CacheService,
                 {
-                    provide: SportsService, useFactory: () => {
-                        return newMockSportsService();
+                    provide: CacheStorageService, useFactory: () => {
+                        return new MockCacheStorageService(null, null);
                     }
                 },
+                Diagnostic,
             ]
         }).compileComponents();
     }));
 
+    let spyGetCurrentNavigation;
+
     beforeEach(() => {
-        fixture = TestBed.createComponent(SportsFilterPage);
+        spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
+            .and.returnValue({ extras: { state: { items: {} } } });
+        fixture = TestBed.createComponent(EventsDetailsPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
-        component.categories = [{}, {}, {}];
+        // component.event = new EventItem('', '', '', '', '', '', false, false, '', new Date(), new Date(), '', '');
     });
 
     it('should be created', () => {
-        testInstanceCreation(component, SportsFilterPage);
-    });
-
-    describe('resetFilters method', () => {
-        it('should set all categories to True', () => {
-            component.resetFilters();
-            component.categories.forEach(category => {
-                expect(category).toBeTruthy();
-            });
-        });
-    });
-
-    describe('uncheckAll method', () => {
-        it('should set all categories to True', () => {
-            component.uncheckAll();
-            component.categories.forEach(categories => {
-                expect(categories.isChecked).toBeFalsy();
-            });
-        });
+        testInstanceCreation(component, EventsDetailsPage);
     });
 });

@@ -97,12 +97,6 @@ export class EventsPage {
     this.utilsServices.initSearchControl(this.searchControl, this.searching);
   }
 
-  // private initSearchControl() {
-  //   this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(() => {
-  //     this.searching = false;
-  //   });
-  // }
-
   public goToEventDetail(event: EventItem) {
     this.utilsServices.goToDetail(event, 'events/details');
   }

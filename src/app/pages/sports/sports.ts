@@ -1,5 +1,3 @@
-import { debounceTime } from 'rxjs/operators';
-
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -80,19 +78,16 @@ export class SportsPage {
     public connService: ConnectivityService,
     private loader: LoaderService,
     public navCtrl: NavController,
-    private utilsServices: UtilsService) {
+    private utilsServices: UtilsService
+  ) {
     this.searchControl = new FormControl();
-  }
-
-  /*update the date with in real time value, load sport and display them*/
-  async ngOnInit() {
     this.updateDateLimit();
     if (this.connService.isOnline()) {
-      await this.loader.present('Please wait..');
-      await this.loadSports(this.segment);
-      await this.loadSports('team');
+      this.loader.present('Please wait..');
+      this.loadSports(this.segment);
+      this.loadSports('team');
       this.utilsServices.initSearchControl(this.searchControl, this.searching);
-      await this.updateDisplayed();
+      this.updateDisplayed();
     } else {
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
@@ -114,7 +109,6 @@ export class SportsPage {
 
   public loadSports(segment: string) {
     this.searching = true;
-    // this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
     if (this.connService.isOnline()) {
       this.sportsService.getSports(segment).then(

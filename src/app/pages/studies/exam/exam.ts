@@ -19,9 +19,6 @@
     along with StudUCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams, ToastController } from '@ionic/angular';
-
-import { UserService } from '../../../services/utils-services/user-service';
 
 @Component({
   selector: 'page-exam',
@@ -31,12 +28,5 @@ import { UserService } from '../../../services/utils-services/user-service';
 
 export class ExamPage {
 
-
-  constructor(public navCtrl: NavController,
-    public toastCtrl: ToastController,
-    public userS: UserService,
-    public modalCtrl: ModalController,
-    public navParams: NavParams) {
-
-  }
+  constructor() { }
 }

@@ -21,7 +21,6 @@
 import { Component } from '@angular/core';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ModalController, NavController } from '@ionic/angular';
 
 @Component({
   selector: 'page-credit',
@@ -34,10 +33,10 @@ export class CreditPage {
   shownGroup = null;
   version;
 
-  constructor(public navCtrl: NavController,
-    public modalCtrl: ModalController,
+  constructor(
     private iab: InAppBrowser,
-    private appVersion: AppVersion) {
+    private appVersion: AppVersion
+  ) {
     this.title = 'Crédits';
     this.appVersion.getVersionNumber().then(version => {
       this.version = version;

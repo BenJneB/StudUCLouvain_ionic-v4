@@ -19,7 +19,6 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component } from '@angular/core';
-import { NavController } from '@ionic/angular';
 
 @Component({
   selector: 'page-restaurant',
@@ -28,7 +27,6 @@ import { NavController } from '@ionic/angular';
 })
 export class RestaurantPage {
   public title: any;
-  constructor(public navCtrl: NavController) {
+  constructor() {
   }
-
 }
