@@ -30,7 +30,7 @@ export class MockEventsService extends EventsService {
         super(user, rssService);
     }
 
-    getSports(s: string) {
+    getEvents(s: string) {
         return new Promise((resolve, reject) => { });
     }
 }

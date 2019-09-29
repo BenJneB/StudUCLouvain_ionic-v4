@@ -2,21 +2,21 @@ import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { spyFunctionWithCallBackThen } from 'src/app/app.component.spec';
 import { EventItem } from 'src/app/entity/eventItem';
+import { EventsService } from 'src/app/services/rss-services/events-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { newMockEventsService } from 'test-config/MockRssService';
 import { newMockUtilsService } from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-import { Network } from '@ionic-native/network/ngx';
 import { IonicModule, IonItemSliding, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { MockCacheStorageService } from '../../../../test-config/MockCacheStorageService';
-import { ModalControllerMock, NetworkMock } from '../../../../test-config/MockIonicNative';
+import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -67,8 +67,11 @@ describe('Events Component', () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                { provide: Network, useClass: NetworkMock },
-                Diagnostic
+                {
+                    provide: EventsService, useFactory: () => {
+                        return newMockEventsService();
+                    }
+                },
             ]
         }).compileComponents();
     }));
