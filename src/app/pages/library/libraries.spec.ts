@@ -4,10 +4,12 @@ import { reject } from 'q';
 import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
 import {
     MockCacheService, MockCacheStorageService, newMockCacheService
 } from 'test-config/MockCacheStorageService';
 import { newMockConnectivityService, newMockUtilsService } from 'test-config/MockUtilsService';
+import { newMockLibrariesService } from 'test-config/MockWso2Services';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -56,6 +58,11 @@ describe('Libraries Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
+                {
+                    provide: LibrariesService, useFactory: () => {
+                        return newMockLibrariesService();
+                    }
+                },
                 {
                     provide: UtilsService, useFactory: () => {
                         return newMockUtilsService();
