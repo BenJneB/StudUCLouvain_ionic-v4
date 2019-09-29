@@ -1,4 +1,5 @@
 import { EventsService } from 'src/app/services/rss-services/events-service';
+import { NewsService } from 'src/app/services/rss-services/news-service';
 import { RssService } from 'src/app/services/rss-services/rss-service';
 import { SportsService } from 'src/app/services/rss-services/sports-service';
 import { UserService } from 'src/app/services/utils-services/user-service';
@@ -39,6 +40,22 @@ export function newMockEventsService() {
     const user = newMockUserService();
     let rssService: MockRssService;
     return new MockEventsService(user, rssService);
+}
+
+export class MockNewsService extends NewsService {
+    constructor(http: HttpClientMock, rssService: RssService) {
+        super(http, rssService);
+    }
+
+    getNews(s: string) {
+        return new Promise((resolve, reject) => { });
+    }
+}
+
+export function newMockNewsService() {
+    let http: HttpClientMock;
+    let rssService: MockRssService;
+    return new MockNewsService(http, rssService);
 }
 
 export class MockRssService extends RssService {
