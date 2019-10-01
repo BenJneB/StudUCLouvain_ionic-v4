@@ -5,7 +5,6 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { newMockSportsService } from 'test-config/MockRssService';
 import { newMockConnectivityService, newMockUtilsService } from 'test-config/MockUtilsService';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -46,7 +45,6 @@ describe('Sports Component', () => {
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientTestingModule,
                 IonicStorageModule.forRoot(),
             ],
             providers: [

@@ -2,10 +2,8 @@ import { testInstanceCreation } from 'src/app/app.component.spec';
 import { SportsService } from 'src/app/services/rss-services/sports-service';
 import { newMockSportsService } from 'test-config/MockRssService';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { ModalController, NavParams } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
@@ -40,8 +38,6 @@ describe('SportsFilter Component', () => {
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
                 TranslateModule.forRoot(),
-                RouterTestingModule,
-                HttpClientTestingModule,
                 IonicStorageModule.forRoot(),
             ],
             providers: [
