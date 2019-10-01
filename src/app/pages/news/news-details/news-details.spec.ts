@@ -55,4 +55,14 @@ describe('NewsDetails Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, NewsDetailsPage);
     });
+
+    describe('openPage method', () => {
+        it('should call open from window', () => {
+            const spyOpen = spyOn(window, 'open').and.callFake(url => { });
+            component.openPage('url');
+            expect(spyOpen.calls.count()).toEqual(1);
+            expect(spyOpen).toHaveBeenCalledWith('url', '_blank');
+        });
+    });
+
 });
