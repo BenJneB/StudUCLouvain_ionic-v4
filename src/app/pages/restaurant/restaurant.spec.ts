@@ -1,16 +1,9 @@
-import { CacheService } from 'ionic-cache';
-import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { HttpClient } from 'selenium-webdriver/http';
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
-import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 
-import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { IonicModule } from '@ionic/angular';
-import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 /**
@@ -44,9 +37,6 @@ describe('Restaurant Component', () => {
                 IonicModule.forRoot(),
                 TranslateModule.forRoot(),
                 RouterTestingModule,
-                HttpClientTestingModule,
-                IonicStorageModule.forRoot(),
-                FormsModule,
             ],
             providers: [
             ]
