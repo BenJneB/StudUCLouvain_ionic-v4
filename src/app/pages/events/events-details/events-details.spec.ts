@@ -74,4 +74,23 @@ describe('EventsDetails Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, EventsDetailsPage);
     });
+
+    describe('openPage method', () => {
+        it('should call open from window', () => {
+            const spyOpen = spyOn(window, 'open').and.callFake(url => { });
+            component.openPage('url');
+            expect(spyOpen.calls.count()).toEqual(1);
+            expect(spyOpen).toHaveBeenCalledWith('url', '_blank');
+        });
+    });
+
+    describe('addFavorite method', () => {
+        it('should call addFavorite from UserService and present Toast', () => {
+            const spyAdd = spyOn(component.user, 'addFavorite').and.callThrough();
+            const spyPresent = spyOn(component.alertService, 'presentToast').and.callThrough();
+            component.addFavorite('');
+            expect(spyAdd.calls.count()).toEqual(1);
+            expect(spyPresent.calls.count()).toEqual(1);
+        });
+    });
 });
