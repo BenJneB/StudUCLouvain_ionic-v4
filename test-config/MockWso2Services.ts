@@ -32,6 +32,12 @@ export class MockRepertoireService extends RepertoireService {
 
         });
     }
+
+    loadEmpDetails() {
+        return new Promise((resolve, reject) => {
+
+        });
+    }
 }
 
 export function newMockRepertoireService() {
