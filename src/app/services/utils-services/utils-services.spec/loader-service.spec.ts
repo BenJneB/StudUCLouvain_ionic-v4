@@ -56,4 +56,14 @@ describe('LoaderService', () => {
     });
 
     it('should create service', () => expect(loaderService).toBeDefined());
+
+    // describe('dismiss', () => {
+    //     it('should call dismiss from LoadingController', async () => {
+    //         loaderService.isLoading = true;
+    //         const spyDismiss = spyOn(loaderService.loading, 'dismiss').and.callThrough();
+    //         await loaderService.dismiss();
+    //         expect(loaderService.isLoading).toBeFalsy();
+    //         expect(spyDismiss.calls.count()).toEqual(1);
+    //     });
+    // });
 });
