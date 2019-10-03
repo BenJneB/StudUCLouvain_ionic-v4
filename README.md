@@ -1,7 +1,7 @@
-<div align="center">
 [![Maintainability](https://api.codeclimate.com/v1/badges/b3a272ba9c2f4de6ed09/maintainability)](https://codeclimate.com/github/BenJneB/StudUCLouvain_ionic-v4/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b3a272ba9c2f4de6ed09/test_coverage)](https://codeclimate.com/github/BenJneB/StudUCLouvain_ionic-v4/test_coverage)
-  
+
+<div align="center">
   
 # StudUCLouvain : Migration to ionic-v4
 
