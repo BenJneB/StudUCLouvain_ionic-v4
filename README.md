@@ -31,8 +31,11 @@
 
 &nbsp;
        
-## README (for sections not in this README) :
-### https://github.com/UCL-INGI/StudUCLouvain
+## README :
+
+### More informations :
+
+#### https://github.com/UCL-INGI/StudUCLouvain
 
 
 ### Prerequisites
