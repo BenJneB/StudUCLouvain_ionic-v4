@@ -15,9 +15,7 @@
 
 - Write unit tests (WIP)
 
-  1. Create \*.spec.ts for all pages
-     - subpages
-  2. Cover important parts with tests
+  * Cover important parts with tests
      - subpages
      - services
 
