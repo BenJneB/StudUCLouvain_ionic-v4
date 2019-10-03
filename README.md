@@ -3,7 +3,7 @@
 
 <div align="center">
   
-# StudUCLouvain : Migration to ionic-v4
+# StudUCLouvain (ionic-v4)
 
 ## WIP - Work In Progress
 ## Feel free to collaborate.
@@ -12,6 +12,8 @@
 </div>
 
 ### TO DO :
+
+- Check Studies & Map Pages
 
 - Write unit tests (WIP)
 
