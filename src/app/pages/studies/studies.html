@@ -130,7 +130,7 @@
     <ion-list *ngIf="status">
       <!--<ion-button full (click)="openWeekPage()">{{'STUDY.WEEK' | translate}}</ion-button>-->
       <h4 class="ion-text-center" *ngIf="prog">{{prog}}</h4>
-      <p class="ion-text-center"> {{'STUDY.STATUS' | translate}} : {{statusInsc}}</p>
+      <p class="ion-text-center"> {{'STUDY.STATUS' | translate}} : {{statusInsc ? statusInsc : 'Undefined'}}</p>
       <ion-button expand="full" (click)="openExamPage()" color="uclouvain">{{'STUDY.EXAM' | translate}}</ion-button>
       <ion-list *ngFor="let activity of activities">
         <ion-item-sliding #slidingItem>
@@ -145,7 +145,10 @@
           </ion-item-options>
         </ion-item-sliding>
       </ion-list>
-      <p *ngIf="activities.length <= 0">{{'STUDY.NO' | translate}}</p>
+      <br>
+      <b>
+        <p *ngIf="activities.length <= 0" style="text-align: center;">{{'STUDY.NO' | translate}}</p>
+      </b>
     </ion-list>
 
   </ng-container>
