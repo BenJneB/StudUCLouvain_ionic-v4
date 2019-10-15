@@ -234,6 +234,8 @@ describe('Events Component', () => {
 
     describe('presentFilter method', () => {
         it('should call create from ModalController', () => {
+            component.filters = undefined;
+            component.dateRange = undefined;
             component.presentFilter();
             const create = component.modalCtrl.create;
             expect(create.calls.count()).toEqual(1);
