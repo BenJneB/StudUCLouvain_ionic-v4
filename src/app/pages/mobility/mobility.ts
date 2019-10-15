@@ -48,7 +48,7 @@ export class MobilityPage {
   ) {
     this.platform = this._platform;
     this.title = 'Mobilité';
-    let titlecar: string;
+    let titlecar = 'NO_TITLE';
     this.translateService.get('MOBI.COVOIT').subscribe((res: string) => { titlecar = res; });
     console.log('After translate in constructor ! First !');
     // Information to launch external app

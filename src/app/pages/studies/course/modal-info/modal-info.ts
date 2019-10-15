@@ -54,13 +54,13 @@ export class ModalInfoPage {
             this.closeModal();
             resolve(400);
           } else {
-            resolve(this.resolveResponse(res, resolve));
+            resolve(this.resolveResponse(res));
           }
         });
     });
   }
 
-  private resolveResponse(res: any, resolve: (value?: any) => void) {
+  private resolveResponse(res: any) {
     let cahier = '';
     const { offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, vol, langue } = this.getDatas(res);
     if (res.cahierChargesExiste) {

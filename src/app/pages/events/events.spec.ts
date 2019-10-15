@@ -218,7 +218,7 @@ describe('Events Component', () => {
         it('should call getEvents from EventService and updateDisplayed', async () => {
             const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', { items: [] });
             const spySaveItem = spyOn(component.cache, 'saveItem').and.callFake(() => {
-                return new Promise((resolve, reject) => {
+                return new Promise((resolve) => {
                     resolve();
                 });
             });
