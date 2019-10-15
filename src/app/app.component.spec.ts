@@ -117,7 +117,7 @@ describe('MyApp Component', () => {
   describe('launchExternalApp method', () => {
     it('should open Market if app not installed (Android)', () => {
       spyOnProperty(component.device, 'platform', 'get').and.returnValue('Android');
-      const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check', '');
+      const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check');
       const spyOpen = spyOn(component.market, 'open').and.callFake(() => { });
       component.launchExternalApp('ios', 'android', 'app', 'http');
       expect(spyCheck.calls.count()).toEqual(1);
@@ -190,7 +190,7 @@ describe('MyApp Component', () => {
       expect(spyConfirmExit.calls.count()).toEqual(1);
     });
     it('should only call confirmExitApp if error', () => {
-      spyFunctionWithCallBackReject(component.menu, 'getOpen', '');
+      spyFunctionWithCallBackReject(component.menu, 'getOpen');
       component.backButtonEvent();
       // SADELY NO TEST
     });
