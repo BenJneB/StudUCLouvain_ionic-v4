@@ -152,7 +152,7 @@ describe('Sports Component', () => {
     });
 
     describe('changeArray method', () => {
-        it('should call getItemDisplay from UtilsService', () => {
+        it('should get ItemDisplay from UtilsService', () => {
             const spyGetItem = spyOn(component.utilsServices, 'getItemDisplay').and.callThrough();
             component.changeArray([{ 'jour': 'DAY' }]);
             expect(spyGetItem.calls.count()).toEqual(1);

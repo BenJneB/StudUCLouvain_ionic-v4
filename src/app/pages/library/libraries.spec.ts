@@ -129,7 +129,7 @@ describe('Libraries Component', () => {
             expect(spySaveItem.calls.count()).toEqual(1);
         });
 
-        it('if not online, should call presentConnectionAlert', () => {
+        it('if not online, should present ConnectionAlert', () => {
             spyOnline = spyOn(component.connService, 'isOnline').and.returnValue(false);
             const spyPresentAlert = spyOn(component.connService, 'presentConnectionAlert').and.callThrough();
             component.loadLibraries();
@@ -153,7 +153,7 @@ describe('Libraries Component', () => {
     });
 
     describe('cachedOrNot method', () => {
-        it('should call getItem from Cache', () => {
+        it('should get Item from Cache', () => {
             const spyGetItem = spyOn(component.cache, 'getItem').and.callThrough();
             component.cachedOrNot();
             expect(spyGetItem.calls.count()).toEqual(1);
