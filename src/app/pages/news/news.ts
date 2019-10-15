@@ -37,7 +37,7 @@ import { UtilsService } from '../../services/utils-services/utils-services';
   templateUrl: 'news.html',
   styleUrls: ['./news.scss'],
 })
-export class NewsPage implements OnInit{
+export class NewsPage implements OnInit {
 
   @ViewChild('newsList', { read: IonList }) newsList: IonList;
   @ViewChild('news') content: IonContent;

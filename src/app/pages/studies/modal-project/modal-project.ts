@@ -30,7 +30,7 @@ import { StudiesService } from '../../../services/studies-services/studies-servi
   templateUrl: 'modal-project.html',
   styleUrls: ['./modal-project.scss'],
 })
-export class ModalProjectPage implements OnInit{
+export class ModalProjectPage implements OnInit {
   sessionId: string;
   public projects;
 
