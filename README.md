@@ -19,6 +19,8 @@
 
 - Check Map Page
 
+- Verify all imports
+
 - Write unit tests (WIP)
 
   * Cover important parts with tests
