@@ -114,7 +114,7 @@ export class SportsPage {
       this.sportsService.getSports(segment).then(
         result => {
           this.assignDatas(
-            segment === 'team' ? true : false,
+            segment === 'team',
             result
           );
         });

@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
@@ -30,7 +30,7 @@ import { StudiesService } from '../../../services/studies-services/studies-servi
   templateUrl: 'modal-project.html',
   styleUrls: ['./modal-project.scss'],
 })
-export class ModalProjectPage {
+export class ModalProjectPage implements OnInit{
   sessionId: string;
   public projects;
 

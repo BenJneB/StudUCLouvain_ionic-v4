@@ -25,9 +25,7 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { Component } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import {
-    AlertController, MenuController, ModalController, NavController, ToastController
-} from '@ionic/angular';
+import { AlertController, MenuController, ModalController, NavController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { AdeProject } from '../../entity/adeProject';
@@ -140,7 +138,7 @@ export class StudiesPage {
             this.statusInsc = result[0].etatInscription;
             this.prog = result[0].intitOffreComplet;
           })
-            .catch((err) => {
+            .catch(() => {
               console.log('Error during load of inscription status');
             });
         }
@@ -159,7 +157,7 @@ export class StudiesPage {
         this.activities.push({ 'name': '', 'sigle': sigle });
       }
     })
-      .catch((err) => { console.log('Error during load of course program'); });
+      .catch(() => { console.log('Error during load of course program'); });
   }
 
   /*Open modalprojectpage to choose an ade project*/

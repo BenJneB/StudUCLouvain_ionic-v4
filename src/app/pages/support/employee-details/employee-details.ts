@@ -51,7 +51,7 @@ export class EmployeeDetailsPage {
     public repService: RepertoireService,
     public connService: ConnectivityService
   ) {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(() => {
 
       if (this.router.getCurrentNavigation().extras.state) {
         this.empDetails = this.router.getCurrentNavigation().extras.state.items;
@@ -72,9 +72,6 @@ export class EmployeeDetailsPage {
       }
     });
 
-  }
-
-  ngOnInit() {
   }
 
   /*Open page with some aditionnal information*/
