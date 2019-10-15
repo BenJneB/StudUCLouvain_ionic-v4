@@ -13,7 +13,11 @@
 
 ### TO DO :
 
-- Check Studies & Map Pages
+- Check Studies Page
+
+  * Right menu toggle
+
+- Check Map Page
 
 - Write unit tests (WIP)
 
