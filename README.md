@@ -25,6 +25,7 @@
 
   * Make user stories (1/?)
 
+- Test on devices
        
 ### TIPS
 #### - To launch only one test page : replace the 'describe' with the wanted scope by fdescribe in <page_name>.spec.ts
