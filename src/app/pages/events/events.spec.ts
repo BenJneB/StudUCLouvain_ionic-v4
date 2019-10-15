@@ -129,7 +129,7 @@ describe('Events Component', () => {
     });
 
     describe('changeArray method', () => {
-        it('should call getItemDisplay from UtilsServices', () => {
+        it('should get ItemDisplay from UtilsServices', () => {
             const spyGetItemD = spyOn(component.utilsServices, 'getItemDisplay').and.returnValue('').and.callThrough();
             component.changeArray([{ startDate: new Date() }]);
             expect(spyGetItemD.calls.count()).toEqual(1);
@@ -185,7 +185,7 @@ describe('Events Component', () => {
     });
 
     describe('cachedOrNot method', () => {
-        it('should call getItem from Cache and present loader during update the displayed events', async () => {
+        it('should get Item from Cache and present loader during update the displayed events', async () => {
             const spyGetItem = spyFunctionWithCallBackThen(
                 component.cache,
                 'getItem',
@@ -215,7 +215,7 @@ describe('Events Component', () => {
     });
 
     describe('loadEvents method', () => {
-        it('should call getEvents from EventService and updateDisplayed', async () => {
+        it('should get Events from EventService and updateDisplayed', async () => {
             const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', { items: [] });
             const spySaveItem = spyOn(component.cache, 'saveItem').and.callFake(() => {
                 return new Promise((resolve) => {
@@ -276,7 +276,7 @@ describe('Events Component', () => {
     });
 
     describe('getRangeWeek method', () => {
-        it('should call getFullDate', () => {
+        it('should get FullDate', () => {
             const spyGetFullDate = spyOn(component, 'getFullDate').and.callThrough();
             component.getRangeWeek(25, 2019);
             expect(spyGetFullDate.calls.count()).toEqual(2);

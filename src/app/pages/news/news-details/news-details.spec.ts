@@ -56,7 +56,7 @@ describe('NewsDetails Component', () => {
     });
 
     describe('openPage method', () => {
-        it('should call open from window', () => {
+        it('should open window', () => {
             const spyOpen = spyOn(window, 'open').and.callFake(() => { });
             component.openPage('url');
             expect(spyOpen.calls.count()).toEqual(1);

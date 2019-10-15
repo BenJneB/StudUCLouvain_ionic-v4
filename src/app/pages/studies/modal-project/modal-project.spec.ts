@@ -108,7 +108,7 @@ describe('ModalProject Component', () => {
     });
 
     describe('getProjects method', () => {
-        it('should call getProjects from StudiesService', () => {
+        it('should get Projects from StudiesService', () => {
             const spyGet = spyFunctionWithCallBackThen(
                 component.studiesService,
                 'getProjects',

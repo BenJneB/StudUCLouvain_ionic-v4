@@ -117,7 +117,7 @@ describe('News Component', () => {
     });
 
     describe('findSite method', () => {
-        it('should call getAvailableSites', () => {
+        it('should get AvailableSites', () => {
             const spyGet = spyOn(component, 'getAvailableSites').and.callThrough();
             component.listFac = [{ facs: {} }];
             component.findSite();
@@ -157,7 +157,7 @@ describe('News Component', () => {
             expect(spyOnline.calls.count()).toBeGreaterThan(0);
         });
 
-        it('should call presentConnectionAlert from ConnectivityService if offline', () => {
+        it('should present ConnectionAlert from ConnectivityService if offline', () => {
             const spyPresent = spyOn(component.connService, 'isOnline').and.returnValue(false);
             component.doRefresh({ target: { complete: () => { return; } } });
             expect(spyPresent.calls.count()).toEqual(1);
