@@ -21,7 +21,7 @@ import { featureGroup, icon, latLng, Layer, Map, marker, tileLayer } from 'leafl
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component, ElementRef, ViewChild } from '@angular/core';
-import { ActionSheetController, ModalController, NavController, Platform } from '@ionic/angular';
+import { ActionSheetController, ModalController, NavController, Platform, MenuController } from '@ionic/angular';
 
 import { POIService } from '../../services/map-services/poi-service';
 import { SearchModal } from './search/search';
@@ -48,7 +48,8 @@ export class MapPage {
     public platform: Platform,
     public poilocations: POIService,
     public mapService: MapService,
-    public userService: UserService) {
+    public userService: UserService,
+    public menuController: MenuController) {
     this.title = 'Carte';
     this.userIcon = icon({
       iconUrl: 'assets/img/user-icon.png',
@@ -64,6 +65,7 @@ export class MapPage {
         this.zones = results;
       });
     });
+    this.menuController.swipeEnable(false);
   }
 
   loadmap() {
@@ -78,8 +80,6 @@ export class MapPage {
 
   centerMapOnPopupOpen() {
     this.map.on('popupopen', (e) => {
-      this.map.closePopup();
-      e.openPopup();
       const px = this.map.project(e.popup._latlng);
       px.y -= e.popup._container.clientHeight / 2;
       this.map.panTo(this.map.unproject(px), {animate: true});
@@ -107,13 +107,15 @@ export class MapPage {
 
   showBuilding(item) {
     // update or create building marker
+
     if (this.building) {
       this.building.setLatLng([item.pos.lat, item.pos.lng]).bindPopup(this.generatePopupContent(item)).openPopup();
     } else {
       this.building = marker([item.pos.lat, item.pos.lng]).addTo(this.map).bindPopup(this.generatePopupContent(item)).openPopup();
       this.building._icon.style.filter = 'hue-rotate(300deg)';
     }
-    this.fitMap();
+    this.map.fire('popupopen', {popup: this.building.getPopup()});
+    // this.fitMap();
   }
 
   fitMap() {
