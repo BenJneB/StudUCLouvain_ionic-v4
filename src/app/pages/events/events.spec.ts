@@ -2,29 +2,21 @@ import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { spyFunctionWithCallBackThen } from 'src/app/app.component.spec';
 import { EventItem } from 'src/app/entity/eventItem';
+import { EventsService } from 'src/app/services/rss-services/events-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { newMockEventsService } from 'test-config/MockRssService';
+import { newMockUtilsService } from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, fakeAsync, TestBed } from '@angular/core/testing';
+import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { Calendar } from '@ionic-native/calendar/ngx';
-import { Device } from '@ionic-native/device/ngx';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Market } from '@ionic-native/market/ngx';
-import { Network } from '@ionic-native/network/ngx';
 import { IonicModule, IonItemSliding, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import {
-    MockCacheStorageService, StorageMock
-} from '../../../../test-config/MockCacheStorageService';
-import {
-    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    ModalControllerMock, NetworkMock
-} from '../../../../test-config/MockIonicNative';
+import { MockCacheStorageService } from '../../../../test-config/MockCacheStorageService';
+import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -63,20 +55,23 @@ describe('Events Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
+                {
+                    provide: UtilsService, useFactory: () => {
+                        return newMockUtilsService();
+                    }
+                },
                 { provide: ModalController, useClass: ModalControllerMock },
-                { provide: Device, useClass: DeviceMock },
-                { provide: Market, useClass: MarketMock },
-                { provide: AppAvailability, useClass: AppAvailabilityMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: CacheService, useClass: StorageMock },
+                CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                { provide: Network, useClass: NetworkMock },
-                Diagnostic,
-                { provide: Calendar, useClass: CalendarMock },
+                {
+                    provide: EventsService, useFactory: () => {
+                        return newMockEventsService();
+                    }
+                },
             ]
         }).compileComponents();
     }));
@@ -134,7 +129,7 @@ describe('Events Component', () => {
     });
 
     describe('changeArray method', () => {
-        it('should call getItemDisplay from UtilsServices', () => {
+        it('should get ItemDisplay from UtilsServices', () => {
             const spyGetItemD = spyOn(component.utilsServices, 'getItemDisplay').and.returnValue('').and.callThrough();
             component.changeArray([{ startDate: new Date() }]);
             expect(spyGetItemD.calls.count()).toEqual(1);
@@ -163,9 +158,6 @@ describe('Events Component', () => {
     describe('doRefresh method', () => {
         it('should call doRefresh from UtilsService', () => {
             const spyRefresh = spyOn(component.utilsServices, 'doRefresh').and.callThrough();
-            spyOn(component.utilsServices.cache, 'removeItem').and.returnValue(
-                new Promise((resolve, reject) => { })
-            );
             component.doRefresh({ target: { complete: () => { return; } } });
             expect(spyRefresh.calls.count()).toEqual(1);
         });
@@ -193,7 +185,7 @@ describe('Events Component', () => {
     });
 
     describe('cachedOrNot method', () => {
-        it('should call getItem from Cache and present loader during update the displayed events', async () => {
+        it('should get Item from Cache and present loader during update the displayed events', async () => {
             const spyGetItem = spyFunctionWithCallBackThen(
                 component.cache,
                 'getItem',
@@ -223,21 +215,27 @@ describe('Events Component', () => {
     });
 
     describe('loadEvents method', () => {
-        it('should call getEvents from EventService and updateDisplayed', async () => {
+        it('should get Events from EventService and updateDisplayed', async () => {
             const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', { items: [] });
-            const spySave = spyOn(component.cache, 'saveItem').and.callThrough();
+            const spySaveItem = spyOn(component.cache, 'saveItem').and.callFake(() => {
+                return new Promise((resolve) => {
+                    resolve();
+                });
+            });
             const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
             await component.loadEvents('key');
             expect(spyGetEvents.calls.count()).toEqual(1);
             expect(spyUpdate.calls.count()).toEqual(1);
             expect(component.searching).toBeFalsy();
-            expect(spySave.calls.count()).toEqual(1);
-            expect(spySave.calls.first().args[0]).toEqual('key');
+            expect(spySaveItem.calls.count()).toEqual(1);
+            expect(spySaveItem.calls.first().args[0]).toEqual('key');
         });
     });
 
     describe('presentFilter method', () => {
         it('should call create from ModalController', () => {
+            component.filters = undefined;
+            component.dateRange = undefined;
             component.presentFilter();
             const create = component.modalCtrl.create;
             expect(create.calls.count()).toEqual(1);
@@ -278,7 +276,7 @@ describe('Events Component', () => {
     });
 
     describe('getRangeWeek method', () => {
-        it('should call getFullDate', () => {
+        it('should get FullDate', () => {
             const spyGetFullDate = spyOn(component, 'getFullDate').and.callThrough();
             component.getRangeWeek(25, 2019);
             expect(spyGetFullDate.calls.count()).toEqual(2);

@@ -62,6 +62,10 @@ export class GuindaillePage {
         };
       });
     });
+    this._get_pictos_and_datas();
+  }
+
+  private _get_pictos_and_datas() {
     const pictoListImg = [
       'alterner', 'Bruit-exterieur', 'eau-gratuite',
       'jen-suis-ou', 'no-cans-no-glass', 'preservatif-jy-pense',

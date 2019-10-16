@@ -1,32 +1,29 @@
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
-
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
-import { Component } from '@angular/core';
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Calendar } from '@ionic-native/calendar/ngx';
-import {
-    AlertController, IonItemSliding, ModalController, NavController, ToastController
-} from '@ionic/angular';
+import { AlertController, IonItemSliding, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { Activity } from '../../../entity/activity';
@@ -41,7 +38,7 @@ import { ModalInfoPage } from './modal-info/modal-info';
   styleUrls: ['./course.scss'],
 })
 
-export class CoursePage {
+export class CoursePage implements OnInit {
   sessionId: string;
   course: Course;
   year;
@@ -57,10 +54,8 @@ export class CoursePage {
 
 
   constructor(
-    public navCtrl: NavController,
     public courseService: CourseService,
     private calendar: Calendar,
-    public toastCtrl: ToastController,
     public userS: UserService,
     public modalCtrl: ModalController,
     private alertCtrl: AlertController,
@@ -70,7 +65,7 @@ export class CoursePage {
     private utilsServices: UtilsService,
     private alertService: AlertService
   ) {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(() => {
 
       if (this.router.getCurrentNavigation().extras.state) {
         this.sessionId = this.router.getCurrentNavigation().extras.state.sessionId;
@@ -100,9 +95,8 @@ export class CoursePage {
   /*Get sessions of the course to display for the selectionned project and display them*/
   getCourse(sessionId: string, acronym: string) {
     this.courseService.getCourseId(sessionId, acronym).then(
-      data => {
-        const courseId = data;
-        this.courseService.getActivity(sessionId, courseId).then(
+        (data: any) => {
+        this.courseService.getActivity(sessionId, data).then(
           courseData => {
             this.course.activities = courseData.sort(
               (a1, a2) => a1.start.valueOf() - a2.start.valueOf()
@@ -123,7 +117,7 @@ export class CoursePage {
 
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem: IonItemSliding, activity: Activity) {
-    let message: string;
+    let message = '';
     this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => { message = res; });
     const datas = {
       title: this.course.name + ': ' + activity.type,
@@ -172,10 +166,10 @@ export class CoursePage {
 
   /*Display a prompt to proprose to the students the slots available for the TP or the CM*/
   async showPrompt(segment: string) {
-    let title: string;
-    let message: string;
-    let cancel: string;
-    let apply: string;
+    let title = '';
+    let message = '';
+    let cancel = '';
+    let apply = '';
     this.translateService.get('COURSE.TITLE').subscribe((res: string) => { title = res; });
     this.translateService.get('COURSE.MESSAGE2').subscribe((res: string) => { message = res; });
     this.translateService.get('COURSE.CANCEL').subscribe((res: string) => { cancel = res; });
@@ -274,7 +268,7 @@ export class CoursePage {
       this.calendar.createEventWithOptions(this.course.name + ': ' + activity.type,
         activity.auditorium, null, activity.start, activity.end, options);
     }
-    let message: string;
+    let message = '';
     this.translateService.get('STUDY.MESSAGE3').subscribe((res: string) => { message = res; });
     this.alertService.presentToast(message);
     this.alertService.alertCourse({ 'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4' });

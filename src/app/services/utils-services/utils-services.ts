@@ -133,7 +133,6 @@ export class UtilsService {
   }
 
   launchExternalApp(page: any) {
-    console.log('LAUNCH EXTEEEEEEERNAL');
     let app: string;
     let check: string;
     if (this.device.platform === 'iOS') {

@@ -63,24 +63,5 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
-    <!---<ion-item-sliding *ngFor="let activity of displayedActi" #slidingItem >
-       <ion-item *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD') || (activity.isExam && segment === 'Examen')">
-        <h2 class="ion-text-center"> {{'COURSE.ACTIVITY' | translate}} : {{activity.type}} </h2>
-        <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
-          &mdash; {{activity.end | date: 'H:mm' }} </p>
-        <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
-        <p> {{'COURSE.STUDENT' | translate}} : {{activity.students}}</p>
-        <p> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
-        <p> {{activity.name}} </p>
-      </ion-item>
-
-      <ion-item-options side="right">
-        <ion-button (click)="" >
-          <ion-icon name="calendar"></ion-icon>
-          {{'COURSE.CALENDAR' | translate}}
-        </ion-button>
-      </ion-item-options>
-    </ion-item-sliding>-->
-
   </ion-list>
 </ion-content>

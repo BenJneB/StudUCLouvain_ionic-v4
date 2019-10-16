@@ -1,32 +1,31 @@
 import { CacheService } from 'ionic-cache';
-
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
-import { Component, ViewChild } from '@angular/core';
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { IonItemSliding, IonList, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EventItem } from '../../entity/eventItem';
-import { EventsFilterPage } from '../../pages/events/events-filter/events-filter';
+import { EventsFilterPage } from './events-filter/events-filter';
 import { EventsService } from '../../services/rss-services/events-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
 import { EVENT_TEXTS, UtilsService } from '../../services/utils-services/utils-services';
@@ -36,7 +35,7 @@ import { EVENT_TEXTS, UtilsService } from '../../services/utils-services/utils-s
   templateUrl: 'events.html',
   styleUrls: ['./events.scss'],
 })
-export class EventsPage {
+export class EventsPage implements OnInit {
   @ViewChild('eventsList', { read: IonList }) eventsList: IonList;
 
   events: Array<EventItem> = [];
@@ -96,12 +95,6 @@ export class EventsPage {
     this.cachedOrNot();
     this.utilsServices.initSearchControl(this.searchControl, this.searching);
   }
-
-  // private initSearchControl() {
-  //   this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(() => {
-  //     this.searching = false;
-  //   });
-  // }
 
   public goToEventDetail(event: EventItem) {
     this.utilsServices.goToDetail(event, 'events/details');
@@ -165,7 +158,7 @@ export class EventsPage {
   }
 
   /*Make an array with events sorted by week*/
-  changeArray(array, weekUCL) {
+  changeArray(array) {
     const getWeek = this.getWeek;
     const groups = array.reduce(function (obj, item) {
       const date = new Date(item.startDate.getTime());
@@ -190,8 +183,6 @@ export class EventsPage {
     date.setHours(0, 0, 0, 0);
     //  Thursday in current week decides the year.
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-    //  January 4 is always in week 1.
-    const week1 = new Date(date.getFullYear(), 0, 4);
     //  Adjust to Thursday in week 1 and count number of weeks from date to week1.
     return this.getWeek(date);
   }
@@ -225,7 +216,7 @@ export class EventsPage {
     }
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
-    this.displayedEventsD = this.changeArray(this.displayedEvents, this.weekUCL);
+    this.displayedEventsD = this.changeArray(this.displayedEvents);
     this.loader.dismiss();
   }
 
@@ -268,7 +259,7 @@ export class EventsPage {
 
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: IonItemSliding, itemData: any): void {
-    let message: string;
+    let message = '';
     this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => { message = res; });
     const datas = {
       title: itemData.title,

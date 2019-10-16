@@ -20,7 +20,6 @@
 */
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController } from '@ionic/angular';
 
 import { NewsItem } from '../../../entity/newsItem';
 
@@ -33,8 +32,8 @@ import { NewsItem } from '../../../entity/newsItem';
 export class NewsDetailsPage {
   news: NewsItem;
 
-  constructor(public navCtrl: NavController, private route: ActivatedRoute, private router: Router) {
-    this.route.queryParams.subscribe(params => {
+  constructor(private route: ActivatedRoute, private router: Router) {
+    this.route.queryParams.subscribe(() => {
 
       if (this.router.getCurrentNavigation().extras.state) {
         this.news = this.router.getCurrentNavigation().extras.state.items;

@@ -24,6 +24,10 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UtilsService } from '../../services/utils-services/utils-services';
 
+export class StructPage {
+  title: string; component: string; iosSchemaName: string; androidPackageName: string; appUrl: string; httpUrl: string;
+}
+
 @Component({
   selector: 'page-mobility',
   templateUrl: 'mobility.html',
@@ -32,9 +36,9 @@ import { UtilsService } from '../../services/utils-services/utils-services';
 
 export class MobilityPage {
   public title: any;
-  carpoolingPage;
-  busPage;
-  trainPage;
+  carpoolingPage: StructPage;
+  busPage: StructPage;
+  trainPage: StructPage;
   public platform: any;
 
   constructor(
@@ -43,9 +47,8 @@ export class MobilityPage {
     private _platform: Platform
   ) {
     this.platform = this._platform;
-
     this.title = 'Mobilité';
-    let titlecar: string;
+    let titlecar = 'NO_TITLE';
     this.translateService.get('MOBI.COVOIT').subscribe((res: string) => { titlecar = res; });
     console.log('After translate in constructor ! First !');
     // Information to launch external app

@@ -19,7 +19,7 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component } from '@angular/core';
-import { ModalController, NavController, NavParams } from '@ionic/angular';
+import { ModalController, NavParams } from '@ionic/angular';
 
 import { StudentService } from '../../../../services/wso2-services/student-service';
 
@@ -33,13 +33,12 @@ export class ModalInfoPage {
   year = this.navParams.get('year');
   information: any;
   langue;
-
-
-  constructor(public navCtrl: NavController,
-
+  // PROBABLY NOT WORKING !
+  constructor(
     public navParams: NavParams,
     public viewCtrl: ModalController,
-    public studentService: StudentService) {
+    public studentService: StudentService
+  ) {
     this.getInfo().then(data => {
       this.information = data;
       this.langue = data.langue;
@@ -55,13 +54,13 @@ export class ModalInfoPage {
             this.closeModal();
             resolve(400);
           } else {
-            resolve(this.resolveResponse(res, resolve));
+            resolve(this.resolveResponse(res));
           }
         });
     });
   }
 
-  private resolveResponse(res: any, resolve: (value?: any) => void) {
+  private resolveResponse(res: any) {
     let cahier = '';
     const { offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, vol, langue } = this.getDatas(res);
     if (res.cahierChargesExiste) {

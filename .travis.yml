@@ -23,11 +23,11 @@ before_script:
 
 jobs:
   include:
-    - stage: "Tests"                # naming the Tests stage
-      name: "Unit Tests"            # names the first Tests stage job
+    - stage: "Tests"
+      name: "Unit Tests"
       script: npm run test:onceAndCoverage
     - script: npm run e2e
-      name: "E2E Tests"     # names the second Tests stage job
+      name: "E2E Tests"
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

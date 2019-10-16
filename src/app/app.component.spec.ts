@@ -2,30 +2,27 @@ import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { of } from 'rxjs';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
-import {
-    AppAvailabilityMock, MarketMock, NetworkMock, StatusBarMock, ToastMock
-} from 'test-config/MockIonicNative';
-
+import { AppAvailabilityMock, MarketMock, NetworkMock, StatusBarMock, ToastMock } from 'test-config/MockIonicNative';
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
@@ -118,10 +115,10 @@ describe('MyApp Component', () => {
   });
 
   describe('launchExternalApp method', () => {
-    it('should call open from Market if app not installed (Android)', () => {
+    it('should open Market if app not installed (Android)', () => {
       spyOnProperty(component.device, 'platform', 'get').and.returnValue('Android');
-      const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check', '');
-      const spyOpen = spyOn(component.market, 'open');
+      const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check');
+      const spyOpen = spyOn(component.market, 'open').and.callFake(() => { });
       component.launchExternalApp('ios', 'android', 'app', 'http');
       expect(spyCheck.calls.count()).toEqual(1);
       expect(spyOpen.calls.count()).toEqual(1);
@@ -183,7 +180,7 @@ describe('MyApp Component', () => {
       expect(spyGetClose.calls.count()).toEqual(3);
     });
 
-    it('should call close from MenuController and confirmExitApp', async function () {
+    it('should close menu and launch modal to confirm exit app', async function () {
       spyOn(component.menu, 'getOpen').and.returnValue('returned');
       const spyClose = spyOn(component.menu, 'close').and.callThrough();
       const spyConfirmExit = spyOn(component, 'confirmExitApp').and.callThrough();
@@ -193,7 +190,7 @@ describe('MyApp Component', () => {
       expect(spyConfirmExit.calls.count()).toEqual(1);
     });
     it('should only call confirmExitApp if error', () => {
-      spyFunctionWithCallBackReject(component.menu, 'getOpen', '');
+      spyFunctionWithCallBackReject(component.menu, 'getOpen');
       component.backButtonEvent();
       // SADELY NO TEST
     });
@@ -208,7 +205,7 @@ export function spyFunctionWithCallBackThen(usedService: any, method: string, ca
   });
 }
 
-export function spyFunctionWithCallBackReject(usedService: any, method: string, callbackReturn: any) {
+export function spyFunctionWithCallBackReject(usedService: any, method: string) {
   return spyOn(usedService, method).and.callFake(function () {
     return {
       then: function (s, error) { return error(); },

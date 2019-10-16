@@ -33,16 +33,18 @@ export class ConnectivityService {
   onDevice: boolean;
   available: boolean;
   enable: boolean;
-  constructor(public platform: Platform,
+
+  constructor(
+    private platform: Platform,
     private network: Network,
     private translateService: TranslateService,
     private alertCtrl: AlertController,
-    private diagnostic: Diagnostic) {
-    this.onDevice = this.platform.is('cordova');
-  }
+    private diagnostic: Diagnostic
+  ) { }
 
   /*Check if there is a connexion*/
   isOnline(): boolean {
+    this.onDevice = this.platform.is('cordova');
     if (this.onDevice && this.network.type) {
       return this.network.type !== Connection.NONE;
     } else {
@@ -77,7 +79,4 @@ export class ConnectivityService {
     await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);
     return this.available;
   }
-
-
-
 }
