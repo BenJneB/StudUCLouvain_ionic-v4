@@ -1,14 +1,12 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { HttpClient } from 'selenium-webdriver/http';
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
-import { CommonModule } from '@angular/common';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
@@ -22,26 +20,31 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import {
-    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock,
-    ModalControllerMock, NetworkMock
+    AppAvailabilityMock,
+    CalendarMock,
+    DeviceMock,
+    InAppBrowserMock,
+    MarketMock,
+    ModalControllerMock,
+    NetworkMock
 } from '../../../../test-config/MockIonicNative';
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
 import { StudiesPage } from './studies';
 
 describe('Studies Component', () => {
@@ -82,11 +85,56 @@ describe('Studies Component', () => {
     beforeEach(() => {
         fixture = TestBed.createComponent(StudiesPage);
         component = fixture.componentInstance;
+        spyOn(component.menu, 'enable').and.returnValue('').and.callThrough();
         fixture.detectChanges();
     });
 
     it('should be created', () => {
         testInstanceCreation(component, StudiesPage);
-        expect(component.segment).toEqual('cours');
+    });
+
+    describe('removeCourse method', () => {
+        it('should call set from Storage', () => {
+            const spySet = spyOn(component.storage, 'set').and.callThrough();
+            component.listCourses = [''];
+            component.removeCourse('');
+            expect(spySet.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('saveCourse method', () => {
+        it('should call set from Storage', () => {
+            const spySet = spyOn(component.storage, 'set').and.callThrough();
+            component.listCourses = [''];
+            component.saveCourse();
+            expect(spySet.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('showPrompt method', () => {
+        it('should call showPromptStudies from AlertService', () => {
+            const spyShow = spyOn(component.alertService, 'showPromptStudies').and.callThrough();
+            component.showPrompt();
+            expect(spyShow.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('checkCourseExisting method', () => {
+        // TO TEST !!
+        it('should call checkExist', () => {
+            const spyCheck = spyOn(component, 'checkExist').and.callThrough();
+            component.project = { name: '' };
+            component.checkCourseExisting(false);
+            expect(spyCheck.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('addCourseFromProgram method', () => {
+        it('should call checkCourseExisting', () => {
+            const spyCheck = spyOn(component, 'checkCourseExisting').and.callThrough();
+            component.listCourses = [''];
+            component.addCourseFromProgram();
+            expect(spyCheck.calls.count()).toEqual(1);
+        });
     });
 });

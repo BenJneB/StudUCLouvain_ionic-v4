@@ -1,35 +1,32 @@
 import { CacheService } from 'ionic-cache';
-
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
-import { Component, ViewChild } from '@angular/core';
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { IonItemSliding, IonList, ModalController, NavController } from '@ionic/angular';
-import { OverlayEventDetail } from '@ionic/core';
+import { IonItemSliding, IonList, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EventItem } from '../../entity/eventItem';
-import { EventsFilterPage } from '../../pages/events/events-filter/events-filter';
+import { EventsFilterPage } from './events-filter/events-filter';
 import { EventsService } from '../../services/rss-services/events-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { LoaderService } from '../../services/utils-services/loader-service';
 import { EVENT_TEXTS, UtilsService } from '../../services/utils-services/utils-services';
 
@@ -38,7 +35,7 @@ import { EVENT_TEXTS, UtilsService } from '../../services/utils-services/utils-s
   templateUrl: 'events.html',
   styleUrls: ['./events.scss'],
 })
-export class EventsPage {
+export class EventsPage implements OnInit {
   @ViewChild('eventsList', { read: IonList }) eventsList: IonList;
 
   events: Array<EventItem> = [];
@@ -70,10 +67,8 @@ export class EventsPage {
     'DEL': 'DELETE',
   };
   constructor(
-    private navCtrl: NavController,
     public modalCtrl: ModalController,
     private eventsService: EventsService,
-    public connService: ConnectivityService,
     private translateService: TranslateService,
     private cache: CacheService,
     private loader: LoaderService,
@@ -83,23 +78,35 @@ export class EventsPage {
     this.searchControl = new FormControl();
   }
 
+  tabChanged(newTab: any) {
+    newTab = newTab.detail.value;
+    if (newTab !== undefined) {
+      this.segment = newTab;
+      if (newTab === 'all') {
+        this.cachedOrNot();
+      } else {
+        this.updateDisplayed();
+      }
+    }
+  }
   /*Like the constructor, ngOnInit fires all his body*/
   ngOnInit() {
     this.updateDateLimit();
     this.cachedOrNot();
-    this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
+    this.utilsServices.initSearchControl(this.searchControl, this.searching);
   }
 
   public goToEventDetail(event: EventItem) {
     this.utilsServices.goToDetail(event, 'events/details');
   }
 
-  removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string) {
-    this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts, this.updateDisplayed.bind(this));
+  async removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string) {
+    await this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts);
+    this.updateDisplayed();
   }
 
-  addFavorite(slidingItem: IonItemSliding, itemData: any) {
-    this.utilsServices.addFavorite(itemData, EVENT_TEXTS, slidingItem, this.updateDisplayed.bind(this));
+  async addFavorite(slidingItem: IonItemSliding, itemData: any) {
+    this.utilsServices.addFavorite(itemData, EVENT_TEXTS, slidingItem);
   }
   /*Reload events when refresh by swipe to the bottom*/
   public doRefresh(refresher) {
@@ -111,12 +118,12 @@ export class EventsPage {
   }
 
   /*Check if data are cached or not */
-  async cachedOrNot() {
+  cachedOrNot() {
     // this.cache.removeItem('cache-event');
     const key = 'cache-event';
-    await this.cache.getItem(key)
-      .then((data) => {
-        this.loader.present('Please wait...').then();
+    this.cache.getItem(key)
+      .then(async (data) => {
+        await this.loader.present('Please wait...');
         this.events = data.items;
         this.events.forEach(function (element) {
           element.startDate = new Date(element.startDate);
@@ -127,41 +134,31 @@ export class EventsPage {
         this.searching = false;
         this.updateDisplayed();
       })
-      .catch(() => {
-        console.log('CATCHING');
-        this.loadEvents(key);
+      .catch(async () => {
+        await this.loadEvents(key);
       });
   }
 
 
   /*Load the list of events to display*/
-  public loadEvents(key?: string) {
+  public async loadEvents(key?: string) {
     this.searching = true;
     // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
-    if (this.connService.isOnline()) {
-      this.loader.present('Please wait...').then();
-      this.eventsService.getEvents(this.segment).then(
-        res => {
-          const result: any = res;
-          this.events = result.items;
-          if (key) {
-            this.cache.saveItem(key, result);
-          }
-          this.shownEvents = result.shownEvents;
-          this.filters = result.categories;
-          this.searching = false;
-          this.noevents = this.events.length === 0;
-          this.updateDisplayed();
-        });
-    } else {
-      this.searching = false;
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert().then();
-    }
+
+    this.eventsService.getEvents(this.segment, this.searching).then(
+      res => {
+        const result: any = res;
+        this.events = result.items;
+        if (key) { this.cache.saveItem(key, result); }
+        this.shownEvents = result.shownItems;
+        this.filters = result.categories;
+        this.noevents = this.events.length === 0;
+        this.updateDisplayed();
+      });
   }
 
   /*Make an array with events sorted by week*/
-  changeArray(array, weekUCL) {
+  changeArray(array) {
     const getWeek = this.getWeek;
     const groups = array.reduce(function (obj, item) {
       const date = new Date(item.startDate.getTime());
@@ -186,8 +183,6 @@ export class EventsPage {
     date.setHours(0, 0, 0, 0);
     //  Thursday in current week decides the year.
     date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
-    //  January 4 is always in week 1.
-    const week1 = new Date(date.getFullYear(), 0, 4);
     //  Adjust to Thursday in week 1 and count number of weeks from date to week1.
     return this.getWeek(date);
   }
@@ -221,7 +216,7 @@ export class EventsPage {
     }
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
-    this.displayedEventsD = this.changeArray(this.displayedEvents, this.weekUCL);
+    this.displayedEventsD = this.changeArray(this.displayedEvents);
     this.loader.dismiss();
   }
 
@@ -237,8 +232,7 @@ export class EventsPage {
         componentProps: { excludedFilters: this.excludedFilters, filters: this.filters, dateRange: this.dateRange }
       }
     );
-    await modal.present().then();
-    await modal.onDidDismiss().then((data: OverlayEventDetail) => {
+    modal.onDidDismiss().then((data: any) => {
       if (data) {
         data = data.data;
         const tmpRange = data[1];
@@ -250,6 +244,7 @@ export class EventsPage {
         this.updateDisplayed();
       }
     });
+    return await modal.present();
   }
 
   /*Update the date limit, take account if a change is done by filter with the dateRange value*/
@@ -264,7 +259,7 @@ export class EventsPage {
 
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: IonItemSliding, itemData: any): void {
-    let message: string;
+    let message = '';
     this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => { message = res; });
     const datas = {
       title: itemData.title,

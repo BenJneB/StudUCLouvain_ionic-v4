@@ -22,7 +22,10 @@ import { HttpClient } from '@angular/common/http';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Injectable } from '@angular/core';
+import { NavController } from '@ionic/angular';
 
+import { ConnectivityService } from '../utils-services/connectivity-service';
+import { LoaderService } from '../utils-services/loader-service';
 import { UtilsService } from '../utils-services/utils-services';
 
 @Injectable({
@@ -32,7 +35,13 @@ export class RssService {
   nbCalls = 0;
   callLimit = 30;
 
-  constructor(public http: HttpClient, private utilsServices: UtilsService) {
+  constructor(
+    public http: HttpClient,
+    private navCtrl: NavController,
+    private utilsServices: UtilsService,
+    public connService: ConnectivityService,
+    private loader: LoaderService,
+  ) {
   }
 
   /*Load data from the RSS flux*/
@@ -63,24 +72,32 @@ export class RssService {
     });
   }
 
-  loadItems(segment: string, url: string, extract: (data: any) => any) {
-    return this.load(url).then(result => {
-      return extract(result);
-    })
-      .catch(error => {
-        if (error === 1) {
-          return this.loadItems(segment, url, extract);
-        } else {
-          if (error === 2) {
-            console.log('Loading items: GET req timed out > limit, suppose no items to display');
+  async loadItems(segment: string, url: string, extract: (data: any) => any, searching?: boolean) {
+    if (this.connService.isOnline()) {
+      await this.loader.present('Please wait...');
+      return this.load(url).then(result => {
+        return extract(result);
+      })
+        .catch(error => {
+          if (error === 1) {
+            return this.loadItems(segment, url, extract);
           } else {
-            console.log('Error loading items: ' + error);
+            if (error === 2) {
+              console.log('Loading items: GET req timed out > limit, suppose no items to display');
+            } else {
+              console.log('Error loading items: ' + error);
+            }
+            return {
+              items: [],
+              shownItems: 0
+            };
           }
-          return {
-            items: [],
-            shownItems: 0
-          };
-        }
-      });
+        });
+    } else {
+      // TODO: to test
+      searching = false;
+      this.navCtrl.pop();
+      this.connService.presentConnectionAlert();
+    }
   }
 }

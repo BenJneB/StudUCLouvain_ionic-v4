@@ -25,9 +25,7 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { Component } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import {
-    AlertController, MenuController, ModalController, NavController, ToastController
-} from '@ionic/angular';
+import { AlertController, MenuController, ModalController, NavController, ToastController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { AdeProject } from '../../entity/adeProject';
@@ -47,7 +45,7 @@ import { ModalProjectPage } from './modal-project/modal-project';
 })
 
 export class StudiesPage {
-  segment = 'cours';
+  public segment = 'cours';
   public listCourses: Course[];
   public sessionId: string;
   public project: AdeProject = null;
@@ -79,7 +77,6 @@ export class StudiesPage {
   ) {
     this.initializeSession();
     this.menu.enable(true, 'studiesMenu');
-    console.log('BEFORE GET COURSE');
     this.getCourses();
   }
 
@@ -141,7 +138,7 @@ export class StudiesPage {
             this.statusInsc = result[0].etatInscription;
             this.prog = result[0].intitOffreComplet;
           })
-            .catch((err) => {
+            .catch(() => {
               console.log('Error during load of inscription status');
             });
         }
@@ -160,29 +157,25 @@ export class StudiesPage {
         this.activities.push({ 'name': '', 'sigle': sigle });
       }
     })
-      .catch((err) => { console.log('Error during load of course program'); });
+      .catch(() => { console.log('Error during load of course program'); });
   }
 
   /*Open modalprojectpage to choose an ade project*/
   async openModalProject() {
     const obj = { sessionId: this.sessionId };
-    const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj });
-    await myModal.present();
-    await myModal.onDidDismiss().then(data => { this.project = data.data; });
+    const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj }).then();
+    myModal.onDidDismiss().then(data => { this.project = data.data; });
+    return await myModal.present();
   }
 
   /*Set project and connect to ADE*/
   initializeSession() {
-    console.log('INIT');
     if (this.connService.isOnline()) {
-      console.log('ONLINE');
       this.studiesService.openSession().then(
         data => {
-          console.log('OPEN SESSION', data);
           this.sessionId = data;
           this.storage.get('adeProject').then(
             (dataProject) => {
-              console.log('adeProject Got', dataProject);
               this.project = dataProject;
               if (this.project === null || this.project === undefined) {
                 this.openModalProject();
@@ -239,9 +232,7 @@ export class StudiesPage {
   }
 
   getCourses() {
-    console.log('BEFORE GET COURSES ETCCCCé)');
     this.storage.get('listCourses').then((data) => {
-      console.log('IN GET STORAGE GETCOURSES');
       if (data === null) {
         this.listCourses = [];
       } else {
@@ -288,7 +279,7 @@ export class StudiesPage {
       subHeader: 'Cette fonctionnalité n\'est pas encore disponible',
       buttons: ['OK']
     });
-    await alert.present();
+    return await alert.present();
   }
 
   launch(url) {

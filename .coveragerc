@@ -15,8 +15,16 @@ omit =
     www/
     src/assets/*
     resources/*
-    **/*.spec.ts
-    src/polyfills.ts
+    "**/*.spec.ts"
+    "/src/polyfills.ts"
+    "/src/test.ts"
+    e2e/*
+    "**/*.js"
+    "**/*.json"
+    "**/*.po.ts"
+    README.md
+    LICENSE
+    "/src/app/variables.ts"
 
 [report]
 fail_under = 100

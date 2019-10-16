@@ -5,7 +5,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import {
-    InAppBrowser, InAppBrowserObject, InAppBrowserOptions
+    InAppBrowser, InAppBrowserEventType, InAppBrowserObject, InAppBrowserOptions
 } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
@@ -43,7 +43,7 @@ export class AppAvailabilityMock extends AppAvailability {
 
 export interface InAppBrowserEvent extends Event {
     /** the eventname, either loadstart, loadstop, loaderror, or exit. */
-    type: string;
+    type: InAppBrowserEventType;
     /** the URL that was loaded. */
     url: string;
     /** the error code, only in the case of loaderror. */
@@ -72,7 +72,7 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
         return getPromise();
     }
 
-    on(event: string): Observable<InAppBrowserEvent> {
+    on(event: InAppBrowserEventType): Observable<InAppBrowserEvent> {
         const response = {
             type: '',
             url: '',
@@ -142,69 +142,6 @@ export class NetworkMock extends Network {
 
     onConnect(): Observable<any> {
         return getObservable();
-    }
-}
-
-export class PlatformMock {
-    public ready(): Promise<string> {
-        return getPromise('READY');
-    }
-
-    public getQueryParam() {
-        return true;
-    }
-
-    public registerBackButtonAction(fn: Function, priority?: number): Function {
-        return (() => true);
-    }
-
-    public hasFocus(ele: HTMLElement): boolean {
-        return true;
-    }
-
-    public doc(): HTMLDocument {
-        return document;
-    }
-
-    public is(): boolean {
-        return true;
-    }
-
-    public getElementComputedStyle(container: any): any {
-        return {
-            paddingLeft: '10',
-            paddingTop: '10',
-            paddingRight: '10',
-            paddingBottom: '10',
-        };
-    }
-
-    public onResize(callback: any) {
-        return callback;
-    }
-
-    public registerListener(ele: any, eventName: string, callback: any): Function {
-        return (() => true);
-    }
-
-    public win(): Window {
-        return window;
-    }
-
-    public raf(callback: any): number {
-        return 1;
-    }
-
-    public timeout(callback: any, timer: number): any {
-        return setTimeout(callback, timer);
-    }
-
-    public cancelTimeout(id: any) {
-        // do nothing
-    }
-
-    public getActiveElement(): any {
-        return document['activeElement'];
     }
 }
 
@@ -304,7 +241,7 @@ export class ModalControllerMock {
     public create = jasmine.createSpy('create').and.returnValue(
         Promise.resolve({
             present: jasmine.createSpy('present').and.returnValue(Promise.resolve()),
-            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve())
+            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve({ 'data': [0, 1] }))
         })
     );
     public dismiss = jasmine.createSpy('dismiss').and.returnValue(Promise.resolve());

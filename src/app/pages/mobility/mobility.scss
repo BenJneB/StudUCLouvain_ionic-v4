@@ -23,21 +23,45 @@
     margin-top: 56px;
 }
 
-ion-grid {
-    height: 100%;
+ion-content {
+    height: 100% !important;
 
-    ion-row {
-        height: 33%;
+    ion-grid.portrait {
+        height: 100% !important;
 
-        ion-col {
-            height: 100%;
+        ion-row {
+            height: 33% !important;
 
-            img {
-                max-height: 100%;
+            ion-col {
+                height: 100% !important;
+
+                img {
+                    max-height: 100%;
+                }
+
+                p {
+                    margin-top: 0px;
+                }
             }
+        }
+    }
 
-            p {
-                margin-top: 0px;
+    ion-grid.landscape {
+        height: 100% !important;
+
+        ion-row {
+            height: 33% !important;
+
+            ion-col {
+                height: 100% !important;
+
+                img {
+                    height: 80% !important;
+                }
+
+                p {
+                    margin-top: 0px;
+                }
             }
         }
     }

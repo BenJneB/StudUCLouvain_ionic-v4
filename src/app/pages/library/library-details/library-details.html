@@ -35,7 +35,7 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content padding>
+<ion-content class="ion-padding">
   <ion-card>
     <ion-card-content>
       <ion-card-title>
@@ -44,15 +44,15 @@
       {{libDetails.name}}
     </ion-card-content>
 
-    <ion-row text-wrap>
+    <ion-row class="ion-text-wrap">
       <ion-col text-right>
       </ion-col>
       <ion-col text-right>
       </ion-col>
     </ion-row>
 
-    <ion-row text-wrap>
-      <ion-item text-wrap>
+    <ion-row class="ion-text-wrap">
+      <ion-item class="ion-text-wrap">
         <ion-label>
           <ion-icon slot="start" name="call"></ion-icon> &nbsp;
           <a href="tel:{{libDetails.phone}}">{{libDetails.phone}}</a>
@@ -65,7 +65,7 @@
         </ion-button>
       </ion-col>
     </ion-row>
-    <ion-row>
+    <ion-row *ngIf="libDetails.email">
       <ion-item>
         <ion-label>
           <ion-icon slot="start" name="mail"></ion-icon> &nbsp;
@@ -74,7 +74,7 @@
       </ion-item>
     </ion-row>
 
-    <ion-row padding text-wrap>
+    <ion-row class="ion-padding ion-text-wrap">
       {{libDetails.openingHoursNote}}
     </ion-row>
 
@@ -118,7 +118,7 @@
       <ion-label>{{'LIBRARY.CLOSED' | translate}}</ion-label>
     </ion-item-divider>
 
-    <ion-item [hidden]="!utilsServices.isGroupShown('closed_dates', shownGroup)" text-wrap>
+    <ion-item [hidden]="!utilsServices.isGroupShown('closed_dates', shownGroup)" class="ion-text-wrap">
       <ion-label>
         <p *ngFor="let cd of libDetails.closedDates">
           {{cd.from}} - {{cd.to}} : {{cd.description}}

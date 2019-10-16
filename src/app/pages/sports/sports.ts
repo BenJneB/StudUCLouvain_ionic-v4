@@ -78,21 +78,19 @@ export class SportsPage {
     public connService: ConnectivityService,
     private loader: LoaderService,
     public navCtrl: NavController,
-    private utilsServices: UtilsService) {
+    private utilsServices: UtilsService
+  ) {
     this.searchControl = new FormControl();
-  }
-
-  /*update the date with in real time value, load sport and display them*/
-  ngOnInit() {
     this.updateDateLimit();
     if (this.connService.isOnline()) {
+      this.loader.present('Please wait..');
       this.loadSports(this.segment);
       this.loadSports('team');
-      this.utilsServices.updateSearchControl(this.searchControl, this.searching, this.updateDisplayed.bind(this));
-      this.loader.present('Please wait..').then();
+      this.utilsServices.initSearchControl(this.searchControl, this.searching);
+      this.updateDisplayed();
     } else {
       this.navCtrl.pop();
-      this.connService.presentConnectionAlert().then();
+      this.connService.presentConnectionAlert();
     }
   }
 
@@ -111,20 +109,19 @@ export class SportsPage {
 
   public loadSports(segment: string) {
     this.searching = true;
-    // this.sportsList.closeSlidingItems();
     this.campus = this.user.campus;
     if (this.connService.isOnline()) {
       this.sportsService.getSports(segment).then(
         result => {
           this.assignDatas(
-            segment === 'team' ? true : false,
+            segment === 'team',
             result
           );
         });
     } else {
       this.searching = false;
       this.navCtrl.pop();
-      this.connService.presentConnectionAlert().then();
+      this.connService.presentConnectionAlert();
     }
   }
 
@@ -134,7 +131,6 @@ export class SportsPage {
     isTeam ? this.filtersT = result.categories : this.filters = result.categories;
     isTeam ? this.noteams = result.sports.length === 0 : this.nosport = result.sports.length === 0;
     this.searching = false;
-    this.updateDisplayed();
   }
 
   /*Sort sports BY DAY*/
@@ -185,6 +181,13 @@ export class SportsPage {
       };
     }
   }
+
+  tabChanged(newTab: any) {
+    if (newTab !== undefined) {
+      this.updateDisplayed();
+    }
+  }
+
   /*Display a modal to select as filter only the sports that the user want to see*/
   async presentFilter() {
     const datas = this.getFiltersData(this.segment === 'team');
@@ -197,8 +200,7 @@ export class SportsPage {
       component: SportsFilterPage,
       componentProps: { excludedFilters: excluded, filters: filters, dateRange: this.dateRange }
     });
-    await modal.present().then();
-    await modal.onDidDismiss().then((data) => {
+    modal.onDidDismiss().then((data) => {
       if (data) {
         data = data.data;
         const tmpRange = data[1];
@@ -212,6 +214,7 @@ export class SportsPage {
         this.updateDisplayed();
       }
     });
+    return await modal.present();
   }
 
   /*Update the dateLimit when that is changed by the filter*/
@@ -227,17 +230,18 @@ export class SportsPage {
     };
     this.calendar.createEventWithOptions(itemData.sport, itemData.lieu,
       itemData.salle, itemData.date, itemData.hfin, options).then(() => {
-        this.alertService.presentToast('Sport créé', slidingItem).then();
+        this.alertService.presentToast('Sport créé', slidingItem);
       });
   }
 
   /*Add a sport to favorite, each slot for the day selected*/
-  addFavorite(slidingItem: IonItemSliding, itemData: SportItem) {
-    this.utilsServices.addFavorite(itemData, this.texts, slidingItem, this.updateDisplayed.bind(this));
+  async addFavorite(slidingItem: IonItemSliding, itemData: SportItem) {
+    await this.utilsServices.addFavorite(itemData, this.texts, slidingItem);
   }
 
   /*Remove a sport of the favorites*/
-  removeFavorite(slidingItem: IonItemSliding, itemData: SportItem, title: string) {
-    this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts, this.updateDisplayed.bind(this));
+  async removeFavorite(slidingItem: IonItemSliding, itemData: SportItem, title: string) {
+    await this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts);
+    this.updateDisplayed();
   }
 }

@@ -1,31 +1,28 @@
 import { CacheService } from 'ionic-cache';
-import { debounceTime } from 'rxjs/operators';
-
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
-import { Component, ViewChild } from '@angular/core';
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
-import { Router } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { AlertController, IonContent, IonList, NavController, Platform } from '@ionic/angular';
+import { IonContent, IonList } from '@ionic/angular';
 
 import { NewsItem } from '../../entity/newsItem';
 import { NewsService } from '../../services/rss-services/news-service';
@@ -40,7 +37,7 @@ import { UtilsService } from '../../services/utils-services/utils-services';
   templateUrl: 'news.html',
   styleUrls: ['./news.scss'],
 })
-export class NewsPage {
+export class NewsPage implements OnInit {
 
   @ViewChild('newsList', { read: IonList }) newsList: IonList;
   @ViewChild('news') content: IonContent;
@@ -64,17 +61,15 @@ export class NewsPage {
   // url = 'assets/data/fac.json';
 
   constructor(
-    public platform: Platform,
-    public navCtrl: NavController,
     public userS: UserService,
     public newsService: NewsService,
     public connService: ConnectivityService,
     private iab: InAppBrowser,
-    public alertCtrl: AlertController,
     public facService: FacService,
     private cache: CacheService,
     private loader: LoaderService,
-    private utilsServices: UtilsService) {
+    private utilsServices: UtilsService
+  ) {
     this.searchControl = new FormControl();
     this.facService.loadResources().then((data) => {
       this.listFac = data;
@@ -84,10 +79,7 @@ export class NewsPage {
   /*load the view, Call function to load news, display them*/
   ngOnInit() {
     this.cachedOrNot();
-    this.searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
-      this.searching = false;
-      this.updateDisplayed();
-    });
+    this.utilsServices.initSearchControl(this.searchControl, this.searching);
   }
 
   /*Open a page with the details of a news*/
@@ -99,7 +91,7 @@ export class NewsPage {
   updateFac(fac: string) {
     this.fac = fac;
     this.userS.addFac(this.fac);
-    const links = this.findSite();
+    this.findSite();
     this.loadNews();
   }
 
@@ -118,8 +110,8 @@ export class NewsPage {
       }
     }
   }
-  /*Remove a fac for a user*/
-  removeFac(fac: string) {
+
+  removeFac() {
     this.userS.removeFac();
   }
 
@@ -163,33 +155,42 @@ export class NewsPage {
   }
 
   /*Tab change*/
-  tabChanged() {
-    if (this.segment === 'univ') { this.cachedOrNot(); }
-    if (this.segment === 'fac') {
-      this.fac = this.userS.fac;
-      if (this.facsegment === 'news' && this.userS.hasFac()) {
-        this.findSite();
-        this.loadNews();
-      }
+  public tabChanged(newTab: any) {
+    newTab = newTab.detail.value;
+    if (newTab !== undefined) {
+      this.segment = newTab;
+      if (newTab === 'univ') {
+        this.cachedOrNot();
+      } else
+        if (newTab === 'fac') {
+          this.manageMainTabFac();
+        }
+    }
+  }
 
+  public manageMainTabFac() {
+    this.fac = this.userS.fac;
+    if (this.facsegment === 'news' && this.userS.hasFac()) {
+      this.findSite();
+      this.loadNews();
     }
   }
 
   /*Check if data are cached or not */
-  async cachedOrNot() {
+  cachedOrNot() {
     // this.cache.removeItem('cache-P1');
     if (this.segment === 'univ') {
       const key = this.getKey();
-      await this.cache.getItem(key)
-        .then((data) => {
-          this.loader.present('Please wait...').then();
+      this.cache.getItem(key)
+        .then(async (data) => {
+          await this.loader.present('Please wait...');
           this.news = data.items;
           this.shownNews = data.showItems;
           this.searching = false;
           this.updateDisplayed();
         })
-        .catch(() => {
-          this.loadNews(key);
+        .catch(async () => {
+          await this.loadNews(key);
         });
     } else {
       this.loadNews();
@@ -197,43 +198,39 @@ export class NewsPage {
   }
 
   /*Load news to display*/
-  public loadNews(key?) {
+  public async loadNews(key?: string) {
     this.searching = true;
     this.news = [];
     // Check connexion before load news
-    if (this.connService.isOnline()) {
-      this.loader.present('Please wait...').then();
-      let actu = this.subsegment;
-      if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
-      this.newsService.getNews(actu)
-        .then(
-          result => {
-            this.news = result.items;
-            if (key) { this.cache.saveItem(key, result); }
-            this.shownNews = result.showItems;
-            this.searching = false;
-            this.nonews = this.news.length === 0;
-            this.updateDisplayed();
-          });
-      // If no connexion pop an alert and go back to previous page
-    } else {
-      this.searching = false;
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
-    }
+
+    let actu = this.subsegment;
+    if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
+    this.newsService.getNews(actu, this.searching).then(
+      result => {
+        this.news = result.items;
+        if (key) { this.cache.saveItem(key, result); }
+        this.shownNews = result.showItems;
+        this.nonews = this.news.length === 0;
+        this.updateDisplayed();
+      });
+    // this.updateDisplayed();
   }
 
   /*Update display news*/
   public updateDisplayed() {
     this.searching = true;
     this.displayedNews = this.news;
-    this.displayedNews = this.news.filter((item) => {
-      return (item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1);
-    });
+    this.filterUpdatedNews();
     this.shownNews = this.displayedNews.length;
     this.nonews = this.shownNews === 0;
     this.searching = false;
     this.loader.dismiss();
+  }
+
+  private filterUpdatedNews() {
+    this.displayedNews = this.news.filter((item) => {
+      return item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
+    });
   }
 
   /*When click on a news, go to the page with more details*/

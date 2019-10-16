@@ -38,6 +38,7 @@ b {
 button[ion-fab] {
     overflow: visible;
     position: relative;
+
     ion-label {
         position: absolute;
         top: -37px;
@@ -52,31 +53,44 @@ button[ion-fab] {
 
 ion-content.hM {
     height: 100% !important;
+
     ion-grid.portrait {
         height: 100% !important;
+
         ion-row {
-            height: calc(20vh - 11.2px);
+            height: calc(20vh - 22.4px);
+
             img:not(.uclouvain) {
-                height: calc(16vh - 8.96px);
+                height: calc(15vh - 17.92px);
             }
+
             p {
                 margin-top: 0px;
             }
         }
     }
+
     ion-grid.landscape {
         height: 100% !important;
+
         ion-row {
-            height: calc(25vh - 14px);
+            height: calc(25vh - 28px);
+
             img:not(.uclouvain) {
-                height: calc(18.75vh - 10.5px);
+                height: calc(18.75vh - 21px);
             }
+
             p {
                 margin-top: 0px;
             }
         }
     }
+
     ion-text {
         color: var(--ion-color-home) !important;
     }
+}
+
+ion-footer ion-toolbar ion-row ion-col {
+    width: 20vw !important;
 }

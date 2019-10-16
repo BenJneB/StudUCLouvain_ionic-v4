@@ -19,11 +19,14 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Component } from '@angular/core';
-import { Market } from '@ionic-native/market/ngx';
-import { NavController } from '@ionic/angular';
+import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { UtilsService } from '../../services/utils-services/utils-services';
+
+export class StructPage {
+  title: string; component: string; iosSchemaName: string; androidPackageName: string; appUrl: string; httpUrl: string;
+}
 
 @Component({
   selector: 'page-mobility',
@@ -33,19 +36,21 @@ import { UtilsService } from '../../services/utils-services/utils-services';
 
 export class MobilityPage {
   public title: any;
-  carpoolingPage;
-  busPage;
-  trainPage;
-  constructor(
-    public nav: NavController,
-    public market: Market,
-    private translateService: TranslateService,
-    public utilsServices: UtilsService
-  ) {
-    this.title = 'Mobilité';
-    let titlecar: string;
-    this.translateService.get('MOBI.COVOIT').subscribe((res: string) => { titlecar = res; });
+  carpoolingPage: StructPage;
+  busPage: StructPage;
+  trainPage: StructPage;
+  public platform: any;
 
+  constructor(
+    private translateService: TranslateService,
+    public utilsServices: UtilsService,
+    private _platform: Platform
+  ) {
+    this.platform = this._platform;
+    this.title = 'Mobilité';
+    let titlecar = 'NO_TITLE';
+    this.translateService.get('MOBI.COVOIT').subscribe((res: string) => { titlecar = res; });
+    console.log('After translate in constructor ! First !');
     // Information to launch external app
     this.carpoolingPage = {
       title: titlecar, component: 'CarpoolingPage',

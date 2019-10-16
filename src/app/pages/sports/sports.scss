@@ -29,17 +29,20 @@
   font-size: 40px;
 }
 
-.team {
-  background-color: #90c53e;
+ion-content.all {
+  --ion-background-color: #0f1d41 !important;
 
-  ion-label {
-    background-color: #90c53e;
-    color: white;
+  ion-searchbar {
+    --ion-background-color: white;
   }
 }
 
-ion-content.all {
-  --ion-background-color: #0f1d41 !important;
+ion-content.team {
+  --ion-background-color: #90c53e !important;
+
+  ion-label {
+    color: white !important;
+  }
 
   ion-searchbar {
     --ion-background-color: white;
@@ -51,5 +54,5 @@ ion-label * {
 }
 
 ion-label {
-  color: var(--ion-color-sport) !important;
+  color: white !important;
 }

@@ -1,5 +1,6 @@
-import { featureGroup, icon, latLng, Layer, Map, marker, tileLayer } from 'leaflet';
-
+import { featureGroup, icon, Map, marker, tileLayer } from 'leaflet';
+import { MapService } from 'src/app/services/map-services/map-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
 /**
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -25,8 +26,6 @@ import { ActionSheetController, ModalController, NavController, Platform, MenuCo
 
 import { POIService } from '../../services/map-services/poi-service';
 import { SearchModal } from './search/search';
-import { MapService } from 'src/app/services/map-services/map-service';
-import { UserService } from 'src/app/services/utils-services/user-service';
 
 @Component({
   selector: 'page-map',
@@ -82,7 +81,7 @@ export class MapPage {
     this.map.on('popupopen', (e) => {
       const px = this.map.project(e.popup._latlng);
       px.y -= e.popup._container.clientHeight / 2;
-      this.map.panTo(this.map.unproject(px), {animate: true});
+      this.map.panTo(this.map.unproject(px), { animate: true });
     });
   }
 
@@ -126,14 +125,14 @@ export class MapPage {
     return `<div>
                 <p class="popup-title">${item.id}</p>
                 <p style="width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.name}</p>
-                <img style="width:150px; height: auto;" src="${item.img}">
+                <img style="width:150px; height: auto;" src="${item.img}" alt="">
                 <p style="width: 150px; word-wrap: break-word;">${item.address}</p>
               </div>`;
   }
 
-  
 
-  
+
+
   // if(platform.is('android')){
   //     if("geo" in this.item){
   //       this.url = "geo:0,0?q="+this.item.geo.label;

@@ -1,33 +1,30 @@
 import { LoaderService } from 'src/app/services/utils-services/loader-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
-
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
 import { animate, state, style, transition, trigger } from '@angular/animations';
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { ModalController, NavController, Platform } from '@ionic/angular';
 
 import { EmployeeItem } from '../../entity/employeeItem';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { RepertoireService } from '../../services/wso2-services/repertoire-service';
 
 @Component({
@@ -54,12 +51,9 @@ export class SupportPage {
   segment = 'aide';
   shownHelp = null;
 
-  constructor(public navCtrl: NavController,
-    public modalCtrl: ModalController,
+  constructor(
     private iab: InAppBrowser,
-    public platform: Platform,
     public repService: RepertoireService,
-    public connService: ConnectivityService,
     public loader: LoaderService,
     private utilsServices: UtilsService
   ) {
@@ -67,8 +61,8 @@ export class SupportPage {
   }
 
   /*Take the name and lastname in the good field to do the search and display the result*/
-  update() {
-    this.loader.present('Please wait..').then();
+  async update() {
+    await this.loader.present('Please wait..');
     const options: Array<string> = [];
     const values: Array<string> = [];
     const fields = [

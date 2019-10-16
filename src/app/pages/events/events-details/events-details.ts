@@ -20,7 +20,6 @@
 */
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
-import { NavController, ToastController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { EventItem } from '../../../entity/eventItem';
@@ -35,36 +34,30 @@ import { UserService } from '../../../services/utils-services/user-service';
 export class EventsDetailsPage {
   event: EventItem;
 
-  constructor(public navCtrl: NavController,
+  constructor(
     public user: UserService,
     private translateService: TranslateService,
-    public toastCtrl: ToastController,
     private router: Router,
     private route: ActivatedRoute,
     private alertService: AlertService
   ) {
-    this.route.queryParams.subscribe(params => {
+    this.route.queryParams.subscribe(() => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.event = this.router.getCurrentNavigation().extras.state.items;
       }
     });
   }
 
-  /*OPEN THE EXTERNAL PAGE OF THE EVENT*/
   public openPage(url: string) {
     window.open(url, '_blank');
   }
 
-  /*ADD EVENT TO FAVORITE*/
   public addFavorite(event: EventItem) {
-    let message: string;
+    let message = '';
     this.translateService.get('EVENTS.MESSAGEFAV2').subscribe((res: string) => { message = res; });
-
     if (!this.user.hasFavorite(event.guid)) {
       this.user.addFavorite(event.guid);
       this.alertService.presentToast(message);
     }
-
   }
-
 }

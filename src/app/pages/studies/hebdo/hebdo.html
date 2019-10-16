@@ -37,20 +37,22 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content padding #weekContent>
+<ion-content class="ion-padding" #weekContent>
   <ion-list *ngFor="let day of schedule">
-    <ion-item-divider text-center [hidden]="day.schedule.length == 0" (click)="toggleGroup(day.date)">
+    <ion-item-divider class="ion-text-center" [hidden]="day.schedule.length == 0" (click)="toggleGroup(day.date)">
       <ion-label>{{day.day}} {{day.date}} ({{day.schedule.length}} séances)</ion-label>
     </ion-item-divider>
     <ion-list *ngFor="let course of day.schedule" [hidden]="!utilsServices.isGroupShown(day.date, shownGroup)">
       <ion-item-sliding>
         <ion-item>
           <ion-label>
-            <h2 text-center> {{course.cours}} - {{course.name}} </h2>
-            <p text-center> {{course.eventstarttime | date: 'dd/MM/yyyy H:mm' }}
+            <h2 class="ion-text-center"> {{course.cours}} - {{course.name}} </h2>
+            <p class="ion-text-center"> {{course.eventstarttime | date: 'dd/MM/yyyy H:mm' }}
               &mdash; {{course.eventendtime | date: 'H:mm' }} </p>
-            <p text-center *ngIf="course.entitycode"> {{'COURSE.AUDIT' | translate}} : {{course.entitycode}}</p>
-            <p text-center *ngIf="course.enseignants"> {{'COURSE.TEACHER' | translate}} : {{course.enseignants}}</p>
+            <p class="ion-text-center" *ngIf="course.entitycode"> {{'COURSE.AUDIT' | translate}} : {{course.entitycode}}
+            </p>
+            <p class="ion-text-center" *ngIf="course.enseignants"> {{'COURSE.TEACHER' | translate}} :
+              {{course.enseignants}}</p>
           </ion-label>
         </ion-item>
         <ion-item-options side="end">
@@ -61,24 +63,5 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
-    <!---<ion-item-sliding *ngFor="let activity of displayedActi" #slidingItem >
-       <ion-item *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD') || (activity.isExam && segment === 'Examen')">
-        <h2 text-center> {{'COURSE.ACTIVITY' | translate}} : {{activity.type}} </h2>
-        <p> {{activity.start | date: 'dd/MM/yyyy H:mm' }}
-          &mdash; {{activity.end | date: 'H:mm' }} </p>
-        <p> {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}</p>
-        <p> {{'COURSE.STUDENT' | translate}} : {{activity.students}}</p>
-        <p> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
-        <p> {{activity.name}} </p>
-      </ion-item>
-
-      <ion-item-options side="right">
-        <ion-button (click)="" >
-          <ion-icon name="calendar"></ion-icon>
-          {{'COURSE.CALENDAR' | translate}}
-        </ion-button>
-      </ion-item-options>
-    </ion-item-sliding>-->
-
   </ion-list>
 </ion-content>

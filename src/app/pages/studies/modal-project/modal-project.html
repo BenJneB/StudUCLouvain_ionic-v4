@@ -25,9 +25,9 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content padding>
+<ion-content class="ion-padding">
 
-  <div text-center> {{'MODAL.PROJECT' | translate}} : </div>
+  <div class="ion-text-center"> {{'MODAL.PROJECT' | translate}} : </div>
   <ion-list>
     <ion-button expand="full" *ngFor="let project of projects" (click)="closeModal(project)">
       <ion-label> {{project.name}} </ion-label>

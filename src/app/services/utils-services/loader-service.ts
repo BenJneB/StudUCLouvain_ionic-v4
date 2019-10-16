@@ -5,24 +5,28 @@ import { LoadingController } from '@ionic/angular';
   providedIn: 'root'
 })
 export class LoaderService {
-
   constructor(public loadingController: LoadingController) { }
-
+  loading: any;
   isLoading = false;
 
   async present(message: string) {
-    this.isLoading = true;
-    const loading = await this.loadingController.create({
-      message: message
-    });
-    await loading.present();
-    if (!this.isLoading) {
-      loading.dismiss();
+    if (this.loading === undefined) {
+      this.loading = await this.loadingController.create({
+        message: message
+      });
+      if (!this.isLoading) {
+        return await this.loading.present().then(() => {
+          this.isLoading = true;
+        });
+      }
     }
   }
 
   async dismiss() {
-    this.isLoading = false;
-    return await this.loadingController.dismiss().then();
+    if (this.isLoading) {
+      await this.loading.dismiss();
+      this.isLoading = false;
+      this.loading = undefined;
+    }
   }
 }
