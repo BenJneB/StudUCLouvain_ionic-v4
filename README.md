@@ -19,6 +19,8 @@
 
 - Check Map Page
 
+- Design & "Ergonomie"
+
 - Verify all imports
 
 - Write unit tests (WIP)
