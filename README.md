@@ -25,9 +25,7 @@
 
 - Write unit tests (WIP)
 
-  * Cover important parts with tests
-     - subpages
-     - services
+  * Write pertinent tests (not only covering tests)
 
 - Functional tests ? (WIP)
 
