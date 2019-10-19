@@ -54,7 +54,21 @@ npm -v
  - should be >= 6.0.0
 ```
 
-       
+
+### Build
+```bash
+$ ionic cordova build <platform>
+$ ionic cordova build <platform> --prod
+$ ionic cordova build <platform> --prod --release
+```
+
+
+### Emulate
+```bash
+$ ionic cordova emulate <platform>
+```
+
+
 ### Tests
 
 #### Unit Tests : Karma
