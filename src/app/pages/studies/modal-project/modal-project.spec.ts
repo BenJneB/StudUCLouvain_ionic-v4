@@ -46,7 +46,7 @@ import {
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { ModalProjectPage } from './modal-project';
-import { MockStudiesService } from '../../../../../test-config/MockStudiesService';
+import { newMockStudiesService } from '../../../../../test-config/MockStudiesService';
 import { StudiesService } from '../../../services/studies-services/studies-service';
 
 describe('ModalProject Component', () => {
@@ -81,7 +81,7 @@ describe('ModalProject Component', () => {
                 { provide: NavParams, useClass: NavParamsMock },
                 {
                     provide: StudiesService, useFactory: () => {
-                        return new MockStudiesService(null, null);
+                        return newMockStudiesService()
                     }
                 },
             ]
