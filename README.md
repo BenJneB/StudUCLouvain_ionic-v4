@@ -21,7 +21,7 @@
 
 - Design & "Ergonomie"
 
-- Verify all imports
+- Verify all imports (WIP)
 
 - Write unit tests (WIP)
 
