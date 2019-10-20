@@ -19,6 +19,11 @@ export class MockWso2Service extends Wso2Service {
     }
 }
 
+export function newMockWso2Service() {
+    let http: HttpClientMock;
+    return new MockWso2Service(http);
+}
+
 export class MockRepertoireService extends RepertoireService {
     constructor(
         http: HttpClientMock,

@@ -14,3 +14,8 @@ export class MockStudiesService extends StudiesService {
     }
 }
 
+export function newMockStudiesService() {
+    let http: HttpClientMock;
+    let ade: AdeService;
+    return new MockStudiesService(http, ade);
+}

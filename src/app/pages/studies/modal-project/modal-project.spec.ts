@@ -46,7 +46,8 @@ import {
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { ModalProjectPage } from './modal-project';
-import { MockStudiesService } from '../../../../../test-config/MockStudiesService';
+import { newMockStudiesService } from '../../../../../test-config/MockStudiesService';
+import { StudiesService } from '../../../services/studies-services/studies-service';
 
 describe('ModalProject Component', () => {
     let fixture;
@@ -78,7 +79,7 @@ describe('ModalProject Component', () => {
                 Diagnostic,
                 { provide: Calendar, useClass: CalendarMock },
                 { provide: NavParams, useClass: NavParamsMock },
-                MockStudiesService
+                { provide: StudiesService, useClass: newMockStudiesService() },
             ]
         }).compileComponents();
     }));
