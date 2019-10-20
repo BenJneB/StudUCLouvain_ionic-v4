@@ -2,7 +2,7 @@ import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { of } from 'rxjs';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
-import { AppAvailabilityMock, MarketMock, NetworkMock, ToastMock } from 'test-config/MockIonicNative';
+import { AppAvailabilityMock, MarketMock, NetworkMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -32,13 +32,13 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { Toast } from '@ionic-native/toast/ngx';
 import { IonicModule, IonRouterOutlet } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
 import { AppComponent } from './app.component';
+import { AlertService } from './services/utils-services/alert-service';
 
 describe('MyApp Component', () => {
   let fixture;
@@ -64,10 +64,10 @@ describe('MyApp Component', () => {
             return new MockCacheStorageService(null, null);
           }
         },
-        { provide: Toast, useClass: ToastMock },
         { provide: Network, useClass: NetworkMock },
         Diagnostic,
         { provide: Calendar, useClass: CalendarMock },
+          AlertService,
         Navigator
       ]
     }).compileComponents();
@@ -161,7 +161,7 @@ describe('MyApp Component', () => {
       expect(spyPop.calls.count()).toEqual(1);
     });
     it('should call show from Toast (otherwhise and not threshold)', () => {
-      const spyShow = spyOn(component.toast, 'show').and.callThrough();
+      const spyShow = spyOn(component.alertService, 'presentToast').and.callThrough();
       spyOnProperty(component.router, 'url', 'get').and.returnValue('home');
       component.confirmExitApp();
       expect(spyShow.calls.count()).toEqual(1);

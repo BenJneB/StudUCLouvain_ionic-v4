@@ -26,15 +26,14 @@ import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
-import { Toast } from '@ionic-native/toast/ngx';
 import {
-  ActionSheetController,
-  IonRouterOutlet,
-  MenuController,
-  ModalController,
-  NavController,
-  Platform,
-  PopoverController
+    ActionSheetController,
+    IonRouterOutlet,
+    MenuController,
+    ModalController,
+    NavController,
+    Platform,
+    PopoverController
 } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
@@ -78,7 +77,6 @@ export class AppComponent {
     public translateService: TranslateService,
     public cache: CacheService,
     private router: Router,
-    private toast: Toast,
     private alertService: AlertService,
     private nav: NavController,
     private utilsServices: UtilsService,
