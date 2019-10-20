@@ -32,6 +32,7 @@ import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
  */
 import { MapPage } from './map';
 import { POIService } from '../../services/map-services/poi-service';
+import { MapService } from '../../services/map-services/map-service';
 
 describe('Map Component', () => {
     let fixture;
@@ -50,7 +51,8 @@ describe('Map Component', () => {
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
                 Geolocation,
-                POIService
+                POIService,
+                MapService
             ]
         }).compileComponents();
     }));

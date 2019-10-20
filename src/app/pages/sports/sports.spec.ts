@@ -33,6 +33,7 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SportsPage } from './sports';
+import { LoaderService } from '../../services/utils-services/loader-service';
 
 describe('Sports Component', () => {
     let fixture;
@@ -65,7 +66,8 @@ describe('Sports Component', () => {
                     }
                 },
                 UserService,
-                Calendar
+                Calendar,
+                LoaderService
             ]
         }).compileComponents();
     }));
