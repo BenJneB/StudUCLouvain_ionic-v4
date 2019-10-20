@@ -47,7 +47,6 @@
     "cordova-android": "^8.1.0",
     "cordova-browser": "^6.0.0",
     "cordova-ios": "5.0.1",
-    "cordova-plugin-advanced-http": "^2.2.0",
     "cordova-plugin-appavailability": "^0.4.2",
     "cordova-plugin-file": "^6.0.2",
     "cordova-plugin-market": "^1.2.0",
