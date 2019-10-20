@@ -18,6 +18,10 @@ export class MockStudiesService extends StudiesService {
     getProjects() {
         return new Promise(() => {});
     }
+
+    openSession() {
+        return new Promise<string>(() => {});
+    }
 }
 
 export function newMockStudiesService() {
