@@ -28,8 +28,6 @@ import { MapLocation } from '../../entity/mapLocation';
 import { ConnectivityService } from '../utils-services/connectivity-service';
 import { UserService } from '../utils-services/user-service';
 
-declare var google;
-
 @Injectable({
     providedIn: 'root'
 })
