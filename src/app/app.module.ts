@@ -25,47 +25,30 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
-import { RouteReuseStrategy } from '@angular/router';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { GoogleMaps } from '@ionic-native/google-maps';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
-import { NativeGeocoder } from '@ionic-native/native-geocoder/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { SecureStorage } from '@ionic-native/secure-storage/ngx';
-import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { SQLite } from '@ionic-native/sqlite/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
-import { IonicModule, IonicRouteStrategy } from '@ionic/angular';
+import { IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 import { TranslateHttpLoader } from '@ngx-translate/http-loader';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { POIService } from './services/map-services/poi-service';
-import { EventsService } from './services/rss-services/events-service';
-import { NewsService } from './services/rss-services/news-service';
 import { RssService } from './services/rss-services/rss-service';
-import { SportsService } from './services/rss-services/sports-service';
 import { AdeService } from './services/studies-services/ade-service';
-import { CourseService } from './services/studies-services/course-service';
-import { StudiesService } from './services/studies-services/studies-service';
 import { AlertService } from './services/utils-services/alert-service';
 import { ConnectivityService } from './services/utils-services/connectivity-service';
 import { FacService } from './services/utils-services/fac-service';
 import { TransService } from './services/utils-services/trans-services';
 import { UserService } from './services/utils-services/user-service';
 import { UtilsService } from './services/utils-services/utils-services';
-import { LibrariesService } from './services/wso2-services/libraries-service';
-import { RepertoireService } from './services/wso2-services/repertoire-service';
-import { StudentService } from './services/wso2-services/student-service';
 import { Wso2Service } from './services/wso2-services/wso2-service';
 
 export function HttpLoaderFactory(http: HttpClient) {
@@ -102,43 +85,25 @@ export function HttpLoaderFactory(http: HttpClient) {
     { provide: ErrorHandler, useClass: ErrorHandler },
     AppAvailability,
     ConnectivityService,
-    CourseService,
-    StudiesService,
-    EventsService,
     AlertService,
     TransService,
     InAppBrowser,
     Market,
-    POIService,
     UserService,
     Device,
-    SplashScreen,
     StatusBar,
-    GoogleMaps,
     Geolocation,
     Network,
     Calendar,
-    NewsService,
     RssService,
-    LibrariesService,
     AdeService,
-    CourseService,
     Wso2Service,
-    NativeGeocoder,
-    SportsService,
-    RepertoireService,
-    StudentService,
     UtilsService,
     FacService,
-    SQLite,
-    SecureStorage,
-    AppVersion,
-    Diagnostic,
     Toast,
     FormsModule,
     ReactiveFormsModule,
     CommonModule,
-    { provide: RouteReuseStrategy, useClass: IonicRouteStrategy }
   ]
 })
 export class AppModule { }
