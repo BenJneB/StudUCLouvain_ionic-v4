@@ -4,6 +4,7 @@ import { AppComponent } from '../../src/app/app.po';
 
 describe('new App', () => {
   const page = new AppComponent();
+  browser.waitForAngularEnabled(false);
 
   it('should display TutoPage', () => {
     page.navigateTo();

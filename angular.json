@@ -118,7 +118,13 @@
               "progress": false,
               "watch": false
             }
-          }
+          },
+          "fileReplacements": [
+            {
+              "replace": "src/environments/environment.ts",
+              "with": "src/environments/environment.e2e.ts"
+            }
+          ]
         },
         "lint": {
           "builder": "@angular-devkit/build-angular:tslint",
