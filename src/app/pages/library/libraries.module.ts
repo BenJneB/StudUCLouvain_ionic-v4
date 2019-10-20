@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { LibrariesPage } from './libraries';
 import { LibrariesService } from '../../services/wso2-services/libraries-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 
 @NgModule({
   declarations: [LibrariesPage],
@@ -25,6 +26,7 @@ import { LibrariesService } from '../../services/wso2-services/libraries-service
   ],
   providers: [
     LibrariesService,
+    ConnectivityService,
   ]
 })
 export class LibrariesPageModule { }

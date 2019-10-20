@@ -33,7 +33,7 @@ export class Wso2Service {
   }
 
   /*Load wso2 service*/
-  load(url: string) {
+  load(url: string): Observable<any> {
     const finalUrl = this.wso2ServiceBaseUrl + url;
     return this.http.get(finalUrl, { headers: this.headers }).pipe(
       map(res => {

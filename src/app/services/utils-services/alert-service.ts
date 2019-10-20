@@ -76,7 +76,8 @@ export class AlertService {
   async presentToast(message: string, slidingItem?: IonItemSliding) {
     const toast = await this.toastCtrl.create({
       message: message,
-      duration: 3000
+      duration: 3000,
+      position: 'middle'
     });
     if (slidingItem !== undefined) {
       await slidingItem.close();

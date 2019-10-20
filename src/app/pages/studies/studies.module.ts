@@ -9,6 +9,9 @@ import { ModalProjectPageModule } from './modal-project/modal-project.module';
 import { StudiesPage } from './studies';
 import { StudentService } from '../../services/wso2-services/student-service';
 import { StudiesService } from '../../services/studies-services/studies-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { TransService } from '../../services/utils-services/trans-services';
+import { Wso2Service } from '../../services/wso2-services/wso2-service';
 
 @NgModule({
   declarations: [StudiesPage],
@@ -29,6 +32,9 @@ import { StudiesService } from '../../services/studies-services/studies-service'
   providers: [
     StudentService,
     StudiesService,
+    ConnectivityService,
+    TransService,
+    Wso2Service
   ]
 })
 export class StudiesPageModule { }

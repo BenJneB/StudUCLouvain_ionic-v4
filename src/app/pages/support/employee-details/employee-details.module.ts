@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { EmployeeDetailsPage } from './employee-details';
 import { RepertoireService } from '../../../services/wso2-services/repertoire-service';
+import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
 
 @NgModule({
   declarations: [EmployeeDetailsPage],
@@ -25,6 +26,7 @@ import { RepertoireService } from '../../../services/wso2-services/repertoire-se
   ],
   providers: [
     RepertoireService,
+    ConnectivityService,
   ]
 })
 export class EmployeeDetailsPageModule { }
