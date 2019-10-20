@@ -39,6 +39,8 @@ import { TranslateModule } from '@ngx-translate/core';
 import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
 import { AppComponent } from './app.component';
 import { AlertService } from './services/utils-services/alert-service';
+import { UtilsService } from './services/utils-services/utils-services';
+import { newMockUtilsService } from '../../test-config/MockUtilsService';
 
 describe('MyApp Component', () => {
   let fixture;
@@ -64,6 +66,11 @@ describe('MyApp Component', () => {
             return new MockCacheStorageService(null, null);
           }
         },
+          {
+              provide: UtilsService, useFactory: () => {
+                  return newMockUtilsService();
+              }
+          },
         { provide: Network, useClass: NetworkMock },
         Diagnostic,
         { provide: Calendar, useClass: CalendarMock },
