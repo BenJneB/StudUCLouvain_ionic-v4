@@ -38,7 +38,8 @@ import { newMockStudiesService } from '../../../../test-config/MockStudiesServic
 import { StudiesService } from '../../services/studies-services/studies-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { Wso2Service } from '../../services/wso2-services/wso2-service';
-import { newMockWso2Service } from '../../../../test-config/MockWso2Services';
+import { newMockStudentService, newMockWso2Service } from '../../../../test-config/MockWso2Services';
+import { StudentService } from '../../services/wso2-services/student-service';
 
 describe('Studies Component', () => {
     let fixture;
@@ -82,6 +83,11 @@ describe('Studies Component', () => {
                 {
                     provide: Wso2Service, useFactory: () => {
                         return newMockWso2Service();
+                    }
+                },
+                {
+                    provide: StudentService, useFactory: () => {
+                        return newMockStudentService();
                     }
                 },
             ]

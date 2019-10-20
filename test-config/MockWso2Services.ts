@@ -6,6 +6,7 @@ import { HttpClient } from '@angular/common/http';
 import { Wso2Service } from '../src/app/services/wso2-services/wso2-service';
 import { MockConnectivityService } from './MockUtilsService';
 import { Observable } from 'rxjs';
+import { StudentService } from '../src/app/services/wso2-services/student-service';
 
 export class HttpClientMock extends HttpClient {
     constructor() {
@@ -80,4 +81,23 @@ export function newMockLibrariesService() {
     let wso2: MockWso2Service;
     let conn: MockConnectivityService;
     return new MockLibrariesService(http, wso2, conn);
+}
+
+export class MockStudentService extends StudentService {
+    constructor(
+        http: HttpClientMock,
+        wso2: MockWso2Service,
+        ) {
+        super(http, wso2);
+    }
+
+    searchActivities() {
+        return new Promise(() => {});
+    }
+}
+
+export function newMockStudentService() {
+    let http: HttpClientMock;
+    let wso2: MockWso2Service;
+    return new MockStudentService(http, wso2);
 }
