@@ -69,7 +69,11 @@ describe('Studies Component', () => {
                         return newMockUtilsService();
                     }
                 },
-                { provide: StudiesService, useClass: newMockStudiesService() },
+                {
+                    provide: StudiesService, useFactory: () => {
+                        return newMockStudiesService();
+                    }
+                },
             ]
         }).compileComponents();
     }));

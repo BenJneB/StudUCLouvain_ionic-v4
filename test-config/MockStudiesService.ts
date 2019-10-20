@@ -2,6 +2,7 @@ import { HttpClient } from '@angular/common/http';
 import { StudiesService } from '../src/app/services/studies-services/studies-service';
 import { AdeService } from '../src/app/services/studies-services/ade-service';
 import { MockUtilsService } from './MockUtilsService';
+import { Observable } from 'rxjs';
 
 export class HttpClientMock extends HttpClient {
     constructor() {
@@ -24,6 +25,10 @@ export function newMockStudiesService() {
 export class MockAdeService extends AdeService {
     constructor(http: HttpClientMock, utils: MockUtilsService) {
         super(http, utils);
+    }
+
+    getProjects() {
+        return new Observable(() => {});
     }
 }
 
