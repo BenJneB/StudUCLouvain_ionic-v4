@@ -46,13 +46,15 @@
 
 
 ### Prerequisites
-Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
+- Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
 node -v
  - should be >= 10.0.0
 npm -v
  - should be >= 6.0.0
 ```
+
+- For iOS, update XCode version to 8.0 or higher
 
 
 ### Launch on browser
