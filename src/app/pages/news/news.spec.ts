@@ -37,6 +37,7 @@ import { FacService } from '../../services/utils-services/fac-service';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { NewsPage } from './news';
+import { LoaderService } from '../../services/utils-services/loader-service';
 
 describe('News Component', () => {
     let fixture;
@@ -82,6 +83,7 @@ describe('News Component', () => {
                         return newMockNewsService();
                     }
                 },
+                LoaderService
             ]
         }).compileComponents();
     }));

@@ -4,15 +4,12 @@ import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Network } from '@ionic-native/network/ngx';
 import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InAppBrowserMock, ModalControllerMock, NetworkMock } from '../../../../test-config/MockIonicNative';
+import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -34,6 +31,7 @@ import { InAppBrowserMock, ModalControllerMock, NetworkMock } from '../../../../
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { MapPage } from './map';
+import { POIService } from '../../services/map-services/poi-service';
 
 describe('Map Component', () => {
     let fixture;
@@ -51,10 +49,8 @@ describe('Map Component', () => {
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: Network, useClass: NetworkMock },
-                Diagnostic,
                 Geolocation,
+                POIService
             ]
         }).compileComponents();
     }));
