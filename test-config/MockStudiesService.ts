@@ -4,6 +4,7 @@ import { AdeService } from '../src/app/services/studies-services/ade-service';
 import { MockUtilsService } from './MockUtilsService';
 import { Observable } from 'rxjs';
 import { CourseService } from '../src/app/services/studies-services/course-service';
+import { Activity } from '../src/app/entity/activity';
 
 export class HttpClientMock extends HttpClient {
     constructor() {
@@ -50,6 +51,10 @@ export function newMockAdeServicee() {
 export class MockCourseService extends CourseService {
     constructor(http: HttpClientMock, ade: MockAdeService) {
         super(http, ade);
+    }
+
+    getCourseId() {
+        return new Promise<Activity[]>(() => {});
     }
 }
 
