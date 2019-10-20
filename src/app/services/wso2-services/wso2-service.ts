@@ -4,7 +4,7 @@ import { catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 // import { wso2Header } from '../../app/variables';
-import { wso2HeaderStudent } from '../../../environments/environment.prod';
+import { wso2HeaderStudent } from '../../../environments/environment';
 
 /**
   Generated class for the Wso2ServiceProvider provider.
