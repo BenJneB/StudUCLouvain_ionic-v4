@@ -15,3 +15,4 @@ export const environment = {
  */
 // import 'zone.js/dist/zone-error';  // Included with Angular CLI.
 export const wso2HeaderStudent = 'AUTHORIZATION_HEADER_FOR_WSO2_LOGIN';
+export const wso2ServiceBaseUrl = 'https://api.sgsi.ucl.ac.be:8243/';
