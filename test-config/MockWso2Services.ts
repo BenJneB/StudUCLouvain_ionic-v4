@@ -26,6 +26,10 @@ export class MockWso2Service extends Wso2Service {
     getToken() {
         return new Observable<string>(() => {});
     }
+
+    load() {
+        return new Observable<string>(() => {});
+    }
 }
 
 export function newMockWso2Service() {
