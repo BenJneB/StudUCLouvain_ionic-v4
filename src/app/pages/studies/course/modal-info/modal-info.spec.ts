@@ -32,6 +32,8 @@ import { ModalControllerMock, NavParamsMock } from '../../../../../../test-confi
  */
 import { ModalInfoPage } from './modal-info';
 import { StudentService } from '../../../../services/wso2-services/student-service';
+import { MockWso2Service } from '../../../../../../test-config/MockWso2Services';
+import { Wso2Service } from '../../../../services/wso2-services/wso2-service';
 
 describe('ModalInfo Component', () => {
     let fixture;
@@ -56,7 +58,9 @@ describe('ModalInfo Component', () => {
                     }
                 },
                 { provide: NavParams, useClass: NavParamsMock },
-                StudentService
+                StudentService,
+                { provide: Wso2Service, useClass: MockWso2Service },
+
             ]
         }).compileComponents();
     }));
