@@ -56,6 +56,10 @@ export class MockLibrariesService extends LibrariesService {
 
         });
     }
+
+    loadLibDetails() {
+        return new Promise(() => {});
+    }
 }
 
 export function newMockLibrariesService() {
