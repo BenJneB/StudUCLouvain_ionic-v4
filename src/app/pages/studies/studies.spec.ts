@@ -35,6 +35,7 @@ import { InAppBrowserMock, ModalControllerMock, NetworkMock } from '../../../../
 import { StudiesPage } from './studies';
 import { UtilsService } from '../../services/utils-services/utils-services';
 import { newMockUtilsService } from '../../../../test-config/MockUtilsService';
+import { MockStudiesService } from '../../../../test-config/MockStudiesService';
 
 describe('Studies Component', () => {
     let fixture;
@@ -67,6 +68,7 @@ describe('Studies Component', () => {
                         return newMockUtilsService();
                     }
                 },
+                MockStudiesService
             ]
         }).compileComponents();
     }));
