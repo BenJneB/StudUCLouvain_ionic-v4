@@ -57,13 +57,32 @@ npm -v
 - For iOS, update XCode version to 8.0 or higher
 
 
+### Getting Started
+
+* Clone this repository
+
+* Install Ionic & Cordova
+    ```bash
+    $ npm install -g ionic cordova
+    ```
+
+* Install node_modules
+    ```bash
+    $ npm install
+    ```    
+
+* Replace the value of "wso2HeaderStudent" by the appropriate value in the file StudUCLouvain/src/environments/environments(.prod).ts
+
+
 ### Launch on browser
 ```bash
 $ ionic serve
 ```
 
 
-### Build
+### Launch on platform
+
+#### Build
 ```bash
 $ ionic cordova build <platform>
 $ ionic cordova build <platform> --prod
@@ -71,11 +90,15 @@ $ ionic cordova build <platform> --prod --release
 ```
 
 
-### Emulate
+#### Emulate
 ```bash
 $ ionic cordova emulate <platform>
 ```
 
+#### Run on device
+```bash
+$ ionic cordova run <platform> (emulate if device not found)
+```
 
 ### Tests
 
