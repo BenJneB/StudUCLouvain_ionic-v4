@@ -35,6 +35,9 @@ import { CoursePage } from './course';
 import { CourseService } from '../../../services/studies-services/course-service';
 import { AdeService } from '../../../services/studies-services/ade-service';
 import { newMockAdeServicee, newMockCourseService } from '../../../../../test-config/MockStudiesService';
+import { UtilsService } from '../../../services/utils-services/utils-services';
+import { newMockUserService, newMockUtilsService } from '../../../../../test-config/MockUtilsService';
+import { UserService } from '../../../services/utils-services/user-service';
 
 describe('Course Component', () => {
     let fixture;
@@ -66,6 +69,16 @@ describe('Course Component', () => {
                 },                {
                     provide: AdeService, useFactory: () => {
                         return newMockAdeServicee();
+                    }
+                },
+                {
+                    provide: UtilsService, useFactory: () => {
+                        return newMockUtilsService();
+                    }
+                },
+                {
+                    provide: UserService, useFactory: () => {
+                        return newMockUserService();
                     }
                 },
             ]
