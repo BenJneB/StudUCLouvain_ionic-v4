@@ -8,7 +8,6 @@ import { InAppBrowser, InAppBrowserEventType, InAppBrowserObject, InAppBrowserOp
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { Toast } from '@ionic-native/toast/ngx';
 
 function getPromise(item?: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -107,16 +106,6 @@ export class DeviceMock extends Device {
     serial: string;
 }
 
-export class ToastMock extends Toast {
-
-    show(message: string, duration: string, position: string): Observable<any> {
-        return getObservable();
-    }
-
-    hide(): Promise<any> {
-        return getPromise();
-    }
-}
 
 export class NetworkMock extends Network {
     type = 'cellular';
