@@ -2,7 +2,7 @@ import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { of } from 'rxjs';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
-import { AppAvailabilityMock, MarketMock, NetworkMock, StatusBarMock, ToastMock } from 'test-config/MockIonicNative';
+import { AppAvailabilityMock, MarketMock, NetworkMock, ToastMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -32,7 +32,6 @@ import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Toast } from '@ionic-native/toast/ngx';
 import { IonicModule, IonRouterOutlet } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
@@ -59,7 +58,6 @@ describe('MyApp Component', () => {
         { provide: AppAvailability, useClass: AppAvailabilityMock },
         { provide: InAppBrowser, useClass: InAppBrowserMock },
         { provide: Device, useClass: DeviceMock },
-        { provide: StatusBar, useClass: StatusBarMock },
         CacheService,
         {
           provide: CacheStorageService, useFactory: () => {
