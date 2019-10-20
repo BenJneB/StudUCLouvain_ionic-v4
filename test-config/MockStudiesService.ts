@@ -3,6 +3,7 @@ import { StudiesService } from '../src/app/services/studies-services/studies-ser
 import { AdeService } from '../src/app/services/studies-services/ade-service';
 import { MockUtilsService } from './MockUtilsService';
 import { Observable } from 'rxjs';
+import { CourseService } from '../src/app/services/studies-services/course-service';
 
 export class HttpClientMock extends HttpClient {
     constructor() {
@@ -44,4 +45,16 @@ export function newMockAdeServicee() {
     let http: HttpClientMock;
     let utils: MockUtilsService;
     return new MockAdeService(http, utils);
+}
+
+export class MockCourseService extends CourseService {
+    constructor(http: HttpClientMock, ade: MockAdeService) {
+        super(http, ade);
+    }
+}
+
+export function newMockCourseService() {
+    let http: HttpClientMock;
+    let ade: MockAdeService;
+    return new MockCourseService(http, ade);
 }

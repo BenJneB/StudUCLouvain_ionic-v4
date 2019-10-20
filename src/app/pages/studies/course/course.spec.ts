@@ -34,7 +34,7 @@ import { CalendarMock, ModalControllerMock } from '../../../../../test-config/Mo
 import { CoursePage } from './course';
 import { CourseService } from '../../../services/studies-services/course-service';
 import { AdeService } from '../../../services/studies-services/ade-service';
-import { newMockAdeServicee } from '../../../../../test-config/MockStudiesService';
+import { newMockAdeServicee, newMockCourseService } from '../../../../../test-config/MockStudiesService';
 
 describe('Course Component', () => {
     let fixture;
@@ -59,8 +59,11 @@ describe('Course Component', () => {
                     }
                 },
                 { provide: Calendar, useClass: CalendarMock },
-                CourseService,
                 {
+                    provide: CourseService, useFactory: () => {
+                        return newMockCourseService();
+                    }
+                },                {
                     provide: AdeService, useFactory: () => {
                         return newMockAdeServicee();
                     }
