@@ -40,6 +40,7 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
 import { Wso2Service } from '../../services/wso2-services/wso2-service';
 import { newMockStudentService, newMockWso2Service } from '../../../../test-config/MockWso2Services';
 import { StudentService } from '../../services/wso2-services/student-service';
+import { TransService } from '../../services/utils-services/trans-services';
 
 describe('Studies Component', () => {
     let fixture;
@@ -90,6 +91,7 @@ describe('Studies Component', () => {
                         return newMockStudentService();
                     }
                 },
+                TransService
             ]
         }).compileComponents();
     }));
