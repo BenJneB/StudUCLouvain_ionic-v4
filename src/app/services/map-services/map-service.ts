@@ -28,9 +28,7 @@ import { MapLocation } from '../../entity/mapLocation';
 import { ConnectivityService } from '../utils-services/connectivity-service';
 import { UserService } from '../utils-services/user-service';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class MapService {
 
     mapElement: any;

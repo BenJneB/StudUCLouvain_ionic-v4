@@ -29,9 +29,7 @@ import { Wso2Service } from './wso2-service';
 import { map } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class LibrariesService {
     libraries: Array<LibraryItem> = [];
     url = 'libraries/v1/list';
