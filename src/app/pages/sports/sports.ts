@@ -122,7 +122,7 @@ export class SportsPage implements OnInit {
           );
         });
     } else {
-      // this.searching = false;
+      this.searching = false;
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
