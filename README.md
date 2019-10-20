@@ -82,6 +82,12 @@ $ ionic serve
 
 ### Launch on platform
 
+#### Before
+```bash
+$ ionic cordova parepare
+$ ionic cordova platform add <platform>
+```
+
 #### Build
 ```bash
 $ ionic cordova build <platform>
