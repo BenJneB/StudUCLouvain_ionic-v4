@@ -42,7 +42,7 @@
 
 ### More informations :
 
-#### https://github.com/UCL-INGI/StudUCLouvain
+#### https://github.com/UCL-INGI/StudUCLouvain (+- Outdated)
 
 
 ### Prerequisites
