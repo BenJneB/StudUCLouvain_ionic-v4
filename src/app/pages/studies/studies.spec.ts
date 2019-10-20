@@ -9,12 +9,11 @@ import { async, TestBed } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Network } from '@ionic-native/network/ngx';
 import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InAppBrowserMock, ModalControllerMock, NetworkMock } from '../../../../test-config/MockIonicNative';
+import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -34,9 +33,10 @@ import { InAppBrowserMock, ModalControllerMock, NetworkMock } from '../../../../
  */
 import { StudiesPage } from './studies';
 import { UtilsService } from '../../services/utils-services/utils-services';
-import { newMockUtilsService } from '../../../../test-config/MockUtilsService';
+import { newMockConnectivityService, newMockUtilsService } from '../../../../test-config/MockUtilsService';
 import { newMockStudiesService } from '../../../../test-config/MockStudiesService';
 import { StudiesService } from '../../services/studies-services/studies-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 
 describe('Studies Component', () => {
     let fixture;
@@ -63,8 +63,11 @@ describe('Studies Component', () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                { provide: Network, useClass: NetworkMock },
                 {
+                    provide: ConnectivityService, useFactory: () => {
+                        return newMockConnectivityService();
+                    }
+                },                {
                     provide: UtilsService, useFactory: () => {
                         return newMockUtilsService();
                     }

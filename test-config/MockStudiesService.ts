@@ -14,6 +14,10 @@ export class MockStudiesService extends StudiesService {
     constructor(http: HttpClientMock, ade: MockAdeService) {
         super(http, ade);
     }
+
+    getProjects() {
+        return new Promise(() => {});
+    }
 }
 
 export function newMockStudiesService() {
