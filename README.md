@@ -55,6 +55,12 @@ npm -v
 ```
 
 
+### Launch on browser
+```bash
+$ ionic serve
+```
+
+
 ### Build
 ```bash
 $ ionic cordova build <platform>
