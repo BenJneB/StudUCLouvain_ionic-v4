@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { SupportPage } from './support';
+import { RepertoireService } from '../../services/wso2-services/repertoire-service';
 
 @NgModule({
   declarations: [SupportPage],
@@ -21,6 +22,9 @@ import { SupportPage } from './support';
         component: SupportPage
       }
     ])
+  ],
+  providers: [
+    RepertoireService,
   ]
 })
 export class SupportPageModule { }

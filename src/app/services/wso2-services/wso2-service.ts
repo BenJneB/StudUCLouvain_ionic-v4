@@ -1,11 +1,10 @@
-import { throwError as observableThrowError } from 'rxjs';
+import { Observable, throwError as observableThrowError } from 'rxjs';
 import { catchError, map } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 // import { wso2Header } from '../../app/variables';
-import { wso2HeaderStudent } from '../../variables';
+import { wso2HeaderStudent } from '../../../environments/environment.prod';
 
 /**
   Generated class for the Wso2ServiceProvider provider.

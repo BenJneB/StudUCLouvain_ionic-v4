@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ModalProjectPage } from './modal-project';
+import { StudiesService } from '../../../services/studies-services/studies-service';
 
 @NgModule({
   declarations: [ModalProjectPage],
@@ -17,6 +18,9 @@ import { ModalProjectPage } from './modal-project';
   ],
   entryComponents: [
     ModalProjectPage
+  ],
+  providers: [
+    StudiesService,
   ]
 })
 export class ModalProjectPageModule { }

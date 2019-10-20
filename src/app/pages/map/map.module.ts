@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { MapPage } from './map';
 import { SearchModalModule } from './search/search.module';
+import { POIService } from '../../services/map-services/poi-service';
 
 @NgModule({
   declarations: [MapPage],
@@ -23,6 +24,9 @@ import { SearchModalModule } from './search/search.module';
         component: MapPage
       }
     ])
-  ]
+  ],
+  providers: [
+    POIService
+  ],
 })
 export class MapPageModule { }

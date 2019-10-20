@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CoursePage } from './course';
 import { ModalInfoPageModule } from './modal-info/modal-info.module';
+import { CourseService } from '../../../services/studies-services/course-service';
 
 @NgModule({
   declarations: [CoursePage],
@@ -23,6 +24,9 @@ import { ModalInfoPageModule } from './modal-info/modal-info.module';
         component: CoursePage
       }
     ])
+  ],
+  providers: [
+    CourseService,
   ]
 })
 export class CoursePageModule { }

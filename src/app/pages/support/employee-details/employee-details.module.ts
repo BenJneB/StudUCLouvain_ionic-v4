@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { EmployeeDetailsPage } from './employee-details';
+import { RepertoireService } from '../../../services/wso2-services/repertoire-service';
 
 @NgModule({
   declarations: [EmployeeDetailsPage],
@@ -21,6 +22,9 @@ import { EmployeeDetailsPage } from './employee-details';
         component: EmployeeDetailsPage
       }
     ])
+  ],
+  providers: [
+    RepertoireService,
   ]
 })
 export class EmployeeDetailsPageModule { }

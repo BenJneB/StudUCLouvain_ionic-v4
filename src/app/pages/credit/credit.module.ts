@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { CreditPage } from './credit';
+import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @NgModule({
   declarations: [CreditPage],
@@ -21,6 +22,9 @@ import { CreditPage } from './credit';
         component: CreditPage
       }
     ])
+  ],
+  providers: [
+    AppVersion,
   ]
 })
 export class CreditPageModule { }

@@ -7,6 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { SportsPage } from './sports';
 import { SportsFilterPageModule } from './sports-filter/sports-filter.module';
+import { SportsService } from '../../services/rss-services/sports-service';
 
 @NgModule({
   declarations: [SportsPage],
@@ -23,6 +24,9 @@ import { SportsFilterPageModule } from './sports-filter/sports-filter.module';
         component: SportsPage
       }
     ])
+  ],
+  providers: [
+    SportsService,
   ]
 })
 export class SportsPageModule { }

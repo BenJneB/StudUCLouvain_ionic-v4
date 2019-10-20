@@ -1,4 +1,3 @@
-import { UserService } from 'src/app/services/utils-services/user-service';
 import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
 import { RepertoireService } from 'src/app/services/wso2-services/repertoire-service';
 
@@ -6,6 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Wso2Service } from '../src/app/services/wso2-services/wso2-service';
 import { MockConnectivityService } from './MockUtilsService';
+import { Observable } from 'rxjs';
 
 export class HttpClientMock extends HttpClient {
     constructor() {
@@ -28,15 +28,11 @@ export class MockRepertoireService extends RepertoireService {
     }
 
     searchEmployees() {
-        return new Promise((resolve, reject) => {
-
-        });
+        return new Promise(() => {});
     }
 
     loadEmpDetails() {
-        return new Promise((resolve, reject) => {
-
-        });
+        return new Promise(() => {});
     }
 }
 

@@ -201,8 +201,6 @@ export class NewsPage implements OnInit {
   public async loadNews(key?: string) {
     this.searching = true;
     this.news = [];
-    // Check connexion before load news
-
     let actu = this.subsegment;
     if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
     this.newsService.getNews(actu, this.searching).then(

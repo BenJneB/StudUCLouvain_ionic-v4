@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { NewsPage } from './news';
+import { NewsService } from '../../services/rss-services/news-service';
 
 @NgModule({
   declarations: [NewsPage],
@@ -21,6 +22,9 @@ import { NewsPage } from './news';
         component: NewsPage
       }
     ])
+  ],
+  providers: [
+    NewsService,
   ]
 })
 export class NewsPageModule { }

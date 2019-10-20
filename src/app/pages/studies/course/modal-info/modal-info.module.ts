@@ -5,6 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ModalInfoPage } from './modal-info';
+import { StudentService } from '../../../../services/wso2-services/student-service';
 
 @NgModule({
   declarations: [ModalInfoPage],
@@ -17,6 +18,9 @@ import { ModalInfoPage } from './modal-info';
   ],
   entryComponents: [
     ModalInfoPage
+  ],
+  providers: [
+    StudentService,
   ]
 })
 export class ModalInfoPageModule { }

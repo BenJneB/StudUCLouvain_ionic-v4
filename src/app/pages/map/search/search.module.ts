@@ -3,6 +3,7 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 import { SearchModal } from './search';
+import { POIService } from '../../../services/map-services/poi-service';
 
 @NgModule({
   declarations: [
@@ -14,6 +15,9 @@ import { SearchModal } from './search';
   ],
   entryComponents: [
     SearchModal
+  ],
+  providers: [
+    POIService
   ]
 })
 export class SearchModalModule { }
