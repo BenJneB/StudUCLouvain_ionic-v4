@@ -64,7 +64,7 @@ export class Wso2Service {
     return this.getToken(body, true);
   }
 
-  private getToken(body: HttpParams, login?: boolean) {
+  getToken(body: HttpParams, login?: boolean) {
     const headers = new HttpHeaders({ 'Authorization': wso2HeaderStudent });
     headers.append('Content-Type', 'application/x-www-form-urlencoded');
     const finalUrl = this.wso2ServiceBaseUrl + 'token';

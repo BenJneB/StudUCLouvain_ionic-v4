@@ -17,6 +17,14 @@ export class MockWso2Service extends Wso2Service {
     constructor(http: HttpClientMock) {
         super(http);
     }
+
+    getAppToken() {
+        return new Observable<string>(() => {});
+    }
+
+    getToken() {
+        return new Observable<string>(() => {});
+    }
 }
 
 export function newMockWso2Service() {
