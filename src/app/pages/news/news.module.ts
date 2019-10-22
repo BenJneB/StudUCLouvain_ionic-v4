@@ -28,7 +28,7 @@ import { FacService } from '../../services/utils-services/fac-service';
   providers: [
     NewsService,
     ConnectivityService,
-    FacService
+      FacService,
   ]
 })
 export class NewsPageModule { }

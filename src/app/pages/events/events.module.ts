@@ -8,7 +8,6 @@ import { TranslateModule } from '@ngx-translate/core';
 import { EventsPage } from './events';
 import { EventsFilterModule } from './events-filter/events-filter.module';
 import { EventsService } from '../../services/rss-services/events-service';
-import { LoaderService } from '../../services/utils-services/loader-service';
 
 @NgModule({
   declarations: [EventsPage],
@@ -28,7 +27,6 @@ import { LoaderService } from '../../services/utils-services/loader-service';
   ],
   providers: [
     EventsService,
-      LoaderService
   ]
 })
 export class EventsPageModule { }

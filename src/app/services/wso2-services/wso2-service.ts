@@ -12,7 +12,9 @@ import { wso2HeaderStudent, wso2ServiceBaseUrl } from '../../../environments/env
  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
  for more info on providers and Angular 2 DI.
  */
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class Wso2Service {
     nbCalls = 0;
     private token = '';
@@ -43,7 +45,12 @@ export class Wso2Service {
                     return;
                 }
                 if (error.status === 401) {
-                    this.getAppToken();
+                    this.getAppToken()
+                        .subscribe(
+                            data => {
+                                this.headers = new HttpHeaders({'Authorization': this.token});
+                                this.headers.append('Accept', 'application/json');
+                            });
                     return this.load(url);
                 } else {
                     return observableThrowError(new Error(error.status));
