@@ -6,7 +6,6 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ModalProjectPage } from './modal-project';
 import { StudiesService } from '../../../services/studies-services/studies-service';
-import { Calendar } from '@ionic-native/calendar/ngx';
 
 @NgModule({
   declarations: [ModalProjectPage],
@@ -22,7 +21,6 @@ import { Calendar } from '@ionic-native/calendar/ngx';
   ],
   providers: [
     StudiesService,
-    Calendar,
   ]
 })
 export class ModalProjectPageModule { }
