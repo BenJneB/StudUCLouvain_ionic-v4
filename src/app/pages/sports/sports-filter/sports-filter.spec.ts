@@ -1,4 +1,4 @@
-import { testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
 import { SportsService } from 'src/app/services/rss-services/sports-service';
 import { newMockSportsService } from 'test-config/MockRssService';
 
@@ -43,11 +43,7 @@ describe('SportsFilter Component', () => {
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: NavParams, useClass: NavParamsMock },
-                {
-                    provide: SportsService, useFactory: () => {
-                        return newMockSportsService();
-                    }
-                },
+                getMockProvider(SportsService, newMockSportsService),
             ]
         }).compileComponents();
     }));

@@ -33,7 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { MockAlertController } from '../../../test-config/MockAlert';
 import { InAppBrowserMock } from '../../../test-config/MockIonicNative';
-import { testInstanceCreation } from '../app.component.spec';
+import { getMockProvider, testInstanceCreation } from '../app.component.spec';
 import { UtilsService } from '../services/utils-services/utils-services';
 import { HomePage } from './home.page';
 
@@ -53,11 +53,7 @@ describe('Home Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 { provide: SplashScreen, useClass: SplashScreenMock },
                 { provide: AlertController, useClass: MockAlertController },

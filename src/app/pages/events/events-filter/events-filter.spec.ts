@@ -1,4 +1,4 @@
-import { testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
 import { EventsService } from 'src/app/services/rss-services/events-service';
 import { newMockEventsService } from 'test-config/MockRssService';
 
@@ -47,11 +47,7 @@ describe('EventsFilter Component', () => {
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: NavParams, useClass: NavParamsMock },
-                {
-                    provide: EventsService, useFactory: () => {
-                        return newMockEventsService();
-                    }
-                },
+                getMockProvider(EventsService, newMockEventsService),
             ]
         }).compileComponents();
     }));

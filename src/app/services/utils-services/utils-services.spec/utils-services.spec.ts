@@ -19,6 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UtilsService } from '../utils-services';
 import { ConnectivityService } from '../connectivity-service';
 import { newMockConnectivityService } from '../../../../../test-config/MockUtilsService';
+import { getMockProvider } from '../../../app.component.spec';
 
 describe('UtilsService', () => {
     let utilsService: UtilsService;
@@ -47,11 +48,7 @@ describe('UtilsService', () => {
                 Diagnostic,
                 { provide: Network, useClass: NetworkMock },
                 { provide: Calendar, useClass: CalendarMock },
-                {
-                    provide: ConnectivityService, useFactory: () => {
-                        return newMockConnectivityService();
-                    }
-                },
+                getMockProvider(ConnectivityService, newMockConnectivityService),
             ]
         });
     }));

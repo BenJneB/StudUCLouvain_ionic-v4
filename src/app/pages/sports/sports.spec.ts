@@ -1,4 +1,4 @@
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
 import { SportsService } from 'src/app/services/rss-services/sports-service';
 import { UserService } from 'src/app/services/utils-services/user-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
@@ -50,21 +50,9 @@ describe('Sports Component', () => {
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
-                {
-                    provide: ConnectivityService, useFactory: () => {
-                        return newMockConnectivityService();
-                    }
-                },
-                {
-                    provide: SportsService, useFactory: () => {
-                        return newMockSportsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(ConnectivityService, newMockConnectivityService),
+                getMockProvider(SportsService, newMockSportsService),
                 UserService,
                 Calendar,
                 LoaderService

@@ -1,6 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -62,25 +62,10 @@ describe('Course Component', () => {
                     }
                 },
                 { provide: Calendar, useClass: CalendarMock },
-                {
-                    provide: CourseService, useFactory: () => {
-                        return newMockCourseService();
-                    }
-                },                {
-                    provide: AdeService, useFactory: () => {
-                        return newMockAdeServicee();
-                    }
-                },
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
-                {
-                    provide: UserService, useFactory: () => {
-                        return newMockUserService();
-                    }
-                },
+                getMockProvider(CourseService, newMockCourseService),
+                getMockProvider(AdeService, newMockAdeServicee),
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(UserService, newMockUserService),
             ]
         }).compileComponents();
     }));

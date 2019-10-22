@@ -1,6 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { spyFunctionWithCallBackThen } from 'src/app/app.component.spec';
+import { getMockProvider, spyFunctionWithCallBackThen } from 'src/app/app.component.spec';
 import { EventItem } from 'src/app/entity/eventItem';
 import { EventsService } from 'src/app/services/rss-services/events-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
@@ -56,11 +56,7 @@ describe('Events Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
                 { provide: ModalController, useClass: ModalControllerMock },
                 CacheService,
                 {
@@ -68,12 +64,8 @@ describe('Events Component', () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                {
-                    provide: EventsService, useFactory: () => {
-                        return newMockEventsService();
-                    }
-                },
-                LoaderService
+                getMockProvider(EventsService, newMockEventsService),
+                LoaderService,
             ]
         }).compileComponents();
     }));

@@ -1,4 +1,4 @@
-import { testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
 import { RepertoireService } from 'src/app/services/wso2-services/repertoire-service';
 import { newMockRepertoireService } from 'test-config/MockWso2Services';
 
@@ -41,16 +41,8 @@ describe('EmployeeDetails Component', () => {
                 RouterTestingModule,
             ],
             providers: [
-                {
-                    provide: RepertoireService, useFactory: () => {
-                        return newMockRepertoireService();
-                    }
-                },
-                {
-                    provide: ConnectivityService, useFactory: () => {
-                        return newMockConnectivityService();
-                    }
-                },
+                getMockProvider(RepertoireService, newMockRepertoireService),
+                getMockProvider(ConnectivityService, newMockConnectivityService),
             ]
         }).compileComponents();
     }));

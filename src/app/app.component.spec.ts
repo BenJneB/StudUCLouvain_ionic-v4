@@ -217,3 +217,10 @@ export function testInstanceCreation(component: any, typeComp: any) {
   expect(component instanceof typeComp).toBeTruthy();
 }
 
+export function getMockProvider(service, newMockService) {
+  return {
+    provide: service, useFactory: () => {
+      return newMockService();
+    }
+  };
+}

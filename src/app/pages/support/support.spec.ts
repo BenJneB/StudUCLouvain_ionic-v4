@@ -1,4 +1,4 @@
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
 import { LoaderService } from 'src/app/services/utils-services/loader-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { RepertoireService } from 'src/app/services/wso2-services/repertoire-service';
@@ -46,16 +46,8 @@ describe('Support Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {
-                    provide: RepertoireService, useFactory: () => {
-                        return newMockRepertoireService();
-                    }
-                },
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(RepertoireService, newMockRepertoireService),
+                getMockProvider(UtilsService, newMockUtilsService),
                 LoaderService,
                 InAppBrowser
             ]

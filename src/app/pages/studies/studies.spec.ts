@@ -1,6 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -67,30 +67,11 @@ describe('Studies Component', () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                {
-                    provide: ConnectivityService, useFactory: () => {
-                        return newMockConnectivityService();
-                    }
-                },                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
-                {
-                    provide: StudiesService, useFactory: () => {
-                        return newMockStudiesService();
-                    }
-                },
-                {
-                    provide: Wso2Service, useFactory: () => {
-                        return newMockWso2Service();
-                    }
-                },
-                {
-                    provide: StudentService, useFactory: () => {
-                        return newMockStudentService();
-                    }
-                },
+                getMockProvider(ConnectivityService, newMockConnectivityService),
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(StudiesService, newMockStudiesService),
+                getMockProvider(Wso2Service, newMockWso2Service),
+                getMockProvider(StudentService, newMockStudentService),
                 TransService
             ]
         }).compileComponents();

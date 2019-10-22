@@ -1,4 +1,4 @@
-import { testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { newMockUtilsService } from 'test-config/MockUtilsService';
 
@@ -40,11 +40,7 @@ describe('Mobility Component', () => {
                 RouterTestingModule,
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
             ]
         }).compileComponents();
     }));

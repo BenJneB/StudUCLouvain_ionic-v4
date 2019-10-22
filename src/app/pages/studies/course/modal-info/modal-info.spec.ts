@@ -1,6 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -59,11 +59,7 @@ describe('ModalInfo Component', () => {
                 },
                 { provide: NavParams, useClass: NavParamsMock },
                 StudentService,
-                {
-                    provide: Wso2Service, useFactory: () => {
-                        return newMockWso2Service();
-                    }
-                },
+                getMockProvider(Wso2Service, newMockWso2Service),
 
             ]
         }).compileComponents();
