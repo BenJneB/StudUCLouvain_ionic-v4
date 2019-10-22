@@ -62,6 +62,7 @@ export class AppComponent {
   campusPages: Array<Page>;
   studiePages: Array<Page>;
   toolPages: Array<Page>;
+  pages: Array<Page>;
 
   constructor(
     public platform: Platform,
@@ -92,6 +93,7 @@ export class AppComponent {
     this.campusPages = this.getOtherPages(false, nullSchemas, nullUrls);
     this.studiePages = this.getOtherPages(true, nullSchemas, nullUrls);
     this.getToolsPages(nullSchemas, nullUrls);
+    this.pages = this.campusPages.concat(this.studiePages.concat(this.toolPages));
   }
 
   private getToolsPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {

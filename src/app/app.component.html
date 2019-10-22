@@ -9,19 +9,7 @@
       </ion-header>
       <ion-content id="main-app-menu">
         <ion-list scroll=true>
-          <ion-item button *ngFor="let p of campusPages" (click)="openRootPage(p)">
-            <ion-label>
-              <div class="box"><img src={{p.icon}} width="35" height="35"  alt="Pictogramme"/> <span> {{p.title | translate}}</span>
-              </div>
-            </ion-label>
-          </ion-item>
-          <ion-item button *ngFor="let p of studiePages" (click)="openRootPage(p)">
-            <ion-label>
-              <div class="box"><img src={{p.icon}} width="35" height="35"  alt="Pictogramme"/> <span> {{p.title | translate}}</span>
-              </div>
-            </ion-label>
-          </ion-item>
-          <ion-item button *ngFor="let p of toolPages" (click)="openRootPage(p)">
+          <ion-item button *ngFor="let p of pages" (click)="openRootPage(p)">
             <ion-label>
               <div class="box"><img src={{p.icon}} width="35" height="35"  alt="Pictogramme"/> <span> {{p.title | translate}}</span>
               </div>
