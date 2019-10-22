@@ -83,7 +83,6 @@ export class Wso2Service {
                 } else {
                     this.token = 'Bearer ' + res['access_token'];
                 }
-                return 'OK';
             }),
             catchError((error: any) => observableThrowError(error)));
     }
