@@ -18,6 +18,8 @@
   * Studies Page : Right menu toggle
 
   * Map Page
+  
+  * Improve managment of HttpErrorResponse & Errors
 
 - Make working on devices (iOS & Android)
 
