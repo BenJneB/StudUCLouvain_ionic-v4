@@ -25,7 +25,9 @@ export const EVENT_TEXTS = {
   'DEL': 'DELETE',
 };
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class UtilsService {
   constructor(
     public user: UserService,

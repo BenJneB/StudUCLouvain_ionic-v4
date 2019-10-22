@@ -28,7 +28,9 @@ import { ConnectivityService } from '../utils-services/connectivity-service';
 import { LoaderService } from '../utils-services/loader-service';
 import { UtilsService } from '../utils-services/utils-services';
 
-@Injectable()
+@Injectable({
+    providedIn: 'root'
+})
 export class RssService {
   nbCalls = 0;
   callLimit = 30;

@@ -39,14 +39,6 @@ import { AppComponent } from './app.component';
 import { Network } from '@ionic-native/network/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { LoaderService } from './services/utils-services/loader-service';
-import { RssService } from './services/rss-services/rss-service';
-import { Wso2Service } from './services/wso2-services/wso2-service';
-import { StudentService } from './services/wso2-services/student-service';
-import { ConnectivityService } from './services/utils-services/connectivity-service';
-import { AlertService } from './services/utils-services/alert-service';
-import { UtilsService } from './services/utils-services/utils-services';
-import { UserService } from './services/utils-services/user-service';
-import { AdeService } from './services/studies-services/ade-service';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -85,14 +77,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         Calendar,
         Network,
         LoaderService,
-        RssService,
-        Wso2Service,
-        StudentService,
-        ConnectivityService,
-        AlertService,
-        UtilsService,
-        UserService,
-        AdeService,
         FormsModule,
         ReactiveFormsModule,
         CommonModule,

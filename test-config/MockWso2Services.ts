@@ -20,13 +20,11 @@ export class MockWso2Service extends Wso2Service {
     }
 
     getAppToken() {
-        return new Observable<void>(() => {
-        });
+        return new Observable<string>(() => {});
     }
 
     getToken() {
-        return new Observable<void>(() => {
-        });
+        return new Observable<string>(() => {});
     }
 
     load() {

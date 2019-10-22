@@ -7,7 +7,9 @@ import { TranslateService } from '@ngx-translate/core';
 
 import { UserService } from './user-service';
 
-@Injectable()
+@Injectable({
+  providedIn: 'root'
+})
 export class AlertService {
   constructor(
     public toastCtrl: ToastController,
