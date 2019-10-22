@@ -86,6 +86,7 @@ export class AppComponent {
     this.initializeApp();
   }
 
+    // TODO: Have to improve that and a lot of things
   private getAllPages() {
     const nullSchemas = this.utilsServices.nullSchemas;
     const nullUrls = this.utilsServices.nullUrls;

@@ -115,9 +115,9 @@ export class StudiesPage {
           return error;
         }))
         .subscribe(
-          data => {
+            (data: string) => {
             if (data !== null) {
-              this.status = data.toString();
+                this.status = data;
               resolve(data);
             }
           });
