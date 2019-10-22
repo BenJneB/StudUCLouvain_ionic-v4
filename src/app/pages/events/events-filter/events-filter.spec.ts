@@ -1,4 +1,4 @@
-import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { EventsService } from 'src/app/services/rss-services/events-service';
 import { newMockEventsService } from 'test-config/MockRssService';
 
@@ -29,6 +29,7 @@ import { ModalControllerMock, NavParamsMock } from '../../../../../test-config/M
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { EventsFilterPage } from './events-filter';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('EventsFilter Component', () => {
     let fixture;

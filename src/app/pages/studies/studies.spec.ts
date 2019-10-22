@@ -1,6 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -41,6 +41,7 @@ import { Wso2Service } from '../../services/wso2-services/wso2-service';
 import { newMockStudentService, newMockWso2Service } from '../../../../test-config/MockWso2Services';
 import { StudentService } from '../../services/wso2-services/student-service';
 import { TransService } from '../../services/utils-services/trans-services';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Studies Component', () => {
     let fixture;

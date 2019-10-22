@@ -1,4 +1,4 @@
-import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { newMockUtilsService } from 'test-config/MockUtilsService';
 
@@ -29,6 +29,7 @@ import { ModalControllerMock } from '../../../../../test-config/MockIonicNative'
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { HebdoPage } from './hebdo';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('Hebdo Component', () => {
     let fixture;

@@ -1,4 +1,4 @@
-import { getMockProvider, spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
 import { SportsService } from 'src/app/services/rss-services/sports-service';
 import { UserService } from 'src/app/services/utils-services/user-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
@@ -34,6 +34,7 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
  */
 import { SportsPage } from './sports';
 import { LoaderService } from '../../services/utils-services/loader-service';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Sports Component', () => {
     let fixture;

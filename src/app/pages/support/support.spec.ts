@@ -1,4 +1,4 @@
-import { getMockProvider, spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
 import { LoaderService } from 'src/app/services/utils-services/loader-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { RepertoireService } from 'src/app/services/wso2-services/repertoire-service';
@@ -30,6 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SupportPage } from './support';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Support Component', () => {
     let fixture;

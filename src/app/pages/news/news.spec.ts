@@ -1,6 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { NewsService } from 'src/app/services/rss-services/news-service';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
@@ -38,6 +38,7 @@ import { FacService } from '../../services/utils-services/fac-service';
  */
 import { NewsPage } from './news';
 import { LoaderService } from '../../services/utils-services/loader-service';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('News Component', () => {
     let fixture;

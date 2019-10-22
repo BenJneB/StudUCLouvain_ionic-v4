@@ -3,7 +3,6 @@ import { catchError, map } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-// import { wso2Header } from '../../app/variables';
 import { wso2HeaderStudent, wso2ServiceBaseUrl } from '../../../environments/environment';
 
 /**
@@ -93,6 +92,6 @@ export class Wso2Service {
         const headers = new HttpHeaders({'Authorization': this.tokenStudent});
         headers.append('Accept', 'application/json');
         const finalUrl = wso2ServiceBaseUrl + url;
-        return this.http.get(finalUrl, {headers: headers}).pipe(map(res => res));
+        return this.http.get(finalUrl, {headers: headers});
     }
 }

@@ -1,4 +1,4 @@
-import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { newMockUtilsService } from 'test-config/MockUtilsService';
 
@@ -25,6 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { MobilityPage } from './mobility';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Mobility Component', () => {
     let fixture;

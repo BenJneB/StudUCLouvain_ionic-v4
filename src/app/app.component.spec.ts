@@ -38,6 +38,7 @@ import { AppComponent } from './app.component';
 import { AlertService } from './services/utils-services/alert-service';
 import { UtilsService } from './services/utils-services/utils-services';
 import { newMockUtilsService } from '../../test-config/MockUtilsService';
+import { getMockProvider } from '../../test-config/Mock';
 
 describe('MyApp Component', () => {
   let fixture;
@@ -63,11 +64,7 @@ describe('MyApp Component', () => {
             return new MockCacheStorageService(null, null);
           }
         },
-          {
-              provide: UtilsService, useFactory: () => {
-                  return newMockUtilsService();
-              }
-          },
+          getMockProvider(UtilsService, newMockUtilsService),
           AlertService,
         Navigator
       ]
@@ -217,10 +214,3 @@ export function testInstanceCreation(component: any, typeComp: any) {
   expect(component instanceof typeComp).toBeTruthy();
 }
 
-export function getMockProvider(service, newMockService) {
-  return {
-    provide: service, useFactory: () => {
-      return newMockService();
-    }
-  };
-}

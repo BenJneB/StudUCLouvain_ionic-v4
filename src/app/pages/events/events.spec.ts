@@ -1,6 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { getMockProvider, spyFunctionWithCallBackThen } from 'src/app/app.component.spec';
+import { spyFunctionWithCallBackThen } from 'src/app/app.component.spec';
 import { EventItem } from 'src/app/entity/eventItem';
 import { EventsService } from 'src/app/services/rss-services/events-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
@@ -39,6 +39,7 @@ import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
 */
 import { EventsPage } from './events';
 import { LoaderService } from '../../services/utils-services/loader-service';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Events Component', () => {
     let fixture;

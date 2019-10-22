@@ -1,4 +1,4 @@
-import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { SportsService } from 'src/app/services/rss-services/sports-service';
 import { newMockSportsService } from 'test-config/MockRssService';
 
@@ -27,6 +27,7 @@ import { ModalControllerMock, NavParamsMock } from '../../../../../test-config/M
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SportsFilterPage } from './sports-filter';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('SportsFilter Component', () => {
     let fixture;

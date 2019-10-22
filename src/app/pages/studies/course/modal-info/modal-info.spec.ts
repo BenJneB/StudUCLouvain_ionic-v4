@@ -1,6 +1,6 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -34,6 +34,7 @@ import { ModalInfoPage } from './modal-info';
 import { StudentService } from '../../../../services/wso2-services/student-service';
 import { newMockWso2Service } from '../../../../../../test-config/MockWso2Services';
 import { Wso2Service } from '../../../../services/wso2-services/wso2-service';
+import { getMockProvider } from '../../../../../../test-config/Mock';
 
 describe('ModalInfo Component', () => {
     let fixture;

@@ -1,4 +1,4 @@
-import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
+import { testInstanceCreation } from 'src/app/app.component.spec';
 import { RepertoireService } from 'src/app/services/wso2-services/repertoire-service';
 import { newMockRepertoireService } from 'test-config/MockWso2Services';
 
@@ -27,6 +27,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { EmployeeDetailsPage } from './employee-details';
 import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
 import { newMockConnectivityService } from '../../../../../test-config/MockUtilsService';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('EmployeeDetails Component', () => {
     let fixture;

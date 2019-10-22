@@ -19,7 +19,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { UtilsService } from '../utils-services';
 import { ConnectivityService } from '../connectivity-service';
 import { newMockConnectivityService } from '../../../../../test-config/MockUtilsService';
-import { getMockProvider } from '../../../app.component.spec';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('UtilsService', () => {
     let utilsService: UtilsService;

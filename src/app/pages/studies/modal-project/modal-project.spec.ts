@@ -48,6 +48,7 @@ import {
 import { ModalProjectPage } from './modal-project';
 import { newMockStudiesService } from '../../../../../test-config/MockStudiesService';
 import { StudiesService } from '../../../services/studies-services/studies-service';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('ModalProject Component', () => {
     let fixture;
@@ -79,11 +80,7 @@ describe('ModalProject Component', () => {
                 Diagnostic,
                 { provide: Calendar, useClass: CalendarMock },
                 { provide: NavParams, useClass: NavParamsMock },
-                {
-                    provide: StudiesService, useFactory: () => {
-                        return newMockStudiesService()
-                    }
-                },
+                getMockProvider(StudiesService, newMockStudiesService), ,
             ]
         }).compileComponents();
     }));

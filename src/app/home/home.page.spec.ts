@@ -33,9 +33,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { MockAlertController } from '../../../test-config/MockAlert';
 import { InAppBrowserMock } from '../../../test-config/MockIonicNative';
-import { getMockProvider, testInstanceCreation } from '../app.component.spec';
+import { testInstanceCreation } from '../app.component.spec';
 import { UtilsService } from '../services/utils-services/utils-services';
 import { HomePage } from './home.page';
+import { getMockProvider } from '../../../test-config/Mock';
 
 describe('Home Component', () => {
     let fixture;
