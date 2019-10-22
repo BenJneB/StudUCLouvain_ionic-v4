@@ -1,4 +1,4 @@
-import { testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { newMockUtilsService } from 'test-config/MockUtilsService';
 
@@ -45,16 +45,8 @@ describe('LibraryDetails Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
-                {
-                    provide: LibrariesService, useFactory: () => {
-                        return newMockLibrariesService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(LibrariesService, newMockLibrariesService),
             ]
         }).compileComponents();
     }));

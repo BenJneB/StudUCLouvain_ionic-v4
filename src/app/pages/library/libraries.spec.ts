@@ -1,5 +1,5 @@
 import { CacheService } from 'ionic-cache';
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
@@ -35,6 +35,7 @@ import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/M
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { LibrariesPage } from './libraries';
+import { Observable } from 'rxjs';
 
 describe('Libraries Component', () => {
     let fixture;
