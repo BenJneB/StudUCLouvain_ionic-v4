@@ -23,9 +23,7 @@ import { Network } from '@ionic-native/network/ngx';
 import { AlertController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class ConnectivityService {
   onDevice: boolean;
   available: boolean;

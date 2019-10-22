@@ -11,9 +11,7 @@ import { wso2HeaderStudent, wso2ServiceBaseUrl } from '../../../environments/env
  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
  for more info on providers and Angular 2 DI.
  */
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class Wso2Service {
     nbCalls = 0;
     private token = '';

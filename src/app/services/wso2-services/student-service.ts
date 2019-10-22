@@ -23,9 +23,7 @@ import { Injectable } from '@angular/core';
 
 import { Wso2Service } from './wso2-service';
 
-@Injectable({
-    providedIn: 'root'
-})
+@Injectable()
 export class StudentService {
   activities: Array<String> = [];
   url = 'my/v0/student/';
