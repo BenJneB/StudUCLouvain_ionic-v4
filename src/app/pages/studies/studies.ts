@@ -20,12 +20,11 @@
 */
 import { catchError } from 'rxjs/operators';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
-import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 import { Component } from '@angular/core';
 import { NavigationExtras } from '@angular/router';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { AlertController, MenuController, ModalController, NavController, ToastController } from '@ionic/angular';
+import { AlertController, MenuController, ModalController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
 import { AdeProject } from '../../entity/adeProject';
@@ -65,7 +64,6 @@ export class StudiesPage {
     private alertCtrl: AlertController,
     public storage: Storage,
     public menu: MenuController,
-    public toastCtrl: ToastController,
     private iab: InAppBrowser,
     public modalCtrl: ModalController,
     public connService: ConnectivityService,
@@ -73,7 +71,6 @@ export class StudiesPage {
     private studentService: StudentService,
     private transService: TransService,
     private alertService: AlertService,
-    private utilsServices: UtilsService
   ) {
     this.initializeSession();
     this.menu.enable(true, 'studiesMenu');
@@ -118,9 +115,9 @@ export class StudiesPage {
           return error;
         }))
         .subscribe(
-          data => {
+            (data: string) => {
             if (data !== null) {
-              this.status = data.toString();
+                this.status = data;
               resolve(data);
             }
           });
@@ -223,12 +220,7 @@ export class StudiesPage {
 
   async addCourse(sigle: string, name: string) {
     this.saveCourse(name, sigle);
-    const toast = await this.toastCtrl.create({
-      message: 'Cours ajouté',
-      duration: 1000,
-      position: 'bottom'
-    });
-    return await toast.present();
+    return await this.alertService.presentToast('Cours ajouté');
   }
 
   getCourses() {
@@ -265,12 +257,6 @@ export class StudiesPage {
       }
     };
     this.navCtrl.navigateForward(['/course'], navigationExtras);
-  }
-
-  openWeekPage() {
-    this.studentService.weekSchedule().then((res) => {
-      this.utilsServices.goToDetail(res, 'hebdo');
-    });
   }
 
   async openExamPage() {

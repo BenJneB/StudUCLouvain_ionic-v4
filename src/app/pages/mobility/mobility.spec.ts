@@ -25,6 +25,7 @@ import { TranslateModule } from '@ngx-translate/core';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { MobilityPage } from './mobility';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Mobility Component', () => {
     let fixture;
@@ -40,11 +41,7 @@ describe('Mobility Component', () => {
                 RouterTestingModule,
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
             ]
         }).compileComponents();
     }));

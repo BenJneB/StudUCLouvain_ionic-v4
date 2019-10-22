@@ -8,27 +8,12 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
-import { Device } from '@ionic-native/device/ngx';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Market } from '@ionic-native/market/ngx';
-import { Network } from '@ionic-native/network/ngx';
-import { ModalController, NavParams } from '@ionic/angular';
+import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import {
-    AppAvailabilityMock,
-    CalendarMock,
-    DeviceMock,
-    InAppBrowserMock,
-    MarketMock,
-    ModalControllerMock,
-    NavParamsMock,
-    NetworkMock
-} from '../../../../../test-config/MockIonicNative';
+import { CalendarMock, ModalControllerMock } from '../../../../../test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -47,6 +32,13 @@ import {
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { CoursePage } from './course';
+import { CourseService } from '../../../services/studies-services/course-service';
+import { AdeService } from '../../../services/studies-services/ade-service';
+import { newMockAdeServicee, newMockCourseService } from '../../../../../test-config/MockStudiesService';
+import { UtilsService } from '../../../services/utils-services/utils-services';
+import { newMockUserService, newMockUtilsService } from '../../../../../test-config/MockUtilsService';
+import { UserService } from '../../../services/utils-services/user-service';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('Course Component', () => {
     let fixture;
@@ -64,20 +56,17 @@ describe('Course Component', () => {
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: AppAvailability, useClass: AppAvailabilityMock },
-                { provide: Market, useClass: MarketMock },
-                { provide: Device, useClass: DeviceMock },
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                { provide: Network, useClass: NetworkMock },
-                Diagnostic,
                 { provide: Calendar, useClass: CalendarMock },
-                { provide: NavParams, useClass: NavParamsMock }
+                getMockProvider(CourseService, newMockCourseService),
+                getMockProvider(AdeService, newMockAdeServicee),
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(UserService, newMockUserService),
             ]
         }).compileComponents();
     }));

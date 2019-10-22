@@ -30,6 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SupportPage } from './support';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Support Component', () => {
     let fixture;
@@ -46,16 +47,8 @@ describe('Support Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {
-                    provide: RepertoireService, useFactory: () => {
-                        return newMockRepertoireService();
-                    }
-                },
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(RepertoireService, newMockRepertoireService),
+                getMockProvider(UtilsService, newMockUtilsService),
                 LoaderService,
                 InAppBrowser
             ]

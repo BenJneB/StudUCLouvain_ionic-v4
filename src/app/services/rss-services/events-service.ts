@@ -24,14 +24,12 @@ import { EventItem } from '../../entity/eventItem';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class EventsService {
   events: Array<EventItem> = [];
   allCategories: any = [];
   shownEvents = 0;
-  url = 'http://louvainfo.be/calendrier/feed/calendar/';
+  url = 'https://louvainfo.be/calendrier/feed/calendar';
 
   constructor(public user: UserService, public rssService: RssService) { }
 

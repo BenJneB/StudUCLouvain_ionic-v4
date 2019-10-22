@@ -7,6 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ModalProjectPageModule } from './modal-project/modal-project.module';
 import { StudiesPage } from './studies';
+import { StudentService } from '../../services/wso2-services/student-service';
+import { StudiesService } from '../../services/studies-services/studies-service';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { TransService } from '../../services/utils-services/trans-services';
 
 @NgModule({
   declarations: [StudiesPage],
@@ -23,6 +27,12 @@ import { StudiesPage } from './studies';
         component: StudiesPage
       }
     ])
+  ],
+  providers: [
+    StudentService,
+    StudiesService,
+    ConnectivityService,
+    TransService,
   ]
 })
 export class StudiesPageModule { }

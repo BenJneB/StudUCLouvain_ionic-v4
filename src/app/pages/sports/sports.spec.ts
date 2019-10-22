@@ -33,6 +33,8 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SportsPage } from './sports';
+import { LoaderService } from '../../services/utils-services/loader-service';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Sports Component', () => {
     let fixture;
@@ -49,23 +51,12 @@ describe('Sports Component', () => {
             ],
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
-                {
-                    provide: ConnectivityService, useFactory: () => {
-                        return newMockConnectivityService();
-                    }
-                },
-                {
-                    provide: SportsService, useFactory: () => {
-                        return newMockSportsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(ConnectivityService, newMockConnectivityService),
+                getMockProvider(SportsService, newMockSportsService),
                 UserService,
-                Calendar
+                Calendar,
+                LoaderService
             ]
         }).compileComponents();
     }));

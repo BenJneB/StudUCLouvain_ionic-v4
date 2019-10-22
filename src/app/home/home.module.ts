@@ -8,6 +8,7 @@ import { TranslateLoader, TranslateModule } from '@ngx-translate/core';
 
 import { HttpLoaderFactory } from '../app.module';
 import { HomePage } from './home.page';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 // import { Http } from '@angular/http';
 @NgModule({
@@ -32,5 +33,8 @@ import { HomePage } from './home.page';
     ])
   ],
   exports: [TranslateModule],
+  providers: [
+    SplashScreen,
+  ]
 })
 export class HomePageModule { }

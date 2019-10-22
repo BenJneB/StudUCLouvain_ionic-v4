@@ -6,6 +6,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ParamPage } from './param';
+import { TransService } from '../../services/utils-services/trans-services';
 
 @NgModule({
   declarations: [ParamPage],
@@ -21,7 +22,9 @@ import { ParamPage } from './param';
         component: ParamPage
       }
     ])
+  ],
+  providers: [
+    TransService,
   ]
-
 })
 export class ParamPageModule { }

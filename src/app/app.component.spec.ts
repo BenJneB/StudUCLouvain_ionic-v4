@@ -2,7 +2,7 @@ import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { of } from 'rxjs';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
-import { AppAvailabilityMock, MarketMock, NetworkMock, StatusBarMock, ToastMock } from 'test-config/MockIonicNative';
+import { AppAvailabilityMock, MarketMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -26,20 +26,19 @@ import { AppAvailabilityMock, MarketMock, NetworkMock, StatusBarMock, ToastMock 
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
-import { Network } from '@ionic-native/network/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Toast } from '@ionic-native/toast/ngx';
 import { IonicModule, IonRouterOutlet } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
+import { DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
 import { AppComponent } from './app.component';
+import { AlertService } from './services/utils-services/alert-service';
+import { UtilsService } from './services/utils-services/utils-services';
+import { newMockUtilsService } from '../../test-config/MockUtilsService';
+import { getMockProvider } from '../../test-config/Mock';
 
 describe('MyApp Component', () => {
   let fixture;
@@ -59,17 +58,14 @@ describe('MyApp Component', () => {
         { provide: AppAvailability, useClass: AppAvailabilityMock },
         { provide: InAppBrowser, useClass: InAppBrowserMock },
         { provide: Device, useClass: DeviceMock },
-        { provide: StatusBar, useClass: StatusBarMock },
         CacheService,
         {
           provide: CacheStorageService, useFactory: () => {
             return new MockCacheStorageService(null, null);
           }
         },
-        { provide: Toast, useClass: ToastMock },
-        { provide: Network, useClass: NetworkMock },
-        Diagnostic,
-        { provide: Calendar, useClass: CalendarMock },
+          getMockProvider(UtilsService, newMockUtilsService),
+          AlertService,
         Navigator
       ]
     }).compileComponents();
@@ -163,7 +159,7 @@ describe('MyApp Component', () => {
       expect(spyPop.calls.count()).toEqual(1);
     });
     it('should call show from Toast (otherwhise and not threshold)', () => {
-      const spyShow = spyOn(component.toast, 'show').and.callThrough();
+      const spyShow = spyOn(component.alertService, 'presentToast').and.callThrough();
       spyOnProperty(component.router, 'url', 'get').and.returnValue('home');
       component.confirmExitApp();
       expect(spyShow.calls.count()).toEqual(1);

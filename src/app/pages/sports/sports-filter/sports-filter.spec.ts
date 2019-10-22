@@ -27,6 +27,7 @@ import { ModalControllerMock, NavParamsMock } from '../../../../../test-config/M
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SportsFilterPage } from './sports-filter';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('SportsFilter Component', () => {
     let fixture;
@@ -43,11 +44,7 @@ describe('SportsFilter Component', () => {
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: NavParams, useClass: NavParamsMock },
-                {
-                    provide: SportsService, useFactory: () => {
-                        return newMockSportsService();
-                    }
-                },
+                getMockProvider(SportsService, newMockSportsService),
             ]
         }).compileComponents();
     }));

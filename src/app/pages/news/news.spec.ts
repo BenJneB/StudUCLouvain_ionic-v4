@@ -37,6 +37,8 @@ import { FacService } from '../../services/utils-services/fac-service';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { NewsPage } from './news';
+import { LoaderService } from '../../services/utils-services/loader-service';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('News Component', () => {
     let fixture;
@@ -54,11 +56,6 @@ describe('News Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 CacheService,
@@ -66,22 +63,11 @@ describe('News Component', () => {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
                     }
-                },
-                {
-                    provide: ConnectivityService, useFactory: () => {
-                        return newMockConnectivityService();
-                    }
-                },
-                {
-                    provide: FacService, useFactory: () => {
-                        return newMockFacService();
-                    }
-                },
-                {
-                    provide: NewsService, useFactory: () => {
-                        return newMockNewsService();
-                    }
-                },
+                }, getMockProvider(ConnectivityService, newMockConnectivityService),
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(FacService, newMockFacService),
+                getMockProvider(NewsService, newMockNewsService),
+                LoaderService
             ]
         }).compileComponents();
     }));

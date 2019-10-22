@@ -29,6 +29,7 @@ import { ModalControllerMock, NavParamsMock } from '../../../../../test-config/M
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { EventsFilterPage } from './events-filter';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('EventsFilter Component', () => {
     let fixture;
@@ -47,11 +48,7 @@ describe('EventsFilter Component', () => {
             providers: [
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: NavParams, useClass: NavParamsMock },
-                {
-                    provide: EventsService, useFactory: () => {
-                        return newMockEventsService();
-                    }
-                },
+                getMockProvider(EventsService, newMockEventsService),
             ]
         }).compileComponents();
     }));

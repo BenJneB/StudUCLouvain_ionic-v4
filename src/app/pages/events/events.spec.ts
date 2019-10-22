@@ -38,6 +38,8 @@ import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { EventsPage } from './events';
+import { LoaderService } from '../../services/utils-services/loader-service';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Events Component', () => {
     let fixture;
@@ -55,11 +57,7 @@ describe('Events Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
                 { provide: ModalController, useClass: ModalControllerMock },
                 CacheService,
                 {
@@ -67,11 +65,8 @@ describe('Events Component', () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                {
-                    provide: EventsService, useFactory: () => {
-                        return newMockEventsService();
-                    }
-                },
+                getMockProvider(EventsService, newMockEventsService),
+                LoaderService,
             ]
         }).compileComponents();
     }));

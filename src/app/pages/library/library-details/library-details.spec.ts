@@ -7,13 +7,8 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-import { Network } from '@ionic-native/network/ngx';
-import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
-
-import { ModalControllerMock, NetworkMock } from '../../../../../test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -32,6 +27,9 @@ import { ModalControllerMock, NetworkMock } from '../../../../../test-config/Moc
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { LibraryDetailsPage } from './library-details';
+import { LibrariesService } from '../../../services/wso2-services/libraries-service';
+import { newMockLibrariesService } from '../../../../../test-config/MockWso2Services';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('LibraryDetails Component', () => {
     let fixture;
@@ -48,14 +46,8 @@ describe('LibraryDetails Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
-                { provide: ModalController, useClass: ModalControllerMock },
-                { provide: Network, useClass: NetworkMock },
-                Diagnostic,
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(LibrariesService, newMockLibrariesService),
             ]
         }).compileComponents();
     }));

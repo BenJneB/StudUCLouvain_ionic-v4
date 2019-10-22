@@ -36,6 +36,7 @@ import { InAppBrowserMock } from '../../../test-config/MockIonicNative';
 import { testInstanceCreation } from '../app.component.spec';
 import { UtilsService } from '../services/utils-services/utils-services';
 import { HomePage } from './home.page';
+import { getMockProvider } from '../../../test-config/Mock';
 
 describe('Home Component', () => {
     let fixture;
@@ -53,11 +54,7 @@ describe('Home Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 { provide: SplashScreen, useClass: SplashScreenMock },
                 { provide: AlertController, useClass: MockAlertController },

@@ -29,6 +29,7 @@ import { ModalControllerMock } from '../../../../../test-config/MockIonicNative'
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { HebdoPage } from './hebdo';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('Hebdo Component', () => {
     let fixture;
@@ -44,11 +45,7 @@ describe('Hebdo Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
                 { provide: ModalController, useClass: ModalControllerMock },
             ]
         }).compileComponents();

@@ -18,7 +18,7 @@
     You should have received a copy of the GNU General Public License
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
-import { Component, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { IonItemSliding, IonList, ModalController, NavController } from '@ionic/angular';
@@ -38,7 +38,7 @@ import { SportsFilterPage } from './sports-filter/sports-filter';
   styleUrls: ['./sports.scss'],
 })
 
-export class SportsPage {
+export class SportsPage implements OnInit {
   @ViewChild('sportsList', { read: IonList }) sportsList: IonList;
 
   sports: Array<SportItem> = [];
@@ -82,18 +82,21 @@ export class SportsPage {
   ) {
     this.searchControl = new FormControl();
     this.updateDateLimit();
+  }
+
+  async ngOnInit() {
     if (this.connService.isOnline()) {
-      this.loader.present('Please wait..');
+      await this.loader.present('Please wait..');
       this.loadSports(this.segment);
       this.loadSports('team');
       this.utilsServices.initSearchControl(this.searchControl, this.searching);
       this.updateDisplayed();
     } else {
+      this.utilsServices.initSearchControl(this.searchControl, this.searching);
       this.navCtrl.pop();
       this.connService.presentConnectionAlert();
     }
   }
-
   public doRefresh(refresher) {
     this.loadSports(this.segment);
     refresher.target.complete();

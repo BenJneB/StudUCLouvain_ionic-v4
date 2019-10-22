@@ -6,11 +6,7 @@ import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { async, TestBed } from '@angular/core/testing';
 import { Router } from '@angular/router';
 import { RouterTestingModule } from '@angular/router/testing';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-import { Network } from '@ionic-native/network/ngx';
 import { TranslateModule } from '@ngx-translate/core';
-
-import { NetworkMock } from '../../../../../test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -29,6 +25,9 @@ import { NetworkMock } from '../../../../../test-config/MockIonicNative';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { EmployeeDetailsPage } from './employee-details';
+import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
+import { newMockConnectivityService } from '../../../../../test-config/MockUtilsService';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('EmployeeDetails Component', () => {
     let fixture;
@@ -43,13 +42,8 @@ describe('EmployeeDetails Component', () => {
                 RouterTestingModule,
             ],
             providers: [
-                {
-                    provide: RepertoireService, useFactory: () => {
-                        return newMockRepertoireService();
-                    }
-                },
-                { provide: Network, useClass: NetworkMock },
-                Diagnostic,
+                getMockProvider(RepertoireService, newMockRepertoireService),
+                getMockProvider(ConnectivityService, newMockConnectivityService),
             ]
         }).compileComponents();
     }));

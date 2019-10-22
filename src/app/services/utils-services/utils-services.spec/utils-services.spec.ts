@@ -1,9 +1,7 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
-import {
-    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock
-} from 'test-config/MockIonicNative';
+import { AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock } from 'test-config/MockIonicNative';
 
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -19,6 +17,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { UtilsService } from '../utils-services';
+import { ConnectivityService } from '../connectivity-service';
+import { newMockConnectivityService } from '../../../../../test-config/MockUtilsService';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('UtilsService', () => {
     let utilsService: UtilsService;
@@ -47,6 +48,7 @@ describe('UtilsService', () => {
                 Diagnostic,
                 { provide: Network, useClass: NetworkMock },
                 { provide: Calendar, useClass: CalendarMock },
+                getMockProvider(ConnectivityService, newMockConnectivityService),
             ]
         });
     }));

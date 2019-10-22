@@ -26,6 +26,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { TutoPage } from './tuto';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 @NgModule({
   declarations: [
@@ -44,5 +45,8 @@ import { TutoPage } from './tuto';
       }
     ])
   ],
+  providers: [
+    SplashScreen,
+  ]
 })
 export class TutoPageModule { }

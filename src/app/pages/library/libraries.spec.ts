@@ -35,6 +35,8 @@ import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/M
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { LibrariesPage } from './libraries';
+import { Observable } from 'rxjs';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Libraries Component', () => {
     let fixture;
@@ -52,28 +54,12 @@ describe('Libraries Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                {
-                    provide: LibrariesService, useFactory: () => {
-                        return newMockLibrariesService();
-                    }
-                },
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
-                {
-                    provide: ConnectivityService, useFactory: () => {
-                        return newMockConnectivityService();
-                    }
-                },
+                getMockProvider(LibrariesService, newMockLibrariesService),
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(ConnectivityService, newMockConnectivityService),
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
-                {
-                    provide: CacheService, useFactory: () => {
-                        return newMockCacheService();
-                    }
-                },
+                getMockProvider(CacheService, newMockCacheService),
             ]
         }).compileComponents();
     }));
