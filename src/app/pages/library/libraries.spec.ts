@@ -1,5 +1,5 @@
 import { CacheService } from 'ionic-cache';
-import { getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
+import { spyFunctionWithCallBackThen, getMockProvider, testInstanceCreation } from 'src/app/app.component.spec';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
