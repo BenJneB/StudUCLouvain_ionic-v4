@@ -1,13 +1,9 @@
 import { CacheService } from 'ionic-cache';
-import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
-import { reject } from 'q';
 import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
-import {
-    MockCacheService, MockCacheStorageService, newMockCacheService
-} from 'test-config/MockCacheStorageService';
+import { newMockCacheService } from 'test-config/MockCacheStorageService';
 import { newMockConnectivityService, newMockUtilsService } from 'test-config/MockUtilsService';
 import { newMockLibrariesService } from 'test-config/MockWso2Services';
 
@@ -20,27 +16,26 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import {
-    InAppBrowserMock, ModalControllerMock, NetworkMock
-} from '../../../../test-config/MockIonicNative';
+import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/MockIonicNative';
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
 import { LibrariesPage } from './libraries';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Libraries Component', () => {
     let fixture;
@@ -58,28 +53,12 @@ describe('Libraries Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                {
-                    provide: LibrariesService, useFactory: () => {
-                        return newMockLibrariesService();
-                    }
-                },
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
-                {
-                    provide: ConnectivityService, useFactory: () => {
-                        return newMockConnectivityService();
-                    }
-                },
+                getMockProvider(LibrariesService, newMockLibrariesService),
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(ConnectivityService, newMockConnectivityService),
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
-                {
-                    provide: CacheService, useFactory: () => {
-                        return newMockCacheService();
-                    }
-                },
+                getMockProvider(CacheService, newMockCacheService),
             ]
         }).compileComponents();
     }));
@@ -109,7 +88,7 @@ describe('Libraries Component', () => {
         let spyLoad;
         beforeEach(() => {
             spySaveItem = spyOn(component.cache, 'saveItem').and.callFake(() => {
-                return new Promise((resolve, reject) => {
+                return new Promise((resolve) => {
                     resolve();
                 });
             });
@@ -135,7 +114,7 @@ describe('Libraries Component', () => {
             expect(spySaveItem.calls.count()).toEqual(1);
         });
 
-        it('if not online, should call presentConnectionAlert', () => {
+        it('if not online, should present ConnectionAlert', () => {
             spyOnline = spyOn(component.connService, 'isOnline').and.returnValue(false);
             const spyPresentAlert = spyOn(component.connService, 'presentConnectionAlert').and.callThrough();
             component.loadLibraries();
@@ -149,7 +128,7 @@ describe('Libraries Component', () => {
         it('should call doRefresh from UtilsService', () => {
             const spyRefresh = spyOn(component.utilsServices, 'doRefresh').and.callThrough();
             spyOn(component.cache, 'removeItem').and.callFake(() => {
-                return new Promise((resolve, reject) => {
+                return new Promise((resolve) => {
                     resolve();
                 });
             });
@@ -159,7 +138,7 @@ describe('Libraries Component', () => {
     });
 
     describe('cachedOrNot method', () => {
-        it('should call getItem from Cache', () => {
+        it('should get Item from Cache', () => {
             const spyGetItem = spyOn(component.cache, 'getItem').and.callThrough();
             component.cachedOrNot();
             expect(spyGetItem.calls.count()).toEqual(1);

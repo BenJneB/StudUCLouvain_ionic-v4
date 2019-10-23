@@ -2,47 +2,43 @@ import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { of } from 'rxjs';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
-import {
-    AppAvailabilityMock, MarketMock, NetworkMock, StatusBarMock, ToastMock
-} from 'test-config/MockIonicNative';
-
+import { AppAvailabilityMock, MarketMock } from 'test-config/MockIonicNative';
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
-import { Network } from '@ionic-native/network/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Toast } from '@ionic-native/toast/ngx';
 import { IonicModule, IonRouterOutlet } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { CalendarMock, DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
+import { DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
 import { AppComponent } from './app.component';
+import { AlertService } from './services/utils-services/alert-service';
+import { UtilsService } from './services/utils-services/utils-services';
+import { newMockUtilsService } from '../../test-config/MockUtilsService';
+import { getMockProvider } from '../../test-config/Mock';
 
 describe('MyApp Component', () => {
   let fixture;
@@ -62,17 +58,14 @@ describe('MyApp Component', () => {
         { provide: AppAvailability, useClass: AppAvailabilityMock },
         { provide: InAppBrowser, useClass: InAppBrowserMock },
         { provide: Device, useClass: DeviceMock },
-        { provide: StatusBar, useClass: StatusBarMock },
         CacheService,
         {
           provide: CacheStorageService, useFactory: () => {
             return new MockCacheStorageService(null, null);
           }
         },
-        { provide: Toast, useClass: ToastMock },
-        { provide: Network, useClass: NetworkMock },
-        Diagnostic,
-        { provide: Calendar, useClass: CalendarMock },
+          getMockProvider(UtilsService, newMockUtilsService),
+          AlertService,
         Navigator
       ]
     }).compileComponents();
@@ -118,10 +111,11 @@ describe('MyApp Component', () => {
   });
 
   describe('launchExternalApp method', () => {
-    it('should call open from Market if app not installed (Android)', () => {
+      it('should open Market if app not installed (Android)', () => {
       spyOnProperty(component.device, 'platform', 'get').and.returnValue('Android');
-      const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check', '');
-      const spyOpen = spyOn(component.market, 'open').and.callFake(os => { });
+          const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check');
+          const spyOpen = spyOn(component.market, 'open').and.callFake(() => {
+          });
       component.launchExternalApp('ios', 'android', 'app', 'http');
       expect(spyCheck.calls.count()).toEqual(1);
       expect(spyOpen.calls.count()).toEqual(1);
@@ -166,7 +160,7 @@ describe('MyApp Component', () => {
       expect(spyPop.calls.count()).toEqual(1);
     });
     it('should call show from Toast (otherwhise and not threshold)', () => {
-      const spyShow = spyOn(component.toast, 'show').and.callThrough();
+        const spyShow = spyOn(component.alertService, 'presentToast').and.callThrough();
       spyOnProperty(component.router, 'url', 'get').and.returnValue('home');
       component.confirmExitApp();
       expect(spyShow.calls.count()).toEqual(1);
@@ -183,7 +177,7 @@ describe('MyApp Component', () => {
       expect(spyGetClose.calls.count()).toEqual(3);
     });
 
-    it('should call close from MenuController and confirmExitApp', async function () {
+      it('should close menu and launch modal to confirm exit app', async function () {
       spyOn(component.menu, 'getOpen').and.returnValue('returned');
       const spyClose = spyOn(component.menu, 'close').and.callThrough();
       const spyConfirmExit = spyOn(component, 'confirmExitApp').and.callThrough();
@@ -193,7 +187,7 @@ describe('MyApp Component', () => {
       expect(spyConfirmExit.calls.count()).toEqual(1);
     });
     it('should only call confirmExitApp if error', () => {
-      spyFunctionWithCallBackReject(component.menu, 'getOpen', '');
+        spyFunctionWithCallBackReject(component.menu, 'getOpen');
       component.backButtonEvent();
       // SADELY NO TEST
     });
@@ -208,7 +202,7 @@ export function spyFunctionWithCallBackThen(usedService: any, method: string, ca
   });
 }
 
-export function spyFunctionWithCallBackReject(usedService: any, method: string, callbackReturn: any) {
+export function spyFunctionWithCallBackReject(usedService: any, method: string) {
   return spyOn(usedService, method).and.callFake(function () {
     return {
       then: function (s, error) { return error(); },

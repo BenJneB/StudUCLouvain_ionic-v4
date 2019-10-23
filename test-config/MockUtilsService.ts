@@ -7,14 +7,11 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { AlertController, Platform } from '@ionic/angular';
 import { Storage, StorageConfig } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
-import {
-    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock
-} from './MockIonicNative';
+import { AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock } from './MockIonicNative';
 import { HttpClientMock } from './MockWso2Services';
 
 export class MockUtilsService extends UtilsService {
@@ -52,7 +49,8 @@ export class MockUtilsService extends UtilsService {
     createEventInCalendar() { }
     doRefresh() { }
     addFavorite() {
-        return new Promise<void>((resolve, reject) => { });
+        return new Promise<void>(() => {
+        });
     }
 }
 
@@ -92,13 +90,12 @@ export class MockConnectivityService extends ConnectivityService {
         network: NetworkMock,
         translateService: TranslateService,
         alertCtrl: AlertController,
-        diagnostic: Diagnostic
     ) {
-        super(platform, network, translateService, alertCtrl, diagnostic);
+        super(platform, network, translateService, alertCtrl);
     }
 
     presentConnectionAlert() {
-        return new Promise<void>((resolve, reject) => {
+        return new Promise<void>(() => {
 
         });
     }
@@ -109,8 +106,7 @@ export function newMockConnectivityService() {
     let network: NetworkMock;
     let translateService: TranslateService;
     let alertCtrl: AlertController;
-    let diagnostic: Diagnostic;
-    return new MockConnectivityService(platform, network, translateService, alertCtrl, diagnostic);
+    return new MockConnectivityService(platform, network, translateService, alertCtrl);
 }
 
 export class MockFacService extends FacService {
@@ -119,7 +115,7 @@ export class MockFacService extends FacService {
     }
 
     loadResources() {
-        return new Promise((resolve, reject) => {
+        return new Promise(() => {
 
         });
     }

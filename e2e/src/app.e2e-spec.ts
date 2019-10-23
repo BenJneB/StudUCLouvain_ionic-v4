@@ -3,7 +3,7 @@ import { browser, by, element } from 'protractor';
 import { AppComponent } from '../../src/app/app.po';
 
 describe('new App', () => {
-  const page = new AppComponent();
+    const page = new AppComponent();
 
   it('should display TutoPage', () => {
     page.navigateTo();

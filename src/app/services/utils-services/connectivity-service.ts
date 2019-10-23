@@ -19,15 +19,12 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { Injectable } from '@angular/core';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { AlertController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-declare var Connection: any;
-
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class ConnectivityService {
   onDevice: boolean;
@@ -39,14 +36,13 @@ export class ConnectivityService {
     private network: Network,
     private translateService: TranslateService,
     private alertCtrl: AlertController,
-    private diagnostic: Diagnostic
   ) { }
 
   /*Check if there is a connexion*/
   isOnline(): boolean {
     this.onDevice = this.platform.is('cordova');
     if (this.onDevice && this.network.type) {
-      return this.network.type !== Connection.NONE;
+        return this.network.type !== 'none';
     } else {
       return navigator.onLine;
     }
@@ -73,10 +69,4 @@ export class ConnectivityService {
   }
 
   errorCallback = (e) => console.error(e);
-
-  async isLocationEnabled() {
-
-    await this.diagnostic.isLocationAvailable().then(this.successCallback).catch(this.errorCallback);
-    return this.available;
-  }
 }

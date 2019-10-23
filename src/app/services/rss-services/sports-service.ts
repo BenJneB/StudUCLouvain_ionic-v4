@@ -24,9 +24,7 @@ import { SportItem } from '../../entity/sportItem';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 
-@Injectable({
-  providedIn: 'root'
-})
+@Injectable()
 export class SportsService {
   sports: Array<SportItem> = [];
   teams: Array<SportItem> = [];

@@ -6,9 +6,7 @@ import { ConnectivityService } from 'src/app/services/utils-services/connectivit
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
 import { newMockNewsService } from 'test-config/MockRssService';
-import {
-    newMockConnectivityService, newMockFacService, newMockUtilsService
-} from 'test-config/MockUtilsService';
+import { newMockConnectivityService, newMockFacService, newMockUtilsService } from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -22,23 +20,25 @@ import { TranslateModule } from '@ngx-translate/core';
 import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/MockIonicNative';
 import { FacService } from '../../services/utils-services/fac-service';
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
 import { NewsPage } from './news';
+import { LoaderService } from '../../services/utils-services/loader-service';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('News Component', () => {
     let fixture;
@@ -56,11 +56,6 @@ describe('News Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
                 { provide: ModalController, useClass: ModalControllerMock },
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 CacheService,
@@ -68,22 +63,11 @@ describe('News Component', () => {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
                     }
-                },
-                {
-                    provide: ConnectivityService, useFactory: () => {
-                        return newMockConnectivityService();
-                    }
-                },
-                {
-                    provide: FacService, useFactory: () => {
-                        return newMockFacService();
-                    }
-                },
-                {
-                    provide: NewsService, useFactory: () => {
-                        return newMockNewsService();
-                    }
-                },
+                }, getMockProvider(ConnectivityService, newMockConnectivityService),
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(FacService, newMockFacService),
+                getMockProvider(NewsService, newMockNewsService),
+                LoaderService
             ]
         }).compileComponents();
     }));
@@ -119,7 +103,7 @@ describe('News Component', () => {
     });
 
     describe('findSite method', () => {
-        it('should call getAvailableSites', () => {
+        it('should get AvailableSites', () => {
             const spyGet = spyOn(component, 'getAvailableSites').and.callThrough();
             component.listFac = [{ facs: {} }];
             component.findSite();
@@ -151,7 +135,7 @@ describe('News Component', () => {
         it('should call isOnline from ConnectivityService', () => {
             const spyOnline = spyOn(component.connService, 'isOnline').and.callThrough();
             spyOn(component.cache, 'removeItem').and.callFake(() => {
-                return new Promise((resolve, reject) => {
+                return new Promise((resolve) => {
                     resolve();
                 });
             });
@@ -159,7 +143,7 @@ describe('News Component', () => {
             expect(spyOnline.calls.count()).toBeGreaterThan(0);
         });
 
-        it('should call presentConnectionAlert from ConnectivityService if offline', () => {
+        it('should present ConnectionAlert from ConnectivityService if offline', () => {
             const spyPresent = spyOn(component.connService, 'isOnline').and.returnValue(false);
             component.doRefresh({ target: { complete: () => { return; } } });
             expect(spyPresent.calls.count()).toEqual(1);
@@ -170,7 +154,7 @@ describe('News Component', () => {
         it('should call removeItem from Cache and load News', () => {
             const spyLoad = spyOn(component, 'loadNews').and.callThrough();
             const spyRemove = spyOn(component.cache, 'removeItem').and.callFake(() => {
-                return new Promise((resolve, reject) => {
+                return new Promise((resolve) => {
                     resolve();
                 });
             });

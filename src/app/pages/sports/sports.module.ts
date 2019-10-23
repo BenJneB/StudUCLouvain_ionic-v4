@@ -7,6 +7,9 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { SportsPage } from './sports';
 import { SportsFilterPageModule } from './sports-filter/sports-filter.module';
+import { SportsService } from '../../services/rss-services/sports-service';
+import { Calendar } from '@ionic-native/calendar/ngx';
+import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 
 @NgModule({
   declarations: [SportsPage],
@@ -23,6 +26,11 @@ import { SportsFilterPageModule } from './sports-filter/sports-filter.module';
         component: SportsPage
       }
     ])
-  ]
+  ],
+    providers: [
+        SportsService,
+        Calendar,
+        ConnectivityService,
+    ]
 })
 export class SportsPageModule { }

@@ -4,14 +4,10 @@ import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
-import {
-    InAppBrowser, InAppBrowserEventType, InAppBrowserObject, InAppBrowserOptions
-} from '@ionic-native/in-app-browser/ngx';
+import { InAppBrowser, InAppBrowserEventType, InAppBrowserObject, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Toast } from '@ionic-native/toast/ngx';
 
 function getPromise(item?: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -110,24 +106,6 @@ export class DeviceMock extends Device {
     serial: string;
 }
 
-export class StatusBarMock extends StatusBar {
-    isVisible: boolean;
-
-    overlaysWebView(doesOverlay: boolean): void { }
-
-    styleDefault(): void { }
-}
-
-export class ToastMock extends Toast {
-
-    show(message: string, duration: string, position: string): Observable<any> {
-        return getObservable();
-    }
-
-    hide(): Promise<any> {
-        return getPromise();
-    }
-}
 
 export class NetworkMock extends Network {
     type = 'cellular';

@@ -36,6 +36,7 @@ import { InAppBrowserMock } from '../../../test-config/MockIonicNative';
 import { testInstanceCreation } from '../app.component.spec';
 import { UtilsService } from '../services/utils-services/utils-services';
 import { HomePage } from './home.page';
+import { getMockProvider } from '../../../test-config/Mock';
 
 describe('Home Component', () => {
     let fixture;
@@ -53,11 +54,7 @@ describe('Home Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
                 { provide: InAppBrowser, useClass: InAppBrowserMock },
                 { provide: SplashScreen, useClass: SplashScreenMock },
                 { provide: AlertController, useClass: MockAlertController },
@@ -92,9 +89,9 @@ describe('Home Component', () => {
 
     describe('updateCampus method', () => {
         it('should call addCampus of UserService', () => {
-            function add(item: string) {
+            function add() {
                 return {
-                    subscribe: (success: Function, error: Function) => {
+                    subscribe: (success: Function) => {
                         success();
                     }
                 };
@@ -127,12 +124,12 @@ describe('Home Component', () => {
     });
 
     describe('emergency method', () => {
-        it('should call getEmergencyTexts', () => {
+        it('should ge tEmergencyTexts', () => {
             const spyGetEmergencyTexts = spyOn(component, 'getEmergencyTexts').and.callThrough();
             component.emergency();
             expect(spyGetEmergencyTexts.calls.count()).toEqual(1);
         });
-        it('should call getEmergencyMsg', () => {
+        it('should get EmergencyMsg', () => {
             const spyGetEmergencyMsg = spyOn(component, 'getEmergencyMsg').and.callThrough();
             component.emergency();
             expect(spyGetEmergencyMsg.calls.count()).toEqual(1);
@@ -146,7 +143,8 @@ describe('Home Component', () => {
     });
 });
 function _testCreateInAppBrowser(component: any) {
-    const spyCreate = spyOn(component.iab, 'create').and.callFake(url => { });
+    const spyCreate = spyOn(component.iab, 'create').and.callFake(() => {
+    });
     component.openUCL('url');
     expect(spyCreate.calls.count()).toEqual(1);
     expect(spyCreate.calls.first().args[0]).toEqual('url');

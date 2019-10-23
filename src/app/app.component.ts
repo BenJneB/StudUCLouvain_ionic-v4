@@ -26,11 +26,14 @@ import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Toast } from '@ionic-native/toast/ngx';
 import {
-    ActionSheetController, IonRouterOutlet, MenuController, ModalController, NavController,
-    Platform, PopoverController
+    ActionSheetController,
+    IonRouterOutlet,
+    MenuController,
+    ModalController,
+    NavController,
+    Platform,
+    PopoverController
 } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
@@ -38,6 +41,7 @@ import { TranslateService } from '@ngx-translate/core';
 import { Page } from './entity/page';
 import { UserService } from './services/utils-services/user-service';
 import { UtilsService } from './services/utils-services/utils-services';
+import { AlertService } from './services/utils-services/alert-service';
 
 @Component({
   selector: 'app-root',
@@ -58,30 +62,31 @@ export class AppComponent {
   campusPages: Array<Page>;
   studiePages: Array<Page>;
   toolPages: Array<Page>;
+    pages: Array<Page>;
 
   constructor(
-    public platform: Platform,
-    public menu: MenuController,
-    public market: Market,
-    private appAvailability: AppAvailability,
-    private iab: InAppBrowser,
-    private device: Device,
-    private popoverCtrl: PopoverController,
-    private user: UserService,
-    private statusBar: StatusBar,
-    public modalCtrl: ModalController,
-    private actionSheetCtrl: ActionSheetController,
-    public translateService: TranslateService,
-    public cache: CacheService,
-    private router: Router,
-    private toast: Toast,
-    private nav: NavController,
-    private utilsServices: UtilsService,
-    private storage: Storage
+      public platform: Platform,
+      public menu: MenuController,
+      public market: Market,
+      private appAvailability: AppAvailability,
+      private iab: InAppBrowser,
+      private device: Device,
+      private popoverCtrl: PopoverController,
+      private user: UserService,
+      public modalCtrl: ModalController,
+      private actionSheetCtrl: ActionSheetController,
+      public translateService: TranslateService,
+      public cache: CacheService,
+      private router: Router,
+      private alertService: AlertService,
+      private nav: NavController,
+      private utilsServices: UtilsService,
+      private storage: Storage
   ) {
     this.initializeApp();
   }
 
+    // TODO: Have to improve that and a lot of things
   private getAllPages() {
     const nullSchemas = this.utilsServices.nullSchemas;
     const nullUrls = this.utilsServices.nullUrls;
@@ -89,6 +94,7 @@ export class AppComponent {
     this.campusPages = this.getOtherPages(false, nullSchemas, nullUrls);
     this.studiePages = this.getOtherPages(true, nullSchemas, nullUrls);
     this.getToolsPages(nullSchemas, nullUrls);
+      this.pages = this.campusPages.concat(this.studiePages.concat(this.toolPages));
   }
 
   private getToolsPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
@@ -134,7 +140,6 @@ export class AppComponent {
     this.alertPresented = false;
     this.getAllPages();
     this.platform.ready().then(() => {
-      this.statusBar.styleDefault();
       // this.wso2Service.getAppToken();
       this.translateService.setDefaultLang('fr');
       this.getLanguage();
@@ -200,9 +205,7 @@ export class AppComponent {
           if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
             navigator['app'].exitApp(); //  work in ionic 4
           } else {
-            this.toast.show(`Press back again to exit App.`, '2000', 'center')
-              .subscribe(toast => {
-              });
+              this.alertService.presentToast('Press back again to exit App.');
             this.lastTimeBackPress = new Date().getTime();
           }
         }

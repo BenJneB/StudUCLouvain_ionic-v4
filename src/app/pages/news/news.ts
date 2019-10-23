@@ -1,26 +1,25 @@
 import { CacheService } from 'ionic-cache';
-
 /**
-    Copyright (c)  Université catholique Louvain.  All rights reserved
-    Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
-    Date: 2018-2019
-    This file is part of Stud.UCLouvain
-    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+ Copyright (c)  Université catholique Louvain.  All rights reserved
+ Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
+ Date: 2018-2019
+ This file is part of Stud.UCLouvain
+ Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
 
-    Stud.UCLouvain is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
+ Stud.UCLouvain is free software: you can redistribute it and/or modify
+ it under the terms of the GNU General Public License as published by
+ the Free Software Foundation, either version 3 of the License, or
+ (at your option) any later version.
 
-    Stud.UCLouvain is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+ Stud.UCLouvain is distributed in the hope that it will be useful,
+ but WITHOUT ANY WARRANTY; without even the implied warranty of
+ MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+ GNU General Public License for more details.
 
-    You should have received a copy of the GNU General Public License
-    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
-*/
-import { Component, ViewChild } from '@angular/core';
+ You should have received a copy of the GNU General Public License
+ along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+ */
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { IonContent, IonList } from '@ionic/angular';
@@ -38,7 +37,7 @@ import { UtilsService } from '../../services/utils-services/utils-services';
   templateUrl: 'news.html',
   styleUrls: ['./news.scss'],
 })
-export class NewsPage {
+export class NewsPage implements OnInit {
 
   @ViewChild('newsList', { read: IonList }) newsList: IonList;
   @ViewChild('news') content: IonContent;
@@ -202,8 +201,6 @@ export class NewsPage {
   public async loadNews(key?: string) {
     this.searching = true;
     this.news = [];
-    // Check connexion before load news
-
     let actu = this.subsegment;
     if (this.segment === 'fac' && this.facsegment === 'news') { actu = this.rss; }
     this.newsService.getNews(actu, this.searching).then(

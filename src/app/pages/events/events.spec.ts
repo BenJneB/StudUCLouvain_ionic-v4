@@ -38,6 +38,8 @@ import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { EventsPage } from './events';
+import { LoaderService } from '../../services/utils-services/loader-service';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Events Component', () => {
     let fixture;
@@ -55,11 +57,7 @@ describe('Events Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
+                getMockProvider(UtilsService, newMockUtilsService),
                 { provide: ModalController, useClass: ModalControllerMock },
                 CacheService,
                 {
@@ -67,11 +65,8 @@ describe('Events Component', () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                {
-                    provide: EventsService, useFactory: () => {
-                        return newMockEventsService();
-                    }
-                },
+                getMockProvider(EventsService, newMockEventsService),
+                LoaderService,
             ]
         }).compileComponents();
     }));
@@ -129,7 +124,7 @@ describe('Events Component', () => {
     });
 
     describe('changeArray method', () => {
-        it('should call getItemDisplay from UtilsServices', () => {
+        it('should get ItemDisplay from UtilsServices', () => {
             const spyGetItemD = spyOn(component.utilsServices, 'getItemDisplay').and.returnValue('').and.callThrough();
             component.changeArray([{ startDate: new Date() }]);
             expect(spyGetItemD.calls.count()).toEqual(1);
@@ -185,7 +180,7 @@ describe('Events Component', () => {
     });
 
     describe('cachedOrNot method', () => {
-        it('should call getItem from Cache and present loader during update the displayed events', async () => {
+        it('should get Item from Cache and present loader during update the displayed events', async () => {
             const spyGetItem = spyFunctionWithCallBackThen(
                 component.cache,
                 'getItem',
@@ -215,10 +210,10 @@ describe('Events Component', () => {
     });
 
     describe('loadEvents method', () => {
-        it('should call getEvents from EventService and updateDisplayed', async () => {
+        it('should get Events from EventService and updateDisplayed', async () => {
             const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', { items: [] });
             const spySaveItem = spyOn(component.cache, 'saveItem').and.callFake(() => {
-                return new Promise((resolve, reject) => {
+                return new Promise((resolve) => {
                     resolve();
                 });
             });
@@ -234,6 +229,8 @@ describe('Events Component', () => {
 
     describe('presentFilter method', () => {
         it('should call create from ModalController', () => {
+            component.filters = undefined;
+            component.dateRange = undefined;
             component.presentFilter();
             const create = component.modalCtrl.create;
             expect(create.calls.count()).toEqual(1);
@@ -274,7 +271,7 @@ describe('Events Component', () => {
     });
 
     describe('getRangeWeek method', () => {
-        it('should call getFullDate', () => {
+        it('should get FullDate', () => {
             const spyGetFullDate = spyOn(component, 'getFullDate').and.callThrough();
             component.getRangeWeek(25, 2019);
             expect(spyGetFullDate.calls.count()).toEqual(2);

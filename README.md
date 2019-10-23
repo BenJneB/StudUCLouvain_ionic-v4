@@ -13,19 +13,28 @@
 
 ### TO DO :
 
-- Check Studies & Map Pages
+- Common platforms
+
+  * Studies Page : Right menu toggle
+
+  * Map Page
+  
+  * Improve managment of HttpErrorResponse (ex: wso2-service l56) & Errors
+
+- Make working on devices (iOS & Android)
+
+- Design & "Ergonomie"
+
+- Verify all imports (WIP)
 
 - Write unit tests (WIP)
 
-  * Cover important parts with tests
-     - subpages
-     - services
+  * Write pertinent tests (not only covering tests)
 
 - Functional tests ? (WIP)
 
   * Make user stories (1/?)
 
-- Test on devices
        
 ### TIPS
 #### - To launch only one test page : replace the 'describe' with the wanted scope by fdescribe in <page_name>.spec.ts
@@ -36,11 +45,11 @@
 
 ### More informations :
 
-#### https://github.com/UCL-INGI/StudUCLouvain
+#### https://github.com/UCL-INGI/StudUCLouvain (+- Outdated)
 
 
 ### Prerequisites
-Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
+- Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
 node -v
  - should be >= 10.0.0
@@ -48,7 +57,58 @@ npm -v
  - should be >= 6.0.0
 ```
 
-       
+- For iOS, update XCode version to 8.0 or higher
+
+
+### Getting Started
+
+* Clone this repository
+
+* Install Ionic & Cordova
+    ```bash
+    $ npm install -g ionic cordova
+    ```
+
+* Install node_modules
+    ```bash
+    $ npm install
+    ```    
+
+* Replace the value of "wso2HeaderStudent" by the appropriate value in the file StudUCLouvain/src/environments/environments(.prod).ts
+
+
+### Launch on browser
+```bash
+$ ionic serve
+```
+
+
+### Launch on platform
+
+#### Before
+```bash
+$ ionic cordova parepare
+$ ionic cordova platform add <platform>
+```
+
+#### Build
+```bash
+$ ionic cordova build <platform>
+$ ionic cordova build <platform> --prod
+$ ionic cordova build <platform> --prod --release
+```
+
+
+#### Emulate
+```bash
+$ ionic cordova emulate <platform>
+```
+
+#### Run on device
+```bash
+$ ionic cordova run <platform> (emulate if device not found)
+```
+
 ### Tests
 
 #### Unit Tests : Karma
