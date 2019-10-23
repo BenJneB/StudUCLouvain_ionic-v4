@@ -143,7 +143,8 @@ describe('Home Component', () => {
     });
 });
 function _testCreateInAppBrowser(component: any) {
-    const spyCreate = spyOn(component.iab, 'create').and.callFake(() => { });
+    const spyCreate = spyOn(component.iab, 'create').and.callFake(() => {
+    });
     component.openUCL('url');
     expect(spyCreate.calls.count()).toEqual(1);
     expect(spyCreate.calls.first().args[0]).toEqual('url');

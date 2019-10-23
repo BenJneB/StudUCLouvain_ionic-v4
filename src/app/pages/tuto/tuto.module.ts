@@ -45,8 +45,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
       }
     ])
   ],
-  providers: [
-    SplashScreen,
-  ]
+    providers: [
+        SplashScreen,
+    ]
 })
 export class TutoPageModule { }

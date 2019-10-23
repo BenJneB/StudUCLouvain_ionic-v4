@@ -111,10 +111,11 @@ describe('MyApp Component', () => {
   });
 
   describe('launchExternalApp method', () => {
-    it('should open Market if app not installed (Android)', () => {
+      it('should open Market if app not installed (Android)', () => {
       spyOnProperty(component.device, 'platform', 'get').and.returnValue('Android');
-      const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check');
-      const spyOpen = spyOn(component.market, 'open').and.callFake(() => { });
+          const spyCheck = spyFunctionWithCallBackReject(component.appAvailability, 'check');
+          const spyOpen = spyOn(component.market, 'open').and.callFake(() => {
+          });
       component.launchExternalApp('ios', 'android', 'app', 'http');
       expect(spyCheck.calls.count()).toEqual(1);
       expect(spyOpen.calls.count()).toEqual(1);
@@ -159,7 +160,7 @@ describe('MyApp Component', () => {
       expect(spyPop.calls.count()).toEqual(1);
     });
     it('should call show from Toast (otherwhise and not threshold)', () => {
-      const spyShow = spyOn(component.alertService, 'presentToast').and.callThrough();
+        const spyShow = spyOn(component.alertService, 'presentToast').and.callThrough();
       spyOnProperty(component.router, 'url', 'get').and.returnValue('home');
       component.confirmExitApp();
       expect(spyShow.calls.count()).toEqual(1);
@@ -176,7 +177,7 @@ describe('MyApp Component', () => {
       expect(spyGetClose.calls.count()).toEqual(3);
     });
 
-    it('should close menu and launch modal to confirm exit app', async function () {
+      it('should close menu and launch modal to confirm exit app', async function () {
       spyOn(component.menu, 'getOpen').and.returnValue('returned');
       const spyClose = spyOn(component.menu, 'close').and.callThrough();
       const spyConfirmExit = spyOn(component, 'confirmExitApp').and.callThrough();
@@ -186,7 +187,7 @@ describe('MyApp Component', () => {
       expect(spyConfirmExit.calls.count()).toEqual(1);
     });
     it('should only call confirmExitApp if error', () => {
-      spyFunctionWithCallBackReject(component.menu, 'getOpen');
+        spyFunctionWithCallBackReject(component.menu, 'getOpen');
       component.backButtonEvent();
       // SADELY NO TEST
     });

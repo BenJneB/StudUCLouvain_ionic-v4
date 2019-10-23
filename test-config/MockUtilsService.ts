@@ -49,7 +49,8 @@ export class MockUtilsService extends UtilsService {
     createEventInCalendar() { }
     doRefresh() { }
     addFavorite() {
-        return new Promise<void>(() => { });
+        return new Promise<void>(() => {
+        });
     }
 }
 

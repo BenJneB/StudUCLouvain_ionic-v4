@@ -51,7 +51,7 @@ export class EmployeeDetailsPage {
     public repService: RepertoireService,
     public connService: ConnectivityService
   ) {
-    this.route.queryParams.subscribe(() => {
+      this.route.queryParams.subscribe(() => {
 
       if (this.router.getCurrentNavigation().extras.state) {
         this.empDetails = this.router.getCurrentNavigation().extras.state.items;

@@ -126,27 +126,28 @@
             </ion-row>
         </form>
 
-        <!------------------------------------------------- LISTE DU PROGRAMME DE COURS ------------------------------------------->
-        <ion-list *ngIf="status">
-            <h4 class="ion-text-center" *ngIf="prog">{{prog}}</h4>
-            <p class="ion-text-center"> {{'STUDY.STATUS' | translate}} : {{statusInsc}}</p>
-            <ion-button expand="full" (click)="openExamPage()"
-                        color="uclouvain">{{'STUDY.EXAM' | translate}}</ion-button>
-            <ion-list *ngFor="let activity of activities">
-                <ion-item-sliding #slidingItem>
-                    <ion-item>
-                        <ion-label>{{activity.sigle}}</ion-label>
-                        <!-- - {{activity.name}}-->
-                    </ion-item>
-                    <ion-item-options>
-                        <ion-button fill="outline" (click)="addCourseFromProgram(activity.sigle)" class="large-icon">
-                            <ion-icon name='add-circle'></ion-icon>
-                        </ion-button>
-                    </ion-item-options>
-                </ion-item-sliding>
-            </ion-list>
-            <p *ngIf="activities.length <= 0">{{'STUDY.NO' | translate}}</p>
-        </ion-list>
+    <!------------------------------------------------- LISTE DU PROGRAMME DE COURS ------------------------------------------->
+    <ion-list *ngIf="status">
+      <h4 class="ion-text-center" *ngIf="prog">{{prog}}</h4>
+      <p class="ion-text-center"> {{'STUDY.STATUS' | translate}} : {{statusInsc ? statusInsc : 'Undefined'}}</p>
+      <ion-button expand="full" (click)="openExamPage()" color="uclouvain">{{'STUDY.EXAM' | translate}}</ion-button>
+      <ion-list *ngFor="let activity of activities">
+        <ion-item-sliding #slidingItem>
+          <ion-item>
+            <ion-label>{{activity.sigle}}</ion-label>
+          </ion-item>
+          <ion-item-options>
+            <ion-button fill="outline" (click)="addCourseFromProgram(activity.sigle)" class="large-icon">
+              <ion-icon name='add-circle'></ion-icon>
+            </ion-button>
+          </ion-item-options>
+        </ion-item-sliding>
+      </ion-list>
+      <br>
+      <b>
+        <p *ngIf="activities.length <= 0" style="text-align: center;">{{'STUDY.NO' | translate}}</p>
+      </b>
+    </ion-list>
 
     </ng-container>
 

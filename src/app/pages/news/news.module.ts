@@ -25,10 +25,10 @@ import { FacService } from '../../services/utils-services/fac-service';
       }
     ])
   ],
-  providers: [
-    NewsService,
-    ConnectivityService,
-      FacService,
-  ]
+    providers: [
+        NewsService,
+        ConnectivityService,
+        FacService,
+    ]
 })
 export class NewsPageModule { }

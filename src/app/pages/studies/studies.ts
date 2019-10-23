@@ -135,7 +135,7 @@ export class StudiesPage {
             this.statusInsc = result[0].etatInscription;
             this.prog = result[0].intitOffreComplet;
           })
-            .catch(() => {
+              .catch(() => {
               console.log('Error during load of inscription status');
             });
         }
@@ -154,7 +154,9 @@ export class StudiesPage {
         this.activities.push({ 'name': '', 'sigle': sigle });
       }
     })
-      .catch(() => { console.log('Error during load of course program'); });
+        .catch(() => {
+            console.log('Error during load of course program');
+        });
   }
 
   /*Open modalprojectpage to choose an ade project*/
@@ -220,7 +222,7 @@ export class StudiesPage {
 
   async addCourse(sigle: string, name: string) {
     this.saveCourse(name, sigle);
-    return await this.alertService.presentToast('Cours ajouté');
+      return await this.alertService.presentToast('Cours ajouté');
   }
 
   getCourses() {

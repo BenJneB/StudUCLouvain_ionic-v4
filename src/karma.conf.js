@@ -18,7 +18,7 @@ module.exports = function (config) {
       jasmine: {
         random: false
       },
-      captureConsole: false
+        captureConsole: false
 
     },
     coverageIstanbulReporter: {

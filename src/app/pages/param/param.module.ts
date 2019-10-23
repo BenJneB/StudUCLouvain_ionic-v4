@@ -23,8 +23,8 @@ import { TransService } from '../../services/utils-services/trans-services';
       }
     ])
   ],
-  providers: [
-    TransService,
-  ]
+    providers: [
+        TransService,
+    ]
 })
 export class ParamPageModule { }

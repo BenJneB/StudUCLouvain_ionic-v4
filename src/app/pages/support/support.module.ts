@@ -23,8 +23,8 @@ import { RepertoireService } from '../../services/wso2-services/repertoire-servi
       }
     ])
   ],
-  providers: [
-    RepertoireService,
-  ]
+    providers: [
+        RepertoireService,
+    ]
 })
 export class SupportPageModule { }

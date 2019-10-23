@@ -33,7 +33,7 @@ export class NewsDetailsPage {
   news: NewsItem;
 
   constructor(private route: ActivatedRoute, private router: Router) {
-    this.route.queryParams.subscribe(() => {
+      this.route.queryParams.subscribe(() => {
 
       if (this.router.getCurrentNavigation().extras.state) {
         this.news = this.router.getCurrentNavigation().extras.state.items;

@@ -25,8 +25,8 @@ import { EventsService } from '../../services/rss-services/events-service';
       }
     ])
   ],
-  providers: [
-    EventsService,
-  ]
+    providers: [
+        EventsService,
+    ]
 })
 export class EventsPageModule { }

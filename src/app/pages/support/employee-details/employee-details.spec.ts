@@ -64,7 +64,8 @@ describe('EmployeeDetails Component', () => {
 
     describe('openPage method', () => {
         it('should open window', () => {
-            const spyOpen = spyOn(window, 'open').and.callFake(() => { });
+            const spyOpen = spyOn(window, 'open').and.callFake(() => {
+            });
             component.openPage('url');
             expect(spyOpen.calls.count()).toEqual(1);
             expect(spyOpen).toHaveBeenCalledWith('url', '_blank');

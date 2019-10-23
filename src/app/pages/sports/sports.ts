@@ -84,19 +84,19 @@ export class SportsPage implements OnInit {
     this.updateDateLimit();
   }
 
-  async ngOnInit() {
-    if (this.connService.isOnline()) {
-      await this.loader.present('Please wait..');
-      this.loadSports(this.segment);
-      this.loadSports('team');
-      this.utilsServices.initSearchControl(this.searchControl, this.searching);
-      this.updateDisplayed();
-    } else {
-      this.utilsServices.initSearchControl(this.searchControl, this.searching);
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
+    async ngOnInit() {
+        if (this.connService.isOnline()) {
+            await this.loader.present('Please wait..');
+            this.loadSports(this.segment);
+            this.loadSports('team');
+            this.utilsServices.initSearchControl(this.searchControl, this.searching);
+            this.updateDisplayed();
+        } else {
+            this.utilsServices.initSearchControl(this.searchControl, this.searching);
+            this.navCtrl.pop();
+            this.connService.presentConnectionAlert();
+        }
     }
-  }
   public doRefresh(refresher) {
     this.loadSports(this.segment);
     refresher.target.complete();
@@ -117,7 +117,7 @@ export class SportsPage implements OnInit {
       this.sportsService.getSports(segment).then(
         result => {
           this.assignDatas(
-            segment === 'team',
+              segment === 'team',
             result
           );
         });

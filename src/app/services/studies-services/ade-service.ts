@@ -33,7 +33,7 @@ import { UtilsService } from '../utils-services/utils-services';
   for more info on providers and Angular 2 DI.
 */
 @Injectable({
-    providedIn: 'root'
+  providedIn: 'root'
 })
 export class AdeService {
   AdeserviceBaseUrl = 'http://horaire.uclouvain.be/jsp/webapi?';

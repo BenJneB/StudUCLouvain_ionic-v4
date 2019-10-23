@@ -11,8 +11,8 @@ import { Calendar } from '@ionic-native/calendar/ngx';
     IonicModule,
     TranslateModule.forChild()
   ],
-  providers: [
-    Calendar,
-  ]
+    providers: [
+        Calendar,
+    ]
 })
 export class ExamPageModule { }

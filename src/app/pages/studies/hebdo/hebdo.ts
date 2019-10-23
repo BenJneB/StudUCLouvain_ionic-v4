@@ -42,7 +42,7 @@ export class HebdoPage {
     private route: ActivatedRoute,
     private router: Router,
   ) {
-    this.route.queryParams.subscribe(() => {
+      this.route.queryParams.subscribe(() => {
       if (this.router.getCurrentNavigation().extras.state) {
         this.schedule = this.router.getCurrentNavigation().extras.state.items;
       }
@@ -53,7 +53,7 @@ export class HebdoPage {
   }
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem: IonItemSliding, activity: any) {
-    let message = '';
+      let message = '';
     this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => { message = res; });
     const datas = {
       title: activity.name + ': ' + activity.type,

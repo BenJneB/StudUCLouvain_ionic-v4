@@ -26,9 +26,9 @@ import { Calendar } from '@ionic-native/calendar/ngx';
       }
     ])
   ],
-  providers: [
-    CourseService,
-      Calendar,
-  ]
+    providers: [
+        CourseService,
+        Calendar,
+    ]
 })
 export class CoursePageModule { }

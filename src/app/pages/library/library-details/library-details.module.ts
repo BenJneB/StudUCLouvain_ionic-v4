@@ -23,8 +23,8 @@ import { LibrariesService } from '../../../services/wso2-services/libraries-serv
       }
     ])
   ],
-  providers: [
-    LibrariesService,
-  ]
+    providers: [
+        LibrariesService,
+    ]
 })
 export class LibraryDetailsPageModule { }

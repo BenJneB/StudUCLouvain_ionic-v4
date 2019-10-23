@@ -58,7 +58,7 @@ describe('ModalInfo Component', () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                { provide: NavParams, useClass: NavParamsMock },
+                {provide: NavParams, useClass: NavParamsMock},
                 StudentService,
                 getMockProvider(Wso2Service, newMockWso2Service),
 

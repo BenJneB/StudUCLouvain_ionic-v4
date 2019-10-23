@@ -30,7 +30,8 @@ export class MockWso2Service extends Wso2Service {
     }
 
     load() {
-        return new Observable<string>(() => {});
+        return new Observable<string>(() => {
+        });
     }
 }
 
@@ -48,11 +49,13 @@ export class MockRepertoireService extends RepertoireService {
     }
 
     searchEmployees() {
-        return new Promise(() => {});
+        return new Promise(() => {
+        });
     }
 
     loadEmpDetails() {
-        return new Promise(() => {});
+        return new Promise(() => {
+        });
     }
 }
 
@@ -78,7 +81,8 @@ export class MockLibrariesService extends LibrariesService {
     }
 
     loadLibDetails() {
-        return new Promise(() => {});
+        return new Promise(() => {
+        });
     }
 }
 
@@ -93,12 +97,13 @@ export class MockStudentService extends StudentService {
     constructor(
         http: HttpClientMock,
         wso2: MockWso2Service,
-        ) {
+    ) {
         super(http, wso2);
     }
 
     searchActivities() {
-        return new Promise(() => {});
+        return new Promise(() => {
+        });
     }
 }
 

@@ -35,7 +35,6 @@ import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/M
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { LibrariesPage } from './libraries';
-import { Observable } from 'rxjs';
 import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Libraries Component', () => {

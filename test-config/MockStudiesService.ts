@@ -18,11 +18,13 @@ export class MockStudiesService extends StudiesService {
     }
 
     getProjects() {
-        return new Promise(() => {});
+        return new Promise(() => {
+        });
     }
 
     openSession() {
-        return new Promise<string>(() => {});
+        return new Promise<string>(() => {
+        });
     }
 }
 
@@ -38,7 +40,8 @@ export class MockAdeService extends AdeService {
     }
 
     getProjects() {
-        return new Observable(() => {});
+        return new Observable(() => {
+        });
     }
 }
 
@@ -54,7 +57,8 @@ export class MockCourseService extends CourseService {
     }
 
     getCourseId() {
-        return new Promise<Activity[]>(() => {});
+        return new Promise<Activity[]>(() => {
+        });
     }
 }
 

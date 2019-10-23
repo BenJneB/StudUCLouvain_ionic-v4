@@ -42,7 +42,7 @@ export class ConnectivityService {
   isOnline(): boolean {
     this.onDevice = this.platform.is('cordova');
     if (this.onDevice && this.network.type) {
-      return this.network.type !== 'none';
+        return this.network.type !== 'none';
     } else {
       return navigator.onLine;
     }

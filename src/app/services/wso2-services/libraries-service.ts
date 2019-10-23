@@ -26,8 +26,6 @@ import { MapLocation } from '../../entity/mapLocation';
 import { TimeSlot } from '../../entity/timeSlot';
 import { ConnectivityService } from '../utils-services/connectivity-service';
 import { Wso2Service } from './wso2-service';
-import { map } from 'rxjs/operators';
-import { Observable } from 'rxjs';
 
 @Injectable()
 export class LibrariesService {

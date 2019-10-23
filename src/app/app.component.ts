@@ -62,26 +62,26 @@ export class AppComponent {
   campusPages: Array<Page>;
   studiePages: Array<Page>;
   toolPages: Array<Page>;
-  pages: Array<Page>;
+    pages: Array<Page>;
 
   constructor(
-    public platform: Platform,
-    public menu: MenuController,
-    public market: Market,
-    private appAvailability: AppAvailability,
-    private iab: InAppBrowser,
-    private device: Device,
-    private popoverCtrl: PopoverController,
-    private user: UserService,
-    public modalCtrl: ModalController,
-    private actionSheetCtrl: ActionSheetController,
-    public translateService: TranslateService,
-    public cache: CacheService,
-    private router: Router,
-    private alertService: AlertService,
-    private nav: NavController,
-    private utilsServices: UtilsService,
-    private storage: Storage
+      public platform: Platform,
+      public menu: MenuController,
+      public market: Market,
+      private appAvailability: AppAvailability,
+      private iab: InAppBrowser,
+      private device: Device,
+      private popoverCtrl: PopoverController,
+      private user: UserService,
+      public modalCtrl: ModalController,
+      private actionSheetCtrl: ActionSheetController,
+      public translateService: TranslateService,
+      public cache: CacheService,
+      private router: Router,
+      private alertService: AlertService,
+      private nav: NavController,
+      private utilsServices: UtilsService,
+      private storage: Storage
   ) {
     this.initializeApp();
   }
@@ -94,7 +94,7 @@ export class AppComponent {
     this.campusPages = this.getOtherPages(false, nullSchemas, nullUrls);
     this.studiePages = this.getOtherPages(true, nullSchemas, nullUrls);
     this.getToolsPages(nullSchemas, nullUrls);
-    this.pages = this.campusPages.concat(this.studiePages.concat(this.toolPages));
+      this.pages = this.campusPages.concat(this.studiePages.concat(this.toolPages));
   }
 
   private getToolsPages(nullSchemas: { ios: any; android: any; }, nullUrls: { app: any; http: any; }) {
@@ -205,7 +205,7 @@ export class AppComponent {
           if (new Date().getTime() - this.lastTimeBackPress < this.timePeriodToExit) {
             navigator['app'].exitApp(); //  work in ionic 4
           } else {
-            this.alertService.presentToast('Press back again to exit App.');
+              this.alertService.presentToast('Press back again to exit App.');
             this.lastTimeBackPress = new Date().getTime();
           }
         }

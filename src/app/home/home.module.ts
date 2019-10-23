@@ -33,8 +33,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
     ])
   ],
   exports: [TranslateModule],
-  providers: [
-    SplashScreen,
-  ]
+    providers: [
+        SplashScreen,
+    ]
 })
 export class HomePageModule { }

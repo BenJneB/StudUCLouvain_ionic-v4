@@ -65,7 +65,7 @@ export class CoursePage implements OnInit {
     private utilsServices: UtilsService,
     private alertService: AlertService
   ) {
-    this.route.queryParams.subscribe(() => {
+      this.route.queryParams.subscribe(() => {
 
       if (this.router.getCurrentNavigation().extras.state) {
         this.sessionId = this.router.getCurrentNavigation().extras.state.sessionId;
@@ -96,7 +96,7 @@ export class CoursePage implements OnInit {
   getCourse(sessionId: string, acronym: string) {
     this.courseService.getCourseId(sessionId, acronym).then(
         (data: any) => {
-        this.courseService.getActivity(sessionId, data).then(
+            this.courseService.getActivity(sessionId, data).then(
           courseData => {
             this.course.activities = courseData.sort(
               (a1, a2) => a1.start.valueOf() - a2.start.valueOf()
@@ -117,7 +117,7 @@ export class CoursePage implements OnInit {
 
   /*Add an activity (a session of the course) to the calendar of the smartphone*/
   addToCalendar(slidingItem: IonItemSliding, activity: Activity) {
-    let message = '';
+      let message = '';
     this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => { message = res; });
     const datas = {
       title: this.course.name + ': ' + activity.type,
@@ -166,10 +166,10 @@ export class CoursePage implements OnInit {
 
   /*Display a prompt to proprose to the students the slots available for the TP or the CM*/
   async showPrompt(segment: string) {
-    let title = '';
-    let message = '';
-    let cancel = '';
-    let apply = '';
+      let title = '';
+      let message = '';
+      let cancel = '';
+      let apply = '';
     this.translateService.get('COURSE.TITLE').subscribe((res: string) => { title = res; });
     this.translateService.get('COURSE.MESSAGE2').subscribe((res: string) => { message = res; });
     this.translateService.get('COURSE.CANCEL').subscribe((res: string) => { cancel = res; });
@@ -268,7 +268,7 @@ export class CoursePage implements OnInit {
       this.calendar.createEventWithOptions(this.course.name + ': ' + activity.type,
         activity.auditorium, null, activity.start, activity.end, options);
     }
-    let message = '';
+      let message = '';
     this.translateService.get('STUDY.MESSAGE3').subscribe((res: string) => { message = res; });
     this.alertService.presentToast(message);
     this.alertService.alertCourse({ 'warning': 'STUDY.WARNING', 'message': 'STUDY.MESSAGE4' });

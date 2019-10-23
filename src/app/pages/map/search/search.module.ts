@@ -16,8 +16,8 @@ import { POIService } from '../../../services/map-services/poi-service';
   entryComponents: [
     SearchModal
   ],
-  providers: [
-    POIService
-  ]
+    providers: [
+        POIService
+    ]
 })
 export class SearchModalModule { }

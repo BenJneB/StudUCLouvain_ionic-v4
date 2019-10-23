@@ -23,8 +23,8 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
       }
     ])
   ],
-  providers: [
-    AppVersion,
-  ]
+    providers: [
+        AppVersion,
+    ]
 })
 export class CreditPageModule { }

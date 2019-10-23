@@ -19,8 +19,8 @@ import { EventsService } from '../../../services/rss-services/events-service';
   entryComponents: [
     EventsFilterPage
   ],
-  providers: [
-    EventsService,
-  ]
+    providers: [
+        EventsService,
+    ]
 })
 export class EventsFilterModule { }

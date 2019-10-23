@@ -158,7 +158,7 @@ export class EventsPage implements OnInit {
   }
 
   /*Make an array with events sorted by week*/
-  changeArray(array) {
+    changeArray(array) {
     const getWeek = this.getWeek;
     const groups = array.reduce(function (obj, item) {
       const date = new Date(item.startDate.getTime());
@@ -216,7 +216,7 @@ export class EventsPage implements OnInit {
     }
     this.shownEvents = this.displayedEvents.length;
     this.searching = false;
-    this.displayedEventsD = this.changeArray(this.displayedEvents);
+      this.displayedEventsD = this.changeArray(this.displayedEvents);
     this.loader.dismiss();
   }
 
@@ -259,7 +259,7 @@ export class EventsPage implements OnInit {
 
   /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: IonItemSliding, itemData: any): void {
-    let message = '';
+      let message = '';
     this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => { message = res; });
     const datas = {
       title: itemData.title,

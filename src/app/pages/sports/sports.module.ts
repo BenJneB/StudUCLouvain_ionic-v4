@@ -27,10 +27,10 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
       }
     ])
   ],
-  providers: [
-    SportsService,
-    Calendar,
-    ConnectivityService,
-  ]
+    providers: [
+        SportsService,
+        Calendar,
+        ConnectivityService,
+    ]
 })
 export class SportsPageModule { }

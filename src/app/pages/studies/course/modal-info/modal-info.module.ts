@@ -20,9 +20,9 @@ import { Calendar } from '@ionic-native/calendar/ngx';
   entryComponents: [
     ModalInfoPage
   ],
-  providers: [
-    StudentService,
-    Calendar,
-  ]
+    providers: [
+        StudentService,
+        Calendar,
+    ]
 })
 export class ModalInfoPageModule { }

@@ -69,10 +69,10 @@ export class StudentService {
     const newUrl = this.url + 'inscriptions';
     return new Promise(resolve => {
       this.wso2Service.loadStudent(newUrl).subscribe(
-        (data) => {
+        (data: any) => {
           let res: any;
-          res = data;
-          resolve(res.lireInscriptionAnacResponse.return);
+          res = data.lireInscriptionAnacResponse;
+          resolve(res == null ? undefined : res.return);
         },
         (err) => {
           console.log(err);

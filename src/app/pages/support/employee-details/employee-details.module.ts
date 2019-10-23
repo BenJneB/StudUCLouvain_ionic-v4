@@ -24,9 +24,9 @@ import { ConnectivityService } from '../../../services/utils-services/connectivi
       }
     ])
   ],
-  providers: [
-    RepertoireService,
-    ConnectivityService,
-  ]
+    providers: [
+        RepertoireService,
+        ConnectivityService,
+    ]
 })
 export class EmployeeDetailsPageModule { }

@@ -24,9 +24,9 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
       }
     ])
   ],
-  providers: [
-    LibrariesService,
-    ConnectivityService,
-  ]
+    providers: [
+        LibrariesService,
+        ConnectivityService,
+    ]
 })
 export class LibrariesPageModule { }

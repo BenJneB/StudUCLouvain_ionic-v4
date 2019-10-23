@@ -27,10 +27,10 @@ import { MapService } from '../../services/map-services/map-service';
       }
     ])
   ],
-  providers: [
-    POIService,
-    Geolocation,
-      MapService
-  ],
+    providers: [
+        POIService,
+        Geolocation,
+        MapService
+    ],
 })
 export class MapPageModule { }

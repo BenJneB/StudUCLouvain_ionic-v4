@@ -66,17 +66,17 @@ export class MapPage {
   }
 
   loadmap() {
-    // this.map = new Map('map').setView(this.mapService.getCampusLocation(this.userService.campus), 14);
+      // this.map = new Map('map').setView(this.mapService.getCampusLocation(this.userService.campus), 14);
     tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
       attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
       maxZoom: 18
     }).addTo(this.map);
-    this.map.on('popupopen', (e) => {
+      this.map.on('popupopen', (e) => {
       const px = this.map.project(e.popup._latlng);
       px.y -= e.popup._container.clientHeight / 2;
       this.map.panTo(this.map.unproject(px), { animate: true });
     });
-    // this.showUserPosition();
+      // this.showUserPosition();
   }
 
   async showSearch() {
@@ -92,11 +92,11 @@ export class MapPage {
     await modal.present();
   }
 
-  // showUserPosition() {
-  //   this.mapService.getUserLocation().then(coord => {
-  //     this.userPosition = marker(coord, { icon: this.userIcon }).addTo(this.map);
-  //   });
-  // }
+    // showUserPosition() {
+    //   this.mapService.getUserLocation().then(coord => {
+    //     this.userPosition = marker(coord, { icon: this.userIcon }).addTo(this.map);
+    //   });
+    // }
 
   showBuilding(item) {
     // update or create building marker

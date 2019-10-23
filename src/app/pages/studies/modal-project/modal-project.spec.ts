@@ -56,7 +56,7 @@ describe('ModalProject Component', () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                { provide: NavParams, useClass: NavParamsMock },
+                {provide: NavParams, useClass: NavParamsMock},
                 getMockProvider(StudiesService, newMockStudiesService),
             ]
         }).compileComponents();

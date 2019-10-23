@@ -19,8 +19,8 @@ import { SportsService } from '../../../services/rss-services/sports-service';
   entryComponents: [
     SportsFilterPage
   ],
-  providers: [
-    SportsService,
-  ]
+    providers: [
+        SportsService,
+    ]
 })
 export class SportsFilterPageModule { }
