@@ -1,13 +1,13 @@
 import { NgModule } from '@angular/core';
 import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
 
+// @ts-ignore
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'course', loadChildren: './pages/studies/course/course.module#CoursePageModule' },
   { path: 'credits', loadChildren: './pages/credit/credit.module#CreditPageModule' },
   { path: 'employee', loadChildren: './pages/support/employee-details/employee-details.module#EmployeeDetailsPageModule' },
-  { path: 'events', loadChildren: './pages/events/events.module#EventsPageModule' },
-  { path: 'events/details', loadChildren: './pages/events/events-details/events-details.module#EventsDetailsPageModule' },
+    {path: 'events', loadChildren: () => import('./pages/events/events.module').then(m => m.EventsPageModule)},
   { path: 'guindaille', loadChildren: './pages/guindaille2-0/guindaille2-0.module#GuindaillePageModule' },
   { path: 'home', loadChildren: './home/home.module#HomePageModule' },
   { path: 'libraries', loadChildren: './pages/library/libraries.module#LibrariesPageModule' },
