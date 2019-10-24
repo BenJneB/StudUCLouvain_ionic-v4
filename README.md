@@ -1,8 +1,8 @@
 [![Maintainability](https://api.codeclimate.com/v1/badges/b3a272ba9c2f4de6ed09/maintainability)](https://codeclimate.com/github/BenJneB/StudUCLouvain_ionic-v4/maintainability)
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b3a272ba9c2f4de6ed09/test_coverage)](https://codeclimate.com/github/BenJneB/StudUCLouvain_ionic-v4/test_coverage)
-[![Join the chat at https://gitter.im/UCLCampus/Lobby](https://badges.gitter.im/Join%20Chat.svg)](https://gitter.im/UCLCampus/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![Gitter](https://badges.gitter.im/StudUCLouvain_ionic-v4/community.svg)](https://gitter.im/StudUCLouvain_ionic-v4/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-<div align="center">
+<div style="text-align: center;">
   
 # StudUCLouvain (ionic-v4)
 

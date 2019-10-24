@@ -35,7 +35,7 @@ export class StudiesService {
 
   /*Open session for the user*/
   openSession() {
-    return new Promise<string>((resolve, reject) => {
+    return new Promise<string>((resolve) => {
       this.ade.httpOpenSession().subscribe(
         data => {
           resolve(data['session'].$.id);
@@ -46,7 +46,7 @@ export class StudiesService {
 
   /*Get the projects ADE*/
   getProjects(sessionId: string) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.ade.getProjects(sessionId).subscribe(
         data => {
           resolve(this.extractAdeProjects(data));
@@ -76,7 +76,7 @@ export class StudiesService {
 
   /*Set the project selected by the user*/
   setProject(sessionId: string, projectId: string) {
-    return new Promise((resolve, reject) => {
+    return new Promise((resolve) => {
       this.ade.setProject(sessionId, projectId).subscribe(
         data => { resolve(data); }
       );
