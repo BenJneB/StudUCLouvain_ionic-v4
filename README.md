@@ -136,6 +136,7 @@ $ npm run ci
 
 ### Features
 
+* Campus choices : Louvain-la-Neuve, Mons, Woluwé
 * Display course schedule (ADE) and select your session
 * Add course schedule to your calendar
 * Display annual course program
@@ -151,3 +152,16 @@ $ npm run ci
 * Maps with point of interest on campus
 * Staffbook
 * Campaign Guindaille2.0
+
+## Contribution
+Contributions are welcome!
+
+* Report issues
+* Open pull request with improvements
+* Spread the word
+
+## Contact
+* In case of problems, please contact us : StudUCLouvain@uclouvain.be
+
+## License
+Stud.UCLouvain is available under the GNU/GPLv3 license. See the LICENSE file for more info.
