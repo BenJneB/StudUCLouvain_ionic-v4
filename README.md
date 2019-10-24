@@ -78,21 +78,21 @@ npm -v
 * Replace the value of "wso2HeaderStudent" by the appropriate value in the file StudUCLouvain/src/environments/environments.ts
 
 
-## Launch on browser
+### Launch on browser
 ```bash
 $ ionic serve
 ```
 
 
-## Launch on platform
+### Launch on platform
 
-### Before
+#### Before
 ```bash
 $ ionic cordova parepare
 $ ionic cordova platform add <platform>
 ```
 
-### Build
+#### Build
 ```bash
 $ ionic cordova build <platform>
 $ ionic cordova build <platform> --prod
@@ -100,12 +100,12 @@ $ ionic cordova build <platform> --prod --release
 ```
 
 
-### Emulate
+#### Emulate
 ```bash
 $ ionic cordova emulate <platform>
 ```
 
-### Run on device
+#### Run on device
 ```bash
 $ ionic cordova run <platform> (emulate if device not found)
 ```
