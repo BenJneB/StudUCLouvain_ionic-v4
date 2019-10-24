@@ -12,7 +12,7 @@
 ### Anyone wishing to participate and/or propose new fixtures/ideas to improve the app should not hesitate to contact StudUCLouvain@uclouvain.be or directly make a pull-request on the repo concerned.
 </div>
 
-### TO DO :
+# TO DO :
 
 - Common platforms
 
@@ -42,14 +42,14 @@
 
 &nbsp;
        
-## README :
+# README :
 
 ### More informations :
 
 #### https://github.com/UCL-INGI/StudUCLouvain (+- Outdated)
 
 
-### Prerequisites
+## Prerequisites
 - Download nodejs (LTS) from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
 node -v
@@ -61,7 +61,7 @@ npm -v
 - For iOS, update XCode version to 8.0 or higher
 
 
-### Getting Started
+## Getting Started
 
 * Clone this repository
 
@@ -78,21 +78,21 @@ npm -v
 * Replace the value of "wso2HeaderStudent" by the appropriate value in the file StudUCLouvain/src/environments/environments.ts
 
 
-### Launch on browser
+## Launch on browser
 ```bash
 $ ionic serve
 ```
 
 
-### Launch on platform
+## Launch on platform
 
-#### Before
+### Before
 ```bash
 $ ionic cordova parepare
 $ ionic cordova platform add <platform>
 ```
 
-#### Build
+### Build
 ```bash
 $ ionic cordova build <platform>
 $ ionic cordova build <platform> --prod
@@ -100,19 +100,19 @@ $ ionic cordova build <platform> --prod --release
 ```
 
 
-#### Emulate
+### Emulate
 ```bash
 $ ionic cordova emulate <platform>
 ```
 
-#### Run on device
+### Run on device
 ```bash
 $ ionic cordova run <platform> (emulate if device not found)
 ```
 
-### Tests
+## Tests
 
-#### Unit Tests : Karma
+### Unit Tests : Karma
 To run the unit tests
 ```bash
 $ npm run test
@@ -120,21 +120,21 @@ $ npm run test:once # single run
 $ npm run test:onceAndCoverage
 ```
        
-#### E2E Tests : Protractor
+### E2E Tests : Protractor
 To run the E2E tests
 ```bash
 $ npm run e2e
 ```
 
        
-#### Both
+### Both
 To run both : single run with coverage and e2e
 ```bash
 $ npm run ci
 ```
 
 
-### Features
+## Features
 
 * Campus choices : Louvain-la-Neuve, Mons, Woluwé
 * Display course schedule (ADE) and select your session
