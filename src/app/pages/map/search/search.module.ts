@@ -3,7 +3,7 @@ import { NgModule } from '@angular/core';
 import { IonicModule } from '@ionic/angular';
 
 import { SearchModal } from './search';
-import { POIService } from '../../../services/map-services/poi-service';
+import { POIService } from 'src/app/services/map-services/poi-service';
 
 @NgModule({
   declarations: [

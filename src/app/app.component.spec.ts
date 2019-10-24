@@ -33,12 +33,12 @@ import { IonicModule, IonRouterOutlet } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { DeviceMock, InAppBrowserMock } from '../../test-config/MockIonicNative';
+import { DeviceMock, InAppBrowserMock } from 'test-config/MockIonicNative';
 import { AppComponent } from './app.component';
 import { AlertService } from './services/utils-services/alert-service';
 import { UtilsService } from './services/utils-services/utils-services';
-import { newMockUtilsService } from '../../test-config/MockUtilsService';
-import { getMockProvider } from '../../test-config/Mock';
+import { newMockUtilsService } from 'test-config/MockUtilsService';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('MyApp Component', () => {
   let fixture;

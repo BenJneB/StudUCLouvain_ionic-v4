@@ -22,7 +22,7 @@ import { Component } from '@angular/core';
 import { Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { UtilsService } from '../../services/utils-services/utils-services';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 export class StructPage {
   title: string; component: string; iosSchemaName: string; androidPackageName: string; appUrl: string; httpUrl: string;

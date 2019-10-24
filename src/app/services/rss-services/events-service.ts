@@ -20,7 +20,7 @@
 */
 import { Injectable } from '@angular/core';
 
-import { EventItem } from '../../entity/eventItem';
+import { EventItem } from 'src/app/entities/eventItem';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 
@@ -89,7 +89,7 @@ export class EventsService {
       case 'culturel et artistique': return 'cultural';
       case 'guindaille': return 'party';
       case 'sportif': return 'sports';
-      case 'services et aides': return 'services';
+      case 'src/app/services et aides': return 'services';
       default: return 'other';
     }
   }

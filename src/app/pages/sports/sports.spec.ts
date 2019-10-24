@@ -13,8 +13,8 @@ import { IonicModule, IonItemSliding, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { ModalControllerMock } from 'test-config/MockIonicNative';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -33,8 +33,8 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SportsPage } from './sports';
-import { LoaderService } from '../../services/utils-services/loader-service';
-import { getMockProvider } from '../../../../test-config/Mock';
+import { LoaderService } from 'src/app/services/utils-services/loader-service';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('Sports Component', () => {
     let fixture;

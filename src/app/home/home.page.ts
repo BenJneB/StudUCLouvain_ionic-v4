@@ -24,8 +24,8 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { AlertController, IonContent, NavController, Platform } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { UserService } from '../services/utils-services/user-service';
-import { UtilsService } from '../services/utils-services/utils-services';
+import { UserService } from 'src/app/services/utils-services/user-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 @Component({
   selector: 'app-home',

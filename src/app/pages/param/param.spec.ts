@@ -24,7 +24,7 @@ import { TranslateModule } from '@ngx-translate/core';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { ParamPage } from './param';
-import { TransService } from '../../services/utils-services/trans-services';
+import { TransService } from 'src/app/services/utils-services/trans-services';
 
 describe('Param Component', () => {
     let fixture;
