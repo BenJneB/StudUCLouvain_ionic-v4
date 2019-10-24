@@ -7,10 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { ModalProjectPageModule } from './modal-project/modal-project.module';
 import { StudiesPage } from './studies';
-import { StudentService } from '../../services/wso2-services/student-service';
-import { StudiesService } from '../../services/studies-services/studies-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { TransService } from '../../services/utils-services/trans-services';
+import { StudentService } from 'src/app/services/wso2-services/student-service';
+import { StudiesService } from 'src/app/services/studies-services/studies-service';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { TransService } from 'src/app/services/utils-services/trans-services';
 
 @NgModule({
   declarations: [StudiesPage],

@@ -23,13 +23,13 @@ import { FormControl } from '@angular/forms';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { IonItemSliding, IonList, ModalController, NavController } from '@ionic/angular';
 
-import { SportItem } from '../../entities/sportItem';
-import { SportsService } from '../../services/rss-services/sports-service';
-import { AlertService } from '../../services/utils-services/alert-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { LoaderService } from '../../services/utils-services/loader-service';
-import { UserService } from '../../services/utils-services/user-service';
-import { UtilsService } from '../../services/utils-services/utils-services';
+import { SportItem } from 'src/app/entities/sportItem';
+import { SportsService } from 'src/app/services/rss-services/sports-service';
+import { AlertService } from 'src/app/services/utils-services/alert-service';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { LoaderService } from 'src/app/services/utils-services/loader-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { SportsFilterPage } from './sports-filter/sports-filter';
 
 @Component({

@@ -3,7 +3,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { wso2HeaderStudent, wso2ServiceBaseUrl } from '../../../environments/environment';
+import { wso2HeaderStudent, wso2ServiceBaseUrl } from 'src/app/environments/environment';
 
 /**
  Generated class for the Wso2ServiceProvider provider.
@@ -23,7 +23,7 @@ export class Wso2Service {
     constructor(public http: HttpClient) {
         this.getAppToken()
             .subscribe(
-                data => {
+                () => {
                     this.headers = new HttpHeaders({'Authorization': this.token});
                     this.headers.append('Accept', 'application/json');
                 });
@@ -46,7 +46,7 @@ export class Wso2Service {
                 if (error.status === 401) {
                     this.getAppToken()
                         .subscribe(
-                            data => {
+                            () => {
                                 this.headers = new HttpHeaders({'Authorization': this.token});
                                 this.headers.append('Accept', 'application/json');
                             });

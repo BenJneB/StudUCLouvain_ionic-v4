@@ -8,7 +8,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModalControllerMock, NavParamsMock } from '../../../../../test-config/MockIonicNative';
+import { ModalControllerMock, NavParamsMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -27,7 +27,7 @@ import { ModalControllerMock, NavParamsMock } from '../../../../../test-config/M
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SportsFilterPage } from './sports-filter';
-import { getMockProvider } from '../../../../../test-config/Mock';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('SportsFilter Component', () => {
     let fixture;

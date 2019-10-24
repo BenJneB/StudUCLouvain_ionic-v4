@@ -22,9 +22,9 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { LibraryItem } from '../../../entities/libraryItem';
-import { UtilsService } from '../../../services/utils-services/utils-services';
-import { LibrariesService } from '../../../services/wso2-services/libraries-service';
+import { LibraryItem } from 'src/app/entities/libraryItem';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
 
 @Component({
   selector: 'page-library-details',

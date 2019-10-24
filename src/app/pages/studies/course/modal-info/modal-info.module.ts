@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ModalInfoPage } from './modal-info';
-import { StudentService } from '../../../../services/wso2-services/student-service';
+import { StudentService } from 'src/app/services/wso2-services/student-service';
 import { Calendar } from '@ionic-native/calendar/ngx';
 
 @NgModule({

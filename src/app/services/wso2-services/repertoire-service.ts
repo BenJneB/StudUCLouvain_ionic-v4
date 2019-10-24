@@ -21,7 +21,7 @@ import { HttpClient } from '@angular/common/http';
  */
 import { Injectable } from '@angular/core';
 
-import { EmployeeItem } from '../../entities/employeeItem';
+import { EmployeeItem } from 'src/app/entities/employeeItem';
 import { ConnectivityService } from '../utils-services/connectivity-service';
 import { Wso2Service } from './wso2-service';
 

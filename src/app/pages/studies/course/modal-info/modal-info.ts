@@ -21,7 +21,7 @@
 import { Component } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 
-import { StudentService } from '../../../../services/wso2-services/student-service';
+import { StudentService } from 'src/app/services/wso2-services/student-service';
 
 @Component({
   selector: 'page-modal-info',

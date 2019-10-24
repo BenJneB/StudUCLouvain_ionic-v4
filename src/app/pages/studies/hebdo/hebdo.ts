@@ -24,7 +24,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { IonItemSliding } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { UtilsService } from '../../../services/utils-services/utils-services';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 @Component({
   selector: 'page-hebdo',

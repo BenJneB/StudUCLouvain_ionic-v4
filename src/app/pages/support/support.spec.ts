@@ -30,7 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SupportPage } from './support';
-import { getMockProvider } from '../../../../test-config/Mock';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('Support Component', () => {
     let fixture;

@@ -16,7 +16,7 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/MockIonicNative';
+import { InAppBrowserMock, ModalControllerMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -35,7 +35,7 @@ import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/M
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { LibrariesPage } from './libraries';
-import { getMockProvider } from '../../../../test-config/Mock';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('Libraries Component', () => {
     let fixture;

@@ -24,8 +24,8 @@ import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { TransService } from '../../services/utils-services/trans-services';
-import { UserService } from '../../services/utils-services/user-service';
+import { TransService } from 'src/app/services/utils-services/trans-services';
+import { UserService } from 'src/app/services/utils-services/user-service';
 
 @Component({
   selector: 'page-param',

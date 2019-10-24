@@ -27,9 +27,9 @@ import { TranslateModule } from '@ngx-translate/core';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { LibraryDetailsPage } from './library-details';
-import { LibrariesService } from '../../../services/wso2-services/libraries-service';
-import { newMockLibrariesService } from '../../../../../test-config/MockWso2Services';
-import { getMockProvider } from '../../../../../test-config/Mock';
+import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
+import { newMockLibrariesService } from 'test-config/MockWso2Services';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('LibraryDetails Component', () => {
     let fixture;

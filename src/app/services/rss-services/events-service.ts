@@ -20,7 +20,7 @@
 */
 import { Injectable } from '@angular/core';
 
-import { EventItem } from '../../entities/eventItem';
+import { EventItem } from 'src/app/entities/eventItem';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 

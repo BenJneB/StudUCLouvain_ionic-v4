@@ -13,7 +13,7 @@ import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { CalendarMock, ModalControllerMock } from '../../../../../test-config/MockIonicNative';
+import { CalendarMock, ModalControllerMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -32,13 +32,13 @@ import { CalendarMock, ModalControllerMock } from '../../../../../test-config/Mo
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { CoursePage } from './course';
-import { CourseService } from '../../../services/studies-services/course-service';
-import { AdeService } from '../../../services/studies-services/ade-service';
-import { newMockAdeServicee, newMockCourseService } from '../../../../../test-config/MockStudiesService';
-import { UtilsService } from '../../../services/utils-services/utils-services';
-import { newMockUserService, newMockUtilsService } from '../../../../../test-config/MockUtilsService';
-import { UserService } from '../../../services/utils-services/user-service';
-import { getMockProvider } from '../../../../../test-config/Mock';
+import { CourseService } from 'src/app/services/studies-services/course-service';
+import { AdeService } from 'src/app/services/studies-services/ade-service';
+import { newMockAdeServicee, newMockCourseService } from 'test-config/MockStudiesService';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { newMockUserService, newMockUtilsService } from 'test-config/MockUtilsService';
+import { UserService } from 'src/app/services/utils-services/user-service';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('Course Component', () => {
     let fixture;

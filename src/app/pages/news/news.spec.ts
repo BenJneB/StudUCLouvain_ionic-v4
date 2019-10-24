@@ -17,8 +17,8 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/MockIonicNative';
-import { FacService } from '../../services/utils-services/fac-service';
+import { InAppBrowserMock, ModalControllerMock } from 'test-config/MockIonicNative';
+import { FacService } from 'src/app/services/utils-services/fac-service';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -37,8 +37,8 @@ import { FacService } from '../../services/utils-services/fac-service';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { NewsPage } from './news';
-import { LoaderService } from '../../services/utils-services/loader-service';
-import { getMockProvider } from '../../../../test-config/Mock';
+import { LoaderService } from 'src/app/services/utils-services/loader-service';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('News Component', () => {
     let fixture;
