@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { SupportPage } from './support';
+import { SupportPage } from './pages/support';
 import { RepertoireService } from 'src/app/services/wso2-services/repertoire-service';
 
 @NgModule({

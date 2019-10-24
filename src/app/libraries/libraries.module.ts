@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { LibrariesPage } from './libraries';
+import { LibrariesPage } from './pages/libraries';
 import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 
