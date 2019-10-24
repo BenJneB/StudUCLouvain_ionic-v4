@@ -23,7 +23,7 @@ import { HttpClient } from '@angular/common/http';
  */
 import { Injectable } from '@angular/core';
 
-import { MapLocation } from '../../entity/mapLocation';
+import { MapLocation } from '../../entities/mapLocation';
 import { UserService } from '../utils-services/user-service';
 
 @Injectable()

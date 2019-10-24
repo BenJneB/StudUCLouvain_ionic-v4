@@ -20,7 +20,7 @@
 */
 import { Injectable } from '@angular/core';
 
-import { SportItem } from '../../entity/sportItem';
+import { SportItem } from '../../entities/sportItem';
 import { UserService } from '../utils-services/user-service';
 import { RssService } from './rss-service';
 

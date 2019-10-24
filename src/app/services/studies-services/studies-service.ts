@@ -21,7 +21,7 @@ import { HttpClient } from '@angular/common/http';
  */
 import { Injectable } from '@angular/core';
 
-import { AdeProject } from '../../entity/adeProject';
+import { AdeProject } from '../../entities/adeProject';
 import { AdeService } from './ade-service';
 
 @Injectable()

@@ -24,7 +24,7 @@ import { FormControl } from '@angular/forms';
 import { IonItemSliding, IonList, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { EventItem } from '../../entity/eventItem';
+import { EventItem } from '../../entities/eventItem';
 import { EventsFilterPage } from './events-filter/events-filter';
 import { EventsService } from '../../services/rss-services/events-service';
 import { LoaderService } from '../../services/utils-services/loader-service';

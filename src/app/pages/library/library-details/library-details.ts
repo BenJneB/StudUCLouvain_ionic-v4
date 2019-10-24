@@ -22,7 +22,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { LibraryItem } from '../../../entity/libraryItem';
+import { LibraryItem } from '../../../entities/libraryItem';
 import { UtilsService } from '../../../services/utils-services/utils-services';
 import { LibrariesService } from '../../../services/wso2-services/libraries-service';
 

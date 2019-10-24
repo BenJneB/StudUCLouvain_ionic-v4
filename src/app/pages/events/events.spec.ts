@@ -1,7 +1,7 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { spyFunctionWithCallBackThen } from 'src/app/app.component.spec';
-import { EventItem } from 'src/app/entity/eventItem';
+import { EventItem } from 'src/app/entities/eventItem';
 import { EventsService } from 'src/app/services/rss-services/events-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { newMockEventsService } from 'test-config/MockRssService';

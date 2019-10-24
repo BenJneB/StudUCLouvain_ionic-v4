@@ -26,8 +26,8 @@ import { Calendar } from '@ionic-native/calendar/ngx';
 import { AlertController, IonItemSliding, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { Activity } from '../../../entity/activity';
-import { Course } from '../../../entity/course';
+import { Activity } from '../../../entities/activity';
+import { Course } from '../../../entities/course';
 import { CourseService } from '../../../services/studies-services/course-service';
 import { UserService } from '../../../services/utils-services/user-service';
 import { ModalInfoPage } from './modal-info/modal-info';

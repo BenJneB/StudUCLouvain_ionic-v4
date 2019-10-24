@@ -22,7 +22,7 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
-import { EventItem } from '../../../entity/eventItem';
+import { EventItem } from '../../../entities/eventItem';
 import { AlertService } from '../../../services/utils-services/alert-service';
 import { UserService } from '../../../services/utils-services/user-service';
 

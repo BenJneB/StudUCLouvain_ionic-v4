@@ -22,7 +22,7 @@ import { Component, OnInit } from '@angular/core';
 import { ModalController, NavParams } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
-import { AdeProject } from '../../../entity/adeProject';
+import { AdeProject } from '../../../entities/adeProject';
 import { StudiesService } from '../../../services/studies-services/studies-service';
 
 @Component({

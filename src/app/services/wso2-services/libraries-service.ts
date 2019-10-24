@@ -21,9 +21,9 @@ import { HttpClient } from '@angular/common/http';
  */
 import { Injectable } from '@angular/core';
 
-import { LibraryItem } from '../../entity/libraryItem';
-import { MapLocation } from '../../entity/mapLocation';
-import { TimeSlot } from '../../entity/timeSlot';
+import { LibraryItem } from '../../entities/libraryItem';
+import { MapLocation } from '../../entities/mapLocation';
+import { TimeSlot } from '../../entities/timeSlot';
 import { ConnectivityService } from '../utils-services/connectivity-service';
 import { Wso2Service } from './wso2-service';
 

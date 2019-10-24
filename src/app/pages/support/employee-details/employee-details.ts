@@ -22,7 +22,7 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { EmployeeItem } from '../../../entity/employeeItem';
+import { EmployeeItem } from '../../../entities/employeeItem';
 import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
 import { RepertoireService } from '../../../services/wso2-services/repertoire-service';
 

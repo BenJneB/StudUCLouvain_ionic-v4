@@ -21,7 +21,7 @@ import { HttpClient } from '@angular/common/http';
  */
 import { Injectable } from '@angular/core';
 
-import { NewsItem } from '../../entity/newsItem';
+import { NewsItem } from '../../entities/newsItem';
 import { RssService } from './rss-service';
 
 @Injectable()

@@ -21,7 +21,7 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 
-import { NewsItem } from '../../../entity/newsItem';
+import { NewsItem } from '../../../entities/newsItem';
 
 @Component({
   selector: 'page-news-details',

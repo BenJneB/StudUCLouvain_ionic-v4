@@ -27,18 +27,18 @@ import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import {
-    ActionSheetController,
-    IonRouterOutlet,
-    MenuController,
-    ModalController,
-    NavController,
-    Platform,
-    PopoverController
+  ActionSheetController,
+  IonRouterOutlet,
+  MenuController,
+  ModalController,
+  NavController,
+  Platform,
+  PopoverController
 } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { Page } from './entity/page';
+import { Page } from './entities/page';
 import { UserService } from './services/utils-services/user-service';
 import { UtilsService } from './services/utils-services/utils-services';
 import { AlertService } from './services/utils-services/alert-service';
