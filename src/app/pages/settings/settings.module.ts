@@ -1,12 +1,12 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { SettingsPage } from './settings';
 import { TransService } from 'src/app/services/utils-services/trans-services';
+import { SettingsRoutingModule } from './settings-routing.module';
 
 @NgModule({
   declarations: [SettingsPage],
@@ -16,12 +16,7 @@ import { TransService } from 'src/app/services/utils-services/trans-services';
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: SettingsPage
-      }
-    ])
+    SettingsRoutingModule
   ],
     providers: [
         TransService,
