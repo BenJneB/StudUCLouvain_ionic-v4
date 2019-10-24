@@ -4,9 +4,9 @@
 module.exports = function (config) {
     config.set({
         basePath: '',
-        frameworks: ['parallel', 'jasmine', '@angular-devkit/build-angular'],
+        frameworks: ['jasmine', '@angular-devkit/build-angular'], // + parallel
         plugins: [
-            require('karma-parallel'),
+            // require('karma-parallel'),
             require('karma-jasmine'),
             require('karma-firefox-launcher'),
             require('karma-jasmine-html-reporter'),
@@ -14,10 +14,10 @@ module.exports = function (config) {
             require('@angular-devkit/build-angular/plugins/karma'),
             require('karma-spec-reporter')
         ],
-        parallelOptions: {
-            executors: 4,
-            shardStrategy: 'round-robin'
-        },
+        // parallelOptions: {
+        //     executors: 4,
+        //     shardStrategy: 'round-robin'
+        // },
         client: {
             clearContext: false, // leave Jasmine Spec Runner output visible in browser
             jasmine: {
