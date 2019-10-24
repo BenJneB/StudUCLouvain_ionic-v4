@@ -29,7 +29,7 @@ import { AppVersionMock, InAppBrowserMock, ModalControllerMock } from 'test-conf
  You should have received a copy of the GNU General Public License
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
-import { CreditPage } from './credit';
+import { CreditsPage } from './credits';
 
 describe('Credit Component', () => {
     let fixture;
@@ -37,7 +37,7 @@ describe('Credit Component', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [CreditPage],
+            declarations: [CreditsPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
                 TranslateModule.forRoot(),
@@ -52,13 +52,13 @@ describe('Credit Component', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(CreditPage);
+        fixture = TestBed.createComponent(CreditsPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should be created', () => {
-        testInstanceCreation(component, CreditPage);
+        testInstanceCreation(component, CreditsPage);
     });
 
     describe('openURL method', () => {

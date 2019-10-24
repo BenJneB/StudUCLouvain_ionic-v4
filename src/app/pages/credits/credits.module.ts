@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { CreditPage } from './credit';
+import { CreditsPage } from './credits';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 
 @NgModule({
-  declarations: [CreditPage],
+  declarations: [CreditsPage],
   imports: [
     IonicModule,
     CommonModule,
@@ -19,7 +19,7 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
     RouterModule.forChild([
       {
         path: '',
-        component: CreditPage
+        component: CreditsPage
       }
     ])
   ],

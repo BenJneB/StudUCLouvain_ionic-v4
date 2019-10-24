@@ -5,11 +5,11 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ParamPage } from './param';
+import { SettingsPage } from './settings';
 import { TransService } from 'src/app/services/utils-services/trans-services';
 
 @NgModule({
-  declarations: [ParamPage],
+  declarations: [SettingsPage],
   imports: [
     IonicModule,
     TranslateModule.forChild(),
@@ -19,7 +19,7 @@ import { TransService } from 'src/app/services/utils-services/trans-services';
     RouterModule.forChild([
       {
         path: '',
-        component: ParamPage
+        component: SettingsPage
       }
     ])
   ],
@@ -27,4 +27,5 @@ import { TransService } from 'src/app/services/utils-services/trans-services';
         TransService,
     ]
 })
-export class ParamPageModule { }
+export class SettingsPageModule {
+}
