@@ -1,4 +1,4 @@
-import { SplashScreenMock } from 'test-config/MockIonicNative';
+import { InAppBrowserMock, SplashScreenMock } from 'test-config/MockIonicNative';
 import { newMockUtilsService } from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -31,12 +31,11 @@ import { AlertController, IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MockAlertController } from '../../../test-config/MockAlert';
-import { InAppBrowserMock } from '../../../test-config/MockIonicNative';
+import { MockAlertController } from 'test-config/MockAlert';
 import { testInstanceCreation } from '../app.component.spec';
 import { UtilsService } from '../services/utils-services/utils-services';
 import { HomePage } from './home.page';
-import { getMockProvider } from '../../../test-config/Mock';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('Home Component', () => {
     let fixture;

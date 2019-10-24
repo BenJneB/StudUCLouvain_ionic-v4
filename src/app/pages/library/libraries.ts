@@ -23,9 +23,9 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
-import { LibraryItem } from '../../entity/libraryItem';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { LibrariesService } from '../../services/wso2-services/libraries-service';
+import { LibraryItem } from 'src/app/entities/libraryItem';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
 
 @Component({
   selector: 'page-libraries',

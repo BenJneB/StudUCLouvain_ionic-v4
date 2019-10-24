@@ -22,9 +22,9 @@ import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { TranslateService } from '@ngx-translate/core';
 
-import { EventItem } from '../../../entity/eventItem';
-import { AlertService } from '../../../services/utils-services/alert-service';
-import { UserService } from '../../../services/utils-services/user-service';
+import { EventItem } from 'src/app/entities/eventItem';
+import { AlertService } from 'src/app/services/utils-services/alert-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
 
 @Component({
   selector: 'page-events-details',

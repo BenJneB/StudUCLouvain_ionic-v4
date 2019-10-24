@@ -1,7 +1,7 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { spyFunctionWithCallBackThen } from 'src/app/app.component.spec';
-import { EventItem } from 'src/app/entity/eventItem';
+import { EventItem } from 'src/app/entities/eventItem';
 import { EventsService } from 'src/app/services/rss-services/events-service';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { newMockEventsService } from 'test-config/MockRssService';
@@ -15,8 +15,8 @@ import { IonicModule, IonItemSliding, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MockCacheStorageService } from '../../../../test-config/MockCacheStorageService';
-import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
+import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
+import { ModalControllerMock } from 'test-config/MockIonicNative';
 /*
     Copyright (c)  Université catholique Louvain.  All rights reserved
     Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -38,8 +38,8 @@ import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { EventsPage } from './events';
-import { LoaderService } from '../../services/utils-services/loader-service';
-import { getMockProvider } from '../../../../test-config/Mock';
+import { LoaderService } from 'src/app/services/utils-services/loader-service';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('Events Component', () => {
     let fixture;

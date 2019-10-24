@@ -23,7 +23,7 @@ import { HttpClient } from '@angular/common/http';
  */
 import { Injectable } from '@angular/core';
 
-import { Activity } from '../../entity/activity';
+import { Activity } from 'src/app/entities/activity';
 import { AdeService } from './ade-service';
 
 @Injectable()
@@ -40,7 +40,7 @@ export class CourseService {
   }
 
   getData(extract: (data: any) => any, getInfo: (sessionId: string, field: string) => Observable<any>, sessionId: string, field: string) {
-    return new Promise<Activity[]>((resolve, reject) => {
+    return new Promise<Activity[]>((resolve) => {
       getInfo(sessionId, field).subscribe(
         data => {
           resolve(extract(data));
@@ -116,14 +116,13 @@ export class CourseService {
   createDate(date: string, hour: string): Date {
     const splitDate = date.split('/');
     const splitHour = hour.split(':');
-    const newdate: Date = new Date(
-      parseInt(splitDate[2], 10),
-      parseInt(splitDate[1], 10) - 1,
-      parseInt(splitDate[0], 10),
-      parseInt(splitHour[0], 10),
-      parseInt(splitHour[1], 10)
+    return new Date(
+        parseInt(splitDate[2], 10),
+        parseInt(splitDate[1], 10) - 1,
+        parseInt(splitDate[0], 10),
+        parseInt(splitHour[0], 10),
+        parseInt(splitHour[1], 10)
     );
-    return newdate;
   }
 
   getItems(participants) {

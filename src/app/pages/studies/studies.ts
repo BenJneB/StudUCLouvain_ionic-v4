@@ -27,13 +27,13 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertController, MenuController, ModalController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
-import { AdeProject } from '../../entity/adeProject';
-import { Course } from '../../entity/course';
-import { StudiesService } from '../../services/studies-services/studies-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { TransService } from '../../services/utils-services/trans-services';
-import { StudentService } from '../../services/wso2-services/student-service';
-import { Wso2Service } from '../../services/wso2-services/wso2-service';
+import { AdeProject } from 'src/app/entities/adeProject';
+import { Course } from 'src/app/entities/course';
+import { StudiesService } from 'src/app/services/studies-services/studies-service';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { TransService } from 'src/app/services/utils-services/trans-services';
+import { StudentService } from 'src/app/services/wso2-services/student-service';
+import { Wso2Service } from 'src/app/services/wso2-services/wso2-service';
 import { ModalProjectPage } from './modal-project/modal-project';
 
 @Component({

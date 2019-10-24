@@ -6,8 +6,8 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { LibrariesPage } from './libraries';
-import { LibrariesService } from '../../services/wso2-services/libraries-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 
 @NgModule({
   declarations: [LibrariesPage],

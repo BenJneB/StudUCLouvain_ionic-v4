@@ -24,7 +24,7 @@ import { UserService } from 'src/app/services/utils-services/user-service';
 import { Component } from '@angular/core';
 import { ActionSheetController, ModalController, NavController, Platform } from '@ionic/angular';
 
-import { POIService } from '../../services/map-services/poi-service';
+import { POIService } from 'src/app/services/map-services/poi-service';
 import { SearchModal } from './search/search';
 
 @Component({

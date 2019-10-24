@@ -24,13 +24,13 @@ import { FormControl } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { IonContent, IonList } from '@ionic/angular';
 
-import { NewsItem } from '../../entity/newsItem';
-import { NewsService } from '../../services/rss-services/news-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { FacService } from '../../services/utils-services/fac-service';
-import { LoaderService } from '../../services/utils-services/loader-service';
-import { UserService } from '../../services/utils-services/user-service';
-import { UtilsService } from '../../services/utils-services/utils-services';
+import { NewsItem } from 'src/app/entities/newsItem';
+import { NewsService } from 'src/app/services/rss-services/news-service';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { FacService } from 'src/app/services/utils-services/fac-service';
+import { LoaderService } from 'src/app/services/utils-services/loader-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 @Component({
   selector: 'page-news',

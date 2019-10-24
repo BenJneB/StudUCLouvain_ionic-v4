@@ -25,9 +25,9 @@ import { TranslateModule } from '@ngx-translate/core';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { EmployeeDetailsPage } from './employee-details';
-import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
-import { newMockConnectivityService } from '../../../../../test-config/MockUtilsService';
-import { getMockProvider } from '../../../../../test-config/Mock';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { newMockConnectivityService } from 'test-config/MockUtilsService';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('EmployeeDetails Component', () => {
     let fixture;

@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { ModalProjectPage } from './modal-project';
-import { StudiesService } from '../../../services/studies-services/studies-service';
+import { StudiesService } from 'src/app/services/studies-services/studies-service';
 
 @NgModule({
   declarations: [ModalProjectPage],

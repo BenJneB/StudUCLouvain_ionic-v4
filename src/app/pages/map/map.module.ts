@@ -7,9 +7,9 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { MapPage } from './map';
 import { SearchModalModule } from './search/search.module';
-import { POIService } from '../../services/map-services/poi-service';
+import { POIService } from 'src/app/services/map-services/poi-service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { MapService } from '../../services/map-services/map-service';
+import { MapService } from 'src/app/services/map-services/map-service';
 
 @NgModule({
   declarations: [MapPage],

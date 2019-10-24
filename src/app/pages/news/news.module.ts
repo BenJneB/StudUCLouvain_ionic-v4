@@ -6,9 +6,9 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { NewsPage } from './news';
-import { NewsService } from '../../services/rss-services/news-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { FacService } from '../../services/utils-services/fac-service';
+import { NewsService } from 'src/app/services/rss-services/news-service';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { FacService } from 'src/app/services/utils-services/fac-service';
 
 @NgModule({
   declarations: [NewsPage],

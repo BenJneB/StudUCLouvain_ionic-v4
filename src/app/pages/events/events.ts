@@ -24,11 +24,11 @@ import { FormControl } from '@angular/forms';
 import { IonItemSliding, IonList, ModalController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
-import { EventItem } from '../../entity/eventItem';
+import { EventItem } from 'src/app/entities/eventItem';
 import { EventsFilterPage } from './events-filter/events-filter';
-import { EventsService } from '../../services/rss-services/events-service';
-import { LoaderService } from '../../services/utils-services/loader-service';
-import { EVENT_TEXTS, UtilsService } from '../../services/utils-services/utils-services';
+import { EventsService } from 'src/app/services/rss-services/events-service';
+import { LoaderService } from 'src/app/services/utils-services/loader-service';
+import { EVENT_TEXTS, UtilsService } from 'src/app/services/utils-services/utils-services';
 
 @Component({
   selector: 'page-events',

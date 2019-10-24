@@ -10,7 +10,7 @@ import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModalControllerMock } from '../../../../../test-config/MockIonicNative';
+import { ModalControllerMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -29,7 +29,7 @@ import { ModalControllerMock } from '../../../../../test-config/MockIonicNative'
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { HebdoPage } from './hebdo';
-import { getMockProvider } from '../../../../../test-config/Mock';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('Hebdo Component', () => {
     let fixture;

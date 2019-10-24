@@ -23,7 +23,7 @@ import { HttpClient } from '@angular/common/http';
  */
 import { Injectable } from '@angular/core';
 
-import { MapLocation } from '../../entity/mapLocation';
+import { MapLocation } from 'src/app/entities/mapLocation';
 import { UserService } from '../utils-services/user-service';
 
 @Injectable()
@@ -88,7 +88,7 @@ export class POIService {
     const restauULength = tmpZones.restaurants_universitaires.length;
     const servicesLength = tmpZones.services.length;
     const parkingsLength = tmpZones.parkings.length;
-    const newZone = {
+    return {
       auditoires: this.getCategoryZones(tmpZones.auditoires, auditoiresLength),
       locaux: this.getCategoryZones(tmpZones.locaux, locauxLength),
       bibliotheques: this.getCategoryZones(tmpZones.bibliotheques, bibliothequesLength),
@@ -98,7 +98,6 @@ export class POIService {
       parkings: this.getCategoryZones(tmpZones.parkings, parkingsLength),
       icon: 'arrow-dropdown',
     };
-    return newZone;
   }
 
   private compare(a, b) {

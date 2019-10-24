@@ -22,7 +22,7 @@ import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { Component } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
-import { EventsService } from '../../../services/rss-services/events-service';
+import { EventsService } from 'src/app/services/rss-services/events-service';
 
 @Component({
   selector: 'page-events-filter',

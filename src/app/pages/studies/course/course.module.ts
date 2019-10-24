@@ -7,7 +7,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { CoursePage } from './course';
 import { ModalInfoPageModule } from './modal-info/modal-info.module';
-import { CourseService } from '../../../services/studies-services/course-service';
+import { CourseService } from 'src/app/services/studies-services/course-service';
 import { Calendar } from '@ionic-native/calendar/ngx';
 
 @NgModule({

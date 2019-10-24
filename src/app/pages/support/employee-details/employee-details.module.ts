@@ -6,8 +6,8 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { EmployeeDetailsPage } from './employee-details';
-import { RepertoireService } from '../../../services/wso2-services/repertoire-service';
-import { ConnectivityService } from '../../../services/utils-services/connectivity-service';
+import { RepertoireService } from 'src/app/services/wso2-services/repertoire-service';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 
 @NgModule({
   declarations: [EmployeeDetailsPage],

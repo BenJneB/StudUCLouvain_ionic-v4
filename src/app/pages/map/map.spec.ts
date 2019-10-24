@@ -9,7 +9,7 @@ import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
+import { ModalControllerMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -31,8 +31,8 @@ import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { MapPage } from './map';
-import { POIService } from '../../services/map-services/poi-service';
-import { MapService } from '../../services/map-services/map-service';
+import { POIService } from 'src/app/services/map-services/poi-service';
+import { MapService } from 'src/app/services/map-services/map-service';
 
 xdescribe('Map Component', () => {
     let fixture;

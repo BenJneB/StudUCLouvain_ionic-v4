@@ -5,7 +5,7 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { EventsFilterPage } from './events-filter';
-import { EventsService } from '../../../services/rss-services/events-service';
+import { EventsService } from 'src/app/services/rss-services/events-service';
 
 @NgModule({
   declarations: [EventsFilterPage],

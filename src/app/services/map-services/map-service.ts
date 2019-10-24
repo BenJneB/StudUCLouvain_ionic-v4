@@ -24,7 +24,7 @@ import { Injectable } from '@angular/core';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { MenuController, Platform } from '@ionic/angular';
 
-import { MapLocation } from '../../entity/mapLocation';
+import { MapLocation } from 'src/app/entities/mapLocation';
 import { ConnectivityService } from '../utils-services/connectivity-service';
 import { UserService } from '../utils-services/user-service';
 
