@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -9,6 +8,7 @@ import { NewsPage } from './news';
 import { NewsService } from '../../services/rss-services/news-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { FacService } from '../../services/utils-services/fac-service';
+import { NewsRoutingModule } from './news-routing.module';
 
 @NgModule({
   declarations: [NewsPage],
@@ -18,12 +18,7 @@ import { FacService } from '../../services/utils-services/fac-service';
     CommonModule,
     FormsModule,
     TranslateModule.forChild(),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: NewsPage
-      }
-    ])
+    NewsRoutingModule
   ],
     providers: [
         NewsService,

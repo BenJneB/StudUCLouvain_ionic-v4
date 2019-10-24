@@ -7,7 +7,7 @@ const routes: Routes = [
     {path: 'events', loadChildren: () => import('./pages/events/events.module').then(m => m.EventsPageModule)},
     {path: 'guindaille', loadChildren: './pages/guindaille2-0/guindaille2-0.module#GuindaillePageModule'},
     {path: 'home', loadChildren: './home/home.module#HomePageModule'},
-    {path: 'libraries', loadChildren: () => import('./pages/library/libraries.module').then(m => m.LibrariesPageModule)},
+    {path: 'libraries', loadChildren: () => import('./pages/libraries/libraries.module').then(m => m.LibrariesPageModule)},
     {path: 'map', loadChildren: './pages/map/map.module#MapPageModule'},
     {path: 'mobility', loadChildren: './pages/mobility/mobility.module#MobilityPageModule'},
     {path: 'news', loadChildren: () => import('./pages/news/news.module').then(m => m.NewsPageModule)},

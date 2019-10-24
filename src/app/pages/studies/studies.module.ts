@@ -1,7 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
@@ -11,6 +10,7 @@ import { StudentService } from '../../services/wso2-services/student-service';
 import { StudiesService } from '../../services/studies-services/studies-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { TransService } from '../../services/utils-services/trans-services';
+import { StudiesRoutingModule } from './studies-routing.module';
 
 @NgModule({
   declarations: [StudiesPage],
@@ -21,12 +21,7 @@ import { TransService } from '../../services/utils-services/trans-services';
     CommonModule,
     ModalProjectPageModule,
     TranslateModule.forChild(),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: StudiesPage
-      }
-    ])
+    StudiesRoutingModule
   ],
   providers: [
     StudentService,

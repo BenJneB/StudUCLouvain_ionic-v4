@@ -51,7 +51,7 @@ export class LibrariesService {
     });
   }
 
-  /*Load the details of a specific library, the library selected by the user*/
+    /*Load the details of a specific libraries, the libraries selected by the user*/
   public loadLibDetails(lib: LibraryItem) {
     return new Promise(resolve => {
       if (this.connService.isOnline()) {
@@ -77,7 +77,7 @@ export class LibrariesService {
         }
     }
 
-  /*Extract all the details for a specific library, the library selected by the user*/
+    /*Extract all the details for a specific libraries, the libraries selected by the user*/
   /*Retrieves all the necessary information*/
   private extractLibraryDetails(lib: LibraryItem, data: any): LibraryItem {
     if (data.locationId === null) {
