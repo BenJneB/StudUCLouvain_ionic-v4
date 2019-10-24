@@ -74,7 +74,7 @@ npm -v
     $ npm install
     ```    
 
-* Replace the value of "wso2HeaderStudent" by the appropriate value in the file StudUCLouvain/src/environments/environments(.prod).ts
+* Replace the value of "wso2HeaderStudent" by the appropriate value in the file StudUCLouvain/src/environments/environments.ts
 
 
 ### Launch on browser
