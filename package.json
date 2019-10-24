@@ -53,6 +53,7 @@
     "ionic-cache": "^4.1.0",
     "ionicons": "^4.6.3",
     "leaflet": "^1.5.1",
+    "ngx-quicklink": "^0.1.5",
     "rxjs": "^6.5.3",
     "stream": "0.0.2",
     "tar": "^4.4.13",
