@@ -5,7 +5,7 @@ import { HttpClient } from '@angular/common/http';
 
 import { Wso2Service } from '../src/app/services/wso2-services/wso2-service';
 import { MockConnectivityService } from './MockUtilsService';
-import { Observable } from 'rxjs';
+import { Observable, Subscription } from 'rxjs';
 import { StudentService } from '../src/app/services/wso2-services/student-service';
 
 export class HttpClientMock extends HttpClient {
@@ -20,8 +20,7 @@ export class MockWso2Service extends Wso2Service {
     }
 
     getAppToken() {
-        return new Observable<void>(() => {
-        });
+        return new Subscription();
     }
 
     getToken() {
@@ -75,7 +74,7 @@ export class MockLibrariesService extends LibrariesService {
     }
 
     loadLibraries() {
-        return new Promise((resolve, reject) => {
+        return new Promise(() => {
 
         });
     }
