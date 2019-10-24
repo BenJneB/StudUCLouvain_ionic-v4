@@ -132,3 +132,22 @@ To run both : single run with coverage and e2e
 ```bash
 $ npm run ci
 ```
+
+
+### Features
+
+* Display course schedule (ADE) and select your session
+* Add course schedule to your calendar
+* Display annual course program
+* Display Libraries schedule and more informations
+* Display News of UCL
+* Display Events of CarpeStudentem
+* Display Sports schedule
+* Launch carpooling app https://www.commuty.net
+* Launch train app https://www.belgiantrain.be/fr/travel-info/prepare-for-your-journey/use-the-sncb-app
+* Launch bus app https://nextride.be/timetables
+* Launch Resto4u app
+* Help Desk, How to connect to the university network
+* Maps with point of interest on campus
+* Staffbook
+* Campaign Guindaille2.0
