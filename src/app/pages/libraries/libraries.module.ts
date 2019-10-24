@@ -8,9 +8,10 @@ import { LibrariesPage } from './libraries';
 import { LibrariesService } from '../../services/wso2-services/libraries-service';
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { LibrariesRoutingModule } from './libraries-routing.module';
+import { LibraryDetailsPage } from './library-details/library-details';
 
 @NgModule({
-  declarations: [LibrariesPage],
+  declarations: [LibrariesPage, LibraryDetailsPage],
   imports: [
     IonicModule,
     FormsModule,

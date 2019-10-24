@@ -20,7 +20,7 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar color="news" secondary>
+  <ion-toolbar color="news">
     <ion-buttons slot="start">
       <ion-back-button></ion-back-button>
     </ion-buttons>
@@ -36,7 +36,7 @@
 <ion-content>
   <ion-card>
 
-    <img style="width:75%; margin:auto;" src="{{news.image}}" />
+    <img style="width:75%; margin:auto;" src="{{news.image}}" alt="News pictures"/>
 
     <ion-card-content>
       <ion-card-title>
@@ -47,7 +47,7 @@
     </ion-card-content>
 
     <ion-row>
-      <ion-col text-right>
+      <ion-col class="ion-text-right">
         <ion-button fill="clear" size="small" (click)="openPage(news.link)">
           <ion-icon slot="start" name='share-alt'></ion-icon>
           {{'NEWS.SITE' | translate}}

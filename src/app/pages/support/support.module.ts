@@ -7,9 +7,10 @@ import { TranslateModule } from '@ngx-translate/core';
 import { SupportPage } from './support';
 import { RepertoireService } from '../../services/wso2-services/repertoire-service';
 import { SupportRoutingModule } from './support-routing.module';
+import { EmployeeDetailsPage } from './employee-details/employee-details';
 
 @NgModule({
-  declarations: [SupportPage],
+  declarations: [SupportPage, EmployeeDetailsPage],
   imports: [
     IonicModule,
     FormsModule,

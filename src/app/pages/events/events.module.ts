@@ -8,9 +8,10 @@ import { EventsPage } from './events';
 import { EventsFilterModule } from './events-filter/events-filter.module';
 import { EventsService } from '../../services/rss-services/events-service';
 import { EventsRoutingModule } from './events-routing.module';
+import { EventsDetailsPage } from './events-details/events-details';
 
 @NgModule({
-  declarations: [EventsPage],
+    declarations: [EventsPage, EventsDetailsPage],
   imports: [
     IonicModule,
     TranslateModule.forChild(),

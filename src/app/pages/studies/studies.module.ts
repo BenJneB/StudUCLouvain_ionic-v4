@@ -11,9 +11,10 @@ import { StudiesService } from '../../services/studies-services/studies-service'
 import { ConnectivityService } from '../../services/utils-services/connectivity-service';
 import { TransService } from '../../services/utils-services/trans-services';
 import { StudiesRoutingModule } from './studies-routing.module';
+import { CoursePage } from './course/course';
 
 @NgModule({
-  declarations: [StudiesPage],
+  declarations: [StudiesPage, CoursePage],
   imports: [
     IonicModule,
     FormsModule,
