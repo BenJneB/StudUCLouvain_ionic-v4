@@ -39,7 +39,6 @@ export class EventsService {
     return this.rssService.loadItems(segment, this.url, this.extractEvents.bind(this), searching);
   }
 
-  /*Extraction of events*/
   private extractEvents(data: any) {
     this.shownEvents = 0;
     const maxDescLength = 20;
@@ -81,7 +80,6 @@ export class EventsService {
     return { trimmedDescription, hidden, favorite, startDate, endDate, iconCategory };
   }
 
-  /*Get the good icon for a catagory*/
   public getIconCategory(category: string): string {
     switch (category.toLowerCase()) {
       case 'sensibilisation': return 'sensibilisation';
@@ -89,14 +87,13 @@ export class EventsService {
       case 'culturel et artistique': return 'cultural';
       case 'guindaille': return 'party';
       case 'sportif': return 'sports';
-      case 'src/app/services et aides': return 'services';
+        case 'services et aides':
+            return 'services';
       default: return 'other';
     }
   }
 
-  /*Return a date in good form by splitting for the event*/
   private createDateForEvent(str: string): Date {
-    // new Date(Year: number, (month-1): number, day: number)
     const dateTimeSplit = str.split(' ');
     const dateSplit = dateTimeSplit[0].split('/');
     const timeSplit = dateTimeSplit[1].split(':');
