@@ -5,8 +5,8 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { EventsPage } from './events';
-import { EventsFilterModule } from './events-filter/events-filter.module';
+import { EventsPage } from './pages/events';
+import { EventsFilterModule } from './pages/events-filter/events-filter.module';
 import { EventsService } from 'src/app/services/rss-services/events-service';
 
 @NgModule({

@@ -5,7 +5,7 @@ import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { NewsPage } from './news';
+import { NewsPage } from './pages/news';
 import { NewsService } from 'src/app/services/rss-services/news-service';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { FacService } from 'src/app/services/utils-services/fac-service';
