@@ -24,8 +24,8 @@ import { animate, state, style, transition, trigger } from '@angular/animations'
 import { Component } from '@angular/core';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
-import { EmployeeItem } from '../../entity/employeeItem';
-import { RepertoireService } from '../../services/wso2-services/repertoire-service';
+import { EmployeeItem } from 'src/app/entity/employeeItem';
+import { RepertoireService } from 'src/app/services/wso2-services/repertoire-service';
 
 @Component({
   selector: 'page-support',

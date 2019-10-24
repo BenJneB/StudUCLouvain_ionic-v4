@@ -17,8 +17,8 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/MockIonicNative';
-import { FacService } from '../../services/utils-services/fac-service';
+import { InAppBrowserMock, ModalControllerMock } from 'test-config/MockIonicNative';
+import { FacService } from 'src/app/services/utils-services/fac-service';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy

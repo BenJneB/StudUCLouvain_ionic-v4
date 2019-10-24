@@ -13,7 +13,7 @@ import { IonicModule, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/MockIonicNative';
+import { InAppBrowserMock, ModalControllerMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -32,16 +32,16 @@ import { InAppBrowserMock, ModalControllerMock } from '../../../../test-config/M
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { StudiesPage } from './studies';
-import { UtilsService } from '../../services/utils-services/utils-services';
-import { newMockConnectivityService, newMockUtilsService } from '../../../../test-config/MockUtilsService';
-import { newMockStudiesService } from '../../../../test-config/MockStudiesService';
-import { StudiesService } from '../../services/studies-services/studies-service';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
-import { Wso2Service } from '../../services/wso2-services/wso2-service';
-import { newMockStudentService, newMockWso2Service } from '../../../../test-config/MockWso2Services';
-import { StudentService } from '../../services/wso2-services/student-service';
-import { TransService } from '../../services/utils-services/trans-services';
-import { getMockProvider } from '../../../../test-config/Mock';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
+import { newMockConnectivityService, newMockUtilsService } from 'test-config/MockUtilsService';
+import { newMockStudiesService } from 'test-config/MockStudiesService';
+import { StudiesService } from 'src/app/services/studies-services/studies-service';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
+import { Wso2Service } from 'src/app/services/wso2-services/wso2-service';
+import { newMockStudentService, newMockWso2Service } from 'test-config/MockWso2Services';
+import { StudentService } from 'src/app/services/wso2-services/student-service';
+import { TransService } from 'src/app/services/utils-services/trans-services';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('Studies Component', () => {
     let fixture;
