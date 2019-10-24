@@ -45,9 +45,9 @@
     </ion-card-content>
 
     <ion-row class="ion-text-wrap">
-      <ion-col text-right>
+      <ion-col class="ion-text-right">
       </ion-col>
-      <ion-col text-right>
+      <ion-col class="ion-text-right">
       </ion-col>
     </ion-row>
 
@@ -58,7 +58,7 @@
           <a href="tel:{{libDetails.phone}}">{{libDetails.phone}}</a>
         </ion-label>
       </ion-item>
-      <ion-col text-right>
+      <ion-col class="ion-text-right">
         <ion-button *ngIf="libDetails.website" fill="clear" size="small" (click)="openPage(libDetails.website)">
           <ion-icon name='share-alt' slot="start"></ion-icon>
           Website
