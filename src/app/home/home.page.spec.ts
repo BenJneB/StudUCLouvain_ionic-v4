@@ -33,7 +33,7 @@ import { TranslateModule } from '@ngx-translate/core';
 
 import { MockAlertController } from 'test-config/MockAlert';
 import { testInstanceCreation } from '../app.component.spec';
-import { UtilsService } from '../services/utils-services/utils-services';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { HomePage } from './home.page';
 import { getMockProvider } from 'test-config/Mock';
 

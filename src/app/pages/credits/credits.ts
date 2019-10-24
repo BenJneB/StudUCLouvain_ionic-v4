@@ -24,11 +24,11 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 
 @Component({
   selector: 'page-credit',
-  templateUrl: 'credit.html',
-  styleUrls: ['./credit.scss'],
+  templateUrl: 'credits.html',
+  styleUrls: ['./credits.scss'],
 })
 
-export class CreditPage {
+export class CreditsPage {
   title: any;
   shownGroup = null;
   version;

@@ -2,7 +2,7 @@
 [![Test Coverage](https://api.codeclimate.com/v1/badges/b3a272ba9c2f4de6ed09/test_coverage)](https://codeclimate.com/github/BenJneB/StudUCLouvain_ionic-v4/test_coverage)
 [![Gitter](https://badges.gitter.im/StudUCLouvain_ionic-v4/community.svg)](https://gitter.im/StudUCLouvain_ionic-v4/community?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge)
 
-<div align="center">
+<div style="text-align: center;">
   
 # StudUCLouvain (ionic-v4)
 

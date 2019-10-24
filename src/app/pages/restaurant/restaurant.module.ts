@@ -1,11 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { RouterModule } from '@angular/router';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { RestaurantPage } from './restaurant';
+import { RestaurantRoutingModule } from './restaurant-routing.module';
 
 @NgModule({
   declarations: [RestaurantPage],
@@ -15,12 +15,7 @@ import { RestaurantPage } from './restaurant';
     ReactiveFormsModule,
     CommonModule,
     FormsModule,
-    RouterModule.forChild([
-      {
-        path: '',
-        component: RestaurantPage
-      }
-    ])
+      RestaurantRoutingModule
   ]
 })
 export class RestaurantPageModule { }

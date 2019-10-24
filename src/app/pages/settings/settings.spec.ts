@@ -23,7 +23,7 @@ import { TranslateModule } from '@ngx-translate/core';
  You should have received a copy of the GNU General Public License
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
-import { ParamPage } from './param';
+import { SettingsPage } from './settings';
 import { TransService } from 'src/app/services/utils-services/trans-services';
 
 describe('Param Component', () => {
@@ -32,7 +32,7 @@ describe('Param Component', () => {
 
     beforeEach(async(() => {
         TestBed.configureTestingModule({
-            declarations: [ParamPage],
+            declarations: [SettingsPage],
             schemas: [CUSTOM_ELEMENTS_SCHEMA],
             imports: [
                 IonicModule.forRoot(),
@@ -47,13 +47,13 @@ describe('Param Component', () => {
     }));
 
     beforeEach(() => {
-        fixture = TestBed.createComponent(ParamPage);
+        fixture = TestBed.createComponent(SettingsPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
     });
 
     it('should be created', () => {
-        testInstanceCreation(component, ParamPage);
+        testInstanceCreation(component, SettingsPage);
     });
 
     describe('campus_choice method', () => {

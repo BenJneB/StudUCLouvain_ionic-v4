@@ -29,8 +29,8 @@ import { UserService } from 'src/app/services/utils-services/user-service';
 
 @Component({
   selector: 'page-param',
-  templateUrl: 'param.html',
-  styleUrls: ['./param.scss'],
+  templateUrl: 'settings.html',
+  styleUrls: ['./settings.scss'],
   animations: [
     trigger('expand', [
       state('true', style({ height: '45px' })),
@@ -40,7 +40,7 @@ import { UserService } from 'src/app/services/utils-services/user-service';
     ])
   ]
 })
-export class ParamPage {
+export class SettingsPage {
   title: any;
   shownGroup = null;
   setting2 = 'Langue';
