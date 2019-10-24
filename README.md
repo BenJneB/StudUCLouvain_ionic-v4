@@ -49,7 +49,7 @@
 
 
 ### Prerequisites
-- Download nodejs from https://nodejs.org/en/download/current/ It will install `node` and `npm`
+- Download nodejs (LTS) from https://nodejs.org/en/download/current/ It will install `node` and `npm`
 ```bash
 node -v
  - should be >= 12.0.0
