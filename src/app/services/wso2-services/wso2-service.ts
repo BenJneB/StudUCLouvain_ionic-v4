@@ -3,7 +3,7 @@ import { catchError, map } from 'rxjs/operators';
 
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { wso2HeaderStudent, wso2ServiceBaseUrl } from 'src/app/environments/environment';
+import { wso2HeaderStudent, wso2ServiceBaseUrl } from 'src/environments/environment';
 
 /**
  Generated class for the Wso2ServiceProvider provider.
@@ -21,12 +21,7 @@ export class Wso2Service {
     headers: HttpHeaders;
 
     constructor(public http: HttpClient) {
-        this.getAppToken()
-            .subscribe(
-                () => {
-                    this.headers = new HttpHeaders({'Authorization': this.token});
-                    this.headers.append('Accept', 'application/json');
-                });
+        this.getAppToken();
     }
 
     /*Load wso2 service*/
@@ -44,12 +39,7 @@ export class Wso2Service {
                     return;
                 }
                 if (error.status === 401) {
-                    this.getAppToken()
-                        .subscribe(
-                            () => {
-                                this.headers = new HttpHeaders({'Authorization': this.token});
-                                this.headers.append('Accept', 'application/json');
-                            });
+                    this.getAppToken();
                     return this.load(url);
                 } else {
                     return observableThrowError(new Error(error.status));
@@ -60,7 +50,11 @@ export class Wso2Service {
 
     getAppToken() {
         const body = new HttpParams().set('grant_type', 'client_credentials');
-        return this.getToken(body);
+        return this.getToken(body).subscribe(
+            () => {
+                this.headers = new HttpHeaders({'Authorization': this.token});
+                this.headers.append('Accept', 'application/json');
+            });
     }
 
     login(user: string, pass: string) {
