@@ -94,7 +94,7 @@ export class SupportPage {
 
   /*Open the page with the details for the employee selectionned*/
   goToEmpDetails(emp: EmployeeItem) {
-    this.utilsServices.goToDetail(emp, 'employee');
+      this.utilsServices.goToDetail(emp, 'support/employee');
   }
 
   /*Open url for some details on site of the UCL about support, etc for more informations*/
