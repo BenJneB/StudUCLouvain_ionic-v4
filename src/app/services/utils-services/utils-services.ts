@@ -31,7 +31,7 @@ export const EVENT_TEXTS = {
 export class UtilsService {
   constructor(
       public user: UserService,
-      private translateService: TranslateService,
+      public translateService: TranslateService,
       public alertCtrl: AlertController,
       private appAvailability: AppAvailability,
       public market: Market,
@@ -41,7 +41,7 @@ export class UtilsService {
       public connService: ConnectivityService,
       private router: Router,
       private calendar: Calendar,
-      private alertService: AlertService,
+      public alertService: AlertService,
       public navCtrl: NavController,
   ) {
   }
@@ -62,6 +62,7 @@ export class UtilsService {
   }
 
   async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding) {
+      console.log('YOLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
     if (this.user.hasFavorite(itemData.guid)) {
         let message = '';
       this.translateService.get(texts['FAV']).subscribe((res: string) => {
