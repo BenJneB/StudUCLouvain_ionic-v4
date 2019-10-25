@@ -29,7 +29,7 @@ function newServiceInstance() {
         calendar, alertService, navCtrl);
 }
 
-fdescribe('UtilsService', () => {
+describe('UtilsService', () => {
     const service = newServiceInstance();
 
     beforeEach(() => {
