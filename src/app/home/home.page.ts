@@ -135,12 +135,10 @@ export class HomePage {
     }, 1000);
   }
 
-  /*Update the public variable campus for the user*/
   updateCampus() {
     this.userS.addCampus(this.where);
   }
 
-  /*Change page when click on a page of the home of launchExternalApp if it's the resto U*/
   changePage(page) {
     if (page.iosSchemaName !== null && page.androidPackageName !== null) {
       this.utilsServices.launchExternalApp(page);
@@ -149,16 +147,13 @@ export class HomePage {
     }
   }
 
-  /*Open the URL for the social media of the UCL*/
   public openURL(url: string) {
     this.iab.create(url, '_system');
-    // fab.close();
   }
   public openUCL(url: string) {
     this.iab.create(url, '_system');
   }
 
-  /*action when click on the floating urgency button, display the text to help the user in an alert*/
   async emergency() {
     const {
       urg,
@@ -179,7 +174,7 @@ export class HomePage {
       buttons: [
         {
           text: close,
-          handler: data => {
+            handler: () => {
           }
         }]
     });
@@ -198,23 +193,23 @@ export class HomePage {
     msg8: any,
     msg9: string
   ) {
-    return '<p> <strong>' + msg1 + '</strong>: <br>'
+      return '<p><strong>' + msg1 + '</strong>:<br>'
       + '<ion-icon slot="start" name="call"></ion-icon>'
-      + '<font size=\' +1\'><a href=\'tel:010 47 22 22\'>010 47 22 22</a></font> </p>'
+          + '<span ><a href=\'tel:010 47 22 22\'>010 47 22 22</a></span> </p>'
       + '<p><strong>' + msg2 + '</strong>: <br>'
       + '<ion-icon slot="start" name="call"></ion-icon>'
-      + '<font size=\' +1\'><a href=\'tel:010 47 24 24\'>010 47 24 24</a></font><br>ou<br>'
+          + '<span ><a href=\'tel:010 47 24 24\'>010 47 24 24</a></span><br>ou<br>'
       + '<ion-icon slot="start" name="call"></ion-icon>'
-      + '<font size=\' +1\'><a href=\'tel:02 764 93 93\'>02 764 93 93</a></font><br>'
+          + '<span ><a href=\'tel:02 764 93 93\'>02 764 93 93</a></span><br>'
       + '(Woluwe - St Gilles - Tournai)<br>ou<br>'
       + '<ion-icon slot="start" name="call"></ion-icon>'
-      + '<font size=\' +1\'><a href=\'tel:065 32 35 55\'>065 32 35 55</a></font>(Mons)</p>'
+          + '<span ><a href=\'tel:065 32 35 55\'>065 32 35 55</a></span>(Mons)</p>'
       + '<p><strong>Contact:</strong><br>'
       + '<ion-icon slot="start" name="mail"></ion-icon>'
       + '<a href=\'mailto:security@uclouvain.be\'>security@uclouvain.be</a></p>'
       + '<p><strong>' + out + ':</strong><br>'
       + '<ion-icon slot="start" name="call"></ion-icon>'
-      + '<font size=\' +1\'><a href=\'tel:112\'>112</a></font></p><br>'
+          + '<span ><a href=\'tel:112\'>112</a></span></p><br>'
       + '<p> ' + msg3 + '<br><br>'
       + '<strong>' + msg4 + '</strong><br>'
       + msg5 + '<br><br>'
@@ -225,11 +220,11 @@ export class HomePage {
   }
 
   private getEmergencyTexts() {
-    let close: string;
+      let close = '';
     this.translateService.get('HOME.CLOSE').subscribe((res: string) => { close = res; });
-    let urg: string;
+      let urg = '';
     this.translateService.get('HOME.URG').subscribe((res: string) => { urg = res; });
-    let msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9: string;
+      let msg1 = '', msg2 = '', msg3 = '', msg4 = '', msg5 = '', msg6 = '', msg7 = '', msg8 = '', msg9 = '';
     this.translateService.get('GUINDAILLE.HELP1').subscribe((res: string) => { msg1 = res; });
     this.translateService.get('GUINDAILLE.HELP2').subscribe((res: string) => { msg2 = res; });
     this.translateService.get('GUINDAILLE.HELP3').subscribe((res: string) => { msg3 = res; });
