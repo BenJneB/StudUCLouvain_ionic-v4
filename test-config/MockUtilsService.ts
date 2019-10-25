@@ -7,7 +7,7 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, NavController, Platform } from '@ionic/angular';
 import { Storage, StorageConfig } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
@@ -27,7 +27,8 @@ export class MockUtilsService extends UtilsService {
         connService: MockConnectivityService,
         router: Router,
         calendar: CalendarMock,
-        alertService: AlertService
+        alertService: AlertService,
+        navCtrl: NavController
     ) {
         super(
             user,
@@ -41,7 +42,8 @@ export class MockUtilsService extends UtilsService {
             connService,
             router,
             calendar,
-            alertService
+            alertService,
+            navCtrl
         );
     }
 
@@ -67,6 +69,7 @@ export function newMockUtilsService() {
     let router: Router;
     let calendar: CalendarMock;
     let alertService: AlertService;
+    let navCtrl: NavController;
     return new MockUtilsService(
         user,
         translateService,
@@ -79,7 +82,8 @@ export function newMockUtilsService() {
         connService,
         router,
         calendar,
-        alertService
+        alertService,
+        navCtrl
     );
 }
 
