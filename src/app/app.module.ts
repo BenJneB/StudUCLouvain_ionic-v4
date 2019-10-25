@@ -73,7 +73,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         FormsModule
     ],
     bootstrap: [AppComponent],
-    entryComponents: [],
     providers: [
         {provide: ErrorHandler, useClass: ErrorHandler},
         AppAvailability,
@@ -83,8 +82,6 @@ export function HttpLoaderFactory(http: HttpClient) {
         Calendar,
         Network,
         SplashScreen,
-        LoaderService,
-        ReactiveFormsModule,
         CommonModule,
     ]
 })
