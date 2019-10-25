@@ -39,6 +39,9 @@ import { AppComponent } from './app.component';
 import { Network } from '@ionic-native/network/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { LoaderService } from './services/utils-services/loader-service';
+import { HomePage } from './home/home.page';
+import { TutoPage } from './pages/tuto/tuto';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,7 +49,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        HomePage,
+        TutoPage
     ],
     exports: [
         TranslateModule
@@ -64,7 +69,8 @@ export function HttpLoaderFactory(http: HttpClient) {
                 useFactory: (HttpLoaderFactory),
                 deps: [HttpClient]
             }
-        })
+        }),
+        FormsModule
     ],
     bootstrap: [AppComponent],
     entryComponents: [],
@@ -76,8 +82,8 @@ export function HttpLoaderFactory(http: HttpClient) {
         Device,
         Calendar,
         Network,
+        SplashScreen,
         LoaderService,
-        FormsModule,
         ReactiveFormsModule,
         CommonModule,
     ]
