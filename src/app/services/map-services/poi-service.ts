@@ -29,108 +29,109 @@ import { UserService } from '../utils-services/user-service';
 @Injectable()
 export class POIService {
 
-  zones: any = [];
-  url = '';
-  urlLLN = 'assets/data/resourcesLLN.json';
-  urlMons = 'assets/data/resourcesMons.json';
-  urlWol = 'assets/data/resourcesWoluwe.json';
-  old = '';
-  constructor(public http: HttpClient,
+    zones: any = [];
+    url = '';
+    urlLLN = 'assets/data/resourcesLLN.json';
+    urlMons = 'assets/data/resourcesMons.json';
+    urlWol = 'assets/data/resourcesWoluwe.json';
+    old = '';
 
-    public user: UserService) {
-    this.old = this.user.campus;
-    this.update();
+    constructor(public http: HttpClient,
+                public user: UserService) {
+        this.old = this.user.campus;
+        this.update();
 
-  }
+    }
 
-  /*Put the good campus for the user to display the good map with the good locations*/
-  update() {
-    const campus = this.user.campus;
-    if (campus === 'LLN') {
-      this.url = this.urlLLN;
+    /*Put the good campus for the user to display the good map with the good locations*/
+    update() {
+        const campus = this.user.campus;
+        if (campus === 'LLN') {
+            this.url = this.urlLLN;
+        }
+        if (campus === 'Woluwe') {
+            this.url = this.urlWol;
+        }
+        if (campus === 'Mons') {
+            this.url = this.urlMons;
+        }
+        if (campus !== this.old) {
+            this.zones = [];
+            this.old = campus;
+        }
     }
-    if (campus === 'Woluwe') {
-      this.url = this.urlWol;
-    }
-    if (campus === 'Mons') {
-      this.url = this.urlMons;
-    }
-    if (campus !== this.old) {
-      this.zones = [];
-      this.old = campus;
-    }
-  }
 
-  /*Load point of interest to load the list of locations and display that*/
-  public loadResources() {
-    this.update();
-    if (this.zones.length === 0) {
-      return new Promise(resolve => {
-        this.http.get(this.url).pipe(
-          map(res => res)).subscribe(data => {
-            const newZone = this.getZones(data);
-            this.zones.push(newZone);
-            resolve(this.zones);
-          });
-      });
-    } else {
-      return new Promise(resolve => {
-        resolve(this.zones);
-      });
+    /*Load point of interest to load the list of locations and display that*/
+    public loadResources() {
+        this.update();
+        if (this.zones.length === 0) {
+            return new Promise(resolve => {
+                this.http.get(this.url).pipe(
+                    map(res => res)).subscribe(data => {
+                    const newZone = this.getZones(data);
+                    this.zones.push(newZone);
+                    resolve(this.zones);
+                });
+            });
+        } else {
+            return new Promise(resolve => {
+                resolve(this.zones);
+            });
+        }
     }
-  }
-  private getZones(data: Object) {
-    const tmpZones = data['zones'];
-    const auditoiresLength = tmpZones.auditoires.length;
-    const locauxLength = tmpZones.locaux.length;
-    const bibliothequesLength = tmpZones.bibliotheques.length;
-    const sportsLength = tmpZones.sports.length;
-    const restauULength = tmpZones.restaurants_universitaires.length;
-    const servicesLength = tmpZones.services.length;
-    const parkingsLength = tmpZones.parkings.length;
-    return {
-      auditoires: this.getCategoryZones(tmpZones.auditoires, auditoiresLength),
-      locaux: this.getCategoryZones(tmpZones.locaux, locauxLength),
-      bibliotheques: this.getCategoryZones(tmpZones.bibliotheques, bibliothequesLength),
-      sports: this.getCategoryZones(tmpZones.sports, sportsLength),
-      restaurants_universitaires: this.getCategoryZones(tmpZones.restaurants_universitaires, restauULength),
-      services: this.getCategoryZones(tmpZones.services, servicesLength),
-      parkings: this.getCategoryZones(tmpZones.parkings, parkingsLength),
-      icon: 'arrow-dropdown',
-    };
-  }
 
-  private compare(a, b) {
-    if (a.nom < b.nom) {
-      return -1;
+    private getZones(data: Object) {
+        const tmpZones = data['zones'];
+        const auditoiresLength = tmpZones.auditoires.length;
+        const locauxLength = tmpZones.locaux.length;
+        const bibliothequesLength = tmpZones.bibliotheques.length;
+        const sportsLength = tmpZones.sports.length;
+        const restauULength = tmpZones.restaurants_universitaires.length;
+        const servicesLength = tmpZones.services.length;
+        const parkingsLength = tmpZones.parkings.length;
+        return {
+            auditoires: this.getCategoryZones(tmpZones.auditoires, auditoiresLength),
+            locaux: this.getCategoryZones(tmpZones.locaux, locauxLength),
+            bibliotheques: this.getCategoryZones(tmpZones.bibliotheques, bibliothequesLength),
+            sports: this.getCategoryZones(tmpZones.sports, sportsLength),
+            restaurants_universitaires: this.getCategoryZones(tmpZones.restaurants_universitaires, restauULength),
+            services: this.getCategoryZones(tmpZones.services, servicesLength),
+            parkings: this.getCategoryZones(tmpZones.parkings, parkingsLength),
+            icon: 'arrow-dropdown',
+        };
     }
-    if (a.nom > b.nom) {
-      return 1;
-    }
-    return 0;
-  }
 
-  private getCategoryZones(zones: any, length: number) {
-    return {
-      list: this.createMapLocations(zones.sort(this.compare)),
-      listChecked: Array(length).fill(false),
-      showDetails: false
-    };
-  }
-
-  /*Create the locations for a type of places represented by a list (ex: auditoires, parkings, etc)*/
-  private createMapLocations(list: any): Array<MapLocation> {
-    const locationsList: MapLocation[] = [];
-    for (const elem of list) {
-      const newLocation = new MapLocation(elem.nom,
-        elem.adresse,
-        elem.coord.lat,
-        elem.coord.lng,
-        elem.sigle,
-        elem.vignette);
-      locationsList.push(newLocation);
+    private compare(a, b) {
+        if (a.nom < b.nom) {
+            return -1;
+        }
+        if (a.nom > b.nom) {
+            return 1;
+        }
+        return 0;
     }
-    return locationsList;
-  }
+
+    private getCategoryZones(zones: any, length: number) {
+        return {
+            list: this.createMapLocations(zones.sort(this.compare)),
+            listChecked: Array(length).fill(false),
+            showDetails: false
+        };
+    }
+
+    /*Create the locations for a type of places represented by a list (ex: auditoires, parkings, etc)*/
+    private createMapLocations(list: any): Array<MapLocation> {
+        const locationsList: MapLocation[] = [];
+        for (const elem of list) {
+            const newLocation = new MapLocation(elem.nom,
+                elem.adresse,
+                elem.coord.lat,
+                elem.coord.lng,
+                elem.sigle,
+                elem.vignette);
+            locationsList.push(newLocation);
+        }
+        return locationsList;
+    }
 
 }

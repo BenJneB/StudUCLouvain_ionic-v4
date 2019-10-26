@@ -28,69 +28,69 @@ import { POIService } from 'src/app/services/map-services/poi-service';
 import { SearchModal } from './search/search';
 
 @Component({
-  selector: 'page-map',
-  templateUrl: 'map.html',
-  styleUrls: ['./map.scss'],
+    selector: 'page-map',
+    templateUrl: 'map.html',
+    styleUrls: ['./map.scss'],
 })
 export class MapPage {
 
-  title: any;
-  map: Map;
-  zones: any;
-  userPosition: marker;
-  userIcon: icon;
-  building: marker;
+    title: any;
+    map: Map;
+    zones: any;
+    userPosition: marker;
+    userIcon: icon;
+    building: marker;
 
-  constructor(public navCtrl: NavController,
-    public modalCtrl: ModalController,
-    public actionSheetCtrl: ActionSheetController,
-    public platform: Platform,
-    public poilocations: POIService,
-    public mapService: MapService,
-    public userService: UserService) {
-    this.title = 'Carte';
-    this.userIcon = icon({
-      iconUrl: 'assets/img/user-icon.png',
-      iconSize: [60, 60],
-      iconAnchor: [30, 30],
-    });
-  }
+    constructor(public navCtrl: NavController,
+                public modalCtrl: ModalController,
+                public actionSheetCtrl: ActionSheetController,
+                public platform: Platform,
+                public poilocations: POIService,
+                public mapService: MapService,
+                public userService: UserService) {
+        this.title = 'Carte';
+        this.userIcon = icon({
+            iconUrl: 'assets/img/user-icon.png',
+            iconSize: [60, 60],
+            iconAnchor: [30, 30],
+        });
+    }
 
-  ionViewDidEnter() {
-    this.platform.ready().then(() => {
-      this.loadmap();
-      this.poilocations.loadResources().then(results => {
-        this.zones = results;
-      });
-    });
-  }
+    ionViewDidEnter() {
+        this.platform.ready().then(() => {
+            this.loadmap();
+            this.poilocations.loadResources().then(results => {
+                this.zones = results;
+            });
+        });
+    }
 
-  loadmap() {
-      // this.map = new Map('map').setView(this.mapService.getCampusLocation(this.userService.campus), 14);
-    tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-      attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-      maxZoom: 18
-    }).addTo(this.map);
-      this.map.on('popupopen', (e) => {
-      const px = this.map.project(e.popup._latlng);
-      px.y -= e.popup._container.clientHeight / 2;
-      this.map.panTo(this.map.unproject(px), { animate: true });
-    });
-      // this.showUserPosition();
-  }
+    loadmap() {
+        // this.map = new Map('map').setView(this.mapService.getCampusLocation(this.userService.campus), 14);
+        tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
+            maxZoom: 18
+        }).addTo(this.map);
+        this.map.on('popupopen', (e) => {
+            const px = this.map.project(e.popup._latlng);
+            px.y -= e.popup._container.clientHeight / 2;
+            this.map.panTo(this.map.unproject(px), {animate: true});
+        });
+        // this.showUserPosition();
+    }
 
-  async showSearch() {
-    const modal = await this.modalCtrl.create({
-      component: SearchModal,
-      componentProps: {},
-      cssClass: 'search-modal'
-    });
-    modal.onDidDismiss().then(data => {
-      const item = data.data;
-      this.showBuilding(item);
-    });
-    await modal.present();
-  }
+    async showSearch() {
+        const modal = await this.modalCtrl.create({
+            component: SearchModal,
+            componentProps: {},
+            cssClass: 'search-modal'
+        });
+        modal.onDidDismiss().then(data => {
+            const item = data.data;
+            this.showBuilding(item);
+        });
+        await modal.present();
+    }
 
     // showUserPosition() {
     //   this.mapService.getUserLocation().then(coord => {
@@ -98,44 +98,42 @@ export class MapPage {
     //   });
     // }
 
-  showBuilding(item) {
-    // update or create building marker
-    if (this.building) {
-      this.building.setLatLng([item.pos.lat, item.pos.lng]).bindPopup(this.generatePopupContent(item)).openPopup();
-    } else {
-      this.building = marker([item.pos.lat, item.pos.lng]).addTo(this.map).bindPopup(this.generatePopupContent(item)).openPopup();
-      this.building._icon.style.filter = 'hue-rotate(300deg)';
+    showBuilding(item) {
+        // update or create building marker
+        if (this.building) {
+            this.building.setLatLng([item.pos.lat, item.pos.lng]).bindPopup(this.generatePopupContent(item)).openPopup();
+        } else {
+            this.building = marker([item.pos.lat, item.pos.lng]).addTo(this.map).bindPopup(this.generatePopupContent(item)).openPopup();
+            this.building._icon.style.filter = 'hue-rotate(300deg)';
+        }
+        this.fitMap();
     }
-    this.fitMap();
-  }
 
-  fitMap() {
-    this.map.fitBounds(featureGroup([this.userPosition, this.building, this.building.popup]).getBounds(), { padding: [50, 50] });
-  }
+    fitMap() {
+        this.map.fitBounds(featureGroup([this.userPosition, this.building, this.building.popup]).getBounds(), {padding: [50, 50]});
+    }
 
-  generatePopupContent(item) {
-    return `<div>
+    generatePopupContent(item) {
+        return `<div>
                 <p class="popup-title">${item.id}</p>
                 <p style="width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.name}</p>
                 <img style="width:150px; height: auto;" src="${item.img}" alt="">
                 <p style="width: 150px; word-wrap: break-word;">${item.address}</p>
               </div>`;
-  }
+    }
 
 
-
-
-  // if(platform.is('android')){
-  //     if("geo" in this.item){
-  //       this.url = "geo:0,0?q="+this.item.geo.label;
-  //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
-  //     }
-  // }
-  // if(platform.is('ios')){
-  //     if("geo" in this.item){
-  //       this.url = "http://maps.apple.com/?q="+this.item.geo.label;
-  //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
-  //     }
-  // }
+    // if(platform.is('android')){
+    //     if("geo" in this.item){
+    //       this.url = "geo:0,0?q="+this.item.geo.label;
+    //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
+    //     }
+    // }
+    // if(platform.is('ios')){
+    //     if("geo" in this.item){
+    //       this.url = "http://maps.apple.com/?q="+this.item.geo.label;
+    //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
+    //     }
+    // }
 
 }

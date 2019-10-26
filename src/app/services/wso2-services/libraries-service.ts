@@ -39,34 +39,34 @@ export class LibrariesService {
         public connService: ConnectivityService) {
     }
 
-  /*Load the list of the libraries*/
-  public loadLibraries() {
-    this.libraries = [];
-    return new Promise(resolve => {
-      this.wso2Service.load(this.url).subscribe(
-        data => {
-          this.extractLibraries(data['return'].library);
-          resolve({ libraries: this.libraries });
+    /*Load the list of the libraries*/
+    public loadLibraries() {
+        this.libraries = [];
+        return new Promise(resolve => {
+            this.wso2Service.load(this.url).subscribe(
+                data => {
+                    this.extractLibraries(data['return'].library);
+                    resolve({libraries: this.libraries});
+                });
         });
-    });
-  }
+    }
 
-  /*Load the details of a specific library, the library selected by the user*/
-  public loadLibDetails(lib: LibraryItem) {
-    return new Promise(resolve => {
-      if (this.connService.isOnline()) {
-        const url_details = this.url + '/' + lib.id;
-        this.wso2Service.load(url_details).subscribe(
-          data => {
-            const value = this.extractLibraryDetails(lib, data['return'].library);
-            resolve(value);
-          });
-      } else {
-        this.connService.presentConnectionAlert();
-        resolve(lib);
-      }
-    });
-  }
+    /*Load the details of a specific library, the library selected by the user*/
+    public loadLibDetails(lib: LibraryItem) {
+        return new Promise(resolve => {
+            if (this.connService.isOnline()) {
+                const url_details = this.url + '/' + lib.id;
+                this.wso2Service.load(url_details).subscribe(
+                    data => {
+                        const value = this.extractLibraryDetails(lib, data['return'].library);
+                        resolve(value);
+                    });
+            } else {
+                this.connService.presentConnectionAlert();
+                resolve(lib);
+            }
+        });
+    }
 
     /*Extract the list of the libraries*/
     private extractLibraries(data: any) {
@@ -77,71 +77,72 @@ export class LibrariesService {
         }
     }
 
-  /*Extract all the details for a specific library, the library selected by the user*/
-  /*Retrieves all the necessary information*/
-  private extractLibraryDetails(lib: LibraryItem, data: any): LibraryItem {
-    if (data.locationId === null) {
-      lib.locationId = -1;
-    } else {
-      lib.locationId = data.locationId;
-    }
-    if (data.mapLocation === null) {
-      lib.mapLocation = new MapLocation(lib.name, '', '', '', '', '');
-    } else {
-      lib.mapLocation = new MapLocation(
-        lib.name,
-        data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality,
-        '',
-        '',
-        '',
-        ''
-      ); // TODO update maplocation with lat lng code
-    }
-    this.assignInfosDatas(data, lib);
-    this.assignHoursDaysDatas(data, lib);
-    return lib;
-  }
+    /*Extract all the details for a specific library, the library selected by the user*/
 
-  private assignHoursDaysDatas(data: any, lib: LibraryItem) {
-    if (data.openingHours) {
-      this.getOpeningHours(data.openingHours, lib.openingHours);
+    /*Retrieves all the necessary information*/
+    private extractLibraryDetails(lib: LibraryItem, data: any): LibraryItem {
+        if (data.locationId === null) {
+            lib.locationId = -1;
+        } else {
+            lib.locationId = data.locationId;
+        }
+        if (data.mapLocation === null) {
+            lib.mapLocation = new MapLocation(lib.name, '', '', '', '', '');
+        } else {
+            lib.mapLocation = new MapLocation(
+                lib.name,
+                data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality,
+                '',
+                '',
+                '',
+                ''
+            ); // TODO update maplocation with lat lng code
+        }
+        this.assignInfosDatas(data, lib);
+        this.assignHoursDaysDatas(data, lib);
+        return lib;
     }
-    if (data.openingExaminationHours) {
-      this.getOpeningHours(data.openingExaminationHours, lib.openingExaminationHours);
-    }
-    if (data.openingSummerHours) {
-      this.getOpeningHours(data.openingSummerHours, lib.openingSummerHours);
-    }
-    lib.openingHoursNote = data.openingHoursNote;
-    if (data.closedDates.length === undefined) {
-      lib.closedDates = [data.closedDates];
-    } else {
-      lib.closedDates = data.closedDates;
-    }
-  }
 
-  private assignInfosDatas(data: any, lib: LibraryItem) {
-    for (const fieldItem of ['email', 'website', 'phone']) {
-      switch (fieldItem) {
-        case 'email': {
-          lib.email = data[fieldItem];
-          break;
+    private assignHoursDaysDatas(data: any, lib: LibraryItem) {
+        if (data.openingHours) {
+            this.getOpeningHours(data.openingHours, lib.openingHours);
         }
-        case 'phone': {
-          lib.phone = data[fieldItem];
-          break;
+        if (data.openingExaminationHours) {
+            this.getOpeningHours(data.openingExaminationHours, lib.openingExaminationHours);
         }
-        case 'website': {
-          lib.website = data[fieldItem];
-          break;
+        if (data.openingSummerHours) {
+            this.getOpeningHours(data.openingSummerHours, lib.openingSummerHours);
         }
-      }
+        lib.openingHoursNote = data.openingHoursNote;
+        if (data.closedDates.length === undefined) {
+            lib.closedDates = [data.closedDates];
+        } else {
+            lib.closedDates = data.closedDates;
+        }
     }
-  }
 
-  private getOpeningHours(data: any, lib: Array<TimeSlot>) {
-    for (let i = 0; i < data.length; i++) {
-      lib.push(new TimeSlot(data[i].day, data[i].startHour, data[i].endHour));
+    private assignInfosDatas(data: any, lib: LibraryItem) {
+        for (const fieldItem of ['email', 'website', 'phone']) {
+            switch (fieldItem) {
+                case 'email': {
+                    lib.email = data[fieldItem];
+                    break;
+                }
+                case 'phone': {
+                    lib.phone = data[fieldItem];
+                    break;
+                }
+                case 'website': {
+                    lib.website = data[fieldItem];
+                    break;
+                }
+            }
+        }
     }
-  }
+
+    private getOpeningHours(data: any, lib: Array<TimeSlot>) {
+        for (let i = 0; i < data.length; i++) {
+            lib.push(new TimeSlot(data[i].day, data[i].startHour, data[i].endHour));
+        }
+    }
 }

@@ -8,19 +8,20 @@ import { TranslateModule } from '@ngx-translate/core';
 import { HebdoPage } from './hebdo';
 
 @NgModule({
-  declarations: [HebdoPage],
-  imports: [
-    IonicModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    TranslateModule.forChild(),
-    RouterModule.forChild([
-      {
-        path: '',
-        component: HebdoPage
-      }
-    ])
-  ]
+    declarations: [HebdoPage],
+    imports: [
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        TranslateModule.forChild(),
+        RouterModule.forChild([
+            {
+                path: '',
+                component: HebdoPage
+            }
+        ])
+    ]
 })
-export class HebdoPageModule { }
+export class HebdoPageModule {
+}

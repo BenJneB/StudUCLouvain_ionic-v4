@@ -9,15 +9,15 @@ import { TransService } from 'src/app/services/utils-services/trans-services';
 import { SettingsRoutingModule } from './settings-routing.module';
 
 @NgModule({
-  declarations: [SettingsPage],
-  imports: [
-    IonicModule,
-    TranslateModule.forChild(),
-    ReactiveFormsModule,
-    CommonModule,
-    FormsModule,
-    SettingsRoutingModule
-  ],
+    declarations: [SettingsPage],
+    imports: [
+        IonicModule,
+        TranslateModule.forChild(),
+        ReactiveFormsModule,
+        CommonModule,
+        FormsModule,
+        SettingsRoutingModule
+    ],
     providers: [
         TransService,
     ]

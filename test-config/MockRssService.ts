@@ -16,7 +16,8 @@ export class MockSportsService extends SportsService {
     }
 
     getSports(s: string) {
-        return new Promise((resolve, reject) => { });
+        return new Promise((resolve, reject) => {
+        });
     }
 }
 
@@ -32,7 +33,8 @@ export class MockEventsService extends EventsService {
     }
 
     getEvents(s: string) {
-        return new Promise((resolve, reject) => { });
+        return new Promise((resolve, reject) => {
+        });
     }
 }
 
@@ -48,7 +50,8 @@ export class MockNewsService extends NewsService {
     }
 
     getNews(s: string) {
-        return new Promise((resolve, reject) => { });
+        return new Promise((resolve, reject) => {
+        });
     }
 }
 

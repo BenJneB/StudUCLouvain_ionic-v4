@@ -16,20 +16,21 @@ import { ModalInfoPage } from './pages/course/modal-info/modal-info';
 
 @NgModule({
     declarations: [StudiesPage, CoursePage, ModalInfoPage],
-  imports: [
-    IonicModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    ModalProjectPageModule,
-    TranslateModule.forChild(),
-    StudiesRoutingModule
-  ],
-  providers: [
-    StudentService,
-    StudiesService,
-    ConnectivityService,
-    TransService,
-  ]
+    imports: [
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        ModalProjectPageModule,
+        TranslateModule.forChild(),
+        StudiesRoutingModule
+    ],
+    providers: [
+        StudentService,
+        StudiesService,
+        ConnectivityService,
+        TransService,
+    ]
 })
-export class StudiesPageModule { }
+export class StudiesPageModule {
+}

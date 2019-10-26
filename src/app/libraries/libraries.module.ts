@@ -11,18 +11,19 @@ import { LibrariesRoutingModule } from './libraries-routing.module';
 import { LibraryDetailsPage } from './pages/library-details/library-details';
 
 @NgModule({
-  declarations: [LibrariesPage, LibraryDetailsPage],
-  imports: [
-    IonicModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    TranslateModule.forChild(),
-    LibrariesRoutingModule
-  ],
+    declarations: [LibrariesPage, LibraryDetailsPage],
+    imports: [
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        TranslateModule.forChild(),
+        LibrariesRoutingModule
+    ],
     providers: [
         LibrariesService,
         ConnectivityService,
     ]
 })
-export class LibrariesPageModule { }
+export class LibrariesPageModule {
+}

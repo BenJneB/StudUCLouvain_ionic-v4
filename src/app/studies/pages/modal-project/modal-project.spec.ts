@@ -49,7 +49,7 @@ describe('ModalProject Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
+                {provide: ModalController, useClass: ModalControllerMock},
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
@@ -81,7 +81,7 @@ describe('ModalProject Component', () => {
             );
             const spySet = spyOn(component.storage, 'set').and.callThrough();
             component.sessionId = 0;
-            component.closeModal({ 'id': 0 });
+            component.closeModal({'id': 0});
             expect(spySetProject.calls.count()).toEqual(1);
             expect(spySet.calls.count()).toEqual(1);
             expect(component.viewCtrl.dismiss.calls.count()).toEqual(1);
@@ -95,7 +95,7 @@ describe('ModalProject Component', () => {
                 'getProjects',
                 'RESULT'
             );
-            component.getProjects({ 'id': '0' });
+            component.getProjects({'id': '0'});
             expect(spyGet.calls.count()).toEqual(1);
             expect(component.projects).toEqual('RESULT');
         });

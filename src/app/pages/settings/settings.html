@@ -21,27 +21,27 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar color="setting">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-      <img src="./assets/img/s.png" height="28" />
-    </ion-buttons>
-    <ion-title horizontal="center">{{title | translate}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="setting">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+            <img src="./assets/img/s.png" height="28"/>
+        </ion-buttons>
+        <ion-title horizontal="center">{{title | translate}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content>
-  <div class="settings" style="height: 100%; display: flex; align-items: center; justify-content: center;">
+    <div class="settings" style="height: 100%; display: flex; align-items: center; justify-content: center;">
 
-    <ion-button expand="block" shape="round" (click)="language_choice()">
-      {{'SETTING.LANGUE' | translate }}
-    </ion-button>
+        <ion-button expand="block" shape="round" (click)="language_choice()">
+            {{'SETTING.LANGUE' | translate }}
+        </ion-button>
 
-    <ion-button expand="block" shape="round" (click)="campus_choice()">Campus</ion-button>
+        <ion-button expand="block" shape="round" (click)="campus_choice()">Campus</ion-button>
 
-    <ion-button expand="block" shape="round" (click)="openTuto()">{{'SETTING.TUTO' | translate }}
-    </ion-button>
+        <ion-button expand="block" shape="round" (click)="openTuto()">{{'SETTING.TUTO' | translate }}
+        </ion-button>
 
-  </div>
+    </div>
 </ion-content>

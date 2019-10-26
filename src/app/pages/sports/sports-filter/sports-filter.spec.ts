@@ -42,8 +42,8 @@ describe('SportsFilter Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
-                { provide: NavParams, useClass: NavParamsMock },
+                {provide: ModalController, useClass: ModalControllerMock},
+                {provide: NavParams, useClass: NavParamsMock},
                 getMockProvider(SportsService, newMockSportsService),
             ]
         }).compileComponents();

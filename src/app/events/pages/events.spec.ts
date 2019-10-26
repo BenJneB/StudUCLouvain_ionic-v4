@@ -58,7 +58,7 @@ describe('Events Component', () => {
             ],
             providers: [
                 getMockProvider(UtilsService, newMockUtilsService),
-                { provide: ModalController, useClass: ModalControllerMock },
+                {provide: ModalController, useClass: ModalControllerMock},
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
@@ -84,7 +84,8 @@ describe('Events Component', () => {
 
     describe('goToEventDetail method', () => {
         it('should call goToDetail of UtilsService', () => {
-            const spyGoDetail = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => { });
+            const spyGoDetail = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => {
+            });
             spyOn(component.cache, 'saveItem').and.callThrough();
             spyOn(component.cache, 'getItem').and.callThrough();
             const eventItem = new EventItem(
@@ -126,7 +127,7 @@ describe('Events Component', () => {
     describe('changeArray method', () => {
         it('should get ItemDisplay from UtilsServices', () => {
             const spyGetItemD = spyOn(component.utilsServices, 'getItemDisplay').and.returnValue('').and.callThrough();
-            component.changeArray([{ startDate: new Date() }]);
+            component.changeArray([{startDate: new Date()}]);
             expect(spyGetItemD.calls.count()).toEqual(1);
         });
     });
@@ -145,7 +146,7 @@ describe('Events Component', () => {
         it('should call addFavorite from UtilsService', () => {
             const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
             let ionItemSliding: IonItemSliding;
-            component.addFavorite(ionItemSliding, { 'guid': 0 });
+            component.addFavorite(ionItemSliding, {'guid': 0});
             expect(spyAdd.calls.count()).toEqual(1);
         });
     });
@@ -153,7 +154,13 @@ describe('Events Component', () => {
     describe('doRefresh method', () => {
         it('should call doRefresh from UtilsService', () => {
             const spyRefresh = spyOn(component.utilsServices, 'doRefresh').and.callThrough();
-            component.doRefresh({ target: { complete: () => { return; } } });
+            component.doRefresh({
+                target: {
+                    complete: () => {
+                        return;
+                    }
+                }
+            });
             expect(spyRefresh.calls.count()).toEqual(1);
         });
     });
@@ -161,13 +168,13 @@ describe('Events Component', () => {
     describe('tabChanged method', () => {
         it('should call cachedOrNot if all segment', () => {
             const spyCachedOrNot = spyOn(component, 'cachedOrNot').and.callThrough();
-            component.tabChanged({ 'detail': { 'value': 'all' } });
+            component.tabChanged({'detail': {'value': 'all'}});
             expect(spyCachedOrNot.calls.count()).toEqual(1);
         });
 
         it('should call updateDisplayed if favorites segment', () => {
             const spyUpdate = spyOn(component, 'updateDisplayed').and.callThrough();
-            component.tabChanged({ 'detail': { 'value': 'favorites' } });
+            component.tabChanged({'detail': {'value': 'favorites'}});
             expect(spyUpdate.calls.count()).toEqual(1);
         });
     });
@@ -177,7 +184,7 @@ describe('Events Component', () => {
             const spyGetItem = spyFunctionWithCallBackThen(
                 component.cache,
                 'getItem',
-                { items: [{ startDate: new Date(), endDate: new Date() }] }
+                {items: [{startDate: new Date(), endDate: new Date()}]}
             );
             const spyLoad = spyFunctionWithCallBackThen( // TODO: not function with then. async method, have to spy on await call
                 component.loader,
@@ -204,7 +211,7 @@ describe('Events Component', () => {
 
     describe('loadEvents method', () => {
         it('should get Events from EventService and updateDisplayed', async () => {
-            const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', { items: [] });
+            const spyGetEvents = spyFunctionWithCallBackThen(component.eventsService, 'getEvents', {items: []});
             const spySaveItem = spyOn(component.cache, 'saveItem').and.callFake(() => {
                 return new Promise((resolve) => {
                     resolve();

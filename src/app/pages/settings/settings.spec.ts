@@ -74,7 +74,8 @@ describe('Param Component', () => {
 
     describe('openTuto method', () => {
         it('should call navigateForward from NavController', () => {
-            const spyNavigate = spyOn(component.navCtrl, 'navigateForward').and.callFake(() => { });
+            const spyNavigate = spyOn(component.navCtrl, 'navigateForward').and.callFake(() => {
+            });
             component.openTuto();
             expect(spyNavigate.calls.count()).toEqual(1);
         });

@@ -46,8 +46,8 @@ describe('EventsFilter Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
-                { provide: NavParams, useClass: NavParamsMock },
+                {provide: ModalController, useClass: ModalControllerMock},
+                {provide: NavParams, useClass: NavParamsMock},
                 getMockProvider(EventsService, newMockEventsService),
             ]
         }).compileComponents();

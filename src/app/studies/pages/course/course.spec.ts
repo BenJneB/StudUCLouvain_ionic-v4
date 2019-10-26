@@ -55,14 +55,14 @@ describe('Course Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
+                {provide: ModalController, useClass: ModalControllerMock},
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
                         return new MockCacheStorageService(null, null);
                     }
                 },
-                { provide: Calendar, useClass: CalendarMock },
+                {provide: Calendar, useClass: CalendarMock},
                 getMockProvider(CourseService, newMockCourseService),
                 getMockProvider(AdeService, newMockAdeServicee),
                 getMockProvider(UtilsService, newMockUtilsService),

@@ -6,18 +6,19 @@ import { SearchModal } from './search';
 import { POIService } from 'src/app/services/map-services/poi-service';
 
 @NgModule({
-  declarations: [
-    SearchModal
-  ],
-  imports: [
-    IonicModule,
-    CommonModule
-  ],
-  entryComponents: [
-    SearchModal
-  ],
+    declarations: [
+        SearchModal
+    ],
+    imports: [
+        IonicModule,
+        CommonModule
+    ],
+    entryComponents: [
+        SearchModal
+    ],
     providers: [
         POIService
     ]
 })
-export class SearchModalModule { }
+export class SearchModalModule {
+}

@@ -36,8 +36,7 @@ describe('NewsDetails Component', () => {
                 TranslateModule.forRoot(),
                 RouterTestingModule,
             ],
-            providers: [
-            ]
+            providers: []
         }).compileComponents();
     }));
 
@@ -45,7 +44,7 @@ describe('NewsDetails Component', () => {
 
     beforeEach(() => {
         spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
-            .and.returnValue({ extras: { state: { items: {} } } });
+            .and.returnValue({extras: {state: {items: {}}}});
         fixture = TestBed.createComponent(NewsDetailsPage);
         component = fixture.componentInstance;
         fixture.detectChanges();

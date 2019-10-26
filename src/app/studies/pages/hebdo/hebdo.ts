@@ -27,41 +27,46 @@ import { TranslateService } from '@ngx-translate/core';
 import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 @Component({
-  selector: 'page-hebdo',
-  templateUrl: 'hebdo.html',
-  styleUrls: ['./hebdo.scss'],
+    selector: 'page-hebdo',
+    templateUrl: 'hebdo.html',
+    styleUrls: ['./hebdo.scss'],
 })
 
 export class HebdoPage {
-  shownGroup = null;
-  schedule: Array<any>;
-  constructor(
-    private translateService: TranslateService,
-    private utilsServices: UtilsService,
-    private alertService: AlertService,
-    private route: ActivatedRoute,
-    private router: Router,
-  ) {
-      this.route.queryParams.subscribe(() => {
-      if (this.router.getCurrentNavigation().extras.state) {
-        this.schedule = this.router.getCurrentNavigation().extras.state.items;
-      }
-    });
-  }
-  toggleGroup(date: string) {
-    this.shownGroup = this.utilsServices.toggleGroup(date, this.shownGroup);
-  }
-  /*Add an activity (a session of the course) to the calendar of the smartphone*/
-  addToCalendar(slidingItem: IonItemSliding, activity: any) {
-      let message = '';
-    this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => { message = res; });
-    const datas = {
-      title: activity.name + ': ' + activity.type,
-      location: activity.entityCode,
-      start: new Date(activity.eventstarttime),
-      end: new Date(activity.eventendtime)
-    };
-    this.utilsServices.createEventInCalendar(datas, message, slidingItem);
-    this.alertService.alertCourse({ 'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3' });
-  }
+    shownGroup = null;
+    schedule: Array<any>;
+
+    constructor(
+        private translateService: TranslateService,
+        private utilsServices: UtilsService,
+        private alertService: AlertService,
+        private route: ActivatedRoute,
+        private router: Router,
+    ) {
+        this.route.queryParams.subscribe(() => {
+            if (this.router.getCurrentNavigation().extras.state) {
+                this.schedule = this.router.getCurrentNavigation().extras.state.items;
+            }
+        });
+    }
+
+    toggleGroup(date: string) {
+        this.shownGroup = this.utilsServices.toggleGroup(date, this.shownGroup);
+    }
+
+    /*Add an activity (a session of the course) to the calendar of the smartphone*/
+    addToCalendar(slidingItem: IonItemSliding, activity: any) {
+        let message = '';
+        this.translateService.get('COURSE.MESSAGE').subscribe((res: string) => {
+            message = res;
+        });
+        const datas = {
+            title: activity.name + ': ' + activity.type,
+            location: activity.entityCode,
+            start: new Date(activity.eventstarttime),
+            end: new Date(activity.eventendtime)
+        };
+        this.utilsServices.createEventInCalendar(datas, message, slidingItem);
+        this.alertService.alertCourse({'warning': 'COURSE.WARNING', 'message': 'COURSE.MESSAGE3'});
+    }
 }

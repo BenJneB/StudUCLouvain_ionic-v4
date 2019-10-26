@@ -21,109 +21,109 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar color="guindaille">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-      <img src="./assets/img/s.png" height="28" />
-    </ion-buttons>
-    <ion-title horizontal="center">
-      <img alt="logo" height="40" src="./assets/img/guindaille/logo.png">
-    </ion-title>
-  </ion-toolbar>
-  <ion-segment [(ngModel)]="segment" color="guindaille">
-    <ion-segment-button value="pict">
-      <ion-label color="light">{{'GUINDAILLE.PICTO' | translate}}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="effect">
-      <ion-label color="light">{{'GUINDAILLE.EFFECT' | translate}}</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="help">
-      <ion-label color="light">{{'GUINDAILLE.HELP' | translate}}</ion-label>
-    </ion-segment-button>
-  </ion-segment>
+    <ion-toolbar color="guindaille">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+            <img src="./assets/img/s.png" height="28"/>
+        </ion-buttons>
+        <ion-title horizontal="center">
+            <img alt="logo" height="40" src="./assets/img/guindaille/logo.png">
+        </ion-title>
+    </ion-toolbar>
+    <ion-segment [(ngModel)]="segment" color="guindaille">
+        <ion-segment-button value="pict">
+            <ion-label color="light">{{'GUINDAILLE.PICTO' | translate}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="effect">
+            <ion-label color="light">{{'GUINDAILLE.EFFECT' | translate}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="help">
+            <ion-label color="light">{{'GUINDAILLE.HELP' | translate}}</ion-label>
+        </ion-segment-button>
+    </ion-segment>
 </ion-header>
 
 <!--BODY-->
 <ion-content>
-  <ion-grid class="gelem" no-lines *ngIf="segment==='pict'">
-    <ion-row>
-      <ion-col size="4" *ngFor="let pict of pictos; let l = last" [offset]="l ? 4 : 0">
-        <img [src]="pict.image" vertical="center" height="auto" (click)="showAlert(pict)" />
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-grid class="gelem" no-lines *ngIf="segment==='pict'">
+        <ion-row>
+            <ion-col size="4" *ngFor="let pict of pictos; let l = last" [offset]="l ? 4 : 0">
+                <img [src]="pict.image" vertical="center" height="auto" (click)="showAlert(pict)"/>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 
-  <div *ngIf="segment==='effect'" class="gelem">
-    <ion-slides pager class="ion-align-items-center">
-      <ion-slide *ngFor="let slide of slides">
-        <img [src]="slide.image" class="slide-image" (click)="showAlert(slide)" />
-      </ion-slide>
-    </ion-slides>
-    <p style="color:white">{{'GUINDAILLE.SLIDE' | translate}}</p>
-  </div>
+    <div *ngIf="segment==='effect'" class="gelem">
+        <ion-slides pager class="ion-align-items-center">
+            <ion-slide *ngFor="let slide of slides">
+                <img [src]="slide.image" class="slide-image" (click)="showAlert(slide)"/>
+            </ion-slide>
+        </ion-slides>
+        <p style="color:white">{{'GUINDAILLE.SLIDE' | translate}}</p>
+    </div>
 
-  <ion-card class="gelem" *ngIf="segment==='help'">
-    <ion-item class="ion-text-center">
-      <ion-label class="ion-text-wrap">
-        <h2> <strong>{{'GUINDAILLE.HELP11' | translate}} </strong></h2>
-        <p [innerHTML]="'GUINDAILLE.HELP12' | translate"></p><br>
-        <p [innerHTML]="'GUINDAILLE.HELP13' | translate"></p>
-        <p style="text-align: left">
-          <li>{{'GUINDAILLE.HELP14' | translate}}</li>
-          <li>{{'GUINDAILLE.HELP15' | translate}}</li>
-          <li>{{'GUINDAILLE.HELP16' | translate}}</li>
-          <li>{{'GUINDAILLE.HELP17' | translate}}</li>
-        </p>
-        <ion-card>
-          <ion-card-content>
-            <strong style='color: red;'>{{'GUINDAILLE.HELP1' | translate}}</strong>:
-            <br>
-            <a href="tel:010 47 22 22">010 47 22 22</a>
-            <br>
-            <strong style='color: red;'>{{'GUINDAILLE.HELP2' | translate}}</strong>:
-            <br>
-            <a href="tel:010 47 24 24">010 47 24 24</a>
-            <br>
-            <strong style='color: red;'>Woluwe - St Gilles - Tournai</strong>:
-            <br>
-            <a href="tel:02 764 93 93">02 764 93 93</a>
-            <br>
-            <strong style='color: red;'>Mons</strong>:
-            <br>
-            <a href="tel:065 32 35 55">065 32 35 55</a>
-            <br>
-            <strong style='color: red;'>Mail: </strong>
-            <br>
-            <a href="mailto:security@uclouvain.be">security@uclouvain.be</a>
-            <br>
-            <strong style='color: red;'>{{'GUINDAILLE.HELP18' | translate}} : </strong>
-            <br>
-            <a href="tel:112">112</a>
-          </ion-card-content>
-        </ion-card>
-        <p>
-          <br>{{'GUINDAILLE.HELP3' | translate}} <br><br>
-          <strong>{{'GUINDAILLE.HELP4' | translate}}</strong>
-          <br>
-          {{'GUINDAILLE.HELP5' | translate}}
-          <br>
-          <strong>{{'GUINDAILLE.HELP6' | translate}}</strong>
-          <br>
-          {{'GUINDAILLE.HELP7' | translate}}
-          <br>
-          <strong>{{'GUINDAILLE.HELP8' | translate}}</strong>
-          <br>
-          {{'GUINDAILLE.HELP9' | translate}}
-          <br>
-          {{'GUINDAILLE.HELP10' | translate}}
-        </p>
-      </ion-label>
-    </ion-item>
-  </ion-card>
+    <ion-card class="gelem" *ngIf="segment==='help'">
+        <ion-item class="ion-text-center">
+            <ion-label class="ion-text-wrap">
+                <h2><strong>{{'GUINDAILLE.HELP11' | translate}} </strong></h2>
+                <p [innerHTML]="'GUINDAILLE.HELP12' | translate"></p><br>
+                <p [innerHTML]="'GUINDAILLE.HELP13' | translate"></p>
+                <p style="text-align: left">
+                <li>{{'GUINDAILLE.HELP14' | translate}}</li>
+                <li>{{'GUINDAILLE.HELP15' | translate}}</li>
+                <li>{{'GUINDAILLE.HELP16' | translate}}</li>
+                <li>{{'GUINDAILLE.HELP17' | translate}}</li>
+                </p>
+                <ion-card>
+                    <ion-card-content>
+                        <strong style='color: red;'>{{'GUINDAILLE.HELP1' | translate}}</strong>:
+                        <br>
+                        <a href="tel:010 47 22 22">010 47 22 22</a>
+                        <br>
+                        <strong style='color: red;'>{{'GUINDAILLE.HELP2' | translate}}</strong>:
+                        <br>
+                        <a href="tel:010 47 24 24">010 47 24 24</a>
+                        <br>
+                        <strong style='color: red;'>Woluwe - St Gilles - Tournai</strong>:
+                        <br>
+                        <a href="tel:02 764 93 93">02 764 93 93</a>
+                        <br>
+                        <strong style='color: red;'>Mons</strong>:
+                        <br>
+                        <a href="tel:065 32 35 55">065 32 35 55</a>
+                        <br>
+                        <strong style='color: red;'>Mail: </strong>
+                        <br>
+                        <a href="mailto:security@uclouvain.be">security@uclouvain.be</a>
+                        <br>
+                        <strong style='color: red;'>{{'GUINDAILLE.HELP18' | translate}} : </strong>
+                        <br>
+                        <a href="tel:112">112</a>
+                    </ion-card-content>
+                </ion-card>
+                <p>
+                    <br>{{'GUINDAILLE.HELP3' | translate}} <br><br>
+                    <strong>{{'GUINDAILLE.HELP4' | translate}}</strong>
+                    <br>
+                    {{'GUINDAILLE.HELP5' | translate}}
+                    <br>
+                    <strong>{{'GUINDAILLE.HELP6' | translate}}</strong>
+                    <br>
+                    {{'GUINDAILLE.HELP7' | translate}}
+                    <br>
+                    <strong>{{'GUINDAILLE.HELP8' | translate}}</strong>
+                    <br>
+                    {{'GUINDAILLE.HELP9' | translate}}
+                    <br>
+                    {{'GUINDAILLE.HELP10' | translate}}
+                </p>
+            </ion-label>
+        </ion-item>
+    </ion-card>
 </ion-content>
 
 <ion-footer class="gfoot ion-text-center" *ngIf="segment === 'effect' || segment === 'pict'"
-  [hidden]="segment === 'help'">
-  <ion-icon name='help-circle'></ion-icon>
-  <p class="gtext">{{'GUINDAILLE.CLICK' | translate}}</p>
+            [hidden]="segment === 'help'">
+    <ion-icon name='help-circle'></ion-icon>
+    <p class="gtext">{{'GUINDAILLE.CLICK' | translate}}</p>
 </ion-footer>

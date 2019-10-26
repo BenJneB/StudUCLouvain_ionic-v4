@@ -8,19 +8,20 @@ import { ModalProjectPage } from './modal-project';
 import { StudiesService } from 'src/app/services/studies-services/studies-service';
 
 @NgModule({
-  declarations: [ModalProjectPage],
-  imports: [
-    IonicModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    TranslateModule.forChild(),
-  ],
-  entryComponents: [
-    ModalProjectPage
-  ],
-  providers: [
-    StudiesService,
-  ]
+    declarations: [ModalProjectPage],
+    imports: [
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        TranslateModule.forChild(),
+    ],
+    entryComponents: [
+        ModalProjectPage
+    ],
+    providers: [
+        StudiesService,
+    ]
 })
-export class ModalProjectPageModule { }
+export class ModalProjectPageModule {
+}

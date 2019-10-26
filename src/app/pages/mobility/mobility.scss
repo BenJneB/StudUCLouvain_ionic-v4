@@ -20,49 +20,49 @@
 */
 
 .scroll-content {
-    margin-top: 56px;
+  margin-top: 56px;
 }
 
 ion-content {
+  height: 100% !important;
+
+  ion-grid.portrait {
     height: 100% !important;
 
-    ion-grid.portrait {
+    ion-row {
+      height: 33% !important;
+
+      ion-col {
         height: 100% !important;
 
-        ion-row {
-            height: 33% !important;
-
-            ion-col {
-                height: 100% !important;
-
-                img {
-                    max-height: 100%;
-                }
-
-                p {
-                    margin-top: 0px;
-                }
-            }
+        img {
+          max-height: 100%;
         }
-    }
 
-    ion-grid.landscape {
+        p {
+          margin-top: 0px;
+        }
+      }
+    }
+  }
+
+  ion-grid.landscape {
+    height: 100% !important;
+
+    ion-row {
+      height: 33% !important;
+
+      ion-col {
         height: 100% !important;
 
-        ion-row {
-            height: 33% !important;
-
-            ion-col {
-                height: 100% !important;
-
-                img {
-                    height: 80% !important;
-                }
-
-                p {
-                    margin-top: 0px;
-                }
-            }
+        img {
+          height: 80% !important;
         }
+
+        p {
+          margin-top: 0px;
+        }
+      }
     }
+  }
 }

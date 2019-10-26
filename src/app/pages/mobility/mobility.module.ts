@@ -8,14 +8,15 @@ import { MobilityPage } from './mobility';
 import { MobilityRoutingModule } from './mobility-routing.module';
 
 @NgModule({
-  declarations: [MobilityPage],
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslateModule.forChild(),
-    MobilityRoutingModule
-  ]
+    declarations: [MobilityPage],
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TranslateModule.forChild(),
+        MobilityRoutingModule
+    ]
 })
-export class MobilityPageModule { }
+export class MobilityPageModule {
+}

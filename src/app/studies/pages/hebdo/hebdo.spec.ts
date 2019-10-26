@@ -46,7 +46,7 @@ describe('Hebdo Component', () => {
             ],
             providers: [
                 getMockProvider(UtilsService, newMockUtilsService),
-                { provide: ModalController, useClass: ModalControllerMock },
+                {provide: ModalController, useClass: ModalControllerMock},
             ]
         }).compileComponents();
     }));
@@ -55,7 +55,7 @@ describe('Hebdo Component', () => {
 
     beforeEach(() => {
         spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
-            .and.returnValue({ extras: { state: { items: [] } } });
+            .and.returnValue({extras: {state: {items: []}}});
         fixture = TestBed.createComponent(HebdoPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -78,7 +78,10 @@ describe('Hebdo Component', () => {
         it('should call createEventInCalendar from Calendar', () => {
             const spyCreate = spyOn(component.utilsServices, 'createEventInCalendar').and.callThrough();
             component.addToCalendar(
-                { 'close': () => { } },
+                {
+                    'close': () => {
+                    }
+                },
                 '',
             );
             expect(spyCreate.calls.count()).toEqual(1);

@@ -46,8 +46,8 @@ describe('Guindaille Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
+                {provide: ModalController, useClass: ModalControllerMock},
+                {provide: InAppBrowser, useClass: InAppBrowserMock},
             ]
         }).compileComponents();
     }));

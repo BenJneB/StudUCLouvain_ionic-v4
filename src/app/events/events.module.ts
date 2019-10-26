@@ -12,17 +12,18 @@ import { EventsDetailsPage } from './pages/events-details/events-details';
 
 @NgModule({
     declarations: [EventsPage, EventsDetailsPage],
-  imports: [
-    IonicModule,
-    TranslateModule.forChild(),
-    ReactiveFormsModule,
-    CommonModule,
-    FormsModule,
-    EventsFilterModule,
-      EventsRoutingModule
-  ],
+    imports: [
+        IonicModule,
+        TranslateModule.forChild(),
+        ReactiveFormsModule,
+        CommonModule,
+        FormsModule,
+        EventsFilterModule,
+        EventsRoutingModule
+    ],
     providers: [
         EventsService,
     ]
 })
-export class EventsPageModule { }
+export class EventsPageModule {
+}

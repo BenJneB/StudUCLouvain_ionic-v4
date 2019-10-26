@@ -37,8 +37,7 @@ describe('Restaurant Component', () => {
                 TranslateModule.forRoot(),
                 RouterTestingModule,
             ],
-            providers: [
-            ]
+            providers: []
         }).compileComponents();
     }));
 

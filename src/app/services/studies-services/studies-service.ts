@@ -26,61 +26,65 @@ import { AdeService } from './ade-service';
 
 @Injectable()
 export class StudiesService {
-  url: string;
-  projects: AdeProject[];
-  data: any;
-  constructor(
-    public http: HttpClient,
-    public ade: AdeService) { }
+    url: string;
+    projects: AdeProject[];
+    data: any;
 
-  /*Open session for the user*/
-  openSession() {
-    return new Promise<string>((resolve) => {
-      this.ade.httpOpenSession().subscribe(
-        data => {
-          resolve(data['session'].$.id);
-        }
-      );
-    });
-  }
-
-  /*Get the projects ADE*/
-  getProjects(sessionId: string) {
-    return new Promise((resolve) => {
-      this.ade.getProjects(sessionId).subscribe(
-        data => {
-          resolve(this.extractAdeProjects(data));
-        }
-      );
-    });
-  }
-
-  /*Extract the projects ADE*/
-  extractAdeProjects(data): AdeProject[] {
-    const projects: AdeProject[] = [];
-    if (data.projects.project.length === undefined) {
-      const name = data.projects.project.$.name.toString();
-      const id = data.projects.project.$.id.toString();
-      const project = new AdeProject(id, name);
-      projects.push(project);
-    } else {
-      for (let i = 0; i < data.projects.project.length; i++) {
-        const name = data.projects.project[i].$.name.toString();
-        const id = data.projects.project[i].$.id.toString();
-        const project = new AdeProject(id, name);
-        projects.push(project);
-      }
+    constructor(
+        public http: HttpClient,
+        public ade: AdeService) {
     }
-    return projects;
-  }
 
-  /*Set the project selected by the user*/
-  setProject(sessionId: string, projectId: string) {
-    return new Promise((resolve) => {
-      this.ade.setProject(sessionId, projectId).subscribe(
-        data => { resolve(data); }
-      );
-    });
-  }
+    /*Open session for the user*/
+    openSession() {
+        return new Promise<string>((resolve) => {
+            this.ade.httpOpenSession().subscribe(
+                data => {
+                    resolve(data['session'].$.id);
+                }
+            );
+        });
+    }
+
+    /*Get the projects ADE*/
+    getProjects(sessionId: string) {
+        return new Promise((resolve) => {
+            this.ade.getProjects(sessionId).subscribe(
+                data => {
+                    resolve(this.extractAdeProjects(data));
+                }
+            );
+        });
+    }
+
+    /*Extract the projects ADE*/
+    extractAdeProjects(data): AdeProject[] {
+        const projects: AdeProject[] = [];
+        if (data.projects.project.length === undefined) {
+            const name = data.projects.project.$.name.toString();
+            const id = data.projects.project.$.id.toString();
+            const project = new AdeProject(id, name);
+            projects.push(project);
+        } else {
+            for (let i = 0; i < data.projects.project.length; i++) {
+                const name = data.projects.project[i].$.name.toString();
+                const id = data.projects.project[i].$.id.toString();
+                const project = new AdeProject(id, name);
+                projects.push(project);
+            }
+        }
+        return projects;
+    }
+
+    /*Set the project selected by the user*/
+    setProject(sessionId: string, projectId: string) {
+        return new Promise((resolve) => {
+            this.ade.setProject(sessionId, projectId).subscribe(
+                data => {
+                    resolve(data);
+                }
+            );
+        });
+    }
 
 }

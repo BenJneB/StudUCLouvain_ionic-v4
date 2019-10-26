@@ -56,10 +56,10 @@ describe('LibraryDetails Component', () => {
 
     beforeEach(() => {
         spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
-            .and.returnValue({ extras: { state: { items: {} } } });
+            .and.returnValue({extras: {state: {items: {}}}});
         fixture = TestBed.createComponent(LibraryDetailsPage);
         component = fixture.componentInstance;
-        component.libDetails = { website: '' };
+        component.libDetails = {website: ''};
         fixture.detectChanges();
     });
 
