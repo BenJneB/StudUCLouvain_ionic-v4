@@ -4,7 +4,7 @@ import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
-import { AlertController } from '@ionic/angular';
+import { AlertController, IonItemSliding } from '@ionic/angular';
 
 import { UtilsService } from '../utils-services';
 import { newMockAlertService, newMockConnectivityService, newMockUserService } from 'test-config/MockUtilsService';
@@ -53,6 +53,15 @@ describe('UtilsService', () => {
             spyOn(service.user, 'hasFavorite').and.callThrough().and.returnValue(false);
             service.addFavorite({guid: {}}, {});
             expect(spyAdd.calls.count()).toEqual(1);
+            expect(spyPresent.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('removeFavorite method', () => {
+        it('should present alert', () => {
+            const spyPresent = spyOn(service, 'presentAlert').and.callThrough();
+            let iis: IonItemSliding;
+            service.removeFavorite(iis, {}, 'TITLE', {});
             expect(spyPresent.calls.count()).toEqual(1);
         });
     });
