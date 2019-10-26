@@ -7,6 +7,11 @@ import {
     TranslateStore
 } from '@ngx-translate/core';
 import { Observable } from 'rxjs';
+import { NavController, Platform } from '@ionic/angular';
+import { Location } from '@angular/common';
+import { UrlSerializer, UrlTree } from '@angular/router';
+import { NavigationOptions } from '@ionic/angular/dist/providers/nav-controller';
+import { NgZone } from '@angular/core';
 
 export function getMockProvider(service, newMockService) {
     return {
@@ -39,4 +44,25 @@ export function newMockTranslateService() {
     let parser: TranslateParser;
     let miss: MissingTranslationHandler;
     return new MockTranslateService(store, loader, compiler, parser, miss);
+}
+
+export class MockNavController extends NavController {
+    constructor(
+        platform: Platform,
+        location: Location,
+        urlSerializer: UrlSerializer
+    ) {
+        super(platform, location, urlSerializer);
+    }
+
+    navigateForward(url: string | UrlTree | any[], options?: NavigationOptions): Promise<boolean> {
+        return new Promise(() => {
+        });
+    }
+}
+
+export function newMockNavController() {
+    const platform = new Platform('', new NgZone({}));
+    let loc: Location, urlS: UrlSerializer;
+    return new MockNavController(platform, loc, urlS);
 }

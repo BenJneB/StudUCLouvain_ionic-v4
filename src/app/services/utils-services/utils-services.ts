@@ -103,7 +103,7 @@ export class UtilsService {
     return await this.presentAlert(alertTexts, slidingItem, itemData);
   }
 
-  private async presentAlert(texts: {}, slidingItem: IonItemSliding, itemData: any) {
+  async presentAlert(texts: {}, slidingItem: IonItemSliding, itemData: any) {
     const alert = await this.alertCtrl.create({
       header: texts['title'],
       message: texts['message'],

@@ -254,7 +254,7 @@ export class StudiesPage {
         year: year
       }
     };
-    this.navCtrl.navigateForward(['/course'], navigationExtras);
+      this.navCtrl.navigateForward(['studies/course'], navigationExtras);
   }
 
   async openExamPage() {
