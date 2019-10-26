@@ -37,7 +37,7 @@ export class ModalProjectPage implements OnInit {
     constructor(
         public storage: Storage,
         public navParams: NavParams,
-        public viewCtrl: ModalController,
+        public modalCtrl: ModalController,
         public studiesService: StudiesService
     ) {
         this.sessionId = this.navParams.get('sessionId');
@@ -48,7 +48,7 @@ export class ModalProjectPage implements OnInit {
         this.studiesService.setProject(this.sessionId, project.id).then(
             () => {
                 this.storage.set('adeProject', project);
-                this.viewCtrl.dismiss(project);
+                this.modalCtrl.dismiss(project);
             }
         );
     }

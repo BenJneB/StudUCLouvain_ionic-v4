@@ -8,7 +8,7 @@ import { ModalController, NavParams } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModalControllerMock, NavParamsMock } from 'test-config/MockIonicNative';
+import { NavParamsMock, newModalControllerMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -42,7 +42,7 @@ describe('SportsFilter Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                {provide: ModalController, useClass: ModalControllerMock},
+                getMockProvider(ModalController, newModalControllerMock),
                 {provide: NavParams, useClass: NavParamsMock},
                 getMockProvider(SportsService, newMockSportsService),
             ]

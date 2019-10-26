@@ -1,58 +1,38 @@
-import { CacheService } from 'ionic-cache';
-import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
-import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
-import {
-    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock
-} from 'test-config/MockIonicNative';
+import { AlertController, ToastController } from '@ionic/angular';
+import { newMockUserService } from '../../../../../test-config/MockUtilsService';
+import { newMockTranslateService } from '../../../../../test-config/Mock';
+import { newModalControllerMock } from '../../../../../test-config/MockIonicNative';
 
-import { async, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { AppAvailability } from '@ionic-native/app-availability/ngx';
-import { Calendar } from '@ionic-native/calendar/ngx';
-import { Device } from '@ionic-native/device/ngx';
-import { Diagnostic } from '@ionic-native/diagnostic/ngx';
-import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
-import { Market } from '@ionic-native/market/ngx';
-import { Network } from '@ionic-native/network/ngx';
-import { IonicModule } from '@ionic/angular';
-import { IonicStorageModule } from '@ionic/storage';
-import { TranslateModule } from '@ngx-translate/core';
+function newServiceInstance() {
+    const translate = newMockTranslateService();
+    const user = newMockUserService();
+    let alert: AlertController, modalCtrl = newModalControllerMock(), toast: ToastController;
+    return new AlertService(toast, user, translate, alert, modalCtrl);
+}
 
 describe('AlertService', () => {
-    let alertService: AlertService;
-
-    beforeEach(async(() => {
-        TestBed.configureTestingModule({
-            declarations: [],
-            imports: [
-                IonicModule.forRoot(),
-                IonicStorageModule.forRoot(),
-                TranslateModule.forRoot(),
-                RouterTestingModule,
-            ],
-            providers: [
-                AlertService,
-                {provide: AppAvailability, useClass: AppAvailabilityMock},
-                {provide: Market, useClass: MarketMock},
-                {provide: InAppBrowser, useClass: InAppBrowserMock},
-                {provide: Device, useClass: DeviceMock},
-                CacheService,
-                {
-                    provide: CacheStorageService, useFactory: () => {
-                        return new MockCacheStorageService(null, null);
-                    }
-                },
-                Diagnostic,
-                {provide: Network, useClass: NetworkMock},
-                {provide: Calendar, useClass: CalendarMock},
-            ]
-        });
-    }));
+    let service: AlertService;
 
     beforeEach(() => {
-        alertService = TestBed.get(AlertService);
+        service = newServiceInstance();
     });
 
-    it('should create service', () => expect(alertService).toBeDefined());
+    it('should create service', () => expect(service).toBeDefined());
+
+    describe('dismissFilterToast method', () => {
+        it('should present alert', () => {
+            const spyPresent = spyOn(service.modalCtrl, 'dismiss').and.callThrough();
+            service.dismissFilterToast({}, undefined);
+            expect(spyPresent.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('applyFilters method', () => {
+        it('should dismiss filter toast', () => {
+            const spyDismiss = spyOn(service, 'dismissFilterToast').and.callThrough();
+            service.applyFilters([], {});
+            expect(spyDismiss.calls.count()).toEqual(1);
+        });
+    });
 });
