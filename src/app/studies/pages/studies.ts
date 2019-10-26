@@ -164,6 +164,7 @@ export class StudiesPage {
     return await myModal.present();
   }
 
+    // FIXME: TO TEST
   initializeSession() {
     if (this.connService.isOnline()) {
       this.studiesService.openSession().then(
