@@ -66,7 +66,6 @@ export class CoursePage implements OnInit {
     private alertService: AlertService
   ) {
       this.route.queryParams.subscribe(() => {
-
       if (this.router.getCurrentNavigation().extras.state) {
         this.sessionId = this.router.getCurrentNavigation().extras.state.sessionId;
         this.course = this.router.getCurrentNavigation().extras.state.course;
@@ -283,5 +282,4 @@ export class CoursePage implements OnInit {
       });
     return await myModal.present();
   }
-
 }

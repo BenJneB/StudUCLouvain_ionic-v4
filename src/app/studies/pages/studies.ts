@@ -101,7 +101,6 @@ export class StudiesPage {
     });
   }
 
-  /*Authenticate a student*/
   private login() {
     this.error = '';
     return new Promise(resolve => {
@@ -124,7 +123,6 @@ export class StudiesPage {
     });
   }
 
-  /*Get course program of student*/
   loadActivities() {
     if (this.connService.isOnline()) {
       this.login().then(() => {
@@ -159,7 +157,6 @@ export class StudiesPage {
         });
   }
 
-  /*Open modalprojectpage to choose an ade project*/
   async openModalProject() {
     const obj = { sessionId: this.sessionId };
     const myModal = await this.modalCtrl.create({ component: ModalProjectPage, componentProps: obj }).then();
@@ -167,7 +164,7 @@ export class StudiesPage {
     return await myModal.present();
   }
 
-  /*Set project and connect to ADE*/
+    // FIXME: TO TEST
   initializeSession() {
     if (this.connService.isOnline()) {
       this.studiesService.openSession().then(
@@ -258,7 +255,7 @@ export class StudiesPage {
         year: year
       }
     };
-    this.navCtrl.navigateForward(['/course'], navigationExtras);
+      this.navCtrl.navigateForward(['studies/course'], navigationExtras);
   }
 
   async openExamPage() {

@@ -82,8 +82,8 @@ export class AlertService {
     if (slidingItem !== undefined) {
       await slidingItem.close();
     }
-    return await toast.present().then();
-
+      // .then() ?
+      return await toast.present();
   }
 
   async campusChoiceAlert(setting: string, message: string, check: string, save: string) {

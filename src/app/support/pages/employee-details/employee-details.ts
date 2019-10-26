@@ -52,12 +52,10 @@ export class EmployeeDetailsPage {
     public connService: ConnectivityService
   ) {
       this.route.queryParams.subscribe(() => {
-
       if (this.router.getCurrentNavigation().extras.state) {
         this.empDetails = this.router.getCurrentNavigation().extras.state.items;
       }
       this.searching = true;
-      // Check if the connexion is Ok before search details pour an employee
       if (this.connService.isOnline()) {
         this.repService.loadEmpDetails(this.empDetails).then(
           res => {
@@ -74,9 +72,7 @@ export class EmployeeDetailsPage {
 
   }
 
-  /*Open page with some aditionnal information*/
   openPage(url: string) {
-    // InAppBrowser.open(url, '_blank');
     window.open(url, '_blank');
   }
 }

@@ -158,13 +158,6 @@ describe('Events Component', () => {
         });
     });
 
-    describe('onSearchInput method', () => {
-        it('should set searching on TRUE', () => {
-            component.onSearchInput();
-            expect(component.searching).toBeTruthy();
-        });
-    });
-
     describe('tabChanged method', () => {
         it('should call cachedOrNot if all segment', () => {
             const spyCachedOrNot = spyOn(component, 'cachedOrNot').and.callThrough();

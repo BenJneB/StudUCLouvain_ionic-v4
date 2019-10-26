@@ -74,7 +74,7 @@ export class EventsPage implements OnInit {
     private loader: LoaderService,
     private utilsServices: UtilsService,
   ) {
-    this.title = 'Evénements';
+    this.title = 'Evenements';
     this.searchControl = new FormControl();
   }
 
@@ -89,7 +89,6 @@ export class EventsPage implements OnInit {
       }
     }
   }
-  /*Like the constructor, ngOnInit fires all his body*/
   ngOnInit() {
     this.updateDateLimit();
     this.cachedOrNot();
@@ -108,16 +107,11 @@ export class EventsPage implements OnInit {
   async addFavorite(slidingItem: IonItemSliding, itemData: any) {
     this.utilsServices.addFavorite(itemData, EVENT_TEXTS, slidingItem);
   }
-  /*Reload events when refresh by swipe to the bottom*/
+
   public doRefresh(refresher) {
     this.utilsServices.doRefresh(refresher, 'cache-event', this.loadEvents.bind(this));
   }
 
-  public onSearchInput() {
-    this.searching = true;
-  }
-
-  /*Check if data are cached or not */
   cachedOrNot() {
     // this.cache.removeItem('cache-event');
     const key = 'cache-event';
@@ -139,12 +133,8 @@ export class EventsPage implements OnInit {
       });
   }
 
-
-  /*Load the list of events to display*/
   public async loadEvents(key?: string) {
     this.searching = true;
-    // Check connexion before load events, if there is connexion => load them, else go back to the precedent page and display alert
-
     this.eventsService.getEvents(this.segment, this.searching).then(
       res => {
         const result: any = res;
@@ -206,7 +196,6 @@ export class EventsPage implements OnInit {
     return (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear();
   }
 
-  /*Update the displayed events and close the loading when it's finished*/
   public updateDisplayed() {
     this.searching = true;
     if (this.segment === 'all') {
@@ -220,8 +209,6 @@ export class EventsPage implements OnInit {
     this.loader.dismiss();
   }
 
-
-  /*Display the modal with the filters and update data with them*/
   async presentFilter() {
     if (this.filters === undefined) {
       this.filters = [];
@@ -247,7 +234,6 @@ export class EventsPage implements OnInit {
     return await modal.present();
   }
 
-  /*Update the date limit, take account if a change is done by filter with the dateRange value*/
   private updateDateLimit() {
     const today = new Date();
     this.dateLimit = new Date(today.getFullYear(), today.getMonth() + this.dateRange, today.getUTCDate() + 1);
@@ -257,7 +243,6 @@ export class EventsPage implements OnInit {
     this.shownGroup = this.utilsServices.toggleGroup(week, this.shownGroup);
   }
 
-  /*Add an event to the calendar of the smartphone with a first reminder 5 minutes before the course*/
   public createEvent(slidingItem: IonItemSliding, itemData: any): void {
       let message = '';
     this.translateService.get('EVENTS.MESSAGE').subscribe((res: string) => { message = res; });

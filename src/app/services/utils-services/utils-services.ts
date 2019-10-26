@@ -11,7 +11,7 @@ import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
-import { AlertController, IonItemSliding } from '@ionic/angular';
+import { AlertController, IonItemSliding, NavController } from '@ionic/angular';
 import { TranslateService } from '@ngx-translate/core';
 
 import { ConnectivityService } from './connectivity-service';
@@ -30,19 +30,21 @@ export const EVENT_TEXTS = {
 })
 export class UtilsService {
   constructor(
-    public user: UserService,
-    private translateService: TranslateService,
-    public alertCtrl: AlertController,
-    private appAvailability: AppAvailability,
-    public market: Market,
-    private iab: InAppBrowser,
-    private device: Device,
-    private cache: CacheService,
-    public connService: ConnectivityService,
-    private router: Router,
-    private calendar: Calendar,
-    private alertService: AlertService
-  ) { }
+      public user: UserService,
+      public translateService: TranslateService,
+      public alertCtrl: AlertController,
+      private appAvailability: AppAvailability,
+      public market: Market,
+      private iab: InAppBrowser,
+      private device: Device,
+      private cache: CacheService,
+      public connService: ConnectivityService,
+      private router: Router,
+      private calendar: Calendar,
+      public alertService: AlertService,
+      public navCtrl: NavController,
+  ) {
+  }
 
   nullSchemas = { ios: null, android: null };
   nullUrls = { app: null, http: null };
@@ -60,8 +62,9 @@ export class UtilsService {
   }
 
   async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding) {
+      console.log('YOLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
     if (this.user.hasFavorite(itemData.guid)) {
-      let message: string;
+        let message = '';
       this.translateService.get(texts['FAV']).subscribe((res: string) => {
         message = res;
       });
@@ -77,7 +80,7 @@ export class UtilsService {
       );
     } else {
       this.user.addFavorite(itemData.guid);
-      let message: string;
+        let message = '';
       this.translateService.get(texts['FAV2']).subscribe((res: string) => {
         message = res;
       });
@@ -86,7 +89,7 @@ export class UtilsService {
   }
 
   async removeFavorite(slidingItem: IonItemSliding, itemData: any, title: string, texts: any) {
-    let message: string, cancel: string, del: string;
+      let message = '', cancel = '', del = '';
     this.translateService.get(texts['FAV3']).subscribe((res: string) => {
       message = res;
     });
@@ -100,7 +103,7 @@ export class UtilsService {
     return await this.presentAlert(alertTexts, slidingItem, itemData);
   }
 
-  private async presentAlert(texts: {}, slidingItem: IonItemSliding, itemData: any) {
+  async presentAlert(texts: {}, slidingItem: IonItemSliding, itemData: any) {
     const alert = await this.alertCtrl.create({
       header: texts['title'],
       message: texts['message'],
@@ -209,7 +212,8 @@ export class UtilsService {
         items: item
       }
     };
-    this.router.navigate([page], navigationExtras);
+      // FIXME: Improve
+      this.navCtrl.navigateForward([page], navigationExtras);
   }
 
   createEventInCalendar(itemData: any, message: string, slidingItem: IonItemSliding) {
@@ -222,7 +226,7 @@ export class UtilsService {
   }
 
   initSearchControl(searchControl: FormControl, searching: boolean, update?: () => void) {
-    searchControl.valueChanges.pipe(debounceTime(700)).subscribe(search => {
+      searchControl.valueChanges.pipe(debounceTime(700)).subscribe(() => {
       searching = false;
       if (update !== undefined) {
         update();
@@ -243,12 +247,11 @@ export class UtilsService {
   }
 
   getItemDisplay(groups: any) {
-    const itemsD = Object.keys(groups).map(function (key) {
-      return {
-        label: key,
-        items: groups[key]
-      };
+      return Object.keys(groups).map(function (key) {
+          return {
+              label: key,
+              items: groups[key]
+          };
     });
-    return itemsD;
   }
 }

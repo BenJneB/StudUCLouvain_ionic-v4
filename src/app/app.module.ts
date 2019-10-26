@@ -23,7 +23,7 @@ import { CacheModule } from 'ionic-cache';
 import { CommonModule } from '@angular/common';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { ErrorHandler, NgModule } from '@angular/core';
-import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { Device } from '@ionic-native/device/ngx';
@@ -38,7 +38,9 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { Network } from '@ionic-native/network/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
-import { LoaderService } from './services/utils-services/loader-service';
+import { HomePage } from './home/home.page';
+import { TutoPage } from './pages/tuto/tuto';
+import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -46,7 +48,9 @@ export function HttpLoaderFactory(http: HttpClient) {
 
 @NgModule({
     declarations: [
-        AppComponent
+        AppComponent,
+        HomePage,
+        TutoPage
     ],
     exports: [
         TranslateModule
@@ -64,10 +68,10 @@ export function HttpLoaderFactory(http: HttpClient) {
                 useFactory: (HttpLoaderFactory),
                 deps: [HttpClient]
             }
-        })
+        }),
+        FormsModule
     ],
     bootstrap: [AppComponent],
-    entryComponents: [],
     providers: [
         {provide: ErrorHandler, useClass: ErrorHandler},
         AppAvailability,
@@ -76,9 +80,7 @@ export function HttpLoaderFactory(http: HttpClient) {
         Device,
         Calendar,
         Network,
-        LoaderService,
-        FormsModule,
-        ReactiveFormsModule,
+        SplashScreen,
         CommonModule,
     ]
 })

@@ -116,7 +116,7 @@ describe('Studies Component', () => {
     });
 
     describe('checkCourseExisting method', () => {
-        // TO TEST !!
+        // FIXME: TO TEST !!
         it('should call checkExist', () => {
             const spyCheck = spyOn(component, 'checkExist').and.callThrough();
             component.project = { name: '' };

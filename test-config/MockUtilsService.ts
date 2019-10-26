@@ -7,12 +7,13 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 
 import { NgZone } from '@angular/core';
 import { Router } from '@angular/router';
-import { AlertController, Platform } from '@ionic/angular';
+import { AlertController, ModalController, NavController, Platform, ToastController } from '@ionic/angular';
 import { Storage, StorageConfig } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
 import { AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock } from './MockIonicNative';
 import { HttpClientMock } from './MockWso2Services';
+import { MockTranslateService } from './Mock';
 
 export class MockUtilsService extends UtilsService {
     constructor(
@@ -27,7 +28,8 @@ export class MockUtilsService extends UtilsService {
         connService: MockConnectivityService,
         router: Router,
         calendar: CalendarMock,
-        alertService: AlertService
+        alertService: AlertService,
+        navCtrl: NavController
     ) {
         super(
             user,
@@ -41,13 +43,20 @@ export class MockUtilsService extends UtilsService {
             connService,
             router,
             calendar,
-            alertService
+            alertService,
+            navCtrl
         );
     }
 
-    launchExternalApp() { }
-    createEventInCalendar() { }
-    doRefresh() { }
+    launchExternalApp() {
+    }
+
+    createEventInCalendar() {
+    }
+
+    doRefresh() {
+    }
+
     addFavorite() {
         return new Promise<void>(() => {
         });
@@ -67,6 +76,7 @@ export function newMockUtilsService() {
     let router: Router;
     let calendar: CalendarMock;
     let alertService: AlertService;
+    let navCtrl: NavController;
     return new MockUtilsService(
         user,
         translateService,
@@ -79,7 +89,8 @@ export function newMockUtilsService() {
         connService,
         router,
         calendar,
-        alertService
+        alertService,
+        navCtrl
     );
 }
 
@@ -131,11 +142,33 @@ export class MockUserService extends UserService {
         super(storage);
     }
 
-    addFac() { }
+    addFac() {
+    }
 }
 
 export function newMockUserService() {
     let config: StorageConfig;
     const storage = new Storage(config);
     return new MockUserService(storage);
+}
+
+export class MockAlertService extends AlertService {
+    constructor(
+        toast: ToastController,
+        user: MockUserService,
+        translate: MockTranslateService,
+        alert: AlertController,
+        modal: ModalController
+    ) {
+        super(toast, user, translate, alert, modal);
+    }
+}
+
+export function newMockAlertService() {
+    let toast: ToastController;
+    let user: MockUserService;
+    let translate: MockTranslateService;
+    let alert: AlertController;
+    let modal: ModalController;
+    return new MockAlertService(toast, user, translate, alert, modal);
 }
