@@ -17,9 +17,9 @@ export class HomePage {
     slideElemToLeft(elem) {
         browser.actions()
             .mouseDown(elem)
-            .mouseMove({ x: -50, y: 0 })
-            .mouseMove({ x: -50, y: 0 })
-            .mouseMove({ x: -50, y: 0 })
+            .mouseMove({x: -50, y: 0})
+            .mouseMove({x: -50, y: 0})
+            .mouseMove({x: -50, y: 0})
             .mouseUp()
             .perform();
         browser.sleep(250);

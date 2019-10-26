@@ -25,28 +25,29 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class FacService {
-  facultes: any = [];
-  url = 'assets/data/fac.json';
-  constructor(public http: HttpClient) {
+    facultes: any = [];
+    url = 'assets/data/fac.json';
 
-  }
+    constructor(public http: HttpClient) {
 
-  /*Load fac from Json file in assets*/
-  public loadResources() {
-    if (this.facultes.length === 0) {
-      return new Promise(resolve => {
-        this.http.get(this.url).pipe(map(res => res)).subscribe(data => {
-          for (const sector of data['secteurs']) {
-            this.facultes.push(sector);
-          }
-          resolve(this.facultes);
-        });
-      });
-    } else {
-      return new Promise(resolve => {
-        resolve(this.facultes);
-      });
     }
-  }
+
+    /*Load fac from Json file in assets*/
+    public loadResources() {
+        if (this.facultes.length === 0) {
+            return new Promise(resolve => {
+                this.http.get(this.url).pipe(map(res => res)).subscribe(data => {
+                    for (const sector of data['secteurs']) {
+                        this.facultes.push(sector);
+                    }
+                    resolve(this.facultes);
+                });
+            });
+        } else {
+            return new Promise(resolve => {
+                resolve(this.facultes);
+            });
+        }
+    }
 
 }

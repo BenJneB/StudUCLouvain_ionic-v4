@@ -6,13 +6,14 @@ import { ExamPage } from './exam';
 import { Calendar } from '@ionic-native/calendar/ngx';
 
 @NgModule({
-  declarations: [ExamPage],
-  imports: [
-    IonicModule,
-    TranslateModule.forChild()
-  ],
+    declarations: [ExamPage],
+    imports: [
+        IonicModule,
+        TranslateModule.forChild()
+    ],
     providers: [
         Calendar,
     ]
 })
-export class ExamPageModule { }
+export class ExamPageModule {
+}

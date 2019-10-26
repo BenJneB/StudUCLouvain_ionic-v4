@@ -54,11 +54,14 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
         super(url, target, options);
     }
 
-    show(): void { }
+    show(): void {
+    }
 
-    close(): void { }
+    close(): void {
+    }
 
-    hide(): void { }
+    hide(): void {
+    }
 
     executeScript(script: { file?: string; code?: string; }): Promise<any> {
         return getPromise();
@@ -110,6 +113,7 @@ export class DeviceMock extends Device {
 export class NetworkMock extends Network {
     type = 'cellular';
     downlinkMax: string;
+
     onchange(): Observable<any> {
         return getObservable();
     }
@@ -165,6 +169,7 @@ export interface CalendarOptions {
 export class CalendarMock extends Calendar {
 
     deleteEvent = this.createEvent;
+
     hasReadWritePermission(): Promise<boolean> {
         return getPromise(true);
     }
@@ -219,7 +224,7 @@ export class ModalControllerMock {
     public create = jasmine.createSpy('create').and.returnValue(
         Promise.resolve({
             present: jasmine.createSpy('present').and.returnValue(Promise.resolve()),
-            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve({ 'data': [0, 1] }))
+            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve({'data': [0, 1]}))
         })
     );
     public dismiss = jasmine.createSpy('dismiss').and.returnValue(Promise.resolve());

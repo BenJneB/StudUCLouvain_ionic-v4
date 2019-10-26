@@ -56,8 +56,8 @@ describe('News Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
+                {provide: ModalController, useClass: ModalControllerMock},
+                {provide: InAppBrowser, useClass: InAppBrowserMock},
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
@@ -105,7 +105,7 @@ describe('News Component', () => {
     describe('findSite method', () => {
         it('should get AvailableSites', () => {
             const spyGet = spyOn(component, 'getAvailableSites').and.callThrough();
-            component.listFac = [{ facs: {} }];
+            component.listFac = [{facs: {}}];
             component.findSite();
             expect(spyGet.calls.count()).toEqual(1);
         });
@@ -139,13 +139,25 @@ describe('News Component', () => {
                     resolve();
                 });
             });
-            component.doRefresh({ target: { complete: () => { return; } } });
+            component.doRefresh({
+                target: {
+                    complete: () => {
+                        return;
+                    }
+                }
+            });
             expect(spyOnline.calls.count()).toBeGreaterThan(0);
         });
 
         it('should present ConnectionAlert from ConnectivityService if offline', () => {
             const spyPresent = spyOn(component.connService, 'isOnline').and.returnValue(false);
-            component.doRefresh({ target: { complete: () => { return; } } });
+            component.doRefresh({
+                target: {
+                    complete: () => {
+                        return;
+                    }
+                }
+            });
             expect(spyPresent.calls.count()).toEqual(1);
         });
     });
@@ -158,7 +170,13 @@ describe('News Component', () => {
                     resolve();
                 });
             });
-            component.handleOnlineRefresh(true, { target: { complete: () => { return; } } });
+            component.handleOnlineRefresh(true, {
+                target: {
+                    complete: () => {
+                        return;
+                    }
+                }
+            });
             expect(spyLoad.calls.count()).toEqual(1);
             expect(spyRemove.calls.count()).toEqual(1);
         });
@@ -166,7 +184,13 @@ describe('News Component', () => {
         it('should load News if segment is not univ', () => {
             component.segment = 'favorites';
             const spyLoad = spyOn(component, 'loadNews').and.callThrough();
-            component.handleOnlineRefresh(true, { target: { complete: () => { return; } } });
+            component.handleOnlineRefresh(true, {
+                target: {
+                    complete: () => {
+                        return;
+                    }
+                }
+            });
             expect(spyLoad.calls.count()).toEqual(1);
         });
     });
@@ -186,7 +210,7 @@ describe('News Component', () => {
     describe('tabChanged method', () => {
         it('should call cachedOrNot if Univ Segment', () => {
             const spyCachedOrNot = spyOn(component, 'cachedOrNot').and.callThrough();
-            component.tabChanged({ 'detail': { 'value': 'univ' } });
+            component.tabChanged({'detail': {'value': 'univ'}});
             expect(spyCachedOrNot.calls.count()).toEqual(1);
         });
 
@@ -194,7 +218,7 @@ describe('News Component', () => {
             component.facsegment = 'news';
             component.userS.fac = 'FAC';
             const spyManage = spyOn(component, 'manageMainTabFac').and.callThrough();
-            component.tabChanged({ 'detail': { 'value': 'fac' } });
+            component.tabChanged({'detail': {'value': 'fac'}});
             expect(spyManage.calls.count()).toEqual(1);
         });
     });
@@ -210,12 +234,14 @@ describe('News Component', () => {
 
     describe('goToNewsDetail method', () => {
         it('should call goToDetail from UtilsService', () => {
-            const spyGo = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => { });
+            const spyGo = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => {
+            });
             component.goToNewsDetail();
             expect(spyGo.calls.count()).toEqual(1);
         });
     });
 });
+
 function _checkGetKeySegment(component: any, subsegment: string) {
     component.subsegment = subsegment;
     const result = component.getKey();
@@ -225,7 +251,7 @@ function _checkGetKeySegment(component: any, subsegment: string) {
 function _testGetAvailableSites(component: any, site: string, rss: string) {
     expect(component.site).toEqual('');
     expect(component.rss).toEqual('');
-    component.getAvailableSites({ facs: [{ acro: 'TEST', site: 'site', rss: 'rss' }] });
+    component.getAvailableSites({facs: [{acro: 'TEST', site: 'site', rss: 'rss'}]});
     expect(component.site).toEqual(site);
     expect(component.rss).toEqual(rss);
 }

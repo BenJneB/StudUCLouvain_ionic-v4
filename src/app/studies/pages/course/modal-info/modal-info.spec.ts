@@ -51,7 +51,7 @@ describe('ModalInfo Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
+                {provide: ModalController, useClass: ModalControllerMock},
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
@@ -70,7 +70,7 @@ describe('ModalInfo Component', () => {
 
     beforeEach(() => {
         spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
-            .and.returnValue({ extras: { state: { items: {} } } });
+            .and.returnValue({extras: {state: {items: {}}}});
         fixture = TestBed.createComponent(ModalInfoPage);
         component = fixture.componentInstance;
         fixture.detectChanges();

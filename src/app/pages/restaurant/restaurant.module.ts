@@ -8,14 +8,15 @@ import { RestaurantPage } from './restaurant';
 import { RestaurantRoutingModule } from './restaurant-routing.module';
 
 @NgModule({
-  declarations: [RestaurantPage],
-  imports: [
-    IonicModule,
-    TranslateModule.forChild(),
-    ReactiveFormsModule,
-    CommonModule,
-    FormsModule,
-      RestaurantRoutingModule
-  ]
+    declarations: [RestaurantPage],
+    imports: [
+        IonicModule,
+        TranslateModule.forChild(),
+        ReactiveFormsModule,
+        CommonModule,
+        FormsModule,
+        RestaurantRoutingModule
+    ]
 })
-export class RestaurantPageModule { }
+export class RestaurantPageModule {
+}

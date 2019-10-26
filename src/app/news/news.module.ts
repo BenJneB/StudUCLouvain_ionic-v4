@@ -13,18 +13,19 @@ import { NewsDetailsPage } from './pages/news-details/news-details';
 
 @NgModule({
     declarations: [NewsPage, NewsDetailsPage],
-  imports: [
-    IonicModule,
-    ReactiveFormsModule,
-    CommonModule,
-    FormsModule,
-    TranslateModule.forChild(),
-    NewsRoutingModule
-  ],
+    imports: [
+        IonicModule,
+        ReactiveFormsModule,
+        CommonModule,
+        FormsModule,
+        TranslateModule.forChild(),
+        NewsRoutingModule
+    ],
     providers: [
         NewsService,
         ConnectivityService,
         FacService,
     ]
 })
-export class NewsPageModule { }
+export class NewsPageModule {
+}

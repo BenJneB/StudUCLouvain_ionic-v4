@@ -8,14 +8,15 @@ import { GuindaillePage } from './guindaille2-0';
 import { Guindaille20RoutingModule } from './guindaille2-0-routing.module';
 
 @NgModule({
-  declarations: [GuindaillePage],
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslateModule.forChild(),
-    Guindaille20RoutingModule
-  ]
+    declarations: [GuindaillePage],
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TranslateModule.forChild(),
+        Guindaille20RoutingModule
+    ]
 })
-export class GuindaillePageModule { }
+export class GuindaillePageModule {
+}

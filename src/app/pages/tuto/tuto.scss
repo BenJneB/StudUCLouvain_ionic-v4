@@ -20,21 +20,26 @@
 */
 
 ion-slides {
-    background: var(--ion-color-uclouvain) !important;
+  background: var(--ion-color-uclouvain) !important;
+  height: 100%;
+
+  ion-slide {
     height: 100%;
-    ion-slide {
-        height: 100%;
-        ion-row {
-            justify-content: center;
-            p {
-                color: white;
-            }
-            img {
-                height: 70vh;
-            }
-            .descr p {
-                height: 20vh;
-            }
-        }
+
+    ion-row {
+      justify-content: center;
+
+      p {
+        color: white;
+      }
+
+      img {
+        height: 70vh;
+      }
+
+      .descr p {
+        height: 20vh;
+      }
     }
+  }
 }

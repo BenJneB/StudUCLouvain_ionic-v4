@@ -23,41 +23,41 @@ import { Component } from '@angular/core';
 import { NavParams } from '@ionic/angular';
 
 @Component({
-  selector: 'page-sports-filter',
-  templateUrl: 'sports-filter.html',
-  styleUrls: ['./sports-filter.scss'],
+    selector: 'page-sports-filter',
+    templateUrl: 'sports-filter.html',
+    styleUrls: ['./sports-filter.scss'],
 })
 export class SportsFilterPage {
-  categories: Array<{ name: string, isChecked: boolean }> = [];
-  dateRange: any;
+    categories: Array<{ name: string, isChecked: boolean }> = [];
+    dateRange: any;
 
-  constructor(
-    public navParams: NavParams,
-    public alertService: AlertService
-  ) {
-    //  passed in array of categories names that should be excluded (unchecked)
-    const excludedFilters = this.navParams.get('excludedFilters');
-    const filters = this.navParams.get('filters');
-    this.dateRange = this.navParams.get('dateRange');
-    for (const filterName of filters) {
-      this.categories.push({
-        name: filterName,
-        isChecked: (excludedFilters.indexOf(filterName) === -1)
-      });
+    constructor(
+        public navParams: NavParams,
+        public alertService: AlertService
+    ) {
+        //  passed in array of categories names that should be excluded (unchecked)
+        const excludedFilters = this.navParams.get('excludedFilters');
+        const filters = this.navParams.get('filters');
+        this.dateRange = this.navParams.get('dateRange');
+        for (const filterName of filters) {
+            this.categories.push({
+                name: filterName,
+                isChecked: (excludedFilters.indexOf(filterName) === -1)
+            });
+        }
     }
-  }
 
-  /*Reset all of the toggles to be checked*/
-  resetFilters() {
-    this.categories.forEach(category => {
-      category.isChecked = true;
-    });
-  }
+    /*Reset all of the toggles to be checked*/
+    resetFilters() {
+        this.categories.forEach(category => {
+            category.isChecked = true;
+        });
+    }
 
-  /*Uncheck all sports from the filter*/
-  uncheckAll() {
-    this.categories.forEach(category => {
-      category.isChecked = false;
-    });
-  }
+    /*Uncheck all sports from the filter*/
+    uncheckAll() {
+        this.categories.forEach(category => {
+            category.isChecked = false;
+        });
+    }
 }

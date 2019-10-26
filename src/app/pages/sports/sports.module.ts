@@ -12,20 +12,21 @@ import { ConnectivityService } from 'src/app/services/utils-services/connectivit
 import { SportsRoutingModule } from './sports-routing.module';
 
 @NgModule({
-  declarations: [SportsPage],
-  imports: [
-    IonicModule,
-    ReactiveFormsModule,
-    CommonModule,
-    FormsModule,
-    SportsFilterPageModule,
-    TranslateModule.forChild(),
-    SportsRoutingModule
-  ],
+    declarations: [SportsPage],
+    imports: [
+        IonicModule,
+        ReactiveFormsModule,
+        CommonModule,
+        FormsModule,
+        SportsFilterPageModule,
+        TranslateModule.forChild(),
+        SportsRoutingModule
+    ],
     providers: [
         SportsService,
         Calendar,
         ConnectivityService,
     ]
 })
-export class SportsPageModule { }
+export class SportsPageModule {
+}

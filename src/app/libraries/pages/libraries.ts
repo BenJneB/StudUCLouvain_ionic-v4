@@ -28,62 +28,64 @@ import { ConnectivityService } from 'src/app/services/utils-services/connectivit
 import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
 
 @Component({
-  selector: 'page-libraries',
-  templateUrl: 'libraries.html',
-  styleUrls: ['./libraries.scss'],
+    selector: 'page-libraries',
+    templateUrl: 'libraries.html',
+    styleUrls: ['./libraries.scss'],
 })
 export class LibrariesPage {
-  title: any;
-  libraries: LibraryItem[];
-  searching = false;
+    title: any;
+    libraries: LibraryItem[];
+    searching = false;
 
-  constructor(
-    public navCtrl: NavController,
-    public libService: LibrariesService,
-    public connService: ConnectivityService,
-    private cache: CacheService,
-    private utilsServices: UtilsService,
-  ) {
-    this.cachedOrNot();
-    this.title = 'Bibliothèques';
-  }
-
-  public doRefresh(refresher) {
-    this.utilsServices.doRefresh(refresher, 'cache-libraries', this.loadLibraries.bind(this));
-  }
-
-  loadLibraries(key?: any) {
-    this.searching = true;
-    if (this.connService.isOnline()) {
-      this.libService.loadLibraries().then(
-        res => {
-          const result: any = res;
-          this.libraries = result.libraries;
-          if (key !== undefined) { this.cache.saveItem(key, this.libraries); }
-          this.searching = false;
-        }
-      );
-    } else {
-      this.searching = false;
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
+    constructor(
+        public navCtrl: NavController,
+        public libService: LibrariesService,
+        public connService: ConnectivityService,
+        private cache: CacheService,
+        private utilsServices: UtilsService,
+    ) {
+        this.cachedOrNot();
+        this.title = 'Bibliothèques';
     }
-  }
 
-  goToLibDetails(lib: LibraryItem) {
-    this.utilsServices.goToDetail(lib, 'libraries/details');
-  }
+    public doRefresh(refresher) {
+        this.utilsServices.doRefresh(refresher, 'cache-libraries', this.loadLibraries.bind(this));
+    }
 
-  cachedOrNot() {
-    //  this.cache.removeItem('cache-event');
-    const key = 'cache-libraries';
-    this.cache.getItem(key)
-      .then((data) => {
-        this.libraries = data;
-        this.searching = false;
-      })
-      .catch(() => {
-        this.loadLibraries(key);
-      });
-  }
+    loadLibraries(key?: any) {
+        this.searching = true;
+        if (this.connService.isOnline()) {
+            this.libService.loadLibraries().then(
+                res => {
+                    const result: any = res;
+                    this.libraries = result.libraries;
+                    if (key !== undefined) {
+                        this.cache.saveItem(key, this.libraries);
+                    }
+                    this.searching = false;
+                }
+            );
+        } else {
+            this.searching = false;
+            this.navCtrl.pop();
+            this.connService.presentConnectionAlert();
+        }
+    }
+
+    goToLibDetails(lib: LibraryItem) {
+        this.utilsServices.goToDetail(lib, 'libraries/details');
+    }
+
+    cachedOrNot() {
+        //  this.cache.removeItem('cache-event');
+        const key = 'cache-libraries';
+        this.cache.getItem(key)
+            .then((data) => {
+                this.libraries = data;
+                this.searching = false;
+            })
+            .catch(() => {
+                this.loadLibraries(key);
+            });
+    }
 }

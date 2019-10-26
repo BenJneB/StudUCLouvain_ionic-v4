@@ -27,80 +27,80 @@ import { Wso2Service } from './wso2-service';
 
 @Injectable()
 export class RepertoireService {
-  employees: Array<EmployeeItem> = [];
-  url = 'directories/v1/employees/';
-  options: any;
+    employees: Array<EmployeeItem> = [];
+    url = 'directories/v1/employees/';
+    options: any;
 
-  constructor(
-    public http: HttpClient,
-    private wso2Service: Wso2Service,
-    private connService: ConnectivityService,
-  ) {
-  }
-
-  /*Search employees that match with the options & values*/
-  public searchEmployees(options: Array<string>, values: Array<string>) {
-    this.employees = [];
-    let newUrl = this.url;
-    newUrl += 'search?';
-    for (let i = 0; i < options.length; i++) {
-      newUrl += options[i] + '=' + values[i];
-      if (i !== options.length - 1) {
-        newUrl += '&';
-      }
+    constructor(
+        public http: HttpClient,
+        private wso2Service: Wso2Service,
+        private connService: ConnectivityService,
+    ) {
     }
-    newUrl += '&page=1&pageSize=10';
-    // newUrl += '&directory=E';
-    return new Promise(resolve => {
-      if (this.connService.isOnline()) {
-        this.wso2Service.load(newUrl).subscribe(
-          data => {
-            if (data['persons'] !== null) {
-              this.extractEmployees(data['persons'].person);
+
+    /*Search employees that match with the options & values*/
+    public searchEmployees(options: Array<string>, values: Array<string>) {
+        this.employees = [];
+        let newUrl = this.url;
+        newUrl += 'search?';
+        for (let i = 0; i < options.length; i++) {
+            newUrl += options[i] + '=' + values[i];
+            if (i !== options.length - 1) {
+                newUrl += '&';
             }
-            resolve(this.employees);
-          });
-      } else {
-        this.connService.presentConnectionAlert();
-        resolve(this.employees);
-      }
-    });
-  }
-
-  /*Load the details for a selected employee*/
-  public loadEmpDetails(emp: EmployeeItem) {
-    return new Promise(resolve => {
-
-      const url_details = this.url + emp.matric_fgs + '/detail';
-
-      this.wso2Service.load(url_details).subscribe(
-        data => {
-          emp = this.extractEmployeeDetails(emp, data['businessInformation']);
-          resolve({ empDetails: emp });
+        }
+        newUrl += '&page=1&pageSize=10';
+        // newUrl += '&directory=E';
+        return new Promise(resolve => {
+            if (this.connService.isOnline()) {
+                this.wso2Service.load(newUrl).subscribe(
+                    data => {
+                        if (data['persons'] !== null) {
+                            this.extractEmployees(data['persons'].person);
+                        }
+                        resolve(this.employees);
+                    });
+            } else {
+                this.connService.presentConnectionAlert();
+                resolve(this.employees);
+            }
         });
-    });
-  }
-
-  /*Extract the employees*/
-  private extractEmployees(data: any) {
-    if (data !== null) {
-      for (let i = 0; i < data.length; i++) {
-        const item = data[i];
-        const employee = new EmployeeItem(item.matric_fgs, item.lastname, item.firstname, item.email, item.departments);
-        this.employees.push(employee);
-      }
     }
-  }
 
-  /*Extract the details for a selected employee*/
-  private extractEmployeeDetails(emp: EmployeeItem, data: any): EmployeeItem {
-    emp.address = data.address;
-    emp.contracts = data.contracts;
-    emp.businessContacts = data.businessContacts;
-    emp.gender = data.gender;
-    emp.photo_url = data.photo_url;
-    // let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments,
-    // data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
-    return emp;
-  }
+    /*Load the details for a selected employee*/
+    public loadEmpDetails(emp: EmployeeItem) {
+        return new Promise(resolve => {
+
+            const url_details = this.url + emp.matric_fgs + '/detail';
+
+            this.wso2Service.load(url_details).subscribe(
+                data => {
+                    emp = this.extractEmployeeDetails(emp, data['businessInformation']);
+                    resolve({empDetails: emp});
+                });
+        });
+    }
+
+    /*Extract the employees*/
+    private extractEmployees(data: any) {
+        if (data !== null) {
+            for (let i = 0; i < data.length; i++) {
+                const item = data[i];
+                const employee = new EmployeeItem(item.matric_fgs, item.lastname, item.firstname, item.email, item.departments);
+                this.employees.push(employee);
+            }
+        }
+    }
+
+    /*Extract the details for a selected employee*/
+    private extractEmployeeDetails(emp: EmployeeItem, data: any): EmployeeItem {
+        emp.address = data.address;
+        emp.contracts = data.contracts;
+        emp.businessContacts = data.businessContacts;
+        emp.gender = data.gender;
+        emp.photo_url = data.photo_url;
+        // let employee = new EmployeeItem(emp.matric_fgs, emp.lastname, emp.firstname, emp.email, emp.departments,
+        // data.address, data.businessContacts, data.contracts, data.gender, data.photo_url);
+        return emp;
+    }
 }

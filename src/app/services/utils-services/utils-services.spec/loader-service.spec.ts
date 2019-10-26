@@ -34,10 +34,10 @@ describe('LoaderService', () => {
             ],
             providers: [
                 LoaderService,
-                { provide: AppAvailability, useClass: AppAvailabilityMock },
-                { provide: Market, useClass: MarketMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: Device, useClass: DeviceMock },
+                {provide: AppAvailability, useClass: AppAvailabilityMock},
+                {provide: Market, useClass: MarketMock},
+                {provide: InAppBrowser, useClass: InAppBrowserMock},
+                {provide: Device, useClass: DeviceMock},
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
@@ -45,8 +45,8 @@ describe('LoaderService', () => {
                     }
                 },
                 Diagnostic,
-                { provide: Network, useClass: NetworkMock },
-                { provide: Calendar, useClass: CalendarMock },
+                {provide: Network, useClass: NetworkMock},
+                {provide: Calendar, useClass: CalendarMock},
             ]
         });
     }));

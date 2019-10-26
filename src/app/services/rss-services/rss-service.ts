@@ -32,72 +32,72 @@ import { UtilsService } from '../utils-services/utils-services';
     providedIn: 'root'
 })
 export class RssService {
-  nbCalls = 0;
-  callLimit = 30;
+    nbCalls = 0;
+    callLimit = 30;
 
-  constructor(
-    public http: HttpClient,
-    private navCtrl: NavController,
-    private utilsServices: UtilsService,
-    public connService: ConnectivityService,
-    private loader: LoaderService,
-  ) {
-  }
-
-  /*Load data from the RSS flux*/
-  load(url: string, isSport: boolean = false) {
-    return new Promise((resolve, reject) => {
-      this.http.get(url, { responseType: 'text' }).pipe(timeout(5000),
-        map(data => this.utilsServices.convertToJson(data))).subscribe(result => {
-          this.nbCalls++;
-          if (isSport) {
-            result = result['xml'];
-          } else {
-            result = result['rss']['channel'];
-          }
-          if (result === null) {
-            if (this.nbCalls >= this.callLimit) {
-              this.nbCalls = 0;
-              reject(2); // 2 = data.query.results === null  & callLimit reached, no neitemsws to display
-            }
-            reject(1); // 1 = data.query.results === null, retry rssService
-          } else {
-            this.nbCalls = 0;
-            resolve(result['item']);
-          }
-        },
-          err => {
-            reject(err);
-          });
-    });
-  }
-
-  async loadItems(segment: string, url: string, extract: (data: any) => any, searching?: boolean) {
-    if (this.connService.isOnline()) {
-      await this.loader.present('Please wait...');
-      return this.load(url).then(result => {
-        return extract(result);
-      })
-        .catch(error => {
-          if (error === 1) {
-            return this.loadItems(segment, url, extract);
-          } else {
-            if (error === 2) {
-              console.log('Loading items: GET req timed out > limit, suppose no items to display');
-            } else {
-              console.log('Error loading items: ' + error);
-            }
-            return {
-              items: [],
-              shownItems: 0
-            };
-          }
-        });
-    } else {
-      // TODO: to test
-      searching = false;
-      this.navCtrl.pop();
-      this.connService.presentConnectionAlert();
+    constructor(
+        public http: HttpClient,
+        private navCtrl: NavController,
+        private utilsServices: UtilsService,
+        public connService: ConnectivityService,
+        private loader: LoaderService,
+    ) {
     }
-  }
+
+    /*Load data from the RSS flux*/
+    load(url: string, isSport: boolean = false) {
+        return new Promise((resolve, reject) => {
+            this.http.get(url, {responseType: 'text'}).pipe(timeout(5000),
+                map(data => this.utilsServices.convertToJson(data))).subscribe(result => {
+                    this.nbCalls++;
+                    if (isSport) {
+                        result = result['xml'];
+                    } else {
+                        result = result['rss']['channel'];
+                    }
+                    if (result === null) {
+                        if (this.nbCalls >= this.callLimit) {
+                            this.nbCalls = 0;
+                            reject(2); // 2 = data.query.results === null  & callLimit reached, no neitemsws to display
+                        }
+                        reject(1); // 1 = data.query.results === null, retry rssService
+                    } else {
+                        this.nbCalls = 0;
+                        resolve(result['item']);
+                    }
+                },
+                err => {
+                    reject(err);
+                });
+        });
+    }
+
+    async loadItems(segment: string, url: string, extract: (data: any) => any, searching?: boolean) {
+        if (this.connService.isOnline()) {
+            await this.loader.present('Please wait...');
+            return this.load(url).then(result => {
+                return extract(result);
+            })
+                .catch(error => {
+                    if (error === 1) {
+                        return this.loadItems(segment, url, extract);
+                    } else {
+                        if (error === 2) {
+                            console.log('Loading items: GET req timed out > limit, suppose no items to display');
+                        } else {
+                            console.log('Error loading items: ' + error);
+                        }
+                        return {
+                            items: [],
+                            shownItems: 0
+                        };
+                    }
+                });
+        } else {
+            // TODO: to test
+            searching = false;
+            this.navCtrl.pop();
+            this.connService.presentConnectionAlert();
+        }
+    }
 }

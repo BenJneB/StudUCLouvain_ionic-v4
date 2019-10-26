@@ -47,7 +47,7 @@ describe('SearchModal of Map Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
+                {provide: ModalController, useClass: ModalControllerMock},
                 POIService
             ]
         }).compileComponents();
