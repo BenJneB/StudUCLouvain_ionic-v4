@@ -16,7 +16,7 @@ export class AlertService {
         public user: UserService,
         private translateService: TranslateService,
         public alertCtrl: AlertController,
-        private viewCtrl: ModalController,
+        public modalCtrl: ModalController,
     ) {
     }
 
@@ -39,7 +39,7 @@ export class AlertService {
                 }
             ]
         });
-        return await disclaimerAlert.present().then();
+        return await disclaimerAlert.present();
     }
 
     async languageAlert(settings: any, message2: any, fr: any, check2: string, en: string, save: any) {
@@ -133,14 +133,14 @@ export class AlertService {
         return await toast.present().then();
     }
 
-    private dismissFilterToast(dateRange: any, data?: any) {
+    dismissFilterToast(dateRange: any, data?: any) {
         const r = [];
         if (typeof data === 'undefined') {
             data = [];
         }
         r.push(data);
         r.push(dateRange);
-        this.viewCtrl.dismiss(r).then();
+        this.modalCtrl.dismiss(r).then();
         return r;
     }
 
