@@ -40,7 +40,7 @@ export class AdeService {
     AdeserviceConnection = 'function=connect&login=etudiant&password=student';
     AdeServiceGetProjects = '&function=getProjects&detail=2';
 
-    constructor(public http: HttpClient, private utilsServices: UtilsService) {
+    constructor(public http: HttpClient, public utilsServices: UtilsService) {
     }
 
     /*Open a session*/
@@ -49,7 +49,7 @@ export class AdeService {
         return this.getOrSetDataFromADE(encodedURL);
     }
 
-    private getOrSetDataFromADE(encodedURL: string, sessionId?: string) {
+    getOrSetDataFromADE(encodedURL: string, sessionId?: string) {
         if (sessionId !== undefined) {
             encodedURL = this.getBasicSessionUrl(sessionId) + encodedURL;
         }
