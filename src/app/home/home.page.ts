@@ -156,16 +156,12 @@ export class HomePage {
     }
 
     async emergency() {
-        const {
-            urg,
-            msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9,
-            close
-        }: {
+        const {urg, msg1, msg2, msg3, msg4, msg5, msg6, msg7, msg8, msg9, close}: {
             urg: string;
             msg1: any; msg2: any; msg3: any; msg4: any; msg5: any; msg6: any; msg7: any; msg8: any; msg9: string;
             close: string;
         } = this.getEmergencyTexts();
-        let out: string;
+        let out = '';
         this.translateService.get('GUINDAILLE.HELP18').subscribe((res: string) => {
             out = res;
         });

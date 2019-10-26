@@ -51,9 +51,7 @@ export class ConnectivityService {
 
     /*pop up an alert to say to the user to connect him to the internet*/
     async presentConnectionAlert() {
-        let title: string;
-        let message: string;
-        let close: string;
+        let title = '', message = '', close = '';
         this.translateService.get('NET.TITLE').subscribe((res: string) => {
             title = res;
         });

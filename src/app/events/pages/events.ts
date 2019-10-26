@@ -203,7 +203,13 @@ export class EventsPage implements OnInit {
     public updateDisplayed() {
         this.searching = true;
         if (this.segment === 'all') {
-            this.displayedEvents = this.utilsServices.filterItems('events', this.events, this.excludedFilters, this.dateLimit, this.searchTerm);
+            this.displayedEvents = this.utilsServices.filterItems(
+                'events',
+                this.events,
+                this.excludedFilters,
+                this.dateLimit,
+                this.searchTerm
+            );
         } else if (this.segment === 'favorites') {
             this.displayedEvents = this.utilsServices.filterFavoriteItems(this.events, this.searchTerm, 'events');
         }

@@ -21,8 +21,7 @@ export class AlertService {
     }
 
     async alertCourse(texts) {
-        let title: string;
-        let message: string;
+        let title = '', message = '';
         this.translateService.get(texts['warning']).subscribe((res: string) => {
             title = res;
         });
@@ -61,14 +60,12 @@ export class AlertService {
                     checked: (check2 === 'en')
                 }
             ],
-            buttons: [
-                {
-                    text: save,
-                    handler: data => {
-                        this.languageChanged(data);
-                    }
+            buttons: [{
+                text: save,
+                handler: data => {
+                    this.languageChanged(data);
                 }
-            ]
+            }]
         });
     }
 
@@ -95,9 +92,9 @@ export class AlertService {
             header: setting,
             message: message,
             inputs: [
-                this.getRadioCampus('Louvain-la-Neuve', 'LLN', check = check),
-                this.getRadioCampus('Woluwé', 'Woluwe', check = check),
-                this.getRadioCampus('Mons', 'Mons', check = check),
+                this.getRadioCampus('Louvain-la-Neuve', 'LLN', check),
+                this.getRadioCampus('Woluwé', 'Woluwe', check),
+                this.getRadioCampus('Mons', 'Mons', check),
                 this.getRadioCampus('Tournai', 'Tournai'),
                 this.getRadioCampus('St-Gilles', 'StG'),
             ],
@@ -119,12 +116,12 @@ export class AlertService {
             label: label,
             value: value,
             checked: (check === value),
-            disabled: check === undefined ? true : false
+            disabled: check === undefined
         };
     }
 
     async toastCourse(key: string) {
-        let msg: string;
+        let msg = '';
         this.translateService.get(key).subscribe((res: string) => {
             msg = res;
         });
@@ -136,20 +133,20 @@ export class AlertService {
         return await toast.present().then();
     }
 
-    private dismissFilterToast(results: any, dateRange: any, data?: any) {
+    private dismissFilterToast(dateRange: any, data?: any) {
+        const r = [];
         if (typeof data === 'undefined') {
             data = [];
         }
-        results.push(data);
-        results.push(dateRange);
-        this.viewCtrl.dismiss(results).then();
-        return results;
+        r.push(data);
+        r.push(dateRange);
+        this.viewCtrl.dismiss(r).then();
+        return r;
     }
 
     applyFilters(categories: any, dateRange: any) {
-        let results: any = [];
         const excludedFilters = categories.filter(c => !c.isChecked).map(c => c.name);
-        results = this.dismissFilterToast(results, dateRange, excludedFilters);
+        this.dismissFilterToast(dateRange, excludedFilters);
     }
 
     async showPromptStudies(listCourses: Course[], check: (already: boolean, acronym: string) => any) {
@@ -191,7 +188,7 @@ export class AlertService {
     }
 
     private getPromptTexts() {
-        let addcourse: string, message: string, sigle: string, cancel: string, save: string;
+        let addcourse = '', message = '', sigle = '', cancel = '', save = '';
         this.translateService.get('STUDY.ADDCOURSE').subscribe((res: string) => {
             addcourse = res;
         });

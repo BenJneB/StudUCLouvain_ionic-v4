@@ -195,11 +195,8 @@ export class SportsPage implements OnInit {
     /*Display a modal to select as filter only the sports that the user want to see*/
     async presentFilter() {
         const datas = this.getFiltersData(this.segment === 'team');
-        let filters = datas['filters'];
+        const filters = datas['filters'] === undefined ? [] : datas['filters'];
         const excluded = datas['exclude'];
-        if (filters === undefined) {
-            filters = [];
-        }
         const modal = await this.modalCtrl.create({
             component: SportsFilterPage,
             componentProps: {excludedFilters: excluded, filters: filters, dateRange: this.dateRange}
