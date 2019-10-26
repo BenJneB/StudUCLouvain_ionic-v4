@@ -212,8 +212,7 @@ export class SportsPage implements OnInit {
                 const newExclude = data[0];
                 if (this.segment === 'all') {
                     this.excludedFilters = newExclude;
-                }
-                if (this.segment === 'team') {
+                } else if (this.segment === 'team') {
                     this.excludedFiltersT = newExclude;
                 }
                 this.updateDisplayed();
