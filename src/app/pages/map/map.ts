@@ -22,7 +22,7 @@ import { UserService } from 'src/app/services/utils-services/user-service';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { Component } from '@angular/core';
-import { ActionSheetController, MenuController, ModalController, NavController, Platform } from '@ionic/angular';
+import { MenuController, ModalController, Platform } from '@ionic/angular';
 
 import { POIService } from 'src/app/services/map-services/poi-service';
 import { SearchModal } from './search/search';
@@ -41,9 +41,8 @@ export class MapPage {
     userIcon: icon;
     building: marker;
 
-  constructor(public navCtrl: NavController,
+    constructor(
     public modalCtrl: ModalController,
-    public actionSheetCtrl: ActionSheetController,
     public platform: Platform,
     public poilocations: POIService,
     public mapService: MapService,
