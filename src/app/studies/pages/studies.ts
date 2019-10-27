@@ -27,8 +27,8 @@ import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { AlertController, MenuController, ModalController, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 
-import { AdeProject } from 'src/app/entities/adeProject';
-import { Course } from 'src/app/entities/course';
+import { AdeProject } from 'src/app/models/adeProject';
+import { Course } from 'src/app/models/course';
 import { StudiesService } from 'src/app/services/studies-services/studies-service';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { TransService } from 'src/app/services/utils-services/trans-services';

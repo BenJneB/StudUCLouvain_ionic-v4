@@ -24,7 +24,7 @@ import { FormControl } from '@angular/forms';
 import { InAppBrowser } from '@ionic-native/in-app-browser/ngx';
 import { IonContent, IonList } from '@ionic/angular';
 
-import { NewsItem } from 'src/app/entities/newsItem';
+import { NewsItem } from 'src/app/models/newsItem';
 import { NewsService } from 'src/app/services/rss-services/news-service';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { FacService } from 'src/app/services/utils-services/fac-service';
