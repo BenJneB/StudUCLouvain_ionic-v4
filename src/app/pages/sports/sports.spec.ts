@@ -13,8 +13,8 @@ import { IonicModule, IonItemSliding, ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModalControllerMock } from '../../../../test-config/MockIonicNative';
-import { ConnectivityService } from '../../services/utils-services/connectivity-service';
+import { ModalControllerMock } from 'test-config/MockIonicNative';
+import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -33,6 +33,8 @@ import { ConnectivityService } from '../../services/utils-services/connectivity-
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SportsPage } from './sports';
+import { LoaderService } from 'src/app/services/utils-services/loader-service';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('Sports Component', () => {
     let fixture;
@@ -48,24 +50,13 @@ describe('Sports Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
-                {
-                    provide: ConnectivityService, useFactory: () => {
-                        return newMockConnectivityService();
-                    }
-                },
-                {
-                    provide: SportsService, useFactory: () => {
-                        return newMockSportsService();
-                    }
-                },
+                {provide: ModalController, useClass: ModalControllerMock},
+                getMockProvider(UtilsService, newMockUtilsService),
+                getMockProvider(ConnectivityService, newMockConnectivityService),
+                getMockProvider(SportsService, newMockSportsService),
                 UserService,
-                Calendar
+                Calendar,
+                LoaderService
             ]
         }).compileComponents();
     }));
@@ -83,7 +74,13 @@ describe('Sports Component', () => {
     describe('doRefresh method', () => {
         it('should call loadSports', () => {
             const spyLoad = spyOn(component, 'loadSports').and.callThrough();
-            component.doRefresh({ target: { complete: () => { return; } } });
+            component.doRefresh({
+                target: {
+                    complete: () => {
+                        return;
+                    }
+                }
+            });
             expect(spyLoad.calls.count()).toBeGreaterThan(0);
         });
     });
@@ -154,7 +151,7 @@ describe('Sports Component', () => {
     describe('changeArray method', () => {
         it('should get ItemDisplay from UtilsService', () => {
             const spyGetItem = spyOn(component.utilsServices, 'getItemDisplay').and.callThrough();
-            component.changeArray([{ 'jour': 'DAY' }]);
+            component.changeArray([{'jour': 'DAY'}]);
             expect(spyGetItem.calls.count()).toEqual(1);
         });
     });
@@ -169,7 +166,7 @@ describe('Sports Component', () => {
 
     describe('assignDatas method', () => {
         it('should set searching to False', () => {
-            component.assignDatas(false, { sports: [] });
+            component.assignDatas(false, {sports: []});
             expect(component.searching).toBeFalsy();
         });
     });
@@ -192,7 +189,7 @@ describe('Sports Component', () => {
         it('should call addFavorite from UtilsService', () => {
             const spyAdd = spyOn(component.utilsServices, 'addFavorite').and.callThrough();
             let ionItemSliding: IonItemSliding;
-            component.addFavorite(ionItemSliding, { 'guid': 0 });
+            component.addFavorite(ionItemSliding, {'guid': 0});
             expect(spyAdd.calls.count()).toEqual(1);
         });
     });
@@ -201,7 +198,10 @@ describe('Sports Component', () => {
         it('should call createEventWithOptions from Calendar', () => {
             const spyCreate = spyOn(component.calendar, 'createEventWithOptions').and.callThrough();
             component.addToCalendar(
-                { 'close': () => { } },
+                {
+                    'close': () => {
+                    }
+                },
                 '',
             );
             expect(spyCreate.calls.count()).toEqual(1);

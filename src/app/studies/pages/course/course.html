@@ -1,0 +1,114 @@
+<!--
+
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date : 2018-2019
+    This file is part of Stud.UCLouvain
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    Stud.UCLouvain is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Stud.UCLouvain is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+
+-->
+<!--EN-TETE-->
+<ion-header>
+    <ion-toolbar color="uclouvain">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+            <img height="28" src="./assets/img/s.png"/>
+        </ion-buttons>
+        <ion-title horizontal="center">{{course.name}} - {{course.acronym}}</ion-title>
+        <ion-buttons (click)="openModalInfo()" slot="end">
+            <ion-button color="light">
+                <ion-icon name="information-circle" slot="icon-only"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+
+    <ion-segment (ionChange)="updateDisplayed()" [(ngModel)]="segment">
+        <ion-segment-button value="Cours magistral">
+            <ion-label>{{'COURSE.CM' | translate}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="TD">
+            <ion-label>{{'COURSE.TP' | translate}}</ion-label>
+        </ion-segment-button>
+        <ion-segment-button value="Examen">
+            <ion-label>{{'COURSE.EXAMEN' | translate}}</ion-label>
+        </ion-segment-button>
+    </ion-segment>
+</ion-header>
+
+<!--BODY-->
+<ion-content #courseContent class="ion-padding">
+    <ion-list>
+        <ion-item-sliding #slidingItem *ngFor="let activity of displayedActi">
+            <ion-item
+                    *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD') || (activity.isExam && segment === 'Examen')">
+                <ion-label>
+                    <h2 class="ion-text-center"> {{'COURSE.ACTIVITY' | translate}} : {{activity.type}} </h2>
+                    <p>
+                        <ion-icon name="calendar" slot="start"></ion-icon>
+                        {{activity.start | date: 'dd/MM/yyyy H:mm' }}
+                        &mdash; {{activity.end | date: 'H:mm' }}
+                    </p>
+                    <p>
+                        <ion-icon name="locate" slot="start"></ion-icon>
+                        {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}
+                    </p>
+                    <ion-row style="align-items: center; color: var(--ion-color-step-600,#666)">
+                        {{'COURSE.STUDENT' | translate}} :
+                        <ion-button (click)="toggleGroup(activity.start)" fill="clear" size="small">
+                            <ion-label
+                                    *ngIf="!utilsServices.isGroupShown(activity.start, shownGroup)">{{'COURSE.SHOW' | translate }}
+                            </ion-label>
+                            <ion-label
+                                    *ngIf="utilsServices.isGroupShown(activity.start, shownGroup)">{{'COURSE.HIDE' | translate }}
+                            </ion-label>
+                        </ion-button>
+
+                    </ion-row>
+                    <p [hidden]="!utilsServices.isGroupShown(activity.start, shownGroup)"
+                       [innerHTML]="activity.students"
+                       style="display:inline"></p>
+                    <p *ngIf="activity.teachers.length>0"> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
+                    <p> {{activity.name}} </p>
+                </ion-label>
+            </ion-item>
+
+            <ion-item-options side="end">
+                <ion-button (click)="addToCalendar(slidingItem, activity)">
+                    <ion-icon name="calendar"></ion-icon>
+                    {{'COURSE.CALENDAR' | translate}}
+                </ion-button>
+            </ion-item-options>
+        </ion-item-sliding>
+
+    </ion-list>
+    <ion-list-header
+            *ngIf="(segment === 'TD' && noTP) || (segment === 'Cours magistral' && noCM) || (segment === 'Examen' && noEx)">
+        <ion-label>{{'COURSE.NO' | translate}}</ion-label>
+    </ion-list-header>
+</ion-content>
+
+<ion-fab *ngIf="segment === 'Cours magistral' || segment === 'TD'" horizontal="end" slot="fixed" vertical="bottom">
+    <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
+    <ion-fab-button (click)="showPrompt(segment)">
+        <ion-icon name="cut"></ion-icon>
+    </ion-fab-button>
+</ion-fab>
+<ion-fab *ngIf="segment === 'Cours magistral' || segment === 'TD'" horizontal="start" slot="fixed" vertical="bottom">
+    <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
+    <ion-fab-button (click)="addCourseToCalendar()">
+        <ion-icon name="calendar"></ion-icon>
+    </ion-fab-button>
+</ion-fab>

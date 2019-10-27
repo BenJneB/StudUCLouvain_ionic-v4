@@ -4,14 +4,12 @@ import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
-import {
-    InAppBrowser, InAppBrowserEventType, InAppBrowserObject, InAppBrowserOptions
-} from '@ionic-native/in-app-browser/ngx';
+import { InAppBrowser, InAppBrowserEventType, InAppBrowserObject, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
-import { StatusBar } from '@ionic-native/status-bar/ngx';
-import { Toast } from '@ionic-native/toast/ngx';
+import { AngularDelegate, ModalController } from '@ionic/angular';
+import { ComponentFactoryResolver, Injector } from '@angular/core';
 
 function getPromise(item?: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -58,11 +56,14 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
         super(url, target, options);
     }
 
-    show(): void { }
+    show(): void {
+    }
 
-    close(): void { }
+    close(): void {
+    }
 
-    hide(): void { }
+    hide(): void {
+    }
 
     executeScript(script: { file?: string; code?: string; }): Promise<any> {
         return getPromise();
@@ -110,28 +111,11 @@ export class DeviceMock extends Device {
     serial: string;
 }
 
-export class StatusBarMock extends StatusBar {
-    isVisible: boolean;
-
-    overlaysWebView(doesOverlay: boolean): void { }
-
-    styleDefault(): void { }
-}
-
-export class ToastMock extends Toast {
-
-    show(message: string, duration: string, position: string): Observable<any> {
-        return getObservable();
-    }
-
-    hide(): Promise<any> {
-        return getPromise();
-    }
-}
 
 export class NetworkMock extends Network {
     type = 'cellular';
     downlinkMax: string;
+
     onchange(): Observable<any> {
         return getObservable();
     }
@@ -187,6 +171,7 @@ export interface CalendarOptions {
 export class CalendarMock extends Calendar {
 
     deleteEvent = this.createEvent;
+
     hasReadWritePermission(): Promise<boolean> {
         return getPromise(true);
     }
@@ -237,14 +222,23 @@ export class SplashScreenMock extends SplashScreen {
     }
 }
 
-export class ModalControllerMock {
+export class ModalControllerMock extends ModalController {
     public create = jasmine.createSpy('create').and.returnValue(
         Promise.resolve({
             present: jasmine.createSpy('present').and.returnValue(Promise.resolve()),
-            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve({ 'data': [0, 1] }))
+            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve({'data': [0, 1]}))
         })
     );
-    public dismiss = jasmine.createSpy('dismiss').and.returnValue(Promise.resolve());
+
+    dismiss() {
+        return new Promise<boolean>(() => {
+        });
+    }
+}
+
+export function newModalControllerMock() {
+    let angularDelegate: AngularDelegate, componentFactoryResolver: ComponentFactoryResolver, injector: Injector;
+    return new ModalControllerMock(angularDelegate, componentFactoryResolver, injector);
 }
 
 export class AppVersionMock extends AppVersion {

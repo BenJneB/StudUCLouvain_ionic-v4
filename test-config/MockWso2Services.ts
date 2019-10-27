@@ -1,4 +1,3 @@
-import { UserService } from 'src/app/services/utils-services/user-service';
 import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
 import { RepertoireService } from 'src/app/services/wso2-services/repertoire-service';
 
@@ -6,6 +5,8 @@ import { HttpClient } from '@angular/common/http';
 
 import { Wso2Service } from '../src/app/services/wso2-services/wso2-service';
 import { MockConnectivityService } from './MockUtilsService';
+import { Observable, Subscription } from 'rxjs';
+import { StudentService } from '../src/app/services/wso2-services/student-service';
 
 export class HttpClientMock extends HttpClient {
     constructor() {
@@ -17,6 +18,25 @@ export class MockWso2Service extends Wso2Service {
     constructor(http: HttpClientMock) {
         super(http);
     }
+
+    getAppToken() {
+        return new Subscription();
+    }
+
+    getToken() {
+        return new Observable<void>(() => {
+        });
+    }
+
+    load() {
+        return new Observable<string>(() => {
+        });
+    }
+}
+
+export function newMockWso2Service() {
+    let http: HttpClientMock;
+    return new MockWso2Service(http);
 }
 
 export class MockRepertoireService extends RepertoireService {
@@ -28,14 +48,12 @@ export class MockRepertoireService extends RepertoireService {
     }
 
     searchEmployees() {
-        return new Promise((resolve, reject) => {
-
+        return new Promise(() => {
         });
     }
 
     loadEmpDetails() {
-        return new Promise((resolve, reject) => {
-
+        return new Promise(() => {
         });
     }
 }
@@ -56,8 +74,13 @@ export class MockLibrariesService extends LibrariesService {
     }
 
     loadLibraries() {
-        return new Promise((resolve, reject) => {
+        return new Promise(() => {
 
+        });
+    }
+
+    loadLibDetails() {
+        return new Promise(() => {
         });
     }
 }
@@ -67,4 +90,24 @@ export function newMockLibrariesService() {
     let wso2: MockWso2Service;
     let conn: MockConnectivityService;
     return new MockLibrariesService(http, wso2, conn);
+}
+
+export class MockStudentService extends StudentService {
+    constructor(
+        http: HttpClientMock,
+        wso2: MockWso2Service,
+    ) {
+        super(http, wso2);
+    }
+
+    searchActivities() {
+        return new Promise(() => {
+        });
+    }
+}
+
+export function newMockStudentService() {
+    let http: HttpClientMock;
+    let wso2: MockWso2Service;
+    return new MockStudentService(http, wso2);
 }

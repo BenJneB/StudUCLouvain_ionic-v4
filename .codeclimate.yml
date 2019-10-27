@@ -33,4 +33,3 @@ exclude_patterns:
 - test-config/
 - README.md
 - LICENSE
-- "src/app/variables.ts"

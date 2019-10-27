@@ -19,28 +19,28 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <ion-header>
-  <ion-toolbar>
-    <ion-searchbar (ionChange)="search($event)" placeholder="search"></ion-searchbar>
-    <ion-buttons slot="end">
-      <ion-button fill="clear" icon-only (click)="close()">
-        <ion-icon item-right name="close"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar>
+        <ion-searchbar (ionChange)="search($event)" placeholder="search"></ion-searchbar>
+        <ion-buttons slot="end">
+            <ion-button (click)="close()" fill="clear" icon-only>
+                <ion-icon item-right name="close"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <ion-segment disabled value="halls">
-  <ion-segment-button value="halls" checked>
-    <ion-label>Halls</ion-label>
-  </ion-segment-button>
-  <ion-segment-button value="rainy">
-    <ion-label>...</ion-label>
-  </ion-segment-button>
+    <ion-segment-button checked value="halls">
+        <ion-label>Halls</ion-label>
+    </ion-segment-button>
+    <ion-segment-button value="rainy">
+        <ion-label>...</ion-label>
+    </ion-segment-button>
 </ion-segment>
 
 <ion-content>
-  <ion-list>
-    <ion-item *ngFor="let item of displayItems" (click)="select(item)">
+    <ion-list>
+        <ion-item (click)="select(item)" *ngFor="let item of displayItems">
       <span class="ion-padding" *ngIf="item.code">
         <div class="info">
           <ion-label class="id">{{item.code}}</ion-label>
@@ -49,6 +49,6 @@
         </div>
         <ion-img class="miniature" [src]="item.vignette"></ion-img>
       </span>
-    </ion-item>
-  </ion-list>
+        </ion-item>
+    </ion-list>
 </ion-content>

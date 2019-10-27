@@ -5,18 +5,23 @@ import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { SportsFilterPage } from './sports-filter';
+import { SportsService } from 'src/app/services/rss-services/sports-service';
 
 @NgModule({
-  declarations: [SportsFilterPage],
-  imports: [
-    IonicModule,
-    ReactiveFormsModule,
-    CommonModule,
-    FormsModule,
-    TranslateModule.forChild(),
-  ],
-  entryComponents: [
-    SportsFilterPage
-  ]
+    declarations: [SportsFilterPage],
+    imports: [
+        IonicModule,
+        ReactiveFormsModule,
+        CommonModule,
+        FormsModule,
+        TranslateModule.forChild(),
+    ],
+    entryComponents: [
+        SportsFilterPage
+    ],
+    providers: [
+        SportsService,
+    ]
 })
-export class SportsFilterPageModule { }
+export class SportsFilterPageModule {
+}

@@ -7,7 +7,7 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { SplashScreenMock } from '../../../../test-config/MockIonicNative';
+import { SplashScreenMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -41,7 +41,7 @@ describe('Tuto Component', () => {
                 RouterTestingModule,
             ],
             providers: [
-                { provide: SplashScreen, useClass: SplashScreenMock },
+                {provide: SplashScreen, useClass: SplashScreenMock},
             ]
         }).compileComponents();
     }));
@@ -66,7 +66,8 @@ describe('Tuto Component', () => {
 
     describe('goToHome method', () => {
         it('should call navigateForward of NavController', () => {
-            const spyNav = spyOn(component.navCtrl, 'navigateForward').and.callFake(() => { });
+            const spyNav = spyOn(component.navCtrl, 'navigateForward').and.callFake(() => {
+            });
             component.goToHome();
             expect(spyNav.calls.count()).toEqual(1);
             expect(spyNav.calls.first().args[0]).toEqual(['/home']);

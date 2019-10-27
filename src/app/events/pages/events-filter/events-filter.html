@@ -1,0 +1,83 @@
+<!--
+    Copyright (c)  Université catholique Louvain.  All rights reserved
+    Authors : Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
+    Date : 2018-2019
+    This file is part of Stud.UCLouvain
+    Licensed under the GPL 3.0 license. See LICENSE file in the project root for full license information.
+
+    Stud.UCLouvain is free software: you can redistribute it and/or modify
+    it under the terms of the GNU General Public License as published by
+    the Free Software Foundation, either version 3 of the License, or
+    (at your option) any later version.
+
+    Stud.UCLouvain is distributed in the hope that it will be useful,
+    but WITHOUT ANY WARRANTY; without even the implied warranty of
+    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+    GNU General Public License for more details.
+
+    You should have received a copy of the GNU General Public License
+    along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
+-->
+<!--EN-TETE-->
+<ion-header>
+    <ion-toolbar class="header" id="header">
+        <ion-buttons slot="start">
+            <ion-button (click)="alertService.applyFilters(categories, dateRange)">{{'EVENTS.CANCEL' | translate}}
+            </ion-button>
+        </ion-buttons>
+        <ion-row>
+            <ion-col>
+                <ion-title>
+                    {{'EVENTS.FILTER' | translate}}
+                </ion-title>
+            </ion-col>
+        </ion-row>
+        <ion-buttons slot="end">
+            <ion-button (click)="alertService.applyFilters(categories, dateRange)" strong>{{'EVENTS.APPLY' | translate}}
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+</ion-header>
+
+<!--BODY-->
+<ion-content class="outer-content">
+    <ion-item>
+        <ion-label center>
+            <div *ngIf="dateRange > 1">
+                {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}}
+                {{'EVENTS.TIMEEVENTS3' | translate}}
+            </div>
+            <div *ngIf="dateRange == 1">
+                {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS4' | translate}}
+            </div>
+        </ion-label>
+        <ion-range [(ngModel)]="dateRange" max="6" min="1" pin="true" snaps="true" step="1">
+        </ion-range>
+    </ion-item>
+    <ion-toolbar color="uclouvain">
+        <ion-buttons slot="start">
+            <ion-button (click)="uncheckAll()" color="light">
+                <ion-label>{{'EVENTS.UNTOGGLE' | translate}}</ion-label>
+                <ion-icon name="done-all" slot="end"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button (click)="resetFilters()" color="light">
+                <ion-label>{{'EVENTS.RESTORE' | translate}}</ion-label>
+                <ion-icon name="refresh-circle" slot="end"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-list>
+        <ion-list-header>
+            <ion-label>{{'EVENTS.CATEGORIES' | translate}}</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let category of categories">
+            <ion-thumbnail item-left>
+                <img [src]="category.iconCategory">
+            </ion-thumbnail>
+            <ion-label>{{category.name}}</ion-label>
+            <ion-toggle [(ngModel)]="category.isChecked" color="secondary"></ion-toggle>
+        </ion-item>
+    </ion-list>
+</ion-content>

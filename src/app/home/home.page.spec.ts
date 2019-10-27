@@ -1,4 +1,4 @@
-import { SplashScreenMock } from 'test-config/MockIonicNative';
+import { InAppBrowserMock, SplashScreenMock } from 'test-config/MockIonicNative';
 import { newMockUtilsService } from 'test-config/MockUtilsService';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
@@ -31,11 +31,11 @@ import { AlertController, IonicModule } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { MockAlertController } from '../../../test-config/MockAlert';
-import { InAppBrowserMock } from '../../../test-config/MockIonicNative';
+import { MockAlertController } from 'test-config/MockAlert';
 import { testInstanceCreation } from '../app.component.spec';
-import { UtilsService } from '../services/utils-services/utils-services';
+import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { HomePage } from './home.page';
+import { getMockProvider } from 'test-config/Mock';
 
 describe('Home Component', () => {
     let fixture;
@@ -53,14 +53,10 @@ describe('Home Component', () => {
                 HttpClientTestingModule,
             ],
             providers: [
-                {
-                    provide: UtilsService, useFactory: () => {
-                        return newMockUtilsService();
-                    }
-                },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: SplashScreen, useClass: SplashScreenMock },
-                { provide: AlertController, useClass: MockAlertController },
+                getMockProvider(UtilsService, newMockUtilsService),
+                {provide: InAppBrowser, useClass: InAppBrowserMock},
+                {provide: SplashScreen, useClass: SplashScreenMock},
+                {provide: AlertController, useClass: MockAlertController},
             ]
         }).compileComponents();
     }));
@@ -78,14 +74,14 @@ describe('Home Component', () => {
     describe('changePage method', () => {
         it('should call launchExternalApp of UtilsService if external application', () => {
             const spyLaunch = spyOn(component.utilsServices, 'launchExternalApp').and.callThrough();
-            component.utilsServices.device = { 'platform': 'iOS' };
-            component.changePage({ iosSchemaName: 'name' });
+            component.utilsServices.device = {'platform': 'iOS'};
+            component.changePage({iosSchemaName: 'name'});
             expect(spyLaunch.calls.count()).toEqual(1);
         });
 
         it('should call navigateForward of NavController otherwhise', () => {
             const spyNavigate = spyOn(component.nav, 'navigateForward').and.callThrough();
-            component.changePage({ iosSchemaName: null, component: '/' });
+            component.changePage({iosSchemaName: null, component: '/'});
             expect(spyNavigate.calls.count()).toEqual(1);
         });
     });
@@ -99,6 +95,7 @@ describe('Home Component', () => {
                     }
                 };
             }
+
             const spyAdd = spyOn(component.userS, 'addCampus').and.callFake(add).and.callThrough();
             component.updateCampus();
             expect(spyAdd.calls.count()).toEqual(1);
@@ -145,8 +142,10 @@ describe('Home Component', () => {
         });
     });
 });
+
 function _testCreateInAppBrowser(component: any) {
-    const spyCreate = spyOn(component.iab, 'create').and.callFake(() => { });
+    const spyCreate = spyOn(component.iab, 'create').and.callFake(() => {
+    });
     component.openUCL('url');
     expect(spyCreate.calls.count()).toEqual(1);
     expect(spyCreate.calls.first().args[0]).toEqual('url');
