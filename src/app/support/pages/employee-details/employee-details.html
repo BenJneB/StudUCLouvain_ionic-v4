@@ -25,7 +25,7 @@
     <ion-toolbar color="support">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img src="./assets/img/s.png" height="28"/>
+            <img height="28" src="./assets/img/s.png"/>
         </ion-buttons>
         <ion-title>{{'EMPLOYEE.INFO' | translate}}</ion-title>
     </ion-toolbar>
@@ -40,7 +40,7 @@
 
         <ion-row class="ion-text-wrap">
             <ion-list>
-                <ion-item style="text-transform:uppercase" *ngIf="empDetails.contracts">
+                <ion-item *ngIf="empDetails.contracts" style="text-transform:uppercase">
                     <ion-label>
                         <p *ngIf="empDetails.contracts.contract.grade!=null">({{c.grade}})</p>
                     </ion-label>

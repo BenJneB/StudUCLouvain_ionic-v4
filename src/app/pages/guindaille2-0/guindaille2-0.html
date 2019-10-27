@@ -24,7 +24,7 @@
     <ion-toolbar color="guindaille">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img src="./assets/img/s.png" height="28"/>
+            <img height="28" src="./assets/img/s.png"/>
         </ion-buttons>
         <ion-title horizontal="center">
             <img alt="logo" height="40" src="./assets/img/guindaille/logo.png">
@@ -45,24 +45,24 @@
 
 <!--BODY-->
 <ion-content>
-    <ion-grid class="gelem" no-lines *ngIf="segment==='pict'">
+    <ion-grid *ngIf="segment==='pict'" class="gelem" no-lines>
         <ion-row>
-            <ion-col size="4" *ngFor="let pict of pictos; let l = last" [offset]="l ? 4 : 0">
-                <img [src]="pict.image" vertical="center" height="auto" (click)="showAlert(pict)"/>
+            <ion-col *ngFor="let pict of pictos; let l = last" [offset]="l ? 4 : 0" size="4">
+                <img (click)="showAlert(pict)" [src]="pict.image" height="auto" vertical="center"/>
             </ion-col>
         </ion-row>
     </ion-grid>
 
     <div *ngIf="segment==='effect'" class="gelem">
-        <ion-slides pager class="ion-align-items-center">
+        <ion-slides class="ion-align-items-center" pager>
             <ion-slide *ngFor="let slide of slides">
-                <img [src]="slide.image" class="slide-image" (click)="showAlert(slide)"/>
+                <img (click)="showAlert(slide)" [src]="slide.image" class="slide-image"/>
             </ion-slide>
         </ion-slides>
         <p style="color:white">{{'GUINDAILLE.SLIDE' | translate}}</p>
     </div>
 
-    <ion-card class="gelem" *ngIf="segment==='help'">
+    <ion-card *ngIf="segment==='help'" class="gelem">
         <ion-item class="ion-text-center">
             <ion-label class="ion-text-wrap">
                 <h2><strong>{{'GUINDAILLE.HELP11' | translate}} </strong></h2>

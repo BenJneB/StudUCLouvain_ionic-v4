@@ -24,7 +24,7 @@
     <ion-toolbar color="setting">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img src="./assets/img/s.png" height="28"/>
+            <img height="28" src="./assets/img/s.png"/>
         </ion-buttons>
         <ion-title horizontal="center">{{title | translate}}</ion-title>
     </ion-toolbar>
@@ -34,13 +34,13 @@
 <ion-content>
     <div class="settings" style="height: 100%; display: flex; align-items: center; justify-content: center;">
 
-        <ion-button expand="block" shape="round" (click)="language_choice()">
+        <ion-button (click)="language_choice()" expand="block" shape="round">
             {{'SETTING.LANGUE' | translate }}
         </ion-button>
 
-        <ion-button expand="block" shape="round" (click)="campus_choice()">Campus</ion-button>
+        <ion-button (click)="campus_choice()" expand="block" shape="round">Campus</ion-button>
 
-        <ion-button expand="block" shape="round" (click)="openTuto()">{{'SETTING.TUTO' | translate }}
+        <ion-button (click)="openTuto()" expand="block" shape="round">{{'SETTING.TUTO' | translate }}
         </ion-button>
 
     </div>

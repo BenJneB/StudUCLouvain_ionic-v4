@@ -22,7 +22,7 @@
     <ion-toolbar>
         <ion-searchbar (ionChange)="search($event)" placeholder="search"></ion-searchbar>
         <ion-buttons slot="end">
-            <ion-button fill="clear" icon-only (click)="close()">
+            <ion-button (click)="close()" fill="clear" icon-only>
                 <ion-icon item-right name="close"></ion-icon>
             </ion-button>
         </ion-buttons>
@@ -30,7 +30,7 @@
 </ion-header>
 
 <ion-segment disabled value="halls">
-    <ion-segment-button value="halls" checked>
+    <ion-segment-button checked value="halls">
         <ion-label>Halls</ion-label>
     </ion-segment-button>
     <ion-segment-button value="rainy">
@@ -40,7 +40,7 @@
 
 <ion-content>
     <ion-list>
-        <ion-item *ngFor="let item of displayItems" (click)="select(item)">
+        <ion-item (click)="select(item)" *ngFor="let item of displayItems">
       <span class="ion-padding" *ngIf="item.code">
         <div class="info">
           <ion-label class="id">{{item.code}}</ion-label>

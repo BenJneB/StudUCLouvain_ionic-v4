@@ -23,7 +23,7 @@
     <ion-toolbar color="sport">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img src="./assets/img/s.png" height="28"/>
+            <img height="28" src="./assets/img/s.png"/>
         </ion-buttons>
         <ion-title>
             <img alt="logo" height="40" src="./assets/img/logoSport.png">
@@ -57,9 +57,9 @@
     <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"></ion-searchbar>
 
     <ion-list #sportsList *ngFor="let jour of displayedSportsD" [hidden]="shownSports === 0">
-        <ion-item-divider *ngIf="jour.items.length > 0" (click)="toggleGroup(jour.label)">
-            <ion-label style="width: 100%;"
-                       class="ion-text-center"> {{jour.label}} {{jour.items[0].date | date: 'dd/MM'}}
+        <ion-item-divider (click)="toggleGroup(jour.label)" *ngIf="jour.items.length > 0">
+            <ion-label class="ion-text-center"
+                       style="width: 100%;"> {{jour.label}} {{jour.items[0].date | date: 'dd/MM'}}
                 ({{jour.items.length}})
             </ion-label>
         </ion-item-divider>
@@ -71,28 +71,28 @@
                     <h3>{{sport.sport}} {{sport.sexe}} {{sport.type}}</h3>
                     <p>{{sport.lieu}} - Salle : {{sport.salle}}</p>
                     <p>
-                        <ion-icon slot="start" name="calendar"></ion-icon>
+                        <ion-icon name="calendar" slot="start"></ion-icon>
                         {{sport.jour}} {{sport.date | date: 'dd/MM/yyyy H:mm' }} &mdash;
                         {{sport.hfin | date : 'H:mm'}}
                     </p>
-                    <p style="color:red !important;" *ngIf="sport.online==1">{{'SPORTS.ONLINE' | translate}}</p>
-                    <p style="color:red !important;" *ngIf="sport.remarque.length > 2">{{'SPORTS.NOTE' | translate}} :
+                    <p *ngIf="sport.online==1" style="color:red !important;">{{'SPORTS.ONLINE' | translate}}</p>
+                    <p *ngIf="sport.remarque.length > 2" style="color:red !important;">{{'SPORTS.NOTE' | translate}} :
                         {{sport.remarque}}</p>
-                    <p style="color:red !important;" *ngIf="sport.active==0">{{'SPORTS.ANNULE' | translate}}</p>
+                    <p *ngIf="sport.active==0" style="color:red !important;">{{'SPORTS.ANNULE' | translate}}</p>
                 </ion-label>
             </ion-item>
 
             <ion-item-options side="end">
                 <ion-item-option (click)="addToCalendar(slidingItem, sport)" class="large-icon">
-                    <ion-icon size="large" name='calendar'></ion-icon>
+                    <ion-icon name='calendar' size="large"></ion-icon>
                 </ion-item-option>
                 <ion-item-option (click)="addFavorite(slidingItem, sport)"
                                  *ngIf="segment === 'all' || segment === 'team'">
-                    <ion-icon size="large" name="star-outline"></ion-icon>
+                    <ion-icon name="star-outline" size="large"></ion-icon>
                 </ion-item-option>
                 <ion-item-option (click)="removeFavorite(slidingItem, sport, 'Remove Favorite')"
                                  *ngIf="segment === 'favorites'">
-                    <ion-icon size="large" name='close'></ion-icon>
+                    <ion-icon name='close' size="large"></ion-icon>
                 </ion-item-option>
             </ion-item-options>
 
@@ -101,8 +101,8 @@
     </ion-list>
 
     <ion-list-header *ngIf="((nosport && segment === 'all') || (noteams && segment === 'team')) && !searching"
-                     class="all"
-                     [ngClass]="{'team' : segment == 'team'}">
+                     [ngClass]="{'team' : segment == 'team'}"
+                     class="all">
         <ion-label>{{'SPORTS.NOTHING' | translate}}</ion-label>
     </ion-list-header>
 </ion-content>

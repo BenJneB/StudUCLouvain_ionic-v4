@@ -48,13 +48,13 @@ export class StudiesPage {
     public listCourses: Course[];
     public sessionId: string;
     public project: AdeProject = null;
-    private username = '';
-    private password = '';
     public error = '';
     status = '';
     title = 'Etudes';
     sigles: any;
     activities: any = [];
+    private username = '';
+    private password = '';
     private statusInsc = '';
     private prog = '';
 
@@ -101,28 +101,6 @@ export class StudiesPage {
         });
     }
 
-    private login() {
-        this.error = '';
-        return new Promise(resolve => {
-            this.wso2Service.login(this.username, this.password).pipe(
-                catchError(error => {
-                    if (error.status === 400) {
-                        this.error = this.transService.getTranslation('STUDY.BADLOG');
-                    } else {
-                        this.error = this.transService.getTranslation('STUDY.ERROR');
-                    }
-                    return error;
-                }))
-                .subscribe(
-                    (data: string) => {
-                        if (data !== null) {
-                            this.status = data;
-                            resolve(data);
-                        }
-                    });
-        });
-    }
-
     loadActivities() {
         if (this.connService.isOnline()) {
             this.login().then(() => {
@@ -142,19 +120,6 @@ export class StudiesPage {
             this.navCtrl.pop();
             this.connService.presentConnectionAlert();
         }
-    }
-
-    private searchActivities() {
-        this.studentService.searchActivities().then((res) => {
-            const result: any = res;
-            this.sigles = result.activities.activity;
-            for (const sigle of this.sigles) {
-                this.activities.push({'name': '', 'sigle': sigle});
-            }
-        })
-            .catch(() => {
-                console.log('Error during load of course program');
-            });
     }
 
     async openModalProject() {
@@ -197,28 +162,6 @@ export class StudiesPage {
             }
         }
         this.checkCourseExisting(already, acro);
-    }
-
-    private checkCourseExisting(already: boolean, acro: string) {
-        let check;
-        if (!already) {
-            this.checkExist(acro).then(data2 => {
-                check = data2;
-                if (check.exist) {
-                    this.addCourse(acro, check.nameFR);
-                } else {
-                    this.alertService.toastCourse('STUDY.BADCOURSE');
-                    this.showPrompt();
-                }
-            });
-        } else {
-            this.alertService.toastCourse('STUDY.ALCOURSE');
-        }
-        return check;
-    }
-
-    private showPrompt() {
-        this.alertService.showPromptStudies(this.listCourses, this.checkCourseExisting.bind(this));
     }
 
     async addCourse(sigle: string, name: string) {
@@ -273,5 +216,62 @@ export class StudiesPage {
 
     launch(url) {
         this.iab.create(url, '_system');
+    }
+
+    private login() {
+        this.error = '';
+        return new Promise(resolve => {
+            this.wso2Service.login(this.username, this.password).pipe(
+                catchError(error => {
+                    if (error.status === 400) {
+                        this.error = this.transService.getTranslation('STUDY.BADLOG');
+                    } else {
+                        this.error = this.transService.getTranslation('STUDY.ERROR');
+                    }
+                    return error;
+                }))
+                .subscribe(
+                    (data: string) => {
+                        if (data !== null) {
+                            this.status = data;
+                            resolve(data);
+                        }
+                    });
+        });
+    }
+
+    private searchActivities() {
+        this.studentService.searchActivities().then((res) => {
+            const result: any = res;
+            this.sigles = result.activities.activity;
+            for (const sigle of this.sigles) {
+                this.activities.push({'name': '', 'sigle': sigle});
+            }
+        })
+            .catch(() => {
+                console.log('Error during load of course program');
+            });
+    }
+
+    private checkCourseExisting(already: boolean, acro: string) {
+        let check;
+        if (!already) {
+            this.checkExist(acro).then(data2 => {
+                check = data2;
+                if (check.exist) {
+                    this.addCourse(acro, check.nameFR);
+                } else {
+                    this.alertService.toastCourse('STUDY.BADCOURSE');
+                    this.showPrompt();
+                }
+            });
+        } else {
+            this.alertService.toastCourse('STUDY.ALCOURSE');
+        }
+        return check;
+    }
+
+    private showPrompt() {
+        this.alertService.showPromptStudies(this.listCourses, this.checkCourseExisting.bind(this));
     }
 }

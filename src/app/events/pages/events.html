@@ -24,7 +24,7 @@
     <ion-toolbar color="event">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img src="./assets/img/s.png" height="28"/>
+            <img height="28" src="./assets/img/s.png"/>
         </ion-buttons>
 
         <ion-title horizontal="center">{{title | translate}}</ion-title>
@@ -34,7 +34,7 @@
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-segment [(ngModel)]="segment" (ionChange)="tabChanged($event)">
+    <ion-segment (ionChange)="tabChanged($event)" [(ngModel)]="segment">
         <ion-segment-button value="all">
             <ion-label>{{'EVENTS.ALL' | translate}}</ion-label>
         </ion-segment-button>
@@ -46,17 +46,17 @@
 
 <!--BODY-->
 <ion-content class="feed-list" #events>
-    <ion-refresher slot="fixed" *ngIf="segment !== 'favorites'" (ionRefresh)="doRefresh($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="segment !== 'favorites'" slot="fixed">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
         </ion-refresher-content>
     </ion-refresher>
-    <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl"
-                   (ionChange)="updateDisplayed()"></ion-searchbar>
+    <ion-searchbar (ionChange)="updateDisplayed()" [(ngModel)]="searchTerm"
+                   [formControl]="searchControl"></ion-searchbar>
 
     <ion-list #eventsList *ngFor="let week of displayedEventsD" [hidden]="shownEvents === 0">
 
-        <ion-item-divider *ngIf="week.items.length > 0" (click)="toggleGroup(week.label)">
-            <ion-label style="width: 100%;" class="ion-text-center">
+        <ion-item-divider (click)="toggleGroup(week.label)" *ngIf="week.items.length > 0">
+            <ion-label class="ion-text-center" style="width: 100%;">
                 [{{getRangeWeek(week.label, year).from | date: 'dd/MM'}}
                 &mdash;
                 {{getRangeWeek(week.label, year).to | date: 'dd/MM'}}] ({{week.items.length}})
@@ -65,7 +65,7 @@
 
         <ion-item-sliding #slidingItem *ngFor="let event of week.items"
                           [hidden]="!utilsServices.isGroupShown(week.label, shownGroup) || event.hidden">
-            <ion-item button (click)="goToEventDetail(event)">
+            <ion-item (click)="goToEventDetail(event)" button>
                 <ion-thumbnail item-left>
                     <img [src]="event.iconCategory">
                 </ion-thumbnail>
@@ -75,7 +75,7 @@
                     <p [innerHtml]="event.trimmedDescription"></p>
                     <p [innerHtml]="event.location"></p>
                     <p>
-                        <ion-icon slot="start" name="calendar"></ion-icon>
+                        <ion-icon name="calendar" slot="start"></ion-icon>
                         {{event.startDate | date: 'dd/MM/yyyy H:mm' }}
                         &mdash; {{event.endDate | date: 'dd/MM/yyyy H:mm' }}
                     </p>
@@ -83,17 +83,17 @@
             </ion-item>
 
             <ion-item-options>
-                <ion-item-option fill="outline" (click)="createEvent(slidingItem, event)">
-                    <ion-icon size="large" name='calendar'></ion-icon>
+                <ion-item-option (click)="createEvent(slidingItem, event)" fill="outline">
+                    <ion-icon name='calendar' size="large"></ion-icon>
                 </ion-item-option>
 
-                <ion-item-option fill="outline" (click)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'">
-                    <ion-icon size="large" name="star-outline"></ion-icon>
+                <ion-item-option (click)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'" fill="outline">
+                    <ion-icon name="star-outline" size="large"></ion-icon>
                 </ion-item-option>
 
                 <ion-item-option (click)="removeFavorite(slidingItem, event, 'Remove Favorite')"
                                  *ngIf="segment === 'favorites'">
-                    <ion-icon size="large" name='close'></ion-icon>
+                    <ion-icon name='close' size="large"></ion-icon>
                 </ion-item-option>
             </ion-item-options>
         </ion-item-sliding>

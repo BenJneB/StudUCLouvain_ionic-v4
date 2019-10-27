@@ -65,6 +65,11 @@ export class GuindaillePage {
         this._get_pictos_and_datas();
     }
 
+    async showAlert(page) {
+        const alert = await this.alertCtrl.create(page).then();
+        return await alert.present();
+    }
+
     private _get_pictos_and_datas() {
         const pictoListImg = [
             'alterner', 'Bruit-exterieur', 'eau-gratuite',
@@ -84,10 +89,5 @@ export class GuindaillePage {
                 };
             });
         });
-    }
-
-    async showAlert(page) {
-        const alert = await this.alertCtrl.create(page).then();
-        return await alert.present();
     }
 }

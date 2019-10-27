@@ -24,7 +24,7 @@
     <ion-toolbar color="support">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img src="./assets/img/s.png" height="28"/>
+            <img height="28" src="./assets/img/s.png"/>
         </ion-buttons>
         <ion-title horizontal="center">{{title | translate}}</ion-title>
     </ion-toolbar>
@@ -115,7 +115,7 @@
                 <div item-content>
                     <p>{{'HELP.TEXT11' | translate}}</p>
                     <h4 style="text-align: justify;">{{'HELP.TEXT12' | translate}}</h4>
-                    <p style="text-align: justify;" [innerHTML]="'HELP.TEXT13' | translate"></p>
+                    <p [innerHTML]="'HELP.TEXT13' | translate" style="text-align: justify;"></p>
                     <h4 style="text-align: justify;">{{'HELP.TEXT14' | translate}}</h4>
                     <p style="text-align: justify;">{{'HELP.TEXT15' | translate}}
                         <ion-button
@@ -123,8 +123,8 @@
                         </ion-button>
                     </p>
                     <h4 style="text-align: justify;">{{'HELP.TEXT16' | translate}}</h4>
-                    <p style="text-align: justify;" [innerHTML]="'HELP.TEXT17' | translate"></p>
-                    <p style="text-align: justify;" [innerHTML]="'HELP.TEXT18' | translate"></p>
+                    <p [innerHTML]="'HELP.TEXT17' | translate" style="text-align: justify;"></p>
+                    <p [innerHTML]="'HELP.TEXT18' | translate" style="text-align: justify;"></p>
                     <ion-button
                             (click)="openURL('https://alfresco.uclouvain.be/alfresco/service/guest/streamDownload/workspace/SpacesStore/eaabb465-8762-4e61-81fb-bf9ff97a3117/guide_rapide_config_WiFi_visiteurs.pdf?guest=true')">
                         {{'HELP.GUIDE' | translate}}</ion-button>
@@ -206,9 +206,9 @@
                         )
                     </p>
                     <h4 style="text-align: justify;">{{'HELP.TEXT25' | translate}}</h4>
-                    <p style="text-align: justify;" [innerHTML]="'HELP.TEXT26' | translate"></p>
+                    <p [innerHTML]="'HELP.TEXT26' | translate" style="text-align: justify;"></p>
                     <h4 style="text-align: justify;">{{'HELP.TEXT27' | translate}}</h4>
-                    <p style="text-align: justify;" [innerHTML]="'HELP.TEXT28' | translate"></p>
+                    <p [innerHTML]="'HELP.TEXT28' | translate" style="text-align: justify;"></p>
                     <h4 style="text-align: justify;">{{'HELP.TEXT29' | translate}}</h4>
                     <p style="text-align: justify;">
                         <ion-button (click)="openURL('https://uclouvain.be/fr/decouvrir/service-desk.html')">
@@ -224,24 +224,24 @@
 
         <ion-card [hidden]="!utilsServices.isGroupShown('rep', shownGroup)">
             <ion-card-content>
-                <ion-list no-lines class="ilist">
-                    <ion-item no-lines [(ngModel)]="lastname" ngDefaultControl>
+                <ion-list class="ilist" no-lines>
+                    <ion-item [(ngModel)]="lastname" ngDefaultControl no-lines>
                         <ion-label color="primary">{{'HELP.NAME' | translate}}</ion-label>
-                        <ion-input type="text" placeholder="nom"></ion-input>
+                        <ion-input placeholder="nom" type="text"></ion-input>
                     </ion-item>
-                    <ion-item no-lines [(ngModel)]="firstname" ngDefaultControl>
+                    <ion-item [(ngModel)]="firstname" ngDefaultControl no-lines>
                         <ion-label color="primary">{{'HELP.FIRSTNAME' | translate}}</ion-label>
-                        <ion-input type="text" placeholder="prénom"></ion-input>
+                        <ion-input placeholder="prénom" type="text"></ion-input>
                     </ion-item>
                 </ion-list>
                 <ion-row center>
                     <ion-col class="ion-text-center">
-                        <ion-button shape="round" (click)="update()">{{'HELP.SEARCH' | translate}}</ion-button>
+                        <ion-button (click)="update()" shape="round">{{'HELP.SEARCH' | translate}}</ion-button>
                     </ion-col>
                 </ion-row>
 
                 <ion-list>
-                    <ion-item *ngFor="let emp of employees" button no-lines (click)="goToEmpDetails(emp)">
+                    <ion-item (click)="goToEmpDetails(emp)" *ngFor="let emp of employees" button no-lines>
                         <ion-label>{{emp.lastname}} {{emp.firstname}}</ion-label>
                     </ion-item>
                 </ion-list>
@@ -252,8 +252,8 @@
     <!----------------SERVICES D AIDES ---------------------->
     <ng-container *ngIf="segment==='aide'">
         <h1 style="text-align:center"><strong> {{'HELP.AIDE1' | translate}} </strong></h1>
-        <ion-button fill="clear" size="small" (click)="openURL('https://uclouvain.be/fr/etudier/aide')">
-            <ion-icon slot="start" name='share-alt'></ion-icon>
+        <ion-button (click)="openURL('https://uclouvain.be/fr/etudier/aide')" fill="clear" size="small">
+            <ion-icon name='share-alt' slot="start"></ion-icon>
             {{'HELP.WEB' | translate}}
         </ion-button>
         <p>{{'HELP.AIDE2' | translate}}</p>
@@ -301,9 +301,9 @@
 
         <ion-item [hidden]="!utilsServices.isGroupShown('socfi', shownGroup)" class="ion-text-wrap">
             <ion-label>
-                <ion-button fill="clear" size="small"
-                            (click)="openURL('https://uclouvain.be/fr/etudier/aide/aidesociale.html')">
-                    <ion-icon slot="start" name='share-alt'></ion-icon>
+                <ion-button (click)="openURL('https://uclouvain.be/fr/etudier/aide/aidesociale.html')" fill="clear"
+                            size="small">
+                    <ion-icon name='share-alt' slot="start"></ion-icon>
                     {{'HELP.WEB' | translate}}
                 </ion-button>
                 <p>{{'HELP.AIDE12' | translate}}</p><br>
@@ -333,9 +333,9 @@
 
         <ion-item [hidden]="!utilsServices.isGroupShown('sante', shownGroup)" class="ion-text-wrap">
             <ion-label>
-                <ion-button fill="clear" size="small"
-                            (click)="openURL('https://uclouvain.be/fr/etudier/aide/aide-sante.html')">
-                    <ion-icon slot="start" name='share-alt'></ion-icon>
+                <ion-button (click)="openURL('https://uclouvain.be/fr/etudier/aide/aide-sante.html')" fill="clear"
+                            size="small">
+                    <ion-icon name='share-alt' slot="start"></ion-icon>
                     {{'HELP.WEB' | translate}}
                 </ion-button>
                 <p>{{'HELP.AIDE21' | translate}}</p><br>
@@ -364,9 +364,9 @@
 
         <ion-item [hidden]="!utilsServices.isGroupShown('psyped', shownGroup)" class="ion-text-wrap">
             <ion-label>
-                <ion-button fill="clear" size="small"
-                            (click)="openURL('https://uclouvain.be/fr/etudier/aide/planning.html')">
-                    <ion-icon slot="start" name='share-alt'></ion-icon>
+                <ion-button (click)="openURL('https://uclouvain.be/fr/etudier/aide/planning.html')" fill="clear"
+                            size="small">
+                    <ion-icon name='share-alt' slot="start"></ion-icon>
                     {{'HELP.WEB' | translate}}
                 </ion-button>
                 <p>{{'HELP.AIDE25' | translate}}</p><br>

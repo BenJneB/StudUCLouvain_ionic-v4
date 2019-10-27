@@ -53,15 +53,6 @@ export class UserService {
         });
     }
 
-    private getFavoritesData(type: string, data: any) {
-        const isString = type === 'campus' || type === 'fac';
-        if (data === null) {
-            return isString ? '' : [];
-        } else {
-            return data;
-        }
-    }
-
     getSlot(acronym: string, type: string) {
         const index = this.slots.findIndex(item => item.course === acronym);
         if (index > -1) {
@@ -112,7 +103,6 @@ export class UserService {
         this.campus = campus;
         this.storage.set('campus', this.campus);
     }
-
 
     addFac(fac: string) {
         this.fac = fac;
@@ -165,6 +155,15 @@ export class UserService {
             this.pushItem(type, acronym, slot);
         }
         this.storage.set('slots', this.slots);
+    }
+
+    private getFavoritesData(type: string, data: any) {
+        const isString = type === 'campus' || type === 'fac';
+        if (data === null) {
+            return isString ? '' : [];
+        } else {
+            return data;
+        }
     }
 
     private pushItem(type: string, acronym: string, slot: string) {

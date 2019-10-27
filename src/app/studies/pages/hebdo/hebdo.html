@@ -25,7 +25,7 @@
     <ion-toolbar color="uclouvain">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img src="./assets/img/s.png" height="28"/>
+            <img height="28" src="./assets/img/s.png"/>
         </ion-buttons>
         <ion-row>
             <ion-col>
@@ -39,7 +39,7 @@
 <!--BODY-->
 <ion-content class="ion-padding" #weekContent>
     <ion-list *ngFor="let day of schedule">
-        <ion-item-divider class="ion-text-center" [hidden]="day.schedule.length == 0" (click)="toggleGroup(day.date)">
+        <ion-item-divider (click)="toggleGroup(day.date)" [hidden]="day.schedule.length == 0" class="ion-text-center">
             <ion-label>{{day.day}} {{day.date}} ({{day.schedule.length}} séances)</ion-label>
         </ion-item-divider>
         <ion-list *ngFor="let course of day.schedule" [hidden]="!utilsServices.isGroupShown(day.date, shownGroup)">
@@ -49,10 +49,10 @@
                         <h2 class="ion-text-center"> {{course.cours}} - {{course.name}} </h2>
                         <p class="ion-text-center"> {{course.eventstarttime | date: 'dd/MM/yyyy H:mm' }}
                             &mdash; {{course.eventendtime | date: 'H:mm' }} </p>
-                        <p class="ion-text-center" *ngIf="course.entitycode"> {{'COURSE.AUDIT' | translate}}
+                        <p *ngIf="course.entitycode" class="ion-text-center"> {{'COURSE.AUDIT' | translate}}
                             : {{course.entitycode}}
                         </p>
-                        <p class="ion-text-center" *ngIf="course.enseignants"> {{'COURSE.TEACHER' | translate}} :
+                        <p *ngIf="course.enseignants" class="ion-text-center"> {{'COURSE.TEACHER' | translate}} :
                             {{course.enseignants}}</p>
                     </ion-label>
                 </ion-item>

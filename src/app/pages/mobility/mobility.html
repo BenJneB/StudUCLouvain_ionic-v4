@@ -23,7 +23,7 @@
     <ion-toolbar color="mobilite">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img src="./assets/img/s.png" height="28"/>
+            <img height="28" src="./assets/img/s.png"/>
         </ion-buttons>
         <ion-title horizontal="center">{{title | translate}}</ion-title>
     </ion-toolbar>
@@ -31,7 +31,7 @@
 
 <!--BODY-->
 <ion-content>
-    <ion-grid class="ion-padding portrait" *ngIf="platform.isPortrait()">
+    <ion-grid *ngIf="platform.isPortrait()" class="ion-padding portrait">
         <ion-row>
             <ion-col class="ion-align-self-end ion-text-center"><img
                     (click)="utilsServices.launchExternalApp(carpoolingPage)"
@@ -65,7 +65,7 @@
             </ion-col>
         </ion-row>
         <ion-row class="ion-text-center ion-align-items-center">
-            <ion-col align-content-center size="4" offset="4">
+            <ion-col align-content-center offset="4" size="4">
                 <ion-label>
                     <img (click)="utilsServices.launchExternalApp(busPage)" alt="bus" src="./assets/img/nextride.png"/>
                     <p><b>{{'MOBI.BUS' | translate}}</b></p>
@@ -73,7 +73,7 @@
             </ion-col>
         </ion-row>
         <ion-row class="ion-text-center ion-align-items-center">
-            <ion-col size="4" offset='8'>
+            <ion-col offset='8' size="4">
                 <ion-label>
                     <img (click)="utilsServices.launchExternalApp(trainPage)" alt="train" src="./assets/img/sncb.png"/>
                     <p><b>{{'MOBI.SNCB' | translate}}</b></p>
