@@ -37,7 +37,7 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content #weekContent class="ion-padding">
+<ion-content class="ion-padding" #weekContent>
     <ion-list *ngFor="let day of schedule">
         <ion-item-divider (click)="toggleGroup(day.date)" [hidden]="day.schedule.length == 0" class="ion-text-center">
             <ion-label>{{day.day}} {{day.date}} ({{day.schedule.length}} séances)</ion-label>

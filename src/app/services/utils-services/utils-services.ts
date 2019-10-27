@@ -62,6 +62,7 @@ export class UtilsService {
     }
 
     async addFavorite(itemData: any, texts: any, slidingItem?: IonItemSliding) {
+        console.log('YOLOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOOO');
         if (this.user.hasFavorite(itemData.guid)) {
             let message = '';
             this.translateService.get(texts['FAV']).subscribe((res: string) => {

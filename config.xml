@@ -22,9 +22,8 @@
     <preference name="ShowSplashScreenSpinner" value="false"/>
     <hook src="scripts/increment_version.js" type="before_prepare"/>
     <platform name="android">
-        <edit-config xmlns:android="http://schemas.android.com/apk/res/android" file="app/src/main/AndroidManifest.xml"
-                     mode="merge"
-                     target="/manifest/application">
+        <edit-config file="app/src/main/AndroidManifest.xml" mode="merge" target="/manifest/application"
+                     xmlns:android="http://schemas.android.com/apk/res/android">
             <application android:networkSecurityConfig="@xml/network_security_config"/>
         </edit-config>
         <resource-file src="resources/android/xml/network_security_config.xml"

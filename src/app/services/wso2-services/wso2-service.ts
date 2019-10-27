@@ -16,9 +16,9 @@ import { wso2HeaderStudent, wso2ServiceBaseUrl } from 'src/environments/environm
 })
 export class Wso2Service {
     nbCalls = 0;
-    headers: HttpHeaders;
     private token = '';
     private tokenStudent = '';
+    headers: HttpHeaders;
 
     constructor(public http: HttpClient) {
         this.getAppToken();

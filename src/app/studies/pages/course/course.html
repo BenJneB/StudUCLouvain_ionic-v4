@@ -49,7 +49,7 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content #courseContent class="ion-padding">
+<ion-content class="ion-padding" #courseContent>
     <ion-list>
         <ion-item-sliding #slidingItem *ngFor="let activity of displayedActi">
             <ion-item
@@ -100,13 +100,13 @@
     </ion-list-header>
 </ion-content>
 
-<ion-fab *ngIf="segment === 'Cours magistral' || segment === 'TD'" horizontal="end" slot="fixed" vertical="bottom">
+<ion-fab slot="fixed" horizontal="end" vertical="bottom" *ngIf="segment === 'Cours magistral' || segment === 'TD'">
     <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
     <ion-fab-button (click)="showPrompt(segment)">
         <ion-icon name="cut"></ion-icon>
     </ion-fab-button>
 </ion-fab>
-<ion-fab *ngIf="segment === 'Cours magistral' || segment === 'TD'" horizontal="start" slot="fixed" vertical="bottom">
+<ion-fab slot="fixed" horizontal="start" vertical="bottom" *ngIf="segment === 'Cours magistral' || segment === 'TD'">
     <!--"(segment == 'Cours magistral' && slotCM == 'no')|| (segment == 'TD' && slotTP =='no')">-->
     <ion-fab-button (click)="addCourseToCalendar()">
         <ion-icon name="calendar"></ion-icon>

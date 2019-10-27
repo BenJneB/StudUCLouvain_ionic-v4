@@ -61,7 +61,7 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content #news class="feed-list">
+<ion-content class="feed-list" #news>
     <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
         </ion-refresher-content>
@@ -136,8 +136,8 @@
 </ion-content>
 
 <!----------------- BUTTON TO CHANGE FAC ------------------------->
-<ion-fab *ngIf="segment==='fac' && facsegment === 'news' && userS.hasFac()" horizontal="end" slot="fixed"
-         vertical="bottom">
+<ion-fab slot="fixed" vertical="bottom" horizontal="end"
+         *ngIf="segment==='fac' && facsegment === 'news' && userS.hasFac()">
     <ion-fab-button (click)="removeFac()">
         <ion-icon name="swap"></ion-icon>
     </ion-fab-button>

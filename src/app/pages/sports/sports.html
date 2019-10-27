@@ -34,7 +34,7 @@
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
-    <ion-segment (ionChange)="tabChanged($event)" [(ngModel)]="segment" name="segment">
+    <ion-segment [(ngModel)]="segment" name="segment" (ionChange)="tabChanged($event)">
         <ion-segment-button value="all">
             <ion-label>{{'SPORTS.ALL' | translate}}</ion-label>
         </ion-segment-button>
@@ -50,7 +50,7 @@
 <!--BODY-->
 <!--class="feed-list" -->
 <ion-content class="all" [ngClass]="{'team' : segment == 'team'}">
-    <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="segment !== 'favorites'" slot="fixed">
+    <ion-refresher slot="fixed" *ngIf="segment !== 'favorites'" (ionRefresh)="doRefresh($event)">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
         </ion-refresher-content>
     </ion-refresher>
