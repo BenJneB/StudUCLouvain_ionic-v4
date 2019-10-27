@@ -54,12 +54,12 @@
         <ion-row class="ion-text-wrap">
             <ion-item class="ion-text-wrap">
                 <ion-label>
-                    <ion-icon slot="start" name="call"></ion-icon> &nbsp;
+                    <ion-icon name="call" slot="start"></ion-icon> &nbsp;
                     <a href="tel:{{libDetails.phone}}">{{libDetails.phone}}</a>
                 </ion-label>
             </ion-item>
             <ion-col class="ion-text-right">
-                <ion-button *ngIf="libDetails.website" fill="clear" size="small" (click)="openPage(libDetails.website)">
+                <ion-button (click)="openPage(libDetails.website)" *ngIf="libDetails.website" fill="clear" size="small">
                     <ion-icon name='share-alt' slot="start"></ion-icon>
                     Website
                 </ion-button>
@@ -68,7 +68,7 @@
         <ion-row *ngIf="libDetails.email">
             <ion-item>
                 <ion-label>
-                    <ion-icon slot="start" name="mail"></ion-icon> &nbsp;
+                    <ion-icon name="mail" slot="start"></ion-icon> &nbsp;
                     <a href="mailto:{{libDetails.email}}">{{libDetails.email}}</a>
                 </ion-label>
             </ion-item>

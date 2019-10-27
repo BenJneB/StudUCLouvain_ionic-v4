@@ -25,17 +25,17 @@
     <ion-toolbar color="uclouvain">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img src="./assets/img/s.png" height="28"/>
+            <img height="28" src="./assets/img/s.png"/>
         </ion-buttons>
         <ion-title horizontal="center">{{course.name}} - {{course.acronym}}</ion-title>
-        <ion-buttons slot="end" (click)="openModalInfo()">
+        <ion-buttons (click)="openModalInfo()" slot="end">
             <ion-button color="light">
-                <ion-icon slot="icon-only" name="information-circle"></ion-icon>
+                <ion-icon name="information-circle" slot="icon-only"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>
 
-    <ion-segment [(ngModel)]="segment" (ionChange)="updateDisplayed()">
+    <ion-segment (ionChange)="updateDisplayed()" [(ngModel)]="segment">
         <ion-segment-button value="Cours magistral">
             <ion-label>{{'COURSE.CM' | translate}}</ion-label>
         </ion-segment-button>
@@ -51,23 +51,23 @@
 <!--BODY-->
 <ion-content class="ion-padding" #courseContent>
     <ion-list>
-        <ion-item-sliding *ngFor="let activity of displayedActi" #slidingItem>
+        <ion-item-sliding #slidingItem *ngFor="let activity of displayedActi">
             <ion-item
                     *ngIf="activity.type === segment || (activity.type === 'TP' && segment ==='TD') || (activity.isExam && segment === 'Examen')">
                 <ion-label>
                     <h2 class="ion-text-center"> {{'COURSE.ACTIVITY' | translate}} : {{activity.type}} </h2>
                     <p>
-                        <ion-icon slot="start" name="calendar"></ion-icon>
+                        <ion-icon name="calendar" slot="start"></ion-icon>
                         {{activity.start | date: 'dd/MM/yyyy H:mm' }}
                         &mdash; {{activity.end | date: 'H:mm' }}
                     </p>
                     <p>
-                        <ion-icon slot="start" name="locate"></ion-icon>
+                        <ion-icon name="locate" slot="start"></ion-icon>
                         {{'COURSE.AUDIT' | translate}} : {{activity.auditorium}}
                     </p>
                     <ion-row style="align-items: center; color: var(--ion-color-step-600,#666)">
                         {{'COURSE.STUDENT' | translate}} :
-                        <ion-button size="small" fill="clear" (click)="toggleGroup(activity.start)">
+                        <ion-button (click)="toggleGroup(activity.start)" fill="clear" size="small">
                             <ion-label
                                     *ngIf="!utilsServices.isGroupShown(activity.start, shownGroup)">{{'COURSE.SHOW' | translate }}
                             </ion-label>
@@ -77,8 +77,9 @@
                         </ion-button>
 
                     </ion-row>
-                    <p [hidden]="!utilsServices.isGroupShown(activity.start, shownGroup)" style="display:inline"
-                       [innerHTML]="activity.students"></p>
+                    <p [hidden]="!utilsServices.isGroupShown(activity.start, shownGroup)"
+                       [innerHTML]="activity.students"
+                       style="display:inline"></p>
                     <p *ngIf="activity.teachers.length>0"> {{'COURSE.TEACHER' | translate}} : {{activity.teachers}}</p>
                     <p> {{activity.name}} </p>
                 </ion-label>

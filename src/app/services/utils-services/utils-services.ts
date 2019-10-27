@@ -29,6 +29,9 @@ export const EVENT_TEXTS = {
     providedIn: 'root'
 })
 export class UtilsService {
+    nullSchemas = {ios: null, android: null};
+    nullUrls = {app: null, http: null};
+
     constructor(
         public user: UserService,
         public translateService: TranslateService,
@@ -45,9 +48,6 @@ export class UtilsService {
         public navCtrl: NavController,
     ) {
     }
-
-    nullSchemas = {ios: null, android: null};
-    nullUrls = {app: null, http: null};
 
     public convertToJson(data: string): Object {
         let res;
@@ -126,15 +126,6 @@ export class UtilsService {
         return await alert.present();
     }
 
-    private checkAvailability(check: string, page: any, app: string) {
-        this.appAvailability.check(check).then(() => {
-            const browser = this.iab.create(page.appUrl, '_system');
-            browser.close();
-        }, () => {
-            this.market.open(app);
-        });
-    }
-
     launchExternalApp(page: any) {
         let app: string;
         let check: string;
@@ -171,19 +162,6 @@ export class UtilsService {
             }
         });
         return favItems;
-    }
-
-    private getFilterFields(type: string, index: string, item: any, title: string, date: Date) {
-        if (type === 'events') {
-            index = item.category;
-            title = item.title;
-            date = item.startDate;
-        } else {
-            index = item.sport;
-            title = item.sport;
-            date = item.date;
-        }
-        return {index, title, date};
     }
 
     getPageStruct(page: any) {
@@ -253,5 +231,27 @@ export class UtilsService {
                 items: groups[key]
             };
         });
+    }
+
+    private checkAvailability(check: string, page: any, app: string) {
+        this.appAvailability.check(check).then(() => {
+            const browser = this.iab.create(page.appUrl, '_system');
+            browser.close();
+        }, () => {
+            this.market.open(app);
+        });
+    }
+
+    private getFilterFields(type: string, index: string, item: any, title: string, date: Date) {
+        if (type === 'events') {
+            index = item.category;
+            title = item.title;
+            date = item.startDate;
+        } else {
+            index = item.sport;
+            title = item.sport;
+            date = item.date;
+        }
+        return {index, title, date};
     }
 }

@@ -61,6 +61,10 @@ export class ModalInfoPage {
         });
     }
 
+    closeModal() {
+        this.viewCtrl.dismiss();
+    }
+
     private resolveResponse(res: any) {
         let cahier = '';
         const {offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, vol, langue} = this.getDatas(res);
@@ -96,9 +100,5 @@ export class ModalInfoPage {
         const resume = res.resumeCoursMap.entry[1].value;
         const vol = {'vol1': res.volTot1, 'vol2': res.volTot2, 'vol1Coef': res.volTot1AvecCoef, 'vol2Coef': res.volTot2AvecCoef};
         return {offres, campus, entite, teacher, loca, credit, progpre, quadri, resume, vol, langue};
-    }
-
-    closeModal() {
-        this.viewCtrl.dismiss();
     }
 }

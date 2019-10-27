@@ -25,11 +25,11 @@
     <ion-toolbar color="news">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img src="./assets/img/s.png" height="28"/>
+            <img height="28" src="./assets/img/s.png"/>
         </ion-buttons>
         <ion-title horizontal="center">{{title | translate}}</ion-title>
     </ion-toolbar>
-    <ion-segment [(ngModel)]="segment" (ionChange)="tabChanged($event)">
+    <ion-segment (ionChange)="tabChanged($event)" [(ngModel)]="segment">
         <ion-segment-button value="univ">
             <ion-label>{{'NEWS.UNIF' | translate}}</ion-label>
         </ion-segment-button>
@@ -37,7 +37,7 @@
             <ion-label>{{'NEWS.FAC' | translate}}</ion-label>
         </ion-segment-button>
     </ion-segment>
-    <ion-segment [(ngModel)]="subsegment" (ionChange)="cachedOrNot()" *ngIf="segment==='univ'">
+    <ion-segment (ionChange)="cachedOrNot()" *ngIf="segment==='univ'" [(ngModel)]="subsegment">
         <ion-segment-button value="P1">
             <ion-label>{{'NEWS.STUDY' | translate}}</ion-label>
         </ion-segment-button>
@@ -48,7 +48,7 @@
             <ion-label>{{'NEWS.SERVICE' | translate}}</ion-label>
         </ion-segment-button>
     </ion-segment>
-    <ion-segment [(ngModel)]="facsegment" *ngIf="segment==='fac'">
+    <ion-segment *ngIf="segment==='fac'" [(ngModel)]="facsegment">
         <ion-segment-button value="news">
             <ion-label>{{'HOME.NEWS' |translate}} <strong *ngIf="userS.hasFac()">({{userS.fac}})</strong></ion-label>
         </ion-segment-button>
@@ -56,13 +56,13 @@
             <ion-label>{{'NEWS.VALVE' | translate}}</ion-label>
         </ion-segment-button>
     </ion-segment>
-    <ion-searchbar [(ngModel)]="searchTerm" [formControl]="searchControl" *ngIf="segment === 'univ'"
-                   (ionChange)="filterUpdatedNews()"></ion-searchbar>
+    <ion-searchbar (ionChange)="filterUpdatedNews()" *ngIf="segment === 'univ'" [(ngModel)]="searchTerm"
+                   [formControl]="searchControl"></ion-searchbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content class="feed-list" #news>
-    <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
         </ion-refresher-content>
     </ion-refresher>
@@ -77,7 +77,7 @@
             </ion-item-divider>
             <ion-item *ngFor="let facs of sector.facs">
                 <ion-label>{{facs.acro}} : {{facs.name}}</ion-label>
-                <ion-radio slot="start" (click)="updateFac(facs.acro)"></ion-radio>
+                <ion-radio (click)="updateFac(facs.acro)" slot="start"></ion-radio>
             </ion-item>
         </ion-item-group>
     </ion-list>
@@ -85,8 +85,9 @@
     <!--------------------------------------- ACTUALITES VALVES ? ---------------------------------->
     <ion-grid *ngIf="segment === 'fac' && facsegment==='valve'" id="valve">
         <ion-row class="ion-align-items-center ion-justify-content-center">
-            <ion-button fill="solid" size="large" color="news"
-                        (click)="openURL('https://sites.uclouvain.be/sgsi-apps/shib-mesvalves/prod/')">
+            <ion-button (click)="openURL('https://sites.uclouvain.be/sgsi-apps/shib-mesvalves/prod/')" color="news"
+                        fill="solid"
+                        size="large">
                 <ion-icon name='share-alt'></ion-icon>
                 <ion-label class="ion-text-center">{{'NEWS.MESVALVES' | translate}}</ion-label>
             </ion-button>
@@ -94,7 +95,7 @@
     </ion-grid>
     <!--------------------------- ACTUALITES FAC ----------------------------------------->
 
-    <ion-row class="ion-justify-content-center" *ngIf="segment === 'fac' && userS.hasFac() && facsegment==='news'">
+    <ion-row *ngIf="segment === 'fac' && userS.hasFac() && facsegment==='news'" class="ion-justify-content-center">
         <!---------------------------------------------------------------------->
         <ion-item>
             <ion-label>
@@ -102,25 +103,26 @@
             </ion-label>
         </ion-item>
     </ion-row>
-    <ion-button center fill="clear" size="small" slot="start" (click)="openURL(site)"
-                *ngIf="segment === 'fac' && site.length > 0 && facsegment ==='news'">
+    <ion-button (click)="openURL(site)" *ngIf="segment === 'fac' && site.length > 0 && facsegment ==='news'" center
+                fill="clear" size="small"
+                slot="start">
         <ion-icon name='share-alt'></ion-icon>
         {{'NEWS.WEB' | translate}}
     </ion-button>
-    <p class="ion-text-center"
-       *ngIf="segment === 'fac' && site.length == 0 && rss.length == 0 && shownNews == 0 && facsegment ==='news'">
+    <p *ngIf="segment === 'fac' && site.length == 0 && rss.length == 0 && shownNews == 0 && facsegment ==='news'"
+       class="ion-text-center">
         <strong>Indisponible pour le moment</strong>
     </p>
 
     <!------------------------------NEWS UNIVERSITAIRES & FACULTAIRES-------------------------------->
     <ng-container *ngIf="segment==='univ' || (segment === 'fac' && facsegment === 'news' && userS.hasFac())">
         <ion-list #newsList [hidden]="shownNews === 0">
-            <ion-item *ngFor="let item of displayedNews" button (click)="goToNewsDetail(item)">
+            <ion-item (click)="goToNewsDetail(item)" *ngFor="let item of displayedNews" button>
                 <ion-label>
                     <p><b>{{item.title}}</b></p>
                     <p [innerHtml]="item.trimmedDescription"></p>
                     <p>
-                        <ion-icon slot="start" name="calendar"></ion-icon>
+                        <ion-icon name="calendar" slot="start"></ion-icon>
                         {{item.pubDate | date: 'dd/MM/yyyy'}}
                     </p>
                 </ion-label>

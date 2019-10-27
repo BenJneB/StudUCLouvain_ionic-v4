@@ -40,6 +40,25 @@ export class EventsService {
         return this.rssService.loadItems(segment, this.url, this.extractEvents.bind(this), searching);
     }
 
+    public getIconCategory(category: string): string {
+        switch (category.toLowerCase()) {
+            case 'sensibilisation':
+                return 'sensibilisation';
+            case 'animation':
+                return 'animation';
+            case 'culturel et artistique':
+                return 'cultural';
+            case 'guindaille':
+                return 'party';
+            case 'sportif':
+                return 'sports';
+            case 'services et aides':
+                return 'services';
+            default:
+                return 'other';
+        }
+    }
+
     private extractEvents(data: any) {
         this.shownEvents = 0;
         const maxDescLength = 20;
@@ -79,25 +98,6 @@ export class EventsService {
         const startDate = this.createDateForEvent(item.date_begin);
         const endDate = this.createDateForEvent(item.date_end);
         return {trimmedDescription, hidden, favorite, startDate, endDate, iconCategory};
-    }
-
-    public getIconCategory(category: string): string {
-        switch (category.toLowerCase()) {
-            case 'sensibilisation':
-                return 'sensibilisation';
-            case 'animation':
-                return 'animation';
-            case 'culturel et artistique':
-                return 'cultural';
-            case 'guindaille':
-                return 'party';
-            case 'sportif':
-                return 'sports';
-            case 'services et aides':
-                return 'services';
-            default:
-                return 'other';
-        }
     }
 
     private createDateForEvent(str: string): Date {

@@ -166,11 +166,6 @@ export class EventsPage implements OnInit {
         return this.utilsServices.getItemDisplay(groups);
     }
 
-    private getWeek(date: Date) {
-        const temp = new Date(date.getFullYear(), 0, 4);
-        return 1 + Math.round(((date.getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7); //  - weekUCL;
-    }
-
     /*Returns the ISO week of the date*/
     getISOWeek(d: Date) {
         const date = new Date(d.getTime());
@@ -194,10 +189,6 @@ export class EventsPage implements OnInit {
         rangeIsTo = rangeIsTo.replace(/-/g, '/');
         rangeIsFrom = rangeIsFrom.replace(/-/g, '/');
         return {from: rangeIsFrom, to: rangeIsTo};
-    }
-
-    private getFullDate(d1: any): any {
-        return (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear();
     }
 
     public updateDisplayed() {
@@ -244,11 +235,6 @@ export class EventsPage implements OnInit {
         return await modal.present();
     }
 
-    private updateDateLimit() {
-        const today = new Date();
-        this.dateLimit = new Date(today.getFullYear(), today.getMonth() + this.dateRange, today.getUTCDate() + 1);
-    }
-
     toggleGroup(week: string) {
         this.shownGroup = this.utilsServices.toggleGroup(week, this.shownGroup);
     }
@@ -265,5 +251,19 @@ export class EventsPage implements OnInit {
             end: itemData.endDate
         };
         this.utilsServices.createEventInCalendar(datas, message, slidingItem);
+    }
+
+    private getWeek(date: Date) {
+        const temp = new Date(date.getFullYear(), 0, 4);
+        return 1 + Math.round(((date.getTime() - temp.getTime()) / 86400000 - 3 + (temp.getDay() + 6) % 7) / 7); //  - weekUCL;
+    }
+
+    private getFullDate(d1: any): any {
+        return (d1.getMonth() + 1) + '-' + d1.getDate() + '-' + d1.getFullYear();
+    }
+
+    private updateDateLimit() {
+        const today = new Date();
+        this.dateLimit = new Date(today.getFullYear(), today.getMonth() + this.dateRange, today.getUTCDate() + 1);
     }
 }

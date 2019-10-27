@@ -72,7 +72,7 @@ export class ConnectivityService {
     successCallback = (isAvailable) => {
         this.available = isAvailable;
         return isAvailable;
-    }
+    };
 
     errorCallback = (e) => console.error(e);
 }

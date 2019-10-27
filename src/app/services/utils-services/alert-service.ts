@@ -69,11 +69,6 @@ export class AlertService {
         });
     }
 
-    private languageChanged(event: string) {
-        this.user.storage.set('lan', event);
-        this.translateService.use(event);
-    }
-
     async presentToast(message: string, slidingItem?: IonItemSliding) {
         const toast = await this.toastCtrl.create({
             message: message,
@@ -108,16 +103,6 @@ export class AlertService {
             ]
         });
         return await settingsAlert.present();
-    }
-
-    private getRadioCampus(label: string, value: string, check?: string): AlertInput {
-        return {
-            type: 'radio',
-            label: label,
-            value: value,
-            checked: (check === value),
-            disabled: check === undefined
-        };
     }
 
     async toastCourse(key: string) {
@@ -174,6 +159,21 @@ export class AlertService {
             ]
         });
         return await prompt.present().then();
+    }
+
+    private languageChanged(event: string) {
+        this.user.storage.set('lan', event);
+        this.translateService.use(event);
+    }
+
+    private getRadioCampus(label: string, value: string, check?: string): AlertInput {
+        return {
+            type: 'radio',
+            label: label,
+            value: value,
+            checked: (check === value),
+            disabled: check === undefined
+        };
     }
 
     private handleSavePrompt(data: any, listCourses: Course[], check: (already: boolean, acronym: string) => any) {

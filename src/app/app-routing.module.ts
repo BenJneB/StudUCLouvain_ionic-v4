@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
-import { PreloadAllModules, RouterModule, Routes } from '@angular/router';
+import { QuicklinkModule, QuicklinkStrategy } from 'ngx-quicklink';
+import { RouterModule, Routes } from '@angular/router';
 import { TutoPage } from './components/tuto/tuto';
 import { HomePage } from './home/home.page';
 
@@ -23,9 +24,12 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})
+        QuicklinkModule,
+        RouterModule.forRoot(routes, {preloadingStrategy: QuicklinkStrategy})
     ],
-    exports: [RouterModule]
+    exports: [
+        RouterModule,
+    ]
 })
 export class AppRoutingModule {
 }

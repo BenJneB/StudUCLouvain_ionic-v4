@@ -103,15 +103,6 @@ export class NewsPage implements OnInit {
         }
     }
 
-    private getAvailableSites(sector: any) {
-        for (const facs of sector.facs) {
-            if (facs.acro === this.fac) {
-                this.site = facs.site;
-                this.rss = facs.rss;
-            }
-        }
-    }
-
     removeFac() {
         this.userS.removeFac();
     }
@@ -127,32 +118,6 @@ export class NewsPage implements OnInit {
             this.connService.presentConnectionAlert();
             refresher.target.complete();
         }
-    }
-
-    private handleOnlineRefresh(doRefresh: boolean, refresher: any) {
-        if (doRefresh) {
-            if (this.segment === 'univ') {
-                const key = this.getKey();
-                this.cache.removeItem(key);
-                this.loadNews(key);
-            } else {
-                this.loadNews();
-            }
-        }
-        refresher.target.complete();
-    }
-
-    private getKey() {
-        const part = this.subsegment;
-        let key;
-        if (part === 'P1') {
-            key = 'cache-P1';
-        } else if (part === 'P2') {
-            key = 'cache-P2';
-        } else {
-            key = 'cache-P3';
-        }
-        return key;
     }
 
     /*Tab change*/
@@ -229,14 +194,49 @@ export class NewsPage implements OnInit {
         this.loader.dismiss();
     }
 
+    /*When click on a news, go to the page with more details*/
+    public goToNewsDetail(news: NewsItem) {
+        this.utilsServices.goToDetail(news, 'news/details');
+    }
+
+    private getAvailableSites(sector: any) {
+        for (const facs of sector.facs) {
+            if (facs.acro === this.fac) {
+                this.site = facs.site;
+                this.rss = facs.rss;
+            }
+        }
+    }
+
+    private handleOnlineRefresh(doRefresh: boolean, refresher: any) {
+        if (doRefresh) {
+            if (this.segment === 'univ') {
+                const key = this.getKey();
+                this.cache.removeItem(key);
+                this.loadNews(key);
+            } else {
+                this.loadNews();
+            }
+        }
+        refresher.target.complete();
+    }
+
+    private getKey() {
+        const part = this.subsegment;
+        let key;
+        if (part === 'P1') {
+            key = 'cache-P1';
+        } else if (part === 'P2') {
+            key = 'cache-P2';
+        } else {
+            key = 'cache-P3';
+        }
+        return key;
+    }
+
     private filterUpdatedNews() {
         this.displayedNews = this.news.filter((item) => {
             return item.title.toLowerCase().indexOf(this.searchTerm.toLowerCase()) > -1;
         });
-    }
-
-    /*When click on a news, go to the page with more details*/
-    public goToNewsDetail(news: NewsItem) {
-        this.utilsServices.goToDetail(news, 'news/details');
     }
 }

@@ -193,58 +193,6 @@ export class CoursePage implements OnInit {
         }
     }
 
-    private fillInputs(array: Activity[], options: any, aucun: boolean) {
-        for (let i = 0; i < array.length; i++) {
-            const slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
-            options.inputs.push(this.getInputsOption(array, i, slotChosen));
-        }
-        if (options.inputs.length > 1) {
-            options.inputs.push({name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun});
-        }
-    }
-
-    private getInputsOption(array: Activity[], i: number, slotChosen: boolean): any {
-        return {
-            name: 'options',
-            value: array[i].name,
-            label: array[i].name + ' ' + array[i].start.getHours() + ':' + array[i].start.getUTCMinutes(),
-            type: 'radio',
-            checked: slotChosen
-        };
-    }
-
-    private getPromptOptions(title: string, message: string, cancel: string, apply: string, segment: string) {
-        return {
-            title: title,
-            message: message,
-            inputs: [],
-            buttons: [
-                {
-                    text: cancel,
-                    handler: () => {
-                    }
-                },
-                {
-                    text: apply,
-                    handler: data => {
-                        this.addSlot(segment, data);
-                        this.updateDisplayed();
-                    }
-                }
-            ]
-        };
-    }
-
-    private addSlot(segment: string, data: any) {
-        const type = segment === 'Cours magistral' ? 'CM' : 'TP';
-        if (type === 'TP') {
-            this.slotTP = data;
-        } else {
-            this.slotCM = data;
-        }
-        this.userS.addSlot(this.course.acronym, data, type);
-    }
-
     /*Return the different slots available for a course TP or CM */
     getSlots(segment: string) {
         let act: Activity[] = this.course.activities;
@@ -295,5 +243,57 @@ export class CoursePage implements OnInit {
                 cssClass: 'modal-fullscreen'
             });
         return await myModal.present();
+    }
+
+    private fillInputs(array: Activity[], options: any, aucun: boolean) {
+        for (let i = 0; i < array.length; i++) {
+            const slotChosen = (this.slotTP === array[i].name || this.slotCM === array[i].name);
+            options.inputs.push(this.getInputsOption(array, i, slotChosen));
+        }
+        if (options.inputs.length > 1) {
+            options.inputs.push({name: 'options', value: 'no', label: 'Toutes', type: 'radio', checked: aucun});
+        }
+    }
+
+    private getInputsOption(array: Activity[], i: number, slotChosen: boolean): any {
+        return {
+            name: 'options',
+            value: array[i].name,
+            label: array[i].name + ' ' + array[i].start.getHours() + ':' + array[i].start.getUTCMinutes(),
+            type: 'radio',
+            checked: slotChosen
+        };
+    }
+
+    private getPromptOptions(title: string, message: string, cancel: string, apply: string, segment: string) {
+        return {
+            title: title,
+            message: message,
+            inputs: [],
+            buttons: [
+                {
+                    text: cancel,
+                    handler: () => {
+                    }
+                },
+                {
+                    text: apply,
+                    handler: data => {
+                        this.addSlot(segment, data);
+                        this.updateDisplayed();
+                    }
+                }
+            ]
+        };
+    }
+
+    private addSlot(segment: string, data: any) {
+        const type = segment === 'Cours magistral' ? 'CM' : 'TP';
+        if (type === 'TP') {
+            this.slotTP = data;
+        } else {
+            this.slotCM = data;
+        }
+        this.userS.addSlot(this.course.acronym, data, type);
     }
 }

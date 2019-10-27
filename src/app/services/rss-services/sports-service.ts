@@ -64,6 +64,34 @@ export class SportsService {
         }
     }
 
+    /*Get sports for the URL specific to the campus of the user*/
+    public getSports(segment: string) {
+        const datas = this.getSportsDatas(segment);
+        return this.rssService.load(datas['url'], true).then(result => {
+            this.extractSports(result, segment !== 'team');
+            return {
+                sports: datas['sports'],
+                shownSports: datas['shownSports'],
+                categories: datas['categories']
+            };
+        }).catch(error => {
+            if (error === 1) {
+                return this.getSports(segment);
+            } else {
+                if (error === 2) {
+                    console.log('Loading sports: GET req timed out > limit, suppose no sports to be displayed');
+                } else {
+                    console.log('Error loading sports: ' + error);
+                }
+                return {
+                    sports: [],
+                    shownSports: 0,
+                    categories: []
+                };
+            }
+        });
+    }
+
     private getSportsDates(dateToString: (date: any) => any) {
         const today: Date = new Date();
         // last day of the week: today +6
@@ -100,34 +128,6 @@ export class SportsService {
             url: isSport ? this.url : this.urlT,
             categories: isSport ? this.allCategories : this.allCategoriesT
         };
-    }
-
-    /*Get sports for the URL specific to the campus of the user*/
-    public getSports(segment: string) {
-        const datas = this.getSportsDatas(segment);
-        return this.rssService.load(datas['url'], true).then(result => {
-            this.extractSports(result, segment !== 'team');
-            return {
-                sports: datas['sports'],
-                shownSports: datas['shownSports'],
-                categories: datas['categories']
-            };
-        }).catch(error => {
-            if (error === 1) {
-                return this.getSports(segment);
-            } else {
-                if (error === 2) {
-                    console.log('Loading sports: GET req timed out > limit, suppose no sports to be displayed');
-                } else {
-                    console.log('Error loading sports: ' + error);
-                }
-                return {
-                    sports: [],
-                    shownSports: 0,
-                    categories: []
-                };
-            }
-        });
     }
 
     /*Extract sports with all the details*/

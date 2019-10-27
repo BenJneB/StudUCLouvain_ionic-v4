@@ -20,7 +20,7 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-    <ion-toolbar id="header" class="header">
+    <ion-toolbar class="header" id="header">
         <ion-buttons slot="start">
             <ion-button (click)="alertService.applyFilters(categories, dateRange)">{{'EVENTS.CANCEL' | translate}}
             </ion-button>
@@ -51,20 +51,20 @@
                 {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS4' | translate}}
             </div>
         </ion-label>
-        <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
+        <ion-range [(ngModel)]="dateRange" max="6" min="1" pin="true" snaps="true" step="1">
         </ion-range>
     </ion-item>
     <ion-toolbar color="uclouvain">
         <ion-buttons slot="start">
-            <ion-button color="light" (click)="uncheckAll()">
+            <ion-button (click)="uncheckAll()" color="light">
                 <ion-label>{{'EVENTS.UNTOGGLE' | translate}}</ion-label>
-                <ion-icon slot="end" name="done-all"></ion-icon>
+                <ion-icon name="done-all" slot="end"></ion-icon>
             </ion-button>
         </ion-buttons>
         <ion-buttons slot="end">
-            <ion-button color="light" (click)="resetFilters()">
+            <ion-button (click)="resetFilters()" color="light">
                 <ion-label>{{'EVENTS.RESTORE' | translate}}</ion-label>
-                <ion-icon slot="end" name="refresh-circle"></ion-icon>
+                <ion-icon name="refresh-circle" slot="end"></ion-icon>
             </ion-button>
         </ion-buttons>
     </ion-toolbar>

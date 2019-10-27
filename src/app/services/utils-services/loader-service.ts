@@ -5,11 +5,11 @@ import { LoadingController } from '@ionic/angular';
     providedIn: 'root'
 })
 export class LoaderService {
-    constructor(public loadingController: LoadingController) {
-    }
-
     loading: any;
     isLoading = false;
+
+    constructor(public loadingController: LoadingController) {
+    }
 
     async present(message: string) {
         if (this.loading === undefined) {

@@ -86,6 +86,96 @@ export class AppComponent {
         this.initializeApp();
     }
 
+    initializeApp() {
+        this.user.getFavorites();
+        this.alertPresented = false;
+        this.getAllPages();
+        this.platform.ready().then(() => {
+            // this.wso2Service.getAppToken();
+            this.translateService.setDefaultLang('fr');
+            this.getLanguage();
+            this.cache.setDefaultTTL(60 * 60 * 2);
+            this.cache.setOfflineInvalidate(false);
+            // this.storage.set('first', null);
+            this.storage.get('first').then((data) => {
+                if (data === null) {
+                    this.nav.navigateForward('/tutos');
+                    this.user.storage.set('first', false);
+                } else {
+                    this.nav.navigateForward('/');
+                }
+            });
+        });
+    }
+
+    async getElementToClose(element: any) {
+        try {
+            const elem = await element.getTop();
+            if (elem) {
+                elem.dismiss();
+                return;
+            }
+        } catch (error) {
+            console.log(error);
+        }
+    }
+
+    backButtonEvent() {
+        this.platform.backButton.subscribe(async () => {
+            this.getElementToClose(this.actionSheetCtrl);
+            this.getElementToClose(this.popoverCtrl);
+            this.getElementToClose(this.modalCtrl);
+            try {
+                const element = await this.menu.getOpen();
+                if (element) {
+                    this.menu.close();
+                }
+            } catch (error) {
+                console.log(error);
+            }
+            this.confirmExitApp();
+        });
+    }
+
+    openRootPage(page) {
+        this.menu.close();
+        this.page = page;
+
+        if (page.iosSchemaName !== null && page.androidPackageName !== null) {
+            this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
+        } else {
+            const navigationExtras: NavigationExtras = {
+                state: {
+                    title: page.title,
+                }
+            };
+            this.nav.navigateForward([page.component], navigationExtras);
+        }
+    }
+
+    launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
+        let app: string;
+        let check = '';
+        if (this.device.platform === 'iOS') {
+            app = iosSchemaName;
+            check = appUrl;
+        } else if (this.device.platform === 'Android') {
+            app = androidPackageName;
+            check = app;
+        } else {
+            const browser = this.iab.create(httpUrl, '_system');
+            return browser.close(); // return not present initially, TEST
+        }
+        this.appAvailability.check(check).then(
+            () => {
+                const browser = this.iab.create(appUrl, '_system');
+                browser.close();
+            },
+            () => {
+                this.market.open(app);
+            });
+    }
+
     // TODO: Have to improve that and a lot of things
     private getAllPages() {
         const nullSchemas = this.utilsServices.nullSchemas;
@@ -135,28 +225,6 @@ export class AppComponent {
         return {title: title, route: route, icon: icon, schemas: nullSchemas, urls: nullUrls};
     }
 
-    initializeApp() {
-        this.user.getFavorites();
-        this.alertPresented = false;
-        this.getAllPages();
-        this.platform.ready().then(() => {
-            // this.wso2Service.getAppToken();
-            this.translateService.setDefaultLang('fr');
-            this.getLanguage();
-            this.cache.setDefaultTTL(60 * 60 * 2);
-            this.cache.setOfflineInvalidate(false);
-            // this.storage.set('first', null);
-            this.storage.get('first').then((data) => {
-                if (data === null) {
-                    this.nav.navigateForward('/tutos');
-                    this.user.storage.set('first', false);
-                } else {
-                    this.nav.navigateForward('/');
-                }
-            });
-        });
-    }
-
     private getLanguage() {
         this.user.storage.get('lan').then((data) => {
             if (data !== null) {
@@ -164,35 +232,6 @@ export class AppComponent {
             } else {
                 this.translateService.use('fr');
             }
-        });
-    }
-
-    async getElementToClose(element: any) {
-        try {
-            const elem = await element.getTop();
-            if (elem) {
-                elem.dismiss();
-                return;
-            }
-        } catch (error) {
-            console.log(error);
-        }
-    }
-
-    backButtonEvent() {
-        this.platform.backButton.subscribe(async () => {
-            this.getElementToClose(this.actionSheetCtrl);
-            this.getElementToClose(this.popoverCtrl);
-            this.getElementToClose(this.modalCtrl);
-            try {
-                const element = await this.menu.getOpen();
-                if (element) {
-                    this.menu.close();
-                }
-            } catch (error) {
-                console.log(error);
-            }
-            this.confirmExitApp();
         });
     }
 
@@ -211,44 +250,5 @@ export class AppComponent {
                 }
             }
         });
-    }
-
-    openRootPage(page) {
-        this.menu.close();
-        this.page = page;
-
-        if (page.iosSchemaName !== null && page.androidPackageName !== null) {
-            this.launchExternalApp(page.iosSchemaName, page.androidPackageName, page.appUrl, page.httpUrl);
-        } else {
-            const navigationExtras: NavigationExtras = {
-                state: {
-                    title: page.title,
-                }
-            };
-            this.nav.navigateForward([page.component], navigationExtras);
-        }
-    }
-
-    launchExternalApp(iosSchemaName: string, androidPackageName: string, appUrl: string, httpUrl: string) {
-        let app: string;
-        let check = '';
-        if (this.device.platform === 'iOS') {
-            app = iosSchemaName;
-            check = appUrl;
-        } else if (this.device.platform === 'Android') {
-            app = androidPackageName;
-            check = app;
-        } else {
-            const browser = this.iab.create(httpUrl, '_system');
-            return browser.close(); // return not present initially, TEST
-        }
-        this.appAvailability.check(check).then(
-            () => {
-                const browser = this.iab.create(appUrl, '_system');
-                browser.close();
-            },
-            () => {
-                this.market.open(app);
-            });
     }
 }

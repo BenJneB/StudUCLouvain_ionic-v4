@@ -129,14 +129,6 @@ export class SportsPage implements OnInit {
         }
     }
 
-    private assignDatas(isTeam: boolean, result: any) {
-        isTeam ? this.teams = result.sports : this.sports = result.sports;
-        isTeam ? this.shownTeams = result.shownSports : this.shownSports = result.shownSports;
-        isTeam ? this.filtersT = result.categories : this.filters = result.categories;
-        isTeam ? this.noteams = result.sports.length === 0 : this.nosport = result.sports.length === 0;
-        this.searching = false;
-    }
-
     /*Sort sports BY DAY*/
     public changeArray(array) {
         const groups = array.reduce(function (obj, item) {
@@ -162,28 +154,6 @@ export class SportsPage implements OnInit {
         this.searching = false;
         this.displayedSportsD = this.changeArray(this.displayedSports);
         this.loader.dismiss();
-    }
-
-    private isNotFavorite() {
-        return this.segment === 'all' || this.segment === 'team';
-    }
-
-    private filterDisplayedSports(items: Array<SportItem>, excluded: any) {
-        return this.utilsServices.filterItems('sports', items, excluded, this.dateLimit, this.searchTerm);
-    }
-
-    private getFiltersData(isTeam: boolean) {
-        if (isTeam === true) {
-            return {
-                filters: this.filtersT,
-                exclude: this.excludedFiltersT
-            };
-        } else {
-            return {
-                filters: this.filters,
-                exclude: this.excludedFilters
-            };
-        }
     }
 
     tabChanged(newTab: any) {
@@ -221,12 +191,6 @@ export class SportsPage implements OnInit {
         return await modal.present();
     }
 
-    /*Update the dateLimit when that is changed by the filter*/
-    private updateDateLimit() {
-        const today = new Date();
-        this.dateLimit = new Date(today.getFullYear(), today.getMonth(), today.getUTCDate() + this.dateRange);
-    }
-
     /*Add a sport to calendar of the smartphone*/
     addToCalendar(slidingItem: IonItemSliding, itemData: SportItem) {
         const options: any = {
@@ -247,5 +211,41 @@ export class SportsPage implements OnInit {
     async removeFavorite(slidingItem: IonItemSliding, itemData: SportItem, title: string) {
         await this.utilsServices.removeFavorite(slidingItem, itemData, title, this.texts);
         this.updateDisplayed();
+    }
+
+    private assignDatas(isTeam: boolean, result: any) {
+        isTeam ? this.teams = result.sports : this.sports = result.sports;
+        isTeam ? this.shownTeams = result.shownSports : this.shownSports = result.shownSports;
+        isTeam ? this.filtersT = result.categories : this.filters = result.categories;
+        isTeam ? this.noteams = result.sports.length === 0 : this.nosport = result.sports.length === 0;
+        this.searching = false;
+    }
+
+    private isNotFavorite() {
+        return this.segment === 'all' || this.segment === 'team';
+    }
+
+    private filterDisplayedSports(items: Array<SportItem>, excluded: any) {
+        return this.utilsServices.filterItems('sports', items, excluded, this.dateLimit, this.searchTerm);
+    }
+
+    private getFiltersData(isTeam: boolean) {
+        if (isTeam === true) {
+            return {
+                filters: this.filtersT,
+                exclude: this.excludedFiltersT
+            };
+        } else {
+            return {
+                filters: this.filters,
+                exclude: this.excludedFilters
+            };
+        }
+    }
+
+    /*Update the dateLimit when that is changed by the filter*/
+    private updateDateLimit() {
+        const today = new Date();
+        this.dateLimit = new Date(today.getFullYear(), today.getMonth(), today.getUTCDate() + this.dateRange);
     }
 }

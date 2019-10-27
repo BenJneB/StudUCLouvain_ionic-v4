@@ -103,15 +103,6 @@ export class CourseService {
         return activities;
     }
 
-    private handleSpecialCase(events: any) {
-        if (events.length === undefined) {
-            const temp = events;
-            events = [];
-            events.push(temp);
-        }
-        return events;
-    }
-
     /*Create a date*/
     createDate(date: string, hour: string): Date {
         const splitDate = date.split('/');
@@ -134,6 +125,14 @@ export class CourseService {
         return itemsData;
     }
 
+    private handleSpecialCase(events: any) {
+        if (events.length === undefined) {
+            const temp = events;
+            events = [];
+            events.push(temp);
+        }
+        return events;
+    }
 
     private fillItems(participants: any, i: number, itemsData: any) {
         switch (participants[i].$.category) {
