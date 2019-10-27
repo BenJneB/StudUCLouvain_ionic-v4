@@ -27,57 +27,57 @@ import { Wso2Service } from './wso2-service';
     providedIn: 'root'
 })
 export class StudentService {
-  activities: Array<String> = [];
-  url = 'my/v0/student/';
-  options: any;
-  courseUrl = 'learning/v1/learningUnits/';
+    activities: Array<String> = [];
+    url = 'my/v0/student/';
+    options: any;
+    courseUrl = 'learning/v1/learningUnits/';
 
-  constructor(public http: HttpClient, private wso2Service: Wso2Service) {
-  }
+    constructor(public http: HttpClient, private wso2Service: Wso2Service) {
+    }
 
-  public searchActivities() {
-    this.activities = [];
-    let newUrl = this.url;
-    newUrl += 'activities';
-    return new Promise(resolve => {
-      this.wso2Service.loadStudent(newUrl).subscribe(
-        data => {
-          if (data['activities'] !== null) {
-            resolve({ activities: data['activities'] });
-          }
+    public searchActivities() {
+        this.activities = [];
+        let newUrl = this.url;
+        newUrl += 'activities';
+        return new Promise(resolve => {
+            this.wso2Service.loadStudent(newUrl).subscribe(
+                data => {
+                    if (data['activities'] !== null) {
+                        resolve({activities: data['activities']});
+                    }
+                });
         });
-    });
-  }
+    }
 
-  public checkCourse(sigle: string, year) {
-    const newUrl = this.courseUrl + year + '/' + sigle + '/fullInformation';
-    return new Promise(resolve => {
-      this.wso2Service.load(newUrl).subscribe(
-        (data) => {
-          let res: any;
-          res = data;
-          resolve(res.ficheActivite);
-        },
-        (err) => {
-          console.log(err);
-          resolve(err.status);
+    public checkCourse(sigle: string, year) {
+        const newUrl = this.courseUrl + year + '/' + sigle + '/fullInformation';
+        return new Promise(resolve => {
+            this.wso2Service.load(newUrl).subscribe(
+                (data) => {
+                    let res: any;
+                    res = data;
+                    resolve(res.ficheActivite);
+                },
+                (err) => {
+                    console.log(err);
+                    resolve(err.status);
+                });
         });
-    });
-  }
+    }
 
-  getStatus() {
-    const newUrl = this.url + 'inscriptions';
-    return new Promise(resolve => {
-      this.wso2Service.loadStudent(newUrl).subscribe(
-        (data: any) => {
-          let res: any;
-          res = data.lireInscriptionAnacResponse;
-          resolve(res == null ? undefined : res.return);
-        },
-        (err) => {
-          console.log(err);
-          resolve(err.status);
+    getStatus() {
+        const newUrl = this.url + 'inscriptions';
+        return new Promise(resolve => {
+            this.wso2Service.loadStudent(newUrl).subscribe(
+                (data: any) => {
+                    let res: any;
+                    res = data.lireInscriptionAnacResponse;
+                    resolve(res == null ? undefined : res.return);
+                },
+                (err) => {
+                    console.log(err);
+                    resolve(err.status);
+                });
         });
-    });
-  }
+    }
 }

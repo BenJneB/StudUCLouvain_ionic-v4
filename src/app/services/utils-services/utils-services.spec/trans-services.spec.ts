@@ -1,9 +1,7 @@
 import { CacheService } from 'ionic-cache';
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 import { MockCacheStorageService } from 'test-config/MockCacheStorageService';
-import {
-    AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock
-} from 'test-config/MockIonicNative';
+import { AppAvailabilityMock, CalendarMock, DeviceMock, InAppBrowserMock, MarketMock, NetworkMock } from 'test-config/MockIonicNative';
 
 import { async, TestBed } from '@angular/core/testing';
 import { RouterTestingModule } from '@angular/router/testing';
@@ -34,10 +32,10 @@ describe('TransService', () => {
             ],
             providers: [
                 TransService,
-                { provide: AppAvailability, useClass: AppAvailabilityMock },
-                { provide: Market, useClass: MarketMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: Device, useClass: DeviceMock },
+                {provide: AppAvailability, useClass: AppAvailabilityMock},
+                {provide: Market, useClass: MarketMock},
+                {provide: InAppBrowser, useClass: InAppBrowserMock},
+                {provide: Device, useClass: DeviceMock},
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
@@ -45,8 +43,8 @@ describe('TransService', () => {
                     }
                 },
                 Diagnostic,
-                { provide: Network, useClass: NetworkMock },
-                { provide: Calendar, useClass: CalendarMock },
+                {provide: Network, useClass: NetworkMock},
+                {provide: Calendar, useClass: CalendarMock},
             ]
         });
     }));

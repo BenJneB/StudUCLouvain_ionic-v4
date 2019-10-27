@@ -44,9 +44,9 @@ describe('Credit Component', () => {
                 RouterTestingModule,
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: AppVersion, useClass: AppVersionMock },
+                {provide: ModalController, useClass: ModalControllerMock},
+                {provide: InAppBrowser, useClass: InAppBrowserMock},
+                {provide: AppVersion, useClass: AppVersionMock},
             ]
         }).compileComponents();
     }));

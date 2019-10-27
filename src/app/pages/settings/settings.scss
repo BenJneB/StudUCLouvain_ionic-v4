@@ -20,15 +20,15 @@
 */
 
 ion-button {
-    --border-radius: 5px;
-    --box-shadow: 0px 14px 25px var(--ion-color-setting);
-    --background: var(--ion-color-setting) !important;
+  --border-radius: 5px;
+  --box-shadow: 0px 14px 25px var(--ion-color-setting);
+  --background: var(--ion-color-setting) !important;
 }
 
 div.settings {
-    background-color: #acaaaa !important;
+  background-color: #acaaaa !important;
 
-    button {
-        --background: var(--ion-color-setting) !important;
-    }
+  button {
+    --background: var(--ion-color-setting) !important;
+  }
 }

@@ -1,24 +1,24 @@
 <ion-app>
     <ion-split-pane contentId="main-app">
         <ion-menu contentId="main-app-menu">
-      <ion-header>
-        <ion-toolbar class="ion-padding" color="home">
-            <img src="./assets/img/s.png" height="28" alt="icon"/>
-          <ion-title class="menu-title">Stud.UCLouvain</ion-title>
-        </ion-toolbar>
-      </ion-header>
+            <ion-header>
+                <ion-toolbar class="ion-padding" color="home">
+                    <img alt="icon" height="28" src="./assets/img/s.png"/>
+                    <ion-title class="menu-title">Stud.UCLouvain</ion-title>
+                </ion-toolbar>
+            </ion-header>
             <ion-content id="main-app-menu">
-        <ion-list scroll=true>
-            <ion-item button *ngFor="let p of pages" (click)="openRootPage(p)">
-            <ion-label>
-                <div class="box"><img src={{p.icon}} width="35" height="35" alt="Pictogramme"/>
-                    <span> {{p.title | translate}}</span>
-              </div>
-            </ion-label>
-          </ion-item>
-        </ion-list>
-      </ion-content>
-    </ion-menu>
+                <ion-list scroll=true>
+                    <ion-item (click)="openRootPage(p)" *ngFor="let p of pages" button>
+                        <ion-label>
+                            <div class="box"><img alt="Pictogramme" height="35" src={{p.icon}} width="35"/>
+                                <span> {{p.title | translate}}</span>
+                            </div>
+                        </ion-label>
+                    </ion-item>
+                </ion-list>
+            </ion-content>
+        </ion-menu>
         <ion-router-outlet id="main-app"></ion-router-outlet>
-  </ion-split-pane>
+    </ion-split-pane>
 </ion-app>

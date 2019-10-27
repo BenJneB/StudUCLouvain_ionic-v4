@@ -1,4 +1,4 @@
-import { browser, by, element, ExpectedConditions } from 'protractor';
+import { browser } from 'protractor';
 
 import { HomePage } from '../../../src/app/home/home.po';
 

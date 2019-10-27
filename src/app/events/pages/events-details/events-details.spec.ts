@@ -13,7 +13,7 @@ import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModalControllerMock } from 'test-config/MockIonicNative';
+import { newModalControllerMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -32,6 +32,7 @@ import { ModalControllerMock } from 'test-config/MockIonicNative';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { EventsDetailsPage } from './events-details';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('EventsDetails Component', () => {
     let fixture;
@@ -48,7 +49,7 @@ describe('EventsDetails Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
+                getMockProvider(ModalController, newModalControllerMock),
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
@@ -64,7 +65,7 @@ describe('EventsDetails Component', () => {
 
     beforeEach(() => {
         spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
-            .and.returnValue({ extras: { state: { items: {} } } });
+            .and.returnValue({extras: {state: {items: {}}}});
         fixture = TestBed.createComponent(EventsDetailsPage);
         component = fixture.componentInstance;
         fixture.detectChanges();

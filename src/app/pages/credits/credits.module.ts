@@ -9,17 +9,18 @@ import { AppVersion } from '@ionic-native/app-version/ngx';
 import { CreditsRoutingModule } from './credits-routing.module';
 
 @NgModule({
-  declarations: [CreditsPage],
-  imports: [
-    IonicModule,
-    CommonModule,
-    FormsModule,
-    ReactiveFormsModule,
-    TranslateModule.forChild(),
-      CreditsRoutingModule
-  ],
+    declarations: [CreditsPage],
+    imports: [
+        IonicModule,
+        CommonModule,
+        FormsModule,
+        ReactiveFormsModule,
+        TranslateModule.forChild(),
+        CreditsRoutingModule
+    ],
     providers: [
         AppVersion,
     ]
 })
-export class CreditPageModule { }
+export class CreditPageModule {
+}

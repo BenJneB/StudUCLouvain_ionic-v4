@@ -8,19 +8,20 @@ import { EventsFilterPage } from './events-filter';
 import { EventsService } from 'src/app/services/rss-services/events-service';
 
 @NgModule({
-  declarations: [EventsFilterPage],
-  imports: [
-    IonicModule,
-    ReactiveFormsModule,
-    CommonModule,
-    FormsModule,
-    TranslateModule.forChild(),
-  ],
-  entryComponents: [
-    EventsFilterPage
-  ],
+    declarations: [EventsFilterPage],
+    imports: [
+        IonicModule,
+        ReactiveFormsModule,
+        CommonModule,
+        FormsModule,
+        TranslateModule.forChild(),
+    ],
+    entryComponents: [
+        EventsFilterPage
+    ],
     providers: [
         EventsService,
     ]
 })
-export class EventsFilterModule { }
+export class EventsFilterModule {
+}

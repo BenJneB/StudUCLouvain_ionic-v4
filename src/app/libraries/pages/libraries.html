@@ -22,27 +22,27 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar color="bibli">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-      <img src="./assets/img/s.png" height="28" />
-    </ion-buttons>
-    <ion-title horizontal="center">{{title | translate}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="bibli">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+            <img height="28" src="./assets/img/s.png"/>
+        </ion-buttons>
+        <ion-title horizontal="center">{{title | translate}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content class="ion-padding">
-  <ion-refresher slot="fixed"(ionRefresh)="doRefresh($event)">
-    <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
-    </ion-refresher-content>
-  </ion-refresher>
-  <div *ngIf="searching" class="spinner-container">
-    <ion-spinner></ion-spinner>
-  </div>
-  <ion-list>
-    <ion-item *ngFor="let lib of libraries" button (click)="goToLibDetails(lib)" no-lines>
-      <ion-label>{{lib.name}}</ion-label>
-    </ion-item>
-  </ion-list>
+    <ion-refresher (ionRefresh)="doRefresh($event)" slot="fixed">
+        <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
+        </ion-refresher-content>
+    </ion-refresher>
+    <div *ngIf="searching" class="spinner-container">
+        <ion-spinner></ion-spinner>
+    </div>
+    <ion-list>
+        <ion-item (click)="goToLibDetails(lib)" *ngFor="let lib of libraries" button no-lines>
+            <ion-label>{{lib.name}}</ion-label>
+        </ion-item>
+    </ion-list>
 </ion-content>

@@ -8,7 +8,7 @@ import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModalControllerMock } from 'test-config/MockIonicNative';
+import { newModalControllerMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -31,6 +31,7 @@ import { ModalControllerMock } from 'test-config/MockIonicNative';
  */
 import { SearchModal } from './search';
 import { POIService } from 'src/app/services/map-services/poi-service';
+import { getMockProvider } from '../../../../../test-config/Mock';
 
 describe('SearchModal of Map Component', () => {
     let fixture;
@@ -47,7 +48,7 @@ describe('SearchModal of Map Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
+                getMockProvider(ModalController, newModalControllerMock),
                 POIService
             ]
         }).compileComponents();

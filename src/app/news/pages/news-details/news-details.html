@@ -20,40 +20,40 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar color="news">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-row>
-      <ion-col>
-        <ion-title>{{news.title}}</ion-title>
-      </ion-col>
-    </ion-row>
-  </ion-toolbar>
+    <ion-toolbar color="news">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-row>
+            <ion-col>
+                <ion-title>{{news.title}}</ion-title>
+            </ion-col>
+        </ion-row>
+    </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content>
-  <ion-card>
+    <ion-card>
 
-    <img style="width:75%; margin:auto;" src="{{news.image}}" alt="News pictures"/>
+        <img alt="News pictures" src="{{news.image}}" style="width:75%; margin:auto;"/>
 
-    <ion-card-content>
-      <ion-card-title>
-        {{news.title}}
-      </ion-card-title>
-      <br>
-      <p [innerHTML]="news.description"></p>
-    </ion-card-content>
+        <ion-card-content>
+            <ion-card-title>
+                {{news.title}}
+            </ion-card-title>
+            <br>
+            <p [innerHTML]="news.description"></p>
+        </ion-card-content>
 
-    <ion-row>
-      <ion-col class="ion-text-right">
-        <ion-button fill="clear" size="small" (click)="openPage(news.link)">
-          <ion-icon slot="start" name='share-alt'></ion-icon>
-          {{'NEWS.SITE' | translate}}
-        </ion-button>
-      </ion-col>
-    </ion-row>
+        <ion-row>
+            <ion-col class="ion-text-right">
+                <ion-button (click)="openPage(news.link)" fill="clear" size="small">
+                    <ion-icon name='share-alt' slot="start"></ion-icon>
+                    {{'NEWS.SITE' | translate}}
+                </ion-button>
+            </ion-col>
+        </ion-row>
 
-  </ion-card>
+    </ion-card>
 </ion-content>

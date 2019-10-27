@@ -10,17 +10,18 @@ import { SupportRoutingModule } from './support-routing.module';
 import { EmployeeDetailsPage } from './pages/employee-details/employee-details';
 
 @NgModule({
-  declarations: [SupportPage, EmployeeDetailsPage],
-  imports: [
-    IonicModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    TranslateModule.forChild(),
-    SupportRoutingModule
-  ],
+    declarations: [SupportPage, EmployeeDetailsPage],
+    imports: [
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        TranslateModule.forChild(),
+        SupportRoutingModule
+    ],
     providers: [
         RepertoireService,
     ]
 })
-export class SupportPageModule { }
+export class SupportPageModule {
+}

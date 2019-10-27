@@ -20,61 +20,65 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar color="mobilite">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-      <img src="./assets/img/s.png" height="28" />
-    </ion-buttons>
-    <ion-title horizontal="center">{{title | translate}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="mobilite">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+            <img height="28" src="./assets/img/s.png"/>
+        </ion-buttons>
+        <ion-title horizontal="center">{{title | translate}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content>
-  <ion-grid class="ion-padding portrait" *ngIf="platform.isPortrait()">
-    <ion-row>
-      <ion-col class="ion-align-self-end ion-text-center"><img (click)="utilsServices.launchExternalApp(carpoolingPage)"
-          alt="voiture" src="./assets/img/commuty.png" vertical="center" />
-        <p horizontal="center"><b>{{'MOBI.COVOIT' | translate}}</b></p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="ion-align-self-end ion-text-center"><img (click)="utilsServices.launchExternalApp(busPage)"
-          alt="bus" src="./assets/img/nextride.png" vertical="center" />
-        <p horizontal="center"><b>{{'MOBI.BUS' | translate}}</b></p>
-      </ion-col>
-    </ion-row>
-    <ion-row>
-      <ion-col class="ion-align-self-end ion-text-center"><img (click)="utilsServices.launchExternalApp(trainPage)"
-          alt="train" src="./assets/img/sncb.png" vertical="center" />
-        <p horizontal="center"><b>{{'MOBI.SNCB' | translate}}</b></p>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
-  <ion-grid *ngIf="platform.isLandscape()" class="landscape">
-    <ion-row class="ion-text-center ion-align-items-center">
-      <ion-col size="4">
-        <ion-label>
-          <img (click)="utilsServices.launchExternalApp(carpoolingPage)" alt="voiture" src="./assets/img/commuty.png" />
-          <p><b>{{'MOBI.COVOIT' | translate}}</b></p>
-        </ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-text-center ion-align-items-center">
-      <ion-col align-content-center size="4" offset="4">
-        <ion-label>
-          <img (click)="utilsServices.launchExternalApp(busPage)" alt="bus" src="./assets/img/nextride.png" />
-          <p><b>{{'MOBI.BUS' | translate}}</b></p>
-        </ion-label>
-      </ion-col>
-    </ion-row>
-    <ion-row class="ion-text-center ion-align-items-center">
-      <ion-col size="4" offset='8'>
-        <ion-label>
-          <img (click)="utilsServices.launchExternalApp(trainPage)" alt="train" src="./assets/img/sncb.png" />
-          <p><b>{{'MOBI.SNCB' | translate}}</b></p>
-        </ion-label>
-      </ion-col>
-    </ion-row>
-  </ion-grid>
+    <ion-grid *ngIf="platform.isPortrait()" class="ion-padding portrait">
+        <ion-row>
+            <ion-col class="ion-align-self-end ion-text-center"><img
+                    (click)="utilsServices.launchExternalApp(carpoolingPage)"
+                    alt="voiture" src="./assets/img/commuty.png" vertical="center"/>
+                <p horizontal="center"><b>{{'MOBI.COVOIT' | translate}}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-align-self-end ion-text-center"><img (click)="utilsServices.launchExternalApp(busPage)"
+                                                                     alt="bus" src="./assets/img/nextride.png"
+                                                                     vertical="center"/>
+                <p horizontal="center"><b>{{'MOBI.BUS' | translate}}</b></p>
+            </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col class="ion-align-self-end ion-text-center"><img
+                    (click)="utilsServices.launchExternalApp(trainPage)"
+                    alt="train" src="./assets/img/sncb.png" vertical="center"/>
+                <p horizontal="center"><b>{{'MOBI.SNCB' | translate}}</b></p>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
+    <ion-grid *ngIf="platform.isLandscape()" class="landscape">
+        <ion-row class="ion-text-center ion-align-items-center">
+            <ion-col size="4">
+                <ion-label>
+                    <img (click)="utilsServices.launchExternalApp(carpoolingPage)" alt="voiture"
+                         src="./assets/img/commuty.png"/>
+                    <p><b>{{'MOBI.COVOIT' | translate}}</b></p>
+                </ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center ion-align-items-center">
+            <ion-col align-content-center offset="4" size="4">
+                <ion-label>
+                    <img (click)="utilsServices.launchExternalApp(busPage)" alt="bus" src="./assets/img/nextride.png"/>
+                    <p><b>{{'MOBI.BUS' | translate}}</b></p>
+                </ion-label>
+            </ion-col>
+        </ion-row>
+        <ion-row class="ion-text-center ion-align-items-center">
+            <ion-col offset='8' size="4">
+                <ion-label>
+                    <img (click)="utilsServices.launchExternalApp(trainPage)" alt="train" src="./assets/img/sncb.png"/>
+                    <p><b>{{'MOBI.SNCB' | translate}}</b></p>
+                </ion-label>
+            </ion-col>
+        </ion-row>
+    </ion-grid>
 </ion-content>

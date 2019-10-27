@@ -58,7 +58,7 @@ describe('Exam Component', () => {
 
     beforeEach(() => {
         spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
-            .and.returnValue({ extras: { state: { items: {} } } });
+            .and.returnValue({extras: {state: {items: {}}}});
         fixture = TestBed.createComponent(ExamPage);
         component = fixture.componentInstance;
         fixture.detectChanges();

@@ -56,8 +56,8 @@ describe('Libraries Component', () => {
                 getMockProvider(LibrariesService, newMockLibrariesService),
                 getMockProvider(UtilsService, newMockUtilsService),
                 getMockProvider(ConnectivityService, newMockConnectivityService),
-                { provide: ModalController, useClass: ModalControllerMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
+                {provide: ModalController, useClass: ModalControllerMock},
+                {provide: InAppBrowser, useClass: InAppBrowserMock},
                 getMockProvider(CacheService, newMockCacheService),
             ]
         }).compileComponents();
@@ -75,7 +75,8 @@ describe('Libraries Component', () => {
 
     describe('goToLibDetails method', () => {
         it('should call goToDetail with libItem and libraries/details from UtilsService', () => {
-            const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => { });
+            const spyGoToDetail = spyOn(component.utilsServices, 'goToDetail').and.callFake(() => {
+            });
             component.goToLibDetails('libItem');
             expect(spyGoToDetail.calls.count()).toEqual(1);
             expect(spyGoToDetail).toHaveBeenCalledWith('libItem', 'libraries/details');
@@ -132,7 +133,13 @@ describe('Libraries Component', () => {
                     resolve();
                 });
             });
-            component.doRefresh({ target: { complete: () => { return; } } });
+            component.doRefresh({
+                target: {
+                    complete: () => {
+                        return;
+                    }
+                }
+            });
             expect(spyRefresh.calls.count()).toEqual(1);
         });
     });

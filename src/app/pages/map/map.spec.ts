@@ -49,7 +49,7 @@ xdescribe('Map Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
+                {provide: ModalController, useClass: ModalControllerMock},
                 Geolocation,
                 POIService,
                 MapService

@@ -12,23 +12,25 @@ import { ConnectivityService } from 'src/app/services/utils-services/connectivit
 import { TransService } from 'src/app/services/utils-services/trans-services';
 import { StudiesRoutingModule } from './studies-routing.module';
 import { CoursePage } from './pages/course/course';
+import { ModalInfoPage } from './pages/course/modal-info/modal-info';
 
 @NgModule({
-  declarations: [StudiesPage, CoursePage],
-  imports: [
-    IonicModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    ModalProjectPageModule,
-    TranslateModule.forChild(),
-    StudiesRoutingModule
-  ],
-  providers: [
-    StudentService,
-    StudiesService,
-    ConnectivityService,
-    TransService,
-  ]
+    declarations: [StudiesPage, CoursePage, ModalInfoPage],
+    imports: [
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        ModalProjectPageModule,
+        TranslateModule.forChild(),
+        StudiesRoutingModule
+    ],
+    providers: [
+        StudentService,
+        StudiesService,
+        ConnectivityService,
+        TransService,
+    ]
 })
-export class StudiesPageModule { }
+export class StudiesPageModule {
+}

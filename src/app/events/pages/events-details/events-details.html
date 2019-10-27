@@ -21,37 +21,37 @@
 <!--EN-TETE-->
 <ion-header>
     <ion-toolbar color="event">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-    </ion-buttons>
-    <ion-title>{{event.title}}</ion-title>
-  </ion-toolbar>
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+        </ion-buttons>
+        <ion-title>{{event.title}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content>
-  <ion-card>
-      <img src="{{event.image}}" alt="Events picture"/>
-    <ion-card-content>
-      <ion-card-title>
-        {{event.title}}
-      </ion-card-title>
-      <p [innerHTML]="event.description"></p>
-    </ion-card-content>
-    <ion-row>
-        <ion-col class="ion-text-right">
-        <ion-button fill="clear" size="small" (click)="addFavorite(event)">
-          <ion-icon slot="start" name='star'></ion-icon>
-          {{'EVENTS.FAV' | translate}}
-        </ion-button>
-      </ion-col>
-        <ion-col class="ion-text-right">
-        <ion-button fill="clear" size="small" (click)="openPage(event.link)">
-          <ion-icon slot="start" name='share-alt'></ion-icon>
-          {{'EVENTS.SITE' | translate}}
-        </ion-button>
-      </ion-col>
-    </ion-row>
+    <ion-card>
+        <img alt="Events picture" src="{{event.image}}"/>
+        <ion-card-content>
+            <ion-card-title>
+                {{event.title}}
+            </ion-card-title>
+            <p [innerHTML]="event.description"></p>
+        </ion-card-content>
+        <ion-row>
+            <ion-col class="ion-text-right">
+                <ion-button (click)="addFavorite(event)" fill="clear" size="small">
+                    <ion-icon name='star' slot="start"></ion-icon>
+                    {{'EVENTS.FAV' | translate}}
+                </ion-button>
+            </ion-col>
+            <ion-col class="ion-text-right">
+                <ion-button (click)="openPage(event.link)" fill="clear" size="small">
+                    <ion-icon name='share-alt' slot="start"></ion-icon>
+                    {{'EVENTS.SITE' | translate}}
+                </ion-button>
+            </ion-col>
+        </ion-row>
 
-  </ion-card>
+    </ion-card>
 </ion-content>

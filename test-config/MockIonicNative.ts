@@ -8,6 +8,8 @@ import { InAppBrowser, InAppBrowserEventType, InAppBrowserObject, InAppBrowserOp
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { AngularDelegate, ModalController } from '@ionic/angular';
+import { ComponentFactoryResolver, Injector } from '@angular/core';
 
 function getPromise(item?: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -54,11 +56,14 @@ export class InAppBrowserObjectMock extends InAppBrowserObject {
         super(url, target, options);
     }
 
-    show(): void { }
+    show(): void {
+    }
 
-    close(): void { }
+    close(): void {
+    }
 
-    hide(): void { }
+    hide(): void {
+    }
 
     executeScript(script: { file?: string; code?: string; }): Promise<any> {
         return getPromise();
@@ -110,6 +115,7 @@ export class DeviceMock extends Device {
 export class NetworkMock extends Network {
     type = 'cellular';
     downlinkMax: string;
+
     onchange(): Observable<any> {
         return getObservable();
     }
@@ -165,6 +171,7 @@ export interface CalendarOptions {
 export class CalendarMock extends Calendar {
 
     deleteEvent = this.createEvent;
+
     hasReadWritePermission(): Promise<boolean> {
         return getPromise(true);
     }
@@ -215,14 +222,23 @@ export class SplashScreenMock extends SplashScreen {
     }
 }
 
-export class ModalControllerMock {
+export class ModalControllerMock extends ModalController {
     public create = jasmine.createSpy('create').and.returnValue(
         Promise.resolve({
             present: jasmine.createSpy('present').and.returnValue(Promise.resolve()),
-            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve({ 'data': [0, 1] }))
+            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve({'data': [0, 1]}))
         })
     );
-    public dismiss = jasmine.createSpy('dismiss').and.returnValue(Promise.resolve());
+
+    dismiss() {
+        return new Promise<boolean>(() => {
+        });
+    }
+}
+
+export function newModalControllerMock() {
+    let angularDelegate: AngularDelegate, componentFactoryResolver: ComponentFactoryResolver, injector: Injector;
+    return new ModalControllerMock(angularDelegate, componentFactoryResolver, injector);
 }
 
 export class AppVersionMock extends AppVersion {

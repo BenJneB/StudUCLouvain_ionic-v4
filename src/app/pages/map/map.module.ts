@@ -12,20 +12,21 @@ import { MapService } from 'src/app/services/map-services/map-service';
 import { MapRoutingModule } from './map-routing.module';
 
 @NgModule({
-  declarations: [MapPage],
-  imports: [
-    IonicModule,
-    FormsModule,
-    ReactiveFormsModule,
-    CommonModule,
-    SearchModalModule,
-    TranslateModule.forChild(),
-    MapRoutingModule
-  ],
+    declarations: [MapPage],
+    imports: [
+        IonicModule,
+        FormsModule,
+        ReactiveFormsModule,
+        CommonModule,
+        SearchModalModule,
+        TranslateModule.forChild(),
+        MapRoutingModule
+    ],
     providers: [
         POIService,
         Geolocation,
         MapService
     ],
 })
-export class MapPageModule { }
+export class MapPageModule {
+}

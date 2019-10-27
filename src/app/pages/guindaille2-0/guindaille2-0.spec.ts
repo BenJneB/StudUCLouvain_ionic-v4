@@ -1,5 +1,5 @@
 import { testInstanceCreation } from 'src/app/app.component.spec';
-import { InAppBrowserMock, ModalControllerMock } from 'test-config/MockIonicNative';
+import { InAppBrowserMock, newModalControllerMock } from 'test-config/MockIonicNative';
 
 import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -30,6 +30,7 @@ import { TranslateModule } from '@ngx-translate/core';
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 */
 import { GuindaillePage } from './guindaille2-0';
+import { getMockProvider } from '../../../../test-config/Mock';
 
 describe('Guindaille Component', () => {
     let fixture;
@@ -46,8 +47,8 @@ describe('Guindaille Component', () => {
                 IonicStorageModule.forRoot(),
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
+                getMockProvider(ModalController, newModalControllerMock),
+                {provide: InAppBrowser, useClass: InAppBrowserMock},
             ]
         }).compileComponents();
     }));

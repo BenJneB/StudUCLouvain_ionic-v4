@@ -60,8 +60,8 @@ describe('Studies Component', () => {
                 FormsModule,
             ],
             providers: [
-                { provide: ModalController, useClass: ModalControllerMock },
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
+                {provide: ModalController, useClass: ModalControllerMock},
+                {provide: InAppBrowser, useClass: InAppBrowserMock},
                 CacheService,
                 {
                     provide: CacheStorageService, useFactory: () => {
@@ -116,10 +116,10 @@ describe('Studies Component', () => {
     });
 
     describe('checkCourseExisting method', () => {
-        // TO TEST !!
+        // FIXME: TO TEST !!
         it('should call checkExist', () => {
             const spyCheck = spyOn(component, 'checkExist').and.callThrough();
-            component.project = { name: '' };
+            component.project = {name: ''};
             component.checkCourseExisting(false);
             expect(spyCheck.calls.count()).toEqual(1);
         });

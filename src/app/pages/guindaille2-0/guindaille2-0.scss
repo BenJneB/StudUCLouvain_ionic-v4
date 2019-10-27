@@ -17,71 +17,71 @@
 */
 
 ion-label {
-    font-family: 'Guindaille-Font' !important;
+  font-family: 'Guindaille-Font' !important;
 }
 
 ion-content {
-    background-color: var(--ion-color-guindaille) !important;
+  background-color: var(--ion-color-guindaille) !important;
 }
 
 .gelem {
-    text-align: center;
-    background-color: var(--ion-color-guindaille) !important;
-    height: 100% !important;
-    width: 100% !important;
+  text-align: center;
+  background-color: var(--ion-color-guindaille) !important;
+  height: 100% !important;
+  width: 100% !important;
 }
 
 ion-card.gelem {
-    //background-color: var(--ion-color-guindaille) !important;
-    border: solid var(--ion-color-guindaille) !important;
-    background-color: #c5ddf6 !important;
-    width: auto !important;
-    height: auto !important;
+  //background-color: var(--ion-color-guindaille) !important;
+  border: solid var(--ion-color-guindaille) !important;
+  background-color: #c5ddf6 !important;
+  width: auto !important;
+  height: auto !important;
 
-    ion-item {
-        height: 100% !important;
-        overflow: hidden;
+  ion-item {
+    height: 100% !important;
+    overflow: hidden;
 
-        ion-label {
-            height: 100% !important;
+    ion-label {
+      height: 100% !important;
 
-            ion-card {
-                border: solid red !important;
-            }
-        }
+      ion-card {
+        border: solid red !important;
+      }
     }
+  }
 }
 
 div.gelem {
-    ion-slides {
-        height: 90%;
-    }
+  ion-slides {
+    height: 90%;
+  }
 }
 
 .gfoot {
-    background-color: var(--ion-color-guindaille) !important;
+  background-color: var(--ion-color-guindaille) !important;
 }
 
 .gtext {
-    color: white;
-    font-family: 'Guindaille-Font' !important;
-    text-align: center;
+  color: white;
+  font-family: 'Guindaille-Font' !important;
+  text-align: center;
 }
 
 ion-grid.gelem {
 
-    ion-row {
-        height: 25%;
-        width: 100%;
+  ion-row {
+    height: 25%;
+    width: 100%;
 
-        ion-col {
-            height: 100%;
-            width: 33%;
+    ion-col {
+      height: 100%;
+      width: 33%;
 
-            img {
-                max-height: 100%;
-                max-width: 100%;
-            }
-        }
+      img {
+        max-height: 100%;
+        max-width: 100%;
+      }
     }
+  }
 }

@@ -54,9 +54,9 @@ describe('Home Component', () => {
             ],
             providers: [
                 getMockProvider(UtilsService, newMockUtilsService),
-                { provide: InAppBrowser, useClass: InAppBrowserMock },
-                { provide: SplashScreen, useClass: SplashScreenMock },
-                { provide: AlertController, useClass: MockAlertController },
+                {provide: InAppBrowser, useClass: InAppBrowserMock},
+                {provide: SplashScreen, useClass: SplashScreenMock},
+                {provide: AlertController, useClass: MockAlertController},
             ]
         }).compileComponents();
     }));
@@ -74,14 +74,14 @@ describe('Home Component', () => {
     describe('changePage method', () => {
         it('should call launchExternalApp of UtilsService if external application', () => {
             const spyLaunch = spyOn(component.utilsServices, 'launchExternalApp').and.callThrough();
-            component.utilsServices.device = { 'platform': 'iOS' };
-            component.changePage({ iosSchemaName: 'name' });
+            component.utilsServices.device = {'platform': 'iOS'};
+            component.changePage({iosSchemaName: 'name'});
             expect(spyLaunch.calls.count()).toEqual(1);
         });
 
         it('should call navigateForward of NavController otherwhise', () => {
             const spyNavigate = spyOn(component.nav, 'navigateForward').and.callThrough();
-            component.changePage({ iosSchemaName: null, component: '/' });
+            component.changePage({iosSchemaName: null, component: '/'});
             expect(spyNavigate.calls.count()).toEqual(1);
         });
     });
@@ -95,6 +95,7 @@ describe('Home Component', () => {
                     }
                 };
             }
+
             const spyAdd = spyOn(component.userS, 'addCampus').and.callFake(add).and.callThrough();
             component.updateCampus();
             expect(spyAdd.calls.count()).toEqual(1);
@@ -141,6 +142,7 @@ describe('Home Component', () => {
         });
     });
 });
+
 function _testCreateInAppBrowser(component: any) {
     const spyCreate = spyOn(component.iab, 'create').and.callFake(() => {
     });

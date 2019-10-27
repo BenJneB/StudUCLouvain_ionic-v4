@@ -27,59 +27,60 @@ import { UtilsService } from '../utils-services/utils-services';
 
 // import X2JS from 'x2js';
 /**
-  Generated class for the AdeserviceProvider provider.
+ Generated class for the AdeserviceProvider provider.
 
-  See https://angular.io/docs/ts/latest/guide/dependency-injection.html
-  for more info on providers and Angular 2 DI.
-*/
+ See https://angular.io/docs/ts/latest/guide/dependency-injection.html
+ for more info on providers and Angular 2 DI.
+ */
 @Injectable({
-  providedIn: 'root'
+    providedIn: 'root'
 })
 export class AdeService {
-  AdeserviceBaseUrl = 'http://horaire.uclouvain.be/jsp/webapi?';
-  AdeserviceConnection = 'function=connect&login=etudiant&password=student';
-  AdeServiceGetProjects = '&function=getProjects&detail=2';
+    AdeserviceBaseUrl = 'http://horaire.uclouvain.be/jsp/webapi?';
+    AdeserviceConnection = 'function=connect&login=etudiant&password=student';
+    AdeServiceGetProjects = '&function=getProjects&detail=2';
 
-  constructor(public http: HttpClient, private utilsServices: UtilsService) {
-  }
-
-  /*Open a session*/
-  httpOpenSession() {
-    const encodedURL = this.AdeserviceBaseUrl + this.AdeserviceConnection;
-    return this.getOrSetDataFromADE(encodedURL);
-  }
-
-  private getOrSetDataFromADE(encodedURL: string, sessionId?: string) {
-    if (sessionId !== undefined) {
-      encodedURL = this.getBasicSessionUrl(sessionId) + encodedURL;
+    constructor(public http: HttpClient, public utilsServices: UtilsService) {
     }
-    return this.http.get(encodedURL, { responseType: 'text' }).pipe(map(res => {
-      return this.utilsServices.convertToJson(res);
-    }, err => {
-      console.log(err);
-    }));
-  }
 
-  getBasicSessionUrl(sessionId: string) {
-    return this.AdeserviceBaseUrl + 'sessionId=' + sessionId;
-  }
-  /*Get the projects from ADE*/
-  getProjects(sessionId: string) {
-    return this.getOrSetDataFromADE(this.AdeServiceGetProjects, sessionId);
-  }
+    /*Open a session*/
+    httpOpenSession() {
+        const encodedURL = this.AdeserviceBaseUrl + this.AdeserviceConnection;
+        return this.getOrSetDataFromADE(encodedURL);
+    }
 
-  /*Set the project selected by the user*/
-  setProject(sessionId: string, projectId: string) {
-    return this.getOrSetDataFromADE('&function=setProject&projectId=' + projectId, sessionId);
-  }
+    getOrSetDataFromADE(encodedURL: string, sessionId?: string) {
+        if (sessionId !== undefined) {
+            encodedURL = this.getBasicSessionUrl(sessionId) + encodedURL;
+        }
+        return this.http.get(encodedURL, {responseType: 'text'}).pipe(map(res => {
+            return this.utilsServices.convertToJson(res);
+        }, err => {
+            console.log(err);
+        }));
+    }
 
-  /*For a course selected and its acronym get the course id*/
-  getCourseId(sessionId: string, acronym: string) {
-    return this.getOrSetDataFromADE('&function=getResources&code=' + acronym, sessionId);
-  }
+    getBasicSessionUrl(sessionId: string) {
+        return this.AdeserviceBaseUrl + 'sessionId=' + sessionId;
+    }
 
-  /*For a course selected get the activities*/
-  getActivity(sessionId: string, courseId: string) {
-    return this.getOrSetDataFromADE('&function=getActivities&resources=' + courseId + '&detail=17', sessionId);
-  }
+    /*Get the projects from ADE*/
+    getProjects(sessionId: string) {
+        return this.getOrSetDataFromADE(this.AdeServiceGetProjects, sessionId);
+    }
+
+    /*Set the project selected by the user*/
+    setProject(sessionId: string, projectId: string) {
+        return this.getOrSetDataFromADE('&function=setProject&projectId=' + projectId, sessionId);
+    }
+
+    /*For a course selected and its acronym get the course id*/
+    getCourseId(sessionId: string, acronym: string) {
+        return this.getOrSetDataFromADE('&function=getResources&code=' + acronym, sessionId);
+    }
+
+    /*For a course selected get the activities*/
+    getActivity(sessionId: string, courseId: string) {
+        return this.getOrSetDataFromADE('&function=getActivities&resources=' + courseId + '&detail=17', sessionId);
+    }
 }

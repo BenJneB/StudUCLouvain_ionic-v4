@@ -25,43 +25,43 @@ import { NavParams } from '@ionic/angular';
 import { EventsService } from 'src/app/services/rss-services/events-service';
 
 @Component({
-  selector: 'page-events-filter',
-  templateUrl: 'events-filter.html',
-  styleUrls: ['./events-filter.scss'],
+    selector: 'page-events-filter',
+    templateUrl: 'events-filter.html',
+    styleUrls: ['./events-filter.scss'],
 })
 export class EventsFilterPage {
-  categories: Array<{ name: string, iconCategory: string, isChecked: boolean }> = [];
-  dateRange: any;
+    categories: Array<{ name: string, iconCategory: string, isChecked: boolean }> = [];
+    dateRange: any;
 
-  constructor(
-    private eventService: EventsService,
-    private navParams: NavParams,
-    public alertService: AlertService
-  ) {
-    // passed in array of categories names that should be excluded (unchecked)
-    const excludedFilters = this.navParams.get('excludedFilters');
-    const filters = this.navParams.get('filters');
-    this.dateRange = this.navParams.get('dateRange');
-    for (const filterName of filters) {
-      this.categories.push({
-        name: filterName,
-        iconCategory: 'assets/icon/events-icon/' + this.eventService.getIconCategory(filterName) + '.png',
-        isChecked: (excludedFilters.indexOf(filterName) === -1)
-      });
+    constructor(
+        private eventService: EventsService,
+        private navParams: NavParams,
+        public alertService: AlertService
+    ) {
+        // passed in array of categories names that should be excluded (unchecked)
+        const excludedFilters = this.navParams.get('excludedFilters');
+        const filters = this.navParams.get('filters');
+        this.dateRange = this.navParams.get('dateRange');
+        for (const filterName of filters) {
+            this.categories.push({
+                name: filterName,
+                iconCategory: 'assets/icon/events-icon/' + this.eventService.getIconCategory(filterName) + '.png',
+                isChecked: (excludedFilters.indexOf(filterName) === -1)
+            });
+        }
     }
-  }
 
-  /*Reset All of the Toggles to be checked*/
-  resetFilters() {
-    this.categories.forEach(category => {
-      category.isChecked = true;
-    });
-  }
+    /*Reset All of the Toggles to be checked*/
+    resetFilters() {
+        this.categories.forEach(category => {
+            category.isChecked = true;
+        });
+    }
 
-  /*Uncheck All Sports*/
-  uncheckAll() {
-    this.categories.forEach(category => {
-      category.isChecked = false;
-    });
-  }
+    /*Uncheck All Sports*/
+    uncheckAll() {
+        this.categories.forEach(category => {
+            category.isChecked = false;
+        });
+    }
 }

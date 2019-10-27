@@ -52,7 +52,7 @@ describe('EmployeeDetails Component', () => {
 
     beforeEach(() => {
         spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
-            .and.returnValue({ extras: { state: { items: { departments: {} } } } });
+            .and.returnValue({extras: {state: {items: {departments: {}}}}});
         fixture = TestBed.createComponent(EmployeeDetailsPage);
         component = fixture.componentInstance;
         fixture.detectChanges();

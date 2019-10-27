@@ -20,64 +20,64 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar id="header" class="header">
-    <ion-buttons slot="start">
-      <ion-button (click)="alertService.applyFilters(categories, dateRange)">{{'EVENTS.CANCEL' | translate}}
-      </ion-button>
-    </ion-buttons>
-    <ion-row>
-      <ion-col>
-        <ion-title>
-          {{'EVENTS.FILTER' | translate}}
-        </ion-title>
-      </ion-col>
-    </ion-row>
-    <ion-buttons slot="end">
-      <ion-button (click)="alertService.applyFilters(categories, dateRange)" strong>{{'EVENTS.APPLY' | translate}}
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
+    <ion-toolbar class="header" id="header">
+        <ion-buttons slot="start">
+            <ion-button (click)="alertService.applyFilters(categories, dateRange)">{{'EVENTS.CANCEL' | translate}}
+            </ion-button>
+        </ion-buttons>
+        <ion-row>
+            <ion-col>
+                <ion-title>
+                    {{'EVENTS.FILTER' | translate}}
+                </ion-title>
+            </ion-col>
+        </ion-row>
+        <ion-buttons slot="end">
+            <ion-button (click)="alertService.applyFilters(categories, dateRange)" strong>{{'EVENTS.APPLY' | translate}}
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content class="outer-content">
-  <ion-item>
-    <ion-label center>
-      <div *ngIf="dateRange > 1">
-        {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}}
-        {{'EVENTS.TIMEEVENTS3' | translate}}
-      </div>
-      <div *ngIf="dateRange == 1">
-        {{'EVENTS.TIMEEVENTS' | translate}} <br /> {{'EVENTS.TIMEEVENTS4' | translate}}
-      </div>
-    </ion-label>
-    <ion-range min="1" max="6" step="1" pin="true" snaps="true" [(ngModel)]="dateRange">
-    </ion-range>
-  </ion-item>
-  <ion-toolbar color="uclouvain">
-    <ion-buttons slot="start">
-      <ion-button color="light" (click)="uncheckAll()">
-        <ion-label>{{'EVENTS.UNTOGGLE' | translate}}</ion-label>
-        <ion-icon slot="end" name="done-all"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-    <ion-buttons slot="end">
-      <ion-button color="light" (click)="resetFilters()">
-        <ion-label>{{'EVENTS.RESTORE' | translate}}</ion-label>
-        <ion-icon slot="end" name="refresh-circle"></ion-icon>
-      </ion-button>
-    </ion-buttons>
-  </ion-toolbar>
-  <ion-list>
-    <ion-list-header>
-      <ion-label>{{'EVENTS.CATEGORIES' | translate}}</ion-label>
-    </ion-list-header>
-    <ion-item *ngFor="let category of categories">
-      <ion-thumbnail item-left>
-        <img [src]="category.iconCategory">
-      </ion-thumbnail>
-      <ion-label>{{category.name}}</ion-label>
-      <ion-toggle [(ngModel)]="category.isChecked" color="secondary"></ion-toggle>
+    <ion-item>
+        <ion-label center>
+            <div *ngIf="dateRange > 1">
+                {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS2' | translate}} {{dateRange}}
+                {{'EVENTS.TIMEEVENTS3' | translate}}
+            </div>
+            <div *ngIf="dateRange == 1">
+                {{'EVENTS.TIMEEVENTS' | translate}} <br/> {{'EVENTS.TIMEEVENTS4' | translate}}
+            </div>
+        </ion-label>
+        <ion-range [(ngModel)]="dateRange" max="6" min="1" pin="true" snaps="true" step="1">
+        </ion-range>
     </ion-item>
-  </ion-list>
+    <ion-toolbar color="uclouvain">
+        <ion-buttons slot="start">
+            <ion-button (click)="uncheckAll()" color="light">
+                <ion-label>{{'EVENTS.UNTOGGLE' | translate}}</ion-label>
+                <ion-icon name="done-all" slot="end"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+        <ion-buttons slot="end">
+            <ion-button (click)="resetFilters()" color="light">
+                <ion-label>{{'EVENTS.RESTORE' | translate}}</ion-label>
+                <ion-icon name="refresh-circle" slot="end"></ion-icon>
+            </ion-button>
+        </ion-buttons>
+    </ion-toolbar>
+    <ion-list>
+        <ion-list-header>
+            <ion-label>{{'EVENTS.CATEGORIES' | translate}}</ion-label>
+        </ion-list-header>
+        <ion-item *ngFor="let category of categories">
+            <ion-thumbnail item-left>
+                <img [src]="category.iconCategory">
+            </ion-thumbnail>
+            <ion-label>{{category.name}}</ion-label>
+            <ion-toggle [(ngModel)]="category.isChecked" color="secondary"></ion-toggle>
+        </ion-item>
+    </ion-list>
 </ion-content>

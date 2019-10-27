@@ -1,7 +1,10 @@
 import { CacheStorageService } from 'ionic-cache/dist/cache-storage';
 
 export class MockCacheStorageService extends CacheStorageService {
-    constructor(a, b) { super(a, b); }
+    constructor(a, b) {
+        super(a, b);
+    }
+
     public ready() {
         let promise: Promise<LocalForage>;
         return new Promise<LocalForage>((resolve, reject) => {
@@ -13,6 +16,7 @@ export class MockCacheStorageService extends CacheStorageService {
 
 export class MockCacheService {
     _storage: MockCacheStorageService;
+
     constructor(_storage) {
     }
 
@@ -22,8 +26,11 @@ export class MockCacheService {
         });
     }
 
-    removeItem() { }
-    saveItem() { }
+    removeItem() {
+    }
+
+    saveItem() {
+    }
 }
 
 export function newMockCacheService() {

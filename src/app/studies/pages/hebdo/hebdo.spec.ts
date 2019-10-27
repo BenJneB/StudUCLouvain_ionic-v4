@@ -10,7 +10,7 @@ import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { ModalControllerMock } from 'test-config/MockIonicNative';
+import { newModalControllerMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -46,7 +46,7 @@ describe('Hebdo Component', () => {
             ],
             providers: [
                 getMockProvider(UtilsService, newMockUtilsService),
-                { provide: ModalController, useClass: ModalControllerMock },
+                getMockProvider(ModalController, newModalControllerMock),
             ]
         }).compileComponents();
     }));
@@ -55,7 +55,7 @@ describe('Hebdo Component', () => {
 
     beforeEach(() => {
         spyGetCurrentNavigation = spyOn(Router.prototype, 'getCurrentNavigation')
-            .and.returnValue({ extras: { state: { items: [] } } });
+            .and.returnValue({extras: {state: {items: []}}});
         fixture = TestBed.createComponent(HebdoPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
@@ -78,7 +78,10 @@ describe('Hebdo Component', () => {
         it('should call createEventInCalendar from Calendar', () => {
             const spyCreate = spyOn(component.utilsServices, 'createEventInCalendar').and.callThrough();
             component.addToCalendar(
-                { 'close': () => { } },
+                {
+                    'close': () => {
+                    }
+                },
                 '',
             );
             expect(spyCreate.calls.count()).toEqual(1);

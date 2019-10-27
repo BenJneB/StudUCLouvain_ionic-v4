@@ -22,82 +22,83 @@
 -->
 <!--EN-TETE-->
 <ion-header>
-  <ion-toolbar color="support">
-    <ion-buttons slot="start">
-      <ion-back-button></ion-back-button>
-      <img src="./assets/img/s.png" height="28" />
-    </ion-buttons>
-    <ion-title>{{'EMPLOYEE.INFO' | translate}}</ion-title>
-  </ion-toolbar>
+    <ion-toolbar color="support">
+        <ion-buttons slot="start">
+            <ion-back-button></ion-back-button>
+            <img height="28" src="./assets/img/s.png"/>
+        </ion-buttons>
+        <ion-title>{{'EMPLOYEE.INFO' | translate}}</ion-title>
+    </ion-toolbar>
 </ion-header>
 
 <!--BODY-->
 <ion-content class="ion-padding">
-  <ion-card>
-    <ion-card-header class="ion-text-wrap">
-      <h1><b>{{empDetails.firstname}} {{empDetails.lastname}}</b></h1>
-    </ion-card-header>
-
-    <ion-row class="ion-text-wrap">
-      <ion-list>
-        <ion-item style="text-transform:uppercase" *ngIf="empDetails.contracts">
-          <ion-label>
-            <p *ngIf="empDetails.contracts.contract.grade!=null">({{c.grade}})</p>
-          </ion-label>
-        </ion-item>
-        <ion-item *ngFor="let emp of empDetails.departments.department">
-          <ion-label>
-            <p *ngIf="emp.linkType == 'Affectation'">{{emp.entity.acronyms}} -- {{emp.entity.name_fr}}
-              ({{emp.entity.acronym}})</p>
-            <p *ngIf="emp.linkType == 'Appartenance'">
-              <ion-icon name="return-right"></ion-icon>{{emp.entity.acronyms}} -- {{emp.entity.name_fr}}
-              ({{emp.entity.acronym}})
-            </p>
-          </ion-label>
-        </ion-item>
-      </ion-list>
-    </ion-row>
-
-
-
     <ion-card>
-      <ion-card-content>
-        <ion-card-title>
-          {{'EMPLOYEE.CONTACT' | translate}}
-        </ion-card-title>
-      </ion-card-content>
-      <ion-row>
-        <ion-col><b>{{'EMPLOYEE.ADRESSE' | translate}}</b></ion-col>
-        <ion-col>
-          {{empDetails.address?.acronym}}<br>
-          {{empDetails.address?.streetName}} {{empDetails.address?.streetNumber}}/{{empDetails.address?.mailBox}}<br>
-          {{empDetails.address?.postCode}} {{empDetails.address?.town}}<br>
-        </ion-col>
-      </ion-row>
-      <ion-row>
-        <ion-col><b>{{'EMPLOYEE.MAIL' | translate}}</b></ion-col>
-        <ion-col>
-          <a href="mailto:{{empDetails?.email}}" target="_top">{{empDetails?.email}}</a>
-        </ion-col>
-      </ion-row>
+        <ion-card-header class="ion-text-wrap">
+            <h1><b>{{empDetails.firstname}} {{empDetails.lastname}}</b></h1>
+        </ion-card-header>
 
-
-      <ion-card *ngFor="let contact of empDetails.businessContacts?.businessContact">
-        <ion-card-content>
-          <ion-card-title>
-            {{contact.acronym}}
-          </ion-card-title>
-        </ion-card-content>
-
-        <ion-row>
-          <ion-col> {{'EMPLOYEE.TEL' | translate}} </ion-col>
-          <ion-col> <a href="tel:{{contact.phone}}">{{contact.phone}}</a> </ion-col>
+        <ion-row class="ion-text-wrap">
+            <ion-list>
+                <ion-item *ngIf="empDetails.contracts" style="text-transform:uppercase">
+                    <ion-label>
+                        <p *ngIf="empDetails.contracts.contract.grade!=null">({{c.grade}})</p>
+                    </ion-label>
+                </ion-item>
+                <ion-item *ngFor="let emp of empDetails.departments.department">
+                    <ion-label>
+                        <p *ngIf="emp.linkType == 'Affectation'">{{emp.entity.acronyms}} -- {{emp.entity.name_fr}}
+                            ({{emp.entity.acronym}})</p>
+                        <p *ngIf="emp.linkType == 'Appartenance'">
+                            <ion-icon name="return-right"></ion-icon>
+                            {{emp.entity.acronyms}} -- {{emp.entity.name_fr}}
+                            ({{emp.entity.acronym}})
+                        </p>
+                    </ion-label>
+                </ion-item>
+            </ion-list>
         </ion-row>
-        <ion-row *ngIf="contact.secretary!=null">
-          <ion-col> {{'EMPLOYEE.SECRETARIAT' | translate}} </ion-col>
-          <ion-col> <a href="tel:{{contact.secretary}}">{{contact.secretary}}</a> </ion-col>
-        </ion-row>
-      </ion-card>
+
+
+        <ion-card>
+            <ion-card-content>
+                <ion-card-title>
+                    {{'EMPLOYEE.CONTACT' | translate}}
+                </ion-card-title>
+            </ion-card-content>
+            <ion-row>
+                <ion-col><b>{{'EMPLOYEE.ADRESSE' | translate}}</b></ion-col>
+                <ion-col>
+                    {{empDetails.address?.acronym}}<br>
+                    {{empDetails.address?.streetName}} {{empDetails.address?.streetNumber}}
+                    /{{empDetails.address?.mailBox}}<br>
+                    {{empDetails.address?.postCode}} {{empDetails.address?.town}}<br>
+                </ion-col>
+            </ion-row>
+            <ion-row>
+                <ion-col><b>{{'EMPLOYEE.MAIL' | translate}}</b></ion-col>
+                <ion-col>
+                    <a href="mailto:{{empDetails?.email}}" target="_top">{{empDetails?.email}}</a>
+                </ion-col>
+            </ion-row>
+
+
+            <ion-card *ngFor="let contact of empDetails.businessContacts?.businessContact">
+                <ion-card-content>
+                    <ion-card-title>
+                        {{contact.acronym}}
+                    </ion-card-title>
+                </ion-card-content>
+
+                <ion-row>
+                    <ion-col> {{'EMPLOYEE.TEL' | translate}} </ion-col>
+                    <ion-col><a href="tel:{{contact.phone}}">{{contact.phone}}</a></ion-col>
+                </ion-row>
+                <ion-row *ngIf="contact.secretary!=null">
+                    <ion-col> {{'EMPLOYEE.SECRETARIAT' | translate}} </ion-col>
+                    <ion-col><a href="tel:{{contact.secretary}}">{{contact.secretary}}</a></ion-col>
+                </ion-row>
+            </ion-card>
+        </ion-card>
     </ion-card>
-  </ion-card>
 </ion-content>
