@@ -5,7 +5,7 @@ import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { UserService } from '../../utils-services/user-service';
 import { ConnectivityService } from '../../utils-services/connectivity-service';
 
-fdescribe('MapService', () => {
+describe('MapService', () => {
     let mapService: MapService;
 
     beforeEach(() => {
