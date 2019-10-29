@@ -10,6 +10,7 @@ import { POIService } from 'src/app/services/map-services/poi-service';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { MapService } from 'src/app/services/map-services/map-service';
 import { MapRoutingModule } from './map-routing.module';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 @NgModule({
     declarations: [MapPage],
@@ -20,7 +21,8 @@ import { MapRoutingModule } from './map-routing.module';
         CommonModule,
         SearchModalModule,
         TranslateModule.forChild(),
-        MapRoutingModule
+        MapRoutingModule,
+        LeafletModule
     ],
     providers: [
         POIService,

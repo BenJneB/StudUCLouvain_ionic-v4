@@ -35,6 +35,8 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content>
-    <div id="map" style="width:100%; height:100%;"></div>
-</ion-content>
+<div style="height: 100%;"
+     leaflet 
+     [leafletOptions]="options"
+     (leafletMapReady)="onMapReady($event)">
+</div>

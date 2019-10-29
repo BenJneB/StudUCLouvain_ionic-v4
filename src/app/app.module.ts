@@ -41,6 +41,7 @@ import { Calendar } from '@ionic-native/calendar/ngx';
 import { HomePage } from './home/home.page';
 import { TutoPage } from './pages/tuto/tuto';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 export function HttpLoaderFactory(http: HttpClient) {
     return new TranslateHttpLoader(http, './assets/i18n/', '.json');
@@ -69,7 +70,8 @@ export function HttpLoaderFactory(http: HttpClient) {
                 deps: [HttpClient]
             }
         }),
-        FormsModule
+        FormsModule,
+        LeafletModule.forRoot()
     ],
     bootstrap: [AppComponent],
     providers: [
