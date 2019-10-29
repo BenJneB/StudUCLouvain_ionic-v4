@@ -63,15 +63,6 @@ export class MapService {
     }
 
     getCampusLocation(campus) {
-        const coord = this.campusLocations[campus];
-        return {lat: coord.lat, lng: coord.lng};
-    }
-
-    getUserLocation(): Promise<any> {
-        return new Promise((resolve) => {
-            this.geolocation.getCurrentPosition().then((resp) => {
-                resolve({lat: resp.coords.latitude, lng: resp.coords.longitude});
-            });
-        });
+        return this.campusLocations[campus];
     }
 }
