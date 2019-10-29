@@ -96,12 +96,12 @@ export class MapPage {
         this.updateOrCreateBuildingMarker(item);
         const popup = this.building.getPopup();
         // this.fitMap();
-        if(popup.isOpen){
+        if(popup.isOpen) {
           this.map.fire('popupopen', {popup: popup});
         }
     }
 
-    updateOrCreateBuildingMarker(item){
+    updateOrCreateBuildingMarker(item) {
       if (this.building) {
           this.building.setLatLng([item.pos.lat, item.pos.lng]).bindPopup(this.generatePopupContent(item)).openPopup();
       } else {
@@ -118,7 +118,7 @@ export class MapPage {
               </div>`;
     }
 
-    //to be used later for sending geolocation to google maps or apple maps
+    // to be used later for sending geolocation to google maps or apple maps
 
     // if(platform.is('android')){
     //     if("geo" in this.item){
