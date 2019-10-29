@@ -35,6 +35,7 @@ import { POIService } from 'src/app/services/map-services/poi-service';
 import { MapService } from 'src/app/services/map-services/map-service';
 import { getMockProvider } from '../../../../test-config/Mock';
 import { newMockMapService } from '../../../../test-config/MockMapService';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 
 describe('Map Component', () => {
     let fixture;
@@ -49,6 +50,7 @@ describe('Map Component', () => {
                 RouterTestingModule,
                 HttpClientModule,
                 IonicStorageModule.forRoot(),
+                LeafletModule.forRoot()
             ],
             providers: [
                 getMockProvider(ModalController, newModalControllerMock),

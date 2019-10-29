@@ -8,6 +8,13 @@ export class MockMapService extends MapService {
     constructor(conn: MockConnectivityService, geo: Geolocation, platform: Platform, menuCtrl: MenuController, user: MockUserService) {
         super(conn, geo, platform, menuCtrl, user);
     }
+
+    getCampusLocation(campus: any) {
+        return {
+            'lat': 0.0,
+            'lng': 0.0
+        };
+    }
 }
 
 export function newMockMapService() {
