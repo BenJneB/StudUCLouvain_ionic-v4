@@ -96,7 +96,7 @@ export class MapPage {
         this.updateOrCreateBuildingMarker(item);
         const popup = this.building.getPopup();
         // this.fitMap();
-        if(popup.isOpen) {
+        if (popup.isOpen) {
           this.map.fire('popupopen', {popup: popup});
         }
     }
