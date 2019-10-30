@@ -1,4 +1,4 @@
-import { testInstanceCreation } from 'src/app/app.component.spec';
+import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -36,6 +36,33 @@ import { MapService } from 'src/app/services/map-services/map-service';
 import { getMockProvider } from '../../../../test-config/Mock';
 import { newMockMapService } from '../../../../test-config/MockMapService';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import * as L from 'leaflet';
+import { LatLngExpression, Marker, Popup } from 'leaflet';
+
+class LeafletMarkerMock extends Marker {
+    constructor() {
+        super({lat: 0.0, lng: 0.0});
+    }
+
+    getPopup() {
+        return new Popup();
+    }
+
+    setLatLng(a: LatLngExpression) {
+        return this;
+    }
+}
+
+class LeafletMapMock {
+    fire() {
+    }
+
+    on() {
+    }
+
+    addLayer() {
+    }
+}
 
 describe('Map Component', () => {
     let fixture;
@@ -65,9 +92,69 @@ describe('Map Component', () => {
         fixture = TestBed.createComponent(MapPage);
         component = fixture.componentInstance;
         fixture.detectChanges();
+        component.map = new LeafletMapMock();
+        component.building = new LeafletMarkerMock();
     });
 
     it('should be created', () => {
         testInstanceCreation(component, MapPage);
+    });
+
+    describe('ionViewDidEnter method', () => {
+        it('should (when platform is ready) load resources and put it into zones. Finally, enable swipe gesture ? ', () => {
+            component.zones = '';
+            const spyReady = spyFunctionWithCallBackThen(component.platform, 'ready', undefined);
+            const spyLoad = spyFunctionWithCallBackThen(component.poilocations, 'loadResources', 'RESULTS');
+            const spySwipe = spyOn(component.menuController, 'swipeGesture').and.callThrough();
+            component.ionViewDidEnter();
+            expect(spyReady.calls.count()).toEqual(1);
+            expect(spyLoad.calls.count()).toEqual(1);
+            expect(spySwipe.calls.count()).toEqual(1);
+            expect(component.zones).toEqual('RESULTS');
+        });
+    });
+
+    describe('centerMapOnPopupOpen method', () => {
+        it('should on from map ?', () => {
+            const spyMapOn = spyOn(component.map, 'on').and.callThrough();
+            component.centerMapOnPopupOpen();
+            expect(spyMapOn.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('showSearch method', () => {
+        it('should create modal', () => {
+            // TODO: Test modal present and ondiddismiss
+            component.showSearch();
+            expect(component.modalCtrl.create.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('showBuilding method', () => {
+        it('should update/create building marker and fire map', () => {
+            const spyFire = spyOn(component.map, 'fire').and.callThrough();
+            const spyUpdate = spyOn(component, 'updateOrCreateBuildingMarker').and.callFake(() => {
+            });
+            component.showBuilding({pos: {lat: 0.0, lng: 0.0}});
+            expect(spyUpdate.calls.count()).toEqual(1);
+            expect(spyFire.calls.count()).toEqual(1);
+        });
+    });
+
+    describe('updateOrCreateBuildingMarker method', () => {
+        it('should generate popup if building defined and set lat/lng', () => {
+            const spySet = spyOn(component.building, 'setLatLng').and.callThrough();
+            const spyGenerate = spyOn(component, 'generatePopupContent').and.callThrough();
+            component.updateOrCreateBuildingMarker({pos: {lat: 0.0, lng: 0.0}});
+            expect(spyGenerate.calls.count()).toEqual(1);
+            expect(spySet.calls.count()).toEqual(1);
+        });
+
+        it('should create marker otherwhise', () => {
+            component.building = undefined;
+            const spyMarker = spyOn(L, 'marker').and.callThrough();
+            component.updateOrCreateBuildingMarker({pos: {lat: 0.0, lng: 0.0}});
+            expect(spyMarker.calls.count()).toEqual(1);
+        });
     });
 });
