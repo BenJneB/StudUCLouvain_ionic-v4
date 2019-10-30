@@ -1,5 +1,3 @@
-import { MapService } from 'src/app/services/map-services/map-service';
-import { UserService } from 'src/app/services/utils-services/user-service';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -26,6 +24,8 @@ import { MenuController, ModalController, Platform } from '@ionic/angular';
 import { POIService } from 'src/app/services/map-services/poi-service';
 import { SearchModal } from './search/search';
 import * as L from 'leaflet';
+import { MapService } from 'src/app/services/map-services/map-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
 
 @Component({
     selector: 'page-map',
