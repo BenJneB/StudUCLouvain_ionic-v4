@@ -33,36 +33,10 @@ import { newModalControllerMock } from 'test-config/MockIonicNative';
 import { MapPage } from './map';
 import { POIService } from 'src/app/services/map-services/poi-service';
 import { MapService } from 'src/app/services/map-services/map-service';
-import { getMockProvider } from '../../../../test-config/Mock';
+import { getMockProvider, LeafletMapMock, LeafletMarkerMock } from '../../../../test-config/Mock';
 import { newMockMapService } from '../../../../test-config/MockMapService';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import * as L from 'leaflet';
-import { LatLngExpression, Marker, Popup } from 'leaflet';
-
-class LeafletMarkerMock extends Marker {
-    constructor() {
-        super({lat: 0.0, lng: 0.0});
-    }
-
-    getPopup() {
-        return new Popup();
-    }
-
-    setLatLng(a: LatLngExpression) {
-        return this;
-    }
-}
-
-class LeafletMapMock {
-    fire() {
-    }
-
-    on() {
-    }
-
-    addLayer() {
-    }
-}
 
 describe('Map Component', () => {
     let fixture;
