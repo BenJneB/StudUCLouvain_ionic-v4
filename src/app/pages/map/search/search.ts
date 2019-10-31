@@ -26,13 +26,11 @@ export class SearchModal {
 
     search(event) {
         const q = event.detail.value;
-        this.displayItems = this.items.filter((v) => {
-            if (v.title.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
+        this.items = this.items.filter((v) => {
+            return v.title.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
                 v.code.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
-                v.address.toLowerCase().indexOf(q.toLowerCase()) > -1) {
-                return true;
-            }
-            return false;
+                v.address.toLowerCase().indexOf(q.toLowerCase()) > -1;
+
         });
     }
 

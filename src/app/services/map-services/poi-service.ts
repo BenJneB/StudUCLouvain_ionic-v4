@@ -67,15 +67,8 @@ export class POIService {
         return locationsList;
     }
 
-    private static getCategoryZones(zones: any, length: number) {
-        return {
-            list: POIService.createMapLocations(zones.sort(POIService.compare)),
-            listChecked: Array(length).fill(false),
-            showDetails: false
-        };
-    }
-
-    private static getZones(data: Object) {
+    private getZones(data: Object) {
+        this.zones = data;
         const tmpZones = data['zones'];
         const auditoiresLength = tmpZones.auditoires.length;
         const locauxLength = tmpZones.locaux.length;
@@ -85,13 +78,13 @@ export class POIService {
         const servicesLength = tmpZones.services.length;
         const parkingsLength = tmpZones.parkings.length;
         return {
-            auditoires: POIService.getCategoryZones(tmpZones.auditoires, auditoiresLength),
-            locaux: POIService.getCategoryZones(tmpZones.locaux, locauxLength),
-            bibliotheques: POIService.getCategoryZones(tmpZones.bibliotheques, bibliothequesLength),
-            sports: POIService.getCategoryZones(tmpZones.sports, sportsLength),
-            restaurants_universitaires: POIService.getCategoryZones(tmpZones.restaurants_universitaires, restauULength),
-            services: POIService.getCategoryZones(tmpZones.services, servicesLength),
-            parkings: POIService.getCategoryZones(tmpZones.parkings, parkingsLength),
+            auditoires: this.createMapLocations(tmpZones.auditoires.sort(this.compare)),
+            locaux: this.createMapLocations(tmpZones.locaux.sort(this.compare)),
+            bibliotheques: this.createMapLocations(tmpZones.bibliotheques.sort(this.compare)),
+            sports: this.createMapLocations(tmpZones.sports.sort(this.compare)),
+            restaurants_universitaires: this.createMapLocations(tmpZones.restaurants_universitaires.sort(this.compare)),
+            services: this.createMapLocations(tmpZones.services.sort(this.compare)),
+            parkings: this.createMapLocations(tmpZones.parkings.sort(this.compare)),
             icon: 'arrow-dropdown',
         };
     }

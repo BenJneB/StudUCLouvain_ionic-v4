@@ -41,72 +41,79 @@ export class MapPage {
     building: L.Marker;
 
     constructor(
-    public modalCtrl: ModalController,
-    public platform: Platform,
-    public poilocations: POIService,
-    public mapService: MapService,
-    public userService: UserService,
-    public menuController: MenuController) {
-    this.title = 'Carte';
-    this.options = {
-      layers: [
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
-      ],
-      zoom: 14,
-      center: this.mapService.getCampusLocation(this.userService.campus)
-    };
-  }
+        public modalCtrl: ModalController,
+        public platform: Platform,
+        public poilocations: POIService,
+        public mapService: MapService,
+        public userService: UserService,
+        public menuController: MenuController) {
+        this.title = 'Carte';
+        this.options = {
+            layers: [
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+            ],
+            zoom: 14,
+            center: this.mapService.getCampusLocation(this.userService.campus)
+        };
+    }
 
-  ionViewDidEnter() {
-    this.platform.ready().then(() => {
-      this.poilocations.loadResources().then(results => {
-        this.zones = results;
-      });
-    });
-    this.menuController.swipeGesture(false);
-  }
+    ionViewDidEnter() {
+        console.log('ionViewDidEnter');
+        this.platform.ready().then(() => {
+            console.log('READY?');
+            this.poilocations.loadResources().subscribe(data => {
+                this.zones = data;
+                console.log(data, this.zones);
+            });
+            console.log('this.zones', this.zones);
+        });
+        this.menuController.swipeGesture(false);
+    }
 
-  onMapReady(map) {
-      this.map = map;
-      this.centerMapOnPopupOpen();
-  }
+    onMapReady(map) {
+        this.map = map;
+        this.centerMapOnPopupOpen();
+    }
 
-  centerMapOnPopupOpen() {
-    this.map.on('popupopen', (e: L.LeafletEvent) => {
-      const popup = e.target._popup;
-      const px = this.map.project(popup._latlng, this.map.getZoom());
-      px.y -= popup._container.clientHeight / 2;
-      this.map.panTo(this.map.unproject(px, this.map.getZoom()), { animate: true });
-    });
-  }
+    centerMapOnPopupOpen() {
+        this.map.on('popupopen', (e: L.LeafletEvent) => {
+            const popup = e.target._popup;
+            const px = this.map.project(popup._latlng, this.map.getZoom());
+            px.y -= popup._container.clientHeight / 2;
+            this.map.panTo(this.map.unproject(px, this.map.getZoom()), {animate: true});
+        });
+    }
 
-  async showSearch() {
-      const modal = await this.modalCtrl.create({
-          component: SearchModal,
-          componentProps: {},
-          cssClass: 'search-modal'
-      });
-      modal.onDidDismiss().then((data: any) => {
-          this.showBuilding(data.data);
-      });
-      await modal.present();
-  }
+    async showSearch() {
+        console.log(this.zones);
+        const modal = await this.modalCtrl.create({
+            component: SearchModal,
+            componentProps: {
+                items: this.zones
+            },
+            cssClass: 'search-modal'
+        });
+        modal.onDidDismiss().then((data: any) => {
+            this.showBuilding(data.data);
+        });
+        await modal.present();
+    }
 
     showBuilding(item) {
         this.updateOrCreateBuildingMarker(item);
         const popup = this.building.getPopup();
         // this.fitMap();
         if (popup.isOpen) {
-          this.map.fire('popupopen', {popup: popup});
+            this.map.fire('popupopen', {popup: popup});
         }
     }
 
     updateOrCreateBuildingMarker(item) {
-      if (this.building) {
-          this.building.setLatLng([item.pos.lat, item.pos.lng]).bindPopup(this.generatePopupContent(item)).openPopup();
-      } else {
-          this.building = L.marker([item.pos.lat, item.pos.lng]).addTo(this.map).bindPopup(this.generatePopupContent(item)).openPopup();
-      }
+        if (this.building) {
+            this.building.setLatLng([item.pos.lat, item.pos.lng]).bindPopup(this.generatePopupContent(item)).openPopup();
+        } else {
+            this.building = L.marker([item.pos.lat, item.pos.lng]).addTo(this.map).bindPopup(this.generatePopupContent(item)).openPopup();
+        }
     }
 
     generatePopupContent(item) {
