@@ -55,7 +55,7 @@ export class POIService {
             this.url = this.urlMons;
         }
         if (campus !== this.old) {
-            this.zones = {};
+            this.zones = [];
             this.old = campus;
         }
     }
@@ -90,7 +90,7 @@ export class POIService {
 
     private createMapLocations(list: any): Array<MapLocation> {
         const locationsList: MapLocation[] = [];
-        for (const elem of list) {
+        for (const elem of list.sort(this.compare)) {
             const newLocation = new MapLocation(elem.nom,
                 elem.adresse,
                 elem.coord.lat,
@@ -105,21 +105,14 @@ export class POIService {
     private getZones(data: Object) {
         this.zones = data;
         const tmpZones = data['zones'];
-        const auditoiresLength = tmpZones.auditoires.length;
-        const locauxLength = tmpZones.locaux.length;
-        const bibliothequesLength = tmpZones.bibliotheques.length;
-        const sportsLength = tmpZones.sports.length;
-        const restauULength = tmpZones.restaurants_universitaires.length;
-        const servicesLength = tmpZones.services.length;
-        const parkingsLength = tmpZones.parkings.length;
         return {
-            auditoires: this.createMapLocations(tmpZones.auditoires.sort(this.compare)),
-            locaux: this.createMapLocations(tmpZones.locaux.sort(this.compare)),
-            bibliotheques: this.createMapLocations(tmpZones.bibliotheques.sort(this.compare)),
-            sports: this.createMapLocations(tmpZones.sports.sort(this.compare)),
-            restaurants_universitaires: this.createMapLocations(tmpZones.restaurants_universitaires.sort(this.compare)),
-            services: this.createMapLocations(tmpZones.services.sort(this.compare)),
-            parkings: this.createMapLocations(tmpZones.parkings.sort(this.compare)),
+            auditoires: this.createMapLocations(tmpZones.auditoires),
+            locaux: this.createMapLocations(tmpZones.locaux),
+            bibliotheques: this.createMapLocations(tmpZones.bibliotheques),
+            sports: this.createMapLocations(tmpZones.sports),
+            restaurants_universitaires: this.createMapLocations(tmpZones.restaurants_universitaires),
+            services: this.createMapLocations(tmpZones.services),
+            parkings: this.createMapLocations(tmpZones.parkings),
             icon: 'arrow-dropdown',
         };
     }
