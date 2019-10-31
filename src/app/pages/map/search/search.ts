@@ -25,12 +25,11 @@ export class SearchModal {
     }
 
     search(event) {
-        const q = event.detail.value;
-        this.items = this.items.filter((v) => {
-            return v.title.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
-                v.code.toLowerCase().indexOf(q.toLowerCase()) > -1 ||
-                v.address.toLowerCase().indexOf(q.toLowerCase()) > -1;
-
+        const q = event.detail.value.toLowerCase();
+        this.items = this.items.filter((obj) => {
+            return [obj.title, obj.code, obj.address].some(
+                (property) => property.toLowerCase().indexOf(q) > -1
+            );
         });
     }
 
