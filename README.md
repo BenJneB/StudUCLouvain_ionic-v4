@@ -88,7 +88,7 @@ $ ionic serve
 
 #### Before
 ```bash
-$ ionic cordova parepare
+$ ionic cordova prepare
 $ ionic cordova platform add <platform>
 ```
 

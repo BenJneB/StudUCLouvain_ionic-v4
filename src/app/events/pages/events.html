@@ -24,7 +24,7 @@
     <ion-toolbar color="event">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img height="28" src="./assets/img/s.png"/>
+            <img alt="Events Icon" height="28" src="./assets/img/s.png"/>
         </ion-buttons>
 
         <ion-title horizontal="center">{{title | translate}}</ion-title>
@@ -45,7 +45,7 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content class="feed-list" #events>
+<ion-content #events class="feed-list">
     <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="segment !== 'favorites'" slot="fixed">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
         </ion-refresher-content>
@@ -66,8 +66,8 @@
         <ion-item-sliding #slidingItem *ngFor="let event of week.items"
                           [hidden]="!utilsServices.isGroupShown(week.label, shownGroup) || event.hidden">
             <ion-item (click)="goToEventDetail(event)" button>
-                <ion-thumbnail item-left>
-                    <img [src]="event.iconCategory">
+                <ion-thumbnail>
+                    <img [src]="event.iconCategory" alt="Event Category Icon">
                 </ion-thumbnail>
                 &nbsp;
                 <ion-label>
@@ -83,11 +83,11 @@
             </ion-item>
 
             <ion-item-options>
-                <ion-item-option (click)="createEvent(slidingItem, event)" fill="outline">
+                <ion-item-option (click)="createEvent(slidingItem, event)">
                     <ion-icon name='calendar' size="large"></ion-icon>
                 </ion-item-option>
 
-                <ion-item-option (click)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'" fill="outline">
+                <ion-item-option (click)="addFavorite(slidingItem, event)" *ngIf="segment === 'all'">
                     <ion-icon name="star-outline" size="large"></ion-icon>
                 </ion-item-option>
 
@@ -104,7 +104,7 @@
     </ion-list-header>
 </ion-content>
 
-<ion-footer class="ion-text-center" *ngIf="segment=='all'">
+<ion-footer *ngIf="segment=='all'" class="ion-text-center">
     <ion-icon name='help-circle'></ion-icon>
     <p>{{'EVENTS.SWIPE' | translate}}</p>
 </ion-footer>
