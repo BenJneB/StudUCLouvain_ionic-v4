@@ -60,7 +60,7 @@ export class POIService {
         }
     }
 
-    public loadResources(): Observable<any> {
+    public loadResources() {
         this.update();
         if (!this.zones) {
             console.log('before http');
