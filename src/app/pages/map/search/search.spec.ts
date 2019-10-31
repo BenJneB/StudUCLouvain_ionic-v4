@@ -63,4 +63,18 @@ describe('SearchModal of Map Component', () => {
     it('should be created', () => {
         testInstanceCreation(component, SearchModal);
     });
+
+
+    describe('search method', () => {
+        it('should on from map ?', () => {
+            const event_arg = {detail: {value: 'TEST'}};
+            const expected = component.items.filter((obj) => {
+                return [obj.title, obj.code, obj.address].some(
+                    (property) => property.toLowerCase().indexOf(event_arg) > -1
+                );
+            });
+            component.search(event_arg);
+            expect(component.items).toEqual(expected);
+        });
+    });
 });
