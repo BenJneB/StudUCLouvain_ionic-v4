@@ -81,68 +81,27 @@ export class LibrariesService {
 
     /*Retrieves all the necessary information*/
     private extractLibraryDetails(lib: LibraryItem, data: any): LibraryItem {
-        if (data.locationId === null) {
-            lib.locationId = -1;
-        } else {
-            lib.locationId = data.locationId;
+        console.log(data);
+        const mapLocation = new MapLocation(lib.name, '', '', '', '', '');
+        if (data.mapLocation) {
+            mapLocation.address = `${data.address.street } ,  ${data.address.postalCode} ,  ${data.address.locality}`;
+            // TODO update maplocation with lat lng code
         }
-        if (data.mapLocation === null) {
-            lib.mapLocation = new MapLocation(lib.name, '', '', '', '', '');
-        } else {
-            lib.mapLocation = new MapLocation(
-                lib.name,
-                data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality,
-                '',
-                '',
-                '',
-                ''
-            ); // TODO update maplocation with lat lng code
-        }
-        this.assignInfosDatas(data, lib);
-        this.assignHoursDaysDatas(data, lib);
+
+        const locationId = data.locationId || -1;
+        const closedDates = [data.closedDates] ? data.closedDates.length === undefined : data.closedDates;
+        const {email, website, phone, openingHoursNote} = data;
+        lib = Object.assign(lib, {email, website, phone, openingHoursNote, locationId, mapLocation, closedDates});
+
+        ['openingHours', 'openingExaminationHours', 'openingSummerHours'].forEach( (property) => {
+            lib[property] = [];
+            (data[property] || []).forEach(
+                (timeSlotRaw: any) => {
+                    const timeslot = new TimeSlot(timeSlotRaw.day, timeSlotRaw.startHour, timeSlotRaw.endHour);
+                    lib[property].push(timeslot);
+                }
+            );
+        });
         return lib;
-    }
-
-    private assignHoursDaysDatas(data: any, lib: LibraryItem) {
-        if (data.openingHours) {
-            this.getOpeningHours(data.openingHours, lib.openingHours);
-        }
-        if (data.openingExaminationHours) {
-            this.getOpeningHours(data.openingExaminationHours, lib.openingExaminationHours);
-        }
-        if (data.openingSummerHours) {
-            this.getOpeningHours(data.openingSummerHours, lib.openingSummerHours);
-        }
-        lib.openingHoursNote = data.openingHoursNote;
-        if (data.closedDates.length === undefined) {
-            lib.closedDates = [data.closedDates];
-        } else {
-            lib.closedDates = data.closedDates;
-        }
-    }
-
-    private assignInfosDatas(data: any, lib: LibraryItem) {
-        for (const fieldItem of ['email', 'website', 'phone']) {
-            switch (fieldItem) {
-                case 'email': {
-                    lib.email = data[fieldItem];
-                    break;
-                }
-                case 'phone': {
-                    lib.phone = data[fieldItem];
-                    break;
-                }
-                case 'website': {
-                    lib.website = data[fieldItem];
-                    break;
-                }
-            }
-        }
-    }
-
-    private getOpeningHours(data: any, lib: Array<TimeSlot>) {
-        for (let i = 0; i < data.length; i++) {
-            lib.push(new TimeSlot(data[i].day, data[i].startHour, data[i].endHour));
-        }
     }
 }
