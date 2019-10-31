@@ -62,16 +62,19 @@ export class POIService {
 
     public loadResources() {
         this.update();
-        if (!this.zones) {
-            console.log('before http');
-            return this.http.get(this.url).pipe(
-                map(data => {
-                    return this.getZones(data);
-                })
-            );
+        if (this.zones.length === 0) {
+            return new Promise(resolve => {
+                this.http.get(this.url).pipe(
+                    map(res => res)).subscribe(data => {
+                    const newZone = this.getZones(data);
+                    this.zones.push(newZone);
+                    resolve(this.zones);
+                });
+            });
         } else {
-            console.log('ZERO', this.zones);
-            return new Observable(() => this.zones);
+            return new Promise(resolve => {
+                resolve(this.zones);
+            });
         }
     }
 
