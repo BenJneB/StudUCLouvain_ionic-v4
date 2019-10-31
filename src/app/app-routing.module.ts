@@ -1,8 +1,7 @@
-import { NgModule } from '@angular/core';
-import { QuicklinkModule, QuicklinkStrategy } from 'ngx-quicklink';
-import { RouterModule, Routes } from '@angular/router';
-import { TutoPage } from './pages/tuto/tuto';
-import { HomePage } from './home/home.page';
+import {NgModule} from '@angular/core';
+import {PreloadAllModules, RouterModule, Routes} from '@angular/router';
+import {TutoPage} from './pages/tuto/tuto';
+import {HomePage} from './home/home.page';
 
 const routes: Routes = [
     {path: '', redirectTo: 'home', pathMatch: 'full'},
@@ -24,8 +23,7 @@ const routes: Routes = [
 
 @NgModule({
     imports: [
-        QuicklinkModule,
-        RouterModule.forRoot(routes, {preloadingStrategy: QuicklinkStrategy})
+        RouterModule.forRoot(routes, {preloadingStrategy: PreloadAllModules})
     ],
     exports: [
         RouterModule,

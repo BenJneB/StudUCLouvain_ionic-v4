@@ -10,11 +10,10 @@
             <ion-content id="main-app-menu">
                 <ion-list scroll=true>
                     <ion-item (click)="openRootPage(p)" *ngFor="let p of pages" button>
-                        <ion-label>
-                            <div class="box"><img alt="Pictogramme" height="35" src={{p.icon}} width="35"/>
-                                <span> {{p.title | translate}}</span>
-                            </div>
-                        </ion-label>
+                        <ion-avatar slot="start">
+                            <img alt="Pictogramme" height="35" src={{p.icon}} width="35"/>
+                        </ion-avatar>
+                        <ion-label> {{p.title | translate}} </ion-label>
                     </ion-item>
                 </ion-list>
             </ion-content>
