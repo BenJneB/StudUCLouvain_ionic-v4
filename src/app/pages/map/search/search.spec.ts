@@ -66,7 +66,7 @@ describe('SearchModal of Map Component', () => {
 
 
     describe('search method', () => {
-        it('should on from map ?', () => {
+        it('should filter items with input', () => {
             const event_arg = {detail: {value: 'TEST'}};
             const expected = component.items.filter((obj) => {
                 return [obj.title, obj.code, obj.address].some(
