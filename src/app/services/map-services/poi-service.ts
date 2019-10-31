@@ -43,59 +43,6 @@ export class POIService {
     urlWol = 'assets/data/resourcesWoluwe.json';
     old = '';
 
-    private static compare(a, b) {
-        if (a.nom < b.nom) {
-            return -1;
-        }
-        if (a.nom > b.nom) {
-            return 1;
-        }
-        return 0;
-    }
-
-    private static createMapLocations(list: any): Array<MapLocation> {
-        const locationsList: MapLocation[] = [];
-        for (const elem of list) {
-            const newLocation = new MapLocation(elem.nom,
-                elem.adresse,
-                elem.coord.lat,
-                elem.coord.lng,
-                elem.sigle,
-                elem.vignette);
-            locationsList.push(newLocation);
-        }
-        return locationsList;
-    }
-
-    private static getCategoryZones(zones: any, length: number) {
-        return {
-            list: POIService.createMapLocations(zones.sort(POIService.compare)),
-            listChecked: Array(length).fill(false),
-            showDetails: false
-        };
-    }
-
-    private static getZones(data: Object) {
-        const tmpZones = data['zones'];
-        const auditoiresLength = tmpZones.auditoires.length;
-        const locauxLength = tmpZones.locaux.length;
-        const bibliothequesLength = tmpZones.bibliotheques.length;
-        const sportsLength = tmpZones.sports.length;
-        const restauULength = tmpZones.restaurants_universitaires.length;
-        const servicesLength = tmpZones.services.length;
-        const parkingsLength = tmpZones.parkings.length;
-        return {
-            auditoires: POIService.getCategoryZones(tmpZones.auditoires, auditoiresLength),
-            locaux: POIService.getCategoryZones(tmpZones.locaux, locauxLength),
-            bibliotheques: POIService.getCategoryZones(tmpZones.bibliotheques, bibliothequesLength),
-            sports: POIService.getCategoryZones(tmpZones.sports, sportsLength),
-            restaurants_universitaires: POIService.getCategoryZones(tmpZones.restaurants_universitaires, restauULength),
-            services: POIService.getCategoryZones(tmpZones.services, servicesLength),
-            parkings: POIService.getCategoryZones(tmpZones.parkings, parkingsLength),
-            icon: 'arrow-dropdown',
-        };
-    }
-
     update() {
         const campus = this.user.campus;
         if (campus === 'LLN') {
@@ -119,7 +66,7 @@ export class POIService {
             return new Promise(resolve => {
                 this.http.get(this.url).pipe(
                     map(res => res)).subscribe(data => {
-                    const newZone = POIService.getZones(data);
+                    const newZone = this.getZones(data);
                     this.zones.push(newZone);
                     resolve(this.zones);
                 });
@@ -131,4 +78,42 @@ export class POIService {
         }
     }
 
+    private compare(a, b) {
+        if (a.nom < b.nom) {
+            return -1;
+        }
+        if (a.nom > b.nom) {
+            return 1;
+        }
+        return 0;
+    }
+
+    private createMapLocations(list: any): Array<MapLocation> {
+        const locationsList: MapLocation[] = [];
+        for (const elem of list.sort(this.compare)) {
+            const newLocation = new MapLocation(elem.nom,
+                elem.adresse,
+                elem.coord.lat,
+                elem.coord.lng,
+                elem.sigle,
+                elem.vignette);
+            locationsList.push(newLocation);
+        }
+        return locationsList;
+    }
+
+    private getZones(data: Object) {
+        this.zones = data;
+        const tmpZones = data['zones'];
+        return {
+            auditoires: this.createMapLocations(tmpZones.auditoires),
+            locaux: this.createMapLocations(tmpZones.locaux),
+            bibliotheques: this.createMapLocations(tmpZones.bibliotheques),
+            sports: this.createMapLocations(tmpZones.sports),
+            restaurants_universitaires: this.createMapLocations(tmpZones.restaurants_universitaires),
+            services: this.createMapLocations(tmpZones.services),
+            parkings: this.createMapLocations(tmpZones.parkings),
+            icon: 'arrow-dropdown',
+        };
+    }
 }

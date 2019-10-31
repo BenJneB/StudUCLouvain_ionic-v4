@@ -34,7 +34,7 @@ export class MockTranslateService extends TranslateService {
 
     get(key: string) {
         return new Observable();
-    };
+    }
 }
 
 export function newMockTranslateService() {
