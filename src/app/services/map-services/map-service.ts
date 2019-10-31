@@ -21,24 +21,10 @@
 // This code is inspired from the great Josh Morony tutorials:
 // https://www.joshmorony.com/creating-an-advanced-google-maps-component-in-ionic-2/
 import { Injectable } from '@angular/core';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { MenuController, Platform } from '@ionic/angular';
-
-import { MapLocation } from 'src/app/entities/mapLocation';
-import { ConnectivityService } from '../utils-services/connectivity-service';
-import { UserService } from '../utils-services/user-service';
 
 @Injectable()
 export class MapService {
-
-    mapElement: any;
-    pleaseConnect: any;
     map: any;
-    mapInitialised = false;
-    markersB: any = [];
-    apiKey: string;
-    userLocation: MapLocation;
-    onDevice: boolean;
 
     campusLocations = {
         'LLN': {
@@ -55,11 +41,10 @@ export class MapService {
         }
     };
 
-    constructor(public connectivityService: ConnectivityService,
-                private geolocation: Geolocation,
-                private platform: Platform,
-                public menuCtrl: MenuController,
-                public userS: UserService) {
+    constructor() {
     }
 
+    getCampusLocation(campus) {
+        return this.campusLocations[campus];
+    }
 }

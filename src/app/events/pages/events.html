@@ -45,7 +45,7 @@
 </ion-header>
 
 <!--BODY-->
-<ion-content class="feed-list" #events>
+<ion-content #events class="feed-list">
     <ion-refresher (ionRefresh)="doRefresh($event)" *ngIf="segment !== 'favorites'" slot="fixed">
         <ion-refresher-content pullingIcon="arrow-dropdown" pullingText="Pull to refresh" refreshingSpinner="circles">
         </ion-refresher-content>
@@ -104,7 +104,7 @@
     </ion-list-header>
 </ion-content>
 
-<ion-footer class="ion-text-center" *ngIf="segment=='all'">
+<ion-footer *ngIf="segment=='all'" class="ion-text-center">
     <ion-icon name='help-circle'></ion-icon>
     <p>{{'EVENTS.SWIPE' | translate}}</p>
 </ion-footer>

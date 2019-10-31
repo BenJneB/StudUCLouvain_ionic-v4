@@ -1,6 +1,3 @@
-import { featureGroup, icon, Map, marker, tileLayer } from 'leaflet';
-import { MapService } from 'src/app/services/map-services/map-service';
-import { UserService } from 'src/app/services/utils-services/user-service';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -22,10 +19,13 @@ import { UserService } from 'src/app/services/utils-services/user-service';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { Component } from '@angular/core';
-import { ActionSheetController, ModalController, NavController, Platform } from '@ionic/angular';
+import { MenuController, ModalController, Platform } from '@ionic/angular';
 
 import { POIService } from 'src/app/services/map-services/poi-service';
 import { SearchModal } from './search/search';
+import * as L from 'leaflet';
+import { MapService } from 'src/app/services/map-services/map-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
 
 @Component({
     selector: 'page-map',
@@ -35,82 +35,80 @@ import { SearchModal } from './search/search';
 export class MapPage {
 
     title: any;
-    map: Map;
     zones: any;
-    userPosition: marker;
-    userIcon: icon;
-    building: marker;
+    map: L.Map;
+    options: L.MapOptions;
+    building: L.Marker;
 
-    constructor(public navCtrl: NavController,
-                public modalCtrl: ModalController,
-                public actionSheetCtrl: ActionSheetController,
-                public platform: Platform,
-                public poilocations: POIService,
-                public mapService: MapService,
-                public userService: UserService) {
+    constructor(
+        public modalCtrl: ModalController,
+        public platform: Platform,
+        public poilocations: POIService,
+        public mapService: MapService,
+        public userService: UserService,
+        public menuController: MenuController) {
         this.title = 'Carte';
-        this.userIcon = icon({
-            iconUrl: 'assets/img/user-icon.png',
-            iconSize: [60, 60],
-            iconAnchor: [30, 30],
-        });
+        this.options = {
+            layers: [
+                L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png')
+            ],
+            zoom: 14,
+            center: this.mapService.getCampusLocation(this.userService.campus)
+        };
     }
 
     ionViewDidEnter() {
         this.platform.ready().then(() => {
-            this.loadmap();
             this.poilocations.loadResources().then(results => {
                 this.zones = results;
             });
         });
+        this.menuController.swipeGesture(false);
     }
 
-    loadmap() {
-        // this.map = new Map('map').setView(this.mapService.getCampusLocation(this.userService.campus), 14);
-        tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
-            attribution: '<a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors',
-            maxZoom: 18
-        }).addTo(this.map);
-        this.map.on('popupopen', (e) => {
-            const px = this.map.project(e.popup._latlng);
-            px.y -= e.popup._container.clientHeight / 2;
-            this.map.panTo(this.map.unproject(px), {animate: true});
+    onMapReady(map) {
+        this.map = map;
+        this.centerMapOnPopupOpen();
+    }
+
+    centerMapOnPopupOpen() {
+        this.map.on('popupopen', (e: L.LeafletEvent) => {
+            const popup = e.target._popup;
+            const px = this.map.project(popup._latlng, this.map.getZoom());
+            px.y -= popup._container.clientHeight / 2;
+            this.map.panTo(this.map.unproject(px, this.map.getZoom()), {animate: true});
         });
-        // this.showUserPosition();
     }
 
     async showSearch() {
         const modal = await this.modalCtrl.create({
             component: SearchModal,
-            componentProps: {},
+            componentProps: {
+                items: this.zones
+            },
             cssClass: 'search-modal'
         });
-        modal.onDidDismiss().then(data => {
-            const item = data.data;
-            this.showBuilding(item);
+        modal.onDidDismiss().then((data: any) => {
+            this.showBuilding(data.data);
         });
         await modal.present();
     }
 
-    // showUserPosition() {
-    //   this.mapService.getUserLocation().then(coord => {
-    //     this.userPosition = marker(coord, { icon: this.userIcon }).addTo(this.map);
-    //   });
-    // }
-
     showBuilding(item) {
-        // update or create building marker
+        this.updateOrCreateBuildingMarker(item);
+        const popup = this.building.getPopup();
+        // this.fitMap();
+        if (popup.isOpen) {
+            this.map.fire('popupopen', {popup: popup});
+        }
+    }
+
+    updateOrCreateBuildingMarker(item) {
         if (this.building) {
             this.building.setLatLng([item.pos.lat, item.pos.lng]).bindPopup(this.generatePopupContent(item)).openPopup();
         } else {
-            this.building = marker([item.pos.lat, item.pos.lng]).addTo(this.map).bindPopup(this.generatePopupContent(item)).openPopup();
-            this.building._icon.style.filter = 'hue-rotate(300deg)';
+            this.building = L.marker([item.pos.lat, item.pos.lng]).addTo(this.map).bindPopup(this.generatePopupContent(item)).openPopup();
         }
-        this.fitMap();
-    }
-
-    fitMap() {
-        this.map.fitBounds(featureGroup([this.userPosition, this.building, this.building.popup]).getBounds(), {padding: [50, 50]});
     }
 
     generatePopupContent(item) {
@@ -122,6 +120,7 @@ export class MapPage {
               </div>`;
     }
 
+    // to be used later for sending geolocation to google maps or apple maps
 
     // if(platform.is('android')){
     //     if("geo" in this.item){
