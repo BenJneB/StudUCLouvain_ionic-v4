@@ -43,7 +43,39 @@ export class POIService {
     urlWol = 'assets/data/resourcesWoluwe.json';
     old = '';
 
-    private static compare(a, b) {
+    update() {
+        const campus = this.user.campus;
+        if (campus === 'LLN') {
+            this.url = this.urlLLN;
+        }
+        if (campus === 'Woluwe') {
+            this.url = this.urlWol;
+        }
+        if (campus === 'Mons') {
+            this.url = this.urlMons;
+        }
+        if (campus !== this.old) {
+            this.zones = {};
+            this.old = campus;
+        }
+    }
+
+    public loadResources(): Observable<any> {
+        this.update();
+        if (!this.zones) {
+            console.log('before http');
+            return this.http.get(this.url).pipe(
+                map(data => {
+                    return this.getZones(data);
+                })
+            );
+        } else {
+            console.log('ZERO', this.zones);
+            return new Observable(() => this.zones);
+        }
+    }
+
+    private compare(a, b) {
         if (a.nom < b.nom) {
             return -1;
         }
@@ -53,7 +85,7 @@ export class POIService {
         return 0;
     }
 
-    private static createMapLocations(list: any): Array<MapLocation> {
+    private createMapLocations(list: any): Array<MapLocation> {
         const locationsList: MapLocation[] = [];
         for (const elem of list) {
             const newLocation = new MapLocation(elem.nom,
@@ -88,40 +120,4 @@ export class POIService {
             icon: 'arrow-dropdown',
         };
     }
-
-    update() {
-        const campus = this.user.campus;
-        if (campus === 'LLN') {
-            this.url = this.urlLLN;
-        }
-        if (campus === 'Woluwe') {
-            this.url = this.urlWol;
-        }
-        if (campus === 'Mons') {
-            this.url = this.urlMons;
-        }
-        if (campus !== this.old) {
-            this.zones = [];
-            this.old = campus;
-        }
-    }
-
-    public loadResources() {
-        this.update();
-        if (this.zones.length === 0) {
-            return new Promise(resolve => {
-                this.http.get(this.url).pipe(
-                    map(res => res)).subscribe(data => {
-                    const newZone = POIService.getZones(data);
-                    this.zones.push(newZone);
-                    resolve(this.zones);
-                });
-            });
-        } else {
-            return new Promise(resolve => {
-                resolve(this.zones);
-            });
-        }
-    }
-
 }
