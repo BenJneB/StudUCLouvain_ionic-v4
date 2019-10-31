@@ -81,7 +81,6 @@ export class MapPage {
     }
 
     async showSearch() {
-        console.log(this.zones);
         const modal = await this.modalCtrl.create({
             component: SearchModal,
             componentProps: {
