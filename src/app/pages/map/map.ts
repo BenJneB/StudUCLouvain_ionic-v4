@@ -58,14 +58,10 @@ export class MapPage {
     }
 
     ionViewDidEnter() {
-        console.log('ionViewDidEnter');
         this.platform.ready().then(() => {
-            console.log('READY?');
-            this.poilocations.loadResources().subscribe(data => {
-                this.zones = data;
-                console.log(data, this.zones);
+            this.poilocations.loadResources().then(results => {
+                this.zones = results;
             });
-            console.log('this.zones', this.zones);
         });
         this.menuController.swipeGesture(false);
     }
