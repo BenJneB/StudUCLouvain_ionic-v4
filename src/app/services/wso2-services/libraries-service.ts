@@ -73,19 +73,15 @@ export class LibrariesService {
         }
     }
 
-    /*Extract all the details for a specific library, the library selected by the user*/
-
-    /*Retrieves all the necessary information*/
     private extractLibraryDetails(lib: LibraryItem, data: any): LibraryItem {
-        console.log(data);
         const mapLocation = new MapLocation(lib.name, '', '', '', '', '');
         if (data.mapLocation) {
-            mapLocation.address = `${data.address.street} ,  ${data.address.postalCode} ,  ${data.address.locality}`;
+            mapLocation.address = data.address.street + ', ' + data.address.postalCode + ', ' + data.address.locality;
             // TODO update maplocation with lat lng code
         }
 
         const locationId = data.locationId || -1;
-        const closedDates = [data.closedDates] ? data.closedDates.length === undefined : data.closedDates;
+        const closedDates = data.closedDates.length === undefined ? [data.closedDates] : data.closedDates;
         const {email, website, phone, openingHoursNote} = data;
         lib = Object.assign(lib, {email, website, phone, openingHoursNote, locationId, mapLocation, closedDates});
 
