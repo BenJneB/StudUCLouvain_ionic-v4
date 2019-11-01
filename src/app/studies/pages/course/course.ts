@@ -80,7 +80,6 @@ export class CoursePage implements OnInit {
                 }
             }
         });
-
     }
 
     toggleGroup(infos: string) {
