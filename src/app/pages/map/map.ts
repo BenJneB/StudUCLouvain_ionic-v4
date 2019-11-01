@@ -97,7 +97,6 @@ export class MapPage {
     showBuilding(item) {
         this.updateOrCreateBuildingMarker(item);
         const popup = this.building.getPopup();
-        // this.fitMap();
         if (popup.isOpen) {
             this.map.fire('popupopen', {popup: popup});
         }
@@ -119,20 +118,4 @@ export class MapPage {
                 <p style="width: 150px; word-wrap: break-word;">${item.address}</p>
               </div>`;
     }
-
-    // to be used later for sending geolocation to google maps or apple maps
-
-    // if(platform.is('android')){
-    //     if("geo" in this.item){
-    //       this.url = "geo:0,0?q="+this.item.geo.label;
-    //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
-    //     }
-    // }
-    // if(platform.is('ios')){
-    //     if("geo" in this.item){
-    //       this.url = "http://maps.apple.com/?q="+this.item.geo.label;
-    //       this.urlSanitized = this.sanitizer.bypassSecurityTrustUrl(this.url);
-    //     }
-    // }
-
 }
