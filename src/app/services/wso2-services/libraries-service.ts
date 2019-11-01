@@ -56,11 +56,7 @@ export class LibrariesService {
         return new Promise(resolve => {
             if (this.connService.isOnline()) {
                 const url_details = this.url + '/' + lib.id;
-                this.wso2Service.load(url_details).subscribe(
-                    data => {
-                        const value = this.extractLibraryDetails(lib, data['return'].library);
-                        resolve(value);
-                    });
+                this.wso2Service.load(url_details).subscribe(data => resolve(this.extractLibraryDetails(lib, data['return'].library)));
             } else {
                 this.connService.presentConnectionAlert();
                 resolve(lib);
@@ -84,7 +80,7 @@ export class LibrariesService {
         console.log(data);
         const mapLocation = new MapLocation(lib.name, '', '', '', '', '');
         if (data.mapLocation) {
-            mapLocation.address = `${data.address.street } ,  ${data.address.postalCode} ,  ${data.address.locality}`;
+            mapLocation.address = `${data.address.street} ,  ${data.address.postalCode} ,  ${data.address.locality}`;
             // TODO update maplocation with lat lng code
         }
 
