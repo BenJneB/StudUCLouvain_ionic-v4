@@ -30,14 +30,6 @@ import { LibrariesService } from 'src/app/services/wso2-services/libraries-servi
     selector: 'page-library-details',
     templateUrl: 'library-details.html',
     styleUrls: ['./library-details.scss'],
-    animations: [
-        trigger('expand', [
-            state('true', style({height: '45px'})),
-            state('false', style({height: '0'})),
-            transition('void => *', animate('0s')),
-            transition('* <=> *', animate('250ms ease-in-out'))
-        ])
-    ]
 })
 
 export class LibraryDetailsPage {
