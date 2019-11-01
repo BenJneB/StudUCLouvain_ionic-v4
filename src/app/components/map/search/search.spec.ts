@@ -31,8 +31,8 @@ import { newModalControllerMock } from 'test-config/MockIonicNative';
  */
 import { SearchModal } from './search';
 import { POIService } from 'src/app/services/map-services/poi-service';
-import { getMockProvider } from '../../../../../test-config/Mock';
-import { MapLocation } from '../../../entities/mapLocation';
+import { getMockProvider } from 'test-config/Mock';
+import { MapLocation } from 'src/app/models/mapLocation';
 
 describe('SearchModal of Map Component', () => {
     let fixture;
