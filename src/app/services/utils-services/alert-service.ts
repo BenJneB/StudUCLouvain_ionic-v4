@@ -1,4 +1,4 @@
-import { Course } from 'src/app/entities/course';
+import { Course } from 'src/app/models/course';
 
 import { Injectable } from '@angular/core';
 import { AlertController, IonItemSliding, ModalController, ToastController } from '@ionic/angular';

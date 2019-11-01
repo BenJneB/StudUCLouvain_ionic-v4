@@ -4,7 +4,7 @@ import { AdeService } from '../src/app/services/studies-services/ade-service';
 import { MockUtilsService } from './MockUtilsService';
 import { Observable } from 'rxjs';
 import { CourseService } from '../src/app/services/studies-services/course-service';
-import { Activity } from '../src/app/entities/activity';
+import { Activity } from '../src/app/models/activity';
 
 export class HttpClientMock extends HttpClient {
     constructor() {

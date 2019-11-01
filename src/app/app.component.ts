@@ -38,7 +38,7 @@ import {
 import { Storage } from '@ionic/storage';
 import { TranslateService } from '@ngx-translate/core';
 
-import { Page } from './entities/page';
+import { Page } from './models/page';
 import { UserService } from './services/utils-services/user-service';
 import { UtilsService } from './services/utils-services/utils-services';
 import { AlertService } from './services/utils-services/alert-service';

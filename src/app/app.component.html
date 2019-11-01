@@ -8,7 +8,7 @@
                 </ion-toolbar>
             </ion-header>
             <ion-content id="main-app-menu">
-                <ion-list scroll=true>
+                <ion-list>
                     <ion-item (click)="openRootPage(p)" *ngFor="let p of pages" button>
                         <ion-avatar slot="start">
                             <img alt="Pictogramme" height="35" src={{p.icon}} width="35"/>

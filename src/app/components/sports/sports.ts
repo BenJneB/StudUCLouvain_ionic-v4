@@ -23,7 +23,7 @@ import { FormControl } from '@angular/forms';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { IonItemSliding, IonList, ModalController, NavController } from '@ionic/angular';
 
-import { SportItem } from 'src/app/entities/sportItem';
+import { SportItem } from 'src/app/models/sportItem';
 import { SportsService } from 'src/app/services/rss-services/sports-service';
 import { AlertService } from 'src/app/services/utils-services/alert-service';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';

@@ -39,7 +39,7 @@ import { AppComponent } from './app.component';
 import { Network } from '@ionic-native/network/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { HomePage } from './home/home.page';
-import { TutoPage } from './pages/tuto/tuto';
+import { TutoPage } from './components/tuto/tuto';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 

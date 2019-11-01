@@ -23,7 +23,7 @@ import { UtilsService } from 'src/app/services/utils-services/utils-services';
 import { Component } from '@angular/core';
 import { NavController } from '@ionic/angular';
 
-import { LibraryItem } from 'src/app/entities/libraryItem';
+import { LibraryItem } from 'src/app/models/libraryItem';
 import { ConnectivityService } from 'src/app/services/utils-services/connectivity-service';
 import { LibrariesService } from 'src/app/services/wso2-services/libraries-service';
 

@@ -23,7 +23,7 @@ import { HttpClient } from '@angular/common/http';
  */
 import { Injectable } from '@angular/core';
 
-import { Activity } from 'src/app/entities/activity';
+import { Activity } from 'src/app/models/activity';
 import { AdeService } from './ade-service';
 
 @Injectable()
