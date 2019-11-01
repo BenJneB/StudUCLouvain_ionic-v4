@@ -32,6 +32,7 @@ import { newModalControllerMock } from 'test-config/MockIonicNative';
 import { SearchModal } from './search';
 import { POIService } from 'src/app/services/map-services/poi-service';
 import { getMockProvider } from '../../../../../test-config/Mock';
+import { MapLocation } from '../../../entities/mapLocation';
 
 describe('SearchModal of Map Component', () => {
     let fixture;
@@ -62,5 +63,24 @@ describe('SearchModal of Map Component', () => {
 
     it('should be created', () => {
         testInstanceCreation(component, SearchModal);
+    });
+
+
+    describe('search method', () => {
+        it('should filter items with input', () => {
+            const event_arg = {detail: {value: 'TEST'}};
+            component.items = [
+                new MapLocation('test', '', '', '', 'tset', ''),
+                new MapLocation('tset', '', '', '', 'test', ''),
+                new MapLocation('tset', '', '', '', 'tset', ''),
+            ];
+            const expected = component.items.filter((obj) => {
+                return [obj.title, obj.code, obj.address].some(
+                    (property) => property.toLowerCase().indexOf('TEST'.toLowerCase()) > -1
+                );
+            });
+            component.search(event_arg);
+            expect(component.items).toEqual(expected);
+        });
     });
 });
