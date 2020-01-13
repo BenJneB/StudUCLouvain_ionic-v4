@@ -71,6 +71,8 @@ jobs:
         skip-cleanup: true
         github-token: $GITHUB_TOKEN
         keep-history: true
+        file_glob: true
+        file: "/home/travis/build/BenJneB/StudUCLouvain_ionic-v4/platforms/android/app/build/outputs/apk/*/*.apk"
         on:
           repo: BenJneB/StudUCLouvain_ionic-v4
           branch: master
