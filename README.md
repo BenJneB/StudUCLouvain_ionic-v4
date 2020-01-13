@@ -26,8 +26,6 @@
 
 - Design & "Ergonomie"
 
-- Verify all imports (WIP)
-
 - Write unit tests (WIP)
 
   * Write pertinent tests (not only covering tests)
