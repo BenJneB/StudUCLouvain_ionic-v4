@@ -82,7 +82,7 @@ npm -v
       <variable name="API_KEY_FOR_IOS" value="myapikeyforios" />
     </plugin>
     ```
-* Replace the value of "myapikey" by your Javascript key in the file [Contribution guidelines for this project](src/environments/environments.ts) StudUCLouvain/src/environments/environments.ts
+* Replace the value of "myapikey" by your Javascript key in the file [Contribution guidelines for this project](https://github.com/BenJneB/StudUCLouvain_ionic-v4/blob/master/src/environments/environment.ts) StudUCLouvain/src/environments/environments.ts
 * Replace the value of "wso2HeaderStudent" by the appropriate value in the file StudUCLouvain/src/environments/environments.ts
 
 
