@@ -24,7 +24,7 @@
 
 - Make working on devices (iOS & Android)
 
-- Design & "Ergonomie"
+- Design & "Ergonomie" ( @mzen )
 
 - Write unit tests (WIP)
 
