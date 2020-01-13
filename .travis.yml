@@ -31,12 +31,6 @@ before_install:
     - touch $HOME/.android/repositories.cfg
 addons:
   chrome: stable
-  apt:
-    sources:
-      - sourceline: deb https://dl.yarnpkg.com/debian/ stable main
-        key_url: https://dl.yarnpkg.com/debian/pubkey.gpg
-    packages:
-      - oracle-java8-installer
 branches:
       only:
       - master
