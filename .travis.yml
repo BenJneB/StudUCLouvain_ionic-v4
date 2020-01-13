@@ -20,7 +20,21 @@ services:
   - xvfb
 addons:
   chrome: stable
+  apt:
+    packages:
+      - oracle-java8-installer
+      - oracle-java8-set-default
+before_cache:
+  - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+  - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+cache:
+  directories:
+    - $HOME/.gradle/caches/
+    - $HOME/.gradle/wrapper/
+    - $HOME/.android/build-cache
 
+before_install:
+    #- touch $HOME/.android/repositories.cfg
 branches:
       only:
       - master
@@ -65,17 +79,6 @@ jobs:
           repo: BenJneB/StudUCLouvain_ionic-v4
           branch: master
         file: "/home/travis/build/BenJneB/StudUCLouvain_ionic-v4/platforms/android/app/build/outputs/apk/*/*.apk"
-        before_cache:
-          - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
-          - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
-        cache:
-          directories:
-            - $HOME/.gradle/caches/
-            - $HOME/.gradle/wrapper/
-            - $HOME/.android/build-cache
-
-before_install:
-    #- touch $HOME/.android/repositories.cfg
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
