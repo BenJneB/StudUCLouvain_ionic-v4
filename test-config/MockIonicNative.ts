@@ -1,15 +1,17 @@
 import { Observable, Observer } from 'rxjs';
 
+import { ComponentFactoryResolver, Injector } from '@angular/core';
 import { AppAvailability } from '@ionic-native/app-availability/ngx';
 import { AppVersion } from '@ionic-native/app-version/ngx';
 import { Calendar } from '@ionic-native/calendar/ngx';
 import { Device } from '@ionic-native/device/ngx';
-import { InAppBrowser, InAppBrowserEventType, InAppBrowserObject, InAppBrowserOptions } from '@ionic-native/in-app-browser/ngx';
+import {
+    InAppBrowser, InAppBrowserEventType, InAppBrowserObject, InAppBrowserOptions
+} from '@ionic-native/in-app-browser/ngx';
 import { Market } from '@ionic-native/market/ngx';
 import { Network } from '@ionic-native/network/ngx';
 import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { AngularDelegate, ModalController } from '@ionic/angular';
-import { ComponentFactoryResolver, Injector } from '@angular/core';
 
 function getPromise(item?: any): Promise<any> {
     return new Promise((resolve, reject) => {
@@ -48,10 +50,10 @@ export interface InAppBrowserEvent extends Event {
     code: number;
     /** the error message, only in the case of loaderror. */
     message: string;
+    data: any;
 }
 
 export class InAppBrowserObjectMock extends InAppBrowserObject {
-
     constructor(url: string, target?: string, options?: string | InAppBrowserOptions) {
         super(url, target, options);
     }
@@ -226,7 +228,7 @@ export class ModalControllerMock extends ModalController {
     public create = jasmine.createSpy('create').and.returnValue(
         Promise.resolve({
             present: jasmine.createSpy('present').and.returnValue(Promise.resolve()),
-            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve({'data': [0, 1]}))
+            onDidDismiss: jasmine.createSpy('onDidDismiss').and.returnValue(Promise.resolve({ 'data': [0, 1] }))
         })
     );
 
