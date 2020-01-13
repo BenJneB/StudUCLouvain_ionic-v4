@@ -75,6 +75,15 @@ npm -v
     $ npm install
     ```    
 
+* Replace the values of "myapikeyforandroid" and "myapikeyforios" by the keys you created in the Google Console, in the file StudUCLouvain/config.xml  
+    ```xml
+    <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="myapikeyforandroid"/>
+    <plugin name="cordova-plugin-googlemaps">
+      <variable name="API_KEY_FOR_ANDROID" value="myapikeyforandroid" />
+      <variable name="API_KEY_FOR_IOS" value="myapikeyforios" />
+    </plugin>
+    ```
+* Replace the value of "myapikey" by your Javascript key in the file StudUCLouvain/src/app/variables-config.ts
 * Replace the value of "wso2HeaderStudent" by the appropriate value in the file StudUCLouvain/src/environments/environments.ts
 
 
