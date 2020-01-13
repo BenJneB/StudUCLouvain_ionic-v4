@@ -74,7 +74,7 @@ npm -v
     $ npm install
     ```    
 
-* Replace the values of "myapikeyforandroid" and "myapikeyforios" by the keys you created in the Google Console, in the file StudUCLouvain/config.xml  
+* Replace the values of "myapikeyforandroid" and "myapikeyforios" by the keys you created in the Google Console, in the file [config.xml](https://github.com/BenJneB/StudUCLouvain_ionic-v4/blob/master/config.xml) 
     ```xml
     <preference name="GOOGLE_MAPS_ANDROID_API_KEY" value="myapikeyforandroid"/>
     <plugin name="cordova-plugin-googlemaps">
@@ -82,8 +82,8 @@ npm -v
       <variable name="API_KEY_FOR_IOS" value="myapikeyforios" />
     </plugin>
     ```
-* Replace the value of "myapikey" by your Javascript key in the file [Contribution guidelines for this project](https://github.com/BenJneB/StudUCLouvain_ionic-v4/blob/master/src/environments/environment.ts) StudUCLouvain/src/environments/environments.ts
-* Replace the value of "wso2HeaderStudent" by the appropriate value in the file StudUCLouvain/src/environments/environments.ts
+* Replace the value of "myapikey" by your Javascript key in the file [environment.ts](https://github.com/BenJneB/StudUCLouvain_ionic-v4/blob/master/src/environments/environment.ts)
+* Replace the value of "wso2HeaderStudent" by the appropriate value in the file [environment.ts](https://github.com/BenJneB/StudUCLouvain_ionic-v4/blob/master/src/environments/environment.ts)
 
 
 ### Launch on browser
