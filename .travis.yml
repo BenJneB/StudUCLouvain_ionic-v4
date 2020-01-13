@@ -1,3 +1,5 @@
+sudo: required
+
 env:
   global:
     - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
