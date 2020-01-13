@@ -15,8 +15,6 @@ branches:
       - master
 
 before_script:
-      - npm install -g ionic cordova
-      - ionic cordova platform add browser
       - export DISPLAY=:99.0
       - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
       - chmod +x ./cc-test-reporter
@@ -30,6 +28,9 @@ jobs:
     - script: npm run e2e
       name: "E2E Tests"
     - script: ionic cordova build browser --prod
+      before_script:
+        - npm install -g ionic cordova
+        - ionic cordova platform add browser
       name: "Build browser"
 
 after_script:
