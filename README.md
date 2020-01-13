@@ -40,7 +40,6 @@
 ### TIPS
 #### - To launch only one test page : replace the 'describe' with the wanted scope by fdescribe in <page_name>.spec.ts
 
-&nbsp;
        
 # README :
 
@@ -83,7 +82,7 @@ npm -v
       <variable name="API_KEY_FOR_IOS" value="myapikeyforios" />
     </plugin>
     ```
-* Replace the value of "myapikey" by your Javascript key in the file StudUCLouvain/src/app/variables-config.ts
+* Replace the value of "myapikey" by your Javascript key in the file StudUCLouvain/src/environments/environments.ts
 * Replace the value of "wso2HeaderStudent" by the appropriate value in the file StudUCLouvain/src/environments/environments.ts
 
 
