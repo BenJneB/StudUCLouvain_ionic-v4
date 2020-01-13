@@ -42,6 +42,7 @@ jobs:
     - script: ionic cordova build android --prod
       before_script:
         - npm install -g ionic cordova
+        - ionic cordova resources android
         - ionic cordova platform add android
       name: "Build Android"
       deploy:
