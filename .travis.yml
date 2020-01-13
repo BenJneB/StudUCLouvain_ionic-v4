@@ -81,7 +81,6 @@ jobs:
         on:
           repo: BenJneB/StudUCLouvain_ionic-v4
           branch: master
-        file: "/home/travis/build/BenJneB/StudUCLouvain_ionic-v4/platforms/android/app/build/outputs/apk/*/*.apk"
 
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
