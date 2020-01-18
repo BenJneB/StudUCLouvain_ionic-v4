@@ -78,6 +78,10 @@ export class POIService {
         }
     }
 
+    public getCategories(zones){
+      return Object.keys(zones);
+    }
+
     private compare(a, b) {
         if (a.nom < b.nom) {
             return -1;
@@ -91,12 +95,14 @@ export class POIService {
     private createMapLocations(list: any): Array<MapLocation> {
         const locationsList: MapLocation[] = [];
         for (const elem of list.sort(this.compare)) {
-            const newLocation = new MapLocation(elem.nom,
+            const newLocation = new MapLocation(
+                elem.nom,
                 elem.adresse,
                 elem.coord.lat,
                 elem.coord.lng,
                 elem.sigle,
-                elem.vignette);
+                elem.vignette
+            );
             locationsList.push(newLocation);
         }
         return locationsList;
@@ -105,15 +111,17 @@ export class POIService {
     private getZones(data: Object) {
         this.zones = data;
         const tmpZones = data['zones'];
+        const locations = this.buildLocations(tmpZones);
         return {
-            auditoires: this.createMapLocations(tmpZones.auditoires),
-            locaux: this.createMapLocations(tmpZones.locaux),
-            bibliotheques: this.createMapLocations(tmpZones.bibliotheques),
-            sports: this.createMapLocations(tmpZones.sports),
-            restaurants_universitaires: this.createMapLocations(tmpZones.restaurants_universitaires),
-            services: this.createMapLocations(tmpZones.services),
-            parkings: this.createMapLocations(tmpZones.parkings),
-            icon: 'arrow-dropdown',
+            ...locations
         };
+    }
+
+    private buildLocations(zones){
+      const locations = [];
+      this.getCategories(zones).forEach(category => {
+        locations.push({category: this.createMapLocations(zones[category])});
+      });
+      return locations;
     }
 }

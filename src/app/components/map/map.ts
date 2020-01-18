@@ -111,11 +111,11 @@ export class MapPage {
     }
 
     generatePopupContent(item) {
-        return `<div>
-                <p class="popup-title">${item.id}</p>
-                <p style="width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.name}</p>
-                <img style="width:150px; height: auto;" src="${item.img}" alt="">
-                <p style="width: 150px; word-wrap: break-word;">${item.address}</p>
-              </div>`;
+        let content = `<div><p class="popup-title">${item.id}</p>`;
+        content += item.name ? `<p style="width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.name}</p>` : '';
+        content += item.img ? `<img style="width:150px; height: auto;" src="${item.img}" alt="">` : '';
+        content += item.address ? `<p style="width: 150px; word-wrap: break-word;">${item.address}</p>` : '';
+        content += `</div>`;
+        return content;
     }
 }

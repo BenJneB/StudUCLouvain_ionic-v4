@@ -12,6 +12,7 @@ import { MapRoutingModule } from './map-routing.module';
 import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { SearchModal } from './search/search';
 import { HttpClientModule } from '@angular/common/http';
+import { PipeModule } from 'src/app/pipes/pipe.module';
 
 @NgModule({
     declarations: [MapPage, SearchModal],
@@ -23,7 +24,8 @@ import { HttpClientModule } from '@angular/common/http';
         TranslateModule.forChild(),
         MapRoutingModule,
         LeafletModule,
-        HttpClientModule
+        HttpClientModule,
+        PipeModule
     ],
     providers: [
         POIService,
