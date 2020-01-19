@@ -78,13 +78,14 @@ jobs:
         - npm install -g ionic cordova cordova-res
         - ionic cordova resources android
         - ionic cordova platform add android
-        - cd Android
       name: "Build Android"
       matrix:
         include:
           - language: android
             dist: trusty
             jdk: oraclejdk8
+            before_script:
+              - cd Android
             before_cache:
               - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
               - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
