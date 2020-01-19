@@ -1,9 +1,9 @@
-sudo: required
+sudo: false
 
 jdk: oraclejdk8
 
 language: node_js
-node_js: "12.12.0"
+node_js: "12.14.0"
 android:
   components:
     - tools
@@ -13,7 +13,9 @@ android:
     - extra
     - extra-android-m2repository
   licenses:
+    - 'android-sdk-preview-license-.+'
     - 'android-sdk-license-.+'
+    - 'google-gdk-license-.+'
 env:
   global:
     - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
