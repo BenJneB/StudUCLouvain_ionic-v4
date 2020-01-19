@@ -87,7 +87,17 @@ jobs:
         on:
           repo: BenJneB/StudUCLouvain_ionic-v4
           branch: master
-
+before_deploy:
+  # start install android
+  - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+  - tar -xzvf /sdk-tools-linux-433379.zip
+  - echo "y" | ./android-sdk-linux/tools/android update sdk --no-ui --filter android-28,build-tools-28.0.3
+  - export ANDROID_HOME=${PWD}/android-sdk-linux
+  # license fail workaround: http://stackoverflow.com/questions/38096225/automatically-accept-all-sdk-licences
+  - mkdir -p ${ANDROID_HOME}/licenses
+  - echo -e "\n8933bad161af4178b1185d1a37fbf41ea5269c55" > "${ANDROID_HOME}/licenses/android-sdk-license"
+  - echo -e "\n84831b9409646a918e30573bab4c9c91346d8abd" > "${ANDROID_HOME}/licenses/android-sdk-preview-license"
+  
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
 
