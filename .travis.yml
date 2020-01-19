@@ -78,12 +78,11 @@ jobs:
         - npm install -g ionic cordova cordova-res
         - ionic cordova resources android
         - ionic cordova platform add android
+        - cd Android
       name: "Build Android"
-            language: android
+        language: android
       dist: trusty
       jdk: oraclejdk8
-      before_script: 
-        - cd Android
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -96,7 +95,6 @@ jobs:
         - yes | sdkmanager "platforms;android-28"
         - yes | sdkmanager 'cmake;3.6.4111459'
         - yes | sdkmanager 'lldb;3.1'
-
       android:
           components:
               - tools
