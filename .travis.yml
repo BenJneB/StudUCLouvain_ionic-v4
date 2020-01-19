@@ -18,8 +18,9 @@ android:
     - platform-tools
     - build-tools-28.0.3
     - android-28
+    - extra
     - extra-android-m2repository
-dist: trusty
+dist: xenial
 services:
   - xvfb
 before_cache:
