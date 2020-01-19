@@ -16,7 +16,7 @@ export class SearchModal {
     selectedCategory: any;
     selectOptions: any = {
       header: 'Categories'
-    }
+    };
 
     constructor(private modalCtrl: ModalController, public poiService: POIService) {
         this.poiService.loadResources().then((res: any) => {
@@ -52,6 +52,10 @@ export class SearchModal {
             img: item.vignette,
             address: item.adresse
         });
+    }
+
+    onVignetteLoaded(event: CustomEvent){
+      (event.target as HTMLElement).style.opacity = '1';
     }
 
 }

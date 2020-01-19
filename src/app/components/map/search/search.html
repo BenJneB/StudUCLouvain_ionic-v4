@@ -45,7 +45,7 @@
           <ion-label class="name">{{item.nom}}</ion-label>
           <ion-note class="address">{{item.adresse}}</ion-note>
         </div>
-        <ion-img *ngIf="item.vignette" class="miniature" [src]="item.vignette"></ion-img>
+        <ion-img *ngIf="item.vignette" [style.opacity]="0" class="miniature" [src]="item.vignette" (ionImgDidLoad)="onVignetteLoaded($event)"></ion-img>
       </span>
         </ion-item>
     </ion-list>
