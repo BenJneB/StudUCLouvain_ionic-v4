@@ -32,9 +32,6 @@ cache:
     - $HOME/.gradle/wrapper/
     - $HOME/.android/build-cache
 
-before_install:
-    - cp -R /usr/local/android-sdk ./android-sdk
-    - touch $HOME/.android/repositories.cfg
 addons:
   chrome: stable
 branches:
