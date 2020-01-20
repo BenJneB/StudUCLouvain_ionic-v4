@@ -41,7 +41,7 @@ jobs:
         - unzip sdk-tools-linux-4333796.zip
         - touch ~/.android/repositories.cfg
         - sudo update-alternatives --config java
-        - export Java_OPTS='-XX:+IgnoreUnrecognizedVMOptions --add-modules Java.se.ee'
+        - unset JAVA_OPTS
         - yes | ./tools/bin/sdkmanager --licenses  
         - yes | ./tools/bin/sdkmanager --update
         - yes | ./tools/bin/sdkmanager "platforms;android-28"
