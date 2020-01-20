@@ -75,7 +75,7 @@ jobs:
         local_dir: www
     - script: ionic cordova build android --prod
       before_script:
-        - find . -type d | grep DIRNAME
+        - find . -type d | grep android-sdk
         - npm install -g ionic cordova cordova-res
         - ionic cordova resources android
         - ionic cordova platform add android
