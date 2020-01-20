@@ -1,4 +1,4 @@
-sudo: false
+sudo: required
 
 language: node_js
 node_js: "12.14.0"
@@ -37,6 +37,10 @@ jobs:
       name: "E2E Tests"
     - script: ionic cordova build android --prod
       before_script:
+        - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+        - tar -xzvf /sdk-tools-linux-433379.zip
+        - echo "y" | ./android-sdk-linux/tools/android update sdk --no-ui --filter android-28,build-tools-28.0.3
+        - export ANDROID_HOME=${PWD}/android-sdk-linux
         - npm install -g cordova-res
         - ionic cordova resources android
         - ionic cordova platform add android
