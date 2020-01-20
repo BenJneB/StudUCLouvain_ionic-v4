@@ -16,13 +16,7 @@ services:
 
 addons:
   chrome: stable
-  apt:
-    sources:
-    - sourceline: deb http://dl.google.com/linux/chrome/deb/ stable main
-      key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub
-    packages:
-    - oracle-java8-installer
-    - oracle-java8-set-default
+
 branches:
       only:
       - master
@@ -46,6 +40,7 @@ jobs:
         - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
         - unzip sdk-tools-linux-4333796.zip
         - touch ~/.android/repositories.cfg
+        - yes | ./tools/bin/sdkmanager --update
         - yes | ./tools/bin/sdkmanager "platforms;android-28"
         - yes | ./tools/bin/sdkmanager "build-tools;28.0.3"
         - export ANDROID_HOME=${PWD}/android-sdk-linux
