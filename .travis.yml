@@ -51,8 +51,6 @@ jobs:
         local_dir: www
     - script: ionic cordova build android --prod
       before_script:
-        - echo "y" | ./android-sdk-linux/tools/android update sdk --no-ui --filter android-28,build-tools-28.0.3
-        - export ANDROID_HOME=${PWD}/android-sdk-linux
         - npm install -g cordova-res
         - ionic cordova resources android
         - ionic cordova platform add android
