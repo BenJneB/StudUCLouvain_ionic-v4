@@ -16,7 +16,13 @@ services:
 
 addons:
   chrome: stable
-
+  apt:
+    sources:
+    - sourceline: deb http://dl.google.com/linux/chrome/deb/ stable main
+      key_url: https://dl-ssl.google.com/linux/linux_signing_key.pub
+    packages:
+    - oracle-java8-installer
+    - oracle-java8-set-default
 branches:
       only:
       - master
