@@ -39,7 +39,7 @@ jobs:
       before_script:
         - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
         - unzip sdk-tools-linux-4333796.zip
-        - echo "y" | ./android-sdk-linux/tools/android update sdk --no-ui --filter android-28,build-tools-28.0.3
+        - echo "y" | ./tools/android update sdk --no-ui --filter android-28,build-tools-28.0.3
         - export ANDROID_HOME=${PWD}/android-sdk-linux
         - npm install -g cordova-res
         - ionic cordova resources android
