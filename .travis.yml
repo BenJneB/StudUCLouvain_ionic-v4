@@ -40,7 +40,8 @@ jobs:
         - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
         - unzip sdk-tools-linux-4333796.zip
         - touch ~/.android/repositories.cfg
-        - echo "y" | ./tools/bin/sdkmanager --update
+        - yes | ./tools/bin/sdkmanager "platforms;android-28"
+        - yes | ./tools/bin/sdkmanager "build-tools;28.0.3"
         - export ANDROID_HOME=${PWD}/android-sdk-linux
         - npm install -g cordova-res
         - ionic cordova resources android
