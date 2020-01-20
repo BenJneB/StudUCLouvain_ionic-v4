@@ -39,6 +39,7 @@ jobs:
       before_script:
         - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
         - unzip sdk-tools-linux-4333796.zip
+        - touch ~/.android/repositories.cfg
         - echo "y" | ./tools/bin/sdkmanager --update
         - export ANDROID_HOME=${PWD}/android-sdk-linux
         - npm install -g cordova-res
