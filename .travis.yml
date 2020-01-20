@@ -26,7 +26,9 @@ before_script:
       - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
       - chmod +x ./cc-test-reporter
       - ./cc-test-reporter before-build
-
+install:
+  - npm install
+  - npm install -g ionic cordova
 jobs:
   include:
     - stage: "Tests"
@@ -37,7 +39,6 @@ jobs:
     - script:
         - ionic cordova build browser --prod
       before_script:
-        - npm install -g ionic cordova
         - ionic cordova platform add browser
       name: "Build browser"
       deploy:
@@ -52,7 +53,7 @@ jobs:
       before_script:
         - echo "y" | ./android-sdk-linux/tools/android update sdk --no-ui --filter android-28,build-tools-28.0.3
         - export ANDROID_HOME=${PWD}/android-sdk-linux
-        - npm install -g ionic cordova cordova-res
+        - npm install -g cordova-res
         - ionic cordova resources android
         - ionic cordova platform add android
       name: "Build Android"
