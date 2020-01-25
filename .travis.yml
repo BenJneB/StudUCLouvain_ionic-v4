@@ -1,20 +1,10 @@
-language: node_js
-node_js: "12.14.0"
 env:
   global:
     - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
 
 branches:
       only:
-      - master
-      
-before_install:
-  - node --version
-  - npm --version
-  - gradle --version
-install:
-  - npm install
-  - npm install -g ionic cordova
+      - master      
   
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
@@ -23,6 +13,9 @@ matrix:
     # app for browser (just for testing)
     - language: node_js
       node_js: "12.14.0"
+      install:
+        - npm install
+        - npm install -g ionic cordova
       services:
         - xvfb
       dist: xenial
@@ -54,9 +47,11 @@ matrix:
             - ant
             - oracle-java8-installer
             - oracle-java8-set-default
-     # install:
-        #- curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
-        #- sudo apt-get install build-essential
+      install:
+        - curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
+        - sudo apt-get install build-essential
+        - npm install
+        - npm install -g ionic cordova
       script:
         - sudo ionic cordova platform add android
         - sudo ionic cordova build --release --prod android
