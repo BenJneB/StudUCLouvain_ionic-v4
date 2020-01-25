@@ -5,12 +5,8 @@ env:
     - ANDROID_BUILD_TOOLS_VERSION=28.0.3
     - ANDROID_ABI=armeabi-v7a
 
-dist: xenial
 services:
   - xvfb
-
-addons:
-  chrome: stable
 
 branches:
       only:
@@ -36,11 +32,16 @@ matrix:
     # app for browser (just for testing)
     - language: node_js
       node_js: "12.14.0"
-      - stage: "Tests"
-        name: "Unit Tests"
-        script: npm run test:onceAndCoverage
-      - script: npm run e2e
-        name: "E2E Tests"
+      dist: xenial
+      addons:
+      chrome: stable
+      jobs:
+        include:
+          - stage: "Tests"
+            name: "Unit Tests"
+            script: npm run test:onceAndCoverage
+          - script: npm run e2e
+            name: "E2E Tests"
 
     # app for android
     - language: android
