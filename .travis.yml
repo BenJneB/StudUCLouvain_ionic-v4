@@ -43,8 +43,6 @@ jobs:
       name: "E2E Tests"
     - script: ionic cordova build android --prod
       before_script:
-        - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
-        - unzip sdk-tools-linux-4333796.zip
         - touch ~/.android/repositories.cfg
         - sudo update-alternatives --config java
         - unset JAVA_OPTS
