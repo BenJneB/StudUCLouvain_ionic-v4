@@ -96,13 +96,13 @@ jobs:
       install:
         - npm install
         - npm install -g ionic cordova
-        - ionic info
         
-      script: ionic cordova build android --prod
       before_script:
         - npm install -g cordova-res
         - ionic cordova resources android
         - ionic cordova platform add android
+        - ionic info
+      script: ionic cordova build android --prod
 
       before_deploy:
         # start install android
