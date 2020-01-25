@@ -10,6 +10,9 @@ services:
 branches:
   only:
     - master
+dist: xenial
+addons:
+  chrome: stable
     
 jobs:
   include:
@@ -17,9 +20,6 @@ jobs:
       name: "Unit Tests"
       language: node_js
       node_js: "12.14.0"
-      dist: xenial
-      addons:
-        chrome: stable
         
       install:
         - npm install
@@ -31,15 +31,10 @@ jobs:
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
       script: npm run test:onceAndCoverage
-      after_script:
-        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
         
     - name: "E2E Tests"
       language: node_js
       node_js: "12.14.0"
-      dist: xenial
-      addons:
-        chrome: stable
 
       install:
         - npm install
@@ -51,8 +46,7 @@ jobs:
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
       script: npm run e2e
-      after_script:
-        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+
     - stage: "Builds"
       name: "Build Android"
       language: android
@@ -87,7 +81,6 @@ jobs:
         - npm install
         - npm install -g ionic cordova
         - npm install -g cordova-res
-        - npm audit fix
         - node --version
         - npm --version
         - gradle --version
@@ -115,3 +108,6 @@ jobs:
           repo: BenJneB/StudUCLouvain_ionic-v4
           branch: master
        
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+  
