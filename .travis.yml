@@ -20,6 +20,8 @@ jobs:
       install:
         - npm install
         - npm install -g ionic cordova
+        - ionic info
+        
       before_script:
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
@@ -44,6 +46,8 @@ jobs:
       install:
         - npm install
         - npm install -g ionic cordova
+        - ionic info
+        
       before_script:
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
@@ -89,7 +93,11 @@ jobs:
         - node --version
         - npm --version
         - gradle --version
-      
+      install:
+        - npm install
+        - npm install -g ionic cordova
+        - ionic info
+        
       script: ionic cordova build android --prod
       before_script:
         - npm install -g cordova-res
