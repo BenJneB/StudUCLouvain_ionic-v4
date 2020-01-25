@@ -20,6 +20,7 @@ jobs:
       install:
         - npm install
         - npm install -g ionic cordova
+        - npm audit fix
         - ionic info
         
       before_script:
@@ -46,6 +47,7 @@ jobs:
       install:
         - npm install
         - npm install -g ionic cordova
+        - npm audit fix
         - ionic info
         
       before_script:
@@ -90,15 +92,16 @@ jobs:
           
       before_install:
         - nvm install 12.14.0
-        - node --version
-        - npm --version
-        - gradle --version
       install:
         - npm install
         - npm install -g ionic cordova
+        - npm install -g cordova-res
+        - npm audit fix
+        - node --version
+        - npm --version
+        - gradle --version
         
       before_script:
-        - npm install -g cordova-res
         - ionic cordova resources android
         - ionic cordova platform add android
         - ionic info
