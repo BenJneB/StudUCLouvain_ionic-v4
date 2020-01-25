@@ -1,72 +1,101 @@
-matrix:
-    # app for browser (just for testing)
-    - language: node_js
-      node_js: 
-        - 12.14.0
-      os: linux
-      services:
-        - xvfb
-      dist: xenial
-      addons:
-        chrome: stable
-      env:
-        global:
-            - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
-      branches:
-        only:
-            - master   
-            
-      install:
-        - npm install
-        - npm install -g ionic cordova
+sudo: false
 
+language: node_js
+node_js: "12.14.0"
+
+env:
+  global:
+    - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
+    - ANDROID_API_LEVEL=28
+    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+    - ANDROID_ABI=armeabi-v7a
+
+dist: xenial
+services:
+  - xvfb
+
+addons:
+  chrome: stable
+
+branches:
+      only:
+      - master
+
+before_script:
+      - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+      - chmod +x ./cc-test-reporter
+      - ./cc-test-reporter before-build
+      
+before_install:
+  - node --version
+  - npm --version
+  - gradle --version
+install:
+  - npm install
+  - npm install -g ionic cordova
+
+jobs:
+  include:
+    - stage: "Tests"
+      name: "Unit Tests"
+      script: npm run test:onceAndCoverage
+    - script: npm run e2e
+      name: "E2E Tests"
+    - script: ionic cordova build android --prod
       before_script:
-        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        - chmod +x ./cc-test-reporter
-        - ./cc-test-reporter before-build   
-
-      after_script:
-        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-  
-      jobs:
-        include:
-          - stage: "Tests"
-            name: "Unit Tests"
-            script: npm run test:onceAndCoverage
-          - script: npm run e2e
-            name: "E2E Tests"
-
-    # app for android
-    - language: android
-      dist: trusty
-      os: linux
-      sudo: true
+        - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+        - unzip sdk-tools-linux-4333796.zip
+        - touch ~/.android/repositories.cfg
+        - sudo update-alternatives --config java
+        - unset JAVA_OPTS
+        - yes | ./tools/bin/sdkmanager --licenses  
+        - yes | ./tools/bin/sdkmanager --update
+        - yes | ./tools/bin/sdkmanager "platforms;android-28"
+        - yes | ./tools/bin/sdkmanager "build-tools;28.0.3"
+        - export ANDROID_HOME=${PWD}/android-sdk-linux
+        - npm install -g cordova-res
+        - ionic cordova resources android
+        - ionic cordova platform add android
+      name: "Build Android"
+      jdk: oraclejdk8
       android:
         components:
-          - build-tools-28.0.3
+          - tools
+          - platform-tools
+          - build-tools-28.0.3	
           - android-28
-      addons:
-        apt:
-          packages:
-            - ant
-            - oracle-java8-installer
-            - oracle-java8-set-default
-      install:
-        - curl -sL https://deb.nodesource.com/setup_11.x | sudo -E bash -
-        - sudo apt-get install build-essential
-        - npm install
-        - npm install -g ionic cordova
-      script:
-        - sudo ionic cordova platform add android
-        - sudo ionic cordova build --release --prod android
-              
-deploy:
-  provider: pages
-  skip-cleanup: true
-  github-token: $GITHUB_TOKEN
-  keep-history: true
-  file_glob: true
-  file: "/home/travis/build/BenJneB/StudUCLouvain_ionic-v4/platforms/android/app/build/outputs/apk/*/*.apk"
-  on:
-    repo: BenJneB/StudUCLouvain_ionic-v4
-    branch: master
+          - extra
+          - extra-android-m2repository
+          - extra-google-google_play_services
+          - extra-google-m2repository
+        licenses:
+          - 'android-sdk-preview-license-.+'
+          - 'android-sdk-license-.+'
+          - 'google-gdk-license-.+'
+      before_cache:
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        directories:
+          - $HOME/.gradle/caches/
+          - $HOME/.gradle/wrapper/
+          - $HOME/.android/build-cache
+      deploy:
+        provider: pages
+        skip-cleanup: true
+        github-token: $GITHUB_TOKEN
+        keep-history: true
+        file_glob: true
+        file: "/home/travis/build/BenJneB/StudUCLouvain_ionic-v4/platforms/android/app/build/outputs/apk/*/*.apk"
+        on:
+          repo: BenJneB/StudUCLouvain_ionic-v4
+          branch: master
+      before_deploy:
+        # start install android
+        - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
+        - tar -xzvf /sdk-tools-linux-4333796.zip
+        - echo "y" | ./android-sdk-linux/tools/android update sdk --no-ui --filter android-28,build-tools-28.0.3
+        - export ANDROID_HOME=${PWD}/android-sdk-linux
+  
+after_script:
+  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
