@@ -1,26 +1,29 @@
 sudo: false
-
+env:
+  global:
+    - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
+    - ANDROID_API_LEVEL=28
+    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+    - ANDROID_ABI=armeabi-v7a
+services:
+  - xvfb
+branches:
+  only:
+    - master
+    
 jobs:
   include:
     - stage: "Tests"
       name: "Unit Tests"
       language: node_js
       node_js: "12.14.0"
-      env:
-        global:
-          - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
       dist: xenial
-      services:
-        - xvfb
       addons:
         chrome: stable
-      branches:
-            only:
-              - master
+        
       install:
         - npm install
         - npm install -g ionic cordova
-        - npm audit fix
         - ionic info
         
       before_script:
@@ -30,24 +33,17 @@ jobs:
       script: npm run test:onceAndCoverage
       after_script:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+        
     - name: "E2E Tests"
       language: node_js
       node_js: "12.14.0"
-      env:
-        global:
-          - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
       dist: xenial
-      services:
-        - xvfb
       addons:
         chrome: stable
-      branches:
-            only:
-              - master
+
       install:
         - npm install
         - npm install -g ionic cordova
-        - npm audit fix
         - ionic info
         
       before_script:
@@ -60,11 +56,6 @@ jobs:
     - stage: "Builds"
       name: "Build Android"
       language: android
-      env:
-        global:
-          - ANDROID_API_LEVEL=28
-          - ANDROID_BUILD_TOOLS_VERSION=28.0.3
-          - ANDROID_ABI=armeabi-v7a
       jdk: oraclejdk8
       android:
         components:
