@@ -2,7 +2,8 @@ sudo: false
 
 jobs:
   include:
-    - stage: "Unit Tests"
+    - stage: "Tests"
+      name: "Unit Tests"
       language: node_js
       node_js: "12.14.0"
       env:
@@ -23,35 +24,11 @@ jobs:
         - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
         - chmod +x ./cc-test-reporter
         - ./cc-test-reporter before-build
-      name: "Unit Tests"
       script: npm run test:onceAndCoverage
       after_script:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
-    - stage: "E2E Tests"
-      language: node_js
-      node_js: "12.14.0"
-      env:
-        global:
-          - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
-      dist: xenial
-      services:
-        - xvfb
-      addons:
-        chrome: stable
-      branches:
-            only:
-              - master
-      install:
-        - npm install
-        - npm install -g ionic cordova
-      before_script:
-        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-        - chmod +x ./cc-test-reporter
-        - ./cc-test-reporter before-build
+    - name: "E2E Tests"
       script: npm run e2e
-      name: "E2E Tests"
-      after_script:
-        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
     - stage: "Build Android"
       language: android
       env:
