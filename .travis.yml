@@ -28,8 +28,30 @@ jobs:
       after_script:
         - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
     - name: "E2E Tests"
+      language: node_js
+      node_js: "12.14.0"
+      env:
+        global:
+          - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
+      dist: xenial
+      services:
+        - xvfb
+      addons:
+        chrome: stable
+      branches:
+            only:
+              - master
+      install:
+        - npm install
+        - npm install -g ionic cordova
+      before_script:
+        - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
+        - chmod +x ./cc-test-reporter
+        - ./cc-test-reporter before-build
       script: npm run e2e
-    - stage: "Build Android"
+      after_script:
+        - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
+    - stage: "Builds"
       language: android
       env:
         global:
@@ -38,16 +60,6 @@ jobs:
           - ANDROID_ABI=armeabi-v7a
       script: ionic cordova build android --prod
       before_script:
-        - wget https://dl.google.com/android/repository/sdk-tools-linux-4333796.zip
-        - unzip sdk-tools-linux-4333796.zip
-        - touch ~/.android/repositories.cfg
-        - sudo update-alternatives --config java
-        - unset JAVA_OPTS
-        - yes | ./tools/bin/sdkmanager --licenses  
-        - yes | ./tools/bin/sdkmanager --update
-        - yes | ./tools/bin/sdkmanager "platforms;android-28"
-        - yes | ./tools/bin/sdkmanager "build-tools;28.0.3"
-        - export ANDROID_HOME=${PWD}/android-sdk-linux
         - npm install -g cordova-res
         - ionic cordova resources android
         - ionic cordova platform add android
