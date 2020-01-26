@@ -47,8 +47,7 @@ jobs:
         - ./cc-test-reporter before-build
       script: npm run e2e
 
-    - stage: "Builds"
-      name: "Build Android"
+    - stage: "Build Android"
       language: android
       jdk: oraclejdk8
       android:
@@ -87,6 +86,26 @@ jobs:
           repo: BenJneB/StudUCLouvain_ionic-v4
           branch: master
        
+    - stage: "Build iOS"
+      os: osx
+      language: objective-c
+          
+      before_install:
+        - nvm install 12.14.0
+      install:
+        - npm install
+        - npm install -g ionic cordova
+        - npm install -g cordova-res
+        - node --version
+        - npm --version
+        - gradle --version
+        
+      before_script:
+        - ionic cordova resources ios
+        - ionic cordova platform add ios
+        - ionic info
+      script: ionic cordova build ios --prod
+
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
   
