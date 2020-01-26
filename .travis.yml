@@ -1,7 +1,5 @@
 sudo: false
-env:
-  global:
-    - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
+
 branches:
   only:
     - master
@@ -11,6 +9,9 @@ jobs:
   include:
     - stage: "Tests"
       name: "Unit Tests"
+      env:
+        global:
+          - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
       language: node_js
       node_js: "12.14.0"
       services:
@@ -30,6 +31,9 @@ jobs:
       script: npm run test:onceAndCoverage
         
     - name: "E2E Tests"
+      env:
+        global:
+          - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
       language: node_js
       node_js: "12.14.0"
       services:
