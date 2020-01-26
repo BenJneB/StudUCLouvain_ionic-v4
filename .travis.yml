@@ -1,26 +1,24 @@
 sudo: false
-env:
-  global:
-    - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
-    - ANDROID_API_LEVEL=28
-    - ANDROID_BUILD_TOOLS_VERSION=28.0.3
-    - ANDROID_ABI=armeabi-v7a
-services:
-  - xvfb
+
 branches:
   only:
     - master
 dist: xenial
-addons:
-  chrome: stable
     
 jobs:
   include:
     - stage: "Tests"
       name: "Unit Tests"
+      env:
+        global:
+          - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
       language: node_js
       node_js: "12.14.0"
-        
+      services:
+        - xvfb
+      addons:
+        chrome: stable
+  
       install:
         - npm install
         - npm install -g ionic cordova
@@ -33,9 +31,16 @@ jobs:
       script: npm run test:onceAndCoverage
         
     - name: "E2E Tests"
+      env:
+        global:
+          - CC_TEST_REPORTER_ID=9e94eb42394f339fee6592314b209bd1afb92b11580fee8e550111aa42626990
       language: node_js
       node_js: "12.14.0"
-
+      services:
+        - xvfb
+      addons:
+        chrome: stable
+        
       install:
         - npm install
         - npm install -g ionic cordova
@@ -47,25 +52,33 @@ jobs:
         - ./cc-test-reporter before-build
       script: npm run e2e
 
-    - stage: "Builds"
-      name: "Build Android"
+    - stage: "Build Android"
       language: android
+      env:
+        global:
+          - ANDROID_API_LEVEL=28
+          - ANDROID_BUILD_TOOLS_VERSION=28.0.3
+          - ANDROID_ABI=armeabi-v7a
       jdk: oraclejdk8
       android:
         components:
-          - tools
-          - platform-tools
           - build-tools-28.0.3	
           - android-28
-          - extra
-          - extra-google-google_play_services
+          
+      before_cache:
+        - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
+        - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
+      cache:
+        directories:
+          - $HOME/.gradle/caches/
+          - $HOME/.gradle/wrapper/
+          - $HOME/.android/build-cache
           
       before_install:
         - nvm install 12.14.0
       install:
         - npm install
-        - npm install -g ionic cordova
-        - npm install -g cordova-res
+        - npm install -g ionic cordova cordova-res
         - node --version
         - npm --version
         - gradle --version
@@ -75,18 +88,25 @@ jobs:
         - ionic cordova platform add android
         - ionic info
       script: ionic cordova build android --prod
-
-      deploy:
-        provider: pages
-        skip-cleanup: true
-        github-token: $GITHUB_TOKEN
-        keep-history: true
-        file_glob: true
-        file: "/home/travis/build/BenJneB/StudUCLouvain_ionic-v4/platforms/android/app/build/outputs/apk/*/*.apk"
-        on:
-          repo: BenJneB/StudUCLouvain_ionic-v4
-          branch: master
        
+    - stage: "Build iOS"
+      os: osx
+      language: objective-c
+          
+      before_install:
+        - nvm install 12.14.0
+      install:
+        - npm install
+        - npm install -g ionic cordova cordova-res
+        - node --version
+        - npm --version
+        
+      before_script:
+        - ionic cordova resources ios
+        - ionic cordova platform add ios
+        - ionic info
+      script: ionic cordova build ios --prod
+
 after_script:
   - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT
   
