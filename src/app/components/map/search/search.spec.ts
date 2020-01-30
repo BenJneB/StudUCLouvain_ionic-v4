@@ -35,7 +35,7 @@ import { TranslateModule } from '@ngx-translate/core';
  */
 import { SearchModal } from './search';
 
-fdescribe('SearchModal of Map Component', () => {
+describe('SearchModal of Map Component', () => {
     let fixture;
     let component;
 
