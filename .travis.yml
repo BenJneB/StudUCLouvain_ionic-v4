@@ -64,7 +64,7 @@ jobs:
         components:
           - build-tools-$ANDROID_BUILD_TOOLS_VERSION
           - android-$ANDROID_API_LEVEL
-         licenses:
+        licenses:
           - 'android-sdk-license-.+'
     
       before_cache:
