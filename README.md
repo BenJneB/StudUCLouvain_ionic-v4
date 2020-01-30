@@ -21,11 +21,7 @@
   * Launch external app
   
   * Studies Page : Right menu toggle
-
-  * Map Page
   
-  * Improve managment of HttpErrorResponse (ex: wso2-service l56) & Errors
-
 - Make working on devices (iOS & Android)
 
 - Design & "Ergonomie"
