@@ -73,6 +73,8 @@ jobs:
           - $HOME/.gradle/caches/
           - $HOME/.gradle/wrapper/
           - $HOME/.android/build-cache
+          - node_modules
+          - plugins
           
       before_install:
         - nvm install 12.14.0
@@ -91,6 +93,11 @@ jobs:
     - stage: "Build iOS"
       os: osx
       language: swift
+          
+      cache:
+        directories:
+          - node_modules
+          - plugins
           
       before_install:
         - nvm install 12.14.0
