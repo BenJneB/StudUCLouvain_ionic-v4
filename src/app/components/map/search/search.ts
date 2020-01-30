@@ -1,6 +1,7 @@
+import { POIService } from 'src/app/services/map-services/poi-service';
+
 import { Component } from '@angular/core';
 import { ModalController } from '@ionic/angular';
-import { POIService } from 'src/app/services/map-services/poi-service';
 
 @Component({
     selector: 'search-modal',
@@ -12,12 +13,23 @@ export class SearchModal {
     searchQuery = '';
     items: any = [];
     displayItems = [];
+    categories = [];
+    selectedCategory: any;
+    selectOptions: any = {
+        header: 'Categories'
+    };
 
     constructor(private modalCtrl: ModalController, public poiService: POIService) {
-        this.poiService.loadResources().then(res => {
-            this.items = res[0].auditoires.list;
-            this.displayItems = this.items;
+        this.poiService.loadResources().then((res: any) => {
+            this.items = res.zones;
+            this.categories = this.poiService.getCategories(res.zones);
+            this.selectedCategory = this.categories[0];
+            this.displayItems = this.items[this.selectedCategory];
         });
+    }
+
+    changeCategory() {
+        this.displayItems = this.items[this.selectedCategory];
     }
 
     close() {
@@ -35,12 +47,16 @@ export class SearchModal {
 
     select(item) {
         this.modalCtrl.dismiss({
-            id: item.code,
-            name: item.title,
-            pos: {lat: item.lat, lng: item.lng},
+            id: item.sigle ? item.sigle : item.nom,
+            name: item.sigle ? item.nom : '',
+            pos: { lat: item.coord.lat, lng: item.coord.lng },
             img: item.vignette,
-            address: item.address
+            address: item.adresse
         });
+    }
+
+    onVignetteLoaded(event: CustomEvent) {
+        (event.target as HTMLElement).style.opacity = '1';
     }
 
 }

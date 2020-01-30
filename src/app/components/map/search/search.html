@@ -19,36 +19,37 @@
     along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
 -->
 <ion-header>
-    <ion-toolbar>
-        <ion-searchbar (ionChange)="search($event)" placeholder="search"></ion-searchbar>
-        <ion-buttons slot="end">
-            <ion-button (click)="close()" fill="clear" icon-only>
-                <ion-icon item-right name="close"></ion-icon>
-            </ion-button>
-        </ion-buttons>
-    </ion-toolbar>
+  <ion-toolbar>
+    <ion-searchbar (ionChange)="search($event)" placeholder="Search"></ion-searchbar>
+    <ion-buttons slot="end">
+      <ion-button (click)="close()" fill="clear" icon-only>
+        <ion-icon item-right name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
 </ion-header>
 
-<ion-segment disabled value="halls">
-    <ion-segment-button checked value="halls">
-        <ion-label>Halls</ion-label>
-    </ion-segment-button>
-    <ion-segment-button value="rainy">
-        <ion-label>...</ion-label>
-    </ion-segment-button>
-</ion-segment>
+<ion-item>
+  <ion-label>Category</ion-label>
+  <ion-select [interfaceOptions]="selectOptions" interface="action-sheet" [(ngModel)]="selectedCategory"
+    (ionChange)="changeCategory()">
+    <ion-select-option *ngFor="let category of categories" value="{{category}}">{{category|cleanAndCapitalize}}
+    </ion-select-option>
+  </ion-select>
+</ion-item>
 
 <ion-content>
-    <ion-list>
-        <ion-item (click)="select(item)" *ngFor="let item of displayItems">
-      <span class="ion-padding" *ngIf="item.code">
+  <ion-list>
+    <ion-item (click)="select(item)" *ngFor="let item of displayItems">
+      <span class="ion-padding" *ngIf="item">
         <div class="info">
-          <ion-label class="id">{{item.code}}</ion-label>
-          <ion-label class="name">{{item.title}}</ion-label>
-          <ion-note class="address">{{item.address}}</ion-note>
+          <ion-label class="id">{{item.sigle}}</ion-label>
+          <ion-label class="name">{{item.nom}}</ion-label>
+          <ion-note class="address">{{item.adresse}}</ion-note>
         </div>
-        <ion-img class="miniature" [src]="item.vignette"></ion-img>
+        <ion-img *ngIf="item.vignette" [style.opacity]="0" class="miniature" [src]="item.vignette"
+          (ionImgDidLoad)="onVignetteLoaded($event)"></ion-img>
       </span>
-        </ion-item>
-    </ion-list>
+    </ion-item>
+  </ion-list>
 </ion-content>

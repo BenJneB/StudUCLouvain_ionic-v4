@@ -263,6 +263,10 @@ ion-tab-button {
   color: white;
   font-weight: bold;
   margin-bottom: 30% !important;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  margin-right: 10px !important;
 }
 
 .leaflet-container a.leaflet-popup-close-button {

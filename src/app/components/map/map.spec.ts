@@ -1,3 +1,21 @@
+import * as L from 'leaflet';
+import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
+import { MapService } from 'src/app/services/map-services/map-service';
+import { POIService } from 'src/app/services/map-services/poi-service';
+import { getMockProvider } from 'test-config/Mock';
+import { newModalControllerMock } from 'test-config/MockIonicNative';
+import { LeafletMapMock, LeafletMarkerMock, newMockMapService } from 'test-config/MockMapService';
+
+import { HttpClientModule } from '@angular/common/http';
+import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { async, TestBed } from '@angular/core/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
+import { ModalController } from '@ionic/angular';
+import { IonicStorageModule } from '@ionic/storage';
+import { TranslateModule } from '@ngx-translate/core';
+
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -19,24 +37,6 @@
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { MapPage } from './map';
-import { POIService } from 'src/app/services/map-services/poi-service';
-import { MapService } from 'src/app/services/map-services/map-service';
-import { getMockProvider } from 'test-config/Mock';
-import { LeafletMapMock, LeafletMarkerMock, newMockMapService } from 'test-config/MockMapService';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
-import * as L from 'leaflet';
-import { spyFunctionWithCallBackThen, testInstanceCreation } from 'src/app/app.component.spec';
-
-import { HttpClientModule } from '@angular/common/http';
-import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
-import { async, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { ModalController } from '@ionic/angular';
-import { IonicStorageModule } from '@ionic/storage';
-import { TranslateModule } from '@ngx-translate/core';
-
-import { newModalControllerMock } from 'test-config/MockIonicNative';
 
 describe('Map Component', () => {
     let fixture;
@@ -109,7 +109,7 @@ describe('Map Component', () => {
             const spyFire = spyOn(component.map, 'fire').and.callThrough();
             const spyUpdate = spyOn(component, 'updateOrCreateBuildingMarker').and.callFake(() => {
             });
-            component.showBuilding({pos: {lat: 0.0, lng: 0.0}});
+            component.showBuilding({ pos: { lat: 0.0, lng: 0.0 } });
             expect(spyUpdate.calls.count()).toEqual(1);
             expect(spyFire.calls.count()).toEqual(1);
         });
@@ -119,7 +119,7 @@ describe('Map Component', () => {
         it('should generate popup if building defined and set lat/lng', () => {
             const spySet = spyOn(component.building, 'setLatLng').and.callThrough();
             const spyGenerate = spyOn(component, 'generatePopupContent').and.callThrough();
-            component.updateOrCreateBuildingMarker({pos: {lat: 0.0, lng: 0.0}});
+            component.updateOrCreateBuildingMarker({ pos: { lat: 0.0, lng: 0.0 } });
             expect(spyGenerate.calls.count()).toEqual(1);
             expect(spySet.calls.count()).toEqual(1);
         });
@@ -127,7 +127,7 @@ describe('Map Component', () => {
         it('should create marker otherwhise', () => {
             component.building = undefined;
             const spyMarker = spyOn(L, 'marker').and.callThrough();
-            component.updateOrCreateBuildingMarker({pos: {lat: 0.0, lng: 0.0}});
+            component.updateOrCreateBuildingMarker({ pos: { lat: 0.0, lng: 0.0 } });
             expect(spyMarker.calls.count()).toEqual(1);
         });
     });
