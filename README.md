@@ -16,6 +16,10 @@
 
 - Common platforms
 
+  * Side menu
+  
+  * Launch external app
+  
   * Studies Page : Right menu toggle
 
   * Map Page
