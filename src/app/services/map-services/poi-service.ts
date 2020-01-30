@@ -78,7 +78,7 @@ export class POIService {
         }
     }
 
-    public getCategories(zones){
+    public getCategories(zones) {
       return Object.keys(zones);
     }
 
@@ -117,7 +117,7 @@ export class POIService {
         };
     }
 
-    private buildLocations(zones){
+    private buildLocations(zones) {
       const locations = [];
       this.getCategories(zones).forEach(category => {
         locations.push({category: this.createMapLocations(zones[category])});

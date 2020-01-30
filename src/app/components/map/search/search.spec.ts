@@ -33,8 +33,9 @@ import { SearchModal } from './search';
 import { POIService } from 'src/app/services/map-services/poi-service';
 import { getMockProvider } from 'test-config/Mock';
 import { MapLocation } from 'src/app/models/mapLocation';
+import { PipeModule } from 'src/app/pipes/pipe.module';
 
-describe('SearchModal of Map Component', () => {
+fdescribe('SearchModal of Map Component', () => {
     let fixture;
     let component;
 
@@ -47,6 +48,7 @@ describe('SearchModal of Map Component', () => {
                 RouterTestingModule,
                 HttpClientModule,
                 IonicStorageModule.forRoot(),
+                PipeModule
             ],
             providers: [
                 getMockProvider(ModalController, newModalControllerMock),

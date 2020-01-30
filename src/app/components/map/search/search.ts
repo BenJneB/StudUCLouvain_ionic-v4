@@ -27,7 +27,7 @@ export class SearchModal {
         });
     }
 
-    changeCategory(){
+    changeCategory() {
       this.displayItems = this.items[this.selectedCategory];
     }
 
@@ -54,7 +54,7 @@ export class SearchModal {
         });
     }
 
-    onVignetteLoaded(event: CustomEvent){
+    onVignetteLoaded(event: CustomEvent) {
       (event.target as HTMLElement).style.opacity = '1';
     }
 

@@ -4,11 +4,11 @@ import { Pipe, PipeTransform } from '@angular/core';
   name: 'cleanAndCapitalize'
 })
 export class CleanAndCapitalizePipe implements PipeTransform {
-  transform(value: string, args: any[]): string {
-    return value === null ? 'Not assigned' : this.capitalize(value.replace('_', ' '));
+  transform(value: string): string {
+    return value === null ? 'Not assigned' : this.capitalize(value.replace(/_/g, ' '));
   }
 
-  capitalize(value: String){
+  capitalize(value: String): string {
     return value.charAt(0).toUpperCase() + value.slice(1);
   }
 }
