@@ -1,6 +1,7 @@
-import { Component} from '@angular/core';
-import { ModalController } from '@ionic/angular';
 import { POIService } from 'src/app/services/map-services/poi-service';
+
+import { Component } from '@angular/core';
+import { ModalController } from '@ionic/angular';
 
 @Component({
     selector: 'search-modal',
@@ -15,7 +16,7 @@ export class SearchModal {
     categories = [];
     selectedCategory: any;
     selectOptions: any = {
-      header: 'Categories'
+        header: 'Categories'
     };
 
     constructor(private modalCtrl: ModalController, public poiService: POIService) {
@@ -28,7 +29,7 @@ export class SearchModal {
     }
 
     changeCategory() {
-      this.displayItems = this.items[this.selectedCategory];
+        this.displayItems = this.items[this.selectedCategory];
     }
 
     close() {
@@ -48,14 +49,14 @@ export class SearchModal {
         this.modalCtrl.dismiss({
             id: item.sigle ? item.sigle : item.nom,
             name: item.sigle ? item.nom : '',
-            pos: {lat: item.coord.lat, lng: item.coord.lng},
+            pos: { lat: item.coord.lat, lng: item.coord.lng },
             img: item.vignette,
             address: item.adresse
         });
     }
 
     onVignetteLoaded(event: CustomEvent) {
-      (event.target as HTMLElement).style.opacity = '1';
+        (event.target as HTMLElement).style.opacity = '1';
     }
 
 }

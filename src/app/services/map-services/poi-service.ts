@@ -1,4 +1,5 @@
 import { map } from 'rxjs/operators';
+import { MapLocation } from 'src/app/models/mapLocation';
 
 import { HttpClient } from '@angular/common/http';
 /**
@@ -23,14 +24,13 @@ import { HttpClient } from '@angular/common/http';
  */
 import { Injectable } from '@angular/core';
 
-import { MapLocation } from 'src/app/models/mapLocation';
 import { UserService } from '../utils-services/user-service';
 
 @Injectable()
 export class POIService {
 
     constructor(public http: HttpClient,
-                public user: UserService) {
+        public user: UserService) {
         this.old = this.user.campus;
         this.update();
 
@@ -66,10 +66,10 @@ export class POIService {
             return new Promise(resolve => {
                 this.http.get(this.url).pipe(
                     map(res => res)).subscribe(data => {
-                    const newZone = this.getZones(data);
-                    this.zones.push(newZone);
-                    resolve(this.zones);
-                });
+                        const newZone = this.getZones(data);
+                        this.zones.push(newZone);
+                        resolve(this.zones);
+                    });
             });
         } else {
             return new Promise(resolve => {
@@ -79,7 +79,7 @@ export class POIService {
     }
 
     public getCategories(zones) {
-      return Object.keys(zones);
+        return Object.keys(zones);
     }
 
     private compare(a, b) {
@@ -118,10 +118,10 @@ export class POIService {
     }
 
     private buildLocations(zones) {
-      const locations = [];
-      this.getCategories(zones).forEach(category => {
-        locations.push({category: this.createMapLocations(zones[category])});
-      });
-      return locations;
+        const locations = [];
+        this.getCategories(zones).forEach(category => {
+            locations.push({ category: this.createMapLocations(zones[category]) });
+        });
+        return locations;
     }
 }

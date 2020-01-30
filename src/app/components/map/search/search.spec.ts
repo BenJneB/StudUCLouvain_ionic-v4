@@ -1,4 +1,9 @@
 import { testInstanceCreation } from 'src/app/app.component.spec';
+import { MapLocation } from 'src/app/models/mapLocation';
+import { PipeModule } from 'src/app/pipes/pipe.module';
+import { POIService } from 'src/app/services/map-services/poi-service';
+import { getMockProvider } from 'test-config/Mock';
+import { newModalControllerMock } from 'test-config/MockIonicNative';
 
 import { HttpClientModule } from '@angular/common/http';
 import { CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
@@ -8,7 +13,6 @@ import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
 import { TranslateModule } from '@ngx-translate/core';
 
-import { newModalControllerMock } from 'test-config/MockIonicNative';
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors: Benjamin Daubry & Bruno Marchesini and Jérôme Lemaire & Corentin Lamy
@@ -30,10 +34,6 @@ import { newModalControllerMock } from 'test-config/MockIonicNative';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { SearchModal } from './search';
-import { POIService } from 'src/app/services/map-services/poi-service';
-import { getMockProvider } from 'test-config/Mock';
-import { MapLocation } from 'src/app/models/mapLocation';
-import { PipeModule } from 'src/app/pipes/pipe.module';
 
 fdescribe('SearchModal of Map Component', () => {
     let fixture;
@@ -70,7 +70,7 @@ fdescribe('SearchModal of Map Component', () => {
 
     describe('search method', () => {
         it('should filter items with input', () => {
-            const event_arg = {detail: {value: 'TEST'}};
+            const event_arg = { detail: { value: 'TEST' } };
             component.items = [
                 new MapLocation('test', '', '', '', 'tset', ''),
                 new MapLocation('tset', '', '', '', 'test', ''),

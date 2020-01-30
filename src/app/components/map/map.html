@@ -23,7 +23,7 @@
     <ion-toolbar color="map">
         <ion-buttons slot="start">
             <ion-back-button></ion-back-button>
-            <img alt="Map Icon" height="28" src="./assets/img/s.png"/>
+            <img alt="Map Icon" height="28" src="./assets/img/s.png" />
         </ion-buttons>
         <ion-title horizontal="center">{{title | translate}}</ion-title>
         <ion-buttons slot="end">
@@ -35,8 +35,5 @@
 </ion-header>
 
 <!--BODY-->
-<div (leafletMapReady)="onMapReady($event)"
-     [leafletOptions]="options"
-     leaflet
-     style="height: 100%;">
+<div (leafletMapReady)="onMapReady($event)" [leafletOptions]="options" leaflet style="height: 100%;">
 </div>

@@ -1,18 +1,19 @@
+import { PipeModule } from 'src/app/pipes/pipe.module';
+import { MapService } from 'src/app/services/map-services/map-service';
+import { POIService } from 'src/app/services/map-services/poi-service';
+
 import { CommonModule } from '@angular/common';
+import { HttpClientModule } from '@angular/common/http';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { LeafletModule } from '@asymmetrik/ngx-leaflet';
+import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { IonicModule } from '@ionic/angular';
 import { TranslateModule } from '@ngx-translate/core';
 
 import { MapPage } from './map';
-import { POIService } from 'src/app/services/map-services/poi-service';
-import { Geolocation } from '@ionic-native/geolocation/ngx';
-import { MapService } from 'src/app/services/map-services/map-service';
 import { MapRoutingModule } from './map-routing.module';
-import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { SearchModal } from './search/search';
-import { HttpClientModule } from '@angular/common/http';
-import { PipeModule } from 'src/app/pipes/pipe.module';
 
 @NgModule({
     declarations: [MapPage, SearchModal],

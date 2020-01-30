@@ -1,3 +1,8 @@
+import * as L from 'leaflet';
+import { MapService } from 'src/app/services/map-services/map-service';
+import { POIService } from 'src/app/services/map-services/poi-service';
+import { UserService } from 'src/app/services/utils-services/user-service';
+
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
  Authors:  Jérôme Lemaire, Corentin Lamy, Daubry Benjamin & Marchesini Bruno
@@ -21,11 +26,7 @@
 import { Component } from '@angular/core';
 import { MenuController, ModalController, Platform } from '@ionic/angular';
 
-import { POIService } from 'src/app/services/map-services/poi-service';
 import { SearchModal } from './search/search';
-import * as L from 'leaflet';
-import { MapService } from 'src/app/services/map-services/map-service';
-import { UserService } from 'src/app/services/utils-services/user-service';
 
 @Component({
     selector: 'page-map',
@@ -76,7 +77,7 @@ export class MapPage {
             const popup = e.target._popup;
             const px = this.map.project(popup._latlng, this.map.getZoom());
             px.y -= popup._container.clientHeight / 2;
-            this.map.panTo(this.map.unproject(px, this.map.getZoom()), {animate: true});
+            this.map.panTo(this.map.unproject(px, this.map.getZoom()), { animate: true });
         });
     }
 
@@ -98,7 +99,7 @@ export class MapPage {
         this.updateOrCreateBuildingMarker(item);
         const popup = this.building.getPopup();
         if (popup.isOpen) {
-            this.map.fire('popupopen', {popup: popup});
+            this.map.fire('popupopen', { popup: popup });
         }
     }
 
