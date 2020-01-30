@@ -62,12 +62,8 @@ jobs:
       jdk: oraclejdk8
       android:
         components:
-          - build-tools-$ANDROID_BUILD_TOOLS_VERSION
-          - android-$ANDROID_API_LEVEL
-        licenses:
-          - 'android-sdk-preview-license-52d11cd2'
-          - 'android-sdk-license-.+'
-          - 'google-gdk-license-.+'
+          - build-tools-28.0.3
+          - android-28
     
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
@@ -82,13 +78,12 @@ jobs:
         - nvm install 12.14.0
       install:
         - npm install
-        - npm install -g ionic cordova cordova-res
+        - npm install -g ionic cordova
         - node --version
         - npm --version
         - gradle --version
         
       before_script:
-        - ionic cordova resources android
         - ionic cordova platform add android
         - ionic info
       script: ionic cordova build android --prod
@@ -101,12 +96,11 @@ jobs:
         - nvm install 12.14.0
       install:
         - npm install
-        - npm install -g ionic cordova cordova-res
+        - npm install -g ionic cordova
         - node --version
         - npm --version
         
       before_script:
-        - ionic cordova resources ios
         - ionic cordova platform add ios
         - ionic info
       script: ionic cordova build ios --prod
