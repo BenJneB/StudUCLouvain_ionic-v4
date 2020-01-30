@@ -62,9 +62,9 @@ jobs:
       jdk: oraclejdk8
       android:
         components:
-          - build-tools-28.0.3	
+          - build-tools-28.0.3
           - android-28
-          
+    
       before_cache:
         - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
         - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
@@ -78,31 +78,29 @@ jobs:
         - nvm install 12.14.0
       install:
         - npm install
-        - npm install -g ionic cordova cordova-res
+        - npm install -g ionic cordova
         - node --version
         - npm --version
         - gradle --version
         
       before_script:
-        - ionic cordova resources android
         - ionic cordova platform add android
         - ionic info
       script: ionic cordova build android --prod
        
     - stage: "Build iOS"
       os: osx
-      language: objective-c
+      language: swift
           
       before_install:
         - nvm install 12.14.0
       install:
         - npm install
-        - npm install -g ionic cordova cordova-res
+        - npm install -g ionic cordova
         - node --version
         - npm --version
         
       before_script:
-        - ionic cordova resources ios
         - ionic cordova platform add ios
         - ionic info
       script: ionic cordova build ios --prod
