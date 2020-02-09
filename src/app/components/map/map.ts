@@ -118,18 +118,19 @@ export class MapPage {
         div += item.name ? `<p style="width: 150px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${item.name}</p>` : '';
         div += item.img ? `<img style="width:150px; height: auto;" src="${item.img}" alt="">` : '';
         div += item.address ? `<p style="width: 150px; word-wrap: break-word;">${item.address}</p>` : '';
-        div += item.pos ? this.buildDirectionsButton(item.pos) : '';
+        div += item.pos ? this.buildDirectionsButton(item.name, item.pos) : '';
         div += `</div>`;
         return div;
     }
 
-    buildDirectionsButton(pos) {
-      return `<ion-button onClick="${this.openNavigation(pos)}" class="disable-hover" color="map" expand="full">
+    buildDirectionsButton(name, pos) {
+      return `<ion-button onClick="${this.openNavigation(name, pos)}" class="disable-hover" color="map" expand="full">
       <ion-icon slot="start" name="map"/></ion-icon>${this.transService.getTranslation('MAP.DIRECTIONS')}</ion-button>`;
     }
 
-    openNavigation(pos) {
+    openNavigation(name, pos) {
       const navProtocol = this.platform.is('ios') ? 'maps://' : 'geo:0,0';
-      return `window.open('${navProtocol}?q=${pos.lat},${pos.lng}','_system')`;
+      const label = this.platform.is('ios') ? '' : name;
+      return `window.open('${navProtocol}?q=${pos.lat},${pos.lng}(${label})','_system')`;
     }
 }
