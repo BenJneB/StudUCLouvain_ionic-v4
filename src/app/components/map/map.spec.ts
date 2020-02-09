@@ -14,7 +14,7 @@ import { LeafletModule } from '@asymmetrik/ngx-leaflet';
 import { Geolocation } from '@ionic-native/geolocation/ngx';
 import { ModalController } from '@ionic/angular';
 import { IonicStorageModule } from '@ionic/storage';
-import { TranslateModule, TranslateService } from '@ngx-translate/core';
+import { TranslateModule } from '@ngx-translate/core';
 
 /**
  Copyright (c)  Université catholique Louvain.  All rights reserved
@@ -37,6 +37,7 @@ import { TranslateModule, TranslateService } from '@ngx-translate/core';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { MapPage } from './map';
+import { TransService } from 'src/app/services/utils-services/trans-services';
 
 describe('Map Component', () => {
     let fixture;
@@ -58,7 +59,7 @@ describe('Map Component', () => {
                 Geolocation,
                 POIService,
                 getMockProvider(MapService, newMockMapService),
-                TranslateService
+                TransService
             ]
         }).compileComponents();
     }));
