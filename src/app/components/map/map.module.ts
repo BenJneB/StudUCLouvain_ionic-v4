@@ -14,6 +14,7 @@ import { TranslateModule } from '@ngx-translate/core';
 import { MapPage } from './map';
 import { MapRoutingModule } from './map-routing.module';
 import { SearchModal } from './search/search';
+import { TransService } from 'src/app/services/utils-services/trans-services';
 
 @NgModule({
     declarations: [MapPage, SearchModal],
@@ -31,7 +32,8 @@ import { SearchModal } from './search/search';
     providers: [
         POIService,
         Geolocation,
-        MapService
+        MapService,
+        TransService
     ],
     entryComponents: [SearchModal]
 })

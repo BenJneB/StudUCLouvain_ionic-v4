@@ -37,6 +37,7 @@ import { TranslateModule } from '@ngx-translate/core';
  along with Stud.UCLouvain.  If not, see <http://www.gnu.org/licenses/>.
  */
 import { MapPage } from './map';
+import { TransService } from 'src/app/services/utils-services/trans-services';
 
 describe('Map Component', () => {
     let fixture;
@@ -58,6 +59,7 @@ describe('Map Component', () => {
                 Geolocation,
                 POIService,
                 getMockProvider(MapService, newMockMapService),
+                TransService
             ]
         }).compileComponents();
     }));

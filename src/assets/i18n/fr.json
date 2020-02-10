@@ -299,7 +299,8 @@
         "REST": "Restaurants Universitaires",
         "PARK": "Parkings",
         "SERV": "Services",
-        "SPORT": "Lieux des activités sportives"
+        "SPORT": "Lieux des activités sportives",
+        "DIRECTIONS": "Itinéraire"
     },
 
     "REST": {

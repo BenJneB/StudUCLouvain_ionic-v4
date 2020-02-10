@@ -300,7 +300,8 @@
         "REST": "University restaurants",
         "PARK": "Parkings",
         "SERV": "Services",
-        "SPORT": "Places of sports activities"
+        "SPORT": "Places of sports activities",
+        "DIRECTIONS": "Directions"
     },
 
     "REST": {
